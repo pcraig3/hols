@@ -1,0 +1,25 @@
+{
+  "name": "az-htm",
+  "version": "1.0.0",
+  "description": "server rendered components",
+  "main": "index.js",
+  "scripts": {
+    "test": "test",
+    "start": "nodemon index.js"
+  },
+  "keywords": [
+    "htm"
+  ],
+  "author": "pcraig3",
+  "license": "MIT",
+  "dependencies": {
+    "esm": "^3.2.21",
+    "express": "^4.16.4",
+    "htm": "^2.1.1",
+    "preact": "^8.4.2",
+    "preact-render-to-string": "^4.1.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.10"
+  }
+}
