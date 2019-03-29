@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "test",
-    "start": "nodemon index.js"
+    "start": "nodemon server.js"
   },
   "keywords": [
     "htm"
@@ -13,7 +13,6 @@
   "author": "pcraig3",
   "license": "MIT",
   "dependencies": {
-    "esm": "^3.2.21",
     "express": "^4.16.4",
     "htm": "^2.1.1",
     "preact": "^8.4.2",

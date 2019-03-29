@@ -1,7 +1,7 @@
-import express from "express";
-import { h, Component } from "preact";
-import render from "preact-render-to-string";
-import htm from "htm";
+const express = require("express");
+const { h, Component } = require("preact");
+const render = require("preact-render-to-string");
+const htm = require("htm");
 
 const html = htm.bind(h);
 
