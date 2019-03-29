@@ -4,7 +4,7 @@
   "description": "server rendered components",
   "main": "index.js",
   "scripts": {
-    "test": "test",
+    "test": "jest",
     "start": "nodemon server.js"
   },
   "keywords": [
@@ -19,6 +19,7 @@
     "preact-render-to-string": "^4.1.0"
   },
   "devDependencies": {
+    "jest": "^24.5.0",
     "nodemon": "^1.18.10"
   }
 }
