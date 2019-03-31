@@ -16,7 +16,7 @@ app.get("/locale/:locale", (req, res) => {
   const key = `${locale}.locale_description`;
 
   res.send(
-    `<!DOCTYPE html><html><body>
+    `<!DOCTYPE html><html lang=${locale}><body>
     <h1>${polyglot.t(key)}</h1>
     </body></html>`
   );
@@ -30,7 +30,7 @@ app.get("/:page", (req, res) => {
     } locale=${locale} polyglot=${polyglot} />`
   );
   // send it back wrapped up as an HTML5 document:
-  res.send(`<!DOCTYPE html><html><body>${markup}</body></html>`);
+  res.send(`<!DOCTYPE html><html lang=${locale}><body>${markup}</body></html>`);
 });
 
 app.get("/", (req, res) => {
