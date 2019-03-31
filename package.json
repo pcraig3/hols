@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "server rendered components",
   "main": "index.js",
+  "engines" : { "node" : ">=10.15" },
   "scripts": {
     "test": "jest",
     "start": "nodemon server.js"
