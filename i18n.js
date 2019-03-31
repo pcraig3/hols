@@ -6,7 +6,7 @@ const phrases = {
     locale_description: "The current language is English"
   },
   fr: {
-    page_description: "Cette page est au subject de « {{name}} »",
+    page_description: "Cette page est au sujet de « {{name}} »",
     locale_description: "La langue actuelle est le français"
   }
 };
