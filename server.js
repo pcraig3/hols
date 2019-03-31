@@ -2,15 +2,33 @@ const express = require("express");
 const { h, Component } = require("preact");
 const render = require("preact-render-to-string");
 const htm = require("htm");
+const polyglot = require("./i18n.js");
 const Page = require("./Page.js");
 
 const html = htm.bind(h);
 
 const app = express();
 
+let locale = "en";
+
+app.get("/locale/:locale", (req, res) => {
+  locale = ["en", "fr"].includes(req.params.locale) ? req.params.locale : "en";
+  const key = `${locale}.locale_description`;
+
+  res.send(
+    `<!DOCTYPE html><html><body>
+    <h1>${polyglot.t(key)}</h1>
+    </body></html>`
+  );
+});
+
 // on each request, render and return a component
 app.get("/:page", (req, res) => {
-  let markup = render(html`<${Page} name=${req.params.page} />`);
+  let markup = render(
+    html`<${Page} name=${
+      req.params.page
+    } locale=${locale} polyglot=${polyglot} />`
+  );
   // send it back wrapped up as an HTML5 document:
   res.send(`<!DOCTYPE html><html><body>${markup}</body></html>`);
 });

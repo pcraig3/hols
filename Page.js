@@ -17,11 +17,13 @@ class Page extends Component {
     return str + "!!";
   }
 
-  render({ name }) {
+  render({ name, locale, polyglot }) {
+    const key = `${locale}.page_description`;
+
     return html`
       <div class="page">
         <h1 style="${this.style.h1}">${this.makeExciting(name)}</h1>
-        <p>This page is all about ${name}.</p>
+        <p>${polyglot.t(key, { name })}.</p>
       </div>
     `;
   }
