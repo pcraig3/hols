@@ -1,10 +1,12 @@
 const express = require('express')
+const logger = require('morgan')
 const render = require('preact-render-to-string')
 const html = require('./utils')
 const polyglot = require('./i18n.js')
 const renderPage = require('./pages/_document.js')
 
 const app = express()
+app.use(logger('dev'))
 
 let locale = 'en'
 

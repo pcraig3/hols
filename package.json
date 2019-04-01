@@ -19,6 +19,7 @@
   "dependencies": {
     "express": "^4.16.4",
     "htm": "^2.1.1",
+    "morgan": "^1.9.1",
     "node-polyglot": "^2.3.0",
     "preact": "^8.4.2",
     "preact-render-to-string": "^4.1.0"
