@@ -1,7 +1,7 @@
 # TODO
 
 - css library
-- linting?
+- html template linting?
 
 # DONE
 
@@ -10,3 +10,4 @@
 - minimal styling
 - 1 unit test
 - i18n
+- linting

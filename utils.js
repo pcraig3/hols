@@ -1,4 +1,4 @@
-const { h } = require("preact");
-const htm = require("htm");
+const { h } = require('preact')
+const htm = require('htm')
 
-module.exports = htm.bind(h);
+module.exports = htm.bind(h)

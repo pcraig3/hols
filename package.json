@@ -3,10 +3,13 @@
   "version": "1.0.0",
   "description": "server rendered components",
   "main": "index.js",
-  "engines" : { "node" : ">=10.15" },
+  "engines": {
+    "node": ">=10.15"
+  },
   "scripts": {
-    "test": "jest",
-    "start": "nodemon server.js"
+    "lint": "node_modules/eslint/bin/eslint.js pages server.js utils.js",
+    "start": "nodemon server.js",
+    "test": "jest"
   },
   "keywords": [
     "htm"
@@ -21,6 +24,8 @@
     "preact-render-to-string": "^4.1.0"
   },
   "devDependencies": {
+    "eslint": "^5.16.0",
+    "eslint-plugin-jest": "^22.4.1",
     "jest": "^24.5.0",
     "nodemon": "^1.18.10"
   },

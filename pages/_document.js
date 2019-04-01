@@ -18,11 +18,11 @@ const document = ({ title, locale, content }) => {
         <main>${content}</main>
       </body>
     </html>
-  `;
-};
+  `
+}
 
 const renderPage = ({ title, locale, content }) => {
-  return document({ title, locale, content });
-};
+  return document({ title, locale, content })
+}
 
-module.exports = renderPage;
+module.exports = renderPage
