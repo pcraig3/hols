@@ -7,7 +7,7 @@
     "node": ">=10.15"
   },
   "scripts": {
-    "lint": "node_modules/eslint/bin/eslint.js pages server.js utils.js",
+    "lint": "node_modules/eslint/bin/eslint.js pages components server.js utils.js",
     "start": "nodemon server.js",
     "test": "jest"
   },

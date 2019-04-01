@@ -1,5 +1,6 @@
 const { Component } = require('preact')
 const html = require('../utils.js')
+const Layout = require('../components/Layout.js')
 
 // example component:
 class Page extends Component {
@@ -19,10 +20,12 @@ class Page extends Component {
     const key = `${locale}.page_description`
 
     return html`
-      <div class="page">
-        <h1 style=${this.style.h1}>${this.makeExciting(name)}</h1>
-        <p>${polyglot.t(key, { name })}.</p>
-      </div>
+      <${Layout}>
+        <div class="page">
+          <h1 style=${this.style.h1}>${this.makeExciting(name)}</h1>
+          <p>${polyglot.t(key, { name })}.</p>
+        </div>
+      <//>
     `
   }
 }

@@ -15,7 +15,7 @@ const document = ({ title, locale, content }) => {
         </style>
       </head>
       <body>
-        <main>${content}</main>
+        ${content}
       </body>
     </html>
   `

@@ -2,7 +2,7 @@ const render = require('preact-render-to-string')
 const html = require('../../utils.js')
 const polyglot = require('../../i18n.js')
 
-const Page = require('../Page')
+const Page = require('../Page.js')
 
 test('Page component has the name passed into it', () => {
   const pageString = render(
