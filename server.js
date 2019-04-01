@@ -17,6 +17,18 @@ app.get('/locale/:locale', (req, res) => {
   res.send(renderPage({ title: `locale ${locale}`, locale, content }))
 })
 
+app.get('/login', (req, res) => {
+  const LoginPage = require('./pages/LoginPage.js')
+
+  const content = render(
+    html`
+      <${LoginPage} />
+    `,
+  )
+
+  res.send(renderPage({ title: 'Login', locale, content }))
+})
+
 // on each request, render and return a component
 app.get('/:page', (req, res) => {
   let component = 'Page'
