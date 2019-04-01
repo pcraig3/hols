@@ -1,10 +1,8 @@
-const Page = require("./Page");
 const render = require("preact-render-to-string");
-const { h } = require("preact");
-const htm = require("htm");
-const polyglot = require("./i18n.js");
+const html = require("../../utils.js");
+const polyglot = require("../../i18n.js");
 
-const html = htm.bind(h);
+const Page = require("../Page");
 
 test("Page component has the name passed into it", () => {
   const pageString = render(
@@ -19,7 +17,7 @@ test("Page component renders in French", () => {
     html`<${Page} name="test" locale="fr" polyglot=${polyglot} />`
   );
   expect(pageString).toContain('<h1 style="color: red;">test!!</h1>');
-  expect(pageString).toContain("<p>Cette page est au subject de « test ».</p>");
+  expect(pageString).toContain("<p>Cette page est au sujet de « test ».</p>");
 });
 
 test("Page component accepts no name", () => {

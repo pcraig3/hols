@@ -1,43 +1,36 @@
 const express = require("express");
-const { h, Component } = require("preact");
 const render = require("preact-render-to-string");
-const htm = require("htm");
+const html = require("./utils");
 const polyglot = require("./i18n.js");
-const Document = require("./_document.js");
-const Page = require("./Page.js");
-
-const html = htm.bind(h);
+const renderPage = require("./pages/_document.js");
+const Page = require("./pages/Page.js");
 
 const app = express();
 
 let locale = "en";
 
-const renderPage = ({ title, content }) => {
-  return Document({ title, locale, content });
-};
-
 app.get("/locale/:locale", (req, res) => {
   locale = ["en", "fr"].includes(req.params.locale) ? req.params.locale : "en";
-  const key = `${locale}.locale_description`;
+  const content = `<h1>${polyglot.t(`${locale}.locale_description`)}</h1>`;
 
-  res.send(
-    renderPage({
-      title: `locale ${locale}`,
-      content: `<h1>${polyglot.t(key)}</h1>`
-    })
-  );
+  res.send(renderPage({ title: `locale ${locale}`, locale, content }));
 });
 
 // on each request, render and return a component
 app.get("/:page", (req, res) => {
-  let markup = render(
-    html`<${Page} name=${
-      req.params.page
-    } locale=${locale} polyglot=${polyglot} />`
+  let component = "Page";
+  // TODO: Try / catch
+  const Page = require(`./pages/${component}.js`);
+
+  const content = render(
+    html`<${Page}
+      name=${req.params.page}
+      locale=${locale}
+      polyglot=${polyglot} />`
   );
 
   // send it back wrapped up as an HTML5 document:
-  res.send(renderPage({ title: req.params.page, content: markup }));
+  res.send(renderPage({ title: req.params.page, locale, content }));
 });
 
 app.get("/", (req, res) => {

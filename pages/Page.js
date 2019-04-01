@@ -1,7 +1,5 @@
-const { h, Component } = require("preact");
-const htm = require("htm");
-
-const html = htm.bind(h);
+const { Component } = require("preact");
+const html = require("../utils.js");
 
 // example component:
 class Page extends Component {

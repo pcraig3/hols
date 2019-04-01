@@ -1,4 +1,4 @@
-module.exports = ({ locale, title, content }) => {
+const document = ({ title, locale, content }) => {
   return `
     <!DOCTYPE html>
     <html lang="${locale}">
@@ -7,7 +7,7 @@ module.exports = ({ locale, title, content }) => {
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>${title}</title>
         <style>
-           body {
+          body {
             font-size: 1.4em;
             font-family: sans-serif;
             word-break: break-word;
@@ -20,3 +20,9 @@ module.exports = ({ locale, title, content }) => {
     </html>
   `;
 };
+
+const renderPage = ({ title, locale, content }) => {
+  return document({ title, locale, content });
+};
+
+module.exports = renderPage;
