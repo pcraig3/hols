@@ -1,35 +1,37 @@
 const render = require('preact-render-to-string')
 const html = require('../../utils.js')
 const polyglot = require('../../i18n.js')
+const cheerio = require('cheerio')
 
 const Page = require('../Page.js')
 
-test('Page component has the name passed into it', () => {
-  const pageString = render(
-    html`
-      <${Page} name="test" locale="en" polyglot=${polyglot} />
-    `,
+const renderPage = ({ name, locale }) => {
+  return cheerio.load(
+    render(
+      html`
+        <${Page} ...${{ name, locale }} polyglot=${polyglot} />
+      `,
+    ),
   )
-  expect(pageString).toContain('<h1 style="color: red;">test!!</h1>')
-  expect(pageString).toContain('<p>This page is all about “test”.</p>')
+}
+
+test('Page component has the name passed into it', () => {
+  const $ = renderPage({ name: 'test', locale: 'en' })
+  expect($('h1').length).toBe(1)
+  expect($('h1').text()).toEqual('test!!')
+  expect($('p').text()).toEqual('This page is all about “test”.')
 })
 
 test('Page component renders in French', () => {
-  const pageString = render(
-    html`
-      <${Page} name="test" locale="fr" polyglot=${polyglot} />
-    `,
-  )
-  expect(pageString).toContain('<h1 style="color: red;">test!!</h1>')
-  expect(pageString).toContain('<p>Cette page est au sujet de « test ».</p>')
+  const $ = renderPage({ name: 'test', locale: 'fr' })
+  expect($('h1').length).toBe(1)
+  expect($('h1').text()).toEqual('test!!')
+  expect($('p').text()).toEqual('Cette page est au sujet de « test ».')
 })
 
 test('Page component accepts no name', () => {
-  const pageString = render(
-    html`
-      <${Page} locale="en" polyglot=${polyglot} />
-    `,
-  )
-  expect(pageString).toContain('<h1 style="color: red;">undefined!!</h1>')
-  expect(pageString).toContain('<p>This page is all about “{{name}}”.</p>')
+  const $ = renderPage({ locale: 'en' })
+  expect($('h1').length).toBe(1)
+  expect($('h1').text()).toEqual('undefined!!')
+  expect($('p').text()).toEqual('This page is all about “{{name}}”.')
 })
