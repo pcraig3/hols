@@ -7,10 +7,9 @@ const red = css`
   color: red;
 `
 
-// example component:
 class Page extends Component {
   makeExciting(str) {
-    return str + '!!'
+    return `${str}!!`
   }
 
   render({ name, locale, polyglot }) {

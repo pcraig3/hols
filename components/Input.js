@@ -1,20 +1,29 @@
 const html = require('../utils.js')
+const { css } = require('emotion')
 
-const labelStyle = {
-  display: 'block',
-  marginBottom: 10,
-}
+const input = css`
+  label {
+    display: block;
+    margin-bottom: 10px;
+  }
 
-const inputStyle = {
-  font: '400 1em sans-serif',
-  border: '2px solid black',
-  width: '100%',
-  height: 40,
-  marginTop: 0,
-  padding: 5,
-  borderRadius: 0,
-  WebkitAppearance: 'none',
-}
+  input {
+    font: 400 1em sans-serif;
+    border: 2px solid black;
+    width: 100%;
+    height: 40px;
+    margin-top: 0;
+    padding: 5px;
+    border-radius: 0;
+    -webkit-appearance: none;
+
+    &[type='number']::-webkit-inner-spin-button,
+    &[type='number']::-webkit-outer-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+  }
+`
 
 const Input = ({
   id,
@@ -26,12 +35,12 @@ const Input = ({
   ...props
 }) =>
   html`
-    <span>
-      <label style=${{ ...labelStyle, fontWeight: bold ? 700 : 400 }} for=${id}>
+    <span class=${input}>
+      <label style=${{ fontWeight: bold ? 700 : 400 }} for=${id}>
         ${children}
       </label>
       <input
-        style=${{ ...inputStyle, ...style }}
+        style=${{ ...style }}
         id=${id}
         name=${name || id}
         type=${type}

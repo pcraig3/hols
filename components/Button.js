@@ -1,26 +1,27 @@
 const html = require('../utils.js')
+const { css } = require('emotion')
 
-const buttonStyle = {
-  font: '400 1em sans-serif',
-  lineHeight: 1.1875,
-  display: 'inline-block',
-  position: 'relative',
-  width: '100%',
-  marginTop: 0,
-  padding: '7px 10px',
-  borderRadius: 0,
-  color: '#000000',
-  backgroundColor: '#EEE',
-  border: '2px solid #595959',
-  textAlign: 'center',
-  verticalAlign: 'top',
-  cursor: 'pointer',
-  WebkitAppearance: 'none',
-}
+const button = css`
+  font: 400 1em sans-serif;
+  line-height: 1.1875;
+  display: inline-block;
+  position: relative;
+  width: 100%;
+  margin-top: 0;
+  padding: 7px 10px;
+  border-radius: 0;
+  color: #000000;
+  background-color: #eee;
+  border: 2px solid #595959;
+  text-align: center;
+  vertical-align: top;
+  cursor: pointer;
+  -webkit-appearance: none;
+`
 
 const Button = ({ children, type = 'submit', style = {}, ...props }) =>
   html`
-    <button type="${type}," style=${{ ...buttonStyle, ...style }} ...${props}>
+    <button type=${type} class=${button} style=${{ ...style }} ...${props}>
       ${children}
     </button>
   `

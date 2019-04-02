@@ -25,12 +25,6 @@ const document = ({ title, locale, content }) => {
             outline-offset: 0;
           }
 
-          input[type=number]::-webkit-inner-spin-button,
-          input[type=number]::-webkit-outer-spin-button {
-            -webkit-appearance: none;
-            margin: 0;
-          }
-
           body {
             margin: 20px;
             font-size: 1.4em;

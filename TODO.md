@@ -1,5 +1,6 @@
 # TODO
 
+- styles.js
 - html template linting?
 - unit tests for all components
 - prod vs dev
