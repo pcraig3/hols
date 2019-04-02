@@ -18,19 +18,19 @@ const formElementContainerStyle = {
 
 /* eslint-disable no-irregular-whitespace */
 
-const LoginPage = () =>
+const LoginPage = ({ data: { sin = '', ...props } = {} }) =>
   html`
     <${Layout}>
       <h1>Log in to see your tax-filing information</h1>
       <p>Please enter your Social Insurance Number and Date of Birth.</p>
 
-      <form style=${formStyle}>
+      <form style=${formStyle} method="post">
         <div style=${formElementContainerStyle}>
-          <${Input} id="sin">SIN (Social Insurance Number)<//>
+          <${Input} id="sin" value=${sin}>SIN (Social Insurance Number)<//>
         </div>
 
         <div style=${formElementContainerStyle}>
-          <${DateOfBirth} />
+          <${DateOfBirth} ...${props} />
         </div>
 
         <${Button} style=${{ maxWidth: 150 }}>Login<//>

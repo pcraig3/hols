@@ -7,7 +7,11 @@ const polyglot = require('./i18n.js')
 const renderPage = require('./pages/_document.js')
 
 const app = express()
-app.use(logger('dev'))
+app
+  .use(logger('dev'))
+  // both of these are needed to parse post request params
+  .use(express.urlencoded({ extended: true }))
+  .use(express.json())
 
 const halfAnHour = 1000 * 60 * 30
 const sessionName = `az-htm-${process.env.COOKIE_SECRET ||
@@ -27,19 +31,57 @@ app.use(
 
 let locale = 'en'
 
+const getSessionData = (session = {}, enforceExists = false) => {
+  const { sin, dobDay, dobMonth, dobYear } = session
+
+  if (enforceExists && (!sin || !dobDay || !dobMonth || !dobYear)) {
+    return false
+  }
+
+  return { sin, dobDay, dobMonth, dobYear }
+}
+
 app.get('/login', (req, res) => {
   const LoginPage = require('./pages/LoginPage.js')
 
   const content = render(
     html`
-      <${LoginPage} />
+      <${LoginPage} data=${getSessionData(req.session)} />
     `,
   )
 
   res.send(renderPage({ title: 'Login', locale, content }))
 })
 
-app.get('/clear', (req, res) => {
+app.post('/login', (req, res) => {
+  req.session = getSessionData(req.body)
+
+  if (!getSessionData(req.session, true)) {
+    return res.redirect(302, '/login')
+  }
+
+  res.redirect(302, '/dashboard')
+})
+
+app.get('/dashboard', (req, res) => {
+  const data = getSessionData(req.session, true)
+
+  if (!data) {
+    return res.redirect(302, '/login')
+  }
+
+  const DashboardPage = require('./pages/DashboardPage.js')
+
+  const content = render(
+    html`
+      <${DashboardPage} data=${data} />
+    `,
+  )
+
+  res.send(renderPage({ title: 'Dashboard', locale, content }))
+})
+
+app.get('/logout', (req, res) => {
   req.session = null
   res.redirect(302, '/login')
 })

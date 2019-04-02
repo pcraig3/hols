@@ -30,45 +30,48 @@ const P0 = ({ style, children, ...props }) =>
     <p style=${{ padding: 0, margin: 0, ...style }} ...${props}>${children}</p>
   `
 
-const DateOfBirth = () =>
+const DateOfBirth = ({ dobDay = '', dobMonth = '', dobYear = '' }) =>
   html`
-    <fieldset style=${fieldsetStyle} aria-describedby="dob-hint" role="group">
+    <fieldset style=${fieldsetStyle} aria-describedby="dobHint" role="group">
       <legend style=${legendStyle}>
         <${P0} style=${{ fontWeight: 700 }}>Date of Birth<//>
       </legend>
-      <${P0} style=${hintStyle} id="dob-hint">
+      <${P0} style=${hintStyle} id="dobHint">
         For example, “30 12 1990”
       <//>
-      <div class="date-input" id="date-input">
+      <div id="dateInput">
         <div style=${inputContainerStyle}>
           <${Input}
-            id="dob-day"
+            id="dobDay"
             type="number"
             pattern="[0-9]*"
             bold=${false}
             style=${{ width: inputWidth }}
+            value=${dobDay}
           >
             Day
           <//>
         </div>
         <div style=${inputContainerStyle}>
           <${Input}
-            id="dob-month"
+            id="dobMonth"
             type="number"
             pattern="[0-9]*"
             bold=${false}
             style=${{ width: inputWidth }}
+            value=${dobMonth}
           >
             Month
           <//>
         </div>
         <div style=${inputContainerStyle}>
           <${Input}
-            id="dob-year"
+            id="dobYear"
             type="number"
             pattern="[0-9]*"
             bold=${false}
             style=${{ width: inputWidth * 2 }}
+            value=${dobYear}
           >
             Year
           <//>
