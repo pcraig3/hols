@@ -19,9 +19,9 @@ const button = css`
   -webkit-appearance: none;
 `
 
-const Button = ({ children, type = 'submit', style = {}, ...props }) =>
+const Button = ({ children, type = 'submit', style = '', ...props }) =>
   html`
-    <button type=${type} class=${button} style=${{ ...style }} ...${props}>
+    <button type=${type} class=${`${button} ${style}`} ...${props}>
       ${children}
     </button>
   `

@@ -17,6 +17,10 @@ const form = css`
   }
 `
 
+const loginButton = css`
+  max-width: 150px;
+`
+
 /* eslint-disable no-irregular-whitespace */
 
 const LoginPage = ({ data: { sin = '', ...props } = {} }) =>
@@ -34,7 +38,7 @@ const LoginPage = ({ data: { sin = '', ...props } = {} }) =>
           <${DateOfBirth} ...${props} />
         </div>
 
-        <${Button} style=${{ maxWidth: 150 }}>Login<//>
+        <${Button} style=${loginButton}>Login<//>
       </form>
     <//>
   `
