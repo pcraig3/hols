@@ -32,6 +32,9 @@ Might add to this list in future.
 
 You'll need node version `v10.15.0` or higher to run the app.
 
+### [Install `docker`](https://docs.docker.com/install/)
+
+A docker container allows a developer to package up an application and all of its parts. This means we can build an app in any language, in any stack, and then run it anywhere — whether locally or on a server.
 
 ## Build and run with npm
 
@@ -67,3 +70,17 @@ npm test
 # run linting
 npm run lint
 ```
+
+## Build and run as a Docker container
+
+```bash
+# build an image locally
+docker build -t cdssnc/az-htm .
+
+# run the container
+docker run -it -p 3000:3000 cdssnc/az-htm
+```
+
+The container should be running at [http://localhost:3000/](http://localhost:3000/).
+
+On a Mac, press `Control` + `C` to quit the running docker container.

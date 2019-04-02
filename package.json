@@ -7,8 +7,9 @@
     "node": ">=10.15"
   },
   "scripts": {
+    "dev": "nodemon server.js",
     "lint": "node_modules/eslint/bin/eslint.js pages components server.js utils.js",
-    "start": "nodemon server.js",
+    "start": "NODE_ENV=production node server.js",
     "test": "jest"
   },
   "keywords": [
