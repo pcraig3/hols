@@ -6,6 +6,7 @@ const labelStyle = {
 }
 
 const inputStyle = {
+  font: '400 1em sans-serif',
   border: '2px solid black',
   width: '100%',
   height: 40,
@@ -13,7 +14,6 @@ const inputStyle = {
   padding: 5,
   borderRadius: 0,
   WebkitAppearance: 'none',
-  font: '400 1em sans-serif',
 }
 
 const Input = ({

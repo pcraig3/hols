@@ -2,6 +2,7 @@ const html = require('../utils.js')
 const Layout = require('../components/Layout.js')
 const Input = require('../components/Input.js')
 const DateOfBirth = require('../components/DateOfBirth.js')
+const Button = require('../components/Button.js')
 
 const formStyle = {
   width: '100%',
@@ -10,7 +11,7 @@ const formStyle = {
 }
 
 const formElementContainerStyle = {
-  marginBottom: 30,
+  marginBottom: 40,
 }
 
 const LoginPage = () =>
@@ -28,7 +29,7 @@ const LoginPage = () =>
           <${DateOfBirth} />
         </div>
 
-        <button type="submit">Login</button>
+        <${Button} style=${{ maxWidth: 150 }}>Login<//>
       </form>
     <//>
   `
