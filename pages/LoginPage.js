@@ -1,20 +1,21 @@
 const html = require('../utils.js')
 const Layout = require('../components/Layout.js')
+const Input = require('../components/Input.js')
+
+const formStyle = {
+  width: '100%',
+  maxWidth: 400,
+  marginTop: 50,
+}
 
 const LoginPage = () =>
   html`
     <${Layout}>
       <h1>Log in to see your tax-filing information</h1>
-      <form>
-        <p>Please enter your Social Insurance Number and Date of Birth.</p>
+      <p>Please enter your Social Insurance Number and Date of Birth.</p>
 
-        <div>
-          <label for="sin">
-            SIN (Social Insurance Number)
-          </label>
-          <input id="sin" name="sin" type="text" />
-        </div>
-
+      <form style=${formStyle}>
+        <${Input} id="sin">SIN (Social Insurance Number)<//>
         <div>
           <fieldset aria-describedby="dob-hint" role="group">
             <legend>

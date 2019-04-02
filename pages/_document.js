@@ -16,6 +16,15 @@ const document = ({ title, locale, content }) => {
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>${title}</title>
         <style>
+          * {
+            box-sizing: 'border-box';
+          }
+
+          *:focus {
+            outline: 3px solid #FFBF47;
+            outline-offset: 0;
+          }
+
           body {
             font-size: 1.4em;
             font-family: sans-serif;
