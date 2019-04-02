@@ -1,17 +1,14 @@
 const { Component } = require('preact')
 const html = require('../utils.js')
+const { css } = require('emotion')
 const Layout = require('../components/Layout.js')
+
+const red = css`
+  color: red;
+`
 
 // example component:
 class Page extends Component {
-  get style() {
-    return {
-      h1: {
-        color: 'red',
-      },
-    }
-  }
-
   makeExciting(str) {
     return str + '!!'
   }
@@ -22,7 +19,7 @@ class Page extends Component {
     return html`
       <${Layout}>
         <div class="page">
-          <h1 style=${this.style.h1}>${this.makeExciting(name)}</h1>
+          <h1 class=${red}>${this.makeExciting(name)}</h1>
           <p>${polyglot.t(key, { name })}.</p>
         </div>
       <//>

@@ -17,6 +17,8 @@
   "author": "pcraig3",
   "license": "MIT",
   "dependencies": {
+    "emotion": "^10.0.9",
+    "emotion-server": "^10.0.9",
     "express": "^4.16.4",
     "htm": "^2.1.1",
     "morgan": "^1.9.1",

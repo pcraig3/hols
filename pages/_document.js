@@ -1,3 +1,5 @@
+const { renderStylesToString } = require('emotion-server')
+
 const document = ({ title, locale, content }) => {
   return `
     <!DOCTYPE html>
@@ -22,7 +24,7 @@ const document = ({ title, locale, content }) => {
 }
 
 const renderPage = ({ title, locale, content }) => {
-  return document({ title, locale, content })
+  return document({ title, locale, content: renderStylesToString(content) })
 }
 
 module.exports = renderPage
