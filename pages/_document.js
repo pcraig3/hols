@@ -17,12 +17,18 @@ const document = ({ title, locale, content }) => {
         <title>${title}</title>
         <style>
           * {
-            box-sizing: 'border-box';
+            box-sizing: border-box;
           }
 
           *:focus {
             outline: 3px solid #FFBF47;
             outline-offset: 0;
+          }
+
+          input[type=number]::-webkit-inner-spin-button,
+          input[type=number]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
           }
 
           body {

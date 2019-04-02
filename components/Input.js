@@ -21,12 +21,13 @@ const Input = ({
   children,
   name = '',
   type = 'text',
+  bold = true,
   style = {},
   ...props
 }) =>
   html`
-    <div>
-      <label style=${labelStyle} for=${id}>
+    <span>
+      <label style=${{ ...labelStyle, fontWeight: bold ? 700 : 400 }} for=${id}>
         ${children}
       </label>
       <input
@@ -36,7 +37,7 @@ const Input = ({
         type=${type}
         ...${props}
       />
-    </div>
+    </span>
   `
 
 module.exports = Input
