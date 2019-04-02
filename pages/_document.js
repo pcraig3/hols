@@ -32,6 +32,7 @@ const document = ({ title, locale, content }) => {
           }
 
           body {
+            margin: 20px;
             font-size: 1.4em;
             font-family: sans-serif;
             word-break: break-word;

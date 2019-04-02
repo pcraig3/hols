@@ -2,7 +2,7 @@ const html = require('../utils.js')
 const Input = require('./Input.js')
 
 const marginBottom = 10
-const inputWidth = 60
+const inputWidth = 59
 
 const fieldsetStyle = {
   margin: 0,
@@ -22,7 +22,7 @@ const hintStyle = {
 
 const inputContainerStyle = {
   display: 'inline-block',
-  marginRight: 20,
+  marginRight: 18,
 }
 
 const P0 = ({ style, children, ...props }) =>
