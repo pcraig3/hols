@@ -1,10 +1,17 @@
 const { renderStylesToString } = require('emotion-server')
 
+// return a meta tag if a GITHUB_SHA environment variable exists
+const metaIfSHA = () =>
+  process.env.GITHUB_SHA
+    ? `<meta name="keywords" content="GITHUB_SHA=${process.env.GITHUB_SHA}" />`
+    : null
+
 const document = ({ title, locale, content }) => {
   return `
     <!DOCTYPE html>
     <html lang="${locale}">
       <head>
+        ${metaIfSHA()}
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>${title}</title>
