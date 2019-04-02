@@ -1,4 +1,4 @@
-const html = require('../utils.js')
+const { html } = require('../utils.js')
 const { css } = require('emotion')
 const Layout = require('../components/Layout.js')
 const Input = require('../components/Input.js')

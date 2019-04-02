@@ -1,6 +1,6 @@
-const html = require('../utils.js')
-const Layout = require('../components/Layout.js')
+const { html } = require('../utils.js')
 const { css } = require('emotion')
+const Layout = require('../components/Layout.js')
 
 const dashboard = css`
   code {

@@ -1,7 +1,7 @@
 const render = require('preact-render-to-string')
-const html = require('../../utils.js')
-const polyglot = require('../../i18n.js')
 const cheerio = require('cheerio')
+const { html } = require('../../utils.js')
+const polyglot = require('../../i18n.js')
 
 const Page = require('../Page.js')
 

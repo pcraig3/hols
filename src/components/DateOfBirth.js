@@ -1,6 +1,6 @@
-const html = require('../utils.js')
-const Input = require('./Input.js')
 const { css } = require('emotion')
+const { html } = require('../utils.js')
+const Input = require('./Input.js')
 
 const marginBottom = '10px'
 

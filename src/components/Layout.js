@@ -1,4 +1,4 @@
-const html = require('../utils.js')
+const { html } = require('../utils.js')
 
 const Layout = ({ children }) =>
   html`

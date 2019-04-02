@@ -2,14 +2,14 @@
   "name": "az-htm",
   "version": "1.0.0",
   "description": "server rendered components",
-  "main": "index.js",
+  "main": "src/server.js",
   "engines": {
     "node": ">=10.15"
   },
   "scripts": {
-    "dev": "nodemon server.js",
-    "lint": "node_modules/eslint/bin/eslint.js pages components server.js utils.js",
-    "start": "NODE_ENV=production node server.js",
+    "dev": "nodemon src/server.js",
+    "lint": "node_modules/eslint/bin/eslint.js src",
+    "start": "NODE_ENV=production node src/server.js",
     "test": "jest"
   },
   "keywords": [

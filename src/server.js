@@ -2,7 +2,7 @@ const express = require('express')
 const logger = require('morgan')
 const cookieSession = require('cookie-session')
 const render = require('preact-render-to-string')
-const html = require('./utils')
+const { html } = require('./utils')
 const polyglot = require('./i18n.js')
 const renderPage = require('./pages/_document.js')
 

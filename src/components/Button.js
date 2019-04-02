@@ -1,5 +1,5 @@
-const html = require('../utils.js')
 const { css } = require('emotion')
+const { html } = require('../utils.js')
 
 const button = css`
   font: 400 1em sans-serif;

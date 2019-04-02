@@ -1,5 +1,5 @@
-const html = require('../utils.js')
 const { css } = require('emotion')
+const { html } = require('../utils.js')
 
 const input = css`
   label {
