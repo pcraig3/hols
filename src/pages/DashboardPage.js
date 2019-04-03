@@ -1,8 +1,11 @@
 const { html } = require('../utils.js')
 const { css } = require('emotion')
 const Layout = require('../components/Layout.js')
+const Button = require('../components/Button.js')
 
 const dashboard = css`
+  position: relative;
+
   > div {
     margin-bottom: 30px;
   }
@@ -21,12 +24,23 @@ const dashboard = css`
     padding: 5px 10px 3px;
     background-color: #f9f9f9;
   }
+
+  .logout {
+    position: absolute;
+    top: 20px;
+    right: 0;
+  }
+`
+
+const submitButton = css`
+  width: 200px;
 `
 
 const Dashboard = ({ data: { sin, dobDay, dobMonth, dobYear } = {} }) =>
   html`
     <${Layout}>
       <div class=${dashboard}>
+        <a class="logout" href="/logout">Log out</a>
         <h1>Dashboard</h1>
         <div>
           <p>Name</p>
@@ -51,7 +65,9 @@ K2P 2P6
         </div>
 
         <br />
-        <a href="/logout">Log out</a>
+        <form method="get" action="/confirmation">
+        <${Button} style=${submitButton}>Submit taxes<//>
+        </form>
       </div>
     </${Layout}>
   `
