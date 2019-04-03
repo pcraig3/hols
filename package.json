@@ -6,17 +6,21 @@
   "engines": {
     "node": ">=10.15"
   },
+  "author": "pcraig3",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/pcraig3/az-htm.git"
+  },
+  "keywords": [
+    "htm"
+  ],
   "scripts": {
     "dev": "nodemon src/server.js",
     "lint": "node_modules/eslint/bin/eslint.js src",
     "start": "NODE_ENV=production node src/server.js",
     "test": "jest"
   },
-  "keywords": [
-    "htm"
-  ],
-  "author": "pcraig3",
-  "license": "MIT",
   "dependencies": {
     "cookie-session": "^1.3.3",
     "emotion": "^10.0.9",
