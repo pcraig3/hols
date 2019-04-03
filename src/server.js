@@ -1,5 +1,6 @@
 const express = require('express')
 const logger = require('morgan')
+const helmet = require('helmet')
 const cookieSession = require('cookie-session')
 const render = require('preact-render-to-string')
 const { html } = require('./utils')
@@ -9,6 +10,7 @@ const renderPage = require('./pages/_document.js')
 const app = express()
 app
   .use(logger('dev'))
+  .use(helmet())
   // both of these are needed to parse post request params
   .use(express.urlencoded({ extended: true }))
   .use(express.json())
