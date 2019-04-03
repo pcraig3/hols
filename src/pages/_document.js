@@ -25,6 +25,7 @@ const document = ({ title, locale, content }) => {
             font-size: 1.4em;
             font-family: sans-serif;
             word-break: break-word;
+            line-height: 1.33;
           }
         </style>
       </head>

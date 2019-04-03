@@ -41,6 +41,18 @@ const getSessionData = (session = {}, enforceExists = false) => {
   return { sin, dobDay, dobMonth, dobYear }
 }
 
+app.get('/welcome', (req, res) => {
+  const WelcomePage = require('./pages/WelcomePage.js')
+
+  const content = render(
+    html`
+      <${WelcomePage} />
+    `,
+  )
+
+  res.send(renderPage({ title: 'Welcome', locale, content }))
+})
+
 app.get('/login', (req, res) => {
   const LoginPage = require('./pages/LoginPage.js')
 
