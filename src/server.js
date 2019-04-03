@@ -32,26 +32,14 @@ app.use(
 let locale = 'en'
 
 const getSessionData = (session = {}, enforceExists = false) => {
-  const { sin, dobDay, dobMonth, dobYear } = session
+  const { name } = session
 
-  if (enforceExists && (!sin || !dobDay || !dobMonth || !dobYear)) {
+  if (enforceExists && !name) {
     return false
   }
 
-  return { sin, dobDay, dobMonth, dobYear }
+  return { name }
 }
-
-app.get('/welcome', (req, res) => {
-  const Welcome = require('./pages/Welcome.js')
-
-  const content = render(
-    html`
-      <${Welcome} />
-    `,
-  )
-
-  res.send(renderPage({ title: 'Welcome', locale, content }))
-})
 
 app.get('/login', (req, res) => {
   const Login = require('./pages/Login.js')
@@ -91,24 +79,6 @@ app.get('/dashboard', (req, res) => {
   )
 
   res.send(renderPage({ title: 'Dashboard', locale, content }))
-})
-
-app.get('/confirmation', (req, res) => {
-  const data = getSessionData(req.session, true)
-
-  if (!data) {
-    return res.redirect(302, '/login')
-  }
-
-  const Confirmation = require('./pages/Confirmation')
-
-  const content = render(
-    html`
-      <${Confirmation} />
-    `,
-  )
-
-  res.send(renderPage({ title: 'Confirmation', locale, content }))
 })
 
 app.get('/logout', (req, res) => {

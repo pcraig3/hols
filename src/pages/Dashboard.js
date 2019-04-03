@@ -1,7 +1,6 @@
 const { html } = require('../utils.js')
 const { css } = require('emotion')
 const Layout = require('../components/Layout.js')
-const Button = require('../components/Button.js')
 
 const dashboard = css`
   position: relative;
@@ -24,50 +23,20 @@ const dashboard = css`
     padding: 5px 10px 3px;
     background-color: #f9f9f9;
   }
-
-  .logout {
-    position: absolute;
-    top: 20px;
-    right: 0;
-  }
 `
 
-const submitButton = css`
-  width: 200px;
-`
-
-const Dashboard = ({ data: { sin, dobDay, dobMonth, dobYear } = {} }) =>
+const Dashboard = ({ data: { name = '' } = {} }) =>
   html`
     <${Layout}>
       <div class=${dashboard}>
-        <a class="logout" href="/logout">Log out</a>
         <h1>Dashboard</h1>
         <div>
           <p>Name</p>
-          <p><pre>Matthew Morris</pre></p>
+          <p><pre>${name}</pre></p>
         </div>
-        <div>
-          <p>Social Insurance Number</p>
-          <p><pre>${sin}</pre></p>
-        </div>
-        <div>
-          <p>Date of Birth</p>
-          <p><pre>${`${dobDay}-${dobMonth}-${dobYear}`}</pre></p>
-        </div>
-        <div>
-          <p>Address</p>
-          <p><pre>
-380 Lewis St
-Ottawa
-Ontario
-K2P 2P6
-          </pre></p>
-        </div>
-
         <br />
-        <form method="get" action="/confirmation">
-        <${Button} style=${submitButton}>Submit taxes<//>
-        </form>
+
+        <a class="logout" href="/logout">Log out</a>
       </div>
     </${Layout}>
   `
