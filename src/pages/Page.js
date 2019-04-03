@@ -20,6 +20,10 @@ class Page extends Component {
         <div class="page">
           <h1 class=${red}>${this.makeExciting(name)}</h1>
           <p>${polyglot.t(key, { name })}.</p>
+          <br />
+          <a href=${`/${name}?locale=${locale == 'fr' ? 'en' : 'fr'}`}
+            >${locale == 'fr' ? 'to English' : 'en français'}</a
+          >
         </div>
       <//>
     `

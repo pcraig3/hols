@@ -29,8 +29,6 @@ app.use(
   }),
 )
 
-let locale = 'en'
-
 const getSessionData = (session = {}, enforceExists = false) => {
   const { name } = session
 
@@ -86,17 +84,13 @@ app.get('/logout', (req, res) => {
   res.redirect(302, '/login')
 })
 
-app.get('/locale/:locale', (req, res) => {
-  locale = ['en', 'fr'].includes(req.params.locale) ? req.params.locale : 'en'
-  const content = `<h1>${polyglot.t(`${locale}.locale_description`)}</h1>`
-
-  res.send(renderPage({ title: `locale ${locale}`, locale, content }))
-})
+let locale = 'en'
 
 app.get('/:page', (req, res) => {
   let component = 'Page'
-  // TODO: Try / catch
   const Page = require(`./pages/${component}.js`)
+
+  locale = ['en', 'fr'].includes(req.query.locale) ? req.query.locale : locale
 
   const content = render(
     html`
