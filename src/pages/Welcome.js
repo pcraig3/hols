@@ -8,7 +8,7 @@ const welcome = css`
   }
 `
 
-const WelcomePage = () =>
+const Welcome = () =>
   html`
     <${Layout}>
       <div class=${welcome}>
@@ -31,4 +31,4 @@ const WelcomePage = () =>
     <//>
   `
 
-module.exports = WelcomePage
+module.exports = Welcome

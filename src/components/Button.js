@@ -11,7 +11,7 @@ const button = css`
   padding: 7px 10px;
   border-radius: 0;
   color: #000000;
-  background-color: palegreen;
+  background-color: aquamarine;
   border: 2px solid #595959;
   text-align: center;
   vertical-align: top;

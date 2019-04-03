@@ -42,11 +42,11 @@ const getSessionData = (session = {}, enforceExists = false) => {
 }
 
 app.get('/welcome', (req, res) => {
-  const WelcomePage = require('./pages/WelcomePage.js')
+  const Welcome = require('./pages/Welcome.js')
 
   const content = render(
     html`
-      <${WelcomePage} />
+      <${Welcome} />
     `,
   )
 
@@ -54,15 +54,15 @@ app.get('/welcome', (req, res) => {
 })
 
 app.get('/login', (req, res) => {
-  const LoginPage = require('./pages/LoginPage.js')
+  const Login = require('./pages/Login.js')
 
   const content = render(
     html`
-      <${LoginPage} data=${getSessionData(req.session)} />
+      <${Login} data=${getSessionData(req.session)} />
     `,
   )
 
-  res.send(renderPage({ title: 'Login', locale, content }))
+  res.send(renderPage({ title: 'Log in', locale, content }))
 })
 
 app.post('/login', (req, res) => {
@@ -82,11 +82,11 @@ app.get('/dashboard', (req, res) => {
     return res.redirect(302, '/login')
   }
 
-  const DashboardPage = require('./pages/DashboardPage.js')
+  const Dashboard = require('./pages/Dashboard')
 
   const content = render(
     html`
-      <${DashboardPage} data=${data} />
+      <${Dashboard} data=${data} />
     `,
   )
 

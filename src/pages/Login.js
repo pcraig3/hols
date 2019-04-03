@@ -23,7 +23,7 @@ const loginButton = css`
 
 /* eslint-disable no-irregular-whitespace */
 
-const LoginPage = ({ data: { sin = '', ...props } = {} }) =>
+const Login = ({ data: { sin = '', ...props } = {} }) =>
   html`
     <${Layout}>
       <h1>Log in to see your tax-filing information</h1>
@@ -43,4 +43,4 @@ const LoginPage = ({ data: { sin = '', ...props } = {} }) =>
     <//>
   `
 
-module.exports = LoginPage
+module.exports = Login
