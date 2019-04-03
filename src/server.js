@@ -93,6 +93,24 @@ app.get('/dashboard', (req, res) => {
   res.send(renderPage({ title: 'Dashboard', locale, content }))
 })
 
+app.get('/confirmation', (req, res) => {
+  const data = getSessionData(req.session, true)
+
+  if (!data) {
+    return res.redirect(302, '/login')
+  }
+
+  const Confirmation = require('./pages/Confirmation')
+
+  const content = render(
+    html`
+      <${Confirmation} />
+    `,
+  )
+
+  res.send(renderPage({ title: 'Confirmation', locale, content }))
+})
+
 app.get('/logout', (req, res) => {
   req.session = null
   res.redirect(302, '/login')
