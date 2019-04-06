@@ -1,6 +1,7 @@
 const { Component } = require('preact')
 const { css } = require('emotion')
 const { html } = require('../utils.js')
+const polyglot = require('../i18n.js')
 const Layout = require('../components/Layout.js')
 
 const red = css`
@@ -12,7 +13,7 @@ class Page extends Component {
     return `${str}!!`
   }
 
-  render({ name, locale, polyglot }) {
+  render({ name, locale }) {
     const key = `${locale}.page_description`
 
     return html`

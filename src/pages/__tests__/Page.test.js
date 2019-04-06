@@ -1,7 +1,6 @@
 const render = require('preact-render-to-string')
 const cheerio = require('cheerio')
 const { html } = require('../../utils.js')
-const polyglot = require('../../i18n.js')
 
 const Page = require('../Page.js')
 
@@ -9,7 +8,7 @@ const renderPage = ({ name, locale }) => {
   return cheerio.load(
     render(
       html`
-        <${Page} ...${{ name, locale }} polyglot=${polyglot} />
+        <${Page} ...${{ name, locale }} />
       `,
     ),
   )

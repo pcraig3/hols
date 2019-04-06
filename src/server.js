@@ -93,7 +93,7 @@ app.get('/:page', (req, res) => {
       locale,
       pageComponent: 'Page',
       title: req.params.page,
-      props: { name: req.params.page, locale, polyglot },
+      props: { name: req.params.page },
     }),
   )
 })

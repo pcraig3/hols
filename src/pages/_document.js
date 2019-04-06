@@ -41,6 +41,9 @@ const document = ({ title, locale, content }) => {
 const renderPage = ({ locale, pageComponent, title = '', props }) => {
   const Page = require(`./${pageComponent}.js`)
 
+  // merge a locale object (eg, { locale:'en' }) with the props object
+  Object.assign(props, { locale })
+
   const content = render(
     html`
       <${Page} ...${props} />
