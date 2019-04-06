@@ -2,18 +2,22 @@ const express = require('express')
 const logger = require('morgan')
 const helmet = require('helmet')
 const cookieSession = require('cookie-session')
-const render = require('preact-render-to-string')
-const { html } = require('./utils')
 const polyglot = require('./i18n.js')
 const renderPage = require('./pages/_document.js')
 
+let locale = 'en'
 const app = express()
+
 app
   .use(logger('dev'))
   .use(helmet())
   // both of these are needed to parse post request params
   .use(express.urlencoded({ extended: true }))
   .use(express.json())
+  .use(function(req, res, next) {
+    locale = ['en', 'fr'].includes(req.query.locale) ? req.query.locale : locale
+    next()
+  })
 
 const halfAnHour = 1000 * 60 * 30
 const sessionName = `az-htm-${process.env.COOKIE_SECRET ||
@@ -42,15 +46,14 @@ const getSessionData = (session = {}, enforceExists = false) => {
 }
 
 app.get('/login', (req, res) => {
-  const Login = require('./pages/Login.js')
-
-  const content = render(
-    html`
-      <${Login} data=${getSessionData(req.session)} />
-    `,
+  res.send(
+    renderPage({
+      locale,
+      pageComponent: 'Login',
+      title: 'Log in',
+      props: { data: getSessionData(req.session) },
+    }),
   )
-
-  res.send(renderPage({ title: 'Log in', locale, content }))
 })
 
 app.post('/login', (req, res) => {
@@ -70,15 +73,13 @@ app.get('/dashboard', (req, res) => {
     return res.redirect(302, '/login')
   }
 
-  const Dashboard = require('./pages/Dashboard')
-
-  const content = render(
-    html`
-      <${Dashboard} data=${data} />
-    `,
+  res.send(
+    renderPage({
+      locale,
+      pageComponent: 'Dashboard',
+      props: { data: getSessionData(req.session) },
+    }),
   )
-
-  res.send(renderPage({ title: 'Dashboard', locale, content }))
 })
 
 app.get('/logout', (req, res) => {
@@ -86,21 +87,15 @@ app.get('/logout', (req, res) => {
   res.redirect(302, '/login')
 })
 
-let locale = 'en'
-
 app.get('/:page', (req, res) => {
-  let component = 'Page'
-  const Page = require(`./pages/${component}.js`)
-
-  locale = ['en', 'fr'].includes(req.query.locale) ? req.query.locale : locale
-
-  const content = render(
-    html`
-      <${Page} name=${req.params.page} locale=${locale} polyglot=${polyglot} />
-    `,
+  res.send(
+    renderPage({
+      locale,
+      pageComponent: 'Page',
+      title: req.params.page,
+      props: { name: req.params.page, locale, polyglot },
+    }),
   )
-
-  res.send(renderPage({ title: req.params.page, locale, content }))
 })
 
 app.get('/', (req, res) => {
