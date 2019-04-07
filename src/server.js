@@ -2,7 +2,6 @@ const express = require('express')
 const logger = require('morgan')
 const helmet = require('helmet')
 const cookieSession = require('cookie-session')
-const polyglot = require('./i18n.js')
 const renderPage = require('./pages/_document.js')
 
 let locale = 'en'
@@ -36,13 +35,13 @@ app.use(
 )
 
 const getSessionData = (session = {}, enforceExists = false) => {
-  const { name } = session
+  const { name, number } = session
 
-  if (enforceExists && !name) {
+  if (enforceExists && (!name || !number)) {
     return false
   }
 
-  return { name }
+  return { name, number }
 }
 
 app.get('/login', (req, res) => {

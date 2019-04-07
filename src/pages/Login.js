@@ -22,7 +22,7 @@ const loginButton = css`
 
 /* eslint-disable no-irregular-whitespace */
 
-const Login = ({ data: { name = '' } = {} }) =>
+const Login = ({ data: { name = '', number = '' } = {} }) =>
   html`
     <${Layout}>
       <h1>Log in to see your name</h1>
@@ -31,6 +31,9 @@ const Login = ({ data: { name = '' } = {} }) =>
       <form class=${form} method="post">
         <div>
           <${Input} id="name" value=${name}>Name<//>
+        </div>
+        <div>
+          <${Input} id="number" value=${number}>Favourite number<//>
         </div>
 
         <${Button} style=${loginButton}>Log in<//>

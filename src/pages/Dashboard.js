@@ -25,7 +25,7 @@ const dashboard = css`
   }
 `
 
-const Dashboard = ({ data: { name = '' } = {} }) =>
+const Dashboard = ({ data: { name = '', number = '' } = {} }) =>
   html`
     <${Layout}>
       <div class=${dashboard}>
@@ -33,6 +33,8 @@ const Dashboard = ({ data: { name = '' } = {} }) =>
         <div>
           <p>Name</p>
           <p><pre>${name}</pre></p>
+          <p>Favourite number</p>
+          <p><pre>${number}</pre></p>
         </div>
         <br />
 
