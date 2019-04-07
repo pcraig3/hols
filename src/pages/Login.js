@@ -20,9 +20,19 @@ const loginButton = css`
   max-width: 150px;
 `
 
+const errorMessage = css`
+  color: red;
+`
+
+const validationError = ({ param, msg }) => html`
+  <span id=${`${param}-error`} class="${errorMessage}">
+    ${msg}
+  </span>
+`
+
 /* eslint-disable no-irregular-whitespace */
 
-const Login = ({ data: { name = '', number = '' } = {} }) =>
+const Login = ({ data: { name = '', number = '' } = {}, errors = {} }) =>
   html`
     <${Layout}>
       <h1>Log in to see your name</h1>
@@ -30,9 +40,11 @@ const Login = ({ data: { name = '', number = '' } = {} }) =>
 
       <form class=${form} method="post">
         <div>
+          ${errors.name && validationError(errors.name)}
           <${Input} id="name" value=${name}>Name<//>
         </div>
         <div>
+          ${errors.number && validationError(errors.number)}
           <${Input} id="number" value=${number}>Favourite number<//>
         </div>
 

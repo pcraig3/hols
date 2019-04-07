@@ -26,6 +26,7 @@
     "emotion": "^10.0.9",
     "emotion-server": "^10.0.9",
     "express": "^4.16.4",
+    "express-validator": "^5.3.1",
     "helmet": "^3.16.0",
     "htm": "^2.1.1",
     "morgan": "^1.9.1",
