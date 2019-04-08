@@ -64,7 +64,7 @@ app.post('/login', checkSchema(loginSchema), (req, res) => {
       renderPage({
         locale,
         pageComponent: 'Login',
-        title: 'Log in',
+        title: 'Error: Log in',
         props: {
           data: getSessionData(req.session),
           errors: errorObj,
