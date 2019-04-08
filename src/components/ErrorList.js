@@ -38,12 +38,13 @@ const errorList = css`
 const ErrorList = ({ errors }) =>
   html`
     <div
+      id="errorList"
       class=${errorList}
-      aria-labelledby="error-list-title"
+      aria-labelledby="errorListTitle"
       role="alert"
       tabindex="-1"
     >
-      <h2 id="error-list-title">
+      <h2 id="errorListTitle">
         There is a problem
       </h2>
       <ul>
