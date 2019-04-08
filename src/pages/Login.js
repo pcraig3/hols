@@ -1,6 +1,7 @@
 const { html } = require('../utils.js')
 const { css } = require('emotion')
 const Layout = require('../components/Layout.js')
+const ErrorList = require('../components/ErrorList.js')
 const Input = require('../components/Input.js')
 const Button = require('../components/Button.js')
 
@@ -21,10 +22,10 @@ const loginButton = css`
 `
 
 const errorMessage = css`
-  color: red;
+  color: #b10e1e;
 `
 
-const validationError = ({ param, msg }) => html`
+const ValidationError = ({ param, msg }) => html`
   <span id=${`${param}-error`} class="${errorMessage}">
     ${msg}
   </span>
@@ -35,16 +36,20 @@ const validationError = ({ param, msg }) => html`
 const Login = ({ data: { name = '', number = '' } = {}, errors = {} }) =>
   html`
     <${Layout}>
+      ${Object.keys(errors).length > 0 &&
+        html`
+          <${ErrorList} errors=${errors} //>
+        `}
+
       <h1>Log in to see your name</h1>
       <p>Please enter your name in order to see the dashboard.</p>
-
       <form class=${form} method="post">
         <div>
-          ${errors.name && validationError(errors.name)}
+          ${errors.name && ValidationError(errors.name)}
           <${Input} id="name" value=${name}>Name<//>
         </div>
         <div>
-          ${errors.number && validationError(errors.number)}
+          ${errors.number && ValidationError(errors.number)}
           <${Input} id="number" value=${number}>Favourite number<//>
         </div>
 

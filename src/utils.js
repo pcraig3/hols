@@ -12,14 +12,17 @@ const metaIfSHA = () =>
 const loginSchema = {
   name: {
     in: ['body'],
-    isEmpty: { errorMessage: 'Cannot be empty', negated: true },
-    isLength: { errorMessage: 'Cannot be 1 character', options: { min: 2 } },
+    isEmpty: { errorMessage: 'Name can’t be empty', negated: true },
+    isLength: {
+      errorMessage: 'Name can’t be 1 character',
+      options: { min: 2 },
+    },
   },
   number: {
     in: ['body'],
-    isEmpty: { errorMessage: 'Cannot be empty', negated: true },
-    isNumeric: { errorMessage: 'Cannot contain letters' },
-    isInt: { errorMessage: 'Cannot be less than 1', options: { min: 1 } },
+    isEmpty: { errorMessage: 'Number can’t be empty', negated: true },
+    isNumeric: { errorMessage: 'Number can’t contain letters' },
+    isInt: { errorMessage: 'Number can’t be less than 1', options: { min: 1 } },
   },
 }
 
@@ -30,15 +33,15 @@ const loginSchema = {
   ie,
 
   [
-    { param: 'name', msg: 'Cannot be empty', ... },
-    { param: 'number', msg: 'Cannot be empty', ... }
+    { param: 'name', msg: 'Name can’t be empty', ... },
+    { param: 'number', msg: 'Number can’t be empty', ... }
   ]
 
   to
 
   {
-    name: { param: 'name', msg: 'Cannot be empty', ... },
-    number: { param: 'number', msg: 'Cannot be empty', ... }
+    name: { param: 'name', msg: 'Name can’t be empty', ... },
+    number: { param: 'number', msg: 'Number can’t be empty', ... }
   }
 */
 const errorArray2ErrorObject = (errors = []) => {
