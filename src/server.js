@@ -47,6 +47,16 @@ const dbmw = cb => {
 }
 
 app.get('/provinces', dbmw(getProvinces), (req, res) => {
+  return res.send(
+    renderPage({
+      pageComponent: 'Provinces',
+      title: 'Provinces',
+      props: { data: { provinces: res.locals.rows } },
+    }),
+  )
+})
+
+app.get('/provinces.json', dbmw(getProvinces), (req, res) => {
   return res.send(res.locals.rows)
 })
 
