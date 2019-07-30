@@ -30,9 +30,9 @@ app.get('/page/:page', (req, res) => {
   )
 })
 
-app.get('/categories', async (req, res, next) => {
+app.get('/provinces', async (req, res, next) => {
   try {
-    const c = await db.all('SELECT * FROM Category LIMIT 10')
+    const c = await db.all('SELECT * FROM Province LIMIT 13')
     res.send(c)
   } catch (err) {
     next(err)
