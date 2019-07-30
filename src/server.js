@@ -3,6 +3,7 @@ const logger = require('morgan')
 const helmet = require('helmet')
 const cookieSession = require('cookie-session')
 const renderPage = require('./pages/_document.js')
+const { cookieSessionConfig } = require('./utils')
 
 const app = express()
 
@@ -13,21 +14,7 @@ app
   .use(express.urlencoded({ extended: true }))
   .use(express.json())
 
-const halfAnHour = 1000 * 60 * 30
-const sessionName = `hols-${process.env.COOKIE_SECRET ||
-  Math.floor(new Date().getTime() / halfAnHour)}`
-
-app.use(
-  cookieSession({
-    name: sessionName,
-    secret: sessionName,
-    cookie: {
-      httpOnly: true,
-      maxAge: halfAnHour,
-      sameSite: true,
-    },
-  }),
-)
+app.use(cookieSession(cookieSessionConfig))
 
 app.get('/:page', (req, res) => {
   res.send(
