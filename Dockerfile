@@ -7,8 +7,7 @@ ENV GITHUB_SHA=$GITHUB_SHA_ARG
 WORKDIR /app
 COPY . .
 
-RUN npm install --production
+RUN npm install --production --silent
 
 EXPOSE 3000
 CMD ["npm", "start"]
-
