@@ -38,6 +38,12 @@ const getCategories = () => {
   return db.all('SELECT * FROM Category LIMIT 3')
 }
 
+const getProvincesWithCategories = () => {
+  return db.all(
+    'SELECT pc.province_id, pc.category_id, p.name_en, p.name_fr, c.name FROM Province p JOIN ProvincesCategories pc ON pc.province_id = p.id JOIN Category c ON pc.category_id = c.id',
+  )
+}
+
 const dbmw = cb => {
   return async (req, res, next) => {
     try {
@@ -66,6 +72,25 @@ app.get('/provinces.json', dbmw(getProvinces), (req, res) => {
 
 app.get('/categories.json', dbmw(getCategories), (req, res) => {
   return res.send(res.locals.rows)
+})
+
+app.get('/pc.json', dbmw(getProvincesWithCategories), (req, res) => {
+  const results = {}
+
+  res.locals.rows.map(row => {
+    if (!results[row.province_id]) {
+      results[row.province_id] = {
+        province_id: row.province_id,
+        name_en: row.name_en,
+        name_fr: row.name_fr,
+        categories: [],
+      }
+    }
+
+    results[row.province_id].categories.push({ category_id: row.category_id, name: row.name })
+  })
+
+  return res.send(Object.values(results))
 })
 
 app.get('/', (req, res) => {
