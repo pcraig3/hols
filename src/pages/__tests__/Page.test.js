@@ -21,16 +21,9 @@ test('Page component has the name passed into it', () => {
   expect($('p').text()).toEqual('This page is all about “test”.')
 })
 
-test('Page component renders in French', () => {
-  const $ = renderPage({ name: 'test', locale: 'fr' })
-  expect($('h1').length).toBe(1)
-  expect($('h1').text()).toEqual('test!!')
-  expect($('p').text()).toEqual('Cette page est au sujet de « test ».')
-})
-
 test('Page component accepts no name', () => {
   const $ = renderPage({ locale: 'en' })
   expect($('h1').length).toBe(1)
   expect($('h1').text()).toEqual('undefined!!')
-  expect($('p').text()).toEqual('This page is all about “{{name}}”.')
+  expect($('p').text()).toEqual('This page is all about “”.')
 })
