@@ -30,13 +30,24 @@ app.get('/page/:page', (req, res) => {
   )
 })
 
-app.get('/provinces', async (req, res, next) => {
-  try {
-    const c = await db.all('SELECT * FROM Province LIMIT 13')
-    res.send(c)
-  } catch (err) {
-    next(err)
+const getProvinces = () => {
+  return db.all('SELECT * FROM Province LIMIT 13')
+}
+
+const dbmw = cb => {
+  return async (req, res, next) => {
+    try {
+      res.locals.rows = await cb()
+    } catch (err) {
+      return next(err)
+    }
+
+    return next()
   }
+}
+
+app.get('/provinces', dbmw(getProvinces), (req, res) => {
+  return res.send(res.locals.rows)
 })
 
 app.get('/', (req, res) => {
