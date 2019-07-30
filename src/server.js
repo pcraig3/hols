@@ -4,6 +4,8 @@ const helmet = require('helmet')
 const cookieSession = require('cookie-session')
 const renderPage = require('./pages/_document.js')
 const { cookieSessionConfig } = require('./utils')
+const Promise = require('bluebird')
+const db = require('sqlite')
 
 const app = express()
 
@@ -28,6 +30,15 @@ app.get('/page/:page', (req, res) => {
   )
 })
 
+app.get('/categories', async (req, res, next) => {
+  try {
+    const c = await db.all('SELECT * FROM Category LIMIT 10')
+    res.send(c)
+  } catch (err) {
+    next(err)
+  }
+})
+
 app.get('/', (req, res) => {
   res.redirect(302, 'page/stuff')
 })
@@ -35,8 +46,20 @@ app.get('/', (req, res) => {
 // basic HTTP server via express:
 const port = process.env.PORT || 3000
 
-app.listen(port, err => {
-  if (err) throw err
-  // eslint-disable-next-line no-console
-  console.log(`Ready on http://localhost:${port}`)
-})
+Promise.resolve()
+  // First, try to open the database
+  .then(() => db.open('./database.sqlite', { Promise })) // <=
+  // Update db schema to the latest version using SQL-based migrations
+  .then(() => db.migrate({ force: 'last' })) // <=
+  // Display error message if something went wrong
+  .catch(err => console.error(err.stack)) // eslint-disable-line no-console
+  // Finally, launch the Node.js app
+  .finally(() => {
+    return app.listen(port, err => {
+      if (err) throw err
+      // eslint-disable-next-line no-console
+      console.log(`Ready on http://localhost:${port}`)
+    })
+  })
+
+// module.exports = app
