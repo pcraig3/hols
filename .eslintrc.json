@@ -1,33 +1,21 @@
 {
-    "env": {
-        "es6": true,
-        "node": true,
-        "jest/globals": true
-    },
-    "extends": [
-        "eslint:recommended"
-    ],
-    "parserOptions": {
-        "ecmaVersion": 9,
-        "sourceType": "module"
-    },
-    "plugins": ["jest"],
-    "rules": {
-        "indent": [
-            "error", 2
-        ],
-        "linebreak-style": [
-            "error",
-            "unix"
-        ],
-        "quotes": [
-            "error",
-            "single"
-        ],
-        "comma-dangle": ["error", "always-multiline"],
-        "semi": [
-            "error",
-            "never"
-        ]
-    }
+  "env": {
+    "es6": true,
+    "node": true,
+    "jest/globals": true
+  },
+  "extends": ["eslint:recommended"],
+  "parserOptions": {
+    "ecmaVersion": 9,
+    "sourceType": "module"
+  },
+  "plugins": ["jest"],
+  "rules": {
+    "indent": ["error", 2, { "SwitchCase": 1 }],
+    "linebreak-style": 0,
+    "quotes": ["error", "single"],
+    "comma-dangle": ["error", "always-multiline"],
+    "semi": ["error", "never"],
+    "no-console": "error"
+  }
 }

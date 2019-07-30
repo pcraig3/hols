@@ -1,29 +1,6 @@
-# az-htm
+# hols
 
-This is a tiny [htm](https://github.com/developit/htm) server-rendered app to trial server-side components.
-
-Components are a great way to build interface, but the client-side-only bit raises a11y and perf problems that you need lots of tooling + expertise to mitigate.
-
-So can we write our HTML as components that get rendered on the server? The answer is yes. But can we write something we would productionize?
-
-That's still a maybe for me. But for prototypes, this thing is great.
-
-This an attempt to get more "production-y" parts of a service to work.
-
-- ✅ 1 page ([express](https://expressjs.com/))
-- ✅ 1 class component ([htm](https://github.com/developit/htm) + [preact](https://github.com/developit/preact) + [preact-render-to-string](https://github.com/developit/preact-render-to-string))
-- ✅ inline CSS
-- ✅ unit tests ([jest](https://jestjs.io/) + [cheerio](https://cheerio.js.org/))
-- ✅ i18n ([node-polyglot](http://airbnb.io/polyglot.js/))
-- ✅ reload on save ([nodemon](https://nodemon.io/))
-- ✅ a CSS library ([emotion](https://emotion.sh/docs/introduction))
-- ✅ linting (sort of, using [eslint](https://eslint.org/))
-- ✅ Dockerfile
-
-Might add to this list in future.
-
-**Shout out to [@timarney](https://twitter.com/timarney), whose [htm-ssr-demo](https://github.com/timarney/htm-ssr-demo) was the inspiration for this.**
-
+This is an [htm](https://github.com/developit/htm) server-rendered app to be a frontend and backend for holidays.
 
 ## Getting started
 
@@ -58,24 +35,6 @@ npm start
 The app should be running at [http://localhost:3000/](http://localhost:3000/).
 
 On a Mac, press `Control` + `C` to quit the running application.
-
-### using the app
-
-The root url `/` will redirect to [`/index`](http://localhost:3000/index), which is rendered out by the `Page` component in [`src/pages/Page.js`](https://github.com/pcraig3/az-htm/blob/master/src/pages/Page.js). It accepts a variable, has some minimal styling, and you can switch the language to French. 
-
-You can change between English and French by adding `?locale=en` or `?locale=fr` to any URL.
-
-#### forms
-
-To trial form / session stuff, I've set up a few routes.
-
-- [`/login`](http://localhost:3000/login): to enter a string into a form
-- [`/dashboard`](http://localhost:3000/dashboard): to see the saved string
-- [`/logout`](http://localhost:3000/logout): to clear the session data
-
-You can't enter an empty string, but there's no other validation.
-
-If you visit [`/dashboard`](http://localhost:3000/dashboard) without entering a name, you will be redirected back to `/login`.
 
 ### Run tests with npm
 

@@ -1,19 +1,17 @@
 {
-  "name": "az-htm",
+  "name": "hols",
   "version": "1.0.0",
-  "description": "server rendered components",
+  "description": "holidays api and holidays frontend",
   "main": "src/server.js",
   "engines": {
-    "node": ">=10.15"
+    "node": ">=10.16"
   },
   "author": "pcraig3",
   "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/pcraig3/az-htm.git"
-  },
   "keywords": [
-    "htm"
+    "htm",
+    "holidays",
+    "canada"
   ],
   "scripts": {
     "dev": "nodemon src/server.js",
@@ -26,11 +24,9 @@
     "emotion": "^10.0.9",
     "emotion-server": "^10.0.9",
     "express": "^4.16.4",
-    "express-validator": "^5.3.1",
     "helmet": "^3.16.0",
     "htm": "^2.1.1",
     "morgan": "^1.9.1",
-    "node-polyglot": "^2.3.0",
     "preact": "^8.4.2",
     "preact-render-to-string": "^4.1.0"
   },
