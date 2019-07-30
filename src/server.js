@@ -18,7 +18,7 @@ process.env.NODE_ENV !== 'test' && app.use(logger('dev'))
 
 app.use(cookieSession(cookieSessionConfig))
 
-app.get('/:page', (req, res) => {
+app.get('/page/:page', (req, res) => {
   res.send(
     renderPage({
       pageComponent: 'Page',
@@ -29,7 +29,7 @@ app.get('/:page', (req, res) => {
 })
 
 app.get('/', (req, res) => {
-  res.redirect(302, '/index')
+  res.redirect(302, 'page/stuff')
 })
 
 // basic HTTP server via express:
