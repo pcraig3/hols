@@ -34,6 +34,10 @@ const getProvinces = () => {
   return db.all('SELECT * FROM Province LIMIT 13')
 }
 
+const getCategories = () => {
+  return db.all('SELECT * FROM Category LIMIT 3')
+}
+
 const dbmw = cb => {
   return async (req, res, next) => {
     try {
@@ -57,6 +61,10 @@ app.get('/provinces', dbmw(getProvinces), (req, res) => {
 })
 
 app.get('/provinces.json', dbmw(getProvinces), (req, res) => {
+  return res.send(res.locals.rows)
+})
+
+app.get('/categories.json', dbmw(getCategories), (req, res) => {
   return res.send(res.locals.rows)
 })
 

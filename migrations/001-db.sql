@@ -15,5 +15,13 @@ INSERT INTO Province (id, name_en, name_fr) VALUES ('QC', 'Quebec', 'Québec');
 INSERT INTO Province (id, name_en, name_fr) VALUES ('SK', 'Saskatchewan', 'Saskatchewan');
 INSERT INTO Province (id, name_en, name_fr) VALUES ('YT', 'Yukon', 'Yukon');
 
+
+CREATE TABLE Category (id INT PRIMARY KEY, name VARCHAR(20));
+
+INSERT INTO Category (id, name) VALUES (1, 'Technology');
+INSERT INTO Category (id, name) VALUES (2, 'Business');
+INSERT INTO Category (id, name) VALUES (3, 'Media studies');
+
 -- Down
 DROP TABLE Province;
+DROP TABLE Category;
