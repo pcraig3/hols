@@ -8,11 +8,13 @@ const { cookieSessionConfig } = require('./utils')
 const app = express()
 
 app
-  .use(logger('dev'))
   .use(helmet())
   // both of these are needed to parse post request params
   .use(express.urlencoded({ extended: true }))
   .use(express.json())
+
+// if NODE_ENV does not equal 'test', add a request logger
+process.env.NODE_ENV !== 'test' && app.use(logger('dev'))
 
 app.use(cookieSession(cookieSessionConfig))
 
