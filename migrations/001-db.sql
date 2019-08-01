@@ -5,6 +5,22 @@ CREATE TABLE Province (
   name_fr TEXT
 );
 
+CREATE TABLE Holiday (
+	id INTEGER PRIMARY KEY AUTOINCREMENT,
+	date_string TEXT,
+	name_en TEXT,
+	name_fr TEXT,
+	federal BOOLEAN DEFAULT FALSE
+);
+
+CREATE TABLE ProvinceHoliday (
+  id INTEGER PRIMARY KEY,
+  province_id CHAR(2),
+  holiday_id INTEGER,
+  FOREIGN KEY(province_id) REFERENCES Province(id),
+  FOREIGN KEY(holiday_id) REFERENCES Holiday(id)
+);
+
 INSERT INTO Province (id, name_en, name_fr) VALUES ('AB', 'Alberta', 'Alberta');
 INSERT INTO Province (id, name_en, name_fr) VALUES ('BC', 'British Columbia', 'Colombie-Britannique');
 INSERT INTO Province (id, name_en, name_fr) VALUES ('MB', 'Manitoba', 'Manitoba');
@@ -18,14 +34,6 @@ INSERT INTO Province (id, name_en, name_fr) VALUES ('PE', 'Prince Edward Island'
 INSERT INTO Province (id, name_en, name_fr) VALUES ('QC', 'Quebec', 'Québec');
 INSERT INTO Province (id, name_en, name_fr) VALUES ('SK', 'Saskatchewan', 'Saskatchewan');
 INSERT INTO Province (id, name_en, name_fr) VALUES ('YT', 'Yukon', 'Yukon');
-
-CREATE TABLE Holiday (
-	id INTEGER PRIMARY KEY AUTOINCREMENT,
-	date_string TEXT,
-	name_en TEXT,
-	name_fr TEXT,
-	federal BOOLEAN DEFAULT FALSE
-);
 
 INSERT INTO Holiday (date_string, name_en, name_fr) VALUES ('January 1', 'New Year’s Day', 'Jour de l’An');
 INSERT INTO Holiday (date_string, name_en, name_fr) VALUES ('Third Monday in February', 'Louis Riel Day', 'Journée Louis Riel');
@@ -66,15 +74,6 @@ UPDATE Holiday SET federal = 1 WHERE name_en = 'Thanksgiving';
 UPDATE Holiday SET federal = 1 WHERE name_en = 'Remembrance Day';
 UPDATE Holiday SET federal = 1 WHERE name_en = 'Christmas Day';
 UPDATE Holiday SET federal = 1 WHERE name_en = 'Boxing Day';
-
-
-CREATE TABLE ProvinceHoliday (
-  id INTEGER PRIMARY KEY,
-  province_id CHAR(2),
-  holiday_id INTEGER,
-  FOREIGN KEY(province_id) REFERENCES Province(id),
-  FOREIGN KEY(holiday_id) REFERENCES Holiday(id)
-);
 
 INSERT INTO ProvinceHoliday (holiday_id, province_id) VALUES ((SELECT id FROM Holiday WHERE (date_string = 'January 1' AND name_en = 'New Year’s Day')), 'AB');
 INSERT INTO ProvinceHoliday (holiday_id, province_id) VALUES ((SELECT id FROM Holiday WHERE (date_string = 'January 1' AND name_en = 'New Year’s Day')), 'BC');
