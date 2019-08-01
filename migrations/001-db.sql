@@ -104,6 +104,141 @@ INSERT INTO ProvinceHoliday (holiday_id, province_id) VALUES ((SELECT id FROM Ho
 
 INSERT INTO ProvinceHoliday (holiday_id, province_id) VALUES ((SELECT id FROM Holiday WHERE (date_string = 'March 17' AND name_en = 'Saint Patrick’s Day')), 'NL');
 
+INSERT INTO ProvinceHoliday (holiday_id, province_id) VALUES ((SELECT id FROM Holiday WHERE (date_string = 'Friday before Easter Day' AND name_en = 'Good Friday')), 'AB');
+INSERT INTO ProvinceHoliday (holiday_id, province_id) VALUES ((SELECT id FROM Holiday WHERE (date_string = 'Friday before Easter Day' AND name_en = 'Good Friday')), 'BC');
+INSERT INTO ProvinceHoliday (holiday_id, province_id) VALUES ((SELECT id FROM Holiday WHERE (date_string = 'Friday before Easter Day' AND name_en = 'Good Friday')), 'MB');
+INSERT INTO ProvinceHoliday (holiday_id, province_id) VALUES ((SELECT id FROM Holiday WHERE (date_string = 'Friday before Easter Day' AND name_en = 'Good Friday')), 'NB');
+INSERT INTO ProvinceHoliday (holiday_id, province_id) VALUES ((SELECT id FROM Holiday WHERE (date_string = 'Friday before Easter Day' AND name_en = 'Good Friday')), 'NL');
+INSERT INTO ProvinceHoliday (holiday_id, province_id) VALUES ((SELECT id FROM Holiday WHERE (date_string = 'Friday before Easter Day' AND name_en = 'Good Friday')), 'NT');
+INSERT INTO ProvinceHoliday (holiday_id, province_id) VALUES ((SELECT id FROM Holiday WHERE (date_string = 'Friday before Easter Day' AND name_en = 'Good Friday')), 'NS');
+INSERT INTO ProvinceHoliday (holiday_id, province_id) VALUES ((SELECT id FROM Holiday WHERE (date_string = 'Friday before Easter Day' AND name_en = 'Good Friday')), 'NU');
+INSERT INTO ProvinceHoliday (holiday_id, province_id) VALUES ((SELECT id FROM Holiday WHERE (date_string = 'Friday before Easter Day' AND name_en = 'Good Friday')), 'ON');
+INSERT INTO ProvinceHoliday (holiday_id, province_id) VALUES ((SELECT id FROM Holiday WHERE (date_string = 'Friday before Easter Day' AND name_en = 'Good Friday')), 'PE');
+INSERT INTO ProvinceHoliday (holiday_id, province_id) VALUES ((SELECT id FROM Holiday WHERE (date_string = 'Friday before Easter Day' AND name_en = 'Good Friday')), 'QC');
+INSERT INTO ProvinceHoliday (holiday_id, province_id) VALUES ((SELECT id FROM Holiday WHERE (date_string = 'Friday before Easter Day' AND name_en = 'Good Friday')), 'SK');
+INSERT INTO ProvinceHoliday (holiday_id, province_id) VALUES ((SELECT id FROM Holiday WHERE (date_string = 'Friday before Easter Day' AND name_en = 'Good Friday')), 'YT');
+
+INSERT INTO ProvinceHoliday (holiday_id, province_id) VALUES ((SELECT id FROM Holiday WHERE (date_string = 'Monday after Easter Day' AND name_en = 'Easter Monday')), 'AB');
+INSERT INTO ProvinceHoliday (holiday_id, province_id) VALUES ((SELECT id FROM Holiday WHERE (date_string = 'Monday after Easter Day' AND name_en = 'Easter Monday')), 'PE');
+
+INSERT INTO ProvinceHoliday (holiday_id, province_id) VALUES ((SELECT id FROM Holiday WHERE (date_string = 'April 23' AND name_en = 'Saint George’s Day')), 'NL');
+
+INSERT INTO ProvinceHoliday (holiday_id, province_id) VALUES ((SELECT id FROM Holiday WHERE (date_string = 'Monday on or before May 24' AND name_en = 'National Patriots’ Day')), 'QC');
+
+INSERT INTO ProvinceHoliday (holiday_id, province_id) VALUES ((SELECT id FROM Holiday WHERE (date_string = 'Monday on or before May 24' AND name_en = 'Victoria Day')), 'AB');
+INSERT INTO ProvinceHoliday (holiday_id, province_id) VALUES ((SELECT id FROM Holiday WHERE (date_string = 'Monday on or before May 24' AND name_en = 'Victoria Day')), 'BC');
+INSERT INTO ProvinceHoliday (holiday_id, province_id) VALUES ((SELECT id FROM Holiday WHERE (date_string = 'Monday on or before May 24' AND name_en = 'Victoria Day')), 'MB');
+INSERT INTO ProvinceHoliday (holiday_id, province_id) VALUES ((SELECT id FROM Holiday WHERE (date_string = 'Monday on or before May 24' AND name_en = 'Victoria Day')), 'NB');
+INSERT INTO ProvinceHoliday (holiday_id, province_id) VALUES ((SELECT id FROM Holiday WHERE (date_string = 'Monday on or before May 24' AND name_en = 'Victoria Day')), 'NT');
+INSERT INTO ProvinceHoliday (holiday_id, province_id) VALUES ((SELECT id FROM Holiday WHERE (date_string = 'Monday on or before May 24' AND name_en = 'Victoria Day')), 'NS');
+INSERT INTO ProvinceHoliday (holiday_id, province_id) VALUES ((SELECT id FROM Holiday WHERE (date_string = 'Monday on or before May 24' AND name_en = 'Victoria Day')), 'NU');
+INSERT INTO ProvinceHoliday (holiday_id, province_id) VALUES ((SELECT id FROM Holiday WHERE (date_string = 'Monday on or before May 24' AND name_en = 'Victoria Day')), 'ON');
+INSERT INTO ProvinceHoliday (holiday_id, province_id) VALUES ((SELECT id FROM Holiday WHERE (date_string = 'Monday on or before May 24' AND name_en = 'Victoria Day')), 'PE');
+INSERT INTO ProvinceHoliday (holiday_id, province_id) VALUES ((SELECT id FROM Holiday WHERE (date_string = 'Monday on or before May 24' AND name_en = 'Victoria Day')), 'SK');
+INSERT INTO ProvinceHoliday (holiday_id, province_id) VALUES ((SELECT id FROM Holiday WHERE (date_string = 'Monday on or before May 24' AND name_en = 'Victoria Day')), 'YT');
+
+INSERT INTO ProvinceHoliday (holiday_id, province_id) VALUES ((SELECT id FROM Holiday WHERE (date_string = 'June 21' AND name_en = 'National Aboriginal Day')), 'NT');
+INSERT INTO ProvinceHoliday (holiday_id, province_id) VALUES ((SELECT id FROM Holiday WHERE (date_string = 'June 21' AND name_en = 'National Aboriginal Day')), 'YT');
+
+INSERT INTO ProvinceHoliday (holiday_id, province_id) VALUES ((SELECT id FROM Holiday WHERE (date_string = 'June 24' AND name_en = 'Discovery Day / National Holiday')), 'NL');
+INSERT INTO ProvinceHoliday (holiday_id, province_id) VALUES ((SELECT id FROM Holiday WHERE (date_string = 'June 24' AND name_en = 'Discovery Day / National Holiday')), 'QC');
+INSERT INTO ProvinceHoliday (holiday_id, province_id) VALUES ((SELECT id FROM Holiday WHERE (date_string = 'June 24' AND name_en = 'Discovery Day / National Holiday')), 'YT');
+
+INSERT INTO ProvinceHoliday (holiday_id, province_id) VALUES ((SELECT id FROM Holiday WHERE (date_string = 'July 1' AND name_en = 'Canada Day')), 'AB');
+INSERT INTO ProvinceHoliday (holiday_id, province_id) VALUES ((SELECT id FROM Holiday WHERE (date_string = 'July 1' AND name_en = 'Canada Day')), 'BC');
+INSERT INTO ProvinceHoliday (holiday_id, province_id) VALUES ((SELECT id FROM Holiday WHERE (date_string = 'July 1' AND name_en = 'Canada Day')), 'MB');
+INSERT INTO ProvinceHoliday (holiday_id, province_id) VALUES ((SELECT id FROM Holiday WHERE (date_string = 'July 1' AND name_en = 'Canada Day')), 'NB');
+INSERT INTO ProvinceHoliday (holiday_id, province_id) VALUES ((SELECT id FROM Holiday WHERE (date_string = 'July 1' AND name_en = 'Canada Day')), 'NL');
+INSERT INTO ProvinceHoliday (holiday_id, province_id) VALUES ((SELECT id FROM Holiday WHERE (date_string = 'July 1' AND name_en = 'Canada Day')), 'NT');
+INSERT INTO ProvinceHoliday (holiday_id, province_id) VALUES ((SELECT id FROM Holiday WHERE (date_string = 'July 1' AND name_en = 'Canada Day')), 'NS');
+INSERT INTO ProvinceHoliday (holiday_id, province_id) VALUES ((SELECT id FROM Holiday WHERE (date_string = 'July 1' AND name_en = 'Canada Day')), 'NU');
+INSERT INTO ProvinceHoliday (holiday_id, province_id) VALUES ((SELECT id FROM Holiday WHERE (date_string = 'July 1' AND name_en = 'Canada Day')), 'ON');
+INSERT INTO ProvinceHoliday (holiday_id, province_id) VALUES ((SELECT id FROM Holiday WHERE (date_string = 'July 1' AND name_en = 'Canada Day')), 'PE');
+INSERT INTO ProvinceHoliday (holiday_id, province_id) VALUES ((SELECT id FROM Holiday WHERE (date_string = 'July 1' AND name_en = 'Canada Day')), 'QC');
+INSERT INTO ProvinceHoliday (holiday_id, province_id) VALUES ((SELECT id FROM Holiday WHERE (date_string = 'July 1' AND name_en = 'Canada Day')), 'SK');
+INSERT INTO ProvinceHoliday (holiday_id, province_id) VALUES ((SELECT id FROM Holiday WHERE (date_string = 'July 1' AND name_en = 'Canada Day')), 'YT');
+
+INSERT INTO ProvinceHoliday (holiday_id, province_id) VALUES ((SELECT id FROM Holiday WHERE (date_string = 'July 12' AND name_en = 'Orangemen’s Day')), 'NL');
+
+INSERT INTO ProvinceHoliday (holiday_id, province_id) VALUES ((SELECT id FROM Holiday WHERE (date_string = 'First Monday in August' AND name_en = 'Civic Holiday')), 'BC');
+INSERT INTO ProvinceHoliday (holiday_id, province_id) VALUES ((SELECT id FROM Holiday WHERE (date_string = 'First Monday in August' AND name_en = 'Civic Holiday')), 'MB');
+INSERT INTO ProvinceHoliday (holiday_id, province_id) VALUES ((SELECT id FROM Holiday WHERE (date_string = 'First Monday in August' AND name_en = 'Civic Holiday')), 'NL');
+INSERT INTO ProvinceHoliday (holiday_id, province_id) VALUES ((SELECT id FROM Holiday WHERE (date_string = 'First Monday in August' AND name_en = 'Civic Holiday')), 'NT');
+INSERT INTO ProvinceHoliday (holiday_id, province_id) VALUES ((SELECT id FROM Holiday WHERE (date_string = 'First Monday in August' AND name_en = 'Civic Holiday')), 'NU');
+INSERT INTO ProvinceHoliday (holiday_id, province_id) VALUES ((SELECT id FROM Holiday WHERE (date_string = 'First Monday in August' AND name_en = 'Civic Holiday')), 'ON');
+INSERT INTO ProvinceHoliday (holiday_id, province_id) VALUES ((SELECT id FROM Holiday WHERE (date_string = 'First Monday in August' AND name_en = 'Civic Holiday')), 'SK');
+
+INSERT INTO ProvinceHoliday (holiday_id, province_id) VALUES ((SELECT id FROM Holiday WHERE (date_string = 'First Monday in August' AND name_en = 'Heritage Day')), 'AB');
+INSERT INTO ProvinceHoliday (holiday_id, province_id) VALUES ((SELECT id FROM Holiday WHERE (date_string = 'First Monday in August' AND name_en = 'Heritage Day')), 'YT');
+
+INSERT INTO ProvinceHoliday (holiday_id, province_id) VALUES ((SELECT id FROM Holiday WHERE (date_string = 'First Monday in August' AND name_en = 'New Brunswick Day')), 'NB');
+
+INSERT INTO ProvinceHoliday (holiday_id, province_id) VALUES ((SELECT id FROM Holiday WHERE (date_string = 'First Monday in August' AND name_en = 'Natal Day')), 'NS');
+
+INSERT INTO ProvinceHoliday (holiday_id, province_id) VALUES ((SELECT id FROM Holiday WHERE (date_string = 'Third Friday in August' AND name_en = 'Gold Cup Parade Day')), 'PE');
+
+INSERT INTO ProvinceHoliday (holiday_id, province_id) VALUES ((SELECT id FROM Holiday WHERE (date_string = 'Third Monday in August' AND name_en = 'Discovery Day')), 'YT');
+
+INSERT INTO ProvinceHoliday (holiday_id, province_id) VALUES ((SELECT id FROM Holiday WHERE (date_string = 'First Monday in September' AND name_en = 'Labour Day')), 'AB');
+INSERT INTO ProvinceHoliday (holiday_id, province_id) VALUES ((SELECT id FROM Holiday WHERE (date_string = 'First Monday in September' AND name_en = 'Labour Day')), 'BC');
+INSERT INTO ProvinceHoliday (holiday_id, province_id) VALUES ((SELECT id FROM Holiday WHERE (date_string = 'First Monday in September' AND name_en = 'Labour Day')), 'MB');
+INSERT INTO ProvinceHoliday (holiday_id, province_id) VALUES ((SELECT id FROM Holiday WHERE (date_string = 'First Monday in September' AND name_en = 'Labour Day')), 'NB');
+INSERT INTO ProvinceHoliday (holiday_id, province_id) VALUES ((SELECT id FROM Holiday WHERE (date_string = 'First Monday in September' AND name_en = 'Labour Day')), 'NL');
+INSERT INTO ProvinceHoliday (holiday_id, province_id) VALUES ((SELECT id FROM Holiday WHERE (date_string = 'First Monday in September' AND name_en = 'Labour Day')), 'NT');
+INSERT INTO ProvinceHoliday (holiday_id, province_id) VALUES ((SELECT id FROM Holiday WHERE (date_string = 'First Monday in September' AND name_en = 'Labour Day')), 'NS');
+INSERT INTO ProvinceHoliday (holiday_id, province_id) VALUES ((SELECT id FROM Holiday WHERE (date_string = 'First Monday in September' AND name_en = 'Labour Day')), 'NU');
+INSERT INTO ProvinceHoliday (holiday_id, province_id) VALUES ((SELECT id FROM Holiday WHERE (date_string = 'First Monday in September' AND name_en = 'Labour Day')), 'ON');
+INSERT INTO ProvinceHoliday (holiday_id, province_id) VALUES ((SELECT id FROM Holiday WHERE (date_string = 'First Monday in September' AND name_en = 'Labour Day')), 'PE');
+INSERT INTO ProvinceHoliday (holiday_id, province_id) VALUES ((SELECT id FROM Holiday WHERE (date_string = 'First Monday in September' AND name_en = 'Labour Day')), 'QC');
+INSERT INTO ProvinceHoliday (holiday_id, province_id) VALUES ((SELECT id FROM Holiday WHERE (date_string = 'First Monday in September' AND name_en = 'Labour Day')), 'SK');
+INSERT INTO ProvinceHoliday (holiday_id, province_id) VALUES ((SELECT id FROM Holiday WHERE (date_string = 'First Monday in September' AND name_en = 'Labour Day')), 'YT');
+
+INSERT INTO ProvinceHoliday (holiday_id, province_id) VALUES ((SELECT id FROM Holiday WHERE (date_string = 'Second Monday in October' AND name_en = 'Thanksgiving')), 'AB');
+INSERT INTO ProvinceHoliday (holiday_id, province_id) VALUES ((SELECT id FROM Holiday WHERE (date_string = 'Second Monday in October' AND name_en = 'Thanksgiving')), 'BC');
+INSERT INTO ProvinceHoliday (holiday_id, province_id) VALUES ((SELECT id FROM Holiday WHERE (date_string = 'Second Monday in October' AND name_en = 'Thanksgiving')), 'MB');
+INSERT INTO ProvinceHoliday (holiday_id, province_id) VALUES ((SELECT id FROM Holiday WHERE (date_string = 'Second Monday in October' AND name_en = 'Thanksgiving')), 'NB');
+INSERT INTO ProvinceHoliday (holiday_id, province_id) VALUES ((SELECT id FROM Holiday WHERE (date_string = 'Second Monday in October' AND name_en = 'Thanksgiving')), 'NL');
+INSERT INTO ProvinceHoliday (holiday_id, province_id) VALUES ((SELECT id FROM Holiday WHERE (date_string = 'Second Monday in October' AND name_en = 'Thanksgiving')), 'NT');
+INSERT INTO ProvinceHoliday (holiday_id, province_id) VALUES ((SELECT id FROM Holiday WHERE (date_string = 'Second Monday in October' AND name_en = 'Thanksgiving')), 'NS');
+INSERT INTO ProvinceHoliday (holiday_id, province_id) VALUES ((SELECT id FROM Holiday WHERE (date_string = 'Second Monday in October' AND name_en = 'Thanksgiving')), 'NU');
+INSERT INTO ProvinceHoliday (holiday_id, province_id) VALUES ((SELECT id FROM Holiday WHERE (date_string = 'Second Monday in October' AND name_en = 'Thanksgiving')), 'ON');
+INSERT INTO ProvinceHoliday (holiday_id, province_id) VALUES ((SELECT id FROM Holiday WHERE (date_string = 'Second Monday in October' AND name_en = 'Thanksgiving')), 'PE');
+INSERT INTO ProvinceHoliday (holiday_id, province_id) VALUES ((SELECT id FROM Holiday WHERE (date_string = 'Second Monday in October' AND name_en = 'Thanksgiving')), 'QC');
+INSERT INTO ProvinceHoliday (holiday_id, province_id) VALUES ((SELECT id FROM Holiday WHERE (date_string = 'Second Monday in October' AND name_en = 'Thanksgiving')), 'SK');
+INSERT INTO ProvinceHoliday (holiday_id, province_id) VALUES ((SELECT id FROM Holiday WHERE (date_string = 'Second Monday in October' AND name_en = 'Thanksgiving')), 'YT');
+
+INSERT INTO ProvinceHoliday (holiday_id, province_id) VALUES ((SELECT id FROM Holiday WHERE (date_string = 'November 11' AND name_en = 'Armistice Day')), 'NL');
+
+INSERT INTO ProvinceHoliday (holiday_id, province_id) VALUES ((SELECT id FROM Holiday WHERE (date_string = 'November 11' AND name_en = 'Remembrance Day')), 'AB');
+INSERT INTO ProvinceHoliday (holiday_id, province_id) VALUES ((SELECT id FROM Holiday WHERE (date_string = 'November 11' AND name_en = 'Remembrance Day')), 'BC');
+INSERT INTO ProvinceHoliday (holiday_id, province_id) VALUES ((SELECT id FROM Holiday WHERE (date_string = 'November 11' AND name_en = 'Remembrance Day')), 'NB');
+INSERT INTO ProvinceHoliday (holiday_id, province_id) VALUES ((SELECT id FROM Holiday WHERE (date_string = 'November 11' AND name_en = 'Remembrance Day')), 'NT');
+INSERT INTO ProvinceHoliday (holiday_id, province_id) VALUES ((SELECT id FROM Holiday WHERE (date_string = 'November 11' AND name_en = 'Remembrance Day')), 'NS');
+INSERT INTO ProvinceHoliday (holiday_id, province_id) VALUES ((SELECT id FROM Holiday WHERE (date_string = 'November 11' AND name_en = 'Remembrance Day')), 'NU');
+INSERT INTO ProvinceHoliday (holiday_id, province_id) VALUES ((SELECT id FROM Holiday WHERE (date_string = 'November 11' AND name_en = 'Remembrance Day')), 'PE');
+INSERT INTO ProvinceHoliday (holiday_id, province_id) VALUES ((SELECT id FROM Holiday WHERE (date_string = 'November 11' AND name_en = 'Remembrance Day')), 'SK');
+INSERT INTO ProvinceHoliday (holiday_id, province_id) VALUES ((SELECT id FROM Holiday WHERE (date_string = 'November 11' AND name_en = 'Remembrance Day')), 'YT');
+
+INSERT INTO ProvinceHoliday (holiday_id, province_id) VALUES ((SELECT id FROM Holiday WHERE (date_string = 'December 25' AND name_en = 'Christmas Day')), 'AB');
+INSERT INTO ProvinceHoliday (holiday_id, province_id) VALUES ((SELECT id FROM Holiday WHERE (date_string = 'December 25' AND name_en = 'Christmas Day')), 'BC');
+INSERT INTO ProvinceHoliday (holiday_id, province_id) VALUES ((SELECT id FROM Holiday WHERE (date_string = 'December 25' AND name_en = 'Christmas Day')), 'MB');
+INSERT INTO ProvinceHoliday (holiday_id, province_id) VALUES ((SELECT id FROM Holiday WHERE (date_string = 'December 25' AND name_en = 'Christmas Day')), 'NB');
+INSERT INTO ProvinceHoliday (holiday_id, province_id) VALUES ((SELECT id FROM Holiday WHERE (date_string = 'December 25' AND name_en = 'Christmas Day')), 'NL');
+INSERT INTO ProvinceHoliday (holiday_id, province_id) VALUES ((SELECT id FROM Holiday WHERE (date_string = 'December 25' AND name_en = 'Christmas Day')), 'NT');
+INSERT INTO ProvinceHoliday (holiday_id, province_id) VALUES ((SELECT id FROM Holiday WHERE (date_string = 'December 25' AND name_en = 'Christmas Day')), 'NS');
+INSERT INTO ProvinceHoliday (holiday_id, province_id) VALUES ((SELECT id FROM Holiday WHERE (date_string = 'December 25' AND name_en = 'Christmas Day')), 'NU');
+INSERT INTO ProvinceHoliday (holiday_id, province_id) VALUES ((SELECT id FROM Holiday WHERE (date_string = 'December 25' AND name_en = 'Christmas Day')), 'ON');
+INSERT INTO ProvinceHoliday (holiday_id, province_id) VALUES ((SELECT id FROM Holiday WHERE (date_string = 'December 25' AND name_en = 'Christmas Day')), 'PE');
+INSERT INTO ProvinceHoliday (holiday_id, province_id) VALUES ((SELECT id FROM Holiday WHERE (date_string = 'December 25' AND name_en = 'Christmas Day')), 'QC');
+INSERT INTO ProvinceHoliday (holiday_id, province_id) VALUES ((SELECT id FROM Holiday WHERE (date_string = 'December 25' AND name_en = 'Christmas Day')), 'SK');
+INSERT INTO ProvinceHoliday (holiday_id, province_id) VALUES ((SELECT id FROM Holiday WHERE (date_string = 'December 25' AND name_en = 'Christmas Day')), 'YT');
+
+INSERT INTO ProvinceHoliday (holiday_id, province_id) VALUES ((SELECT id FROM Holiday WHERE (date_string = 'December 26' AND name_en = 'Boxing Day')), 'AB');
+INSERT INTO ProvinceHoliday (holiday_id, province_id) VALUES ((SELECT id FROM Holiday WHERE (date_string = 'December 26' AND name_en = 'Boxing Day')), 'NB');
+INSERT INTO ProvinceHoliday (holiday_id, province_id) VALUES ((SELECT id FROM Holiday WHERE (date_string = 'December 26' AND name_en = 'Boxing Day')), 'NS');
+INSERT INTO ProvinceHoliday (holiday_id, province_id) VALUES ((SELECT id FROM Holiday WHERE (date_string = 'December 26' AND name_en = 'Boxing Day')), 'ON');
+INSERT INTO ProvinceHoliday (holiday_id, province_id) VALUES ((SELECT id FROM Holiday WHERE (date_string = 'December 26' AND name_en = 'Boxing Day')), 'PE');
+
 -- Down
 DROP TABLE ProvinceHoliday;
 DROP TABLE Holiday;
