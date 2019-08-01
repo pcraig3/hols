@@ -3,9 +3,10 @@ const logger = require('morgan')
 const helmet = require('helmet')
 const cookieSession = require('cookie-session')
 const renderPage = require('./pages/_document.js')
-const { cookieSessionConfig } = require('./utils')
+const { cookieSessionConfig, dbmw } = require('./utils')
 const Promise = require('bluebird')
 const db = require('sqlite')
+const { getProvinces, getHolidays, getProvincesWithHolidays } = require('./queries')
 
 const app = express()
 
@@ -30,51 +31,7 @@ app.get('/page/:page', (req, res) => {
   )
 })
 
-const array2Obj = (arr, key = 'id') => {
-  return arr.reduce(function(obj, item) {
-    obj[item[key]] = item //a, b, c
-    return obj
-  }, {})
-}
-
-const getProvinces = () => {
-  return db.all('SELECT * FROM Province ORDER BY id ASC;')
-}
-
-const getHolidays = () => {
-  return db.all('SELECT * FROM Holiday ORDER BY id ASC;')
-}
-
-const getProvincesWithHolidays = async () => {
-  const provinces = await db.all('SELECT * FROM Province ORDER BY id ASC;')
-  provinces.map(p => (p.holidays = []))
-  const provincesObj = array2Obj(provinces)
-
-  const holidays = await db.all('SELECT * FROM Holiday ORDER BY id ASC;')
-  const holidaysObj = array2Obj(holidays)
-
-  const pcs = await db.all('SELECT * FROM ProvinceHoliday')
-
-  pcs.map(pc => {
-    provincesObj[pc.province_id].holidays.push(holidaysObj[pc.holiday_id])
-  })
-
-  return Object.values(provincesObj)
-}
-
-const dbmw = cb => {
-  return async (req, res, next) => {
-    try {
-      res.locals.rows = await cb()
-    } catch (err) {
-      return next(err)
-    }
-
-    return next()
-  }
-}
-
-app.get('/provinces', dbmw(getProvinces), (req, res) => {
+app.get('/provinces', dbmw(getProvinces(db)), (req, res) => {
   return res.send(
     renderPage({
       pageComponent: 'Provinces',
@@ -84,15 +41,15 @@ app.get('/provinces', dbmw(getProvinces), (req, res) => {
   )
 })
 
-app.get('/provinces.json', dbmw(getProvinces), (req, res) => {
+app.get('/api/provinces', dbmw(getProvinces(db)), (req, res) => {
   return res.send(res.locals.rows)
 })
 
-app.get('/holidays.json', dbmw(getHolidays), (req, res) => {
+app.get('/api/holidays', dbmw(getHolidays(db)), (req, res) => {
   return res.send(res.locals.rows)
 })
 
-app.get('/ph.json', dbmw(getProvincesWithHolidays), (req, res) => {
+app.get('/api/ph', dbmw(getProvincesWithHolidays(db)), (req, res) => {
   return res.send(res.locals.rows)
 })
 
