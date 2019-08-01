@@ -9,11 +9,11 @@ const getHolidays = db => {
 }
 
 const getProvincesWithHolidays = async db => {
-  const provinces = await db.all('SELECT * FROM Province ORDER BY id ASC;')
+  const provinces = await getProvinces(db)
   provinces.map(p => (p.holidays = []))
   const provincesObj = array2Obj(provinces)
 
-  const holidays = await db.all('SELECT * FROM Holiday ORDER BY id ASC;')
+  const holidays = await getHolidays(db)
   const holidaysObj = array2Obj(holidays)
 
   const pcs = await db.all('SELECT * FROM ProvinceHoliday')
