@@ -41,22 +41,22 @@ const getProvinces = () => {
   return db.all('SELECT * FROM Province ORDER BY id ASC;')
 }
 
-const getCategories = () => {
-  return db.all('SELECT * FROM Category ORDER BY id ASC;')
+const getHolidays = () => {
+  return db.all('SELECT * FROM Holiday ORDER BY id ASC;')
 }
 
-const getProvincesWithCategories = async () => {
+const getProvincesWithHolidays = async () => {
   const provinces = await db.all('SELECT * FROM Province ORDER BY id ASC;')
-  provinces.map(p => (p.categories = []))
+  provinces.map(p => (p.holidays = []))
   const provincesObj = array2Obj(provinces)
 
-  const categories = await db.all('SELECT * FROM Category ORDER BY id ASC;')
-  const categoriesObj = array2Obj(categories)
+  const holidays = await db.all('SELECT * FROM Holiday ORDER BY id ASC;')
+  const holidaysObj = array2Obj(holidays)
 
-  const pcs = await db.all('SELECT * FROM ProvincesCategories')
+  const pcs = await db.all('SELECT * FROM ProvinceHoliday')
 
   pcs.map(pc => {
-    provincesObj[pc.province_id].categories.push(categoriesObj[pc.category_id])
+    provincesObj[pc.province_id].holidays.push(holidaysObj[pc.holiday_id])
   })
 
   return Object.values(provincesObj)
@@ -88,11 +88,11 @@ app.get('/provinces.json', dbmw(getProvinces), (req, res) => {
   return res.send(res.locals.rows)
 })
 
-app.get('/categories.json', dbmw(getCategories), (req, res) => {
+app.get('/holidays.json', dbmw(getHolidays), (req, res) => {
   return res.send(res.locals.rows)
 })
 
-app.get('/pc.json', dbmw(getProvincesWithCategories), (req, res) => {
+app.get('/ph.json', dbmw(getProvincesWithHolidays), (req, res) => {
   return res.send(res.locals.rows)
 })
 
