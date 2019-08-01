@@ -1,7 +1,7 @@
 const { renderStylesToString } = require('emotion-server')
 const { html } = require('../utils')
 const render = require('preact-render-to-string')
-const { metaIfSHA } = require('../utils.js')
+const { metaIfSHA } = require('../utils')
 
 const document = ({ title, locale, content }) => {
   return `

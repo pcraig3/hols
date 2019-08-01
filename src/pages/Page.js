@@ -1,6 +1,6 @@
 const { Component } = require('preact')
 const { css } = require('emotion')
-const { html } = require('../utils.js')
+const { html } = require('../utils')
 const Layout = require('../components/Layout.js')
 
 const red = css`

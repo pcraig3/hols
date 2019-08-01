@@ -1,5 +1,5 @@
 const { css } = require('emotion')
-const { html } = require('../utils.js')
+const { html } = require('../utils')
 
 const main = css`
   max-width: 900px;

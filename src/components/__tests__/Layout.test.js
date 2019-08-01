@@ -1,6 +1,6 @@
 const render = require('preact-render-to-string')
 const cheerio = require('cheerio')
-const { html } = require('../../utils.js')
+const { html } = require('../../utils')
 
 const Layout = require('../Layout.js')
 
