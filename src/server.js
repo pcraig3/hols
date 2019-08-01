@@ -30,18 +30,36 @@ app.get('/page/:page', (req, res) => {
   )
 })
 
+const array2Obj = (arr, key = 'id') => {
+  return arr.reduce(function(obj, item) {
+    obj[item[key]] = item //a, b, c
+    return obj
+  }, {})
+}
+
 const getProvinces = () => {
-  return db.all('SELECT * FROM Province LIMIT 13')
+  return db.all('SELECT * FROM Province ORDER BY id ASC;')
 }
 
 const getCategories = () => {
-  return db.all('SELECT * FROM Category LIMIT 3')
+  return db.all('SELECT * FROM Category ORDER BY id ASC;')
 }
 
-const getProvincesWithCategories = () => {
-  return db.all(
-    'SELECT pc.province_id, pc.category_id, p.name_en, p.name_fr, c.name FROM Province p JOIN ProvincesCategories pc ON pc.province_id = p.id JOIN Category c ON pc.category_id = c.id',
-  )
+const getProvincesWithCategories = async () => {
+  const provinces = await db.all('SELECT * FROM Province ORDER BY id ASC;')
+  provinces.map(p => (p.categories = []))
+  const provincesObj = array2Obj(provinces)
+
+  const categories = await db.all('SELECT * FROM Category ORDER BY id ASC;')
+  const categoriesObj = array2Obj(categories)
+
+  const pcs = await db.all('SELECT * FROM ProvincesCategories')
+
+  pcs.map(pc => {
+    provincesObj[pc.province_id].categories.push(categoriesObj[pc.category_id])
+  })
+
+  return Object.values(provincesObj)
 }
 
 const dbmw = cb => {
@@ -75,22 +93,7 @@ app.get('/categories.json', dbmw(getCategories), (req, res) => {
 })
 
 app.get('/pc.json', dbmw(getProvincesWithCategories), (req, res) => {
-  const results = {}
-
-  res.locals.rows.map(row => {
-    if (!results[row.province_id]) {
-      results[row.province_id] = {
-        province_id: row.province_id,
-        name_en: row.name_en,
-        name_fr: row.name_fr,
-        categories: [],
-      }
-    }
-
-    results[row.province_id].categories.push({ category_id: row.category_id, name: row.name })
-  })
-
-  return res.send(Object.values(results))
+  return res.send(res.locals.rows)
 })
 
 app.get('/', (req, res) => {
