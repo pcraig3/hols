@@ -31,7 +31,7 @@ app.get('/page/:page', (req, res) => {
   )
 })
 
-app.get('/provinces', dbmw(getProvinces(db)), (req, res) => {
+app.get('/provinces', dbmw(db, getProvinces), (req, res) => {
   return res.send(
     renderPage({
       pageComponent: 'Provinces',
@@ -41,15 +41,15 @@ app.get('/provinces', dbmw(getProvinces(db)), (req, res) => {
   )
 })
 
-app.get('/api/provinces', dbmw(getProvinces(db)), (req, res) => {
+app.get('/api/provinces', dbmw(db, getProvinces), (req, res) => {
   return res.send(res.locals.rows)
 })
 
-app.get('/api/holidays', dbmw(getHolidays(db)), (req, res) => {
+app.get('/api/holidays', dbmw(db, getHolidays), (req, res) => {
   return res.send(res.locals.rows)
 })
 
-app.get('/api/ph', dbmw(getProvincesWithHolidays(db)), (req, res) => {
+app.get('/api/ph', dbmw(db, getProvincesWithHolidays), (req, res) => {
   return res.send(res.locals.rows)
 })
 

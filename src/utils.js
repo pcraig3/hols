@@ -9,10 +9,10 @@ const html = htm.bind(h)
 // takes a function that is a database query
 // this middleware is a convience function so that we don't have to write
 // "try / catch" in all our database query functions
-const dbmw = cb => {
+const dbmw = (db, cb) => {
   return async (req, res, next) => {
     try {
-      res.locals.rows = await cb()
+      res.locals.rows = await cb(db)
     } catch (err) {
       return next(err)
     }
