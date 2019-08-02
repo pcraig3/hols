@@ -3,6 +3,7 @@ const logger = require('morgan')
 const helmet = require('helmet')
 const cookieSession = require('cookie-session')
 const renderPage = require('./pages/_document.js')
+const { getISODate } = require('./dates')
 const { cookieSessionConfig, dbmw } = require('./utils')
 const Promise = require('bluebird')
 const db = require('sqlite')
@@ -51,6 +52,10 @@ app.get('/api/holidays', dbmw(db, getHolidays), (req, res) => {
 
 app.get('/api/ph', dbmw(db, getProvincesWithHolidays), (req, res) => {
   return res.send(res.locals.rows)
+})
+
+app.get('/sugar', (req, res) => {
+  return res.send(getISODate('next Wednesday'))
 })
 
 app.get('/', (req, res) => {
