@@ -3,7 +3,7 @@ const easterDay = require('@jsbits/easter-day')
 var addDays = require('date-fns/addDays')
 var getISODay = require('date-fns/getISODay')
 
-const getISODayInt = weekday => {
+const _getISODayInt = weekday => {
   if (weekday === 'Monday') {
     return 1
   }
@@ -15,15 +15,18 @@ const getISODayInt = weekday => {
   throw new Error(`Weekday not parsable: ${weekday}`)
 }
 
-const parseRelativeDates = dateString => {
-  // eg, Friday before Easter Day
+const _parseRelativeDates = dateString => {
   let [weekday, position, ...anchorDate] = dateString.split(' ')
+
+  anchorDate = anchorDate.join(' ')
 
   if (anchorDate.includes('Easter')) {
     anchorDate = easterDay(2019)
+  } else {
+    anchorDate = Sugar.Date.create(anchorDate)
   }
 
-  weekday = getISODayInt(weekday)
+  weekday = _getISODayInt(weekday)
   position = position === 'before' ? -1 : 1
 
   let count = 0
@@ -36,20 +39,21 @@ const parseRelativeDates = dateString => {
 }
 
 const getISODate = dateString => {
+  let date
+
   if (/First|Second|Third|Fourth/i.test(dateString)) {
     dateString = `The ${dateString}`
   }
 
-  let date = Sugar.Date.create(dateString)
+  if (/before|after/i.test(dateString)) {
+    date = _parseRelativeDates(dateString)
+  } else {
+    date = Sugar.Date.create(dateString)
+  }
 
   // Test for invalid dates
   if (isNaN(date)) {
-    // if it doesn't contain "before" or "after", throw an error
-    if (!/before|after/i.test(dateString)) {
-      throw new Error(`Date string not parsable: ${dateString}`)
-    }
-
-    date = parseRelativeDates(dateString)
+    throw new Error(`Date string not parsable: ${dateString}`)
   }
 
   return date.toISOString().substring(0, 10)
