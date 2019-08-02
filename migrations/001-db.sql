@@ -44,8 +44,8 @@ INSERT INTO Holiday (date_string, name_en, name_fr) VALUES ('March 17', 'Saint P
 INSERT INTO Holiday (date_string, name_en, name_fr) VALUES ('Friday before Easter Day', 'Good Friday', 'Vendredi saint');
 INSERT INTO Holiday (date_string, name_en, name_fr) VALUES ('Monday after Easter Day', 'Easter Monday', 'Lundi de Pâques');
 INSERT INTO Holiday (date_string, name_en, name_fr) VALUES ('April 23', 'Saint George’s Day', 'Jour de St. George');
-INSERT INTO Holiday (date_string, name_en, name_fr) VALUES ('Monday on or before May 24', 'National Patriots’ Day', 'Journée nationale des patriotes');
-INSERT INTO Holiday (date_string, name_en, name_fr) VALUES ('Monday on or before May 24', 'Victoria Day', 'Fête de la Reine');
+INSERT INTO Holiday (date_string, name_en, name_fr) VALUES ('Monday before May 25', 'National Patriots’ Day', 'Journée nationale des patriotes');
+INSERT INTO Holiday (date_string, name_en, name_fr) VALUES ('Monday before May 25', 'Victoria Day', 'Fête de la Reine');
 INSERT INTO Holiday (date_string, name_en, name_fr) VALUES ('June 21', 'National Aboriginal Day', 'Journée nationale des Autochthones');
 INSERT INTO Holiday (date_string, name_en, name_fr) VALUES ('June 24', 'Discovery Day / National Holiday', 'Journée découverte / Fête nationale du Québec / Saint-Jean-Baptiste');
 INSERT INTO Holiday (date_string, name_en, name_fr) VALUES ('July 1', 'Canada Day', 'Fête du Canada');
@@ -122,19 +122,19 @@ INSERT INTO ProvinceHoliday (holiday_id, province_id) VALUES ((SELECT id FROM Ho
 
 INSERT INTO ProvinceHoliday (holiday_id, province_id) VALUES ((SELECT id FROM Holiday WHERE (date_string = 'April 23' AND name_en = 'Saint George’s Day')), 'NL');
 
-INSERT INTO ProvinceHoliday (holiday_id, province_id) VALUES ((SELECT id FROM Holiday WHERE (date_string = 'Monday on or before May 24' AND name_en = 'National Patriots’ Day')), 'QC');
+INSERT INTO ProvinceHoliday (holiday_id, province_id) VALUES ((SELECT id FROM Holiday WHERE (date_string = 'Monday before May 25' AND name_en = 'National Patriots’ Day')), 'QC');
 
-INSERT INTO ProvinceHoliday (holiday_id, province_id) VALUES ((SELECT id FROM Holiday WHERE (date_string = 'Monday on or before May 24' AND name_en = 'Victoria Day')), 'AB');
-INSERT INTO ProvinceHoliday (holiday_id, province_id) VALUES ((SELECT id FROM Holiday WHERE (date_string = 'Monday on or before May 24' AND name_en = 'Victoria Day')), 'BC');
-INSERT INTO ProvinceHoliday (holiday_id, province_id) VALUES ((SELECT id FROM Holiday WHERE (date_string = 'Monday on or before May 24' AND name_en = 'Victoria Day')), 'MB');
-INSERT INTO ProvinceHoliday (holiday_id, province_id) VALUES ((SELECT id FROM Holiday WHERE (date_string = 'Monday on or before May 24' AND name_en = 'Victoria Day')), 'NB');
-INSERT INTO ProvinceHoliday (holiday_id, province_id) VALUES ((SELECT id FROM Holiday WHERE (date_string = 'Monday on or before May 24' AND name_en = 'Victoria Day')), 'NT');
-INSERT INTO ProvinceHoliday (holiday_id, province_id) VALUES ((SELECT id FROM Holiday WHERE (date_string = 'Monday on or before May 24' AND name_en = 'Victoria Day')), 'NS');
-INSERT INTO ProvinceHoliday (holiday_id, province_id) VALUES ((SELECT id FROM Holiday WHERE (date_string = 'Monday on or before May 24' AND name_en = 'Victoria Day')), 'NU');
-INSERT INTO ProvinceHoliday (holiday_id, province_id) VALUES ((SELECT id FROM Holiday WHERE (date_string = 'Monday on or before May 24' AND name_en = 'Victoria Day')), 'ON');
-INSERT INTO ProvinceHoliday (holiday_id, province_id) VALUES ((SELECT id FROM Holiday WHERE (date_string = 'Monday on or before May 24' AND name_en = 'Victoria Day')), 'PE');
-INSERT INTO ProvinceHoliday (holiday_id, province_id) VALUES ((SELECT id FROM Holiday WHERE (date_string = 'Monday on or before May 24' AND name_en = 'Victoria Day')), 'SK');
-INSERT INTO ProvinceHoliday (holiday_id, province_id) VALUES ((SELECT id FROM Holiday WHERE (date_string = 'Monday on or before May 24' AND name_en = 'Victoria Day')), 'YT');
+INSERT INTO ProvinceHoliday (holiday_id, province_id) VALUES ((SELECT id FROM Holiday WHERE (date_string = 'Monday before May 25' AND name_en = 'Victoria Day')), 'AB');
+INSERT INTO ProvinceHoliday (holiday_id, province_id) VALUES ((SELECT id FROM Holiday WHERE (date_string = 'Monday before May 25' AND name_en = 'Victoria Day')), 'BC');
+INSERT INTO ProvinceHoliday (holiday_id, province_id) VALUES ((SELECT id FROM Holiday WHERE (date_string = 'Monday before May 25' AND name_en = 'Victoria Day')), 'MB');
+INSERT INTO ProvinceHoliday (holiday_id, province_id) VALUES ((SELECT id FROM Holiday WHERE (date_string = 'Monday before May 25' AND name_en = 'Victoria Day')), 'NB');
+INSERT INTO ProvinceHoliday (holiday_id, province_id) VALUES ((SELECT id FROM Holiday WHERE (date_string = 'Monday before May 25' AND name_en = 'Victoria Day')), 'NT');
+INSERT INTO ProvinceHoliday (holiday_id, province_id) VALUES ((SELECT id FROM Holiday WHERE (date_string = 'Monday before May 25' AND name_en = 'Victoria Day')), 'NS');
+INSERT INTO ProvinceHoliday (holiday_id, province_id) VALUES ((SELECT id FROM Holiday WHERE (date_string = 'Monday before May 25' AND name_en = 'Victoria Day')), 'NU');
+INSERT INTO ProvinceHoliday (holiday_id, province_id) VALUES ((SELECT id FROM Holiday WHERE (date_string = 'Monday before May 25' AND name_en = 'Victoria Day')), 'ON');
+INSERT INTO ProvinceHoliday (holiday_id, province_id) VALUES ((SELECT id FROM Holiday WHERE (date_string = 'Monday before May 25' AND name_en = 'Victoria Day')), 'PE');
+INSERT INTO ProvinceHoliday (holiday_id, province_id) VALUES ((SELECT id FROM Holiday WHERE (date_string = 'Monday before May 25' AND name_en = 'Victoria Day')), 'SK');
+INSERT INTO ProvinceHoliday (holiday_id, province_id) VALUES ((SELECT id FROM Holiday WHERE (date_string = 'Monday before May 25' AND name_en = 'Victoria Day')), 'YT');
 
 INSERT INTO ProvinceHoliday (holiday_id, province_id) VALUES ((SELECT id FROM Holiday WHERE (date_string = 'June 21' AND name_en = 'National Aboriginal Day')), 'NT');
 INSERT INTO ProvinceHoliday (holiday_id, province_id) VALUES ((SELECT id FROM Holiday WHERE (date_string = 'June 21' AND name_en = 'National Aboriginal Day')), 'YT');
