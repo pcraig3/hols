@@ -5,7 +5,8 @@ describe('Test getISODate', () => {
     { str: 'January 1', iso: '2019-01-01' },
     { str: 'Third Monday in February', iso: '2019-02-18' },
     { str: 'March 17', iso: '2019-03-17' },
-    /* 'Friday before Easter Day',
+    { str: 'Friday before Easter Day', iso: '2019-04-19' },
+    /*
     'Monday after Easter Day',
     'April 23',
     'Monday on or before May 24',
