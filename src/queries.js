@@ -16,20 +16,33 @@ const getHolidays = db => {
 }
 
 const getProvincesWithHolidays = async db => {
-  const provinces = await getProvinces(db)
-  provinces.map(p => (p.holidays = []))
-  const provincesObj = array2Obj(provinces)
+  const provincesObj = array2Obj(await getProvinces(db))
+  Object.values(provincesObj).map(p => (p.holidays = []))
 
-  const holidays = await getHolidays(db)
-  const holidaysObj = array2Obj(holidays)
+  const holidaysObj = array2Obj(await getHolidays(db))
 
-  const pcs = await db.all('SELECT * FROM ProvinceHoliday')
+  const phs = await db.all('SELECT * FROM ProvinceHoliday')
 
-  pcs.map(pc => {
-    provincesObj[pc.province_id].holidays.push(holidaysObj[pc.holiday_id])
+  phs.map(ph => {
+    provincesObj[ph.province_id].holidays.push(holidaysObj[ph.holiday_id])
   })
 
   return Object.values(provincesObj)
 }
 
-module.exports = { getProvinces, getHolidays, getProvincesWithHolidays }
+const getHolidaysWithProvinces = async db => {
+  const holidaysObj = array2Obj(await getHolidays(db))
+  Object.values(holidaysObj).map(h => (h.provinces = []))
+
+  const provincesObj = array2Obj(await getProvinces(db))
+
+  const phs = await db.all('SELECT * FROM ProvinceHoliday')
+
+  phs.map(ph => {
+    holidaysObj[ph.holiday_id].provinces.push(provincesObj[ph.province_id])
+  })
+
+  return Object.values(holidaysObj)
+}
+
+module.exports = { getProvinces, getHolidays, getProvincesWithHolidays, getHolidaysWithProvinces }

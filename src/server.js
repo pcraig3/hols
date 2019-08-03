@@ -7,7 +7,12 @@ const { getISODate } = require('./dates')
 const { cookieSessionConfig, dbmw } = require('./utils')
 const Promise = require('bluebird')
 const db = require('sqlite')
-const { getProvinces, getHolidays, getProvincesWithHolidays } = require('./queries')
+const {
+  getProvinces,
+  getHolidays,
+  getProvincesWithHolidays,
+  getHolidaysWithProvinces,
+} = require('./queries')
 
 const app = express()
 
@@ -51,6 +56,10 @@ app.get('/api/holidays', dbmw(db, getHolidays), (req, res) => {
 })
 
 app.get('/api/ph', dbmw(db, getProvincesWithHolidays), (req, res) => {
+  return res.send(res.locals.rows)
+})
+
+app.get('/api/hp', dbmw(db, getHolidaysWithProvinces), (req, res) => {
   return res.send(res.locals.rows)
 })
 
