@@ -2,7 +2,6 @@
 
 - run web scraper again
 - update web scraper for new table names
-- add api router instead of all routes in server.js
 - add root api domain
 - return nextHoliday for each province
 - create federal route
@@ -24,3 +23,4 @@
 - return list of holidays in a page
 - add a many-to-one association between provinces and holidays
 - return holidays JSON without a recursion error
+- add api router instead of all routes in server.js

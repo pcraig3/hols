@@ -2,17 +2,12 @@ const express = require('express')
 const logger = require('morgan')
 const helmet = require('helmet')
 const cookieSession = require('cookie-session')
+const Promise = require('bluebird')
+const db = require('sqlite')
 const renderPage = require('./pages/_document.js')
 const { getISODate } = require('./dates')
 const { cookieSessionConfig, dbmw } = require('./utils')
-const Promise = require('bluebird')
-const db = require('sqlite')
-const {
-  getProvinces,
-  getHolidays,
-  getProvincesWithHolidays,
-  getHolidaysWithProvinces,
-} = require('./queries')
+const { getProvinces } = require('./queries')
 
 const app = express()
 
@@ -26,6 +21,10 @@ app
 process.env.NODE_ENV !== 'test' && app.use(logger('dev'))
 
 app.use(cookieSession(cookieSessionConfig))
+
+const apiRouter = require('./routes/api')
+
+app.use('/api/v1', apiRouter)
 
 app.get('/page/:page', (req, res) => {
   res.send(
@@ -45,22 +44,6 @@ app.get('/provinces', dbmw(db, getProvinces), (req, res) => {
       props: { data: { provinces: res.locals.rows } },
     }),
   )
-})
-
-app.get('/api/provinces', dbmw(db, getProvinces), (req, res) => {
-  return res.send(res.locals.rows)
-})
-
-app.get('/api/holidays', dbmw(db, getHolidays), (req, res) => {
-  return res.send(res.locals.rows)
-})
-
-app.get('/api/ph', dbmw(db, getProvincesWithHolidays), (req, res) => {
-  return res.send(res.locals.rows)
-})
-
-app.get('/api/hp', dbmw(db, getHolidaysWithProvinces), (req, res) => {
-  return res.send(res.locals.rows)
 })
 
 app.get('/sugar', (req, res) => {
