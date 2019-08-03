@@ -1,7 +1,5 @@
 # TODO
 
-- run web scraper again
-- update web scraper for new table names
 - return nextHoliday for each province
 - create federal route
 - return holidays by id
@@ -24,3 +22,5 @@
 - return holidays JSON without a recursion error
 - add api router instead of all routes in server.js
 - add root api domain
+- run web scraper again
+- update web scraper for new table names
