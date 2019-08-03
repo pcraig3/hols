@@ -1,11 +1,18 @@
 const { array2Obj } = require('./utils')
+const { getISODate } = require('./dates')
 
 const getProvinces = db => {
   return db.all('SELECT * FROM Province ORDER BY id ASC;')
 }
 
 const getHolidays = db => {
-  return db.all('SELECT * FROM Holiday ORDER BY id ASC;')
+  const holidays = db.all('SELECT * FROM Holiday ORDER BY id ASC;')
+
+  return holidays.map(holiday => {
+    holiday.date = getISODate(holiday.date_string)
+    delete holiday.date_string
+    return holiday
+  })
 }
 
 const getProvincesWithHolidays = async db => {
