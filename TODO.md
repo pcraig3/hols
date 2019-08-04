@@ -1,8 +1,8 @@
 # TODO
 
 - create federal route
-- return holidays by id
-- return provinces by id
+- return better error message for province with bad id
+- think about how much hateoas we want in the api
 
 # DONE
 
@@ -25,3 +25,5 @@
 - update web scraper for new table names
 - return nextHoliday for each province
 - create generic error API message
+- return holidays by id
+- return provinces by id

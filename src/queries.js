@@ -1,8 +1,18 @@
 const { array2Obj } = require('./utils')
 const { getISODate } = require('./dates')
 
-const getProvinces = db => {
-  return db.all('SELECT * FROM Province ORDER BY id ASC;')
+const _getProvinces = db => db.all('SELECT * FROM Province ORDER BY id ASC;')
+
+const _getProvinceById = (db, provinceId) => {
+  return db.all('SELECT * FROM Province WHERE id = ? ORDER BY id ASC;', [provinceId.toUpperCase()])
+}
+
+const getProvinces = (db, provinceId) => {
+  if (provinceId) {
+    return _getProvinceById(db, provinceId)
+  }
+
+  return _getProvinces(db)
 }
 
 const _getHolidays = db => db.all('SELECT * FROM Holiday ORDER BY id ASC;')
@@ -33,7 +43,7 @@ const _getProvinceHolidaysByHolidayId = (db, holidayId) => {
 }
 
 const _getProvinceHolidaysByProvinceId = (db, provinceId) => {
-  return db.all('SELECT * FROM ProvinceHoliday WHERE provinceId = ?;', [provinceId])
+  return db.all('SELECT * FROM ProvinceHoliday WHERE provinceId = ?;', [provinceId.toUpperCase()])
 }
 
 const getProvinceHolidays = (db, { holidayId, provinceId }) => {
@@ -57,13 +67,13 @@ const getNextHoliday = provinces => {
   })
 }
 
-const getProvincesWithHolidays = async db => {
-  const provincesObj = array2Obj(await getProvinces(db))
+const getProvincesWithHolidays = async (db, { provinceId }) => {
+  const provincesObj = array2Obj(await getProvinces(db, provinceId))
   Object.values(provincesObj).map(p => (p.holidays = []))
 
   const holidaysObj = array2Obj(await getHolidays(db))
 
-  const phs = await db.all('SELECT * FROM ProvinceHoliday')
+  const phs = await getProvinceHolidays(db, { provinceId })
 
   phs.map(ph => {
     provincesObj[ph.provinceId].holidays.push(holidaysObj[ph.holidayId])
@@ -75,13 +85,13 @@ const getProvincesWithHolidays = async db => {
   return Object.values(provincesObj)
 }
 
-const getHolidaysWithProvinces = async (db, { holidayId, provinceId }) => {
+const getHolidaysWithProvinces = async (db, { holidayId }) => {
   const holidaysObj = array2Obj(await getHolidays(db, holidayId))
   Object.values(holidaysObj).map(h => (h.provinces = []))
 
   const provincesObj = array2Obj(await getProvinces(db))
 
-  const phs = await getProvinceHolidays(db, { holidayId, provinceId })
+  const phs = await getProvinceHolidays(db, { holidayId })
 
   phs.map(ph => {
     holidaysObj[ph.holidayId].provinces.push(provincesObj[ph.provinceId])
