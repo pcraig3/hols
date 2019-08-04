@@ -1,10 +1,11 @@
 const express = require('express')
 const router = express.Router()
 const db = require('sqlite')
+const createError = require('http-errors')
 const { dbmw } = require('../utils')
 const { getProvincesWithHolidays, getHolidaysWithProvinces } = require('../queries')
 
-router.get('/', (req, res) => {
+router.get('/v1/', (req, res) => {
   const protocol = req.get('host').includes('localhost') ? 'http' : 'https'
 
   res.send({
@@ -24,12 +25,30 @@ router.get('/', (req, res) => {
   })
 })
 
-router.get('/provinces', dbmw(db, getProvincesWithHolidays), (req, res) => {
+router.get('/v1/provinces', dbmw(db, getProvincesWithHolidays), (req, res) => {
   return res.send({ provinces: res.locals.rows })
 })
 
-router.get('/holidays', dbmw(db, getHolidaysWithProvinces), (req, res) => {
+router.get('/v1/holidays', dbmw(db, getHolidaysWithProvinces), (req, res) => {
   return res.send({ holidays: res.locals.rows })
+})
+
+router.get('*', (req, res, next) => {
+  res.status(404)
+  next(new createError(404, `Error: Could not find route “${req.path}”`))
+})
+
+// eslint-disable-next-line no-unused-vars
+router.use(function(err, req, res, next) {
+  let errResponse = {
+    error: {
+      status: res.statusCode,
+      message: err.message,
+      timestamp: new Date().toISOString(),
+    },
+  }
+
+  return res.send(errResponse)
 })
 
 module.exports = router

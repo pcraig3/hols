@@ -29,6 +29,7 @@
     "express": "^4.17.1",
     "helmet": "^3.20.0",
     "htm": "^2.2.0",
+    "http-errors": "^1.7.3",
     "morgan": "^1.9.1",
     "preact": "^8.4.2",
     "preact-render-to-string": "^4.1.0",
