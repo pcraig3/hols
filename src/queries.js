@@ -5,13 +5,46 @@ const getProvinces = db => {
   return db.all('SELECT * FROM Province ORDER BY id ASC;')
 }
 
-const getHolidays = db => {
-  const holidays = db.all('SELECT * FROM Holiday ORDER BY id ASC;')
+const _getHolidays = db => db.all('SELECT * FROM Holiday ORDER BY id ASC;')
+
+const _getHolidayById = (db, holidayId) => {
+  return db.all('SELECT * FROM Holiday WHERE id = ? ORDER BY id ASC;', [holidayId])
+}
+
+const getHolidays = (db, holidayId) => {
+  let holidays = []
+
+  if (holidayId) {
+    holidays = _getHolidayById(db, holidayId)
+  } else {
+    holidays = _getHolidays(db)
+  }
 
   return holidays.map(holiday => {
     holiday.date = getISODate(holiday.date)
     return holiday
   })
+}
+
+const _getProvinceHolidays = db => db.all('SELECT * FROM ProvinceHoliday')
+
+const _getProvinceHolidaysByHolidayId = (db, holidayId) => {
+  return db.all('SELECT * FROM ProvinceHoliday WHERE holidayId = ?;', [holidayId])
+}
+
+const _getProvinceHolidaysByProvinceId = (db, provinceId) => {
+  return db.all('SELECT * FROM ProvinceHoliday WHERE provinceId = ?;', [provinceId])
+}
+
+const getProvinceHolidays = (db, { holidayId, provinceId }) => {
+  if (holidayId) {
+    return _getProvinceHolidaysByHolidayId(db, holidayId)
+  }
+  if (provinceId) {
+    return _getProvinceHolidaysByProvinceId(db, provinceId)
+  }
+
+  return _getProvinceHolidays(db)
 }
 
 const getNextHoliday = provinces => {
@@ -42,13 +75,13 @@ const getProvincesWithHolidays = async db => {
   return Object.values(provincesObj)
 }
 
-const getHolidaysWithProvinces = async db => {
-  const holidaysObj = array2Obj(await getHolidays(db))
+const getHolidaysWithProvinces = async (db, { holidayId, provinceId }) => {
+  const holidaysObj = array2Obj(await getHolidays(db, holidayId))
   Object.values(holidaysObj).map(h => (h.provinces = []))
 
   const provincesObj = array2Obj(await getProvinces(db))
 
-  const phs = await db.all('SELECT * FROM ProvinceHoliday')
+  const phs = await getProvinceHolidays(db, { holidayId, provinceId })
 
   phs.map(ph => {
     holidaysObj[ph.holidayId].provinces.push(provincesObj[ph.provinceId])

@@ -33,9 +33,17 @@ router.get('/v1/holidays', dbmw(db, getHolidaysWithProvinces), (req, res) => {
   return res.send({ holidays: res.locals.rows })
 })
 
-router.get('*', (req, res, next) => {
+router.get('/v1/holidays/:holidayId', dbmw(db, getHolidaysWithProvinces), (req, res) => {
+  if (!res.locals.rows.length) {
+    throw new createError(404, `Error: No holiday with id “${req.params.holidayId}”`)
+  }
+
+  return res.send({ holidays: res.locals.rows })
+})
+
+router.get('*', (req, res) => {
   res.status(404)
-  next(new createError(404, `Error: Could not find route “${req.path}”`))
+  throw new createError(404, `Error: Could not find route “${req.path}”`)
 })
 
 // eslint-disable-next-line no-unused-vars
