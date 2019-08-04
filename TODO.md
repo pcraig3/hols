@@ -1,9 +1,9 @@
 # TODO
 
-- return nextHoliday for each province
 - create federal route
 - return holidays by id
 - return provinces by id
+- create generic error API message
 
 # DONE
 
@@ -24,3 +24,4 @@
 - add root api domain
 - run web scraper again
 - update web scraper for new table names
+- return nextHoliday for each province

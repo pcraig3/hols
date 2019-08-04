@@ -14,6 +14,16 @@ const getHolidays = db => {
   })
 }
 
+const getNextHoliday = provinces => {
+  // relies on the assumption that the dates are currently sorted earliest to latest
+  provinces.map(province => {
+    province.nextHoliday = province.holidays.find(holiday => {
+      // compare iso strings: eg, "2019-09-04" >= "2019-08-04"
+      return holiday.date >= new Date().toISOString().substring(0, 10)
+    })
+  })
+}
+
 const getProvincesWithHolidays = async db => {
   const provincesObj = array2Obj(await getProvinces(db))
   Object.values(provincesObj).map(p => (p.holidays = []))
@@ -25,6 +35,9 @@ const getProvincesWithHolidays = async db => {
   phs.map(ph => {
     provincesObj[ph.provinceId].holidays.push(holidaysObj[ph.holidayId])
   })
+
+  // mutates the object, adds a "nextHoliday" key
+  getNextHoliday(Object.values(provincesObj))
 
   return Object.values(provincesObj)
 }
