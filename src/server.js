@@ -5,7 +5,7 @@ const cookieSession = require('cookie-session')
 const db = require('sqlite')
 const renderPage = require('./pages/_document.js')
 const { cookieSessionConfig, dbmw } = require('./utils')
-const { getProvinces } = require('./queries')
+const { getProvinces, getHolidaysWithProvinces } = require('./queries')
 
 const app = express()
 
@@ -43,8 +43,14 @@ app.get('/provinces', dbmw(db, getProvinces), (req, res) => {
   )
 })
 
-app.get('/', (req, res) => {
-  res.redirect(302, '/page/stuff')
+app.get('/', dbmw(db, getHolidaysWithProvinces), (req, res) => {
+  return res.send(
+    renderPage({
+      pageComponent: 'Canada',
+      title: 'Canada',
+      props: { data: { holidays: res.locals.rows } },
+    }),
+  )
 })
 
 module.exports = app
