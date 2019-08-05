@@ -27,13 +27,15 @@ const Canada = ({ data: { holidays, nextHoliday } = {} }) =>
   html`
     <${Layout}>
       <div class=${styles}>
-        <div>
-          <h1>
-            Canada’s next public holiday is ${nextHoliday.nameEn} on ${' '}
-            <span><${DateHtml} dateString=${nextHoliday.date} //></span>
-          </h1>
-          ${renderCelebreatingProvinces(nextHoliday.provinces)}
-        </div>
+        <section>
+          <div>
+            <h1>
+              Canada’s next public holiday is ${nextHoliday.nameEn} on ${' '}
+              <span><${DateHtml} dateString=${nextHoliday.date} //></span>
+            </h1>
+            ${renderCelebreatingProvinces(nextHoliday.provinces)}
+          </div>
+        </section>
 
         <div>
           <h3>All upcoming holidays ↓</h3>

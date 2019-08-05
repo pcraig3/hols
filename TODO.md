@@ -4,7 +4,15 @@
 - about page
 - remove junk page
 - next holiday canada
+
+  - actually get next holiday
+  - square box for next holiday
+
 - list of holidays canada
+
+  - list upcoming holidays
+  - table that breaks
+
 - next holiday provinces
 - list of holidays list of provinces
 
@@ -43,3 +51,4 @@
   - holidays by ID route
   - federal route
   - test for error routes
+- add styles js file
