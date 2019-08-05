@@ -1,7 +1,7 @@
 const { css } = require('emotion')
 const { html } = require('../utils')
-const { displayDate } = require('../dates')
 const Layout = require('../components/Layout.js')
+const DateHtml = require('../components/DateHtml.js')
 
 const styles = css`
   li {
@@ -30,7 +30,7 @@ const Canada = ({ data: { holidays, nextHoliday } = {} }) =>
         <div>
           <h1>
             Canada’s next public holiday is ${nextHoliday.nameEn} on ${' '}
-            <span>${displayDate(nextHoliday.date)}</span>
+            <span><${DateHtml} dateString=${nextHoliday.date} //></span>
           </h1>
           ${renderCelebreatingProvinces(nextHoliday.provinces)}
         </div>
