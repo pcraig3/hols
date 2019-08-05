@@ -52,15 +52,14 @@ Since we are still using components as interface, this makes testing really easi
 
 Instead, using [`cheerio`](https://cheerio.js.org/), we can load in a string like `"<main><p>hello</p></main>"` and then traverse it using jQuery selector syntax. So we can write assertions against stuff like `$('main > p').text()`, which is far better than string testing.
 
-
 ## Build and run as a Docker container
 
 ```bash
 # build an image locally
-docker build -t cdssnc/az-htm .
+docker build -t pcraig3/hols .
 
 # run the container
-docker run -it -p 3000:3000 cdssnc/az-htm
+docker run -it -p 3000:3000 pcraig3/hols
 ```
 
 The container should be running at [http://localhost:3000/](http://localhost:3000/).
