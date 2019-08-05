@@ -1,11 +1,26 @@
 const request = require('supertest')
+const db = require('sqlite')
+const Promise = require('bluebird')
 const app = require('../server.js')
 
 describe('Test server responses', () => {
+  beforeAll(async () => {
+    await Promise.resolve()
+      // First, try to open the database
+      .then(() => db.open('./database.sqlite', { Promise, cached: true })) // <=
+      // Update db schema to the latest version using SQL-based migrations
+      .then(() => db.migrate()) // <=
+      // Display error message if something went wrong
+      .catch(err => console.error(err.stack)) // eslint-disable-line no-console
+  })
+
+  afterAll(() => {
+    db.close()
+  })
+
   test('it should return 302 for the root path', async () => {
     const response = await request(app).get('/')
-    expect(response.statusCode).toBe(302)
-    expect(response.headers.location).toEqual('/page/stuff')
+    expect(response.statusCode).toBe(200)
   })
 
   test('it should return security-focused headers in reponses', async () => {

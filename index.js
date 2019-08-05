@@ -7,9 +7,9 @@ const port = parseInt(process.env.PORT, 10) || 3000
 
 Promise.resolve()
   // First, try to open the database
-  .then(() => db.open('./database.sqlite', { Promise })) // <=
+  .then(() => db.open('./database.sqlite', { Promise, cached: true })) // <=
   // Update db schema to the latest version using SQL-based migrations
-  .then(() => db.migrate({ force: 'last' })) // <=
+  .then(() => db.migrate()) // <=
   // Display error message if something went wrong
   .catch(err => console.error(err.stack)) // eslint-disable-line no-console
   // Finally, launch the Node.js app
