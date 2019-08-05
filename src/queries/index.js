@@ -1,5 +1,5 @@
-const { array2Obj } = require('./utils')
-const { getISODate } = require('./dates')
+const { array2Obj } = require('../utils')
+const { getISODate } = require('../dates')
 
 const _getProvinces = db => db.all('SELECT * FROM Province ORDER BY id ASC;')
 
@@ -107,4 +107,10 @@ const getHolidaysWithProvinces = async (db, { holidayId, federal }) => {
   return Object.values(holidaysObj)
 }
 
-module.exports = { getProvinces, getHolidays, getProvincesWithHolidays, getHolidaysWithProvinces }
+module.exports = {
+  _parseFederal,
+  getProvinces,
+  getHolidays,
+  getProvincesWithHolidays,
+  getHolidaysWithProvinces,
+}
