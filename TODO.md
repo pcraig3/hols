@@ -1,6 +1,5 @@
 # TODO
 
-- create federal route
 - return better error message for province with bad id
 - think about how much hateoas we want in the api
 
@@ -27,3 +26,4 @@
 - create generic error API message
 - return holidays by id
 - return provinces by id
+- create federal route

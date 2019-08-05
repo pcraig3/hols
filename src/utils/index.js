@@ -11,11 +11,13 @@ const html = htm.bind(h)
 // "try / catch" in all our database query functions
 const dbmw = (db, cb) => {
   return async (req, res, next) => {
-    // allow url parameters to be passed in
+    // allow query parameters or url parameters to be passed in
     let options = {
       holidayId: req.params.holidayId,
       provinceId: req.params.provinceId,
+      federal: req.query.federal,
     }
+
     try {
       res.locals.rows = await cb(db, options)
     } catch (err) {

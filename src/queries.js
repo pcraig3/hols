@@ -21,11 +21,31 @@ const _getHolidayById = (db, holidayId) => {
   return db.all('SELECT * FROM Holiday WHERE id = ? ORDER BY id ASC;', [holidayId])
 }
 
-const getHolidays = (db, holidayId) => {
+const _getFederalHolidays = (db, federal) => {
+  return db.all('SELECT * FROM Holiday WHERE federal = ? ORDER BY id ASC;', [federal])
+}
+
+const _parseFederal = federal => {
+  if (!federal) {
+    return null
+  }
+
+  const yesFederal = ['1', 'true']
+  const noFederal = ['0', 'false']
+
+  federal = federal.toLowerCase()
+
+  return yesFederal.includes(federal) ? 1 : noFederal.includes(federal) ? 0 : null
+}
+
+const getHolidays = (db, holidayId, federal) => {
   let holidays = []
+  federal = _parseFederal(federal)
 
   if (holidayId) {
     holidays = _getHolidayById(db, holidayId)
+  } else if (federal !== null) {
+    holidays = _getFederalHolidays(db, federal)
   } else {
     holidays = _getHolidays(db)
   }
@@ -36,25 +56,8 @@ const getHolidays = (db, holidayId) => {
   })
 }
 
-const _getProvinceHolidays = db => db.all('SELECT * FROM ProvinceHoliday')
-
-const _getProvinceHolidaysByHolidayId = (db, holidayId) => {
-  return db.all('SELECT * FROM ProvinceHoliday WHERE holidayId = ?;', [holidayId])
-}
-
-const _getProvinceHolidaysByProvinceId = (db, provinceId) => {
-  return db.all('SELECT * FROM ProvinceHoliday WHERE provinceId = ?;', [provinceId.toUpperCase()])
-}
-
-const getProvinceHolidays = (db, { holidayId, provinceId }) => {
-  if (holidayId) {
-    return _getProvinceHolidaysByHolidayId(db, holidayId)
-  }
-  if (provinceId) {
-    return _getProvinceHolidaysByProvinceId(db, provinceId)
-  }
-
-  return _getProvinceHolidays(db)
+const getProvinceHolidays = db => {
+  return db.all('SELECT * FROM ProvinceHoliday')
 }
 
 const getNextHoliday = provinces => {
@@ -73,10 +76,12 @@ const getProvincesWithHolidays = async (db, { provinceId }) => {
 
   const holidaysObj = array2Obj(await getHolidays(db))
 
-  const phs = await getProvinceHolidays(db, { provinceId })
+  const phs = await getProvinceHolidays(db)
 
   phs.map(ph => {
-    provincesObj[ph.provinceId].holidays.push(holidaysObj[ph.holidayId])
+    if (provincesObj[ph.provinceId]) {
+      provincesObj[ph.provinceId].holidays.push(holidaysObj[ph.holidayId])
+    }
   })
 
   // mutates the object, adds a "nextHoliday" key
@@ -85,16 +90,18 @@ const getProvincesWithHolidays = async (db, { provinceId }) => {
   return Object.values(provincesObj)
 }
 
-const getHolidaysWithProvinces = async (db, { holidayId }) => {
-  const holidaysObj = array2Obj(await getHolidays(db, holidayId))
+const getHolidaysWithProvinces = async (db, { holidayId, federal }) => {
+  const holidaysObj = array2Obj(await getHolidays(db, holidayId, federal))
   Object.values(holidaysObj).map(h => (h.provinces = []))
 
   const provincesObj = array2Obj(await getProvinces(db))
 
-  const phs = await getProvinceHolidays(db, { holidayId })
+  const phs = await getProvinceHolidays(db)
 
   phs.map(ph => {
-    holidaysObj[ph.holidayId].provinces.push(provincesObj[ph.provinceId])
+    if (holidaysObj[ph.holidayId]) {
+      holidaysObj[ph.holidayId].provinces.push(provincesObj[ph.provinceId])
+    }
   })
 
   return Object.values(holidaysObj)
