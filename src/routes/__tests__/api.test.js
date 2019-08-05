@@ -161,5 +161,23 @@ describe('Test /api responses', () => {
         expect(holiday).toEqual(expect.objectContaining(expectHolidayKeys()))
       })
     })
+
+    describe('for /api/v1/holidays/:holidayId path', () => {
+      test('it should a holiday for a good ID', async () => {
+        const response = await request(app).get('/api/v1/holidays/16')
+        expect(response.statusCode).toBe(200)
+
+        let { holiday } = JSON.parse(response.text)
+
+        expect(holiday).toMatchObject({
+          id: 16,
+          date: '2019-08-05',
+          nameEn: 'Civic Holiday',
+          nameFr: 'Premier lundi d’août',
+          federal: 1,
+          provinces: expect.any(Array),
+        })
+      })
+    })
   })
 })
