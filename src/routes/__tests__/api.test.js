@@ -15,20 +15,22 @@ describe('Test /api responses', () => {
       .catch(err => console.error(err.stack)) // eslint-disable-line no-console
   })
 
-  const expectProvinceKeys = () => {
+  const expectProvinceKeys = (withHolidays = true) => {
+    const holidays = { holidays: expect.any(Array), nextHoliday: expect.any(Object) }
     return Object.assign(
       {},
       {
         id: expect.any(String),
         nameEn: expect.any(String),
         nameFr: expect.any(String),
-        holidays: expect.any(Array),
-        nextHoliday: expect.any(Object),
       },
+      withHolidays ? holidays : {},
     )
   }
 
-  const expectHolidayKeys = () => {
+  const expectHolidayKeys = (withProvinces = true) => {
+    const provinces = { provinces: expect.any(Array) }
+
     return Object.assign(
       {},
       {
@@ -38,6 +40,7 @@ describe('Test /api responses', () => {
         nameFr: expect.any(String),
         federal: expect.any(Number),
       },
+      withProvinces ? provinces : {},
     )
   }
 
@@ -77,7 +80,7 @@ describe('Test /api responses', () => {
 
       provinces.map(province => {
         let provinceExpect = expectProvinceKeys()
-        provinceExpect.nextHoliday = expect.objectContaining(expectHolidayKeys())
+        provinceExpect.nextHoliday = expect.objectContaining(expectHolidayKeys(false))
         expect(province).toEqual(expect.objectContaining(provinceExpect))
       })
     })
@@ -143,6 +146,19 @@ describe('Test /api responses', () => {
           'Error: No province with id “FAKE”. Accepted province IDs are: [AB, BC, MB, NB, NL, NS, NT, NU, ON, PE, QC, SK, YT].',
         status: response.statusCode,
         timestamp: expect.any(String),
+      })
+    })
+  })
+
+  describe('for /api/v1/holidays path', () => {
+    test('it should return all holidays', async () => {
+      const response = await request(app).get('/api/v1/holidays')
+      expect(response.statusCode).toBe(200)
+
+      let { holidays } = JSON.parse(response.text)
+
+      holidays.map(holiday => {
+        expect(holiday).toEqual(expect.objectContaining(expectHolidayKeys()))
       })
     })
   })
