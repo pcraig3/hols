@@ -178,6 +178,19 @@ describe('Test /api responses', () => {
           provinces: expect.any(Array),
         })
       })
+
+      test('it should return an error message for a bad ID', async () => {
+        const response = await request(app).get('/api/v1/holidays/1000')
+        expect(response.statusCode).toBe(404)
+
+        let { error } = JSON.parse(response.text)
+
+        expect(error).toMatchObject({
+          message: 'Error: No holiday with id “1000”',
+          status: response.statusCode,
+          timestamp: expect.any(String),
+        })
+      })
     })
   })
 })
