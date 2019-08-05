@@ -44,7 +44,7 @@ app.get('/provinces', dbmw(db, getProvinces), (req, res) => {
 })
 
 app.get('/', (req, res) => {
-  res.redirect(302, 'page/stuff')
+  res.redirect(302, '/page/stuff')
 })
 
 module.exports = app
