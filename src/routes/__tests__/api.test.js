@@ -162,6 +162,21 @@ describe('Test /api responses', () => {
       })
     })
 
+    const yesFederal = ['1', 'true', 'TRUE', 'tRuE']
+    yesFederal.map(val => {
+      test(`it should return ONLY federal holidays for “?federal=${val}”`, async () => {
+        const response = await request(app).get(`/api/v1/holidays?federal=${val}`)
+        expect(response.statusCode).toBe(200)
+
+        let { holidays } = JSON.parse(response.text)
+
+        holidays.map(holiday => {
+          expect(holiday).toEqual(expect.objectContaining(expectHolidayKeys()))
+          expect(holiday.federal).toBe(1)
+        })
+      })
+    })
+
     describe('for /api/v1/holidays/:holidayId path', () => {
       test('it should a holiday for a good ID', async () => {
         const response = await request(app).get('/api/v1/holidays/16')
