@@ -15,7 +15,7 @@ describe('Test _parseFederal', () => {
     })
   })
 
-  const invalidFederal = ['2', '-1', 'one', 'Yes', '']
+  const invalidFederal = ['2', '-1', 'one', 'Yes', 't', 'f', '']
   invalidFederal.map(val => {
     test(`returns null for value: “${val}”`, () => {
       expect(_parseFederal(val)).toBe(null)
