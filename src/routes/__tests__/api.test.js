@@ -119,5 +119,19 @@ describe('Test /api responses', () => {
         })
       })
     })
+
+    test('it should return an error message for a bad ID', async () => {
+      const response = await request(app).get('/api/v1/provinces/FAKE')
+      expect(response.statusCode).toBe(400)
+
+      let { error } = JSON.parse(response.text)
+
+      expect(error).toMatchObject({
+        message:
+          'Error: No province with id “FAKE”. Accepted province IDs are: [AB, BC, MB, NB, NL, NS, NT, NU, ON, PE, QC, SK, YT].',
+        status: response.statusCode,
+        timestamp: expect.any(String),
+      })
+    })
   })
 })
