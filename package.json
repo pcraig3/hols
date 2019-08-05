@@ -2,7 +2,7 @@
   "name": "hols",
   "version": "1.0.0",
   "description": "holidays api and holidays frontend",
-  "main": "src/server.js",
+  "main": "index.js",
   "engines": {
     "node": ">=10.16"
   },
@@ -14,9 +14,9 @@
     "canada"
   ],
   "scripts": {
-    "dev": "nodemon src/server.js",
+    "dev": "nodemon index.js",
     "lint": "node_modules/eslint/bin/eslint.js src",
-    "start": "NODE_ENV=production node src/server.js",
+    "start": "NODE_ENV=production node index.js",
     "test": "jest"
   },
   "dependencies": {
