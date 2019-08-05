@@ -41,13 +41,13 @@ describe('Test /api responses', () => {
     )
   }
 
-  test('it should return 302 for the /api path', async () => {
+  test('for /api path it should return a 302 status', async () => {
     const response = await request(app).get('/api/')
     expect(response.statusCode).toBe(302)
     expect(response.headers.location).toEqual('/api/v1/')
   })
 
-  test('it should return a message for the /api/v1/ path', async () => {
+  test('for /api/v1/ path it should return a message ', async () => {
     const response = await request(app).get('/api/v1/')
     expect(response.statusCode).toBe(200)
 
@@ -56,17 +56,48 @@ describe('Test /api responses', () => {
     expect(Object.keys(json._links)).toEqual(['self', 'holidays', 'provinces'])
   })
 
-  test('it should return all provinces for the /api/v1/provinces path', async () => {
-    const response = await request(app).get('/api/v1/provinces')
-    expect(response.statusCode).toBe(200)
+  describe('for /api/v1/provinces path', () => {
+    test('it should return all provinces', async () => {
+      const response = await request(app).get('/api/v1/provinces')
+      expect(response.statusCode).toBe(200)
 
-    let { provinces } = JSON.parse(response.text)
-    expect(provinces.length).toBe(13)
+      let { provinces } = JSON.parse(response.text)
 
-    provinces.map(province => {
-      let provinceExpect = expectProvinceKeys()
-      provinceExpect.nextHoliday = expect.objectContaining(expectHolidayKeys())
-      expect(province).toEqual(expect.objectContaining(provinceExpect))
+      provinces.map(province => {
+        let provinceExpect = expectProvinceKeys()
+        provinceExpect.nextHoliday = expect.objectContaining(expectHolidayKeys())
+        expect(province).toEqual(expect.objectContaining(provinceExpect))
+      })
+    })
+
+    test('it should return the right number of holidays per province', async () => {
+      const provinceHolidayLength = {
+        AB: 11,
+        BC: 10,
+        MB: 9,
+        NB: 11,
+        NL: 12,
+        NS: 11,
+        NT: 10,
+        NU: 9,
+        ON: 10,
+        PE: 12,
+        QC: 8,
+        SK: 10,
+        YT: 12,
+      }
+
+      const response = await request(app).get('/api/v1/provinces')
+      expect(response.statusCode).toBe(200)
+
+      let { provinces } = JSON.parse(response.text)
+      expect(provinces.length).toBe(Object.keys(provinceHolidayLength).length)
+
+      provinces.map(province => {
+        expect(`${province.id} ${province.holidays.length}`).toEqual(
+          `${province.id} ${provinceHolidayLength[province.id]}`,
+        )
+      })
     })
   })
 })
