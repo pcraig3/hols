@@ -5,7 +5,6 @@ const cookieSession = require('cookie-session')
 const Promise = require('bluebird')
 const db = require('sqlite')
 const renderPage = require('./pages/_document.js')
-const { getISODate } = require('./dates')
 const { cookieSessionConfig, dbmw } = require('./utils')
 const { getProvinces } = require('./queries')
 
@@ -23,7 +22,6 @@ process.env.NODE_ENV !== 'test' && app.use(logger('dev'))
 app.use(cookieSession(cookieSessionConfig))
 
 const apiRouter = require('./routes/api')
-
 app.use('/api', apiRouter)
 
 app.get('/page/:page', (req, res) => {
@@ -44,10 +42,6 @@ app.get('/provinces', dbmw(db, getProvinces), (req, res) => {
       props: { data: { provinces: res.locals.rows } },
     }),
   )
-})
-
-app.get('/sugar', (req, res) => {
-  return res.send(getISODate('next Wednesday'))
 })
 
 app.get('/', (req, res) => {
