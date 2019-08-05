@@ -1,6 +1,5 @@
 # TODO
 
-- return better error message for province with bad id
 - tests for API routes
   - root route
   - provinces route
@@ -35,3 +34,4 @@
 - create federal route
 - free deployment
 - think about how much hateoas we want in the api
+- return better error message for province with bad id

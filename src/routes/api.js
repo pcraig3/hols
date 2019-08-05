@@ -30,8 +30,14 @@ router.get('/v1/provinces', dbmw(db, getProvincesWithHolidays), (req, res) => {
 })
 
 router.get('/v1/provinces/:provinceId', dbmw(db, getProvincesWithHolidays), (req, res) => {
+  const provinceMsg =
+    'Accepted province IDs are: [AB, BC, MB, NB, NL, NS, NT, NU, ON, PE, QC, SK, YT].'
   if (!res.locals.rows.length) {
-    throw new createError(404, `Error: No province with id “${req.params.provinceId}”`)
+    res.status(400)
+    throw new createError(
+      400,
+      `Error: No province with id “${req.params.provinceId}”. ${provinceMsg}`,
+    )
   }
 
   return res.send({ provinces: res.locals.rows })
@@ -43,6 +49,7 @@ router.get('/v1/holidays', dbmw(db, getHolidaysWithProvinces), (req, res) => {
 
 router.get('/v1/holidays/:holidayId', dbmw(db, getHolidaysWithProvinces), (req, res) => {
   if (!res.locals.rows.length) {
+    res.status(404)
     throw new createError(404, `Error: No holiday with id “${req.params.holidayId}”`)
   }
 
