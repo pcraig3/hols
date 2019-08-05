@@ -20,7 +20,7 @@ router.get('/v1/provinces/:provinceId', dbmw(db, getProvincesWithHolidays), (req
     )
   }
 
-  return res.send({ provinces: res.locals.rows })
+  return res.send({ province: res.locals.rows[0] })
 })
 
 router.get('/v1/holidays', dbmw(db, getHolidaysWithProvinces), (req, res) => {
@@ -33,7 +33,7 @@ router.get('/v1/holidays/:holidayId', dbmw(db, getHolidaysWithProvinces), (req, 
     throw new createError(404, `Error: No holiday with id “${req.params.holidayId}”`)
   }
 
-  return res.send({ holidays: res.locals.rows })
+  return res.send({ holiday: res.locals.rows[0] })
 })
 
 router.get('/v1/', (req, res) => {
