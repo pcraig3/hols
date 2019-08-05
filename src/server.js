@@ -4,7 +4,7 @@ const helmet = require('helmet')
 const cookieSession = require('cookie-session')
 const db = require('sqlite')
 const renderPage = require('./pages/_document.js')
-const { cookieSessionConfig, dbmw } = require('./utils')
+const { cookieSessionConfig, dbmw, nextHoliday } = require('./utils')
 const { getProvinces, getHolidaysWithProvinces } = require('./queries')
 
 const app = express()
@@ -48,7 +48,7 @@ app.get('/', dbmw(db, getHolidaysWithProvinces), (req, res) => {
     renderPage({
       pageComponent: 'Canada',
       title: 'Canada',
-      props: { data: { holidays: res.locals.rows } },
+      props: { data: { holidays: res.locals.rows, nextHoliday: nextHoliday(res.locals.rows) } },
     }),
   )
 })

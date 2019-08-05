@@ -1,7 +1,9 @@
 const Sugar = require('sugar-date')
 const easterDay = require('@jsbits/easter-day')
-var addDays = require('date-fns/addDays')
-var getISODay = require('date-fns/getISODay')
+const format = require('date-fns/format')
+const addDays = require('date-fns/addDays')
+const addMinutes = require('date-fns/addMinutes')
+const getISODay = require('date-fns/getISODay')
 
 const _getISODayInt = weekday => {
   if (weekday === 'Monday') {
@@ -59,4 +61,12 @@ const getISODate = dateString => {
   return date.toISOString().substring(0, 10)
 }
 
-module.exports = { getISODate }
+// 60 minutes * 24 hours = 1440
+const getDateBeforeMidnightFromString = str => addMinutes(new Date(str), 1439)
+
+const space2Nbsp = str => str.replace(/ /g, ' ')
+
+const displayDate = dateString =>
+  space2Nbsp(format(getDateBeforeMidnightFromString(dateString), 'MMMM do'))
+
+module.exports = { getISODate, displayDate }
