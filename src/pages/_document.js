@@ -11,7 +11,7 @@ const document = ({ title, locale, content }) => {
         ${metaIfSHA() || ''}
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>${title} — az-htm</title>
+        <title>${title} — hols</title>
         <style>
           * {
             box-sizing: border-box;

@@ -3,11 +3,15 @@
   "version": "1.0.0",
   "description": "holidays api and holidays frontend",
   "main": "index.js",
+  "author": "pcraig3",
+  "license": "MIT",
   "engines": {
     "node": ">=10.16"
   },
-  "author": "pcraig3",
-  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/pcraig3/hols.git"
+  },
   "keywords": [
     "htm",
     "holidays",
