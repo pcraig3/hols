@@ -1,8 +1,7 @@
 const request = require('supertest')
-const app = require('../../server.js')
-
 const db = require('sqlite')
 const Promise = require('bluebird')
+const app = require('../../server.js')
 
 describe('Test /api responses', () => {
   beforeAll(async () => {

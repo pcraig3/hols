@@ -70,10 +70,40 @@ const array2Obj = (arr, key = 'id') => {
   }, {})
 }
 
+/**
+ * This function takes an array of holidays and returns the closest upcoming
+ * holiday that the most provinces celebrate
+ *
+ * @param {Array} holidays an array of holidays
+ * @param {String} dateString an optional dateString
+ */
+const nextHoliday = (holidays, dateString) => {
+  if (!dateString) {
+    dateString = new Date().toISOString().substring(0, 10)
+  }
+
+  const nextDate = holidays.find(holiday => {
+    return holiday.date >= dateString
+  }).date
+
+  const nextHolidays = holidays.filter(holiday => holiday.date === nextDate)
+
+  nextHolidays.sort((h1, h2) => {
+    if (h1.provinces.length <= h2.provinces.length) {
+      return 1
+    }
+
+    return -1
+  })
+
+  return nextHolidays[0]
+}
+
 module.exports = {
   html,
   metaIfSHA,
   cookieSessionConfig,
   array2Obj,
   dbmw,
+  nextHoliday,
 }
