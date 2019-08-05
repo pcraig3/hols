@@ -16,7 +16,7 @@ const renderPage = ({ provinces }) => {
 
 describe('Provinces component', () => {
   test('has one province passed into it', () => {
-    const $ = renderPage({ provinces: [{ name_en: 'Aurora' }] })
+    const $ = renderPage({ provinces: [{ nameEn: 'Aurora' }] })
     expect($('h1').length).toBe(1)
     expect($('h1').text()).toEqual('Canadian provinces and territories')
     expect($('li').length).toBe(1)
@@ -31,7 +31,7 @@ describe('Provinces component', () => {
 
   test('has several provinces passed into it', () => {
     const $ = renderPage({
-      provinces: [{ name_en: 'Aurora' }, { name_en: 'Alaska' }, { name_en: 'French Labrador' }],
+      provinces: [{ nameEn: 'Aurora' }, { nameEn: 'Alaska' }, { nameEn: 'French Labrador' }],
     })
     expect($('h1').length).toBe(1)
     expect($('li').length).toBe(3)

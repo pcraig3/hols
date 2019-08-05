@@ -7,7 +7,7 @@ const _getProvinceById = (db, provinceId) => {
   return db.all('SELECT * FROM Province WHERE id = ? ORDER BY id ASC;', [provinceId.toUpperCase()])
 }
 
-const getProvinces = (db, provinceId) => {
+const getProvinces = (db, { provinceId } = {}) => {
   if (provinceId) {
     return _getProvinceById(db, provinceId)
   }
@@ -71,7 +71,7 @@ const getNextHoliday = provinces => {
 }
 
 const getProvincesWithHolidays = async (db, { provinceId }) => {
-  const provincesObj = array2Obj(await getProvinces(db, provinceId))
+  const provincesObj = array2Obj(await getProvinces(db, { provinceId }))
   Object.values(provincesObj).map(p => (p.holidays = []))
 
   const holidaysObj = array2Obj(await getHolidays(db))
