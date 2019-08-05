@@ -100,4 +100,21 @@ describe('Test /api responses', () => {
       })
     })
   })
+
+  describe('for /api/v1/provinces/:provinceId path', () => {
+    test('it should the right province', async () => {
+      const response = await request(app).get('/api/v1/provinces/NB')
+      expect(response.statusCode).toBe(200)
+
+      let { province } = JSON.parse(response.text)
+
+      expect(province).toMatchObject({
+        id: 'NB',
+        nameEn: 'New Brunswick',
+        nameFr: 'Nouveau-Brunswick',
+        nextHoliday: expect.any(Object),
+        holidays: expect.any(Array),
+      })
+    })
+  })
 })
