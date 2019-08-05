@@ -47,6 +47,18 @@ describe('Test /api responses', () => {
     expect(response.headers.location).toEqual('/api/v1/')
   })
 
+  test('for /api/v1/* not found path a 404 status', async () => {
+    const response = await request(app).get('/api/v1/dinosaur')
+    expect(response.statusCode).toBe(404)
+
+    let { error } = JSON.parse(response.text)
+    expect(error).toMatchObject({
+      message: 'Error: Could not find route “/v1/dinosaur”',
+      status: response.statusCode,
+      timestamp: expect.any(String),
+    })
+  })
+
   test('for /api/v1/ path it should return a message ', async () => {
     const response = await request(app).get('/api/v1/')
     expect(response.statusCode).toBe(200)

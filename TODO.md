@@ -1,11 +1,10 @@
 # TODO
 
 - tests for API routes
-  - provinces route
-  - provinces by ID route
   - holidays route
   - holidays by ID route
   - federal route
+  - test for error routes
 
 # DONE
 
@@ -36,3 +35,5 @@
 - return better error message for province with bad id
 - tests for API routes
   - root route
+  - provinces route
+  - provinces by ID route
