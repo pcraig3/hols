@@ -1,10 +1,12 @@
 # TODO
 
-- tests for API routes
-  - holidays route
-  - holidays by ID route
-  - federal route
-  - test for error routes
+- sketch design for frontend
+- about page
+- remove junk page
+- next holiday canada
+- list of holidays canada
+- next holiday provinces
+- list of holidays list of provinces
 
 # DONE
 
@@ -37,3 +39,7 @@
   - root route
   - provinces route
   - provinces by ID route
+  - holidays route
+  - holidays by ID route
+  - federal route
+  - test for error routes
