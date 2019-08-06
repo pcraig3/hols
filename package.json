@@ -39,6 +39,7 @@
     "preact-render-to-string": "^4.1.0",
     "sqlite": "^3.0.3",
     "sugar-date": "^2.0.6",
+    "sweet-scroll": "^4.0.0",
     "validator": "^11.1.0"
   },
   "devDependencies": {
