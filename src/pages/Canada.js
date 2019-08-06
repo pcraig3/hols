@@ -27,7 +27,11 @@ const styles = css`
   }
 
   > section:first-of-type {
-    max-width: 80%;
+    max-width: 100%;
+
+    @media (${theme.mq.md}) {
+      max-width: 80%;
+    }
   }
 `
 

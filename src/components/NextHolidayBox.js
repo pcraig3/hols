@@ -7,7 +7,13 @@ const accent = theme.color.red
 
 const styles = css`
   border: ${theme.space.xs} solid ${accent};
-  padding: ${theme.space.lg};
+  padding: ${theme.space.md} ${theme.space.sm};
+  margin: -${theme.space.md};
+
+  @media (${theme.mq.md}) {
+    margin: 0;
+    padding: ${theme.space.lg};
+  }
 
   h1 {
     margin-top: 0;
@@ -15,6 +21,10 @@ const styles = css`
 
     .hol-name {
       color: ${accent};
+    }
+
+    @media (${theme.mq.sm}) {
+      font-size: 1.8em;
     }
   }
 `
