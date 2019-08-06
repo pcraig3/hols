@@ -66,7 +66,11 @@ const getDateBeforeMidnightFromString = str => addMinutes(new Date(str), 1439)
 
 const space2Nbsp = str => str.replace(/ /g, ' ')
 
-const displayDate = dateString =>
-  space2Nbsp(format(getDateBeforeMidnightFromString(dateString), 'MMMM do'))
+const displayDate = (dateString, weekend = false) => {
+  dateString = getDateBeforeMidnightFromString(dateString)
+  let msg = space2Nbsp(format(dateString, 'MMMM do'))
+
+  return weekend ? `${format(dateString, 'EEEE')}, ${msg}` : msg
+}
 
 module.exports = { getISODate, displayDate }

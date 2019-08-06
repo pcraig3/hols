@@ -5,10 +5,14 @@
 - list of holidays canada
 
   - list upcoming holidays
+  - list relevant provinces for upcoming holidays
   - table that breaks
 
+- slide down effect
+- footer that says I am bomb
 - next holiday provinces
 - list of holidays list of provinces
+- analytics
 
 # DONE
 

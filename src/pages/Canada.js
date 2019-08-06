@@ -3,6 +3,7 @@ const { html } = require('../utils')
 const { theme } = require('../styles')
 const Layout = require('../components/Layout.js')
 const DateHtml = require('../components/DateHtml.js')
+const SummaryTable = require('../components/SummaryTable.js')
 
 const accent = theme.color.red
 
@@ -46,6 +47,18 @@ const renderCelebreatingProvinces = provinces => {
     </span>
   `
 }
+
+const createRows = holidays => {
+  return holidays.map(holiday => {
+    return {
+      key: holiday.nameEn,
+      value: html`
+        <${DateHtml} dateString=${holiday.date} weekday=${true} //>
+      `,
+    }
+  })
+}
+
 const Canada = ({ data: { holidays, nextHoliday } = {} }) =>
   html`
     <${Layout}>
@@ -65,13 +78,7 @@ const Canada = ({ data: { holidays, nextHoliday } = {} }) =>
 
         <div>
           <h3>All upcoming holidays ↓</h3>
-          <ul>
-            ${holidays.map(
-              holiday => html`
-                <li>${holiday.nameEn}</li>
-              `,
-            )}
-          </ul>
+          <${SummaryTable} title="Holidays" rows=${createRows(holidays)} />
         </div>
       </div>
     <//>

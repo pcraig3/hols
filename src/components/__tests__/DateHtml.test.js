@@ -17,3 +17,17 @@ test('DateHtml displays dates properly', () => {
   expect($('time').attr('datetime')).toEqual('2019-01-01')
   expect($('time').text()).toEqual('January 1st')
 })
+
+test('DateHtml displays dates properly with the weekday', () => {
+  const dateString = '2019-01-01'
+  const $ = cheerio.load(
+    render(
+      html`
+        <${DateHtml} dateString=${dateString} weekday=${true} //>
+      `,
+    ),
+  )
+  expect($('time').length).toBe(1)
+  expect($('time').attr('datetime')).toEqual('2019-01-01')
+  expect($('time').text()).toEqual('Tuesday, January 1st')
+})
