@@ -1,4 +1,4 @@
-const { array2Obj, nextHoliday } = require('../index')
+const { array2Obj, nextHoliday, upcomingHolidays } = require('../index')
 const holidays = require('./data.skip')
 
 describe('Test array2Obj', () => {
@@ -40,8 +40,39 @@ describe('Test nextHoliday', () => {
     expect(nextHoliday(holidays, dateString).nameEn).toEqual('Family Day')
   })
 
-  test('returns Saint Patrick’s Day for the beginning of March', () => {
+  test('returns Saint Patrick’s Day for March 1st', () => {
     const dateString = '2019-03-01'
     expect(nextHoliday(holidays, dateString).nameEn).toEqual('Saint Patrick’s Day')
+  })
+})
+
+describe('Test upcomingHolidays', () => {
+  beforeEach(() => {
+    expect(holidays.length).toBe(6)
+  })
+
+  test('returns all holidays for the beginning of the year', () => {
+    const dateString = '2019-01-01'
+    expect(upcomingHolidays(holidays, dateString).length).toEqual(6)
+  })
+
+  test('returns one less holidays for the second day of the year', () => {
+    const dateString = '2019-01-02'
+    expect(upcomingHolidays(holidays, dateString).length).toEqual(5)
+  })
+
+  test('returns one less holidays for February 18th', () => {
+    const dateString = '2019-02-18'
+    expect(upcomingHolidays(holidays, dateString).length).toEqual(5)
+  })
+
+  test('returns one holiday for February 19th', () => {
+    const dateString = '2019-02-19'
+    expect(upcomingHolidays(holidays, dateString).length).toEqual(1)
+  })
+
+  test('returns no holidays for April 1st', () => {
+    const dateString = '2019-04-01'
+    expect(upcomingHolidays(holidays, dateString).length).toEqual(0)
   })
 })

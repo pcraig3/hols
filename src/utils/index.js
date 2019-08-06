@@ -99,6 +99,20 @@ const nextHoliday = (holidays, dateString) => {
   return nextHolidays[0]
 }
 
+/**
+ * This function takes an array of holidays and returns only the remaining upcoming holidays
+ *
+ * @param {Array} holidays an array of holidays
+ * @param {String} dateString an optional dateString
+ */
+const upcomingHolidays = (holidays, dateString) => {
+  if (!dateString) {
+    dateString = new Date().toISOString().substring(0, 10)
+  }
+
+  return holidays.filter(holiday => holiday.date >= dateString)
+}
+
 module.exports = {
   html,
   metaIfSHA,
@@ -106,4 +120,5 @@ module.exports = {
   array2Obj,
   dbmw,
   nextHoliday,
+  upcomingHolidays,
 }
