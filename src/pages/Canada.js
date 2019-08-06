@@ -109,7 +109,7 @@ const Canada = ({ data: { holidays, nextHoliday } = {} }) =>
             rows=${createRows(holidays)}
           />
 
-          <span class="bottom-link"><a href="#body">Back to top ↑</a></span>
+          <span class="bottom-link"><a href="#html">Back to top ↑</a></span>
         </section>
       </div>
     <//>

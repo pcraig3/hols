@@ -6,7 +6,7 @@ const { theme } = require('../styles')
 const document = ({ title, locale, content }) => {
   return `
     <!DOCTYPE html>
-    <html lang="${locale}">
+    <html lang="${locale}" id="html">
       <head>
         ${metaIfSHA() || ''}
         <meta charset="utf-8" />
@@ -40,8 +40,10 @@ const document = ({ title, locale, content }) => {
           }
         </style>
       </head>
-      <body id="body">
+      <body>
         ${content}
+        <script src="/js/sweet-scroll.min.js"></script>
+        <script src="/js/script.js"></script>
       </body>
     </html>
   `
