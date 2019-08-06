@@ -49,12 +49,21 @@ const renderCelebreatingProvinces = provinces => {
 }
 
 const createRows = holidays => {
+  const _provinces = holiday => {
+    if (holiday.provinces.length === 13) {
+      return 'National holiday'
+    }
+
+    return holiday.provinces.map(p => p.id).join(', ')
+  }
+
   return holidays.map(holiday => {
     return {
       key: holiday.nameEn,
       value: html`
         <${DateHtml} dateString=${holiday.date} weekday=${true} //>
       `,
+      value2: _provinces(holiday),
     }
   })
 }

@@ -54,7 +54,6 @@ const summaryRow = css`
     .value2 {
       width: 20%;
       padding-right: 0;
-      text-align: right;
     }
   }
 
