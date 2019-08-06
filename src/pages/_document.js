@@ -12,6 +12,7 @@ const document = ({ title, content }) => {
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>${title} — Holidays Canada</title>
+        <link rel="shortcut icon" href="/favicon.png" type="image/x-icon" sizes="32x32" />
         <link href="https://fonts.googleapis.com/css?family=Gothic+A1:400,600&display=swap" rel="stylesheet" />
         <style>
           * {

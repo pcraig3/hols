@@ -4,10 +4,10 @@
 - about page
 - footer that says I am bomb
 - page title and meta tag
-- favicon
 - next holiday provinces
 - list of holidays
 - list of provinces
+- better on mobile
 - analytics
 
 # DONE
@@ -55,3 +55,4 @@
   - list relevant provinces for upcoming holidays
   - table that breaks
 - slide down effect
+- favicon
