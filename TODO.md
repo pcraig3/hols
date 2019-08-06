@@ -2,12 +2,6 @@
 
 - sketch design for frontend
 - about page
-- remove junk page
-- next holiday canada
-
-  - actually get next holiday
-  - square box for next holiday
-
 - list of holidays canada
 
   - list upcoming holidays
@@ -52,3 +46,7 @@
   - federal route
   - test for error routes
 - add styles js file
+- next holiday canada
+  - actually get next holiday
+  - square box for next holiday
+- remove junk page

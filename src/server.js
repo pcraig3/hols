@@ -23,16 +23,6 @@ app.use(cookieSession(cookieSessionConfig))
 const apiRouter = require('./routes/api')
 app.use('/api', apiRouter)
 
-app.get('/page/:page', (req, res) => {
-  res.send(
-    renderPage({
-      pageComponent: 'Page',
-      title: req.params.page,
-      props: { name: req.params.page },
-    }),
-  )
-})
-
 app.get('/provinces', dbmw(db, getProvinces), (req, res) => {
   return res.send(
     renderPage({
