@@ -3,13 +3,13 @@ const { css } = require('emotion')
 const { theme } = require('../styles')
 
 const summaryRow = css`
+  margin-bottom: ${theme.space.sm};
+  border-bottom: 1px solid ${theme.color.greyLight};
+
   @media (${theme.mq.lg}) {
     display: table-row;
-  }
-
-  @media (${theme.mq.sm}) {
-    margin-bottom: ${theme.space.sm};
-    border-bottom: 1px solid ${theme.color.greyLight};
+    margin-bottom: 0;
+    border-bottom: none;
   }
 
   .key,
@@ -20,11 +20,13 @@ const summaryRow = css`
   }
 
   .key {
+    font-weight: 700;
     margin-bottom: ${theme.space.xxs};
   }
 
   .value {
     white-space: pre-wrap;
+    margin-bottom: ${theme.space.sm};
   }
 
   .value2 {
@@ -54,16 +56,6 @@ const summaryRow = css`
     .value2 {
       width: 20%;
       padding-right: 0;
-    }
-  }
-
-  @media (${theme.mq.sm}) {
-    .key {
-      font-weight: 700;
-    }
-
-    .value {
-      margin-bottom: ${theme.space.sm};
     }
   }
 `
@@ -99,22 +91,17 @@ const summaryTable = css`
 
   h2 {
     font-size: 1.3em;
-    margin: ${theme.space.md} 0 ${theme.space.lg} 0;
+    margin: ${theme.space.md} 0 0 0;
     padding-top: ${theme.space.md};
-    padding-bottom: ${theme.space.xxs};
+    padding-bottom: ${theme.space.xl};
   }
 
   /* on larger screens */
-  @media (min-width: 640px) {
+  @media (${theme.mq.md}) {
     dl {
       display: table;
       width: 100%;
       table-layout: fixed;
-    }
-
-    h2 {
-      margin-bottom: 0;
-      padding-bottom: ${theme.space.xl};
     }
   }
 `

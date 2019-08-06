@@ -19,8 +19,11 @@ const theme = {
     xxl: '60px',
   },
   mq: {
-    sm: 'max-width: 640px',
-    lg: 'min-width: 640px',
+    xs: 'max-width: 336px',
+    sm: 'min-width: 336px',
+    md: 'min-width: 568px',
+    lg: 'min-width: 768px',
+    xl: 'min-width: 1024px',
   },
 }
 

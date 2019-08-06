@@ -26,18 +26,14 @@ const document = ({ title, content }) => {
 
           body {
             margin: ${theme.space.md};
-            font-size: 1.5em;
+            font-size: 1.05em;
             font-family: 'Gothic A1', sans-serif;
             word-break: break-word;
             line-height: 1.33;
           }
 
-          h1, h2 {
-            font-weight: 600;
-          }
-
-          @media (${theme.mq.sm}) {
-            body { font-size: 1.05em; }
+          @media (${theme.mq.lg}) {
+            body { font-size: 1.5em; }
           }
         </style>
       </head>
