@@ -19,7 +19,7 @@ const styles = css`
     margin-top: 0;
     font-size: 1.8em;
 
-    .hol-name {
+    time {
       color: ${accent};
     }
 
@@ -54,11 +54,8 @@ const nextHolidayBox = ({ nextHoliday }) => {
     <div class=${styles}>
       <h1>
         Canada’s next public holiday is${' '}
-        <br />
         <span class="hol-name">${nextHoliday.nameEn}</span>
-        <br />
-        ${' '}on${' '}
-        <span><${DateHtml} dateString=${nextHoliday.date} //></span>
+        ${' '}on <${DateHtml} dateString=${nextHoliday.date} //>
       </h1>
       ${renderCelebreatingProvinces(nextHoliday.provinces)}
     </div>

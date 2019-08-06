@@ -64,7 +64,7 @@ const getISODate = dateString => {
 // 60 minutes * 24 hours = 1440
 const getDateBeforeMidnightFromString = str => addMinutes(new Date(str), 1439)
 
-const space2Nbsp = str => str.replace(/ /g, ' ')
+const space2Nbsp = str => str.replace(/ /g, ' ')
 
 const displayDate = (dateString, weekend = false) => {
   dateString = getDateBeforeMidnightFromString(dateString)
