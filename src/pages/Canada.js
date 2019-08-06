@@ -8,8 +8,24 @@ const SummaryTable = require('../components/SummaryTable.js')
 const accent = theme.color.red
 
 const styles = css`
+  a,
+  a:visited {
+    color: ${accent};
+  }
+
+  > section {
+    min-height: 95vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    .bottom-link {
+      margin-top: ${theme.space.lg};
+      margin-bottom: ${theme.space.lg};
+    }
+  }
+
   > section:first-of-type {
-    min-height: 80vh;
     max-width: 80%;
 
     > div {
@@ -83,12 +99,18 @@ const Canada = ({ data: { holidays, nextHoliday } = {} }) =>
             </h1>
             ${renderCelebreatingProvinces(nextHoliday.provinces)}
           </div>
+          <span class="bottom-link"><a href="#upcoming-holidays">All upcoming holidays ↓</a></span>
         </section>
 
-        <div>
-          <h3>All upcoming holidays ↓</h3>
-          <${SummaryTable} title="Holidays" rows=${createRows(holidays)} />
-        </div>
+        <section>
+          <${SummaryTable}
+            id="upcoming-holidays"
+            title="Canada’s upcoming holidays in 2019"
+            rows=${createRows(holidays)}
+          />
+
+          <span class="bottom-link"><a href="#body">Back to top ↑</a></span>
+        </section>
       </div>
     <//>
   `

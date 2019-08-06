@@ -20,7 +20,7 @@ const document = ({ title, locale, content }) => {
 
           a:focus {
             outline: 3px solid ${theme.color.focus};
-            outline-offset: 0;
+            outline-offset: 5px;
           }
 
           body {
@@ -29,7 +29,6 @@ const document = ({ title, locale, content }) => {
             font-family: 'Gothic A1', sans-serif;
             word-break: break-word;
             line-height: 1.33;
-            background-color: ${theme.color.yellowPale}
           }
 
           h1, h2 {
@@ -41,7 +40,7 @@ const document = ({ title, locale, content }) => {
           }
         </style>
       </head>
-      <body>
+      <body id="body">
         ${content}
       </body>
     </html>

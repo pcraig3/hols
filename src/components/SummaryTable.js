@@ -9,7 +9,7 @@ const summaryRow = css`
 
   @media (${theme.mq.sm}) {
     margin-bottom: ${theme.space.sm};
-    border-bottom: 1px solid ${theme.color.grey};
+    border-bottom: 1px solid ${theme.color.greyLight};
   }
 
   .key,
@@ -40,7 +40,7 @@ const summaryRow = css`
       padding-right: ${theme.space.lg};
       padding-top: ${theme.space.xs};
       padding-bottom: ${theme.space.xs};
-      border-bottom: 1px solid ${theme.color.black};
+      border-bottom: 1px solid ${theme.color.greyLight};
     }
 
     .key {
@@ -99,9 +99,9 @@ const summaryTable = css`
 
   h2 {
     font-size: 1.3em;
-    margin: ${theme.space.lg} 0 ${theme.space.xs} 0;
+    margin: ${theme.space.md} 0 ${theme.space.lg} 0;
+    padding-top: ${theme.space.md};
     padding-bottom: ${theme.space.xxs};
-    border-bottom: 1px solid black;
   }
 
   /* on larger screens */
@@ -114,17 +114,17 @@ const summaryTable = css`
 
     h2 {
       margin-bottom: 0;
-      padding-bottom: ${theme.space.xs};
+      padding-bottom: ${theme.space.xl};
     }
   }
 `
 
-const SummaryTable = ({ rows, title = false, ...props }) =>
+const SummaryTable = ({ rows, title = false, id, ...props }) =>
   html`
     <div class=${summaryTable}>
       ${title &&
         html`
-          <h2>${title}</h2>
+          <h2 id=${id}>${title}</h2>
         `}
       <dl title=${title}>
         ${rows.map(row => renderSummaryRow(row, props))}

@@ -6,7 +6,8 @@ const theme = {
   color: {
     red: '#D43B1D',
     yellowPale: '#FFFCF0',
-    focus: '#FFBF47',
+    greyLight: '#BFC1C3',
+    focus: 'cornflowerblue',
   },
   space: {
     xxs: '5px',

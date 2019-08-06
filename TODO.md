@@ -2,16 +2,13 @@
 
 - sketch design for frontend
 - about page
-- list of holidays canada
-
-  - list upcoming holidays
-  - list relevant provinces for upcoming holidays
-  - table that breaks
-
 - slide down effect
 - footer that says I am bomb
+- page title and meta tag
+- favicon
 - next holiday provinces
-- list of holidays list of provinces
+- list of holidays
+- list of provinces
 - analytics
 
 # DONE
@@ -54,3 +51,7 @@
   - actually get next holiday
   - square box for next holiday
 - remove junk page
+- list of holidays canada
+  - list upcoming holidays
+  - list relevant provinces for upcoming holidays
+  - table that breaks
