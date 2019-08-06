@@ -105,10 +105,9 @@ const Canada = ({ data: { holidays, nextHoliday } = {} }) =>
         <section>
           <${SummaryTable}
             id="upcoming-holidays"
-            title="Canada’s upcoming holidays in 2019"
+            title="Upcoming holidays in Canada"
             rows=${createRows(holidays)}
           />
-
           <span class="bottom-link"><a href="#html">Back to top ↑</a></span>
         </section>
       </div>
