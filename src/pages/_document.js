@@ -37,7 +37,7 @@ const document = ({ title, content }) => {
           }
         </style>
       </head>
-      <body>
+      <body id="body">
         ${content}
         <script src="/js/sweet-scroll.min.js"></script>
         <script src="/js/script.js"></script>

@@ -7,7 +7,9 @@ document.addEventListener(
       duration: 650, // Specifies animation duration in integer
       easing: 'easeOutExpo',
       after: (offset, $trigger) => {
-        document.getElementById($trigger.hash.substr(1)).focus()
+        window.setTimeout(function() {
+          document.getElementById($trigger.hash.substr(1)).focus()
+        }, 1)
       },
     })
   },
