@@ -12,22 +12,28 @@ const document = ({ title, locale, content }) => {
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>${title} — Holidays Canada</title>
+        <link href="https://fonts.googleapis.com/css?family=Gothic+A1:400,600&display=swap" rel="stylesheet" />
         <style>
           * {
             box-sizing: border-box;
           }
 
-          *:focus {
-            outline: 3px solid #FFBF47;
+          a:focus {
+            outline: 3px solid ${theme.color.focus};
             outline-offset: 0;
           }
 
           body {
             margin: ${theme.space.md};
-            font-size: 1.4em;
-            font-family: sans-serif;
+            font-size: 1.5em;
+            font-family: 'Gothic A1', sans-serif;
             word-break: break-word;
             line-height: 1.33;
+            background-color: ${theme.color.yellowPale}
+          }
+
+          h1, h2 {
+            font-weight: 600;
           }
 
           @media (${theme.mq.sm}) {
