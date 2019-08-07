@@ -60,15 +60,13 @@ router.get('*', (req, res) => {
 
 // eslint-disable-next-line no-unused-vars
 router.use(function(err, req, res, next) {
-  let errResponse = {
+  return res.send({
     error: {
       status: res.statusCode,
       message: err.message,
       timestamp: new Date().toISOString(),
     },
-  }
-
-  return res.send(errResponse)
+  })
 })
 
 module.exports = router

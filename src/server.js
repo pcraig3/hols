@@ -3,9 +3,16 @@ const logger = require('morgan')
 const helmet = require('helmet')
 const cookieSession = require('cookie-session')
 const db = require('sqlite')
+const createError = require('http-errors')
 const renderPage = require('./pages/_document.js')
-const { cookieSessionConfig, dbmw, nextHoliday, upcomingHolidays } = require('./utils')
-const { getProvinces, getHolidaysWithProvinces } = require('./queries')
+const {
+  cookieSessionConfig,
+  dbmw,
+  checkProvinceIdErr,
+  nextHoliday,
+  upcomingHolidays,
+} = require('./utils')
+const { getProvinces, getHolidaysWithProvinces, getProvincesWithHolidays } = require('./queries')
 const { displayDate } = require('./dates')
 
 const app = express()
@@ -47,6 +54,31 @@ app.get('/', dbmw(db, getHolidaysWithProvinces), (req, res) => {
       title: 'Canada’s next public holiday',
       meta,
       props: { data: { holidays, nextHoliday: nextHol } },
+    }),
+  )
+})
+
+app.get(
+  '/province/:provinceId',
+  dbmw(db, getProvincesWithHolidays),
+  checkProvinceIdErr,
+  (req, res) => {
+    return res.send(res.locals.rows)
+  },
+)
+
+// eslint-disable-next-line no-unused-vars
+app.use(function(err, req, res, next) {
+  return res.send(
+    renderPage({
+      pageComponent: 'Error',
+      title: `Whoops ${res.statusCode}`,
+      props: {
+        data: {
+          status: res.statusCode,
+          message: err.message,
+        },
+      },
     }),
   )
 })
