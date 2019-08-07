@@ -23,6 +23,11 @@ describe('Test server responses', () => {
     expect(response.statusCode).toBe(200)
   })
 
+  test('it should return 404 for a nonexistent path', async () => {
+    const response = await request(app).get('/pterosaur')
+    expect(response.statusCode).toBe(404)
+  })
+
   test('it should return security-focused headers in reponses', async () => {
     const response = await request(app).get('/')
 

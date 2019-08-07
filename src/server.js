@@ -3,7 +3,6 @@ const logger = require('morgan')
 const helmet = require('helmet')
 const cookieSession = require('cookie-session')
 const db = require('sqlite')
-const createError = require('http-errors')
 const renderPage = require('./pages/_document.js')
 const { cookieSessionConfig, dbmw, checkProvinceIdErr } = require('./utils')
 const { getProvinces, getProvincesWithHolidays } = require('./queries')
@@ -46,26 +45,5 @@ app.get(
     return res.send(res.locals.rows)
   },
 )
-
-app.get('*', (req, res) => {
-  res.status(404)
-  throw new createError(404, 'Oopsie daisy. Maybe head back to the home page? 👇')
-})
-
-// eslint-disable-next-line no-unused-vars
-app.use(function(err, req, res, next) {
-  return res.send(
-    renderPage({
-      pageComponent: 'Error',
-      title: `${res.statusCode}`,
-      props: {
-        data: {
-          status: res.statusCode,
-          message: err.message,
-        },
-      },
-    }),
-  )
-})
 
 module.exports = app

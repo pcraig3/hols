@@ -33,4 +33,19 @@ describe('Test ui responses', () => {
       expect($('meta[name="description"]').attr('content')).toMatch(/^Canada’s next holiday is/)
     })
   })
+
+  describe('Test 404 responses', () => {
+    test('it should return 404', async () => {
+      const response = await request(app).get('/allosaurus')
+      expect(response.statusCode).toBe(404)
+    })
+
+    test('it should return the h1, title, and meta tag', async () => {
+      const response = await request(app).get('/allosaurus')
+      const $ = cheerio.load(response.text)
+      expect($('h1').text()).toEqual('404')
+      expect($('title').text()).toEqual('404 — Holidays Canada')
+      expect($('meta[name="description"]').attr('content')).toEqual('Public holidays in Canada')
+    })
+  })
 })

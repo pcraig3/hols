@@ -3,7 +3,6 @@
 - sketch design for frontend
 - about page
 - footer that says I am bomb
-- frontend specific router + smoke tests
 - next holiday provinces
 - list of holidays
 - list of provinces
@@ -58,3 +57,4 @@
 - favicon
 - page title and meta tag
 - generic 404 page
+- frontend specific router + smoke tests
