@@ -34,6 +34,41 @@ describe('Test ui responses', () => {
     })
   })
 
+  describe('Test /province/:provinceId responses', () => {
+    describe('for a good provinceId', () => {
+      test('it should return 200', async () => {
+        const response = await request(app).get('/province/MB')
+        expect(response.statusCode).toBe(200)
+      })
+
+      test('it should return the h1, title, and meta tag', async () => {
+        const response = await request(app).get('/province/MB')
+        const $ = cheerio.load(response.text)
+        expect($('h1').text()).toMatch(/^Manitoba’s next public holiday is/)
+        expect($('title').text()).toEqual('Manitoba’s next public holiday — Holidays Canada')
+        expect($('meta[name="description"]').attr('content')).toMatch(/^Manitoba’s next holiday is/)
+      })
+    })
+
+    describe('for a good provinceId', () => {
+      test('for a bad province IDit should return 400', async () => {
+        const response = await request(app).get('/allosaurus')
+        expect(response.statusCode).toBe(404)
+      })
+
+      test('it should return the h1, title, and meta tag', async () => {
+        const response = await request(app).get('/province/pangea')
+        const $ = cheerio.load(response.text)
+        expect($('h1').text()).toEqual('400')
+        expect($('p').text()).toEqual(
+          'Error: No province with id “pangea”. Accepted province IDs are: [AB, BC, MB, NB, NL, NS, NT, NU, ON, PE, QC, SK, YT].',
+        )
+        expect($('title').text()).toEqual('400 — Holidays Canada')
+        expect($('meta[name="description"]').attr('content')).toEqual('Public holidays in Canada')
+      })
+    })
+  })
+
   describe('Test 404 responses', () => {
     test('it should return 404', async () => {
       const response = await request(app).get('/allosaurus')

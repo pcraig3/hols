@@ -36,7 +36,7 @@ router.get(
       renderPage({
         pageComponent: 'Province',
         title: `${province.nameEn}’s next public holiday`,
-        meta: getMeta(province.nextHoliday, province.name_en),
+        meta: getMeta(province.nextHoliday, province.nameEn),
         props: { data: { province } },
       }),
     )

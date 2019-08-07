@@ -24,5 +24,8 @@ test('nextHolidayBox displays next holiday properly', () => {
   expect($('h1').text()).toEqual(
     'Canada’s next public holiday is Gold Cup Parade Day on August 16th',
   )
-  expect($('h1 + span').text()).toEqual('Celebrated by Prince Edward Island')
+  expect($('h1 + p').text()).toEqual('Celebrated by Prince Edward Island')
 })
+
+test.todo('Test with multiple provinces string')
+test.todo('Test with no provinces attached to holidays')
