@@ -18,7 +18,7 @@ describe('Test server responses', () => {
     db.close()
   })
 
-  test('it should return 302 for the root path', async () => {
+  test('it should return 200 for the root path', async () => {
     const response = await request(app).get('/')
     expect(response.statusCode).toBe(200)
   })

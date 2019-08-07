@@ -5,15 +5,8 @@ const cookieSession = require('cookie-session')
 const db = require('sqlite')
 const createError = require('http-errors')
 const renderPage = require('./pages/_document.js')
-const {
-  cookieSessionConfig,
-  dbmw,
-  checkProvinceIdErr,
-  nextHoliday,
-  upcomingHolidays,
-} = require('./utils')
-const { getProvinces, getHolidaysWithProvinces, getProvincesWithHolidays } = require('./queries')
-const { displayDate } = require('./dates')
+const { cookieSessionConfig, dbmw, checkProvinceIdErr } = require('./utils')
+const { getProvinces, getProvincesWithHolidays } = require('./queries')
 
 const app = express()
 
@@ -32,28 +25,15 @@ app.use(cookieSession(cookieSessionConfig))
 const apiRouter = require('./routes/api')
 app.use('/api', apiRouter)
 
+const uiRouter = require('./routes/ui')
+app.use(uiRouter)
+
 app.get('/provinces', dbmw(db, getProvinces), (req, res) => {
   return res.send(
     renderPage({
       pageComponent: 'Provinces',
       title: 'Provinces',
       props: { data: { provinces: res.locals.rows } },
-    }),
-  )
-})
-
-app.get('/', dbmw(db, getHolidaysWithProvinces), (req, res) => {
-  const holidays = upcomingHolidays(res.locals.rows)
-  const nextHol = nextHoliday(holidays)
-
-  const meta = `Canada’s next holiday is ${nextHol.nameEn} on ${displayDate(nextHol.date)}`
-
-  return res.send(
-    renderPage({
-      pageComponent: 'Canada',
-      title: 'Canada’s next public holiday',
-      meta,
-      props: { data: { holidays, nextHoliday: nextHol } },
     }),
   )
 })
