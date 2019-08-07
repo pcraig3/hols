@@ -1,6 +1,7 @@
 const { h } = require('preact')
 const htm = require('htm')
 const validator = require('validator')
+const createError = require('http-errors')
 
 const html = htm.bind(h)
 
@@ -26,6 +27,18 @@ const dbmw = (db, cb) => {
 
     return next()
   }
+}
+
+// middleware for returning "province id doesn't exist" errors
+const checkProvinceIdErr = (req, res, next) => {
+  const provinceMsg =
+    'Accepted province IDs are: [AB, BC, MB, NB, NL, NS, NT, NU, ON, PE, QC, SK, YT].'
+  if (!res.locals.rows.length) {
+    res.status(400)
+    next(createError(400, `Error: No province with id “${req.params.provinceId}”. ${provinceMsg}`))
+  }
+
+  next()
 }
 
 // return a meta tag if a GITHUB_SHA environment variable exists
@@ -119,6 +132,7 @@ module.exports = {
   cookieSessionConfig,
   array2Obj,
   dbmw,
+  checkProvinceIdErr,
   nextHoliday,
   upcomingHolidays,
 }

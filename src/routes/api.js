@@ -2,26 +2,21 @@ const express = require('express')
 const router = express.Router()
 const db = require('sqlite')
 const createError = require('http-errors')
-const { dbmw } = require('../utils')
+const { dbmw, checkProvinceIdErr } = require('../utils')
 const { getProvincesWithHolidays, getHolidaysWithProvinces } = require('../queries')
 
 router.get('/v1/provinces', dbmw(db, getProvincesWithHolidays), (req, res) => {
   return res.send({ provinces: res.locals.rows })
 })
 
-router.get('/v1/provinces/:provinceId', dbmw(db, getProvincesWithHolidays), (req, res) => {
-  const provinceMsg =
-    'Accepted province IDs are: [AB, BC, MB, NB, NL, NS, NT, NU, ON, PE, QC, SK, YT].'
-  if (!res.locals.rows.length) {
-    res.status(400)
-    throw new createError(
-      400,
-      `Error: No province with id “${req.params.provinceId}”. ${provinceMsg}`,
-    )
-  }
-
-  return res.send({ province: res.locals.rows[0] })
-})
+router.get(
+  '/v1/provinces/:provinceId',
+  dbmw(db, getProvincesWithHolidays),
+  checkProvinceIdErr,
+  (req, res) => {
+    return res.send({ province: res.locals.rows[0] })
+  },
+)
 
 router.get('/v1/holidays', dbmw(db, getHolidaysWithProvinces), (req, res) => {
   return res.send({ holidays: res.locals.rows })

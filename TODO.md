@@ -3,6 +3,7 @@
 - sketch design for frontend
 - about page
 - footer that says I am bomb
+- generic 404 page
 - next holiday provinces
 - list of holidays
 - list of provinces

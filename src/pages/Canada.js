@@ -14,18 +14,6 @@ const styles = css`
     color: ${accent};
   }
 
-  > section {
-    min-height: 95vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-
-    .bottom-link {
-      margin-top: ${theme.space.lg};
-      margin-bottom: ${theme.space.lg};
-    }
-  }
-
   > section:first-of-type {
     max-width: 100%;
 
