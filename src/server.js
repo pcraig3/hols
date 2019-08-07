@@ -4,8 +4,8 @@ const helmet = require('helmet')
 const cookieSession = require('cookie-session')
 const db = require('sqlite')
 const renderPage = require('./pages/_document.js')
-const { cookieSessionConfig, dbmw, checkProvinceIdErr } = require('./utils')
-const { getProvinces, getProvincesWithHolidays } = require('./queries')
+const { cookieSessionConfig, dbmw } = require('./utils')
+const { getProvinces } = require('./queries')
 
 const app = express()
 
@@ -36,14 +36,5 @@ app.get('/provinces', dbmw(db, getProvinces), (req, res) => {
     }),
   )
 })
-
-app.get(
-  '/province/:provinceId',
-  dbmw(db, getProvincesWithHolidays),
-  checkProvinceIdErr,
-  (req, res) => {
-    return res.send(res.locals.rows)
-  },
-)
 
 module.exports = app

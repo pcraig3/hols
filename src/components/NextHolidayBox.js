@@ -16,7 +16,7 @@ const styles = css`
   }
 
   h1 {
-    margin-top: 0;
+    margin: 0;
     font-size: 1.8em;
 
     time {
@@ -27,37 +27,42 @@ const styles = css`
       font-size: 1.8em;
     }
   }
+
+  h1 + p {
+    margin-bottom: 0;
+    margin-top: ${theme.space.xl};
+  }
 `
 
 const renderCelebreatingProvinces = provinces => {
   const isLastProvince = province => province.id === provinces[provinces.length - 1].id
   if (provinces.length === 1) {
     return html`
-      <span>Celebrated by${' '}<span>${provinces[0].nameEn}</span></span>
+      <p>Celebrated by${' '}<span>${provinces[0].nameEn}</span></p>
     `
   }
 
   return html`
-    <span
-      >Celebrated by
+    <p>
+      Celebrated by
       ${provinces.map(
         p => html`
           ${isLastProvince(p) ? ' and ' : ' '}<span>${p.id}</span>${isLastProvince(p) ? '' : ','}
         `,
       )}
-    </span>
+    </p>
   `
 }
 
-const nextHolidayBox = ({ nextHoliday }) => {
+const nextHolidayBox = ({ nextHoliday, provinceName = 'Canada' }) => {
   return html`
     <div class=${styles}>
       <h1>
-        Canada’s next public holiday is${' '}
+        ${provinceName}’s next public holiday is${' '}
         <span class="hol-name">${nextHoliday.nameEn}</span>
         ${' '}on <${DateHtml} dateString=${nextHoliday.date} //>
       </h1>
-      ${renderCelebreatingProvinces(nextHoliday.provinces)}
+      ${nextHoliday.provinces && renderCelebreatingProvinces(nextHoliday.provinces)}
     </div>
   `
 }

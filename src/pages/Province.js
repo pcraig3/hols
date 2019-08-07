@@ -24,39 +24,30 @@ const styles = css`
 `
 
 const createRows = holidays => {
-  const _provinces = holiday => {
-    if (holiday.provinces.length === 13) {
-      return 'National holiday'
-    }
-
-    return holiday.provinces.map(p => p.id).join(', ')
-  }
-
   return holidays.map(holiday => {
     return {
       key: html`
         <${DateHtml} dateString=${holiday.date} weekday=${true} //>
       `,
       value: holiday.nameEn,
-      value2: _provinces(holiday),
     }
   })
 }
 
-const Canada = ({ data: { holidays, nextHoliday } = {} }) =>
+const Province = ({ data: { province = {} } = {} }) =>
   html`
     <${Layout}>
       <div class=${styles}>
         <section>
-          <${NextHolidayBox} nextHoliday=${nextHoliday} />
+          <${NextHolidayBox} nextHoliday=${province.nextHoliday} provinceName=${province.nameEn} />
           <span class="bottom-link"><a href="#upcoming-holidays">Upcoming holidays ↓</a></span>
         </section>
 
         <section>
           <${SummaryTable}
             id="upcoming-holidays"
-            title="Upcoming holidays in Canada"
-            rows=${createRows(holidays)}
+            title=${`Upcoming holidays in ${province.nameEn}`}
+            rows=${createRows(province.holidays)}
           />
           <span class="bottom-link"><a href="#html">Back to top ↑</a></span>
         </section>
@@ -64,4 +55,4 @@ const Canada = ({ data: { holidays, nextHoliday } = {} }) =>
     <//>
   `
 
-module.exports = Canada
+module.exports = Province
