@@ -33,13 +33,18 @@ const createRows = holidays => {
   }
 
   return holidays.map(holiday => {
-    return {
+    const row = {
       key: html`
         <${DateHtml} dateString=${holiday.date} weekday=${true} //>
       `,
       value: holiday.nameEn,
-      value2: _provinces(holiday),
     }
+
+    if (holiday.provinces) {
+      row.value2 = _provinces(holiday)
+    }
+
+    return row
   })
 }
 
