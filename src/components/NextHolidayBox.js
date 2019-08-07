@@ -33,7 +33,7 @@ const renderCelebreatingProvinces = provinces => {
   const isLastProvince = province => province.id === provinces[provinces.length - 1].id
   if (provinces.length === 1) {
     return html`
-      <span>Celebrated by${' '}<span>${provinces[0].nameEn}</span>.</span>
+      <span>Celebrated by${' '}<span>${provinces[0].nameEn}</span></span>
     `
   }
 
@@ -42,7 +42,7 @@ const renderCelebreatingProvinces = provinces => {
       >Celebrated by
       ${provinces.map(
         p => html`
-          ${isLastProvince(p) ? ' and ' : ' '}<span>${p.id}</span>${isLastProvince(p) ? '.' : ','}
+          ${isLastProvince(p) ? ' and ' : ' '}<span>${p.id}</span>${isLastProvince(p) ? '' : ','}
         `,
       )}
     </span>

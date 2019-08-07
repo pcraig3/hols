@@ -6,6 +6,7 @@ const db = require('sqlite')
 const renderPage = require('./pages/_document.js')
 const { cookieSessionConfig, dbmw, nextHoliday, upcomingHolidays } = require('./utils')
 const { getProvinces, getHolidaysWithProvinces } = require('./queries')
+const { displayDate } = require('./dates')
 
 const app = express()
 
@@ -36,12 +37,16 @@ app.get('/provinces', dbmw(db, getProvinces), (req, res) => {
 
 app.get('/', dbmw(db, getHolidaysWithProvinces), (req, res) => {
   const holidays = upcomingHolidays(res.locals.rows)
+  const nextHol = nextHoliday(holidays)
+
+  const meta = `Canada’s next holiday is ${nextHol.nameEn} on ${displayDate(nextHol.date)}`
 
   return res.send(
     renderPage({
       pageComponent: 'Canada',
-      title: 'Canada',
-      props: { data: { holidays, nextHoliday: nextHoliday(holidays) } },
+      title: 'Canada’s next public holiday',
+      meta,
+      props: { data: { holidays, nextHoliday: nextHol } },
     }),
   )
 })

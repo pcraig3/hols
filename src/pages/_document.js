@@ -3,7 +3,7 @@ const render = require('preact-render-to-string')
 const { html, metaIfSHA } = require('../utils')
 const { theme } = require('../styles')
 
-const document = ({ title, content }) => {
+const document = ({ title, meta, content }) => {
   return `
     <!DOCTYPE html>
     <html lang="en" id="html">
@@ -11,6 +11,7 @@ const document = ({ title, content }) => {
         ${metaIfSHA() || ''}
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="description" content="${meta ? meta : 'Public holidays in Canada'}">
         <title>${title} — Holidays Canada</title>
         <link rel="shortcut icon" href="/favicon.png" type="image/x-icon" sizes="32x32" />
         <link href="https://fonts.googleapis.com/css?family=Gothic+A1:400,600&display=swap" rel="stylesheet" />
@@ -46,7 +47,7 @@ const document = ({ title, content }) => {
   `
 }
 
-const renderPage = ({ pageComponent, title = '', props }) => {
+const renderPage = ({ pageComponent, title = '', meta = '', props }) => {
   const Page = require(`./${pageComponent}.js`)
 
   const content = render(
@@ -57,7 +58,7 @@ const renderPage = ({ pageComponent, title = '', props }) => {
 
   // if title is not explicitly passed in, use the name of the page component
   title = title || pageComponent
-  return document({ title, content: renderStylesToString(content) })
+  return document({ title, meta, content: renderStylesToString(content) })
 }
 
 module.exports = renderPage

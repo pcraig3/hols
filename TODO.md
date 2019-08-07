@@ -3,7 +3,6 @@
 - sketch design for frontend
 - about page
 - footer that says I am bomb
-- page title and meta tag
 - next holiday provinces
 - list of holidays
 - list of provinces
@@ -56,3 +55,4 @@
   - table that breaks
 - slide down effect
 - favicon
+- page title and meta tag
