@@ -38,7 +38,7 @@ const renderCelebreatingProvinces = provinces => {
   const isLastProvince = province => province.id === provinces[provinces.length - 1].id
   if (provinces.length === 1) {
     return html`
-      <p>Celebrated by${' '}<span>${provinces[0].nameEn}</span></p>
+      <p>Celebrated by${' '}<a href=${`/province/${provinces[0].id}`}>${provinces[0].nameEn}</a></p>
     `
   }
 
@@ -60,7 +60,8 @@ const nextHolidayBox = ({ nextHoliday, provinceName = 'Canada' }) => {
       <h1>
         ${provinceName}’s next public holiday is${' '}
         <span class="hol-name">${nextHoliday.nameEn}</span>
-        ${' '}on <${DateHtml} dateString=${nextHoliday.date} //>
+        ${' '}on${' '}<br />
+        <${DateHtml} dateString=${nextHoliday.date} //>
       </h1>
       ${nextHoliday.provinces && renderCelebreatingProvinces(nextHoliday.provinces)}
     </div>
