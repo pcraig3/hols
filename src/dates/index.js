@@ -70,7 +70,7 @@ const displayDate = (dateString, weekend = false) => {
   dateString = getDateBeforeMidnightFromString(dateString)
   let msg = space2Nbsp(format(dateString, 'MMMM do'))
 
-  return weekend ? `${format(dateString, 'EEEE')}, ${msg}` : msg
+  return weekend ? `${format(dateString, 'E')}, ${msg}` : msg
 }
 
 module.exports = { getISODate, displayDate }

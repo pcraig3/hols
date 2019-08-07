@@ -46,11 +46,11 @@ const summaryRow = css`
     }
 
     .key {
-      width: 30%;
+      width: 40%;
     }
 
     .value {
-      width: 50%;
+      width: 40%;
     }
 
     .value2 {

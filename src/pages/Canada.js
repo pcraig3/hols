@@ -46,10 +46,10 @@ const createRows = holidays => {
 
   return holidays.map(holiday => {
     return {
-      key: holiday.nameEn,
-      value: html`
+      key: html`
         <${DateHtml} dateString=${holiday.date} weekday=${true} //>
       `,
+      value: holiday.nameEn,
       value2: _provinces(holiday),
     }
   })
