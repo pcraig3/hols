@@ -16,13 +16,12 @@ const Error = ({ data: { status, message } = {} }) =>
       <div class=${styles}>
         <section>
           <div>
-            <h1>Whoops — ${status}</h1>
+            <h1>${status}</h1>
             <p>
               ${message}
             </p>
           </div>
-          <span class="bottom-link"></span>
-          <a href="/">← back</a>
+          <span class="bottom-link"><a href="/">← back</a></span>
         </section>
       </div>
     <//>

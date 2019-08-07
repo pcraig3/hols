@@ -67,12 +67,17 @@ app.get(
   },
 )
 
+app.get('*', (req, res) => {
+  res.status(404)
+  throw new createError(404, 'Oopsie daisy. Maybe head back to the home page? 👇')
+})
+
 // eslint-disable-next-line no-unused-vars
 app.use(function(err, req, res, next) {
   return res.send(
     renderPage({
       pageComponent: 'Error',
-      title: `Whoops ${res.statusCode}`,
+      title: `${res.statusCode}`,
       props: {
         data: {
           status: res.statusCode,
