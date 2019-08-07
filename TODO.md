@@ -3,7 +3,7 @@
 - sketch design for frontend
 - about page
 - footer that says I am bomb
-- next holiday provinces
+- fix layout for province pages
 - list of holidays
 - list of provinces
 - better on mobile
@@ -58,3 +58,4 @@
 - page title and meta tag
 - generic 404 page
 - frontend specific router + smoke tests
+- next holiday provinces

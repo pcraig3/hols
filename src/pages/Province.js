@@ -24,30 +24,44 @@ const styles = css`
 `
 
 const createRows = holidays => {
+  const _provinces = holiday => {
+    if (holiday.provinces.length === 13) {
+      return 'National holiday'
+    }
+
+    return holiday.provinces.map(p => p.id).join(', ')
+  }
+
   return holidays.map(holiday => {
-    return {
+    const row = {
       key: html`
         <${DateHtml} dateString=${holiday.date} weekday=${true} //>
       `,
       value: holiday.nameEn,
     }
+
+    if (holiday.provinces) {
+      row.value2 = _provinces(holiday)
+    }
+
+    return row
   })
 }
 
-const Province = ({ data: { province = {} } = {} }) =>
+const Province = ({ data: { holidays, nextHoliday, provinceName = 'Canada' } = {} }) =>
   html`
     <${Layout}>
       <div class=${styles}>
         <section>
-          <${NextHolidayBox} nextHoliday=${province.nextHoliday} provinceName=${province.nameEn} />
+          <${NextHolidayBox} nextHoliday=${nextHoliday} provinceName=${provinceName} />
           <span class="bottom-link"><a href="#upcoming-holidays">Upcoming holidays ↓</a></span>
         </section>
 
         <section>
           <${SummaryTable}
             id="upcoming-holidays"
-            title=${`Upcoming holidays in ${province.nameEn}`}
-            rows=${createRows(province.holidays)}
+            title=${`Upcoming holidays in ${provinceName}`}
+            rows=${createRows(holidays)}
           />
           <span class="bottom-link"><a href="#html">Back to top ↑</a></span>
         </section>

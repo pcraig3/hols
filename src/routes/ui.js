@@ -16,7 +16,7 @@ router.get('/', dbmw(db, getHolidaysWithProvinces), (req, res) => {
 
   return res.send(
     renderPage({
-      pageComponent: 'Canada',
+      pageComponent: 'Province',
       title: 'Canada’s next public holiday',
       meta: getMeta(nextHol),
       props: { data: { holidays, nextHoliday: nextHol } },
@@ -29,15 +29,14 @@ router.get(
   dbmw(db, getProvincesWithHolidays),
   checkProvinceIdErr,
   (req, res) => {
-    const province = res.locals.rows[0]
-    province.holidays = upcomingHolidays(province.holidays)
+    const { holidays, nextHoliday, nameEn: provinceName } = res.locals.rows[0]
 
     return res.send(
       renderPage({
         pageComponent: 'Province',
-        title: `${province.nameEn}’s next public holiday`,
-        meta: getMeta(province.nextHoliday, province.nameEn),
-        props: { data: { province } },
+        title: `${provinceName}’s next public holiday`,
+        meta: getMeta(nextHoliday, provinceName),
+        props: { data: { holidays: upcomingHolidays(holidays), nextHoliday, provinceName } },
       }),
     )
   },
