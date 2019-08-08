@@ -4,6 +4,9 @@ const format = require('date-fns/format')
 const addDays = require('date-fns/addDays')
 const addMinutes = require('date-fns/addMinutes')
 const getISODay = require('date-fns/getISODay')
+const differenceInDays = require('date-fns/differenceInDays')
+const startOfDay = require('date-fns/startOfDay')
+const formatDistance = require('date-fns/formatDistance')
 
 const _getISODayInt = weekday => {
   if (weekday === 'Monday') {
@@ -73,4 +76,23 @@ const displayDate = (dateString, weekend = false) => {
   return weekend ? `${format(dateString, 'E')}, ${msg}` : msg
 }
 
-module.exports = { getISODate, displayDate }
+const relativeDate = dateString => {
+  const daysOffset = differenceInDays(
+    startOfDay(new Date()),
+    getDateBeforeMidnightFromString(dateString),
+  )
+
+  switch (daysOffset) {
+    case 0:
+      return 'That’s today!'
+    case -1:
+      return 'That’s tomorrow!'
+    default:
+      return `That’s ${formatDistance(
+        getDateBeforeMidnightFromString(dateString),
+        new Date(),
+      )} away`
+  }
+}
+
+module.exports = { getISODate, displayDate, relativeDate }

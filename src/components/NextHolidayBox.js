@@ -2,6 +2,7 @@ const { css } = require('emotion')
 const { html } = require('../utils')
 const { theme } = require('../styles')
 const DateHtml = require('./DateHtml.js')
+const { relativeDate } = require('../dates')
 
 const accent = theme.color.red
 
@@ -54,6 +55,12 @@ const renderCelebreatingProvinces = provinces => {
   `
 }
 
+const renderRelativeDate = dateString => {
+  return html`
+    <p>${relativeDate(dateString)}</p>
+  `
+}
+
 const nextHolidayBox = ({ nextHoliday, provinceName = 'Canada' }) => {
   return html`
     <div class=${styles}>
@@ -63,7 +70,9 @@ const nextHolidayBox = ({ nextHoliday, provinceName = 'Canada' }) => {
         ${' '}on${' '}<br />
         <${DateHtml} dateString=${nextHoliday.date} //>
       </h1>
-      ${nextHoliday.provinces && renderCelebreatingProvinces(nextHoliday.provinces)}
+      ${nextHoliday.provinces
+        ? renderCelebreatingProvinces(nextHoliday.provinces)
+        : renderRelativeDate(nextHoliday.date)}
     </div>
   `
 }
