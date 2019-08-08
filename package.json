@@ -1,6 +1,6 @@
 {
   "name": "hols",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "holidays api and holidays frontend",
   "main": "index.js",
   "author": "pcraig3",
@@ -35,7 +35,7 @@
     "htm": "^2.2.1",
     "http-errors": "^1.7.3",
     "morgan": "^1.9.1",
-    "preact": "^8.5.0",
+    "preact": "^8.5.1",
     "preact-render-to-string": "^4.1.0",
     "sqlite": "^3.0.3",
     "sugar-date": "^2.0.6",
@@ -45,7 +45,7 @@
   "devDependencies": {
     "cheerio": "^1.0.0-rc.3",
     "eslint": "^6.1.0",
-    "eslint-plugin-jest": "^22.14.1",
+    "eslint-plugin-jest": "^22.15.0",
     "jest": "^24.8.0",
     "nodemon": "^1.19.1",
     "supertest": "^4.0.2"
