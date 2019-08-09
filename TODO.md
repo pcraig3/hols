@@ -1,6 +1,5 @@
 # TODO
 
-- colours for all the provinces
 - about page
 - footer that says I am bomb
 - fix layout for province pages
@@ -63,3 +62,4 @@
 - links on the list on the front page
 - fix the summary table for two values
 - up arrows down arrows CSS content
+- colours for all the provinces

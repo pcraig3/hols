@@ -6,9 +6,7 @@ const DateHtml = require('../components/DateHtml.js')
 const NextHolidayBox = require('../components/NextHolidayBox.js')
 const SummaryTable = require('../components/SummaryTable.js')
 
-const accent = theme.color.red
-
-const styles = css`
+const styles = ({ accent = theme.color.red, focus = theme.color.focus } = {}) => css`
   a,
   a:visited {
     color: ${accent};
@@ -19,6 +17,10 @@ const styles = css`
 
     &.down-arrow::after {
       content: ' ↓';
+    }
+
+    &:focus {
+      outline-color: ${focus};
     }
   }
 
@@ -64,12 +66,12 @@ const createRows = holidays => {
   })
 }
 
-const Province = ({ data: { holidays, nextHoliday, provinceName = 'Canada' } = {} }) =>
+const Province = ({ data: { holidays, nextHoliday, provinceName = 'Canada', provinceId } = {} }) =>
   html`
     <${Layout}>
-      <div class=${styles}>
+      <div class=${provinceId ? styles(theme.color[provinceId]) : styles()}>
         <section>
-          <${NextHolidayBox} nextHoliday=${nextHoliday} provinceName=${provinceName} />
+          <${NextHolidayBox} ...${{ nextHoliday, provinceName, provinceId }} />
           <span class="bottom-link"
             ><a href="#upcoming-holidays" class="down-arrow">Upcoming holidays</a></span
           >

@@ -88,10 +88,7 @@ const relativeDate = dateString => {
     case -1:
       return 'That’s tomorrow!'
     default:
-      return `That’s ${formatDistance(
-        getDateBeforeMidnightFromString(dateString),
-        new Date(),
-      )} away`
+      return `That’s in ${formatDistance(getDateBeforeMidnightFromString(dateString), new Date())}`
   }
 }
 

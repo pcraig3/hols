@@ -29,14 +29,16 @@ router.get(
   dbmw(db, getProvincesWithHolidays),
   checkProvinceIdErr,
   (req, res) => {
-    const { holidays, nextHoliday, nameEn: provinceName } = res.locals.rows[0]
+    const { holidays, nextHoliday, nameEn: provinceName, id: provinceId } = res.locals.rows[0]
 
     return res.send(
       renderPage({
         pageComponent: 'Province',
         title: `${provinceName}’s next public holiday`,
         meta: getMeta(nextHoliday, provinceName),
-        props: { data: { holidays: upcomingHolidays(holidays), nextHoliday, provinceName } },
+        props: {
+          data: { holidays: upcomingHolidays(holidays), nextHoliday, provinceName, provinceId },
+        },
       }),
     )
   },

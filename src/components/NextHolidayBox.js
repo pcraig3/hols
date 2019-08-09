@@ -4,9 +4,7 @@ const { theme } = require('../styles')
 const DateHtml = require('./DateHtml.js')
 const { relativeDate } = require('../dates')
 
-const accent = theme.color.red
-
-const styles = css`
+const styles = ({ accent = theme.color.red } = {}) => css`
   border: ${theme.space.xs} solid ${accent};
   padding: ${theme.space.md} ${theme.space.sm};
   margin: -${theme.space.md};
@@ -61,9 +59,9 @@ const renderRelativeDate = dateString => {
   `
 }
 
-const nextHolidayBox = ({ nextHoliday, provinceName = 'Canada' }) => {
+const nextHolidayBox = ({ nextHoliday, provinceName = 'Canada', provinceId }) => {
   return html`
-    <div class=${styles}>
+    <div class=${provinceId ? styles(theme.color[provinceId]) : styles()}>
       <h1>
         ${provinceName}’s next public holiday is${' '}
         <span class="hol-name">${nextHoliday.nameEn}</span>
