@@ -31,6 +31,11 @@ const styles = ({ accent = theme.color.red } = {}) => css`
     margin-bottom: 0;
     margin-top: ${theme.space.xl};
   }
+
+  time {
+    display: inline-block;
+    min-width: 80%;
+  }
 `
 
 const renderCelebreatingProvinces = provinces => {
@@ -65,8 +70,7 @@ const nextHolidayBox = ({ nextHoliday, provinceName = 'Canada', provinceId }) =>
       <h1>
         ${provinceName}’s next public holiday is${' '}
         <span class="hol-name">${nextHoliday.nameEn}</span>
-        ${' '}on${' '}<br />
-        <${DateHtml} dateString=${nextHoliday.date} //>
+        ${' '}on${' '}<${DateHtml} dateString=${nextHoliday.date} //>
       </h1>
       ${nextHoliday.provinces
         ? renderCelebreatingProvinces(nextHoliday.provinces)
