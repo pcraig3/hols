@@ -102,8 +102,8 @@ const summaryTable = css`
   }
 
   h2 {
-    font-size: 1.3em;
-    margin: ${theme.space.md} 0 0 0;
+    font-size: 1.5em;
+    margin: 0;
     padding-top: ${theme.space.md};
     padding-bottom: ${theme.space.xl};
   }

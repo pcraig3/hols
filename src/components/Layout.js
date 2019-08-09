@@ -6,10 +6,15 @@ const main = css`
   max-width: 900px;
 
   div > section {
-    min-height: 91vh;
+    min-height: 99vh;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    padding: ${theme.space.md};
+
+    @media (${theme.mq.md}) {
+      padding: ${theme.space.lg} 0 ${theme.space.lg} ${theme.space.lg};
+    }
 
     .bottom-link {
       margin-top: ${theme.space.lg};

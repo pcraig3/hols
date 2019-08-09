@@ -26,7 +26,7 @@ const document = ({ title, meta, content }) => {
           }
 
           body {
-            margin: ${theme.space.md};
+            margin: 0;
             font-size: 1.05em;
             font-family: 'Gothic A1', sans-serif;
             word-break: break-word;
