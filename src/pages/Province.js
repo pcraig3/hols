@@ -29,7 +29,15 @@ const createRows = holidays => {
       return 'National holiday'
     }
 
-    return holiday.provinces.map(p => p.id).join(', ')
+    return holiday.provinces.map(
+      (p, i) =>
+        html`
+          <a href="/province/${p.id}" title="Holidays for ${p.nameEn}">${p.id}</a>${i + 1 ===
+          holiday.provinces.length
+            ? ''
+            : ', '}
+        `,
+    )
   }
 
   return holidays.map(holiday => {

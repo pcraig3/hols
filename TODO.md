@@ -1,6 +1,8 @@
 # TODO
 
-- sketch design for frontend
+- colours for all the provinces
+- fix the summary table for two values
+- up arrows down arrows css content
 - about page
 - footer that says I am bomb
 - fix layout for province pages
@@ -59,3 +61,5 @@
 - generic 404 page
 - frontend specific router + smoke tests
 - next holiday provinces
+- sketch design for frontend
+- links on the list on the front page
