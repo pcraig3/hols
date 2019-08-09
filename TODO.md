@@ -1,8 +1,9 @@
 # TODO
 
+- add bottom menu link
+- add federal holidays
 - about page
 - footer that says I am bomb
-- fix layout for province pages
 - list of holidays
 - list of provinces
 - better on mobile
@@ -63,3 +64,4 @@
 - fix the summary table for two values
 - up arrows down arrows CSS content
 - colours for all the provinces
+- fix layout for province pages
