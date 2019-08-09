@@ -46,6 +46,18 @@ const summaryRow = css`
     }
 
     .key {
+      width: 55%;
+    }
+
+    .value {
+      width: 45%;
+    }
+  }
+`
+
+const summaryRow2 = css`
+  @media (${theme.mq.lg}) {
+    .key {
       width: 40%;
     }
 
@@ -61,7 +73,7 @@ const summaryRow = css`
 `
 const SummaryRow = ({ row: { key, value, value2 } = {} }) => {
   return html`
-    <div class=${summaryRow}>
+    <div class=${value2 ? `${summaryRow} ${summaryRow2}` : summaryRow}>
       <dt class="key">
         ${key}
       </dt>

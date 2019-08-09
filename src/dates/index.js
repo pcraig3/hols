@@ -69,11 +69,11 @@ const getDateBeforeMidnightFromString = str => addMinutes(new Date(str), 1439)
 
 const space2Nbsp = str => str.replace(/ /g, ' ')
 
-const displayDate = (dateString, weekend = false) => {
+const displayDate = (dateString, weekday = false) => {
   dateString = getDateBeforeMidnightFromString(dateString)
   let msg = space2Nbsp(format(dateString, 'MMMM do'))
 
-  return weekend ? `${format(dateString, 'E')}, ${msg}` : msg
+  return weekday ? `${format(dateString, 'E')}, ${msg}` : msg
 }
 
 const relativeDate = dateString => {
