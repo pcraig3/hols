@@ -12,6 +12,14 @@ const styles = css`
   a,
   a:visited {
     color: ${accent};
+
+    &.up-arrow::after {
+      content: ' ↑';
+    }
+
+    &.down-arrow::after {
+      content: ' ↓';
+    }
   }
 
   > section:first-of-type {
@@ -62,7 +70,9 @@ const Province = ({ data: { holidays, nextHoliday, provinceName = 'Canada' } = {
       <div class=${styles}>
         <section>
           <${NextHolidayBox} nextHoliday=${nextHoliday} provinceName=${provinceName} />
-          <span class="bottom-link"><a href="#upcoming-holidays">Upcoming holidays ↓</a></span>
+          <span class="bottom-link"
+            ><a href="#upcoming-holidays" class="down-arrow">Upcoming holidays</a></span
+          >
         </section>
 
         <section>
@@ -71,7 +81,7 @@ const Province = ({ data: { holidays, nextHoliday, provinceName = 'Canada' } = {
             title=${`Upcoming holidays in ${provinceName}`}
             rows=${createRows(holidays)}
           />
-          <span class="bottom-link"><a href="#html">Back to top ↑</a></span>
+          <span class="bottom-link"><a href="#html" class="up-arrow">Back to top</a></span>
         </section>
       </div>
     <//>
