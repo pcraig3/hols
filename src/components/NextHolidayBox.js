@@ -8,10 +8,14 @@ const styles = ({ accent = theme.color.red } = {}) => css`
   border: ${theme.space.xs} solid ${accent};
   padding: ${theme.space.md} ${theme.space.sm};
   margin: -${theme.space.md};
+  background-color: ${accent};
+  color: white;
 
   @media (${theme.mq.md}) {
     margin: 0;
     padding: ${theme.space.lg};
+    background-color: transparent;
+    color: black;
   }
 
   h1 {
@@ -19,11 +23,17 @@ const styles = ({ accent = theme.color.red } = {}) => css`
     font-size: 1.8em;
 
     time {
-      color: ${accent};
+      color: white;
     }
 
     @media (${theme.mq.sm}) {
       font-size: 1.8em;
+    }
+
+    @media (${theme.mq.md}) {
+      time {
+        color: ${accent};
+      }
     }
   }
 
