@@ -35,15 +35,23 @@ const main = css`
     .menu-link {
       background: white;
       position: fixed;
-      bottom: 30px;
+      bottom: 35px;
       right: 30px;
 
       @media (${theme.mq.md}) {
         right: 60px;
+        bottom: 30px;
       }
 
       @media (${theme.mq.lg}) {
         left: calc(55% - 20px);
+        margin-right: -20px;
+      }
+    }
+
+    .menu-link--Canada {
+      @media (${theme.mq.lg}) {
+        left: calc(40% - 7px);
       }
     }
   }

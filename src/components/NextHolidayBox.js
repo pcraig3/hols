@@ -30,14 +30,14 @@ const styles = ({ accent = theme.color.red } = {}) => css`
 
   h1 {
     margin: 0;
-    font-size: 1.7em;
+    font-size: 1.75em;
 
     time {
       color: white;
     }
 
     @media (${theme.mq.sm}) {
-      font-size: 1.7em;
+      font-size: 1.75em;
     }
   }
 
