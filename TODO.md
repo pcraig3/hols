@@ -1,11 +1,9 @@
 # TODO
 
-- add bottom menu link
 - add federal holidays
 - about page
 - footer that says I am bomb
 - list of holidays
-- list of provinces
 - better on mobile
 - analytics
 
@@ -66,3 +64,5 @@
 - colours for all the provinces
 - fix layout for province pages
 - one column layout, wink
+- add bottom menu link
+- list of provinces

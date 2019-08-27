@@ -31,6 +31,11 @@ const styles = ({ accent = theme.color.red } = {}) => css`
   h1 + p {
     margin-bottom: 0;
     margin-top: ${theme.space.xl};
+
+    a,
+    a:visited {
+      color: white;
+    }
   }
 
   time {
@@ -53,7 +58,8 @@ const renderCelebreatingProvinces = provinces => {
       Celebrated by
       ${provinces.map(
         p => html`
-          ${isLastProvince(p) ? ' and ' : ' '}<span>${p.id}</span>${isLastProvince(p) ? '' : ','}
+          ${isLastProvince(p) ? ' and ' : ' '}<a href=${`/province/${p.id}`}>${p.id}</a
+          >${isLastProvince(p) ? '' : ','}
         `,
       )}
     </p>
