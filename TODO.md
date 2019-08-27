@@ -65,3 +65,4 @@
 - up arrows down arrows CSS content
 - colours for all the provinces
 - fix layout for province pages
+- one column layout, wink

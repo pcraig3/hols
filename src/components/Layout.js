@@ -3,17 +3,15 @@ const { html } = require('../utils')
 const { theme } = require('../styles')
 
 const main = css`
-  max-width: 900px;
-
   div > section {
     min-height: 99vh;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    padding: ${theme.space.md};
+    padding: ${theme.space.md} ${theme.space.lg} ${theme.space.md} ${theme.space.sm};
 
     @media (${theme.mq.md}) {
-      padding: ${theme.space.lg} 0 ${theme.space.lg} ${theme.space.lg};
+      padding: ${theme.space.lg} ${theme.space.xxl} ${theme.space.lg} ${theme.space.lg};
     }
 
     .bottom-link {

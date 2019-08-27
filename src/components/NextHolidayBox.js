@@ -5,22 +5,19 @@ const DateHtml = require('./DateHtml.js')
 const { relativeDate } = require('../dates')
 
 const styles = ({ accent = theme.color.red } = {}) => css`
-  border: ${theme.space.xs} solid ${accent};
-  padding: ${theme.space.md} ${theme.space.sm};
-  margin: -${theme.space.md};
+  padding: ${theme.space.xl} ${theme.space.lg};
   background-color: ${accent};
   color: white;
+  margin: -${theme.space.lg} -${theme.space.lg} 0 -${theme.space.lg};
 
   @media (${theme.mq.md}) {
-    margin: 0;
-    padding: ${theme.space.lg};
-    background-color: transparent;
-    color: black;
+    margin-right: -${theme.space.xxl};
   }
 
   h1 {
     margin: 0;
     font-size: 1.8em;
+    width: 100%;
 
     time {
       color: white;
@@ -28,12 +25,12 @@ const styles = ({ accent = theme.color.red } = {}) => css`
 
     @media (${theme.mq.sm}) {
       font-size: 1.8em;
+      width: 90%;
     }
 
     @media (${theme.mq.md}) {
-      time {
-        color: ${accent};
-      }
+      width: 70%;
+      max-width: 750px;
     }
   }
 

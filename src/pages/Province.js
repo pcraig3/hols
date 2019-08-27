@@ -19,16 +19,12 @@ const styles = ({ accent = theme.color.red, focus = theme.color.focus } = {}) =>
       content: ' ↓';
     }
 
+    &.right-arrow::after {
+      content: ' →';
+    }
+
     &:focus {
       outline-color: ${focus};
-    }
-  }
-
-  > section:first-of-type {
-    max-width: 100%;
-
-    @media (${theme.mq.md}) {
-      max-width: 80%;
     }
   }
 `
