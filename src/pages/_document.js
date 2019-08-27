@@ -45,8 +45,12 @@ const document = ({ title, meta, content }) => {
             line-height: 1.33;
           }
 
+          @media (${theme.mq.md}) {
+            body { font-size: 1.2em; }
+          }
+
           @media (${theme.mq.lg}) {
-            body { font-size: 1.5em; }
+            body { font-size: 1.6em; }
           }
         </style>
       </head>

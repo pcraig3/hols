@@ -4,7 +4,7 @@ const { theme } = require('../styles')
 
 const main = css`
   div > section {
-    min-height: 99vh;
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -35,8 +35,16 @@ const main = css`
     .menu-link {
       background: white;
       position: fixed;
-      bottom: 35px;
-      left: calc(55% - 20px);
+      bottom: 30px;
+      right: 30px;
+
+      @media (${theme.mq.md}) {
+        right: 60px;
+      }
+
+      @media (${theme.mq.lg}) {
+        left: calc(55% - 20px);
+      }
     }
   }
 `
