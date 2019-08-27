@@ -31,6 +31,13 @@ const main = css`
         margin-bottom: 0;
       }
     }
+
+    .menu-link {
+      background: white;
+      position: fixed;
+      bottom: 35px;
+      left: calc(55% - 20px);
+    }
   }
 `
 
