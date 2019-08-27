@@ -14,23 +14,30 @@ const styles = ({ accent = theme.color.red } = {}) => css`
     margin-right: -${theme.space.xxl};
   }
 
-  h1 {
-    margin: 0;
-    font-size: 1.8em;
+  h1,
+  p {
     width: 100%;
 
-    time {
-      color: white;
-    }
-
     @media (${theme.mq.sm}) {
-      font-size: 1.8em;
       width: 90%;
     }
 
     @media (${theme.mq.md}) {
       width: 70%;
       max-width: 750px;
+    }
+  }
+
+  h1 {
+    margin: 0;
+    font-size: 1.7em;
+
+    time {
+      color: white;
+    }
+
+    @media (${theme.mq.sm}) {
+      font-size: 1.7em;
     }
   }
 

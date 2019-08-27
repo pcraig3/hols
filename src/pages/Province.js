@@ -71,7 +71,7 @@ const Province = ({ data: { holidays, nextHoliday, provinceName = 'Canada', prov
           <span class="bottom-link"
             ><a href="#upcoming-holidays" class="down-arrow">Upcoming holidays</a></span
           >
-          <span class="menu-link"><a href="#" class="right-arrow">All regions</a></span>
+          <span class="menu-link"><a href="/provinces" class="right-arrow">All regions</a></span>
         </section>
 
         <section>

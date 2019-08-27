@@ -4,7 +4,7 @@ const db = require('sqlite')
 const createError = require('http-errors')
 const renderPage = require('../pages/_document.js')
 const { dbmw, checkProvinceIdErr, upcomingHolidays, nextHoliday } = require('../utils')
-const { getHolidaysWithProvinces, getProvincesWithHolidays } = require('../queries')
+const { getProvinces, getHolidaysWithProvinces, getProvincesWithHolidays } = require('../queries')
 const { displayDate } = require('../dates')
 
 const getMeta = (holiday, provinceName = 'Canada') =>
@@ -43,6 +43,16 @@ router.get(
     )
   },
 )
+
+router.get('/provinces', dbmw(db, getProvinces), (req, res) => {
+  return res.send(
+    renderPage({
+      pageComponent: 'Provinces',
+      title: 'Provinces',
+      props: { data: { provinces: res.locals.rows } },
+    }),
+  )
+})
 
 router.get('*', (req, res) => {
   res.status(404)

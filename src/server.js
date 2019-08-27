@@ -2,10 +2,7 @@ const express = require('express')
 const logger = require('morgan')
 const helmet = require('helmet')
 const cookieSession = require('cookie-session')
-const db = require('sqlite')
-const renderPage = require('./pages/_document.js')
-const { cookieSessionConfig, dbmw } = require('./utils')
-const { getProvinces } = require('./queries')
+const { cookieSessionConfig } = require('./utils')
 
 const app = express()
 
@@ -26,15 +23,5 @@ app.use('/api', apiRouter)
 
 const uiRouter = require('./routes/ui')
 app.use(uiRouter)
-
-app.get('/provinces', dbmw(db, getProvinces), (req, res) => {
-  return res.send(
-    renderPage({
-      pageComponent: 'Provinces',
-      title: 'Provinces',
-      props: { data: { provinces: res.locals.rows } },
-    }),
-  )
-})
 
 module.exports = app

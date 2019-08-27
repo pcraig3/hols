@@ -18,7 +18,7 @@ describe('Provinces component', () => {
   test('has one province passed into it', () => {
     const $ = renderPage({ provinces: [{ nameEn: 'Aurora' }] })
     expect($('h1').length).toBe(1)
-    expect($('h1').text()).toEqual('Canadian provinces and territories')
+    expect($('h1').text()).toEqual('All regions in Canada')
     expect($('li').length).toBe(1)
     expect($('li').text()).toBe('Aurora')
   })
