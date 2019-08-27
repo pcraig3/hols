@@ -28,25 +28,13 @@ const styles = ({ accent = theme.color.red } = {}) => css`
     }
   }
 
-  h1 {
-    margin: 0;
-    font-size: 1.75em;
-
-    time {
-      color: white;
-    }
-
-    @media (${theme.mq.sm}) {
-      font-size: 1.75em;
-    }
-  }
-
   h1 + p {
     margin-bottom: 0;
     margin-top: ${theme.space.xl};
   }
 
   time {
+    color: white;
     display: inline-block;
     min-width: 80%;
   }

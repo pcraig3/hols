@@ -52,6 +52,15 @@ const document = ({ title, meta, content }) => {
           @media (${theme.mq.lg}) {
             body { font-size: 1.6em; }
           }
+
+          h1 {
+            margin: 0;
+            font-size: 1.75em;
+          }
+
+          p {
+            margin: 0 0 ${theme.space.lg} 0;
+          }
         </style>
       </head>
       <body id="body">

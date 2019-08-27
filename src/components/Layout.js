@@ -55,10 +55,6 @@ const main = css`
       }
     }
   }
-
-  p {
-    margin: 0 0 ${theme.space.lg} 0;
-  }
 `
 
 const Layout = ({ children }) =>

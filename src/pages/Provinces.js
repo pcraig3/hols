@@ -10,11 +10,6 @@ const provinces = css`
 
   h1 {
     margin: ${theme.space.xs} 0 ${theme.space.xl} 0;
-    font-size: 1.8em;
-
-    @media (${theme.mq.sm}) {
-      font-size: 1.8em;
-    }
   }
 
   ul {
