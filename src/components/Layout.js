@@ -3,39 +3,29 @@ const { html } = require('../utils')
 const { theme } = require('../styles')
 
 const main = css`
-  div > section {
+  section {
     min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+    position: relative;
     padding: ${theme.space.md} ${theme.space.lg} ${theme.space.md} ${theme.space.sm};
+
+    .bottom-link {
+      position: absolute;
+      left: ${theme.space.sm};
+      bottom: ${theme.space.lg};
+    }
 
     @media (${theme.mq.md}) {
       padding: ${theme.space.lg} ${theme.space.xxl} ${theme.space.lg} ${theme.space.lg};
-    }
 
-    .bottom-link {
-      margin-top: ${theme.space.lg};
-      margin-bottom: ${theme.space.sm};
-      display: inline-block;
-
-      @media (${theme.mq.md}) {
-        margin-bottom: 0;
-      }
-    }
-
-    &:first-of-type .bottom-link {
-      margin-bottom: ${theme.space.xxl};
-
-      @media (${theme.mq.md}) {
-        margin-bottom: 0;
+      .bottom-link {
+        left: ${theme.space.lg};
       }
     }
 
     .menu-link {
       background: white;
       position: fixed;
-      bottom: 35px;
+      bottom: ${theme.space.lg};
       right: 30px;
 
       @media (${theme.mq.md}) {

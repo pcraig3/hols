@@ -4,10 +4,6 @@ const { theme } = require('../styles')
 const Layout = require('../components/Layout.js')
 
 const provinces = css`
-  > section {
-    display: block !important;
-  }
-
   h1 {
     margin: ${theme.space.xs} 0 ${theme.space.xl} 0;
   }

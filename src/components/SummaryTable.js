@@ -98,7 +98,7 @@ const renderSummaryRow = (row, props) =>
 const summaryTable = css`
   dl {
     margin: 0;
-    margin-bottom: ${theme.space.xl};
+    margin-bottom: calc(${theme.space.xl} + ${theme.space.xl});
   }
 
   h2 {
