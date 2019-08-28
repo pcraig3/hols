@@ -46,12 +46,19 @@ const styles = ({ accent = theme.color.red } = {}) => css`
 `
 
 const renderCelebreatingProvinces = provinces => {
-  const isLastProvince = province => province.id === provinces[provinces.length - 1].id
   if (provinces.length === 1) {
     return html`
       <p>Celebrated by${' '}<a href=${`/province/${provinces[0].id}`}>${provinces[0].nameEn}</a></p>
     `
   }
+
+  if (provinces.length === 13) {
+    return html`
+      <p>Celebrated by${' '}<a href="/provinces">all provinces and territories</a></p>
+    `
+  }
+
+  const isLastProvince = province => province.id === provinces[provinces.length - 1].id
 
   return html`
     <p>
