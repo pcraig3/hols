@@ -1,12 +1,14 @@
 # TODO
 
-- vh bug omg
+- all provinces link bug
+- analytics
+- update README
+- put your name in it somewhere
 - add federal holidays
 - about page
 - footer that says I am bomb
 - list of holidays
 - better on mobile
-- analytics
 
 # DONE
 
@@ -67,3 +69,4 @@
 - one column layout, wink
 - add bottom menu link
 - list of provinces
+- vh bug omg

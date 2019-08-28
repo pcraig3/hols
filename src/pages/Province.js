@@ -7,6 +7,10 @@ const NextHolidayBox = require('../components/NextHolidayBox.js')
 const SummaryTable = require('../components/SummaryTable.js')
 
 const styles = ({ accent = theme.color.red, focus = theme.color.focus } = {}) => css`
+  section {
+    min-height: calc(var(--vh, 1vh) * 100);
+  }
+
   a,
   a:visited {
     color: ${accent};
@@ -85,6 +89,12 @@ const Province = ({ data: { holidays, nextHoliday, provinceName = 'Canada', prov
           <span class="bottom-link"><a href="#html" class="up-arrow">Back to top</a></span>
         </section>
       </div>
+      <script>
+        /* First we get the viewport height and we multiple it by 1% to get a value for a vh unit */
+        let vh = window.innerHeight * 0.01
+        /* Then we set the value in the --vh custom property to the root of the document */
+        document.documentElement.style.setProperty('--vh', vh + 'px')
+      </script>
     <//>
   `
 
