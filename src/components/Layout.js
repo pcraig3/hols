@@ -27,6 +27,7 @@ const main = css`
       position: fixed;
       bottom: ${theme.space.lg};
       right: 30px;
+      z-index: 100;
 
       @media (${theme.mq.md}) {
         right: 60px;

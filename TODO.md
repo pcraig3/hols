@@ -1,6 +1,7 @@
 # TODO
 
-- all provinces link bug
+- big text for big screens
+- horizontal layout padding
 - analytics
 - update README
 - put your name in it somewhere
@@ -70,3 +71,4 @@
 - add bottom menu link
 - list of provinces
 - vh bug omg
+- all provinces link bug
