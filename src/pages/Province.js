@@ -112,8 +112,17 @@ const Province = ({ data: { holidays, nextHoliday, provinceName = 'Canada', prov
           document.documentElement.style.setProperty('--vh', vh + 'px')
         }
 
+        function ifLandscapeMode(cb) {
+          return function() {
+            /* you're in LANDSCAPE mode */
+            if (window.matchMedia('(orientation: landscape)').matches) {
+              cb()
+            }
+          }
+        }
+
         /* We listen to the resize event every 5 milliseconds */
-        window.addEventListener('resize', throttle(updateCSSVar, 5))
+        window.addEventListener('resize', throttle(ifLandscapeMode(updateCSSVar), 5))
         updateCSSVar()
       </script>
     <//>
