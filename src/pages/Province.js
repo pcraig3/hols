@@ -112,8 +112,8 @@ const Province = ({ data: { holidays, nextHoliday, provinceName = 'Canada', prov
           document.documentElement.style.setProperty('--vh', vh + 'px')
         }
 
-        /* We listen to the resize event every 100 milliseconds */
-        window.addEventListener('resize', throttle(updateCSSVar, 100))
+        /* We listen to the resize event every 5 milliseconds */
+        window.addEventListener('resize', throttle(updateCSSVar, 5))
         updateCSSVar()
       </script>
     <//>
