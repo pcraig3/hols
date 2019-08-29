@@ -11,7 +11,16 @@ const styles = ({ accent = theme.color.red } = {}) => css`
   margin: -${theme.space.lg} -${theme.space.lg} 0 -${theme.space.lg};
 
   @media (${theme.mq.md}) {
+    font-size: 3vw;
     margin-right: -${theme.space.xxl};
+  }
+
+  @media (${theme.mq.lg}) {
+    font-size: 2.8vw;
+  }
+
+  @media (${theme.mq.xl}) {
+    font-size: 2.2vw;
   }
 
   h1,
@@ -42,6 +51,10 @@ const styles = ({ accent = theme.color.red } = {}) => css`
     color: white;
     display: inline-block;
     min-width: 80%;
+    font-size: 1.15em;
+    @media (${theme.mq.lg}) {
+      font-size: 1.25em;
+    }
   }
 `
 
