@@ -1,6 +1,5 @@
 # TODO
 
-- horizontal layout padding
 - analytics
 - update README
 - put your name in it somewhere
