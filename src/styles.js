@@ -4,7 +4,7 @@ const { css } = require('emotion')
 
 const theme = {
   color: {
-    red: '#D43B1D',
+    red: '#AD1D00',
     yellowPale: '#FFFCF0',
     greyLight: '#BFC1C3',
     focus: 'cornflowerblue',
