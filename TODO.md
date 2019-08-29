@@ -1,6 +1,5 @@
 # TODO
 
-- analytics
 - update README
 - put your name in it somewhere
 - add federal holidays
@@ -71,3 +70,4 @@
 - vh bug omg
 - all provinces link bug
 - big text for big screens
+- analytics
