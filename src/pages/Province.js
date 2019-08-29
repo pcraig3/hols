@@ -4,6 +4,7 @@ const { theme } = require('../styles')
 const Layout = require('../components/Layout.js')
 const DateHtml = require('../components/DateHtml.js')
 const NextHolidayBox = require('../components/NextHolidayBox.js')
+const MenuLink = require('../components/MenuLink.js')
 const SummaryTable = require('../components/SummaryTable.js')
 
 const styles = ({ accent = theme.color.red, focus = theme.color.focus } = {}) => css`
@@ -75,9 +76,7 @@ const Province = ({ data: { holidays, nextHoliday, provinceName = 'Canada', prov
           <span class="bottom-link"
             ><a href="#upcoming-holidays" class="down-arrow">Upcoming holidays</a></span
           >
-          <span class=${provinceName === 'Canada' ? 'menu-link menu-link--Canada' : 'menu-link'}
-            ><a href="/provinces" class="right-arrow">All regions</a></span
-          >
+          <${MenuLink} provinceName=${provinceName} //>
         </section>
 
         <section>

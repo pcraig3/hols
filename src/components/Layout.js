@@ -21,30 +21,6 @@ const main = css`
         left: ${theme.space.lg};
       }
     }
-
-    .menu-link {
-      background: white;
-      position: fixed;
-      bottom: ${theme.space.lg};
-      right: 30px;
-      z-index: 100;
-
-      @media (${theme.mq.md}) {
-        right: 60px;
-        bottom: 30px;
-      }
-
-      @media (${theme.mq.lg}) {
-        left: calc(55% - 20px);
-        margin-right: -20px;
-      }
-    }
-
-    .menu-link--Canada {
-      @media (${theme.mq.lg}) {
-        left: calc(40% - 7px);
-      }
-    }
   }
 `
 
