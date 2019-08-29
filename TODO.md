@@ -1,6 +1,5 @@
 # TODO
 
-- big text for big screens
 - horizontal layout padding
 - analytics
 - update README
@@ -72,3 +71,4 @@
 - list of provinces
 - vh bug omg
 - all provinces link bug
+- big text for big screens

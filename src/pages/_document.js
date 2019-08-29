@@ -53,6 +53,10 @@ const document = ({ title, meta, content }) => {
             body { font-size: 1.6em; }
           }
 
+          @media (${theme.mq.xxl}) {
+            body { font-size: 2em; }
+          }
+
           h1 {
             margin: 0;
             font-size: 1.75em;

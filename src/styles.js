@@ -37,6 +37,7 @@ const theme = {
     md: 'min-width: 568px',
     lg: 'min-width: 768px',
     xl: 'min-width: 1024px',
+    xxl: 'min-width: 1600px',
   },
 }
 
