@@ -46,6 +46,19 @@ const metaIfSHA = () =>
   process.env.GITHUB_SHA &&
   `<meta name="keywords" content="GITHUB_SHA=${validator.escape(process.env.GITHUB_SHA)}" />`
 
+// return analytics scripts if "production" rather than dev
+const gaIfProd = id =>
+  process.env.NODE_ENV &&
+  `<script async src="https://www.googletagmanager.com/gtag/js?id=${id}"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', '${id}');
+  </script>
+  `
+
 // cookie session config
 const halfAnHour = 1000 * 60 * 30
 const sessionName = `hols-${process.env.COOKIE_SECRET ||
@@ -129,6 +142,7 @@ const upcomingHolidays = (holidays, dateString) => {
 module.exports = {
   html,
   metaIfSHA,
+  gaIfProd,
   cookieSessionConfig,
   array2Obj,
   dbmw,

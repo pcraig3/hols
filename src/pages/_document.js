@@ -1,6 +1,6 @@
 const { renderStylesToString } = require('emotion-server')
 const render = require('preact-render-to-string')
-const { html, metaIfSHA } = require('../utils')
+const { html, metaIfSHA, gaIfProd } = require('../utils')
 const { theme } = require('../styles')
 
 const document = ({ title, meta, content }) => {
@@ -69,6 +69,8 @@ const document = ({ title, meta, content }) => {
       </head>
       <body id="body">
         ${content}
+
+        ${gaIfProd('UA-37633400-10') || ''}
         <script src="/js/sweet-scroll.min.js"></script>
         <script src="/js/script.js"></script>
       </body>
