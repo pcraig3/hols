@@ -9,10 +9,12 @@ const styles = ({ accent = theme.color.red } = {}) => css`
   background-color: ${accent};
   color: white;
   margin: -${theme.space.lg} -${theme.space.lg} 0 -${theme.space.lg};
+  min-height: 75vh;
 
   @media (${theme.mq.md}) {
     font-size: 3vw;
     margin-right: -${theme.space.xxl};
+    min-height: 80vh;
   }
 
   @media (${theme.mq.lg}) {
