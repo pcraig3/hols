@@ -1,6 +1,5 @@
 # TODO
 
-- update README
 - add federal holidays
 - about page
 - footer that says I am bomb
@@ -71,3 +70,5 @@
 - big text for big screens
 - analytics
 - put your name in it somewhere
+- update README
+- add API docs
