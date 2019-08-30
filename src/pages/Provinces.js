@@ -12,6 +12,7 @@ const provinces = css`
     list-style-type: none;
     margin: 0;
     padding: 0;
+    margin-bottom: ${theme.space.xxl};
 
     li {
       margin-bottom: ${theme.space.xs};
@@ -22,6 +23,10 @@ const provinces = css`
         margin-right: ${theme.space.xs};
       }
     }
+  }
+
+  a#pcraig3 {
+    color: ${theme.color.red};
   }
 `
 
@@ -41,6 +46,12 @@ const Provinces = ({ data }) =>
               `,
             )}
           </ul>
+          <span>
+            by
+            <a id="pcraig3" title="Paul Craig on Twitter" href="https://twitter.com/pcraig3"
+              >@pcraig3</a
+            >
+          </span>
         </section>
       </div>
     <//>

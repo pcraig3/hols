@@ -1,7 +1,6 @@
 # TODO
 
 - update README
-- put your name in it somewhere
 - add federal holidays
 - about page
 - footer that says I am bomb
@@ -71,3 +70,4 @@
 - all provinces link bug
 - big text for big screens
 - analytics
+- put your name in it somewhere
