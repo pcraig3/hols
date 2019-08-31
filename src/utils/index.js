@@ -53,21 +53,6 @@ const gaIfProd = id =>
   <script src="/js/ga.js"></script>
   `
 
-// cookie session config
-const halfAnHour = 1000 * 60 * 30
-const sessionName = `hols-${process.env.COOKIE_SECRET ||
-  Math.floor(new Date().getTime() / halfAnHour)}`
-
-const cookieSessionConfig = {
-  name: sessionName,
-  secret: sessionName,
-  cookie: {
-    httpOnly: true,
-    maxAge: halfAnHour,
-    sameSite: true,
-  },
-}
-
 /**
  * Function to take an array of objects and object of objects
  * with the keys being one of the inner-object values
@@ -137,7 +122,6 @@ module.exports = {
   html,
   metaIfSHA,
   gaIfProd,
-  cookieSessionConfig,
   array2Obj,
   dbmw,
   checkProvinceIdErr,
