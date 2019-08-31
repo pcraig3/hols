@@ -9,8 +9,8 @@ const app = express()
 
 app
   .use(helmet())
-  // redirect http connections to https (unless localhost:{4 digits})
-  .use(redirectToHTTPS([/localhost:(\d{4})/], [], 301))
+  // redirect http connections to https (unless localhost:{4 digits}, or 127.0.0.1:{5 digits} (for supertest))
+  .use(redirectToHTTPS([/localhost:(\d{4})|127.0.0.1:(\d{5})/], [], 301))
   // both of these are needed to parse post request params
   .use(express.urlencoded({ extended: true }))
   .use(express.json())
