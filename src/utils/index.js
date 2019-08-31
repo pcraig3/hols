@@ -48,15 +48,9 @@ const metaIfSHA = () =>
 
 // return analytics scripts if "production" rather than dev
 const gaIfProd = id =>
-  process.env.NODE_ENV &&
+  process.env.NODE_ENV === 'production' &&
   `<script async src="https://www.googletagmanager.com/gtag/js?id=${id}"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-
-    gtag('config', '${id}');
-  </script>
+  <script src="/js/ga.js"></script>
   `
 
 // cookie session config
