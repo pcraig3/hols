@@ -1,6 +1,7 @@
 const express = require('express')
 const logger = require('morgan')
 const helmet = require('helmet')
+const compression = require('compression')
 const redirectToHTTPS = require('express-http-to-https').redirectToHTTPS
 const csp = require('./config/csp.config')
 
@@ -15,6 +16,7 @@ app
   .use(express.urlencoded({ extended: true }))
   .use(express.json())
   .use(express.static('public'))
+  .use(compression())
 
 // if NODE_ENV does not equal 'test', add a request logger
 process.env.NODE_ENV !== 'test' && app.use(logger('dev'))

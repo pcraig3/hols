@@ -26,6 +26,7 @@
   "dependencies": {
     "@jsbits/easter-day": "^1.0.1",
     "bluebird": "^3.5.5",
+    "compression": "^1.7.4",
     "date-fns": "^2.0.1",
     "emotion": "^10.0.14",
     "emotion-server": "^10.0.14",
