@@ -8,6 +8,6 @@ module.exports = {
   formAction: ["'none'"],
   frameAncestors: ["'none'"],
   imgSrc: ["'self'", 'https://www.googletagmanager.com'],
-  scriptSrc: ["'self'", 'https://www.googletagmanager.com'],
+  scriptSrc: ["'self'", 'https://tagmanager.google.com/', 'https://www.googletagmanager.com'],
   styleSrc: ["'self'", "'unsafe-inline'", 'https://fonts.googleapis.com'],
 }
