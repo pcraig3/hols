@@ -1,6 +1,7 @@
 const express = require('express')
 const logger = require('morgan')
 const helmet = require('helmet')
+const redirectToHTTPS = require('express-http-to-https').redirectToHTTPS
 const cookieSession = require('cookie-session')
 const { cookieSessionConfig } = require('./utils')
 
@@ -8,6 +9,8 @@ const app = express()
 
 app
   .use(helmet())
+  // redirect http connections to https (unless localhost:{4 digits})
+  .use(redirectToHTTPS([/localhost:(\d{4})/], [], 301))
   // both of these are needed to parse post request params
   .use(express.urlencoded({ extended: true }))
   .use(express.json())

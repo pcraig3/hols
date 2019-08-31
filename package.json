@@ -31,6 +31,7 @@
     "emotion": "^10.0.14",
     "emotion-server": "^10.0.14",
     "express": "^4.17.1",
+    "express-http-to-https": "^1.1.4",
     "helmet": "^3.20.1",
     "htm": "^2.2.1",
     "http-errors": "^1.7.3",
