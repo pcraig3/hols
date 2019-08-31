@@ -5,6 +5,8 @@ module.exports = {
   connectSrc: ["'none'"],
   baseUri: ["'none'"],
   fontSrc: ["'self'", 'https://fonts.gstatic.com'],
+  formAction: ["'none'"],
+  frameAncestors: ["'none'"],
   imgSrc: ["'self'", 'https://www.googletagmanager.com'],
   scriptSrc: ["'self'", 'https://www.googletagmanager.com'],
   styleSrc: ["'self'", "'unsafe-inline'", 'https://fonts.googleapis.com'],
