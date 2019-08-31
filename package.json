@@ -44,8 +44,8 @@
   },
   "devDependencies": {
     "cheerio": "^1.0.0-rc.3",
-    "eslint": "^6.2.2",
-    "eslint-plugin-jest": "^22.15.2",
+    "eslint": "^6.3.0",
+    "eslint-plugin-jest": "^22.16.0",
     "jest": "^24.9.0",
     "nodemon": "^1.19.1",
     "supertest": "^4.0.2"
