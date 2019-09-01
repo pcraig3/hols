@@ -12,7 +12,7 @@ const provinces = css`
     list-style-type: none;
     margin: 0;
     padding: 0;
-    margin-bottom: ${theme.space.xxl};
+    margin-bottom: calc(${theme.space.xl} + ${theme.space.xl});
 
     li {
       margin-bottom: ${theme.space.xs};
@@ -25,8 +25,9 @@ const provinces = css`
     }
   }
 
-  a#pcraig3 {
-    color: ${theme.color.red};
+  footer {
+    position: absolute;
+    bottom: 0;
   }
 `
 
@@ -46,12 +47,9 @@ const Provinces = ({ data }) =>
               `,
             )}
           </ul>
-          <span>
-            by
-            <a id="pcraig3" title="Paul Craig on Twitter" href="https://twitter.com/pcraig3"
-              >@pcraig3</a
-            >
-          </span>
+          <footer>
+            <p>→ more stuff on ${' '}<a id="about-link" href="/about">the about page</a></p>
+          </footer>
         </section>
       </div>
     <//>
