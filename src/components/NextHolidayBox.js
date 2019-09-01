@@ -63,7 +63,7 @@ const styles = ({ accent = theme.color.red } = {}) => css`
   }
 `
 
-const renderCelebreatingProvinces = provinces => {
+const renderCelebratingProvinces = provinces => {
   if (provinces.length === 1) {
     return html`
       <p>Celebrated by${' '}<a href=${`/province/${provinces[0].id}`}>${provinces[0].nameEn}</a></p>
@@ -110,7 +110,7 @@ const nextHolidayBox = ({ nextHoliday, provinceName = 'Canada', provinceId, fede
         ${' '}on${' '}<${DateHtml} dateString=${nextHoliday.date} //>
       </h1>
       ${nextHoliday.provinces && !federal
-        ? renderCelebreatingProvinces(nextHoliday.provinces)
+        ? renderCelebratingProvinces(nextHoliday.provinces)
         : renderRelativeDate(nextHoliday.date)}
     </div>
   `
