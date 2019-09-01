@@ -7,7 +7,7 @@ module.exports = {
   fontSrc: ["'self'", 'https://fonts.gstatic.com'],
   formAction: ["'none'"],
   frameAncestors: ["'none'"],
-  imgSrc: ["'self'", 'https://www.googletagmanager.com'],
-  scriptSrc: ["'self'", 'https://tagmanager.google.com/', 'https://www.googletagmanager.com'],
+  imgSrc: ["'self'", 'https://www.google-analytics.com'],
+  scriptSrc: ["'self'", 'https://www.google-analytics.com'],
   styleSrc: ["'self'", "'unsafe-inline'", 'https://fonts.googleapis.com'],
 }

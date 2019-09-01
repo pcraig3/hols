@@ -47,10 +47,10 @@ const metaIfSHA = () =>
   `<meta name="keywords" content="GITHUB_SHA=${validator.escape(process.env.GITHUB_SHA)}" />`
 
 // return analytics scripts if "production" rather than dev
-const gaIfProd = id =>
+const gaIfProd = () =>
   process.env.NODE_ENV === 'production' &&
-  `<script async src="https://www.googletagmanager.com/gtag/js?id=${id}"></script>
-  <script src="/js/ga.js"></script>
+  `<script src="/js/ga.js"></script>
+  <script async src='https://www.google-analytics.com/analytics.js'></script>
   `
 
 /**
