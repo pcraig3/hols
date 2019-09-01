@@ -54,11 +54,15 @@ router.get('/provinces', dbmw(db, getProvinces), (req, res) => {
   )
 })
 
-router.get('/about', (req, res) => {
+router.get('/about', dbmw(db, getHolidaysWithProvinces), (req, res) => {
+  const holidays = upcomingHolidays(res.locals.rows)
+  const nextHol = nextHoliday(holidays)
+
   return res.send(
     renderPage({
       pageComponent: 'About',
       title: 'About',
+      props: { data: { nextHoliday: nextHol } },
     }),
   )
 })

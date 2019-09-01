@@ -39,7 +39,7 @@ const styles = css`
   }
 `
 
-const About = () =>
+const About = ({ data: { nextHoliday } }) =>
   html`
     <${Layout}>
       <div class=${styles}>
@@ -48,7 +48,7 @@ const About = () =>
 
           <p>
             Work sucks, I know. But until we get the post-work future we all deserve,${' '}
-            <a href="/">Labour Day</a> is gonna have to do.
+            <a href="/">${nextHoliday.nameEn}</a> is gonna have to do.
           </p>
 
           <h2>Feedback</h2>
