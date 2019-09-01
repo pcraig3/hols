@@ -11,21 +11,21 @@ const document = ({ title, meta, content }) => {
         ${metaIfSHA() || ''}
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta name="description" content="${meta ? meta : 'Public holidays in Canada'}">
+        <meta name="description" content="${meta ? meta : 'Canada public holidays'}">
         <meta name="msvalidate.01" content="F9D4867F2140DC849033A2EA34C56E6A" />
 
         <!-— facebook open graph tags -->
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://can-hols.herokuapp.com/" />
-        <meta property="og:title" content="${title} — Holidays Canada" />
+        <meta property="og:title" content="${title} — Canada public holidays" />
         <meta property="og:description" content="${meta ? meta : 'Public holidays in Canada'}" />
 
         <!-— twitter card tags additive with the og: tags -->
         <meta name="twitter:domain" value="can-hols.herokuapp.com" />
-        <meta name="twitter:title" value="${title} — Holidays Canada" />
+        <meta name="twitter:title" value="${title} — Canada public holidays" />
         <meta name="twitter:description" value="${meta ? meta : 'Public holidays in Canada'}" />
 
-        <title>${title} — Holidays Canada</title>
+        <title>${title} — Canada public holidays</title>
         ${gaIfProd() || ''}
         <link rel="shortcut icon" href="/favicon.png" type="image/x-icon" sizes="32x32" />
         <link href="https://fonts.googleapis.com/css?family=Gothic+A1:400,600&display=swap" rel="stylesheet" />
