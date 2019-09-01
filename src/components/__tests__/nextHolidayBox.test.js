@@ -22,7 +22,7 @@ test('nextHolidayBox displays next holiday properly', () => {
   )
   expect($('div').length).toBe(1)
   expect($('h1').text()).toEqual(
-    'Canada’s next public holiday is Gold Cup Parade Day on August 16th',
+    'Canada’s next statutory holiday is Gold Cup Parade Day on August 16th',
   )
   expect($('h1 + p').text()).toEqual('Celebrated by Prince Edward Island')
 })

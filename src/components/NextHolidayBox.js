@@ -38,7 +38,7 @@ const styles = ({ accent = theme.color.red } = {}) => css`
 
     @media (${theme.mq.md}) {
       width: 70%;
-      max-width: 750px;
+      max-width: 850px;
     }
   }
 
@@ -101,7 +101,7 @@ const nextHolidayBox = ({ nextHoliday, provinceName = 'Canada', provinceId }) =>
   return html`
     <div class=${provinceId ? styles(theme.color[provinceId]) : styles()}>
       <h1>
-        ${provinceName}’s next public holiday is${' '}
+        ${provinceName}’s next statutory holiday is${' '}
         <span class="hol-name">${nextHoliday.nameEn}</span>
         ${' '}on${' '}<${DateHtml} dateString=${nextHoliday.date} //>
       </h1>

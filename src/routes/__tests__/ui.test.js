@@ -28,9 +28,13 @@ describe('Test ui responses', () => {
     test('it should return the h1, title, and meta tag', async () => {
       const response = await request(app).get('/')
       const $ = cheerio.load(response.text)
-      expect($('h1').text()).toMatch(/^Canada’s next public holiday is/)
-      expect($('title').text()).toEqual('Canada’s next public holiday — Canada public holidays')
-      expect($('meta[name="description"]').attr('content')).toMatch(/^Canada’s next holiday is/)
+      expect($('h1').text()).toMatch(/^Canada’s next statutory holiday is/)
+      expect($('title').text()).toEqual(
+        'Canada’s next statutory holiday — Canada statutory holidays 2019',
+      )
+      expect($('meta[name="description"]').attr('content')).toMatch(
+        /^Canada’s next stat holiday is/,
+      )
     })
   })
 
@@ -44,9 +48,13 @@ describe('Test ui responses', () => {
       test('it should return the h1, title, and meta tag', async () => {
         const response = await request(app).get('/province/MB')
         const $ = cheerio.load(response.text)
-        expect($('h1').text()).toMatch(/^Manitoba’s next public holiday is/)
-        expect($('title').text()).toEqual('Manitoba’s next public holiday — Canada public holidays')
-        expect($('meta[name="description"]').attr('content')).toMatch(/^Manitoba’s next holiday is/)
+        expect($('h1').text()).toMatch(/^Manitoba’s next statutory holiday is/)
+        expect($('title').text()).toEqual(
+          'Manitoba’s next statutory holiday — Canada statutory holidays 2019',
+        )
+        expect($('meta[name="description"]').attr('content')).toMatch(
+          /^Manitoba’s next stat holiday is/,
+        )
       })
     })
 
@@ -63,8 +71,10 @@ describe('Test ui responses', () => {
         expect($('p').text()).toEqual(
           'Error: No province with id “pangea”. Accepted province IDs are: [AB, BC, MB, NB, NL, NS, NT, NU, ON, PE, QC, SK, YT].',
         )
-        expect($('title').text()).toEqual('400 — Canada public holidays')
-        expect($('meta[name="description"]').attr('content')).toEqual('Canada public holidays')
+        expect($('title').text()).toEqual('400 — Canada statutory holidays 2019')
+        expect($('meta[name="description"]').attr('content')).toEqual(
+          'Statutory holidays in Canada',
+        )
       })
     })
   })
@@ -79,8 +89,8 @@ describe('Test ui responses', () => {
       const response = await request(app).get('/allosaurus')
       const $ = cheerio.load(response.text)
       expect($('h1').text()).toEqual('404')
-      expect($('title').text()).toEqual('404 — Canada public holidays')
-      expect($('meta[name="description"]').attr('content')).toEqual('Canada public holidays')
+      expect($('title').text()).toEqual('404 — Canada statutory holidays 2019')
+      expect($('meta[name="description"]').attr('content')).toEqual('Statutory holidays in Canada')
     })
   })
 })

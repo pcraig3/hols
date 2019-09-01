@@ -8,7 +8,7 @@ const { getProvinces, getHolidaysWithProvinces, getProvincesWithHolidays } = req
 const { displayDate } = require('../dates')
 
 const getMeta = (holiday, provinceName = 'Canada') =>
-  `${provinceName}’s next holiday is ${holiday.nameEn} on ${displayDate(holiday.date)}`
+  `${provinceName}’s next stat holiday is ${holiday.nameEn} on ${displayDate(holiday.date)}`
 
 router.get('/', dbmw(db, getHolidaysWithProvinces), (req, res) => {
   const holidays = upcomingHolidays(res.locals.rows)
@@ -17,7 +17,7 @@ router.get('/', dbmw(db, getHolidaysWithProvinces), (req, res) => {
   return res.send(
     renderPage({
       pageComponent: 'Province',
-      title: 'Canada’s next public holiday',
+      title: 'Canada’s next statutory holiday',
       meta: getMeta(nextHol),
       props: { data: { holidays, nextHoliday: nextHol } },
     }),
@@ -34,7 +34,7 @@ router.get(
     return res.send(
       renderPage({
         pageComponent: 'Province',
-        title: `${provinceName}’s next public holiday`,
+        title: `${provinceName}’s next statutory holiday`,
         meta: getMeta(nextHoliday, provinceName),
         props: {
           data: { holidays: upcomingHolidays(holidays), nextHoliday, provinceName, provinceId },
