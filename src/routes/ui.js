@@ -54,6 +54,15 @@ router.get('/provinces', dbmw(db, getProvinces), (req, res) => {
   )
 })
 
+router.get('/about', (req, res) => {
+  return res.send(
+    renderPage({
+      pageComponent: 'About',
+      title: 'About',
+    }),
+  )
+})
+
 router.get('*', (req, res) => {
   res.status(404)
   throw new createError(404, 'Oopsie daisy. Maybe head back to the home page? 👇')

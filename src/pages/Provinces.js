@@ -3,7 +3,7 @@ const { html } = require('../utils')
 const { theme } = require('../styles')
 const Layout = require('../components/Layout.js')
 
-const provinces = css`
+const styles = css`
   h1 {
     margin: ${theme.space.xs} 0 ${theme.space.xl} 0;
   }
@@ -34,7 +34,7 @@ const provinces = css`
 const Provinces = ({ data }) =>
   html`
     <${Layout}>
-      <div class=${provinces}>
+      <div class=${styles}>
         <section>
           <h1>All regions in Canada</h1>
 
@@ -48,7 +48,13 @@ const Provinces = ({ data }) =>
             )}
           </ul>
           <footer>
-            <p>→ more stuff on ${' '}<a id="about-link" href="/about">the about page</a></p>
+            <p>
+              <span aria-hidden="true">→</span> more good stuff on ${' '}<a
+                id="about-link"
+                href="/about"
+                >the about page</a
+              >
+            </p>
           </footer>
         </section>
       </div>
