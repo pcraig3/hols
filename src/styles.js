@@ -8,6 +8,7 @@ const theme = {
     yellowPale: '#FFFCF0',
     greyLight: '#BFC1C3',
     focus: 'cornflowerblue',
+    federal: { accent: '#B04F72', focus: 'cornflowerblue' },
     AB: { accent: '#a50069', focus: '#00aad2' },
     BC: { accent: '#5475a7', focus: '#ffbf47' },
     MB: { accent: '#057d3e', focus: '#2c3135' },

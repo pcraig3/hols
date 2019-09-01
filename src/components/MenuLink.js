@@ -38,18 +38,18 @@ const styles = css`
   }
 `
 
-const stylesCanada = css`
+const styles3Columns = css`
   @media (${theme.mq.lg}) {
     left: calc(40% - 7px);
   }
 `
 
-const DateHtml = ({ provinceName }) => {
+const DateHtml = ({ canada }) => {
   return html`
     <span
-      class=${provinceName === 'Canada'
+      class=${canada
         ? css`
-            ${styles} ${stylesCanada}
+            ${styles} ${styles3Columns}
           `
         : styles}
       ><a href="/provinces" class="right-arrow">All regions</a></span

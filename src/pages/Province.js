@@ -34,7 +34,7 @@ const styles = ({ accent = theme.color.red, focus = theme.color.focus } = {}) =>
   }
 `
 
-const createRows = holidays => {
+const createRows = (holidays, federal) => {
   const _provinces = holiday => {
     if (holiday.provinces.length === 13) {
       return 'National holiday'
@@ -59,7 +59,7 @@ const createRows = holidays => {
       value: holiday.nameEn,
     }
 
-    if (holiday.provinces) {
+    if (!federal && holiday.provinces) {
       row.value2 = _provinces(holiday)
     }
 
@@ -67,23 +67,29 @@ const createRows = holidays => {
   })
 }
 
-const Province = ({ data: { holidays, nextHoliday, provinceName = 'Canada', provinceId } = {} }) =>
+const Province = ({
+  data: { holidays, nextHoliday, provinceName = 'Canada', provinceId, federal = false } = {},
+}) =>
   html`
     <${Layout}>
-      <div class=${provinceId ? styles(theme.color[provinceId]) : styles()}>
+      <div
+        class=${federal || provinceId
+          ? styles(theme.color[federal ? 'federal' : provinceId])
+          : styles()}
+      >
         <section>
-          <${NextHolidayBox} ...${{ nextHoliday, provinceName, provinceId }} />
+          <${NextHolidayBox} ...${{ nextHoliday, provinceName, provinceId, federal }} />
           <span class="bottom-link"
             ><a href="#upcoming-holidays" class="down-arrow">Upcoming holidays</a></span
           >
-          <${MenuLink} provinceName=${provinceName} //>
+          <${MenuLink} canada=${!federal && provinceName === 'Canada'} //>
         </section>
 
         <section>
           <${SummaryTable}
             id="upcoming-holidays"
-            title=${`Upcoming holidays in ${provinceName}`}
-            rows=${createRows(holidays)}
+            title=${`Upcoming ${federal && 'federal'} holidays in ${provinceName}`}
+            rows=${createRows(holidays, federal)}
           />
           <span class="bottom-link"><a href="#html" class="up-arrow">Back to top</a></span>
         </section>

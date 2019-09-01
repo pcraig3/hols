@@ -44,6 +44,20 @@ router.get(
   },
 )
 
+router.get('/federal', dbmw(db, getHolidaysWithProvinces), (req, res) => {
+  const holidays = upcomingHolidays(res.locals.rows)
+  const nextHol = nextHoliday(holidays)
+
+  return res.send(
+    renderPage({
+      pageComponent: 'Province',
+      title: 'Canada’s next federal stat holiday',
+      meta: getMeta(nextHol),
+      props: { data: { holidays, nextHoliday: nextHol, federal: true } },
+    }),
+  )
+})
+
 router.get('/provinces', dbmw(db, getProvinces), (req, res) => {
   return res.send(
     renderPage({

@@ -1,6 +1,15 @@
 # TODO
 
 - add federal holidays
+  - add a menu item for federal holidays
+  - explain what federal holidays are
+  - add more tests for federal holidays
+- add test for menu item thing
+- add holidays by year
+  - 2020
+  - 2019
+  - 2021
+  - unprefixed? two years?
 - https://matthewsmith.io/blog/how-to-set-up-cache-busting-in-express
 - list of holidays
 
@@ -71,3 +80,5 @@
 - update README
 - add API docs
 - about page
+- add federal holidays
+  - add a page for federal holidays

@@ -97,15 +97,19 @@ const renderRelativeDate = dateString => {
   `
 }
 
-const nextHolidayBox = ({ nextHoliday, provinceName = 'Canada', provinceId }) => {
+const nextHolidayBox = ({ nextHoliday, provinceName = 'Canada', provinceId, federal }) => {
   return html`
-    <div class=${provinceId ? styles(theme.color[provinceId]) : styles()}>
+    <div
+      class=${federal || provinceId
+        ? styles(theme.color[federal ? 'federal' : provinceId])
+        : styles()}
+    >
       <h1>
-        ${provinceName}’s next statutory holiday is${' '}
+        ${provinceName}’s next${' '}${federal && 'federal '}statutory holiday is${' '}
         <span class="hol-name">${nextHoliday.nameEn}</span>
         ${' '}on${' '}<${DateHtml} dateString=${nextHoliday.date} //>
       </h1>
-      ${nextHoliday.provinces
+      ${nextHoliday.provinces && !federal
         ? renderCelebreatingProvinces(nextHoliday.provinces)
         : renderRelativeDate(nextHoliday.date)}
     </div>

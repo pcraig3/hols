@@ -12,11 +12,23 @@ const html = htm.bind(h)
 // "try / catch" in all our database query functions
 const dbmw = (db, cb) => {
   return async (req, res, next) => {
+    const _parseFederal = req => {
+      if (req.query.federal !== undefined) {
+        return req.query.federal
+      }
+
+      if (req.path === '/federal') {
+        return 'true'
+      }
+
+      return undefined
+    }
+
     // allow query parameters or url parameters to be passed in
     let options = {
       holidayId: req.params.holidayId,
       provinceId: req.params.provinceId,
-      federal: req.query.federal,
+      federal: _parseFederal(req),
     }
 
     try {
