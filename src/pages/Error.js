@@ -21,7 +21,7 @@ const Error = ({ data: { status, message } = {} }) =>
               ${message}
             </p>
           </div>
-          <span class="bottom-link"><a href="/">← back</a></span>
+          <span class="bottom-link"><a href="/">← Canada’s next public holiday</a></span>
         </section>
       </div>
     <//>
