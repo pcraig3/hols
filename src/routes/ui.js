@@ -62,7 +62,8 @@ router.get('/provinces', dbmw(db, getProvinces), (req, res) => {
   return res.send(
     renderPage({
       pageComponent: 'Provinces',
-      title: 'Provinces',
+      title: 'All regions in Canada',
+      meta: 'All regions in Canada — Statutory holidays in Canada',
       props: { data: { provinces: res.locals.rows } },
     }),
   )
@@ -76,6 +77,7 @@ router.get('/about', dbmw(db, getHolidaysWithProvinces), (req, res) => {
     renderPage({
       pageComponent: 'About',
       title: 'About',
+      meta: 'About — Statutory holidays in Canada',
       props: { data: { nextHoliday: nextHol } },
     }),
   )

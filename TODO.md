@@ -3,7 +3,6 @@
 - add federal holidays
   - add a menu item for federal holidays
   - explain what federal holidays are
-  - add more tests for federal holidays
 - add holidays by year
   - 2020
   - 2019
@@ -81,4 +80,5 @@
 - about page
 - add federal holidays
   - add a page for federal holidays
+  - add more tests for federal holidays
 - add test for menu item thing

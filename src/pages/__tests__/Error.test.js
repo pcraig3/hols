@@ -14,15 +14,15 @@ const renderPage = ({ status, message }) => {
   )
 }
 
-describe('Error component', () => {
+describe('Error page', () => {
   test('renders status code and error message and status', () => {
     const $ = renderPage({ status: 999, message: 'bro you effed UP!' })
     expect($('h1').length).toBe(1)
     expect($('h1').text()).toEqual('999')
     expect($('p').length).toBe(1)
-    expect($('p').text()).toBe('bro you effed UP!')
+    expect($('p').text()).toEqual('bro you effed UP!')
     expect($('a').length).toBe(1)
-    expect($('a').text()).toBe('← Canada’s next public holiday')
-    expect($('a').attr('href')).toBe('/')
+    expect($('a').text()).toEqual('← Canada’s next public holiday')
+    expect($('a').attr('href')).toEqual('/')
   })
 })

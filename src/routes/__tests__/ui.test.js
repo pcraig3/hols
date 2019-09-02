@@ -19,7 +19,7 @@ describe('Test ui responses', () => {
     db.close()
   })
 
-  describe('Test / responses', () => {
+  describe('Test / response', () => {
     test('it should return 200', async () => {
       const response = await request(app).get('/')
       expect(response.statusCode).toBe(200)
@@ -34,6 +34,23 @@ describe('Test ui responses', () => {
       )
       expect($('meta[name="description"]').attr('content')).toMatch(
         /^Canada’s next stat holiday is/,
+      )
+    })
+  })
+
+  describe('Test /provinces response', () => {
+    test('it should return 200', async () => {
+      const response = await request(app).get('/provinces')
+      expect(response.statusCode).toBe(200)
+    })
+
+    test('it should return the h1, title, and meta tag', async () => {
+      const response = await request(app).get('/provinces')
+      const $ = cheerio.load(response.text)
+      expect($('h1').text()).toEqual('All regions in Canada')
+      expect($('title').text()).toEqual('All regions in Canada — Canada statutory holidays 2019')
+      expect($('meta[name="description"]').attr('content')).toEqual(
+        'All regions in Canada — Statutory holidays in Canada',
       )
     })
   })
@@ -58,8 +75,44 @@ describe('Test ui responses', () => {
       })
     })
 
-    describe('for a good provinceId', () => {
-      test('for a bad province IDit should return 400', async () => {
+    describe('Test /federal responses', () => {
+      test('it should return 200', async () => {
+        const response = await request(app).get('/federal')
+        expect(response.statusCode).toBe(200)
+      })
+
+      test('it should return the h1, title, and meta tag', async () => {
+        const response = await request(app).get('/federal')
+        const $ = cheerio.load(response.text)
+        expect($('h1').text()).toMatch(/^Canada’s next federal statutory holiday is/)
+        expect($('title').text()).toEqual(
+          'Canada’s next federal stat holiday — Canada statutory holidays 2019',
+        )
+        expect($('meta[name="description"]').attr('content')).toMatch(
+          /^Canada’s next stat holiday is/,
+        )
+      })
+    })
+
+    describe('Test /about response', () => {
+      test('it should return 200', async () => {
+        const response = await request(app).get('/about')
+        expect(response.statusCode).toBe(200)
+      })
+
+      test('it should return the h1, title, and meta tag', async () => {
+        const response = await request(app).get('/about')
+        const $ = cheerio.load(response.text)
+        expect($('h1').text()).toEqual('About')
+        expect($('title').text()).toEqual('About — Canada statutory holidays 2019')
+        expect($('meta[name="description"]').attr('content')).toEqual(
+          'About — Statutory holidays in Canada',
+        )
+      })
+    })
+
+    describe('for a bad province ID', () => {
+      test('it should return 400', async () => {
         const response = await request(app).get('/allosaurus')
         expect(response.statusCode).toBe(404)
       })
