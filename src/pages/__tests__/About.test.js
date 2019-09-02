@@ -20,7 +20,7 @@ describe('About page', () => {
     expect($('h1').length).toBe(1)
     expect($('h1').text()).toEqual('About')
     expect($('h1 + p').text()).toEqual(
-      'Work sucks, I know. But until we get the post-work future we all deserve, May Day is the most we can expect.',
+      'Work sucks, I know. But until we get the post-work future we all deserve, May Day is what we have to look forward to.',
     )
   })
 })

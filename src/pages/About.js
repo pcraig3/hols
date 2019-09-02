@@ -48,7 +48,7 @@ const About = ({ data: { nextHoliday } }) =>
 
           <p>
             Work sucks, I know. But until we get the post-work future we all deserve,${' '}
-            <a href="/">${nextHoliday.nameEn}</a> is the most we can expect.
+            <a href="/">${nextHoliday.nameEn}</a> is what we have to look forward to.
           </p>
 
           <h2>Feedback</h2>

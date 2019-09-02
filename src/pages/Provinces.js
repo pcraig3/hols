@@ -12,7 +12,11 @@ const styles = css`
     list-style-type: none;
     margin: 0;
     padding: 0;
-    margin-bottom: calc(${theme.space.xl} + ${theme.space.xl});
+    margin-bottom: ${theme.space.xl};
+
+    @media (${theme.mq.md}) {
+      margin-bottom: ${theme.space.xxl};
+    }
 
     li {
       margin-bottom: ${theme.space.xs};
@@ -23,11 +27,6 @@ const styles = css`
         margin-right: ${theme.space.xs};
       }
     }
-  }
-
-  footer {
-    position: absolute;
-    bottom: 0;
   }
 `
 

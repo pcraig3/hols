@@ -66,10 +66,6 @@ const document = ({ title, meta, content }) => {
 
           h2, h3, p {
             margin: 0 0 ${theme.space.md} 0;
-
-            @media (${theme.mq.sm}) {
-              margin: 0 0 ${theme.space.lg} 0;
-            }
           }
         </style>
       </head>
