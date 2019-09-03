@@ -33,8 +33,11 @@ const styles = css`
       outline: 0 !important;
 
       > span {
-        outline: 3px solid ${theme.color.focus};
-        outline-offset: 5px;
+        border-bottom: 3px solid ${theme.color.focus};
+
+        @media (${theme.mq.md}) {
+          border-bottom: 5px solid ${theme.color.focus};
+        }
       }
     }
 
