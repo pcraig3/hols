@@ -8,6 +8,60 @@ const styles = css`
     margin: ${theme.space.xs} 0 ${theme.space.xl} 0;
   }
 
+  div {
+    margin-bottom: ${theme.space.md};
+  }
+
+  details {
+    font-size: 0.9em;
+    margin-top: ${theme.space.xs};
+    list-style-type: none;
+
+    width: 100%;
+
+    @media (${theme.mq.sm}) {
+      width: 90%;
+    }
+
+    @media (${theme.mq.md}) {
+      width: 70%;
+      max-width: 880px;
+      font-size: 0.9em;
+    }
+
+    @media (${theme.mq.lg}) {
+      font-size: 0.85em;
+      margin-top: ${theme.space.sm};
+    }
+
+    summary {
+      cursor: pointer;
+      // the little arrow disappears in firefox unless this is set explicitly
+      display: list-item;
+
+      &:focus {
+        outline: 0 !important;
+
+        > span {
+          outline: 3px solid ${theme.color.focus};
+          outline-offset: 5px;
+        }
+      }
+
+      // the summary element doesn't appear to accept underlined text
+      > span {
+        text-decoration: underline;
+      }
+    }
+
+    summary ~ * {
+      margin-top: ${theme.space.xs};
+      padding-left: ${theme.space.sm};
+      border-left: 5px solid ${theme.color.greyLight};
+      margin-bottom: ${theme.space.lg};
+    }
+  }
+
   ul {
     list-style-type: none;
     margin: 0;
@@ -28,6 +82,12 @@ const styles = css`
       }
     }
   }
+
+  @media (${theme.mq.xs}) {
+    footer p {
+      width: 105%;
+    }
+  }
 `
 
 const Provinces = ({ data }) =>
@@ -37,8 +97,24 @@ const Provinces = ({ data }) =>
         <section>
           <h1>All regions in Canada</h1>
 
-          <p><a href="/">All Canadian holidays</a></p>
-          <!-- p>Federally-regulated industy</p -->
+          <div>
+            <p><a href="/">All Canadian holidays</a></p>
+          </div>
+          <div>
+            <a href="/">Federal statutory holidays</a>
+            <details>
+              <summary><span>What are federal statutory holidays?</span></summary>
+              <p>
+                The federal government and${' '}
+                <a
+                  href="https://www.canada.ca/en/employment-social-development/programs/employment-equity/regulated-industries.html"
+                  target="_blank"
+                  >federally-regulated industries</a
+                >
+                ${' '}observe federal holidays instead of provincial holidays.
+              </p>
+            </details>
+          </div>
           <ul>
             ${data.provinces.map(
               province => html`
@@ -48,11 +124,9 @@ const Provinces = ({ data }) =>
           </ul>
           <footer>
             <p>
-              <span aria-hidden="true">→</span> more good stuff on ${' '}<a
-                id="about-link"
-                href="/about"
-                >the about page</a
-              >
+              more good stuff on ${' '}<a id="about-link" href="/about"
+                >the about page <span aria-hidden="true">→</span>
+              </a>
             </p>
           </footer>
         </section>

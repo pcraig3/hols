@@ -1,7 +1,7 @@
 {
   "name": "hols",
   "version": "1.3.0",
-  "description": "holidays api and holidays frontend",
+  "description": "hols for cans: holidays api and holidays frontend",
   "main": "index.js",
   "author": "pcraig3",
   "license": "MIT",
