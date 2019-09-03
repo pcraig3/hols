@@ -12,7 +12,6 @@ const document = ({ title, meta, content }) => {
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta name="description" content="${meta ? meta : 'Statutory holidays in Canada'}">
-        <meta name="msvalidate.01" content="F9D4867F2140DC849033A2EA34C56E6A" />
 
         <!-— facebook open graph tags -->
         <meta property="og:type" content="website" />

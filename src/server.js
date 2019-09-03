@@ -21,6 +21,15 @@ app
 // if NODE_ENV does not equal 'test', add a request logger
 process.env.NODE_ENV !== 'test' && app.use(logger('dev'))
 
+// redirect from the Heroku url to the custom one
+app.use((req, res, next) => {
+  if (req.headers.host === 'can-hols.herokuapp.com') {
+    res.redirect(301, `https://canada-holidays.ca${req.path}`)
+  }
+
+  next()
+})
+
 const apiRouter = require('./routes/api')
 app.use('/api', apiRouter)
 
