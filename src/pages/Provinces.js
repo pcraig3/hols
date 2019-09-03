@@ -2,6 +2,7 @@ const { css } = require('emotion')
 const { html } = require('../utils')
 const { theme } = require('../styles')
 const Layout = require('../components/Layout.js')
+const Details = require('../components/Details.js')
 
 const styles = css`
   h1 {
@@ -10,56 +11,6 @@ const styles = css`
 
   div {
     margin-bottom: ${theme.space.md};
-  }
-
-  details {
-    font-size: 0.9em;
-    margin-top: ${theme.space.xs};
-    list-style-type: none;
-
-    width: 100%;
-
-    @media (${theme.mq.sm}) {
-      width: 90%;
-    }
-
-    @media (${theme.mq.md}) {
-      width: 70%;
-      max-width: 880px;
-      font-size: 0.9em;
-    }
-
-    @media (${theme.mq.lg}) {
-      font-size: 0.85em;
-      margin-top: ${theme.space.sm};
-    }
-
-    summary {
-      cursor: pointer;
-      // the little arrow disappears in firefox unless this is set explicitly
-      display: list-item;
-
-      &:focus {
-        outline: 0 !important;
-
-        > span {
-          outline: 3px solid ${theme.color.focus};
-          outline-offset: 5px;
-        }
-      }
-
-      // the summary element doesn't appear to accept underlined text
-      > span {
-        text-decoration: underline;
-      }
-    }
-
-    summary ~ * {
-      margin-top: ${theme.space.xs};
-      padding-left: ${theme.space.sm};
-      border-left: 5px solid ${theme.color.greyLight};
-      margin-bottom: ${theme.space.lg};
-    }
   }
 
   ul {
@@ -101,9 +52,8 @@ const Provinces = ({ data }) =>
             <p><a href="/">All Canadian holidays</a></p>
           </div>
           <div>
-            <a href="/">Federal statutory holidays</a>
-            <details>
-              <summary><span>What are federal statutory holidays?</span></summary>
+            <a href="/federal">Federal statutory holidays</a>
+            <${Details} summary="What are federal statutory holidays?">
               <p>
                 The federal government and${' '}
                 <a
@@ -113,7 +63,7 @@ const Provinces = ({ data }) =>
                 >
                 ${' '}observe federal holidays instead of provincial holidays.
               </p>
-            </details>
+            <//>
           </div>
           <ul>
             ${data.provinces.map(

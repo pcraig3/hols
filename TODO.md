@@ -1,7 +1,7 @@
 # TODO
 
 - add federal holidays
-  - add a menu item for federal holidays
+  - put federal holidays on the canada holiday box province list
   - explain what federal holidays are
 - add holidays by year
   - 2020
@@ -81,4 +81,5 @@
 - add federal holidays
   - add a page for federal holidays
   - add more tests for federal holidays
+  - add a menu item for federal holidays
 - add test for menu item thing
