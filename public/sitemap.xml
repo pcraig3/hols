@@ -1,1 +1,113 @@
-<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:news="http://www.google.com/schemas/sitemap-news/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:mobile="http://www.google.com/schemas/sitemap-mobile/1.0" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xmlns:video="http://www.google.com/schemas/sitemap-video/1.1"><url><loc>https://canada-holidays.ca/</loc></url><url><loc>https://canada-holidays.ca/provinces</loc></url><url><loc>https://canada-holidays.ca/province/AB</loc></url><url><loc>https://canada-holidays.ca/province/BC</loc></url><url><loc>https://canada-holidays.ca/province/MB</loc></url><url><loc>https://canada-holidays.ca/province/NB</loc></url><url><loc>https://canada-holidays.ca/province/NL</loc></url><url><loc>https://canada-holidays.ca/province/NS</loc></url><url><loc>https://canada-holidays.ca/province/NT</loc></url><url><loc>https://canada-holidays.ca/province/NU</loc></url><url><loc>https://canada-holidays.ca/province/ON</loc></url><url><loc>https://canada-holidays.ca/province/PE</loc></url><url><loc>https://canada-holidays.ca/province/QC</loc></url><url><loc>https://canada-holidays.ca/province/SK</loc></url><url><loc>https://canada-holidays.ca/province/YT</loc></url></urlset>
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset
+      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+<!-- created with Free Online Sitemap Generator www.xml-sitemaps.com -->
+
+
+<url>
+  <loc>https://canada-holidays.ca/</loc>
+  <lastmod>2019-09-03T22:11:41+00:00</lastmod>
+  <changefreq>daily</changefreq>
+  <priority>1.00</priority>
+</url>
+<url>
+  <loc>https://canada-holidays.ca/provinces</loc>
+  <lastmod>2019-09-03T22:11:41+00:00</lastmod>
+  <changefreq>daily</changefreq>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://canada-holidays.ca/province/NL</loc>
+  <lastmod>2019-09-03T22:11:41+00:00</lastmod>
+  <changefreq>daily</changefreq>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://canada-holidays.ca/province/AB</loc>
+  <lastmod>2019-09-03T22:11:41+00:00</lastmod>
+  <changefreq>daily</changefreq>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://canada-holidays.ca/province/BC</loc>
+  <lastmod>2019-09-03T22:11:41+00:00</lastmod>
+  <changefreq>daily</changefreq>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://canada-holidays.ca/province/NB</loc>
+  <lastmod>2019-09-03T22:11:41+00:00</lastmod>
+  <changefreq>daily</changefreq>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://canada-holidays.ca/province/NT</loc>
+  <lastmod>2019-09-03T22:11:41+00:00</lastmod>
+  <changefreq>daily</changefreq>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://canada-holidays.ca/province/NS</loc>
+  <lastmod>2019-09-03T22:11:41+00:00</lastmod>
+  <changefreq>daily</changefreq>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://canada-holidays.ca/province/NU</loc>
+  <lastmod>2019-09-03T22:11:41+00:00</lastmod>
+  <changefreq>daily</changefreq>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://canada-holidays.ca/province/PE</loc>
+  <lastmod>2019-09-03T22:11:41+00:00</lastmod>
+  <changefreq>daily</changefreq>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://canada-holidays.ca/province/SK</loc>
+  <lastmod>2019-09-03T22:11:41+00:00</lastmod>
+  <changefreq>daily</changefreq>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://canada-holidays.ca/province/YT</loc>
+  <lastmod>2019-09-03T22:11:41+00:00</lastmod>
+  <changefreq>daily</changefreq>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://canada-holidays.ca/province/ON</loc>
+  <lastmod>2019-09-03T22:11:41+00:00</lastmod>
+  <changefreq>daily</changefreq>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://canada-holidays.ca/federal</loc>
+  <lastmod>2019-09-03T22:11:41+00:00</lastmod>
+  <changefreq>daily</changefreq>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://canada-holidays.ca/province/MB</loc>
+  <lastmod>2019-09-03T22:11:41+00:00</lastmod>
+  <changefreq>daily</changefreq>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://canada-holidays.ca/province/QC</loc>
+  <lastmod>2019-09-03T22:11:41+00:00</lastmod>
+  <changefreq>daily</changefreq>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://canada-holidays.ca/about</loc>
+  <lastmod>2019-09-03T22:11:41+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+  <priority>0.64</priority>
+</url>
+
+</urlset>
