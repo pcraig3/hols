@@ -28,12 +28,17 @@ const getNextHoliday = () => {
   }
 }
 
+const sp2nbsp = str => str.replace(/ /g, '\u00a0')
+
 test('nextHolidayBox displays next holiday properly for Canada', () => {
-  const $ = renderNextHolidayBox({ nextHoliday: getNextHoliday() })
+  const nextHoliday = getNextHoliday()
+  const $ = renderNextHolidayBox({ nextHoliday })
 
   expect($('div').length).toBe(1)
   expect($('h1').text()).toEqual(
-    'Canada’s next statutory holiday is Gold Cup Parade Day on August 16th',
+    `Canada’s next statutory holiday is ${sp2nbsp(nextHoliday.nameEn)} on ${sp2nbsp(
+      'August 16th',
+    )}`,
   )
   expect($('h1 + p').text()).toEqual('Celebrated by Prince Edward Island')
 })
@@ -46,17 +51,22 @@ test('nextHolidayBox uses province IDs when more than 1 province exists', () => 
 
   expect($('div').length).toBe(1)
   expect($('h1').text()).toEqual(
-    'Canada’s next statutory holiday is Gold Cup Parade Day on August 16th',
+    `Canada’s next statutory holiday is ${sp2nbsp(nextHoliday.nameEn)} on ${sp2nbsp(
+      'August 16th',
+    )}`,
   )
   expect($('h1 + p').text()).toEqual('Celebrated by PE, AB, and QC')
 })
 
 test('nextHolidayBox refers to federal holidays when "federal" variable is passed in', () => {
-  const $ = renderNextHolidayBox({ nextHoliday: getNextHoliday(), federal: true })
+  const nextHoliday = getNextHoliday()
+  const $ = renderNextHolidayBox({ nextHoliday, federal: true })
 
   expect($('div').length).toBe(1)
   expect($('h1').text()).toEqual(
-    'Canada’s next federal statutory holiday is Gold Cup Parade Day on August 16th',
+    `Canada’s next federal statutory holiday is ${sp2nbsp(nextHoliday.nameEn)} on ${sp2nbsp(
+      'August 16th',
+    )}`,
   )
   expect($('h1 + p').text()).toMatch(/That’s in \d\d days/)
 })
@@ -83,7 +93,9 @@ test('nextHolidayBox says "all provinces and territories" when there are 13 prov
 
   expect($('div').length).toBe(1)
   expect($('h1').text()).toEqual(
-    'Canada’s next statutory holiday is Gold Cup Parade Day on August 16th',
+    `Canada’s next statutory holiday is ${sp2nbsp(nextHoliday.nameEn)} on ${sp2nbsp(
+      'August 16th',
+    )}`,
   )
   expect($('h1 + p').text()).toEqual('Celebrated by all provinces and territories')
 })
@@ -100,7 +112,9 @@ test('nextHolidayBox displays next holiday properly for a given province', () =>
 
   expect($('div').length).toBe(1)
   expect($('h1').text()).toEqual(
-    'Prince Edward Island’s next statutory holiday is Gold Cup Parade Day on August 16th',
+    `Prince Edward Island’s next statutory holiday is ${sp2nbsp(nextHoliday.nameEn)} on ${sp2nbsp(
+      'August 16th',
+    )}`,
   )
   expect($('h1 + p').text()).toMatch(/That’s in \d\d days/)
 })

@@ -106,7 +106,7 @@ const nextHolidayBox = ({ nextHoliday, provinceName = 'Canada', provinceId, fede
     >
       <h1>
         ${provinceName}’s next${' '}${federal && 'federal '}statutory holiday is${' '}
-        <span class="hol-name">${nextHoliday.nameEn}</span>
+        <span class="hol-name">${nextHoliday.nameEn.replace(/ /g, '\u00a0')}</span>
         ${' '}on${' '}<${DateHtml} dateString=${nextHoliday.date} //>
       </h1>
       ${nextHoliday.provinces && !federal
