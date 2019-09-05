@@ -88,7 +88,7 @@ const Province = ({
         <section>
           <${SummaryTable}
             id="upcoming-holidays"
-            title=${`Upcoming ${federal ? 'federal' : ''} holidays in ${provinceName}`}
+            title=${`Upcoming${federal ? ' federal' : ''} holidays in ${provinceName}`}
             rows=${createRows(holidays, federal)}
           />
           <span class="bottom-link"><a href="#html" class="up-arrow">Back to top</a></span>
