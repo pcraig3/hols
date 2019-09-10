@@ -64,8 +64,41 @@ const visuallyHidden = css`
   white-space: nowrap !important;
 `
 
+const contentPageStyles = css`
+  section {
+    width: 100%;
+
+    @media (${theme.mq.sm}) {
+      width: 90%;
+    }
+
+    @media (${theme.mq.md}) {
+      width: 70%;
+      max-width: 880px;
+    }
+
+    p:nth-last-child(2) {
+      margin-bottom: calc(${theme.space.xl} + ${theme.space.xl});
+    }
+  }
+
+  h1 {
+    margin: ${theme.space.xs} 0 ${theme.space.xl} 0;
+  }
+
+  h2 {
+    font-size: 1.15em;
+    margin-top: ${theme.space.xl};
+
+    @media (${theme.mq.md}) {
+      margin-top: ${theme.space.xxl};
+    }
+  }
+`
+
 module.exports = {
   theme,
   visuallyHidden,
   pageMargin,
+  contentPageStyles,
 }

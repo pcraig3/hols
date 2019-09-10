@@ -1,39 +1,9 @@
 const { css } = require('emotion')
 const { html } = require('../utils')
-const { theme } = require('../styles')
+const { theme, contentPageStyles } = require('../styles')
 const Layout = require('../components/Layout.js')
 
 const styles = css`
-  section {
-    width: 100%;
-
-    @media (${theme.mq.sm}) {
-      width: 90%;
-    }
-
-    @media (${theme.mq.md}) {
-      width: 70%;
-      max-width: 880px;
-    }
-  }
-
-  h1 {
-    margin: ${theme.space.xs} 0 ${theme.space.xl} 0;
-  }
-
-  h2 {
-    font-size: 1.15em;
-    margin-top: ${theme.space.xl};
-
-    @media (${theme.mq.md}) {
-      margin-top: ${theme.space.xxl};
-    }
-
-    &:last-of-type + p {
-      margin-bottom: calc(${theme.space.xl} + ${theme.space.xl});
-    }
-  }
-
   #pcraig3 {
     color: ${theme.color.red};
   }
@@ -42,7 +12,7 @@ const styles = css`
 const About = ({ data: { nextHoliday } }) =>
   html`
     <${Layout}>
-      <div class=${styles}>
+      <div class=${(styles, contentPageStyles)}>
         <section>
           <h1>About</h1>
 

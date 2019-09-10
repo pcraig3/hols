@@ -1,19 +1,11 @@
-const { css } = require('emotion')
 const { html } = require('../utils')
-const { theme } = require('../styles')
+const { contentPageStyles } = require('../styles')
 const Layout = require('../components/Layout.js')
-
-const styles = css`
-  h1 {
-    font-size: 2.2em;
-    margin-top: ${theme.space.sm};
-  }
-`
 
 const Error = ({ data: { status, message } = {} }) =>
   html`
     <${Layout}>
-      <div class=${styles}>
+      <div class=${contentPageStyles}>
         <section>
           <div>
             <h1>${status}</h1>
