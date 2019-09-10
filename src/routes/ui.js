@@ -7,8 +7,7 @@ const { dbmw, checkProvinceIdErr, upcomingHolidays, nextHoliday } = require('../
 const { getProvinces, getHolidaysWithProvinces, getProvincesWithHolidays } = require('../queries')
 const { displayDate } = require('../dates')
 
-const getMeta = (holiday, provinceName = 'Canada') =>
-  `${provinceName}’s next stat holiday is ${holiday.nameEn} on ${displayDate(holiday.date)}`
+const getMeta = holiday => `${holiday.nameEn} on ${displayDate(holiday.date)}`
 
 router.get('/', dbmw(db, getHolidaysWithProvinces), (req, res) => {
   const holidays = upcomingHolidays(res.locals.rows)
@@ -18,7 +17,7 @@ router.get('/', dbmw(db, getHolidaysWithProvinces), (req, res) => {
     renderPage({
       pageComponent: 'Province',
       title: 'Canada’s next statutory holiday',
-      docProps: { meta: getMeta(nextHol) },
+      docProps: { meta: getMeta(nextHol), path: req.path },
       props: { data: { holidays, nextHoliday: nextHol } },
     }),
   )
@@ -35,7 +34,7 @@ router.get(
       renderPage({
         pageComponent: 'Province',
         title: `${provinceName}’s next statutory holiday`,
-        docProps: { meta: getMeta(nextHoliday, provinceName) },
+        docProps: { meta: getMeta(nextHoliday), path: req.path },
         props: {
           data: { holidays: upcomingHolidays(holidays), nextHoliday, provinceName, provinceId },
         },
@@ -52,7 +51,7 @@ router.get('/federal', dbmw(db, getHolidaysWithProvinces), (req, res) => {
     renderPage({
       pageComponent: 'Province',
       title: 'Canada’s next federal stat holiday',
-      docProps: { meta: getMeta(nextHol) },
+      docProps: { meta: getMeta(nextHol), path: req.path },
       props: { data: { holidays, nextHoliday: nextHol, federal: true } },
     }),
   )
@@ -63,7 +62,11 @@ router.get('/provinces', dbmw(db, getProvinces), (req, res) => {
     renderPage({
       pageComponent: 'Provinces',
       title: 'All regions in Canada',
-      docProps: { meta: 'All regions in Canada — Statutory holidays in Canada' },
+      docProps: {
+        meta: 'Upcoming holidays for all regions in Canada',
+        fullMeta: true,
+        path: req.path,
+      },
       props: { data: { provinces: res.locals.rows } },
     }),
   )
@@ -77,7 +80,7 @@ router.get('/about', dbmw(db, getHolidaysWithProvinces), (req, res) => {
     renderPage({
       pageComponent: 'About',
       title: 'About',
-      docProps: { meta: 'About — Statutory holidays in Canada' },
+      docProps: { meta: 'Give feedback, use the API, etc', fullMeta: true, path: req.path },
       props: { data: { nextHoliday: nextHol } },
     }),
   )
@@ -93,7 +96,8 @@ router.use(function(err, req, res, next) {
   return res.send(
     renderPage({
       pageComponent: 'Error',
-      title: `${res.statusCode}`,
+      title: `Error: ${res.statusCode}`,
+      docProps: { meta: err.message.split('.')[0], fullMeta: true, path: req.path },
       props: {
         data: {
           status: res.statusCode,

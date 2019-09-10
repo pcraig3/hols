@@ -3,7 +3,7 @@ const render = require('preact-render-to-string')
 const { html, metaIfSHA, gaIfProd } = require('../utils')
 const { theme } = require('../styles')
 
-const document = ({ title, content, docProps: { meta } }) => {
+const document = ({ title, content, docProps: { meta, path, fullMeta = false } }) => {
   return `
     <!DOCTYPE html>
     <html lang="en" id="html">
@@ -11,18 +11,21 @@ const document = ({ title, content, docProps: { meta } }) => {
         ${metaIfSHA() || ''}
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta name="description" content="${meta ? meta : 'Statutory holidays in Canada'}">
+        <meta name="description" content="${
+          !meta ? 'Statutory holidays in Canada' : fullMeta ? meta : `${title} is ${meta}`
+        }">
 
         <!-- facebook open graph tags -->
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://can-hols.herokuapp.com/" />
-        <meta property="og:title" content="${title} — Canada statutory holidays" />
-        <meta property="og:description" content="${meta ? meta : 'Statutory holidays in Canada'}" />
+        <meta property="og:url" content="https://canada-holidays.ca${path}" />
+        <meta property="og:title" content="${title}" />
+        <meta property="og:description" content="${
+          meta ? meta : 'Upcoming statutory holidays in Canada'
+        }" />
 
         <!-- twitter card tags additive with the og: tags -->
-        <meta name="twitter:domain" value="can-hols.herokuapp.com" />
-        <meta name="twitter:title" value="${title} — Canada statutory holidays" />
-        <meta name="twitter:description" value="${meta ? meta : 'Statutory holidays in Canada'}" />
+        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:creator" content="@pcraig3" />
 
         <title>${title} — Canada statutory holidays 2019</title>
         ${gaIfProd() || ''}

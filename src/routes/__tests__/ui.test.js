@@ -33,7 +33,7 @@ describe('Test ui responses', () => {
         'Canada’s next statutory holiday — Canada statutory holidays 2019',
       )
       expect($('meta[name="description"]').attr('content')).toMatch(
-        /^Canada’s next stat holiday is/,
+        /^Canada’s next statutory holiday is/,
       )
     })
   })
@@ -50,7 +50,7 @@ describe('Test ui responses', () => {
       expect($('h1').text()).toEqual('All regions in Canada')
       expect($('title').text()).toEqual('All regions in Canada — Canada statutory holidays 2019')
       expect($('meta[name="description"]').attr('content')).toEqual(
-        'All regions in Canada — Statutory holidays in Canada',
+        'Upcoming holidays for all regions in Canada',
       )
     })
   })
@@ -70,7 +70,7 @@ describe('Test ui responses', () => {
           'Manitoba’s next statutory holiday — Canada statutory holidays 2019',
         )
         expect($('meta[name="description"]').attr('content')).toMatch(
-          /^Manitoba’s next stat holiday is/,
+          /^Manitoba’s next statutory holiday is/,
         )
       })
     })
@@ -89,7 +89,7 @@ describe('Test ui responses', () => {
           'Canada’s next federal stat holiday — Canada statutory holidays 2019',
         )
         expect($('meta[name="description"]').attr('content')).toMatch(
-          /^Canada’s next stat holiday is/,
+          /^Canada’s next federal stat holiday is/,
         )
       })
     })
@@ -106,7 +106,7 @@ describe('Test ui responses', () => {
         expect($('h1').text()).toEqual('About')
         expect($('title').text()).toEqual('About — Canada statutory holidays 2019')
         expect($('meta[name="description"]').attr('content')).toEqual(
-          'About — Statutory holidays in Canada',
+          'Give feedback, use the API, etc',
         )
       })
     })
@@ -124,9 +124,9 @@ describe('Test ui responses', () => {
         expect($('p').text()).toEqual(
           'Error: No province with id “pangea”. Accepted province IDs are: [AB, BC, MB, NB, NL, NS, NT, NU, ON, PE, QC, SK, YT].',
         )
-        expect($('title').text()).toEqual('400 — Canada statutory holidays 2019')
+        expect($('title').text()).toEqual('Error: 400 — Canada statutory holidays 2019')
         expect($('meta[name="description"]').attr('content')).toEqual(
-          'Statutory holidays in Canada',
+          'Error: No province with id “pangea”',
         )
       })
     })
@@ -142,8 +142,8 @@ describe('Test ui responses', () => {
       const response = await request(app).get('/allosaurus')
       const $ = cheerio.load(response.text)
       expect($('h1').text()).toEqual('404')
-      expect($('title').text()).toEqual('404 — Canada statutory holidays 2019')
-      expect($('meta[name="description"]').attr('content')).toEqual('Statutory holidays in Canada')
+      expect($('title').text()).toEqual('Error: 404 — Canada statutory holidays 2019')
+      expect($('meta[name="description"]').attr('content')).toEqual('Oopsie daisy')
     })
   })
 })
