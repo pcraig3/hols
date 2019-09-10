@@ -72,6 +72,8 @@ router.get('/provinces', dbmw(db, getProvinces), (req, res) => {
   )
 })
 
+router.get('/province', (req, res) => res.redirect(302, '/provinces'))
+
 router.get('/about', dbmw(db, getHolidaysWithProvinces), (req, res) => {
   const holidays = upcomingHolidays(res.locals.rows)
   const nextHol = nextHoliday(holidays)
