@@ -53,16 +53,23 @@ const Provinces = ({ data }) =>
           </div>
           <div>
             <a href="/federal">Federal statutory holidays</a>
-            <${Details} summary="What are federal statutory holidays?">
-              <p>
-                The federal government and${' '}
-                <a
-                  href="https://www.canada.ca/en/employment-social-development/programs/employment-equity/regulated-industries.html"
-                  target="_blank"
-                  >federally-regulated industries</a
-                >
-                ${' '}observe federal holidays instead of provincial holidays.
-              </p>
+            <${Details} summary="Do federal holidays apply to me?">
+              <div>
+                <p>
+                  The federal government and${' '}
+                  <a
+                    href="https://www.canada.ca/en/employment-social-development/programs/employment-equity/regulated-industries.html"
+                    target="_blank"
+                    >federally-regulated industries</a
+                  >
+                  ${' '}observe federal holidays instead of provincial holidays.
+                </p>
+                <p>
+                  <a href="/do-federal-holidays-apply-to-me"
+                    >Find out if federal holidays apply to you</a
+                  >.
+                </p>
+              </div>
             <//>
           </div>
           <ul>

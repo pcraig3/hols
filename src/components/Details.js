@@ -48,10 +48,18 @@ const styles = css`
   }
 
   summary ~ * {
-    margin-top: ${theme.space.xs};
+    margin-top: ${theme.space.sm};
     padding-left: ${theme.space.sm};
     border-left: 5px solid ${theme.color.greyLight};
     margin-bottom: ${theme.space.lg};
+  }
+
+  p {
+    margin-bottom: ${theme.space.sm};
+
+    &:last-child {
+      margin-bottom: 0;
+    }
   }
 `
 
