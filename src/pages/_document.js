@@ -13,13 +13,13 @@ const document = ({ title, meta, content }) => {
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta name="description" content="${meta ? meta : 'Statutory holidays in Canada'}">
 
-        <!-— facebook open graph tags -->
+        <!-- facebook open graph tags -->
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://can-hols.herokuapp.com/" />
         <meta property="og:title" content="${title} — Canada statutory holidays" />
         <meta property="og:description" content="${meta ? meta : 'Statutory holidays in Canada'}" />
 
-        <!-— twitter card tags additive with the og: tags -->
+        <!-- twitter card tags additive with the og: tags -->
         <meta name="twitter:domain" value="can-hols.herokuapp.com" />
         <meta name="twitter:title" value="${title} — Canada statutory holidays" />
         <meta name="twitter:description" value="${meta ? meta : 'Statutory holidays in Canada'}" />
