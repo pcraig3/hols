@@ -27,12 +27,12 @@
     "@jsbits/easter-day": "^1.0.1",
     "bluebird": "^3.5.5",
     "compression": "^1.7.4",
-    "date-fns": "^2.0.1",
-    "emotion": "^10.0.14",
-    "emotion-server": "^10.0.14",
+    "date-fns": "^2.1.0",
+    "emotion": "^10.0.17",
+    "emotion-server": "^10.0.17",
     "express": "^4.17.1",
     "express-http-to-https": "^1.1.4",
-    "helmet": "^3.20.1",
+    "helmet": "^3.21.0",
     "htm": "^2.2.1",
     "http-errors": "^1.7.3",
     "morgan": "^1.9.1",
@@ -46,9 +46,9 @@
   "devDependencies": {
     "cheerio": "^1.0.0-rc.3",
     "eslint": "^6.3.0",
-    "eslint-plugin-jest": "^22.16.0",
+    "eslint-plugin-jest": "^22.17.0",
     "jest": "^24.9.0",
-    "nodemon": "^1.19.1",
+    "nodemon": "^1.19.2",
     "supertest": "^4.0.2"
   }
 }

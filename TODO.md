@@ -1,5 +1,7 @@
 # TODO
 
+- details element for ie11
+- better meta for social
 - add federal holidays
   - put federal holidays on the canada holiday box province list
   - explain what federal holidays are
