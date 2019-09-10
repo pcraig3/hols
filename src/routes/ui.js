@@ -74,6 +74,20 @@ router.get('/provinces', dbmw(db, getProvinces), (req, res) => {
 
 router.get('/province', (req, res) => res.redirect(302, '/provinces'))
 
+router.get('/do-federal-holidays-apply-to-me', (req, res) => {
+  return res.send(
+    renderPage({
+      pageComponent: 'FederallyRegulated',
+      title: 'Do federal holidays apply to me?',
+      docProps: {
+        meta: 'How to tell if you get federal holidays or provincial holidays',
+        fullMeta: true,
+        path: req.path,
+      },
+    }),
+  )
+})
+
 router.get('/about', dbmw(db, getHolidaysWithProvinces), (req, res) => {
   const holidays = upcomingHolidays(res.locals.rows)
   const nextHol = nextHoliday(holidays)
