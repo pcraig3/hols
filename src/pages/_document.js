@@ -3,7 +3,7 @@ const render = require('preact-render-to-string')
 const { html, metaIfSHA, gaIfProd } = require('../utils')
 const { theme } = require('../styles')
 
-const document = ({ title, meta, content }) => {
+const document = ({ title, content, docProps: { meta } }) => {
   return `
     <!DOCTYPE html>
     <html lang="en" id="html">
@@ -77,7 +77,7 @@ const document = ({ title, meta, content }) => {
   `
 }
 
-const renderPage = ({ pageComponent, title = '', meta = '', props }) => {
+const renderPage = ({ pageComponent, title = '', props, docProps }) => {
   const Page = require(`./${pageComponent}.js`)
 
   const content = render(
@@ -88,7 +88,7 @@ const renderPage = ({ pageComponent, title = '', meta = '', props }) => {
 
   // if title is not explicitly passed in, use the name of the page component
   title = title || pageComponent
-  return document({ title, meta, content: renderStylesToString(content) })
+  return document({ title, content: renderStylesToString(content), docProps })
 }
 
 module.exports = renderPage
