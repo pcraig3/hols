@@ -111,6 +111,25 @@ describe('Test ui responses', () => {
       })
     })
 
+    describe('Test /do-federal-holidays-apply-to-me response', () => {
+      test('it should return 200', async () => {
+        const response = await request(app).get('/do-federal-holidays-apply-to-me')
+        expect(response.statusCode).toBe(200)
+      })
+
+      test('it should return the h1, title, and meta tag', async () => {
+        const response = await request(app).get('/do-federal-holidays-apply-to-me')
+        const $ = cheerio.load(response.text)
+        expect($('h1').text()).toEqual('Do federal holidays apply to me?')
+        expect($('title').text()).toEqual(
+          'Do federal holidays apply to me? — Canada statutory holidays 2019',
+        )
+        expect($('meta[name="description"]').attr('content')).toEqual(
+          'How to tell if you get federal holidays or provincial holidays',
+        )
+      })
+    })
+
     describe('for a bad province ID', () => {
       test('it should return 400', async () => {
         const response = await request(app).get('/allosaurus')
