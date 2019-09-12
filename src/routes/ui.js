@@ -13,11 +13,15 @@ router.get('/', dbmw(db, getHolidaysWithProvinces), (req, res) => {
   const holidays = upcomingHolidays(res.locals.rows)
   const nextHol = nextHoliday(holidays)
 
+  const meta = `Canada’s next stat holiday is ${getMeta(
+    nextHol,
+  )}. See all statutory holidays in Canada in 2019.`
+
   return res.send(
     renderPage({
       pageComponent: 'Province',
-      title: 'Canada’s next statutory holiday',
-      docProps: { meta: getMeta(nextHol), path: req.path },
+      title: 'Canadian statutory holidays in 2019',
+      docProps: { meta, path: req.path },
       props: { data: { holidays, nextHoliday: nextHol } },
     }),
   )
@@ -30,11 +34,15 @@ router.get(
   (req, res) => {
     const { holidays, nextHoliday, nameEn: provinceName, id: provinceId } = res.locals.rows[0]
 
+    const meta = `${provinceId}’s next stat holiday is ${getMeta(
+      nextHoliday,
+    )}. See all statutory holidays in ${provinceName}, Canada in 2019.`
+
     return res.send(
       renderPage({
         pageComponent: 'Province',
-        title: `${provinceName}’s next statutory holiday`,
-        docProps: { meta: getMeta(nextHoliday), path: req.path },
+        title: `${provinceName} (${provinceId}) statutory holidays in 2019`,
+        docProps: { meta, path: req.path },
         props: {
           data: { holidays: upcomingHolidays(holidays), nextHoliday, provinceName, provinceId },
         },
@@ -47,11 +55,15 @@ router.get('/federal', dbmw(db, getHolidaysWithProvinces), (req, res) => {
   const holidays = upcomingHolidays(res.locals.rows)
   const nextHol = nextHoliday(holidays)
 
+  const meta = `Canada’s next federal stat holiday is ${getMeta(
+    nextHol,
+  )}. See all federal statutory holidays in Canada in 2019.`
+
   return res.send(
     renderPage({
       pageComponent: 'Province',
-      title: 'Canada’s next federal stat holiday',
-      docProps: { meta: getMeta(nextHol), path: req.path },
+      title: 'Federal statutory holidays in Canada in 2019',
+      docProps: { meta, path: req.path },
       props: { data: { holidays, nextHoliday: nextHol, federal: true } },
     }),
   )
@@ -61,10 +73,10 @@ router.get('/provinces', dbmw(db, getProvinces), (req, res) => {
   return res.send(
     renderPage({
       pageComponent: 'Provinces',
-      title: 'All regions in Canada',
+      title: 'All regions in Canada — Canada statutory holidays',
       docProps: {
-        meta: 'Upcoming holidays for all regions in Canada',
-        fullMeta: true,
+        meta:
+          'Upcoming stat holidays for all regions in Canada. See all federal statutory holidays in Canada in 2019.',
         path: req.path,
       },
       props: { data: { provinces: res.locals.rows } },
@@ -78,10 +90,9 @@ router.get('/do-federal-holidays-apply-to-me', (req, res) => {
   return res.send(
     renderPage({
       pageComponent: 'FederallyRegulated',
-      title: 'Do federal holidays apply to me?',
+      title: 'Do federal holidays apply to me? — Canada statutory holidays',
       docProps: {
-        meta: 'How to tell if you get federal holidays or provincial holidays',
-        fullMeta: true,
+        meta: 'How to tell if you get federal holidays or provincial holidays in Canada.',
         path: req.path,
       },
     }),
@@ -95,8 +106,11 @@ router.get('/about', dbmw(db, getHolidaysWithProvinces), (req, res) => {
   return res.send(
     renderPage({
       pageComponent: 'About',
-      title: 'About',
-      docProps: { meta: 'Give feedback, use the API, etc', fullMeta: true, path: req.path },
+      title: 'About — Canada statutory holidays',
+      docProps: {
+        meta: 'Give feedback, use the API, get in touch, report a proble, etc.',
+        path: req.path,
+      },
       props: { data: { nextHoliday: nextHol } },
     }),
   )
@@ -112,8 +126,8 @@ router.use(function(err, req, res, next) {
   return res.send(
     renderPage({
       pageComponent: 'Error',
-      title: `Error: ${res.statusCode}`,
-      docProps: { meta: err.message.split('.')[0], fullMeta: true, path: req.path },
+      title: `Error: ${res.statusCode} — Canada statutory holidays`,
+      docProps: { meta: err.message.split('.')[0], path: req.path },
       props: {
         data: {
           status: res.statusCode,

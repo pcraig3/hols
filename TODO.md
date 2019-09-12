@@ -1,7 +1,7 @@
 # TODO
 
-- add federal holidays
-  - put federal holidays on the canada holiday box province list
+- Show all holidays not just upcoming holidays
+  - Style past holidays differently
 - add holidays by year to the frontend
   - 2020
   - 2021
@@ -10,6 +10,7 @@
   - st george's day is wrong
 - https://matthewsmith.io/blog/how-to-set-up-cache-busting-in-express
 - list of holidays
+- ? put federal holidays on the canada holiday box province list
 
 # DONE
 

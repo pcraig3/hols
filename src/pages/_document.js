@@ -3,7 +3,7 @@ const render = require('preact-render-to-string')
 const { html, metaIfSHA, gaIfProd } = require('../utils')
 const { theme } = require('../styles')
 
-const document = ({ title, content, docProps: { meta, path, fullMeta = false } }) => {
+const document = ({ title, content, docProps: { meta, path } }) => {
   return `
     <!DOCTYPE html>
     <html lang="en" id="html">
@@ -11,9 +11,7 @@ const document = ({ title, content, docProps: { meta, path, fullMeta = false } }
         ${metaIfSHA() || ''}
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta name="description" content="${
-          !meta ? 'Statutory holidays in Canada' : fullMeta ? meta : `${title} is ${meta}`
-        }">
+        <meta name="description" content="${meta ? meta : 'Canadian statutory holidays'}">
 
         <!-- facebook open graph tags -->
         <meta property="og:type" content="website" />
@@ -27,7 +25,7 @@ const document = ({ title, content, docProps: { meta, path, fullMeta = false } }
         <meta name="twitter:card" content="summary" />
         <meta name="twitter:creator" content="@pcraig3" />
 
-        <title>${title} — Canada statutory holidays 2019</title>
+        <title>${title}</title>
         ${gaIfProd() || ''}
         <link rel="shortcut icon" href="/favicon.png" type="image/x-icon" sizes="32x32" />
         <link href="https://fonts.googleapis.com/css?family=Gothic+A1:400,600&display=swap" rel="stylesheet" />
