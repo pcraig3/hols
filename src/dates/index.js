@@ -35,7 +35,7 @@ const _parseRelativeDates = dateString => {
   weekday = _getISODayInt(weekday)
   position = position === 'before' ? -1 : 1
 
-  let count = 0
+  let count = 1
   // addDays to the current anchorDay until the day of the week matches
   while (weekday !== getISODay(addDays(anchorDate, position * count))) {
     count++
