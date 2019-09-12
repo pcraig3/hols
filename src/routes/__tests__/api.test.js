@@ -195,33 +195,91 @@ describe('Test /api responses', () => {
       })
     })
 
-    describe('for /api/v1/holidays/:holidayId path', () => {
-      test('it should a holiday for a good ID', async () => {
-        const response = await request(app).get('/api/v1/holidays/16')
-        expect(response.statusCode).toBe(200)
+    describe('with ?years=', () => {
+      let years = ['2019', '2020', '2021']
+      years.map(year => {
+        test(`${year} it should return all holidays for ${year}`, async () => {
+          const response = await request(app).get(`/api/v1/holidays?year=${year}`)
+          expect(response.statusCode).toBe(200)
 
-        let { holiday } = JSON.parse(response.text)
+          let { holidays } = JSON.parse(response.text)
 
-        expect(holiday).toMatchObject({
-          id: 16,
-          date: '2019-08-05',
-          nameEn: 'Civic Holiday',
-          nameFr: 'Premier lundi d’août',
-          federal: 1,
-          provinces: expect.any(Array),
+          holidays.map(holiday => {
+            expect(holiday.date.slice(0, 4)).toEqual(year)
+          })
         })
       })
 
-      test('it should return an error message for a bad ID', async () => {
-        const response = await request(app).get('/api/v1/holidays/1000')
-        expect(response.statusCode).toBe(404)
+      let badYears = ['2018', '2022', '1', null, undefined, false, 'orange', 'christmas']
+      badYears.map(year => {
+        test(`${year} it should return all holidays for ${new Date()
+          .getUTCFullYear()
+          .toString()} with the current year`, async () => {
+          const response = await request(app).get(`/api/v1/holidays?year=${year}`)
+          expect(response.statusCode).toBe(200)
 
-        let { error } = JSON.parse(response.text)
+          let { holidays } = JSON.parse(response.text)
 
-        expect(error).toMatchObject({
-          message: 'Error: No holiday with id “1000”',
-          status: response.statusCode,
-          timestamp: expect.any(String),
+          holidays.map(holiday => {
+            expect(holiday.date.slice(0, 4)).toEqual(new Date().getUTCFullYear().toString())
+          })
+        })
+      })
+    })
+  })
+
+  describe('for /api/v1/holidays/:holidayId path', () => {
+    test('it should a holiday for a good ID', async () => {
+      const response = await request(app).get('/api/v1/holidays/16')
+      expect(response.statusCode).toBe(200)
+
+      let { holiday } = JSON.parse(response.text)
+
+      expect(holiday).toMatchObject({
+        id: 16,
+        date: '2019-08-05',
+        nameEn: 'Civic Holiday',
+        nameFr: 'Premier lundi d’août',
+        federal: 1,
+        provinces: expect.any(Array),
+      })
+    })
+
+    test('it should return an error message for a bad ID', async () => {
+      const response = await request(app).get('/api/v1/holidays/1000')
+      expect(response.statusCode).toBe(404)
+
+      let { error } = JSON.parse(response.text)
+
+      expect(error).toMatchObject({
+        message: 'Error: No holiday with id “1000”',
+        status: response.statusCode,
+        timestamp: expect.any(String),
+      })
+    })
+
+    describe('with ?years=', () => {
+      let years = ['2019', '2020', '2021']
+      years.map(year => {
+        test(`${year} it should a holiday with the right dateString`, async () => {
+          const response = await request(app).get(`/api/v1/holidays/16?year=${year}`)
+          expect(response.statusCode).toBe(200)
+
+          let { holiday } = JSON.parse(response.text)
+
+          expect(holiday.date.slice(0, 4)).toEqual(year)
+        })
+      })
+
+      let badYears = ['2018', '2022', '1', null, undefined, false, 'orange', 'christmas']
+      badYears.map(year => {
+        test(`${year} it should a holiday with the current year`, async () => {
+          const response = await request(app).get(`/api/v1/holidays/16?year=${year}`)
+          expect(response.statusCode).toBe(200)
+
+          let { holiday } = JSON.parse(response.text)
+
+          expect(holiday.date.slice(0, 4)).toEqual(new Date().getUTCFullYear().toString())
         })
       })
     })

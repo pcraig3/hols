@@ -2,11 +2,9 @@
 
 - add federal holidays
   - put federal holidays on the canada holiday box province list
-- add holidays by year
+- add holidays by year to the frontend
   - 2020
-  - 2019
   - 2021
-  - unprefixed? two years?
 - Wiki problems
   - nunavut day?
   - st george's day is wrong
@@ -88,3 +86,7 @@
 - add test for menu item component
 - details element for ie11
 - better meta for social
+- add holidays by year to the API
+  - 2019
+  - 2020
+  - 2021
