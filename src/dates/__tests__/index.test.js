@@ -25,7 +25,7 @@ describe('Test getISODate', () => {
     ]
 
     days2019.map(day => {
-      test(`returns correct ISO date string for: "${day.str}"`, () => {
+      test(`returns correct 2019 ISO date string for: "${day.str}"`, () => {
         expect(getISODate(day.str, 2019)).toEqual(day.iso)
       })
 
@@ -59,8 +59,38 @@ describe('Test getISODate', () => {
     ]
 
     days2020.map(day => {
-      test(`returns correct ISO date string for: "${day.str}"`, () => {
+      test(`returns correct 2020 ISO date string for: "${day.str}"`, () => {
         expect(getISODate(day.str, 2020)).toEqual(day.iso)
+      })
+    })
+  })
+
+  describe('for 2021', () => {
+    const days2020 = [
+      { str: 'January 1', iso: '2021-01-01' },
+      { str: 'Third Monday in February', iso: '2021-02-15' },
+      { str: 'March 17', iso: '2021-03-17' },
+      { str: 'Friday before Easter Day', iso: '2021-04-02' },
+      { str: 'Monday after Easter Day', iso: '2021-04-05' },
+      { str: 'April 23', iso: '2021-04-23' },
+      { str: 'Monday before May 25', iso: '2021-05-24' },
+      { str: 'June 21', iso: '2021-06-21' },
+      { str: 'June 24', iso: '2021-06-24' },
+      { str: 'July 1', iso: '2021-07-01' },
+      { str: 'July 12', iso: '2021-07-12' },
+      { str: 'First Monday in August', iso: '2021-08-02' },
+      { str: 'Third Monday in August', iso: '2021-08-16' },
+      { str: 'Third Friday in August', iso: '2021-08-20' },
+      { str: 'First Monday in September', iso: '2021-09-06' },
+      { str: 'Second Monday in October', iso: '2021-10-11' },
+      { str: 'November 11', iso: '2021-11-11' },
+      { str: 'December 25', iso: '2021-12-25' },
+      { str: 'December 26', iso: '2021-12-26' },
+    ]
+
+    days2020.map(day => {
+      test(`returns correct 2021 ISO date string for: "${day.str}"`, () => {
+        expect(getISODate(day.str, 2021)).toEqual(day.iso)
       })
     })
   })
