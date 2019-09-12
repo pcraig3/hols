@@ -43,8 +43,9 @@ const _parseRelativeDates = dateString => {
   return addDays(anchorDate, position * count)
 }
 
-const getISODate = dateString => {
+const getISODate = (dateString, year = 2019) => {
   let date
+  dateString = `${dateString} ${year}`
 
   if (/First|Second|Third|Fourth/i.test(dateString)) {
     dateString = `The ${dateString}`
