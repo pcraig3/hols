@@ -23,10 +23,11 @@ const _getISODayInt = weekday => {
 const _parseRelativeDates = dateString => {
   let [weekday, position, ...anchorDate] = dateString.split(' ')
 
+  let year = anchorDate[anchorDate.length - 1]
   anchorDate = anchorDate.join(' ')
 
   if (anchorDate.includes('Easter')) {
-    anchorDate = easterDay(2019)
+    anchorDate = easterDay(year)
   } else {
     anchorDate = Sugar.Date.create(anchorDate)
   }
