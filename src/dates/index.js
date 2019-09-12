@@ -44,7 +44,7 @@ const _parseRelativeDates = dateString => {
   return addDays(anchorDate, position * count)
 }
 
-const getISODate = (dateString, year = 2019) => {
+const getISODate = (dateString, year = new Date().getUTCFullYear()) => {
   let date
   dateString = `${dateString} ${year}`
 
