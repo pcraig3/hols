@@ -38,7 +38,7 @@ const _parseFederal = federal => {
   return yesFederal.includes(federal) ? 1 : noFederal.includes(federal) ? 0 : null
 }
 
-const getHolidays = (db, holidayId, federal) => {
+const getHolidays = (db, { holidayId, federal, year }) => {
   let holidays = []
   federal = _parseFederal(federal)
 
@@ -51,7 +51,7 @@ const getHolidays = (db, holidayId, federal) => {
   }
 
   return holidays.map(holiday => {
-    holiday.date = getISODate(holiday.date)
+    holiday.date = getISODate(holiday.date, year)
     return holiday
   })
 }
@@ -70,11 +70,11 @@ const getNextHoliday = provinces => {
   })
 }
 
-const getProvincesWithHolidays = async (db, { provinceId }) => {
+const getProvincesWithHolidays = async (db, { provinceId, year }) => {
   const provincesObj = array2Obj(await getProvinces(db, { provinceId }))
   Object.values(provincesObj).map(p => (p.holidays = []))
 
-  const holidaysObj = array2Obj(await getHolidays(db))
+  const holidaysObj = array2Obj(await getHolidays(db, { year }))
 
   const phs = await getProvinceHolidays(db)
 
@@ -90,8 +90,8 @@ const getProvincesWithHolidays = async (db, { provinceId }) => {
   return Object.values(provincesObj)
 }
 
-const getHolidaysWithProvinces = async (db, { holidayId, federal }) => {
-  const holidaysObj = array2Obj(await getHolidays(db, holidayId, federal))
+const getHolidaysWithProvinces = async (db, { holidayId, federal, year }) => {
+  const holidaysObj = array2Obj(await getHolidays(db, { holidayId, federal, year }))
   Object.values(holidaysObj).map(h => (h.provinces = []))
 
   const provincesObj = array2Obj(await getProvinces(db))
