@@ -24,11 +24,22 @@ const dbmw = (db, cb) => {
       return undefined
     }
 
+    const _parseYear = req => {
+      const year = parseInt(req.query.year)
+
+      if (![2019, 2020, 2021].includes(year)) {
+        return new Date().getUTCFullYear()
+      }
+
+      return year
+    }
+
     // allow query parameters or url parameters to be passed in
     let options = {
       holidayId: req.params.holidayId,
       provinceId: req.params.provinceId,
       federal: _parseFederal(req),
+      year: _parseYear(req),
     }
 
     try {
