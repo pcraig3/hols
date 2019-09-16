@@ -5,6 +5,8 @@
 - add holidays by year to the frontend
   - 2020
   - 2021
+- Add a print feature
+- Add an export ics feature
 - Wiki problems
   - nunavut day?
   - st george's day is wrong

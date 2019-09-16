@@ -101,8 +101,8 @@ const summaryTable = css`
     margin-bottom: calc(${theme.space.xl} + ${theme.space.xl});
   }
 
+  h1,
   h2 {
-    font-size: 1.5em;
     margin: 0;
     padding-top: ${theme.space.md};
     padding-bottom: ${theme.space.xl};
@@ -118,13 +118,20 @@ const summaryTable = css`
   }
 `
 
-const SummaryTable = ({ rows, title = false, id, ...props }) =>
+const renderHeading = ({ title, id, h1 }) => {
+  return h1
+    ? html`
+        <h1 id=${id}>${title}</h1>
+      `
+    : html`
+        <h2 id=${id}>${title}</h2>
+      `
+}
+
+const SummaryTable = ({ rows, title = false, id, h1 = false, ...props }) =>
   html`
     <div class=${summaryTable}>
-      ${title &&
-        html`
-          <h2 id=${id}>${title}</h2>
-        `}
+      ${title && renderHeading({ title, id, h1 })}
       <dl title=${title}>
         ${rows.map(row => renderSummaryRow(row, props))}
       </dl>

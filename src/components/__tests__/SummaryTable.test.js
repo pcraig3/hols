@@ -39,4 +39,20 @@ describe('<SummaryTable>', () => {
     expect($('dl').attr('title')).toEqual('Hols')
     expect($('h2').text()).toEqual('Hols')
   })
+
+  test('renders with am h2 heading with an id', () => {
+    const $ = renderTable({ rows, title: 'Hols', id: 'h2-title' })
+
+    expect($('h2').text()).toEqual('Hols')
+    expect($('h2').attr('id')).toEqual('h2-title')
+    expect($('h1').length).toBe(0)
+  })
+
+  test('renders with an h1 heading with an id', () => {
+    const $ = renderTable({ rows, title: 'Hols', id: 'h1-title', h1: true })
+
+    expect($('h2').length).toBe(0)
+    expect($('h1').text()).toEqual('Hols')
+    expect($('h1').attr('id')).toEqual('h1-title')
+  })
 })
