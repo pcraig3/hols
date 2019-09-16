@@ -24,6 +24,15 @@ describe('<SummaryTable>', () => {
     expect($('dl div').length).toBe(1)
   })
 
+  test('renders <dl> element and 1 row with a passed-in className', () => {
+    rows[0].className = 'rowClass'
+    const $ = renderTable({ rows })
+
+    expect($('dl').length).toBe(1)
+    expect($('dl div').length).toBe(1)
+    expect($('dl div').attr('class')).toMatch(/ rowClass$/)
+  })
+
   test('renders without a title', () => {
     const $ = renderTable({ rows })
 

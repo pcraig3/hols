@@ -39,6 +39,6 @@ describe('Province page', () => {
       'Canada’s next statutory holiday is Gold Cup Parade Day on August 16th',
     )
     expect($('h2').length).toBe(1)
-    expect($('h2').text()).toEqual('Upcoming holidays in Canada')
+    expect($('h2').text()).toEqual('Canada statutory holidays in 2019')
   })
 })

@@ -32,19 +32,20 @@ router.get(
   dbmw(db, getProvincesWithHolidays),
   checkProvinceIdErr,
   (req, res) => {
+    const year = new Date().getUTCFullYear()
     const { holidays, nextHoliday, nameEn: provinceName, id: provinceId } = res.locals.rows[0]
 
     const meta = `${provinceId}’s next stat holiday is ${getMeta(
       nextHoliday,
-    )}. See all statutory holidays in ${provinceName}, Canada in 2019.`
+    )}. See all statutory holidays in ${provinceName}, Canada in ${year}.`
 
     return res.send(
       renderPage({
         pageComponent: 'Province',
-        title: `${provinceName} (${provinceId}) statutory holidays in 2019`,
+        title: `${provinceName} (${provinceId}) statutory holidays in ${year}`,
         docProps: { meta, path: req.path },
         props: {
-          data: { holidays: upcomingHolidays(holidays), nextHoliday, provinceName, provinceId },
+          data: { holidays, nextHoliday, provinceName, provinceId, year },
         },
       }),
     )

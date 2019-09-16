@@ -51,6 +51,8 @@ const createRows = (holidays, federal) => {
     )
   }
 
+  const today = new Date().toISOString().slice(0, 10)
+
   return holidays.map(holiday => {
     const row = {
       key: html`
@@ -63,12 +65,21 @@ const createRows = (holidays, federal) => {
       row.value2 = _provinces(holiday)
     }
 
+    row.className = holiday.date < today ? 'past' : 'upcoming'
+
     return row
   })
 }
 
 const Province = ({
-  data: { holidays, nextHoliday, provinceName = 'Canada', provinceId, federal = false } = {},
+  data: {
+    holidays,
+    nextHoliday,
+    provinceName = 'Canada',
+    provinceId,
+    federal = false,
+    year = 2019,
+  } = {},
 }) =>
   html`
     <${Layout}>
@@ -80,15 +91,15 @@ const Province = ({
         <section>
           <${NextHolidayBox} ...${{ nextHoliday, provinceName, provinceId, federal }} />
           <span class="bottom-link"
-            ><a href="#upcoming-holidays" class="down-arrow">Upcoming holidays</a></span
+            ><a href=${`#holidays-${year}`} class="down-arrow">All ${year} holidays</a></span
           >
           <${MenuLink} canada=${!federal && provinceName === 'Canada'} //>
         </section>
 
         <section>
           <${SummaryTable}
-            id="upcoming-holidays"
-            title=${`Upcoming${federal ? ' federal' : ''} holidays in ${provinceName}`}
+            id=${`holidays-${year}`}
+            title=${`${provinceName}${federal ? ' federal' : ''} statutory holidays in ${year}`}
             rows=${createRows(holidays, federal)}
           />
           <span class="bottom-link"><a href="#html" class="up-arrow">Back to top</a></span>
