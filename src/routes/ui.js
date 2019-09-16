@@ -3,14 +3,14 @@ const router = express.Router()
 const db = require('sqlite')
 const createError = require('http-errors')
 const renderPage = require('../pages/_document.js')
-const { dbmw, checkProvinceIdErr, upcomingHolidays, nextHoliday } = require('../utils')
+const { dbmw, checkProvinceIdErr, nextHoliday } = require('../utils')
 const { getProvinces, getHolidaysWithProvinces, getProvincesWithHolidays } = require('../queries')
 const { displayDate } = require('../dates')
 
 const getMeta = holiday => `${holiday.nameEn} on ${displayDate(holiday.date)}`
 
 router.get('/', dbmw(db, getHolidaysWithProvinces), (req, res) => {
-  const holidays = upcomingHolidays(res.locals.rows)
+  const holidays = res.locals.rows
   const nextHol = nextHoliday(holidays)
 
   const meta = `Canada’s next stat holiday is ${getMeta(
@@ -53,7 +53,7 @@ router.get(
 )
 
 router.get('/federal', dbmw(db, getHolidaysWithProvinces), (req, res) => {
-  const holidays = upcomingHolidays(res.locals.rows)
+  const holidays = res.locals.rows
   const nextHol = nextHoliday(holidays)
 
   const meta = `Canada’s next federal stat holiday is ${getMeta(
@@ -101,8 +101,7 @@ router.get('/do-federal-holidays-apply-to-me', (req, res) => {
 })
 
 router.get('/about', dbmw(db, getHolidaysWithProvinces), (req, res) => {
-  const holidays = upcomingHolidays(res.locals.rows)
-  const nextHol = nextHoliday(holidays)
+  const nextHol = nextHoliday(res.locals.rows)
 
   return res.send(
     renderPage({

@@ -1,13 +1,13 @@
 # TODO
 
-- Show all holidays not just upcoming holidays
-  - Style past holidays differently
+- show all holidays not just upcoming holidays
+  - show upcoming holidays if preferred
 - add holidays by year to the frontend
   - 2020
   - 2021
-- Add a print feature
-- Add an export ics feature
-- Wiki problems
+- add a print feature
+- add an export ics feature
+- wiki problems
   - nunavut day?
   - st george's day is wrong
 - https://matthewsmith.io/blog/how-to-set-up-cache-busting-in-express
@@ -93,3 +93,5 @@
   - 2019
   - 2020
   - 2021
+- show all holidays not just upcoming holidays
+  - style past holidays differently

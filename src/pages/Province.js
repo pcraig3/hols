@@ -32,6 +32,22 @@ const styles = ({ accent = theme.color.red, focus = theme.color.focus } = {}) =>
       outline-color: ${focus};
     }
   }
+
+  div.past {
+    opacity: 0.6;
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+
+  div.upcoming {
+    color: ${accent};
+
+    ~ div.upcoming {
+      color: black;
+    }
+  }
 `
 
 const createRows = (holidays, federal) => {
