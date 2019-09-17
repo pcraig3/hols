@@ -130,10 +130,10 @@ const renderHeading = ({ title, id, h1 }) => {
       `
 }
 
-const SummaryTable = ({ rows, title = false, id, h1 = false, ...props }) =>
+const SummaryTable = ({ rows, title = false, id, h1 = false, children, ...props }) =>
   html`
     <div class=${summaryTable}>
-      ${title && renderHeading({ title, id, h1 })}
+      ${title && renderHeading({ title, id, h1 })} ${children}
       <dl title=${title}>
         ${rows.map(row => renderSummaryRow(row, props))}
       </dl>

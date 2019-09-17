@@ -64,4 +64,21 @@ describe('<SummaryTable>', () => {
     expect($('h1').text()).toEqual('Hols')
     expect($('h1').attr('id')).toEqual('h1-title')
   })
+
+  test('renders with a child element after the heading', () => {
+    const $ = cheerio.load(
+      render(
+        html`
+          <${SummaryTable} rows=${rows} title="Hols">
+            <p>subheading</p>
+          <//>
+        `,
+      ),
+    )
+
+    expect($('dl').attr('title')).toEqual('Hols')
+    expect($('h2').text()).toEqual('Hols')
+    expect($('h2 + p').length).toBe(1)
+    expect($('h2 + p').text()).toBe('subheading')
+  })
 })
