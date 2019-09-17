@@ -35,19 +35,29 @@ const styles = ({ accent = theme.color.red, focus = theme.color.focus } = {}) =>
   }
 
   div.past {
-    opacity: 0.6;
+    > * {
+      opacity: 0.45;
 
-    &:hover {
+      &.key {
+        text-decoration: line-through;
+      }
+    }
+
+    &:hover > * {
       opacity: 1;
+
+      &.key {
+        text-decoration: none;
+      }
     }
   }
 
-  div.upcoming {
+  div.upcoming .key {
     color: ${accent};
+  }
 
-    ~ div.upcoming {
-      color: black;
-    }
+  div.upcoming ~ div.upcoming .key {
+    color: black;
   }
 
   #toggle-past {
