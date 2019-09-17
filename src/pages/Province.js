@@ -137,7 +137,8 @@ const Province = ({
             <${Button}
               id="toggle-past"
               color=${federal || provinceId ? theme.color[federal ? 'federal' : provinceId] : {}}
-              >Hide past holidays<//
+              style="display: none;"
+              >Show past holidays<//
             >
           <//>
           <span class="bottom-link"><a href="#html" class="up-arrow">Back to top</a></span>
