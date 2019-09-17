@@ -6,6 +6,7 @@ const DateHtml = require('../components/DateHtml.js')
 const NextHolidayBox = require('../components/NextHolidayBox.js')
 const MenuLink = require('../components/MenuLink.js')
 const SummaryTable = require('../components/SummaryTable.js')
+const Button = require('../components/Button.js')
 
 const styles = ({ accent = theme.color.red, focus = theme.color.focus } = {}) => css`
   section {
@@ -47,6 +48,11 @@ const styles = ({ accent = theme.color.red, focus = theme.color.focus } = {}) =>
     ~ div.upcoming {
       color: black;
     }
+  }
+
+  #toggle-past {
+    margin-top: ${theme.space.sm};
+    margin-bottom: ${theme.space.xl};
   }
 `
 
@@ -117,7 +123,13 @@ const Province = ({
             id=${`holidays-${year}`}
             title=${`${provinceName}${federal ? ' federal' : ''} statutory holidays in ${year}`}
             rows=${createRows(holidays, federal)}
-          />
+          >
+            <${Button}
+              id="toggle-past"
+              color=${federal || provinceId ? theme.color[federal ? 'federal' : provinceId] : {}}
+              >Hide past holidays<//
+            >
+          <//>
           <span class="bottom-link"><a href="#html" class="up-arrow">Back to top</a></span>
         </section>
       </div>
