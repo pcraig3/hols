@@ -1,7 +1,5 @@
 # TODO
 
-- show all holidays not just upcoming holidays
-  - show upcoming holidays if preferred
 - add holidays by year to the frontend
   - 2020
   - 2021
@@ -95,3 +93,4 @@
   - 2021
 - show all holidays not just upcoming holidays
   - style past holidays differently
+  - show upcoming holidays if preferred
