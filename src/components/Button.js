@@ -30,8 +30,8 @@ const styles = ({ accent = theme.color.red, focus = theme.color.focus } = {}) =>
   }
 
   &:focus {
-    outline: 2px dashed ${focus};
-    outline-offset: 6px;
+    outline: 3px dashed ${focus};
+    outline-offset: 8px;
   }
 
   &::-moz-focus-inner {
@@ -45,9 +45,9 @@ const styles = ({ accent = theme.color.red, focus = theme.color.focus } = {}) =>
   }
 `
 
-const Button = ({ children, id, type = 'button', color = {} }) => {
+const Button = ({ children, color = {}, ...props }) => {
   return html`
-    <button class=${styles(color)} id=${id} type=${type}>
+    <button class=${styles(color)} ...${props}>
       ${children}
     </button>
   `
