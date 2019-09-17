@@ -37,18 +37,10 @@ const styles = ({ accent = theme.color.red, focus = theme.color.focus } = {}) =>
   div.past {
     > * {
       opacity: 0.45;
-
-      &.key {
-        text-decoration: line-through;
-      }
     }
 
     &:hover > * {
       opacity: 1;
-
-      &.key {
-        text-decoration: none;
-      }
     }
   }
 
@@ -123,7 +115,7 @@ const Province = ({
         <section>
           <${NextHolidayBox} ...${{ nextHoliday, provinceName, provinceId, federal }} />
           <span class="bottom-link"
-            ><a href=${`#holidays-${year}`} class="down-arrow">All ${year} holidays</a></span
+            ><a href=${`#holidays-${year}`} class="down-arrow">More ${year} holidays</a></span
           >
           <${MenuLink} canada=${!federal && provinceName === 'Canada'} //>
         </section>
