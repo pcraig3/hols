@@ -32,7 +32,7 @@
     "emotion-server": "^10.0.17",
     "express": "^4.17.1",
     "express-http-to-https": "^1.1.4",
-    "helmet": "^3.21.0",
+    "helmet": "^3.21.1",
     "htm": "^2.2.1",
     "http-errors": "^1.7.3",
     "morgan": "^1.9.1",
