@@ -63,10 +63,12 @@ const styles = css`
   }
 `
 
-const Details = ({ summary, children }) => {
+const Details = ({ summary, id, children }) => {
   return html`
-    <details class=${styles}>
-      <summary><span>${summary}</span></summary>
+    <details class=${styles} id=${id}>
+      <summary data-event="true" data-label="federal-holidays"
+        ><span data-event="true" data-label="federal-holidays">${summary}</span></summary
+      >
       ${children}
     </details>
   `
