@@ -6,7 +6,6 @@
 - add a print feature
 - add an export ics feature
 - wiki problems
-  - nunavut day?
   - st george's day is wrong
 - https://matthewsmith.io/blog/how-to-set-up-cache-busting-in-express
 - list of holidays
@@ -94,3 +93,5 @@
 - show all holidays not just upcoming holidays
   - style past holidays differently
   - show upcoming holidays if preferred
+- wiki problems
+  - nunavut day
