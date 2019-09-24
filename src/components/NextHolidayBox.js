@@ -47,10 +47,14 @@ const styles = ({ accent = theme.color.red } = {}) => css`
     margin-top: ${theme.space.xl};
     font-size: 1.4em;
 
-    a,
-    a:visited {
-      color: white;
+    + p {
+      margin-top: ${theme.space.xl};
     }
+  }
+
+  a,
+  a:visited {
+    color: white;
   }
 
   time {
@@ -113,6 +117,12 @@ const nextHolidayBox = ({ nextHoliday, provinceName = 'Canada', provinceId, fede
       ${nextHoliday.provinces && !federal
         ? renderCelebratingProvinces(nextHoliday.provinces)
         : renderRelativeDate(nextHoliday.date)}
+      ${federal &&
+        html`
+          <p>
+            <a href="/do-federal-holidays-apply-to-me">Find out who gets federal stat holidays</a>.
+          </p>
+        `}
     </div>
   `
 }
