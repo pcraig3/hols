@@ -54,6 +54,7 @@ INSERT INTO Holiday (date, nameEn, nameFr) VALUES ('First Monday in August', 'Ci
 INSERT INTO Holiday (date, nameEn, nameFr) VALUES ('First Monday in August', 'British Columbia Day', 'Jour de Colombie-Britannique');
 INSERT INTO Holiday (date, nameEn, nameFr) VALUES ('First Monday in August', 'Heritage Day', 'Fête du patrimoine');
 INSERT INTO Holiday (date, nameEn, nameFr) VALUES ('First Monday in August', 'New Brunswick Day', 'Jour de Nouveau Brunswick');
+INSERT INTO Holiday (date, nameEn, nameFr) VALUES ('First Monday in August', 'Saskatchewan Day', 'Jour de Saskatchewan');
 INSERT INTO Holiday (date, nameEn, nameFr) VALUES ('Third Monday in August', 'Discovery Day', 'Jour de la Découverte');
 INSERT INTO Holiday (date, nameEn, nameFr) VALUES ('First Monday in September', 'Labour Day', 'Fête du travail');
 INSERT INTO Holiday (date, nameEn, nameFr) VALUES ('Second Monday in October', 'Thanksgiving', 'Action de grâce');
@@ -157,7 +158,8 @@ INSERT INTO ProvinceHoliday (holidayId, provinceId) VALUES ((SELECT id FROM Holi
 INSERT INTO ProvinceHoliday (holidayId, provinceId) VALUES ((SELECT id FROM Holiday WHERE (date = 'First Monday in August' AND nameEn = 'Civic Holiday')), 'NL');
 INSERT INTO ProvinceHoliday (holidayId, provinceId) VALUES ((SELECT id FROM Holiday WHERE (date = 'First Monday in August' AND nameEn = 'Civic Holiday')), 'NT');
 INSERT INTO ProvinceHoliday (holidayId, provinceId) VALUES ((SELECT id FROM Holiday WHERE (date = 'First Monday in August' AND nameEn = 'Civic Holiday')), 'NU');
-INSERT INTO ProvinceHoliday (holidayId, provinceId) VALUES ((SELECT id FROM Holiday WHERE (date = 'First Monday in August' AND nameEn = 'Civic Holiday')), 'SK');
+
+INSERT INTO ProvinceHoliday (holidayId, provinceId) VALUES ((SELECT id FROM Holiday WHERE (date = 'First Monday in August' AND nameEn = 'Saskatchewan Day')), 'SK');
 
 INSERT INTO ProvinceHoliday (holidayId, provinceId) VALUES ((SELECT id FROM Holiday WHERE (date = 'First Monday in August' AND nameEn = 'Heritage Day')), 'AB');
 INSERT INTO ProvinceHoliday (holidayId, provinceId) VALUES ((SELECT id FROM Holiday WHERE (date = 'First Monday in August' AND nameEn = 'Heritage Day')), 'YT');
