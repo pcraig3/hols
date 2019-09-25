@@ -45,7 +45,7 @@ const styles = ({ accent = theme.color.red } = {}) => css`
   h1 + p {
     margin-bottom: 0;
     margin-top: ${theme.space.xl};
-    font-size: 1.4em;
+    font-size: 1.1em;
 
     + p {
       margin-top: ${theme.space.xl};
