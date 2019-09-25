@@ -4,7 +4,7 @@ Canada has public holidays, but when are they? UK people know when [UK bank holi
 
 This is an API that lists
 
-- all 28 public holidays in Canada
+- all 27 public holidays in Canada
 - all 13 provinces and territories in Canada
 - which provinces/territories observe which holidays
 - (TODO: which holidays are federal holidays)
