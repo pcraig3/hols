@@ -125,7 +125,6 @@ INSERT INTO ProvinceHoliday (holidayId, provinceId) VALUES ((SELECT id FROM Holi
 INSERT INTO ProvinceHoliday (holidayId, provinceId) VALUES ((SELECT id FROM Holiday WHERE (date = 'Monday before May 25' AND nameEn = 'Victoria Day')), 'AB');
 INSERT INTO ProvinceHoliday (holidayId, provinceId) VALUES ((SELECT id FROM Holiday WHERE (date = 'Monday before May 25' AND nameEn = 'Victoria Day')), 'BC');
 INSERT INTO ProvinceHoliday (holidayId, provinceId) VALUES ((SELECT id FROM Holiday WHERE (date = 'Monday before May 25' AND nameEn = 'Victoria Day')), 'MB');
-INSERT INTO ProvinceHoliday (holidayId, provinceId) VALUES ((SELECT id FROM Holiday WHERE (date = 'Monday before May 25' AND nameEn = 'Victoria Day')), 'NB');
 INSERT INTO ProvinceHoliday (holidayId, provinceId) VALUES ((SELECT id FROM Holiday WHERE (date = 'Monday before May 25' AND nameEn = 'Victoria Day')), 'NT');
 INSERT INTO ProvinceHoliday (holidayId, provinceId) VALUES ((SELECT id FROM Holiday WHERE (date = 'Monday before May 25' AND nameEn = 'Victoria Day')), 'NS');
 INSERT INTO ProvinceHoliday (holidayId, provinceId) VALUES ((SELECT id FROM Holiday WHERE (date = 'Monday before May 25' AND nameEn = 'Victoria Day')), 'NU');
@@ -226,7 +225,6 @@ INSERT INTO ProvinceHoliday (holidayId, provinceId) VALUES ((SELECT id FROM Holi
 INSERT INTO ProvinceHoliday (holidayId, provinceId) VALUES ((SELECT id FROM Holiday WHERE (date = 'December 25' AND nameEn = 'Christmas Day')), 'SK');
 INSERT INTO ProvinceHoliday (holidayId, provinceId) VALUES ((SELECT id FROM Holiday WHERE (date = 'December 25' AND nameEn = 'Christmas Day')), 'YT');
 
-INSERT INTO ProvinceHoliday (holidayId, provinceId) VALUES ((SELECT id FROM Holiday WHERE (date = 'December 26' AND nameEn = 'Boxing Day')), 'NB');
 INSERT INTO ProvinceHoliday (holidayId, provinceId) VALUES ((SELECT id FROM Holiday WHERE (date = 'December 26' AND nameEn = 'Boxing Day')), 'NS');
 INSERT INTO ProvinceHoliday (holidayId, provinceId) VALUES ((SELECT id FROM Holiday WHERE (date = 'December 26' AND nameEn = 'Boxing Day')), 'ON');
 INSERT INTO ProvinceHoliday (holidayId, provinceId) VALUES ((SELECT id FROM Holiday WHERE (date = 'December 26' AND nameEn = 'Boxing Day')), 'PE');
