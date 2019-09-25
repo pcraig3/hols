@@ -74,3 +74,19 @@ docker run -it -p 3000:3000 pcraig3/hols
 The container should be running at [http://localhost:3000/](http://localhost:3000/).
 
 On a Mac, press `Control` + `C` to quit the running docker container.
+
+## Citations
+
+- AB: 9 https://www.alberta.ca/alberta-general-holidays.aspx
+- BC: 10 https://www2.gov.bc.ca/gov/content/employment-business/employment-standards-advice/employment-standards/statutory-holidays
+- MB: 8 https://www.gov.mb.ca/labour/standards/doc,gen-holidays-after-april-30-07,factsheet.html#q12
+- NB: 8 https://www2.gnb.ca/content/dam/gnb/Departments/petl-epft/PDF/es/FactSheets/PublicHolidaysVacation.pdf
+- NL: 9 https://www.newfoundlandlabrador.com/about-this-place/nl-facts
+- NS: 6 https://novascotia.ca/lae/employmentrights/holidaychart.asp
+- NT: 10 https://www.ece.gov.nt.ca/en/services/employment-standards/frequently-asked-questions
+- NU: 9 http://nu-lsco.ca/faq-s?tmpl=component&faqid=11
+- ON: 9 https://www.ontario.ca/document/your-guide-employment-standards-act-0/public-holidays
+- PE: 7 https://www.princeedwardisland.ca/en/information/workforce-and-advanced-learning/paid-holidays
+- QE: 8 https://www.educaloi.qc.ca/en/capsules/public-holidays
+- SK: 10 https://www.saskatchewan.ca/business/employment-standards/vacations-holidays-leaves-and-absences/public-statutory-holidays/list-of-saskatchewan-public-holidays
+- YT: 10 https://yukon.ca/en/doing-business/employer-responsibilities/find-yukon-statutory-holiday
