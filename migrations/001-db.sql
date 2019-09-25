@@ -161,7 +161,6 @@ INSERT INTO ProvinceHoliday (holidayId, provinceId) VALUES ((SELECT id FROM Holi
 INSERT INTO ProvinceHoliday (holidayId, provinceId) VALUES ((SELECT id FROM Holiday WHERE (date = 'First Monday in August' AND nameEn = 'Civic Holiday')), 'NL');
 INSERT INTO ProvinceHoliday (holidayId, provinceId) VALUES ((SELECT id FROM Holiday WHERE (date = 'First Monday in August' AND nameEn = 'Civic Holiday')), 'NT');
 INSERT INTO ProvinceHoliday (holidayId, provinceId) VALUES ((SELECT id FROM Holiday WHERE (date = 'First Monday in August' AND nameEn = 'Civic Holiday')), 'NU');
-INSERT INTO ProvinceHoliday (holidayId, provinceId) VALUES ((SELECT id FROM Holiday WHERE (date = 'First Monday in August' AND nameEn = 'Civic Holiday')), 'ON');
 INSERT INTO ProvinceHoliday (holidayId, provinceId) VALUES ((SELECT id FROM Holiday WHERE (date = 'First Monday in August' AND nameEn = 'Civic Holiday')), 'SK');
 
 INSERT INTO ProvinceHoliday (holidayId, provinceId) VALUES ((SELECT id FROM Holiday WHERE (date = 'First Monday in August' AND nameEn = 'Heritage Day')), 'AB');
