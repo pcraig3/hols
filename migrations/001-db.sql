@@ -194,13 +194,9 @@ INSERT INTO ProvinceHoliday (holidayId, provinceId) VALUES ((SELECT id FROM Holi
 INSERT INTO ProvinceHoliday (holidayId, provinceId) VALUES ((SELECT id FROM Holiday WHERE (date = 'Second Monday in October' AND nameEn = 'Thanksgiving')), 'AB');
 INSERT INTO ProvinceHoliday (holidayId, provinceId) VALUES ((SELECT id FROM Holiday WHERE (date = 'Second Monday in October' AND nameEn = 'Thanksgiving')), 'BC');
 INSERT INTO ProvinceHoliday (holidayId, provinceId) VALUES ((SELECT id FROM Holiday WHERE (date = 'Second Monday in October' AND nameEn = 'Thanksgiving')), 'MB');
-INSERT INTO ProvinceHoliday (holidayId, provinceId) VALUES ((SELECT id FROM Holiday WHERE (date = 'Second Monday in October' AND nameEn = 'Thanksgiving')), 'NB');
-INSERT INTO ProvinceHoliday (holidayId, provinceId) VALUES ((SELECT id FROM Holiday WHERE (date = 'Second Monday in October' AND nameEn = 'Thanksgiving')), 'NL');
 INSERT INTO ProvinceHoliday (holidayId, provinceId) VALUES ((SELECT id FROM Holiday WHERE (date = 'Second Monday in October' AND nameEn = 'Thanksgiving')), 'NT');
-INSERT INTO ProvinceHoliday (holidayId, provinceId) VALUES ((SELECT id FROM Holiday WHERE (date = 'Second Monday in October' AND nameEn = 'Thanksgiving')), 'NS');
 INSERT INTO ProvinceHoliday (holidayId, provinceId) VALUES ((SELECT id FROM Holiday WHERE (date = 'Second Monday in October' AND nameEn = 'Thanksgiving')), 'NU');
 INSERT INTO ProvinceHoliday (holidayId, provinceId) VALUES ((SELECT id FROM Holiday WHERE (date = 'Second Monday in October' AND nameEn = 'Thanksgiving')), 'ON');
-INSERT INTO ProvinceHoliday (holidayId, provinceId) VALUES ((SELECT id FROM Holiday WHERE (date = 'Second Monday in October' AND nameEn = 'Thanksgiving')), 'PE');
 INSERT INTO ProvinceHoliday (holidayId, provinceId) VALUES ((SELECT id FROM Holiday WHERE (date = 'Second Monday in October' AND nameEn = 'Thanksgiving')), 'QC');
 INSERT INTO ProvinceHoliday (holidayId, provinceId) VALUES ((SELECT id FROM Holiday WHERE (date = 'Second Monday in October' AND nameEn = 'Thanksgiving')), 'SK');
 INSERT INTO ProvinceHoliday (holidayId, provinceId) VALUES ((SELECT id FROM Holiday WHERE (date = 'Second Monday in October' AND nameEn = 'Thanksgiving')), 'YT');
