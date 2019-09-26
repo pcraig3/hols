@@ -10,7 +10,8 @@ const FederallyRegulated = () =>
           <h1>Do federal holidays apply to me?</h1>
 
           <p>
-            Probably not. Most Canadian workers will get provincial holidays off, not federal ones.
+            Probably not, but it depends on your job. Most Canadian workers get provincial holidays
+            off, not federal ones.
           </p>
           <aside>
             <ul>
@@ -23,11 +24,10 @@ const FederallyRegulated = () =>
 
           <h2>Who’s federally regulated?</h2>
           <p>
-            All jobs in Canada are regulated by <strong>the province</strong> or the${' '}<strong
-              >federal</strong
-            >
-            ${' '}government. Depending on where you work, you will either get provincial holidays
-            or federal holidays.
+            All jobs in Canada are regulated by <strong>a provincial</strong> government or
+            ${' '}<strong>the federal</strong>
+            ${' '}government. If your job is regulated by the federal government, you get federal
+            holidays instead of the provincial holidays.
           </p>
           <p>
             Approximately 6% of Canadians work in federally regulated industries. Some examples are:
@@ -71,8 +71,8 @@ const FederallyRegulated = () =>
 
           <h2>How can I tell which holidays apply to me?</h2>
           <p>
-            Most likely you follow provincial holidays, but if you’re not sure, you can ask someone
-            you work with or check out${' '}
+            Most likely you get provincial holidays, but if you’re not sure, you can ask someone you
+            work with or check out${' '}
             <a
               href="https://www.canada.ca/en/employment-social-development/programs/employment-equity/regulated-industries.html"
               target="_blank"
