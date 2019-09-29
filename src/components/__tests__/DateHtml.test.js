@@ -29,5 +29,5 @@ test('DateHtml displays dates properly with the weekday', () => {
   )
   expect($('time').length).toBe(1)
   expect($('time').attr('datetime')).toEqual('2019-01-01')
-  expect($('time').text()).toEqual('Tue, January 1st')
+  expect($('time').text()).toEqual('Tuesday, January 1st')
 })
