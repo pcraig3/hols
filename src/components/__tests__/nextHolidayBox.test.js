@@ -68,7 +68,7 @@ test('nextHolidayBox refers to federal holidays when "federal" variable is passe
       'August 16th',
     )}`,
   )
-  expect($('h1 + p').text()).toMatch(/That’s in (\d\d days|about 1 month)/)
+  expect($('h1 + p').text()).toMatch(/That’s in (\d\d days|about 1 month|about 2 months)/)
 })
 
 test('nextHolidayBox says "all provinces and territories" when there are 13 provinces', () => {
@@ -116,5 +116,5 @@ test('nextHolidayBox displays next holiday properly for a given province', () =>
       'August 16th',
     )}`,
   )
-  expect($('h1 + p').text()).toMatch(/That’s in (\d\d days|about 1 month)/)
+  expect($('h1 + p').text()).toMatch(/That’s in (\d\d days|about 1 month|about 2 months)/)
 })
