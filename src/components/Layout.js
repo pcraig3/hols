@@ -1,7 +1,20 @@
 const { css } = require('emotion')
 const { html } = require('../utils')
 const { theme } = require('../styles')
+const Logo = require('./Logo')
 
+const header = css`
+  padding: ${theme.space.md};
+  padding-top: ${theme.space.sm};
+
+  @media (${theme.mq.md}) {
+    padding-top: ${theme.space.md};
+  }
+
+  @media (${theme.mq.md}) {
+    padding: ${theme.space.md} ${theme.space.lg};
+  }
+`
 const main = css`
   section {
     min-height: 100vh;
@@ -24,11 +37,16 @@ const main = css`
   }
 `
 
-const Layout = ({ children }) =>
+const Layout = ({ color, children }) =>
   html`
-    <main class=${main}>
-      ${children}
-    </main>
+    <div>
+      <header class=${header}>
+        <${Logo} color=${color} />
+      </header>
+      <main class=${main}>
+        ${children}
+      </main>
+    </div>
   `
 
 module.exports = Layout

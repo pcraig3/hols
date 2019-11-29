@@ -11,13 +11,13 @@ const styles = ({ accent = theme.color.red } = {}) => css`
   margin: -${theme.space.lg} -${theme.space.lg} 0 -${theme.space.lg};
 
   @media (${theme.mq.sm}) {
-    min-height: 75vh;
+    min-height: 65vh;
   }
 
   @media (${theme.mq.md}) {
     font-size: 3vw;
     margin-right: -${theme.space.xxl};
-    min-height: 80vh;
+    min-height: 70vh;
   }
 
   @media (${theme.mq.lg}) {

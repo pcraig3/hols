@@ -21,8 +21,16 @@ describe('Error page', () => {
     expect($('h1').text()).toEqual('999')
     expect($('p').length).toBe(1)
     expect($('p').text()).toEqual('bro you effed UP!')
-    expect($('a').length).toBe(1)
-    expect($('a').text()).toEqual('← Canada’s next public holiday')
-    expect($('a').attr('href')).toEqual('/')
+    expect($('a').length).toBe(2)
+    expect(
+      $('a')
+        .eq(1)
+        .text(),
+    ).toEqual('← Canada’s next public holiday')
+    expect(
+      $('a')
+        .eq(1)
+        .attr('href'),
+    ).toEqual('/')
   })
 })
