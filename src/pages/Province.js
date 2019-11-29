@@ -11,6 +11,10 @@ const Button = require('../components/Button.js')
 const styles = ({ accent = theme.color.red, focus = theme.color.focus } = {}) => css`
   section {
     min-height: calc(var(--vh, 1vh) * 100);
+
+    &:first-of-type {
+      min-height: calc(var(--vh, 1vh) * 90);
+    }
   }
 
   a,

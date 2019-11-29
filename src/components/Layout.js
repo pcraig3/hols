@@ -21,6 +21,10 @@ const main = css`
     position: relative;
     padding: ${theme.space.md} ${theme.space.lg} ${theme.space.md} ${theme.space.sm};
 
+    &:first-of-type {
+      min-height: 90vh;
+    }
+
     .bottom-link {
       position: absolute;
       left: ${theme.space.sm};
