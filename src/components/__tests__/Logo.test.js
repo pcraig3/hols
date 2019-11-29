@@ -14,14 +14,6 @@ test('Logo renders link and spans properly', () => {
   )
   expect($('a').length).toBe(1)
   expect($('a').attr('href')).toEqual('/')
-  expect(
-    $('span')
-      .eq(0)
-      .attr('aria-hidden'),
-  ).toEqual('true')
-  expect(
-    $('span')
-      .eq(1)
-      .text(),
-  ).toEqual('Canada Holidays')
+  expect($('svg').attr('aria-hidden')).toEqual('true')
+  expect($('a').text()).toEqual('Canada Holidays')
 })
