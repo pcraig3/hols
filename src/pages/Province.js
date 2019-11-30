@@ -13,7 +13,19 @@ const styles = ({ accent = theme.color.red, focus = theme.color.focus } = {}) =>
     min-height: calc(var(--vh, 1vh) * 100);
 
     &:first-of-type {
-      min-height: calc(var(--vh, 1vh) * 90);
+      min-height: calc((var(--vh, 1vh) * 100) - 57.35px);
+    }
+
+    @media (${theme.mq.md}) {
+      &:first-of-type {
+        min-height: calc((var(--vh, 1vh) * 100) - 65.5px);
+      }
+    }
+
+    @media (${theme.mq.lg}) {
+      &:first-of-type {
+        min-height: calc((var(--vh, 1vh) * 100) - 74px);
+      }
     }
   }
 

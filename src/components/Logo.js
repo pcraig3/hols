@@ -52,9 +52,9 @@ const div = color => css`
     width: 17px;
     margin-right: 6px;
 
-    @media (${theme.mq.lg}) {
-      height: 25px;
-      width: 25px;
+    @media (${theme.mq.md}) {
+      height: 19.5px;
+      width: 19.5px;
       margin-right: 7px;
     }
 
