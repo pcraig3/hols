@@ -5,6 +5,10 @@ const Logo = require('./Logo')
 
 const header = css`
   padding: ${theme.space.xs} ${theme.space.md};
+
+  @media (${theme.mq.md}) {
+    padding: ${theme.space.xs} ${theme.space.lg};
+  }
 `
 const main = css`
   section {
