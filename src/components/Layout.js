@@ -25,7 +25,7 @@ const main = css`
     }
 
     @media (${theme.mq.md}) {
-      padding: 0 ${theme.space.xxl} ${theme.space.lg} ${theme.space.lg};
+      padding: 0 ${theme.space.xxl} ${theme.space.xl} ${theme.space.lg};
 
       .bottom-link {
         left: ${theme.space.lg};

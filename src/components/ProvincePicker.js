@@ -6,7 +6,6 @@ const styles = css`
   padding: ${theme.space.md} ${theme.space.lg};
   border-top: 3px solid ${theme.color.greyLight};
   border-bottom: 3px solid ${theme.color.greyLight};
-  margin-bottom: 40px;
 
   @media (${theme.mq.md}) {
     padding: ${theme.space.lg} ${theme.space.lg};

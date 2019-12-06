@@ -83,6 +83,12 @@ const renderCelebratingProvinces = provinces => {
     `
   }
 
+  if (provinces.length === 13) {
+    return html`
+      <p>National holiday</p>
+    `
+  }
+
   const isLastProvince = province => province.id === provinces[provinces.length - 1].id
 
   return html`
@@ -120,7 +126,7 @@ const nextHolidayBox = ({ nextHoliday, provinceName = 'Canada', provinceId, fede
         <div class="h1--date"><${DateHtml} dateString=${nextHoliday.date} //></div>
         <div class="h1--name">${nextHoliday.nameEn.replace(/ /g, '\u00a0')}</div>
       </h1>
-      ${nextHoliday.provinces && nextHoliday.provinces.length !== 13 && !federal
+      ${nextHoliday.provinces && !federal
         ? renderCelebratingProvinces(nextHoliday.provinces)
         : renderRelativeDate(nextHoliday.date)}
       ${federal &&
