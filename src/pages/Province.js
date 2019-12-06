@@ -4,7 +4,6 @@ const { theme } = require('../styles')
 const Layout = require('../components/Layout.js')
 const DateHtml = require('../components/DateHtml.js')
 const NextHolidayBox = require('../components/NextHolidayBox.js')
-const MenuLink = require('../components/MenuLink.js')
 const SummaryTable = require('../components/SummaryTable.js')
 const Button = require('../components/Button.js')
 
@@ -119,7 +118,6 @@ const Province = ({
               >More ${year} holidays</a
             ></span
           >
-          <${MenuLink} canada=${!federal && provinceName === 'Canada'} //>
         </section>
 
         <section>

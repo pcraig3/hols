@@ -110,6 +110,10 @@ const summaryTable = children => css`
     padding-bottom: ${!children ? theme.space.xl : 0};
   }
 
+  h2 {
+    font-size: 1.35em;
+  }
+
   /* on larger screens */
   @media (${theme.mq.md}) {
     dl {
