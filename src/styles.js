@@ -96,9 +96,18 @@ const contentPageStyles = css`
   }
 `
 
+const fullWidth = css`
+  margin: 0 -${theme.space.lg} 0 -${theme.space.sm};
+
+  @media (${theme.mq.md}) {
+    margin: 0 calc(-${theme.space.lg} * 2) 0 calc(-${theme.space.sm} * 2);
+  }
+`
+
 module.exports = {
   theme,
   visuallyHidden,
   pageMargin,
   contentPageStyles,
+  fullWidth,
 }

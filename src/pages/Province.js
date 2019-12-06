@@ -4,7 +4,7 @@ const { theme, visuallyHidden } = require('../styles')
 const Layout = require('../components/Layout.js')
 const DateHtml = require('../components/DateHtml.js')
 const NextHolidayBox = require('../components/NextHolidayBox.js')
-const MenuLink = require('../components/MenuLink.js')
+const ProvincePicker = require('../components/ProvincePicker.js')
 const SummaryTable = require('../components/SummaryTable.js')
 const Button = require('../components/Button.js')
 
@@ -116,7 +116,7 @@ const Province = ({
       >
         <section>
           <${NextHolidayBox} ...${{ nextHoliday, provinceName, provinceId, federal }} />
-          <${MenuLink} canada=${!federal && provinceName === 'Canada'} //>
+          <${ProvincePicker} //>
         </section>
 
         <section>

@@ -1,6 +1,6 @@
 const { css } = require('emotion')
 const { html } = require('../utils')
-const { theme, visuallyHidden } = require('../styles')
+const { theme, fullWidth, visuallyHidden } = require('../styles')
 const DateHtml = require('./DateHtml.js')
 const { relativeDate } = require('../dates')
 
@@ -8,7 +8,7 @@ const styles = ({ accent = theme.color.red } = {}) => css`
   padding: ${theme.space.xl} ${theme.space.lg};
   background-color: ${accent};
   color: white;
-  margin: 0 -${theme.space.lg} 0 -${theme.space.lg};
+  ${fullWidth};
 
   @media (${theme.mq.md}) {
     font-size: calc(16px + 8 * (100vw - 400px) / 400);
@@ -83,12 +83,6 @@ const renderCelebratingProvinces = provinces => {
     `
   }
 
-  if (provinces.length === 13) {
-    return html`
-      <p>Celebrated by${' '}<a href="/provinces">all provinces and territories</a></p>
-    `
-  }
-
   const isLastProvince = province => province.id === provinces[provinces.length - 1].id
 
   return html`
@@ -126,7 +120,7 @@ const nextHolidayBox = ({ nextHoliday, provinceName = 'Canada', provinceId, fede
         <div class="h1--date"><${DateHtml} dateString=${nextHoliday.date} //></div>
         <div class="h1--name">${nextHoliday.nameEn.replace(/ /g, '\u00a0')}</div>
       </h1>
-      ${nextHoliday.provinces && !federal
+      ${nextHoliday.provinces && nextHoliday.provinces.length !== 13 && !federal
         ? renderCelebratingProvinces(nextHoliday.provinces)
         : renderRelativeDate(nextHoliday.date)}
       ${federal &&

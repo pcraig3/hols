@@ -91,7 +91,7 @@ test('nextHolidayBox says "all provinces and territories" when there are 13 prov
   expect($('h1').text()).toEqual(
     `Canada’s next statutory holiday is${sp2nbsp('August 16')}${sp2nbsp(nextHoliday.nameEn)}`,
   )
-  expect($('h1 + p').text()).toEqual('Celebrated by all provinces and territories')
+  expect($('h1 + p').text()).toMatch(/That’s in (about )?(\d\d days|\d month(s)?)/)
 })
 
 test('nextHolidayBox displays next holiday properly for a given province', () => {
