@@ -9,6 +9,14 @@ const SummaryTable = require('../components/SummaryTable.js')
 const Button = require('../components/Button.js')
 
 const styles = ({ accent = theme.color.red, focus = theme.color.focus } = {}) => css`
+  section:last-of-type {
+    width: 100%;
+
+    @media (${theme.mq.xl}) {
+      width: 90%;
+    }
+  }
+
   a,
   a:visited {
     color: ${accent};

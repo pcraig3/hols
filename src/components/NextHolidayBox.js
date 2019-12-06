@@ -5,7 +5,11 @@ const DateHtml = require('./DateHtml.js')
 const { relativeDate } = require('../dates')
 
 const styles = ({ accent = theme.color.red } = {}) => css`
-  padding: ${theme.space.xl} ${theme.space.lg};
+  padding: ${theme.space.xl} ${theme.space.lg} ${theme.space.xl} ${theme.space.sm};
+  @media (${theme.mq.md}) {
+    padding: ${theme.space.xl} ${theme.space.lg};
+  }
+
   background-color: ${accent};
   color: white;
   ${fullWidth};

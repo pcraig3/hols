@@ -3,7 +3,7 @@ const { css } = require('emotion')
 const { theme, fullWidth } = require('../styles')
 
 const styles = css`
-  padding: ${theme.space.md} ${theme.space.lg};
+  padding: ${theme.space.md} ${theme.space.lg} ${theme.space.md} ${theme.space.sm};
   border-top: 3px solid ${theme.color.greyLight};
   border-bottom: 3px solid ${theme.color.greyLight};
 

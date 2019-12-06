@@ -18,18 +18,8 @@ const main = css`
     position: relative;
     padding: 0 ${theme.space.lg} ${theme.space.md} ${theme.space.sm};
 
-    .bottom-link {
-      position: absolute;
-      left: ${theme.space.sm};
-      bottom: ${theme.space.lg};
-    }
-
     @media (${theme.mq.md}) {
       padding: 0 ${theme.space.xxl} ${theme.space.xl} ${theme.space.lg};
-
-      .bottom-link {
-        left: ${theme.space.lg};
-      }
     }
   }
 `
