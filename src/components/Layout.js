@@ -4,10 +4,13 @@ const { theme } = require('../styles')
 const Logo = require('./Logo')
 
 const header = css`
+  font-size: 0.9em;
+  font-weight: 600;
   padding: ${theme.space.xs} ${theme.space.md};
 
   @media (${theme.mq.md}) {
-    padding: ${theme.space.xs} ${theme.space.lg};
+    padding: ${theme.space.sm} ${theme.space.lg};
+    font-size: 1em;
   }
 `
 const main = css`

@@ -1,6 +1,6 @@
 const { css } = require('emotion')
 const { html } = require('../utils')
-const { theme } = require('../styles')
+const { theme, visuallyHidden } = require('../styles')
 const DateHtml = require('./DateHtml.js')
 const { relativeDate } = require('../dates')
 
@@ -21,8 +21,9 @@ const styles = ({ accent = theme.color.red } = {}) => css`
 
   h1 {
     .h1--intro {
-      font-size: 0.5em;
+      font-size: 0.533em;
       font-weight: 400;
+      margin-bottom: 8px;
 
       @media (${theme.mq.lg}) {
         font-weight: 300;
@@ -32,19 +33,16 @@ const styles = ({ accent = theme.color.red } = {}) => css`
     .h1--date {
       font-size: 1.3em;
       font-weight: 700;
+      margin-bottom: 3px;
     }
 
     .h1--name {
-      font-size: 0.8em;
+      font-size: 0.9em;
       font-weight: 400;
 
       @media (${theme.mq.lg}) {
         font-weight: 300;
       }
-    }
-
-    div {
-      margin-bottom: 3px;
     }
   }
 
@@ -52,19 +50,23 @@ const styles = ({ accent = theme.color.red } = {}) => css`
   p {
     width: 100%;
 
-    @media (${theme.mq.md}) {
+    @media (${theme.mq.lg}) {
       width: 70%;
       max-width: 850px;
     }
   }
 
-  h1 + p {
+  p {
     margin-bottom: 0;
-    margin-top: ${theme.space.xl};
-    font-size: 80%;
+    margin-top: calc(${theme.space.xl} + ${theme.space.md});
 
     + p {
-      margin-top: ${theme.space.xl};
+      margin-top: ${theme.space.xs};
+    }
+
+    @media (${theme.mq.lg}) {
+      font-size: 85%;
+      margin-top: calc(${theme.space.xl} + ${theme.space.xl});
     }
   }
 
@@ -117,7 +119,9 @@ const nextHolidayBox = ({ nextHoliday, provinceName = 'Canada', provinceId, fede
     >
       <h1>
         <div class="h1--intro">
-          ${provinceName}’s next${' '}${federal && 'federal '}statutory holiday is
+          ${provinceName}’s next${' '}${federal && 'federal '}<span class=${visuallyHidden}
+            >statutory </span
+          >holiday is
         </div>
         <div class="h1--date"><${DateHtml} dateString=${nextHoliday.date} //></div>
         <div class="h1--name">${nextHoliday.nameEn.replace(/ /g, '\u00a0')}</div>
@@ -128,7 +132,9 @@ const nextHolidayBox = ({ nextHoliday, provinceName = 'Canada', provinceId, fede
       ${federal &&
         html`
           <p>
-            <a href="/do-federal-holidays-apply-to-me">Find out who gets federal stat holidays</a>.
+            <a href="/do-federal-holidays-apply-to-me"
+              >Find out who gets federal <span class=${visuallyHidden}>statutory </span>holidays</a
+            >
           </p>
         `}
     </div>
