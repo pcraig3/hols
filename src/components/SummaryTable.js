@@ -103,7 +103,6 @@ const summaryTable = children => css`
     margin-bottom: calc(${theme.space.xl} + ${theme.space.xl});
   }
 
-  h1,
   h2 {
     margin: 0;
     padding-top: ${theme.space.md};
@@ -111,7 +110,7 @@ const summaryTable = children => css`
   }
 
   h2 {
-    /* font-size: 1.35em; */
+    font-size: 1.566em;
   }
 
   /* on larger screens */

@@ -1,6 +1,6 @@
 const { css } = require('emotion')
 const { html } = require('../utils')
-const { theme } = require('../styles')
+const { theme, visuallyHidden } = require('../styles')
 const Layout = require('../components/Layout.js')
 const DateHtml = require('../components/DateHtml.js')
 const NextHolidayBox = require('../components/NextHolidayBox.js')
@@ -54,6 +54,12 @@ const styles = ({ accent = theme.color.red, focus = theme.color.focus } = {}) =>
   }
 `
 
+const createTitle = (provinceName, federal, year) => {
+  return html`
+    ${provinceName}${federal ? ' federal' : ''}
+    <span class=${visuallyHidden}> statutory</span> holidays in ${year}
+  `
+}
 const createRows = (holidays, federal) => {
   const _provinces = holiday => {
     if (holiday.provinces.length === 13) {
@@ -116,7 +122,7 @@ const Province = ({
         <section>
           <${SummaryTable}
             id=${`holidays-${year}`}
-            title=${`${provinceName}${federal ? ' federal' : ''} statutory holidays in ${year}`}
+            title=${createTitle(provinceName, federal, year)}
             rows=${createRows(holidays, federal)}
           >
             <${Button}
