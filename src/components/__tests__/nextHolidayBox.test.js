@@ -34,11 +34,9 @@ test('nextHolidayBox displays next holiday properly for Canada', () => {
   const nextHoliday = getNextHoliday()
   const $ = renderNextHolidayBox({ nextHoliday })
 
-  expect($('div').length).toBe(1)
+  expect($('div h1').length).toBe(1)
   expect($('h1').text()).toEqual(
-    `Canada’s next statutory holiday is ${sp2nbsp(nextHoliday.nameEn)} on ${sp2nbsp(
-      'August 16th',
-    )}`,
+    `Canada’s next statutory holiday is${sp2nbsp('August 16')}${sp2nbsp(nextHoliday.nameEn)}`,
   )
   expect($('h1 + p').text()).toEqual('Celebrated by Prince Edward Island')
 })
@@ -49,11 +47,9 @@ test('nextHolidayBox uses province IDs when more than 1 province exists', () => 
 
   const $ = renderNextHolidayBox({ nextHoliday })
 
-  expect($('div').length).toBe(1)
+  expect($('div h1').length).toBe(1)
   expect($('h1').text()).toEqual(
-    `Canada’s next statutory holiday is ${sp2nbsp(nextHoliday.nameEn)} on ${sp2nbsp(
-      'August 16th',
-    )}`,
+    `Canada’s next statutory holiday is${sp2nbsp('August 16')}${sp2nbsp(nextHoliday.nameEn)}`,
   )
   expect($('h1 + p').text()).toEqual('Celebrated by PE, AB, and QC')
 })
@@ -62,10 +58,10 @@ test('nextHolidayBox refers to federal holidays when "federal" variable is passe
   const nextHoliday = getNextHoliday()
   const $ = renderNextHolidayBox({ nextHoliday, federal: true })
 
-  expect($('div').length).toBe(1)
+  expect($('div h1').length).toBe(1)
   expect($('h1').text()).toEqual(
-    `Canada’s next federal statutory holiday is ${sp2nbsp(nextHoliday.nameEn)} on ${sp2nbsp(
-      'August 16th',
+    `Canada’s next federal statutory holiday is${sp2nbsp('August 16')}${sp2nbsp(
+      nextHoliday.nameEn,
     )}`,
   )
   expect($('h1 + p').text()).toMatch(/That’s in (about )?(\d\d days|\d month(s)?)/)
@@ -91,11 +87,9 @@ test('nextHolidayBox says "all provinces and territories" when there are 13 prov
 
   const $ = renderNextHolidayBox({ nextHoliday })
 
-  expect($('div').length).toBe(1)
+  expect($('div h1').length).toBe(1)
   expect($('h1').text()).toEqual(
-    `Canada’s next statutory holiday is ${sp2nbsp(nextHoliday.nameEn)} on ${sp2nbsp(
-      'August 16th',
-    )}`,
+    `Canada’s next statutory holiday is${sp2nbsp('August 16')}${sp2nbsp(nextHoliday.nameEn)}`,
   )
   expect($('h1 + p').text()).toEqual('Celebrated by all provinces and territories')
 })
@@ -110,10 +104,10 @@ test('nextHolidayBox displays next holiday properly for a given province', () =>
     provinceName: getProvince().nameEn,
   })
 
-  expect($('div').length).toBe(1)
+  expect($('div h1').length).toBe(1)
   expect($('h1').text()).toEqual(
-    `Prince Edward Island’s next statutory holiday is ${sp2nbsp(nextHoliday.nameEn)} on ${sp2nbsp(
-      'August 16th',
+    `Prince Edward Island’s next statutory holiday is${sp2nbsp('August 16')}${sp2nbsp(
+      nextHoliday.nameEn,
     )}`,
   )
   expect($('h1 + p').text()).toMatch(/That’s in (about )?(\d\d days|\d month(s)?)/)

@@ -21,20 +21,33 @@ const styles = ({ accent = theme.color.red } = {}) => css`
   }
 
   @media (${theme.mq.lg}) {
-    font-size: 2.8vw;
+    font-size: 3vw;
   }
 
-  @media (${theme.mq.xl}) {
-    font-size: 2.2vw;
+  h1 {
+    .h1--intro {
+      font-size: 50%;
+      font-weight: 400;
+    }
+
+    .h1--date {
+      font-size: 130%;
+      font-weight: 700;
+    }
+
+    .h1--name {
+      font-size: 80%;
+      font-weight: 500;
+    }
+
+    div {
+      margin-bottom: 3px;
+    }
   }
 
   h1,
   p {
     width: 100%;
-
-    @media (${theme.mq.sm}) {
-      width: 90%;
-    }
 
     @media (${theme.mq.md}) {
       width: 70%;
@@ -45,7 +58,7 @@ const styles = ({ accent = theme.color.red } = {}) => css`
   h1 + p {
     margin-bottom: 0;
     margin-top: ${theme.space.xl};
-    font-size: 1.1em;
+    font-size: 80%;
 
     + p {
       margin-top: ${theme.space.xl};
@@ -55,16 +68,6 @@ const styles = ({ accent = theme.color.red } = {}) => css`
   a,
   a:visited {
     color: white;
-  }
-
-  time {
-    color: white;
-    display: inline-block;
-    min-width: 80%;
-    font-size: 1.15em;
-    @media (${theme.mq.lg}) {
-      font-size: 1.25em;
-    }
   }
 `
 
@@ -110,9 +113,11 @@ const nextHolidayBox = ({ nextHoliday, provinceName = 'Canada', provinceId, fede
         : styles()}
     >
       <h1>
-        ${provinceName}’s next${' '}${federal && 'federal '}statutory holiday is${' '}
-        <span class="hol-name">${nextHoliday.nameEn.replace(/ /g, '\u00a0')}</span>
-        ${' '}on${' '}<${DateHtml} dateString=${nextHoliday.date} //>
+        <div class="h1--intro">
+          ${provinceName}’s next${' '}${federal && 'federal '}statutory holiday is
+        </div>
+        <div class="h1--date"><${DateHtml} dateString=${nextHoliday.date} //></div>
+        <div class="h1--name">${nextHoliday.nameEn.replace(/ /g, '\u00a0')}</div>
       </h1>
       ${nextHoliday.provinces && !federal
         ? renderCelebratingProvinces(nextHoliday.provinces)
