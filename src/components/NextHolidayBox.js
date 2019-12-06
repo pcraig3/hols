@@ -26,17 +26,17 @@ const styles = ({ accent = theme.color.red } = {}) => css`
 
   h1 {
     .h1--intro {
-      font-size: 50%;
+      font-size: 0.5em;
       font-weight: 400;
     }
 
     .h1--date {
-      font-size: 130%;
+      font-size: 1.3em;
       font-weight: 700;
     }
 
     .h1--name {
-      font-size: 80%;
+      font-size: 0.85em;
       font-weight: 500;
     }
 

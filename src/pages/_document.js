@@ -28,7 +28,7 @@ const document = ({ title, content, docProps: { meta, path } }) => {
         <title>${title}</title>
         ${gaIfProd() || ''}
         <link rel="shortcut icon" href="/favicon.png" type="image/x-icon" sizes="32x32" />
-        <link href="https://fonts.googleapis.com/css?family=Gothic+A1:400,500,700&display=swap" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css?family=Gothic+A1:400,500,600,700&display=swap" rel="stylesheet" />
         <style>
           * {
             box-sizing: border-box;

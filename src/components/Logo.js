@@ -27,6 +27,8 @@ const MapleLeaf = ({ fill = '#DD2E44' }) => {
 const div = color => css`
   position: relative;
   display: inline-block;
+  font-size: 0.85em;
+  font-weight: 500;
 
   a {
     position: relative;
@@ -48,20 +50,20 @@ const div = color => css`
   }
 
   svg {
-    height: 17px;
-    width: 17px;
-    margin-right: 6px;
+    height: 14.5px;
+    width: 14.5px;
+    margin-right: 4px;
 
     @media (${theme.mq.md}) {
-      height: 19.5px;
-      width: 19.5px;
-      margin-right: 7px;
+      height: 17px;
+      width: 17px;
+      margin-right: 5px;
     }
 
     @media (${theme.mq.lg}) {
-      height: 25px;
-      width: 25px;
-      margin-right: 9px;
+      height: 22px;
+      width: 22px;
+      margin-right: 7px;
     }
   }
 `
