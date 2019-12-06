@@ -11,18 +11,22 @@ const styles = ({ accent = theme.color.red } = {}) => css`
   margin: 0 -${theme.space.lg} 0 -${theme.space.lg};
 
   @media (${theme.mq.md}) {
-    font-size: 3vw;
+    font-size: calc(16px + 8 * (100vw - 400px) / 400);
     margin-right: -${theme.space.xxl};
   }
 
   @media (${theme.mq.lg}) {
-    font-size: 3vw;
+    font-size: calc(20px + 3 * (100vw - 400px) / 400);
   }
 
   h1 {
     .h1--intro {
       font-size: 0.5em;
-      font-weight: 300;
+      font-weight: 400;
+
+      @media (${theme.mq.lg}) {
+        font-weight: 300;
+      }
     }
 
     .h1--date {
@@ -31,8 +35,12 @@ const styles = ({ accent = theme.color.red } = {}) => css`
     }
 
     .h1--name {
-      font-size: 0.85em;
-      font-weight: 300;
+      font-size: 0.8em;
+      font-weight: 400;
+
+      @media (${theme.mq.lg}) {
+        font-weight: 300;
+      }
     }
 
     div {

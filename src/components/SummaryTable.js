@@ -111,7 +111,7 @@ const summaryTable = children => css`
   }
 
   h2 {
-    font-size: 1.35em;
+    /* font-size: 1.35em; */
   }
 
   /* on larger screens */
