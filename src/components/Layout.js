@@ -4,26 +4,12 @@ const { theme } = require('../styles')
 const Logo = require('./Logo')
 
 const header = css`
-  padding: ${theme.space.md};
-  padding-top: ${theme.space.sm};
-
-  @media (${theme.mq.md}) {
-    padding-top: ${theme.space.md};
-  }
-
-  @media (${theme.mq.md}) {
-    padding: ${theme.space.md} ${theme.space.lg};
-  }
+  padding: ${theme.space.xs} ${theme.space.md};
 `
 const main = css`
   section {
-    min-height: 100vh;
     position: relative;
-    padding: ${theme.space.md} ${theme.space.lg} ${theme.space.md} ${theme.space.sm};
-
-    &:first-of-type {
-      min-height: 90vh;
-    }
+    padding: 0 ${theme.space.lg} ${theme.space.md} ${theme.space.sm};
 
     .bottom-link {
       position: absolute;
@@ -32,7 +18,7 @@ const main = css`
     }
 
     @media (${theme.mq.md}) {
-      padding: ${theme.space.lg} ${theme.space.xxl} ${theme.space.lg} ${theme.space.lg};
+      padding: 0 ${theme.space.xxl} ${theme.space.lg} ${theme.space.lg};
 
       .bottom-link {
         left: ${theme.space.lg};

@@ -8,16 +8,11 @@ const styles = ({ accent = theme.color.red } = {}) => css`
   padding: ${theme.space.xl} ${theme.space.lg};
   background-color: ${accent};
   color: white;
-  margin: -${theme.space.lg} -${theme.space.lg} 0 -${theme.space.lg};
-
-  @media (${theme.mq.sm}) {
-    min-height: 65vh;
-  }
+  margin: 0 -${theme.space.lg} 0 -${theme.space.lg};
 
   @media (${theme.mq.md}) {
     font-size: 3vw;
     margin-right: -${theme.space.xxl};
-    min-height: 70vh;
   }
 
   @media (${theme.mq.lg}) {
@@ -27,7 +22,7 @@ const styles = ({ accent = theme.color.red } = {}) => css`
   h1 {
     .h1--intro {
       font-size: 0.5em;
-      font-weight: 400;
+      font-weight: 300;
     }
 
     .h1--date {
@@ -37,7 +32,7 @@ const styles = ({ accent = theme.color.red } = {}) => css`
 
     .h1--name {
       font-size: 0.85em;
-      font-weight: 500;
+      font-weight: 300;
     }
 
     div {

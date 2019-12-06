@@ -9,26 +9,6 @@ const SummaryTable = require('../components/SummaryTable.js')
 const Button = require('../components/Button.js')
 
 const styles = ({ accent = theme.color.red, focus = theme.color.focus } = {}) => css`
-  section {
-    min-height: calc(var(--vh, 1vh) * 100);
-
-    &:first-of-type {
-      min-height: calc((var(--vh, 1vh) * 100) - 57.35px);
-    }
-
-    @media (${theme.mq.md}) {
-      &:first-of-type {
-        min-height: calc((var(--vh, 1vh) * 100) - 65.5px);
-      }
-    }
-
-    @media (${theme.mq.lg}) {
-      &:first-of-type {
-        min-height: calc((var(--vh, 1vh) * 100) - 74px);
-      }
-    }
-  }
-
   a,
   a:visited {
     color: ${accent};
