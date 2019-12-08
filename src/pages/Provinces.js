@@ -53,7 +53,11 @@ const Provinces = ({ data }) =>
           </div>
           <div>
             <a href="/federal">Federal statutory holidays</a>
-            <${Details} summary="Do federal holidays apply to me?">
+            <${Details}
+              summary="Do federal holidays apply to me?"
+              data-event="true"
+              data-label="federal-holidays"
+            >
               <div>
                 <p>
                   The federal government and${' '}

@@ -23,3 +23,19 @@ test('Details displays summary and content properly', () => {
     'Free cash for all citizens to guarantee a decent living standard.',
   )
 })
+
+test('Details displays summary props properly', () => {
+  expect(1).toBe(1)
+  const $ = cheerio.load(
+    render(
+      html`
+        <${Details} summary=${'What is universal basic income?'} data-implemented=${'Not yet'}
+          ><p>Free cash for all citizens to guarantee a decent living standard.</p><//
+        >
+      `,
+    ),
+  )
+  expect($('details').length).toBe(1)
+  expect($('summary').attr('data-implemented')).toBe('Not yet')
+  expect($('summary span').attr('data-implemented')).toBe('Not yet')
+})
