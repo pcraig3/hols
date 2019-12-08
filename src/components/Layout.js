@@ -6,7 +6,7 @@ const Logo = require('./Logo')
 const header = css`
   font-size: 0.9em;
   font-weight: 600;
-  padding: ${theme.space.xs} ${theme.space.md};
+  padding: ${theme.space.xs} ${theme.space.sm};
 
   @media (${theme.mq.md}) {
     padding: ${theme.space.sm} ${theme.space.lg};
