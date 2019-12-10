@@ -1,26 +1,26 @@
 const { css } = require('emotion')
 const { html } = require('../utils')
-const { theme, fullWidth, visuallyHidden } = require('../styles')
+const { theme, insideContainer, horizontalPadding, visuallyHidden } = require('../styles')
 const DateHtml = require('./DateHtml.js')
 const { relativeDate } = require('../dates')
 
 const styles = ({ accent = theme.color.red } = {}) => css`
-  padding: ${theme.space.xl} ${theme.space.lg} ${theme.space.xl} ${theme.space.sm};
-  @media (${theme.mq.md}) {
-    padding: ${theme.space.xl} ${theme.space.lg};
-  }
-
+  padding-top: ${theme.space.xl};
+  padding-bottom: ${theme.space.xl};
   background-color: ${accent};
   color: white;
-  ${fullWidth};
+  ${horizontalPadding};
 
   @media (${theme.mq.md}) {
     font-size: calc(16px + 8 * (100vw - 400px) / 400);
-    margin-right: -${theme.space.xxl};
   }
 
   @media (${theme.mq.lg}) {
     font-size: calc(20px + 3 * (100vw - 400px) / 400);
+  }
+
+  > div {
+    ${insideContainer};
   }
 
   h1 {
@@ -121,26 +121,29 @@ const nextHolidayBox = ({ nextHoliday, provinceName = 'Canada', provinceId, fede
         ? styles(theme.color[federal ? 'federal' : provinceId])
         : styles()}
     >
-      <h1>
-        <div class="h1--intro">
-          ${provinceName}’s next${' '}${federal && 'federal '}<span class=${visuallyHidden}
-            >statutory </span
-          >holiday is
-        </div>
-        <div class="h1--date"><${DateHtml} dateString=${nextHoliday.date} //></div>
-        <div class="h1--name">${nextHoliday.nameEn.replace(/ /g, '\u00a0')}</div>
-      </h1>
-      ${nextHoliday.provinces && !federal
-        ? renderCelebratingProvinces(nextHoliday.provinces)
-        : renderRelativeDate(nextHoliday.date)}
-      ${federal &&
-        html`
-          <p>
-            <a href="/do-federal-holidays-apply-to-me"
-              >Find out who gets federal <span class=${visuallyHidden}>statutory </span>holidays</a
-            >
-          </p>
-        `}
+      <div>
+        <h1>
+          <div class="h1--intro">
+            ${provinceName}’s next${' '}${federal && 'federal '}<span class=${visuallyHidden}
+              >statutory </span
+            >holiday is
+          </div>
+          <div class="h1--date"><${DateHtml} dateString=${nextHoliday.date} //></div>
+          <div class="h1--name">${nextHoliday.nameEn.replace(/ /g, '\u00a0')}</div>
+        </h1>
+        ${nextHoliday.provinces && !federal
+          ? renderCelebratingProvinces(nextHoliday.provinces)
+          : renderRelativeDate(nextHoliday.date)}
+        ${federal &&
+          html`
+            <p>
+              <a href="/do-federal-holidays-apply-to-me"
+                >Find out who gets federal
+                <span class=${visuallyHidden}>statutory </span>holidays</a
+              >
+            </p>
+          `}
+      </div>
     </div>
   `
 }

@@ -1,6 +1,6 @@
 const { css } = require('emotion')
 const { html } = require('../utils')
-const { theme, visuallyHidden } = require('../styles')
+const { theme, visuallyHidden, horizontalPadding, insideContainer } = require('../styles')
 const Layout = require('../components/Layout.js')
 const DateHtml = require('../components/DateHtml.js')
 const NextHolidayBox = require('../components/NextHolidayBox.js')
@@ -9,14 +9,6 @@ const SummaryTable = require('../components/SummaryTable.js')
 const Button = require('../components/Button.js')
 
 const styles = ({ accent = theme.color.red, focus = theme.color.focus } = {}) => css`
-  section:last-of-type {
-    width: 100%;
-
-    @media (${theme.mq.xl}) {
-      width: 90%;
-    }
-  }
-
   a,
   a:visited {
     color: ${accent};
@@ -127,22 +119,24 @@ const Province = ({
           <${ProvincePicker} //>
         </section>
 
-        <section>
-          <${SummaryTable}
-            id=${`holidays-${year}`}
-            title=${createTitle(provinceName, federal, year)}
-            rows=${createRows(holidays, federal)}
-          >
-            <${Button}
-              id="toggle-past"
-              color=${federal || provinceId ? theme.color[federal ? 'federal' : provinceId] : {}}
-              style="display: none;"
-              data-event="true"
-              data-label="toggle-past"
-              >Show past holidays<//
+        <section class=${horizontalPadding}>
+          <div class=${insideContainer}>
+            <${SummaryTable}
+              id=${`holidays-${year}`}
+              title=${createTitle(provinceName, federal, year)}
+              rows=${createRows(holidays, federal)}
             >
-          <//>
-          <span class="bottom-link"><a href="#html" class="up-arrow">Back to top</a></span>
+              <${Button}
+                id="toggle-past"
+                color=${federal || provinceId ? theme.color[federal ? 'federal' : provinceId] : {}}
+                style="display: none;"
+                data-event="true"
+                data-label="toggle-past"
+                >Show past holidays<//
+              >
+            <//>
+            <span class="bottom-link"><a href="#html" class="up-arrow">Back to top</a></span>
+          </div>
         </section>
       </div>
       <script src="/js/province.js"></script>

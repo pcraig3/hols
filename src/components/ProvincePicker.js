@@ -1,23 +1,25 @@
 const { html } = require('../utils')
 const { css } = require('emotion')
-const { theme, fullWidth } = require('../styles')
+const { theme, insideContainer, horizontalPadding } = require('../styles')
 
 const styles = css`
-  padding: ${theme.space.md} ${theme.space.lg} ${theme.space.md} ${theme.space.sm};
+  padding-top: ${theme.space.md};
+  padding-bottom: ${theme.space.md};
   border-top: 3px solid ${theme.color.greyLight};
   border-bottom: 3px solid ${theme.color.greyLight};
 
   @media (${theme.mq.md}) {
-    padding: ${theme.space.lg} ${theme.space.lg};
+    padding-top: ${theme.space.lg};
+    padding-bottom: ${theme.space.lg};
   }
 
-  ${fullWidth};
+  ${horizontalPadding};
 
-  a {
-    padding: ${theme.space.sm};
-    margin-left: -${theme.space.sm};
+  > div {
+    ${insideContainer};
+  }
 
-    &:focus {
+  a:focus {
       outline-offset: -${theme.space.xs};
     }
   }
@@ -25,7 +27,9 @@ const styles = css`
 
 const ProvincePicker = () => {
   return html`
-    <div class=${styles}><a href="/provinces" class="right-arrow">All regions in Canada</a></div>
+    <div class=${styles}>
+      <div><a href="/provinces" class="right-arrow">All regions in Canada</a></div>
+    </div>
   `
 }
 

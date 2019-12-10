@@ -1,25 +1,28 @@
 const { css } = require('emotion')
 const { html } = require('../utils')
-const { theme } = require('../styles')
-const Logo = require('./Logo')
+const { theme, horizontalPadding } = require('../styles')
+const Nav = require('./Nav')
 
 const header = css`
   font-size: 0.9em;
   font-weight: 600;
-  padding: ${theme.space.xs} ${theme.space.sm};
+  ${horizontalPadding};
+  padding-top: ${theme.space.xs};
+  padding-bottom: ${theme.space.xs};
 
   @media (${theme.mq.md}) {
-    padding: ${theme.space.sm} ${theme.space.lg};
+    padding-top: ${theme.space.sm};
+    padding-bottom: ${theme.space.sm};
     font-size: 1em;
   }
 `
 const main = css`
   section {
     position: relative;
-    padding: 0 ${theme.space.lg} ${theme.space.md} ${theme.space.sm};
+    padding-bottom: ${theme.space.md};
 
     @media (${theme.mq.md}) {
-      padding: 0 ${theme.space.xxl} ${theme.space.xl} ${theme.space.lg};
+      padding-bottom: ${theme.space.xl};
     }
   }
 `
@@ -28,7 +31,7 @@ const Layout = ({ color, children }) =>
   html`
     <div>
       <header class=${header}>
-        <${Logo} color=${color} />
+        <${Nav} color=${color} //>
       </header>
       <main class=${main}>
         ${children}

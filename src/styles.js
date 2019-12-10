@@ -96,11 +96,30 @@ const contentPageStyles = css`
   }
 `
 
-const fullWidth = css`
-  margin: 0 -${theme.space.lg} 0 -${theme.space.sm};
+const horizontalPadding = css`
+  padding-left: ${theme.space.sm};
+  padding-right: ${theme.space.lg};
 
-  @media (${theme.mq.md}) {
-    margin: 0 calc(-${theme.space.lg} * 2) 0 calc(-${theme.space.sm} * 2);
+  @media (${theme.mq.lg}) {
+    padding-left: ${theme.space.lg};
+  }
+`
+
+const insideContainer = css`
+  width: 100%;
+  margin: 0 auto;
+
+  @media (${theme.mq.sm}) {
+    width: 90%;
+  }
+
+  @media (${theme.mq.lg}) {
+    width: 80%;
+    max-width: 960px;
+  }
+
+  @media (${theme.mq.xl}) {
+    max-width: 1170px;
   }
 `
 
@@ -109,5 +128,6 @@ module.exports = {
   visuallyHidden,
   pageMargin,
   contentPageStyles,
-  fullWidth,
+  insideContainer,
+  horizontalPadding,
 }
