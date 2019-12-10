@@ -138,7 +138,7 @@ const nextHolidayBox = ({ nextHoliday, provinceName = 'Canada', provinceId, fede
           html`
             <p>
               <a href="/do-federal-holidays-apply-to-me"
-                >Find out who gets federal
+                >Find out who gets federal${' '}
                 <span class=${visuallyHidden}>statutory </span>holidays</a
               >
             </p>
