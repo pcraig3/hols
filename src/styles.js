@@ -65,20 +65,15 @@ const visuallyHidden = css`
 `
 
 const contentPageStyles = css`
-  section {
+  > *:not(ul) {
     width: 100%;
 
-    @media (${theme.mq.sm}) {
+    @media (${theme.mq.md}) {
       width: 90%;
     }
 
-    @media (${theme.mq.md}) {
+    @media (${theme.mq.xl}) {
       width: 70%;
-      max-width: 880px;
-    }
-
-    p:nth-last-child(2) {
-      margin-bottom: calc(${theme.space.xl} + ${theme.space.xl});
     }
   }
 
@@ -93,6 +88,10 @@ const contentPageStyles = css`
     @media (${theme.mq.md}) {
       margin-top: ${theme.space.xxl};
     }
+  }
+
+  > p:nth-last-child(2) {
+    margin-bottom: calc(${theme.space.xl} + ${theme.space.xl});
   }
 `
 

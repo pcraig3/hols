@@ -18,11 +18,6 @@ const styles = css`
   > div {
     ${insideContainer};
   }
-
-  a:focus {
-      outline-offset: -${theme.space.xs};
-    }
-  }
 `
 
 const ProvincePicker = () => {

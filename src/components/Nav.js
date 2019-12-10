@@ -15,9 +15,9 @@ const Nav = ({ color }) => {
   return html`
     <nav class=${styles}>
       <${Logo} color=${color} />
-      <div>
+      <!-- <div>
         <a href="#">About</a>
-      </div>
+      </div> -->
     </nav>
   `
 }

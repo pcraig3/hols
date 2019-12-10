@@ -1,6 +1,7 @@
 const { css } = require('emotion')
 const { html } = require('../utils')
 const { theme } = require('../styles')
+const Content = require('../components/Content.js')
 const Layout = require('../components/Layout.js')
 const Details = require('../components/Details.js')
 
@@ -44,54 +45,52 @@ const styles = css`
 const Provinces = ({ data }) =>
   html`
     <${Layout}>
-      <div class=${styles}>
-        <section>
-          <h1>All regions in Canada</h1>
+      <${Content} class=${styles}>
+        <h1>All regions in Canada</h1>
 
-          <div>
-            <p><a href="/">All Canadian holidays</a></p>
-          </div>
-          <div>
-            <a href="/federal">Federal statutory holidays</a>
-            <${Details}
-              summary="Do federal holidays apply to me?"
-              data-event="true"
-              data-label="federal-holidays"
-            >
-              <div>
-                <p>
-                  The federal government and${' '}
-                  <a
-                    href="https://www.canada.ca/en/employment-social-development/programs/employment-equity/regulated-industries.html"
-                    target="_blank"
-                    >federally-regulated industries</a
-                  >
-                  ${' '}observe federal holidays instead of provincial holidays.
-                </p>
-                <p>
-                  <a href="/do-federal-holidays-apply-to-me"
-                    >Find out if federal holidays apply to you</a
-                  >.
-                </p>
-              </div>
-            <//>
-          </div>
-          <ul>
-            ${data.provinces.map(
-              province => html`
-                <li><a href=${`/province/${province.id}`}>${province.nameEn}</a></li>
-              `,
-            )}
-          </ul>
-          <footer>
-            <p>
-              more good stuff on ${' '}<a id="about-link" href="/about"
-                >the about page <span aria-hidden="true">→</span>
-              </a>
-            </p>
-          </footer>
-        </section>
-      </div>
+        <div>
+          <p><a href="/">All Canadian holidays</a></p>
+        </div>
+        <div>
+          <a href="/federal">Federal statutory holidays</a>
+          <${Details}
+            summary="Do federal holidays apply to me?"
+            data-event="true"
+            data-label="federal-holidays"
+          >
+            <div>
+              <p>
+                The federal government and${' '}
+                <a
+                  href="https://www.canada.ca/en/employment-social-development/programs/employment-equity/regulated-industries.html"
+                  target="_blank"
+                  >federally-regulated industries</a
+                >
+                ${' '}observe federal holidays instead of provincial holidays.
+              </p>
+              <p>
+                <a href="/do-federal-holidays-apply-to-me"
+                  >Find out if federal holidays apply to you</a
+                >.
+              </p>
+            </div>
+          <//>
+        </div>
+        <ul>
+          ${data.provinces.map(
+            province => html`
+              <li><a href=${`/province/${province.id}`}>${province.nameEn}</a></li>
+            `,
+          )}
+        </ul>
+        <footer>
+          <p>
+            more good stuff on ${' '}<a id="about-link" href="/about"
+              >the about page <span aria-hidden="true">→</span>
+            </a>
+          </p>
+        </footer>
+      <//>
     <//>
   `
 
