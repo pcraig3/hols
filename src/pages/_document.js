@@ -28,7 +28,7 @@ const document = ({ title, content, docProps: { meta, path } }) => {
         <title>${title}</title>
         ${gaIfProd() || ''}
         <link rel="shortcut icon" href="/favicon.png" type="image/x-icon" sizes="32x32" />
-        <link href="https://fonts.googleapis.com/css?family=Gothic+A1:400,600&display=swap" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css?family=Gothic+A1:300,400,500,600,700&display=swap" rel="stylesheet" />
         <style>
           * {
             box-sizing: border-box;
@@ -45,6 +45,7 @@ const document = ({ title, content, docProps: { meta, path } }) => {
             font-family: 'Gothic A1', sans-serif;
             word-break: break-word;
             line-height: 1.33;
+            font-weight: 400;
           }
 
           @media (${theme.mq.md}) {
@@ -52,16 +53,20 @@ const document = ({ title, content, docProps: { meta, path } }) => {
           }
 
           @media (${theme.mq.lg}) {
-            body { font-size: 1.6em; }
+            body {
+              font-size: 1.3em;
+              font-weight: 300;
+            }
           }
 
           @media (${theme.mq.xxl}) {
-            body { font-size: 2em; }
+            body { font-size: 1.4em; }
           }
 
           h1 {
             margin: 0;
             font-size: 1.75em;
+            font-weight: 600;
           }
 
           h2, h3, p {

@@ -1,34 +1,14 @@
 const { css } = require('emotion')
 const { html } = require('../utils')
-const { theme } = require('../styles')
+const { theme, visuallyHidden, horizontalPadding, insideContainer } = require('../styles')
 const Layout = require('../components/Layout.js')
 const DateHtml = require('../components/DateHtml.js')
 const NextHolidayBox = require('../components/NextHolidayBox.js')
-const MenuLink = require('../components/MenuLink.js')
+const ProvincePicker = require('../components/ProvincePicker.js')
 const SummaryTable = require('../components/SummaryTable.js')
 const Button = require('../components/Button.js')
 
 const styles = ({ accent = theme.color.red, focus = theme.color.focus } = {}) => css`
-  section {
-    min-height: calc(var(--vh, 1vh) * 100);
-
-    &:first-of-type {
-      min-height: calc((var(--vh, 1vh) * 100) - 57.35px);
-    }
-
-    @media (${theme.mq.md}) {
-      &:first-of-type {
-        min-height: calc((var(--vh, 1vh) * 100) - 65.5px);
-      }
-    }
-
-    @media (${theme.mq.lg}) {
-      &:first-of-type {
-        min-height: calc((var(--vh, 1vh) * 100) - 74px);
-      }
-    }
-  }
-
   a,
   a:visited {
     color: ${accent};
@@ -74,6 +54,12 @@ const styles = ({ accent = theme.color.red, focus = theme.color.focus } = {}) =>
   }
 `
 
+const createTitle = (provinceName, federal, year) => {
+  return html`
+    ${provinceName}${federal ? ' federal' : ''}
+    <span class=${visuallyHidden}> statutory</span> holidays in ${year}
+  `
+}
 const createRows = (holidays, federal) => {
   const _provinces = holiday => {
     if (holiday.provinces.length === 13) {
@@ -130,34 +116,27 @@ const Province = ({
       >
         <section>
           <${NextHolidayBox} ...${{ nextHoliday, provinceName, provinceId, federal }} />
-          <span class="bottom-link"
-            ><a
-              href=${`#holidays-${year}`}
-              class="down-arrow"
-              data-event="true"
-              data-label="more-holidays"
-              >More ${year} holidays</a
-            ></span
-          >
-          <${MenuLink} canada=${!federal && provinceName === 'Canada'} //>
+          <${ProvincePicker} //>
         </section>
 
-        <section>
-          <${SummaryTable}
-            id=${`holidays-${year}`}
-            title=${`${provinceName}${federal ? ' federal' : ''} statutory holidays in ${year}`}
-            rows=${createRows(holidays, federal)}
-          >
-            <${Button}
-              id="toggle-past"
-              color=${federal || provinceId ? theme.color[federal ? 'federal' : provinceId] : {}}
-              style="display: none;"
-              data-event="true"
-              data-label="toggle-past"
-              >Show past holidays<//
+        <section class=${horizontalPadding}>
+          <div class=${insideContainer}>
+            <${SummaryTable}
+              id=${`holidays-${year}`}
+              title=${createTitle(provinceName, federal, year)}
+              rows=${createRows(holidays, federal)}
             >
-          <//>
-          <span class="bottom-link"><a href="#html" class="up-arrow">Back to top</a></span>
+              <${Button}
+                id="toggle-past"
+                color=${federal || provinceId ? theme.color[federal ? 'federal' : provinceId] : {}}
+                style="display: none;"
+                data-event="true"
+                data-label="toggle-past"
+                >Show past holidays<//
+              >
+            <//>
+            <span class="bottom-link"><a href="#html" class="up-arrow">Back to top</a></span>
+          </div>
         </section>
       </div>
       <script src="/js/province.js"></script>

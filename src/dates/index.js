@@ -73,9 +73,9 @@ const space2Nbsp = str => str.replace(/ /g, ' ')
 
 const displayDate = (dateString, weekday = false) => {
   dateString = getDateBeforeMidnightFromString(dateString)
-  let msg = space2Nbsp(format(dateString, 'MMMM do'))
+  let msg = space2Nbsp(format(dateString, 'MMMM d'))
 
-  return weekday ? `${format(dateString, 'EEEE')}, ${msg}` : msg
+  return weekday ? `${msg}, ${format(dateString, 'EEEE')}` : msg
 }
 
 const relativeDate = dateString => {

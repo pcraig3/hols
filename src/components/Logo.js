@@ -48,20 +48,20 @@ const div = color => css`
   }
 
   svg {
-    height: 17px;
-    width: 17px;
-    margin-right: 6px;
+    height: 15.5px;
+    width: 15.5px;
+    margin-right: 4px;
 
     @media (${theme.mq.md}) {
-      height: 19.5px;
-      width: 19.5px;
-      margin-right: 7px;
+      height: 19px;
+      width: 19px;
+      margin-right: 5px;
     }
 
     @media (${theme.mq.lg}) {
-      height: 25px;
-      width: 25px;
-      margin-right: 9px;
+      height: 21px;
+      width: 21px;
+      margin-right: 7px;
     }
   }
 `

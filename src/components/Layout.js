@@ -1,42 +1,28 @@
 const { css } = require('emotion')
 const { html } = require('../utils')
-const { theme } = require('../styles')
-const Logo = require('./Logo')
+const { theme, horizontalPadding } = require('../styles')
+const Nav = require('./Nav')
 
 const header = css`
-  padding: ${theme.space.md};
-  padding-top: ${theme.space.sm};
+  font-size: 0.9em;
+  font-weight: 600;
+  ${horizontalPadding};
+  padding-top: ${theme.space.xs};
+  padding-bottom: ${theme.space.xs};
 
   @media (${theme.mq.md}) {
-    padding-top: ${theme.space.md};
-  }
-
-  @media (${theme.mq.md}) {
-    padding: ${theme.space.md} ${theme.space.lg};
+    padding-top: ${theme.space.sm};
+    padding-bottom: ${theme.space.sm};
+    font-size: 1em;
   }
 `
 const main = css`
   section {
-    min-height: 100vh;
     position: relative;
-    padding: ${theme.space.md} ${theme.space.lg} ${theme.space.md} ${theme.space.sm};
-
-    &:first-of-type {
-      min-height: 90vh;
-    }
-
-    .bottom-link {
-      position: absolute;
-      left: ${theme.space.sm};
-      bottom: ${theme.space.lg};
-    }
+    padding-bottom: ${theme.space.md};
 
     @media (${theme.mq.md}) {
-      padding: ${theme.space.lg} ${theme.space.xxl} ${theme.space.lg} ${theme.space.lg};
-
-      .bottom-link {
-        left: ${theme.space.lg};
-      }
+      padding-bottom: ${theme.space.xl};
     }
   }
 `
@@ -45,7 +31,7 @@ const Layout = ({ color, children }) =>
   html`
     <div>
       <header class=${header}>
-        <${Logo} color=${color} />
+        <${Nav} color=${color} //>
       </header>
       <main class=${main}>
         ${children}

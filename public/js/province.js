@@ -55,7 +55,7 @@ b.setAttribute('data-hide-textContent', "Show ".concat(pastEvents.length, " past
 /* set up button */
 b.setAttribute('data-show', false);
 b.setAttribute('aria-label', b.getAttribute('data-hide-aria-label'));
-b.textContent = b.getAttribute('data-hide-textContent');
+b.querySelector('span').textContent = b.getAttribute('data-hide-textContent');
 b.removeAttribute('style');
 for (var i = 0, max = pastEvents.length; i < max; i++) {
   pastEvents[i].style.display = 'none';
@@ -69,10 +69,10 @@ b.addEventListener('click', function (event) {
 
   if (show) {
     b.setAttribute('aria-label', b.getAttribute('data-show-aria-label'));
-    b.textContent = b.getAttribute('data-show-textContent');
+    b.querySelector('span').textContent = b.getAttribute('data-show-textContent');
   } else {
     b.setAttribute('aria-label', b.getAttribute('data-hide-aria-label'));
-    b.textContent = b.getAttribute('data-hide-textContent');
+    b.querySelector('span').textContent = b.getAttribute('data-hide-textContent');
   }
 
   for (var i = 0, max = pastEvents.length; i < max; i++) {

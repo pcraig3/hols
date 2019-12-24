@@ -1,70 +1,82 @@
 const { css } = require('emotion')
 const { html } = require('../utils')
-const { theme } = require('../styles')
+const { theme, insideContainer, horizontalPadding, visuallyHidden } = require('../styles')
 const DateHtml = require('./DateHtml.js')
 const { relativeDate } = require('../dates')
 
 const styles = ({ accent = theme.color.red } = {}) => css`
-  padding: ${theme.space.xl} ${theme.space.lg};
+  padding-top: ${theme.space.xl};
+  padding-bottom: ${theme.space.xl};
   background-color: ${accent};
   color: white;
-  margin: -${theme.space.lg} -${theme.space.lg} 0 -${theme.space.lg};
-
-  @media (${theme.mq.sm}) {
-    min-height: 65vh;
-  }
+  ${horizontalPadding};
 
   @media (${theme.mq.md}) {
-    font-size: 3vw;
-    margin-right: -${theme.space.xxl};
-    min-height: 70vh;
+    font-size: calc(16px + 8 * (100vw - 400px) / 400);
   }
 
   @media (${theme.mq.lg}) {
-    font-size: 2.8vw;
+    font-size: calc(20px + 3 * (100vw - 400px) / 400);
   }
 
-  @media (${theme.mq.xl}) {
-    font-size: 2.2vw;
+  > div {
+    ${insideContainer};
+  }
+
+  h1 {
+    .h1--intro {
+      font-size: 0.533em;
+      font-weight: 400;
+      margin-bottom: 8px;
+
+      @media (${theme.mq.lg}) {
+        font-weight: 300;
+      }
+    }
+
+    .h1--date {
+      font-size: 1.3em;
+      font-weight: 700;
+      margin-bottom: 3px;
+    }
+
+    .h1--name {
+      font-size: 0.9em;
+      font-weight: 400;
+
+      @media (${theme.mq.lg}) {
+        font-weight: 300;
+      }
+    }
   }
 
   h1,
   p {
     width: 100%;
 
-    @media (${theme.mq.sm}) {
-      width: 90%;
-    }
-
-    @media (${theme.mq.md}) {
+    @media (${theme.mq.lg}) {
       width: 70%;
       max-width: 850px;
     }
   }
 
-  h1 + p {
+  p {
     margin-bottom: 0;
-    margin-top: ${theme.space.xl};
-    font-size: 1.1em;
+    margin-top: calc(${theme.space.xl} + ${theme.space.md});
 
     + p {
-      margin-top: ${theme.space.xl};
+      margin-top: ${theme.space.xs};
+    }
+
+    @media (${theme.mq.lg}) {
+      font-size: 85%;
+      margin-top: calc(${theme.space.xl} + ${theme.space.xl});
     }
   }
 
   a,
   a:visited {
     color: white;
-  }
-
-  time {
-    color: white;
-    display: inline-block;
-    min-width: 80%;
-    font-size: 1.15em;
-    @media (${theme.mq.lg}) {
-      font-size: 1.25em;
-    }
   }
 `
 
@@ -77,7 +89,7 @@ const renderCelebratingProvinces = provinces => {
 
   if (provinces.length === 13) {
     return html`
-      <p>Celebrated by${' '}<a href="/provinces">all provinces and territories</a></p>
+      <p>National holiday</p>
     `
   }
 
@@ -109,20 +121,29 @@ const nextHolidayBox = ({ nextHoliday, provinceName = 'Canada', provinceId, fede
         ? styles(theme.color[federal ? 'federal' : provinceId])
         : styles()}
     >
-      <h1>
-        ${provinceName}’s next${' '}${federal && 'federal '}statutory holiday is${' '}
-        <span class="hol-name">${nextHoliday.nameEn.replace(/ /g, '\u00a0')}</span>
-        ${' '}on${' '}<${DateHtml} dateString=${nextHoliday.date} //>
-      </h1>
-      ${nextHoliday.provinces && !federal
-        ? renderCelebratingProvinces(nextHoliday.provinces)
-        : renderRelativeDate(nextHoliday.date)}
-      ${federal &&
-        html`
-          <p>
-            <a href="/do-federal-holidays-apply-to-me">Find out who gets federal stat holidays</a>.
-          </p>
-        `}
+      <div>
+        <h1>
+          <div class="h1--intro">
+            ${provinceName}’s next${' '}${federal && 'federal '}<span class=${visuallyHidden}
+              >statutory </span
+            >holiday is
+          </div>
+          <div class="h1--date"><${DateHtml} dateString=${nextHoliday.date} //></div>
+          <div class="h1--name">${nextHoliday.nameEn.replace(/ /g, '\u00a0')}</div>
+        </h1>
+        ${nextHoliday.provinces && !federal
+          ? renderCelebratingProvinces(nextHoliday.provinces)
+          : renderRelativeDate(nextHoliday.date)}
+        ${federal &&
+          html`
+            <p>
+              <a href="/do-federal-holidays-apply-to-me"
+                >Find out who gets federal${' '}
+                <span class=${visuallyHidden}>statutory </span>holidays</a
+              >
+            </p>
+          `}
+      </div>
     </div>
   `
 }

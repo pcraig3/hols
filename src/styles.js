@@ -65,20 +65,15 @@ const visuallyHidden = css`
 `
 
 const contentPageStyles = css`
-  section {
+  > *:not(ul) {
     width: 100%;
 
-    @media (${theme.mq.sm}) {
+    @media (${theme.mq.md}) {
       width: 90%;
     }
 
-    @media (${theme.mq.md}) {
+    @media (${theme.mq.xl}) {
       width: 70%;
-      max-width: 880px;
-    }
-
-    p:nth-last-child(2) {
-      margin-bottom: calc(${theme.space.xl} + ${theme.space.xl});
     }
   }
 
@@ -94,6 +89,37 @@ const contentPageStyles = css`
       margin-top: ${theme.space.xxl};
     }
   }
+
+  > p:nth-last-child(2) {
+    margin-bottom: calc(${theme.space.xl} + ${theme.space.xl});
+  }
+`
+
+const horizontalPadding = css`
+  padding-left: ${theme.space.sm};
+  padding-right: ${theme.space.lg};
+
+  @media (${theme.mq.lg}) {
+    padding-left: ${theme.space.lg};
+  }
+`
+
+const insideContainer = css`
+  width: 100%;
+  margin: 0 auto;
+
+  @media (${theme.mq.sm}) {
+    width: 90%;
+  }
+
+  @media (${theme.mq.lg}) {
+    width: 80%;
+    max-width: 960px;
+  }
+
+  @media (${theme.mq.xl}) {
+    max-width: 1170px;
+  }
 `
 
 module.exports = {
@@ -101,4 +127,6 @@ module.exports = {
   visuallyHidden,
   pageMargin,
   contentPageStyles,
+  insideContainer,
+  horizontalPadding,
 }
