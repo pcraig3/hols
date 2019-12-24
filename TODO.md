@@ -1,10 +1,13 @@
 # TODO
 
+- make it work for 2020
+- add a better province picker
+- add a print feature
+- add an export ics feature
+- sticky header?
 - add holidays by year to the frontend
   - 2020
   - 2021
-- add a print feature
-- add an export ics feature
 - https://matthewsmith.io/blog/how-to-set-up-cache-busting-in-express
 - list of holidays
 - ? put federal holidays on the canada holiday box province list
