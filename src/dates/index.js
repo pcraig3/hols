@@ -44,7 +44,7 @@ const _parseRelativeDates = dateString => {
   return addDays(anchorDate, position * count)
 }
 
-const getISODate = (dateString, year = new Date().getUTCFullYear()) => {
+const getISODate = (dateString, year = new Date(Date.now()).getUTCFullYear()) => {
   let date
   dateString = `${dateString} ${year}`
 
@@ -80,7 +80,7 @@ const displayDate = (dateString, weekday = false) => {
 
 const relativeDate = dateString => {
   const daysOffset = differenceInDays(
-    startOfDay(new Date()),
+    startOfDay(new Date(Date.now())),
     getDateBeforeMidnightFromString(dateString),
   )
 
@@ -90,7 +90,10 @@ const relativeDate = dateString => {
     case -1:
       return 'That’s tomorrow!'
     default:
-      return `That’s in ${formatDistance(getDateBeforeMidnightFromString(dateString), new Date())}`
+      return `That’s in ${formatDistance(
+        getDateBeforeMidnightFromString(dateString),
+        new Date(Date.now()),
+      )}`
   }
 }
 

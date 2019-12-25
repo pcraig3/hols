@@ -28,7 +28,7 @@ const dbmw = (db, cb) => {
       const year = parseInt(req.query.year)
 
       if (![2019, 2020, 2021].includes(year)) {
-        return new Date().getUTCFullYear()
+        return new Date(Date.now()).getUTCFullYear()
       }
 
       return year
@@ -107,7 +107,7 @@ const array2Obj = (arr, key = 'id') => {
  */
 const nextHoliday = (holidays, dateString) => {
   if (!dateString) {
-    dateString = new Date().toISOString().substring(0, 10)
+    dateString = new Date(Date.now()).toISOString().substring(0, 10)
   }
 
   const nextDate = holidays.find(holiday => {
@@ -135,7 +135,7 @@ const nextHoliday = (holidays, dateString) => {
  */
 const upcomingHolidays = (holidays, dateString) => {
   if (!dateString) {
-    dateString = new Date().toISOString().substring(0, 10)
+    dateString = new Date(Date.now()).toISOString().substring(0, 10)
   }
 
   return holidays.filter(holiday => holiday.date >= dateString)

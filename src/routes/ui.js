@@ -32,7 +32,7 @@ router.get(
   dbmw(db, getProvincesWithHolidays),
   checkProvinceIdErr,
   (req, res) => {
-    const year = new Date().getUTCFullYear()
+    const year = new Date(Date.now()).getUTCFullYear()
     const { holidays, nextHoliday, nameEn: provinceName, id: provinceId } = res.locals.rows[0]
 
     const meta = `${provinceId}’s next stat holiday is ${getMeta(

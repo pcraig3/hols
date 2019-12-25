@@ -64,7 +64,7 @@ router.use(function(err, req, res, next) {
     error: {
       status: res.statusCode,
       message: err.message,
-      timestamp: new Date().toISOString(),
+      timestamp: new Date(Date.now()).toISOString(),
     },
   })
 })

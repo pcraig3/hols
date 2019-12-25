@@ -65,7 +65,7 @@ const getNextHoliday = provinces => {
   provinces.map(province => {
     province.nextHoliday = province.holidays.find(holiday => {
       // compare iso strings: eg, "2019-09-04" >= "2019-08-04"
-      return holiday.date >= new Date().toISOString().substring(0, 10)
+      return holiday.date >= new Date(Date.now()).toISOString().substring(0, 10)
     })
   })
 }
