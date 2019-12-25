@@ -3,7 +3,7 @@ const router = express.Router()
 const db = require('sqlite')
 const createError = require('http-errors')
 const renderPage = require('../pages/_document.js')
-const { dbmw, checkProvinceIdErr, nextHoliday } = require('../utils')
+const { dbmw, checkProvinceIdErr, nextHoliday, getCurrentHolidayYear } = require('../utils')
 const { getProvinces, getHolidaysWithProvinces, getProvincesWithHolidays } = require('../queries')
 const { displayDate } = require('../dates')
 
@@ -15,12 +15,12 @@ router.get('/', dbmw(db, getHolidaysWithProvinces), (req, res) => {
 
   const meta = `Canada’s next stat holiday is ${getMeta(
     nextHol,
-  )}. See all statutory holidays in Canada in 2019.`
+  )}. See all statutory holidays in Canada in ${getCurrentHolidayYear()}.`
 
   return res.send(
     renderPage({
       pageComponent: 'Province',
-      title: 'Canadian statutory holidays in 2019',
+      title: `Canadian statutory holidays in ${getCurrentHolidayYear()}`,
       docProps: { meta, path: req.path },
       props: { data: { holidays, nextHoliday: nextHol } },
     }),
@@ -32,7 +32,7 @@ router.get(
   dbmw(db, getProvincesWithHolidays),
   checkProvinceIdErr,
   (req, res) => {
-    const year = new Date(Date.now()).getUTCFullYear()
+    const year = getCurrentHolidayYear()
     const { holidays, nextHoliday, nameEn: provinceName, id: provinceId } = res.locals.rows[0]
 
     const meta = `${provinceId}’s next stat holiday is ${getMeta(
@@ -58,12 +58,12 @@ router.get('/federal', dbmw(db, getHolidaysWithProvinces), (req, res) => {
 
   const meta = `Canada’s next federal stat holiday is ${getMeta(
     nextHol,
-  )}. See all federal statutory holidays in Canada in 2019.`
+  )}. See all federal statutory holidays in Canada in ${getCurrentHolidayYear()}.`
 
   return res.send(
     renderPage({
       pageComponent: 'Province',
-      title: 'Federal statutory holidays in Canada in 2019',
+      title: `Federal statutory holidays in Canada in ${getCurrentHolidayYear()}`,
       docProps: { meta, path: req.path },
       props: { data: { holidays, nextHoliday: nextHol, federal: true } },
     }),
@@ -76,8 +76,7 @@ router.get('/provinces', dbmw(db, getProvinces), (req, res) => {
       pageComponent: 'Provinces',
       title: 'All regions in Canada — Canada statutory holidays',
       docProps: {
-        meta:
-          'Upcoming stat holidays for all regions in Canada. See all federal statutory holidays in Canada in 2019.',
+        meta: `Upcoming stat holidays for all regions in Canada. See all federal statutory holidays in Canada in ${getCurrentHolidayYear()}.`,
         path: req.path,
       },
       props: { data: { provinces: res.locals.rows } },

@@ -28,7 +28,7 @@ const dbmw = (db, cb) => {
       const year = parseInt(req.query.year)
 
       if (![2019, 2020, 2021].includes(year)) {
-        return new Date(Date.now()).getUTCFullYear()
+        return getCurrentHolidayYear()
       }
 
       return year
