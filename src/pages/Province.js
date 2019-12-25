@@ -77,7 +77,7 @@ const createRows = (holidays, federal) => {
     )
   }
 
-  const today = new Date().toISOString().slice(0, 10)
+  const today = new Date(Date.now()).toISOString().slice(0, 10)
 
   return holidays.map(holiday => {
     const row = {
@@ -122,7 +122,7 @@ const Province = ({
         <section class=${horizontalPadding}>
           <div class=${insideContainer}>
             <${SummaryTable}
-              id=${`holidays-${year}`}
+              id="holidays-table"
               title=${createTitle(provinceName, federal, year)}
               rows=${createRows(holidays, federal)}
             >
