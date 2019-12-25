@@ -1,4 +1,4 @@
-const { array2Obj, nextHoliday, upcomingHolidays } = require('../index')
+const { array2Obj, nextHoliday, upcomingHolidays, getCurrentHolidayYear } = require('../index')
 const holidays = require('./data.skip')
 
 describe('Test array2Obj', () => {
@@ -74,5 +74,42 @@ describe('Test upcomingHolidays', () => {
   test('returns no holidays for April 1st', () => {
     const dateString = '2019-04-01'
     expect(upcomingHolidays(holidays, dateString).length).toEqual(0)
+  })
+})
+
+describe('Test getCurrentHolidayYear', () => {
+  const RealDate = Date
+
+  afterEach(() => {
+    global.Date = RealDate
+  })
+
+  const mockDate = dateString => {
+    global.Date.now = () => new Date(dateString)
+  }
+
+  test('returns the current year for 2019', () => {
+    mockDate('2019-01-01')
+    expect(getCurrentHolidayYear()).toEqual(2019)
+  })
+
+  test('returns the current year for 2020', () => {
+    mockDate('2020-01-01')
+    expect(getCurrentHolidayYear()).toEqual(2020)
+  })
+
+  test('returns 2019 for December 25th, 2019', () => {
+    mockDate('2019-12-25')
+    expect(getCurrentHolidayYear()).toEqual(2019)
+  })
+
+  test('returns 2020 for December 26th, 2019', () => {
+    mockDate('2019-12-26')
+    expect(getCurrentHolidayYear()).toEqual(2020)
+  })
+
+  test('returns 2020 for December 31st, 2019', () => {
+    mockDate('2019-12-31')
+    expect(getCurrentHolidayYear()).toEqual(2020)
   })
 })
