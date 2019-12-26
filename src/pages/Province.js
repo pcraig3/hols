@@ -52,7 +52,7 @@ const styles = ({ accent = theme.color.red, focus = theme.color.focus } = {}) =>
   }
 
   div.upcoming ~ div.upcoming .key {
-    color: black;
+    color: #585858;
   }
 
   #toggle-past {
@@ -153,13 +153,13 @@ const Province = ({
                     data-label="toggle-past"
                     >Show past holidays<//
                   >
+                  <script src="/js/province.js"></script>
                 `}
             <//>
             <span class="bottom-link"><a href="#html" class="up-arrow">Back to top</a></span>
           </div>
         </section>
       </div>
-      <script src="/js/province.js"></script>
     <//>
   `
 
