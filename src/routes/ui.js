@@ -10,19 +10,20 @@ const { displayDate } = require('../dates')
 const getMeta = holiday => `${holiday.nameEn} on ${displayDate(holiday.date)}`
 
 router.get('/', dbmw(db, getHolidaysWithProvinces), (req, res) => {
+  const year = getCurrentHolidayYear()
   const holidays = res.locals.rows
   const nextHol = nextHoliday(holidays)
 
   const meta = `Canada’s next stat holiday is ${getMeta(
     nextHol,
-  )}. See all statutory holidays in Canada in ${getCurrentHolidayYear()}.`
+  )}. See all statutory holidays in Canada in ${year}.`
 
   return res.send(
     renderPage({
       pageComponent: 'Province',
-      title: `Canadian statutory holidays in ${getCurrentHolidayYear()}`,
+      title: `Canadian statutory holidays in ${year}`,
       docProps: { meta, path: req.path },
-      props: { data: { holidays, nextHoliday: nextHol } },
+      props: { data: { holidays, nextHoliday: nextHol, year } },
     }),
   )
 })
@@ -53,19 +54,20 @@ router.get(
 )
 
 router.get('/federal', dbmw(db, getHolidaysWithProvinces), (req, res) => {
+  const year = getCurrentHolidayYear()
   const holidays = res.locals.rows
   const nextHol = nextHoliday(holidays)
 
   const meta = `Canada’s next federal stat holiday is ${getMeta(
     nextHol,
-  )}. See all federal statutory holidays in Canada in ${getCurrentHolidayYear()}.`
+  )}. See all federal statutory holidays in Canada in ${year}.`
 
   return res.send(
     renderPage({
       pageComponent: 'Province',
-      title: `Federal statutory holidays in Canada in ${getCurrentHolidayYear()}`,
+      title: `Federal statutory holidays in Canada in ${year}`,
       docProps: { meta, path: req.path },
-      props: { data: { holidays, nextHoliday: nextHol, federal: true } },
+      props: { data: { holidays, nextHoliday: nextHol, federal: true, year } },
     }),
   )
 })

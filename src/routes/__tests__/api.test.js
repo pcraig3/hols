@@ -2,6 +2,7 @@ const request = require('supertest')
 const db = require('sqlite')
 const Promise = require('bluebird')
 const app = require('../../server.js')
+const { getCurrentHolidayYear } = require('../../utils')
 
 describe('Test /api responses', () => {
   beforeAll(async () => {
@@ -212,18 +213,14 @@ describe('Test /api responses', () => {
 
       let badYears = ['2018', '2022', '1', null, undefined, false, 'orange', 'christmas']
       badYears.map(year => {
-        test(`${year} it should return all holidays for ${new Date(Date.now())
-          .getUTCFullYear()
-          .toString()} with the current year`, async () => {
+        test(`${year} it should return all holidays for ${getCurrentHolidayYear()} with the current year`, async () => {
           const response = await request(app).get(`/api/v1/holidays?year=${year}`)
           expect(response.statusCode).toBe(200)
 
           let { holidays } = JSON.parse(response.text)
 
           holidays.map(holiday => {
-            expect(holiday.date.slice(0, 4)).toEqual(
-              new Date(Date.now()).getUTCFullYear().toString(),
-            )
+            expect(holiday.date.slice(0, 4)).toEqual(getCurrentHolidayYear().toString())
           })
         })
       })
@@ -239,7 +236,7 @@ describe('Test /api responses', () => {
 
       expect(holiday).toMatchObject({
         id: 16,
-        date: '2019-08-05',
+        date: '2020-08-03',
         nameEn: 'Civic Holiday',
         nameFr: 'Premier lundi d’août',
         federal: 1,
@@ -280,8 +277,7 @@ describe('Test /api responses', () => {
           expect(response.statusCode).toBe(200)
 
           let { holiday } = JSON.parse(response.text)
-
-          expect(holiday.date.slice(0, 4)).toEqual(new Date(Date.now()).getUTCFullYear().toString())
+          expect(holiday.date.slice(0, 4)).toEqual(getCurrentHolidayYear().toString())
         })
       })
     })

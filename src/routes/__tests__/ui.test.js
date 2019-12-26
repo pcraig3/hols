@@ -29,12 +29,12 @@ describe('Test ui responses', () => {
       const response = await request(app).get('/')
       const $ = cheerio.load(response.text)
       expect($('h1').text()).toMatch(/^Canada’s next statutory holiday is/)
-      expect($('title').text()).toEqual('Canadian statutory holidays in 2019')
+      expect($('title').text()).toEqual('Canadian statutory holidays in 2020')
       expect($('meta[name="description"]').attr('content')).toMatch(
         /^Canada’s next stat holiday is/,
       )
       expect($('meta[name="description"]').attr('content')).toMatch(
-        /See all statutory holidays in Canada in 2019./,
+        /See all statutory holidays in Canada in 2020./,
       )
     })
   })
@@ -51,7 +51,7 @@ describe('Test ui responses', () => {
       expect($('h1').text()).toEqual('All regions in Canada')
       expect($('title').text()).toEqual('All regions in Canada — Canada statutory holidays')
       expect($('meta[name="description"]').attr('content')).toEqual(
-        'Upcoming stat holidays for all regions in Canada. See all federal statutory holidays in Canada in 2019.',
+        'Upcoming stat holidays for all regions in Canada. See all federal statutory holidays in Canada in 2020.',
       )
     })
   })
@@ -67,10 +67,10 @@ describe('Test ui responses', () => {
         const response = await request(app).get('/province/MB')
         const $ = cheerio.load(response.text)
         expect($('h1').text()).toMatch(/^Manitoba’s next statutory holiday is/)
-        expect($('title').text()).toEqual('Manitoba (MB) statutory holidays in 2019')
+        expect($('title').text()).toEqual('Manitoba (MB) statutory holidays in 2020')
         expect($('meta[name="description"]').attr('content')).toMatch(/^MB’s next stat holiday is/)
         expect($('meta[name="description"]').attr('content')).toMatch(
-          /See all statutory holidays in Manitoba, Canada in 2019/,
+          /See all statutory holidays in Manitoba, Canada in 2020/,
         )
       })
     })
@@ -85,7 +85,7 @@ describe('Test ui responses', () => {
         const response = await request(app).get('/federal')
         const $ = cheerio.load(response.text)
         expect($('h1').text()).toMatch(/^Canada’s next federal statutory holiday is/)
-        expect($('title').text()).toEqual('Federal statutory holidays in Canada in 2019')
+        expect($('title').text()).toEqual('Federal statutory holidays in Canada in 2020')
         expect($('meta[name="description"]').attr('content')).toMatch(
           /^Canada’s next federal stat holiday is/,
         )
