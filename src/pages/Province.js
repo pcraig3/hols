@@ -97,6 +97,11 @@ const createRows = (holidays, federal) => {
   })
 }
 
+const ifPastHolidays = (holidays = []) => {
+  const today = new Date(Date.now()).toISOString().slice(0, 10)
+  return holidays[0].date < today
+}
+
 const Province = ({
   data: {
     holidays,
@@ -126,14 +131,19 @@ const Province = ({
               title=${createTitle(provinceName, federal, year)}
               rows=${createRows(holidays, federal)}
             >
-              <${Button}
-                id="toggle-past"
-                color=${federal || provinceId ? theme.color[federal ? 'federal' : provinceId] : {}}
-                style="display: none;"
-                data-event="true"
-                data-label="toggle-past"
-                >Show past holidays<//
-              >
+              ${ifPastHolidays(holidays) &&
+                html`
+                  <${Button}
+                    id="toggle-past"
+                    color=${federal || provinceId
+                      ? theme.color[federal ? 'federal' : provinceId]
+                      : {}}
+                    style="display: none;"
+                    data-event="true"
+                    data-label="toggle-past"
+                    >Show past holidays<//
+                  >
+                `}
             <//>
             <span class="bottom-link"><a href="#html" class="up-arrow">Back to top</a></span>
           </div>
