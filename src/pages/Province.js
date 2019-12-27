@@ -30,6 +30,13 @@ const styles = ({ accent = theme.color.red, focus = theme.color.focus } = {}) =>
     }
   }
 
+  h2 {
+    margin: 0;
+    padding-top: ${theme.space.md};
+    padding-bottom: ${theme.space.xl};
+    font-size: 1.566em;
+  }
+
   div.past {
     > * {
       opacity: 0.45;
@@ -54,12 +61,12 @@ const styles = ({ accent = theme.color.red, focus = theme.color.focus } = {}) =>
   }
 `
 
-const createTitle = (provinceName, federal, year) => {
-  return html`
-    ${provinceName}${federal ? ' federal' : ''}
-    <span class=${visuallyHidden}> statutory</span> holidays in ${year}
+const getTitleString = (provinceName, federal, year) => {
+  return `
+    ${provinceName}${federal ? ' federal' : ''} statutory holidays in ${year}
   `
 }
+
 const createRows = (holidays, federal) => {
   const _provinces = holiday => {
     if (holiday.provinces.length === 13) {
@@ -127,10 +134,13 @@ const Province = ({
         <section class=${horizontalPadding}>
           <div class=${insideContainer}>
             <${SummaryTable}
-              id="holidays-table"
-              title=${createTitle(provinceName, federal, year)}
+              title=${getTitleString(provinceName, federal, year)}
               rows=${createRows(holidays, federal)}
             >
+              <h2 id="holidays-table">
+                ${provinceName}${federal ? ' federal' : ''}
+                <span class=${visuallyHidden}> statutory</span> holidays in ${year}
+              </h2>
               ${ifPastHolidays(holidays) &&
                 html`
                   <${Button}

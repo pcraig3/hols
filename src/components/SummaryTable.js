@@ -97,20 +97,10 @@ const renderSummaryRow = (row, props) =>
     <${SummaryRow} row=${row} ...${props} //>
   `
 
-const summaryTable = children => css`
+const summaryTable = css`
   dl {
     margin: 0;
     margin-bottom: calc(${theme.space.xl} + ${theme.space.xl});
-  }
-
-  h2 {
-    margin: 0;
-    padding-top: ${theme.space.md};
-    padding-bottom: ${!children ? theme.space.xl : 0};
-  }
-
-  h2 {
-    font-size: 1.566em;
   }
 
   /* on larger screens */
@@ -123,20 +113,10 @@ const summaryTable = children => css`
   }
 `
 
-const renderHeading = ({ title, id, h1 }) => {
-  return h1
-    ? html`
-        <h1 id=${id}>${title}</h1>
-      `
-    : html`
-        <h2 id=${id}>${title}</h2>
-      `
-}
-
-const SummaryTable = ({ rows, title = false, id, h1 = false, children, ...props }) =>
+const SummaryTable = ({ rows, title = false, children, ...props }) =>
   html`
-    <div class=${summaryTable(children)}>
-      ${title && renderHeading({ title, id, h1 })} ${children}
+    <div class=${summaryTable}>
+      ${children}
       <dl title=${title}>
         ${rows.map(row => renderSummaryRow(row, props))}
       </dl>
