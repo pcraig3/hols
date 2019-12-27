@@ -4,12 +4,12 @@ const { css } = require('emotion')
 
 const theme = {
   color: {
-    red: '#AD1D00',
-    yellowPale: '#FFFCF0',
-    greyLight: '#BFC1C3',
+    red: '#9f2f10',
+    yellowPale: '#fffcf0',
+    greyLight: '#bfc1c3',
     grey: '#585858',
     focus: 'cornflowerblue',
-    federal: { accent: '#B04F72', focus: 'cornflowerblue' },
+    federal: { accent: '#b04f72', focus: 'cornflowerblue' },
     AB: { accent: '#a50069', focus: '#00aad2' },
     BC: { accent: '#5475a7', focus: '#ffbf47' },
     MB: { accent: '#057d3e', focus: '#2c3135' },
@@ -18,11 +18,11 @@ const theme = {
     NS: { accent: '#006cb7', focus: '#f8d44c' },
     NT: { accent: '#0f599a', focus: '#c75997' },
     NU: { accent: '#5c5600', focus: '#5a9699' },
-    ON: { accent: '#006B3F', focus: '#333333' },
-    PE: { accent: '#008570', focus: '#99CC99' },
+    ON: { accent: '#006b3f', focus: '#333333' },
+    PE: { accent: '#008570', focus: '#99cc99' },
     QC: { accent: '#095797', focus: '#ffbf47' },
     SK: { accent: '#046a38', focus: '#fbdd40' },
-    YT: { accent: '#244C5A', focus: '#F2A900' },
+    YT: { accent: '#244c5a', focus: '#f2a900' },
   },
   space: {
     xxs: '5px',
