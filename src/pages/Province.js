@@ -87,6 +87,7 @@ const createRows = (holidays, federal) => {
   }
 
   const today = new Date(Date.now()).toISOString().slice(0, 10)
+  var previousDate = null
 
   return holidays.map(holiday => {
     const row = {
@@ -102,6 +103,11 @@ const createRows = (holidays, federal) => {
 
     row.className = holiday.date < today ? 'past' : 'upcoming'
 
+    if (previousDate === holiday.date) {
+      row.className += ' repeatDate'
+    }
+
+    previousDate = holiday.date
     return row
   })
 }

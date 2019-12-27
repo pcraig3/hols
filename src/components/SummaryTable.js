@@ -39,6 +39,14 @@ const summaryRow = css`
   }
 
   @media (${theme.mq.lg}) {
+    &:first-of-type {
+      .key,
+      .value,
+      .value2 {
+        border-top: none;
+      }
+    }
+
     .key,
     .value,
     .value2 {
@@ -46,11 +54,15 @@ const summaryRow = css`
       padding-right: ${theme.space.lg};
       padding-top: ${theme.space.md};
       padding-bottom: ${theme.space.md};
-      border-bottom: 2px solid ${theme.color.greyLight};
+      border-top: 2px solid ${theme.color.greyLight};
 
       a {
         color: ${theme.color.red};
       }
+    }
+
+    &.repeatDate .key {
+      visibility: hidden;
     }
 
     .key {
