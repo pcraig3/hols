@@ -41,10 +41,11 @@ const styles = ({ accent = theme.color.red } = {}) => css`
     }
 
     .h1--name {
-      font-size: 0.9em;
+      font-size: 0.75em;
       font-weight: 400;
 
       @media (${theme.mq.lg}) {
+        font-size: 0.83em;
         font-weight: 300;
       }
     }
