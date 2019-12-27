@@ -51,8 +51,10 @@ const styles = ({ accent = theme.color.red, focus = theme.color.focus } = {}) =>
     color: ${accent};
   }
 
-  div.upcoming ~ div.upcoming .key {
-    color: #585858;
+  @media (${theme.mq.lg}) {
+    div.upcoming ~ div.upcoming .key {
+      color: ${theme.color.grey};
+    }
   }
 
   #toggle-past {

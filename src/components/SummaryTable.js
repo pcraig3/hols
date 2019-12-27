@@ -3,8 +3,8 @@ const { css } = require('emotion')
 const { theme } = require('../styles')
 
 const summaryRow = css`
-  margin-bottom: ${theme.space.sm};
-  border-bottom: 1px solid ${theme.color.greyLight};
+  margin-bottom: ${theme.space.md};
+  border-bottom: 2px solid ${theme.color.greyLight};
 
   @media (${theme.mq.lg}) {
     display: table-row;
@@ -21,17 +21,21 @@ const summaryRow = css`
 
   .key {
     font-weight: 700;
-    margin-bottom: ${theme.space.xxs};
+    margin-bottom: ${theme.space.xs};
   }
 
   .value {
     white-space: pre-wrap;
-    margin-bottom: ${theme.space.sm};
+    margin-bottom: ${theme.space.xxs};
   }
 
   .value2 {
     margin: 0;
-    margin-bottom: ${theme.space.sm};
+    margin-bottom: ${theme.space.md};
+
+    a {
+      color: inherit;
+    }
   }
 
   @media (${theme.mq.lg}) {
@@ -40,17 +44,21 @@ const summaryRow = css`
     .value2 {
       display: table-cell;
       padding-right: ${theme.space.lg};
-      padding-top: ${theme.space.xs};
-      padding-bottom: ${theme.space.xs};
-      border-bottom: 1px solid ${theme.color.greyLight};
+      padding-top: ${theme.space.md};
+      padding-bottom: ${theme.space.md};
+      border-bottom: 2px solid ${theme.color.greyLight};
+
+      a {
+        color: ${theme.color.red};
+      }
     }
 
     .key {
-      width: 55%;
+      width: 60%;
     }
 
     .value {
-      width: 45%;
+      width: 25%;
     }
   }
 `
@@ -58,11 +66,11 @@ const summaryRow = css`
 const summaryRow2 = css`
   @media (${theme.mq.lg}) {
     .key {
-      width: 40%;
+      width: 55%;
     }
 
     .value {
-      width: 40%;
+      width: 25%;
     }
 
     .value2 {
