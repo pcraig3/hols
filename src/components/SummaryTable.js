@@ -1,10 +1,28 @@
 const { html } = require('../utils')
 const { css } = require('emotion')
-const { theme } = require('../styles')
+const { theme, visuallyHidden } = require('../styles')
 
 const summaryRow = css`
-  margin-bottom: ${theme.space.sm};
-  border-bottom: 1px solid ${theme.color.greyLight};
+  padding-top: ${theme.space.md};
+  border-top: 2px solid ${theme.color.greyLight};
+
+  &:first-of-type {
+    border-top: none;
+    padding-top: 0;
+  }
+
+  &.repeatDate {
+    border-top: none;
+    padding-top: ${theme.space.xs};
+
+    .key {
+      ${visuallyHidden};
+    }
+
+    @media (${theme.mq.md}) {
+      padding-top: ${theme.space.md};
+    }
+  }
 
   @media (${theme.mq.lg}) {
     display: table-row;
@@ -21,48 +39,72 @@ const summaryRow = css`
 
   .key {
     font-weight: 700;
-    margin-bottom: ${theme.space.xxs};
+    margin-bottom: ${theme.space.xs};
   }
 
   .value {
     white-space: pre-wrap;
-    margin-bottom: ${theme.space.sm};
-  }
-
-  .value2 {
-    margin: 0;
-    margin-bottom: ${theme.space.sm};
+    margin-bottom: ${theme.space.md};
   }
 
   @media (${theme.mq.lg}) {
+    &.repeatDate .key {
+      visibility: hidden;
+    }
+
+    &:first-of-type {
+      .key,
+      .value,
+      .value2 {
+        border-top: none;
+      }
+    }
+
     .key,
     .value,
     .value2 {
       display: table-cell;
       padding-right: ${theme.space.lg};
-      padding-top: ${theme.space.xs};
-      padding-bottom: ${theme.space.xs};
-      border-bottom: 1px solid ${theme.color.greyLight};
+      padding-top: ${theme.space.md};
+      padding-bottom: ${theme.space.md};
+      border-top: 2px solid ${theme.color.greyLight};
+
+      a {
+        color: ${theme.color.red};
+      }
     }
 
     .key {
-      width: 55%;
+      width: 70%;
     }
 
     .value {
-      width: 45%;
+      width: 30%;
     }
   }
 `
 
 const summaryRow2 = css`
+  .value {
+    margin-bottom: ${theme.space.xxs};
+  }
+
+  .value2 {
+    margin: 0;
+    margin-bottom: ${theme.space.md};
+
+    a {
+      color: inherit;
+    }
+  }
+
   @media (${theme.mq.lg}) {
     .key {
-      width: 40%;
+      width: 55%;
     }
 
     .value {
-      width: 40%;
+      width: 25%;
     }
 
     .value2 {

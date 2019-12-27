@@ -51,8 +51,10 @@ const styles = ({ accent = theme.color.red, focus = theme.color.focus } = {}) =>
     color: ${accent};
   }
 
-  div.upcoming ~ div.upcoming .key {
-    color: black;
+  @media (${theme.mq.lg}) {
+    div.upcoming ~ div.upcoming .key {
+      color: ${theme.color.grey};
+    }
   }
 
   #toggle-past {
@@ -85,6 +87,7 @@ const createRows = (holidays, federal) => {
   }
 
   const today = new Date(Date.now()).toISOString().slice(0, 10)
+  var previousDate = null
 
   return holidays.map(holiday => {
     const row = {
@@ -100,6 +103,11 @@ const createRows = (holidays, federal) => {
 
     row.className = holiday.date < today ? 'past' : 'upcoming'
 
+    if (previousDate === holiday.date) {
+      row.className += ' repeatDate'
+    }
+
+    previousDate = holiday.date
     return row
   })
 }
@@ -153,13 +161,13 @@ const Province = ({
                     data-label="toggle-past"
                     >Show past holidays<//
                   >
+                  <script src="/js/province.js"></script>
                 `}
             <//>
             <span class="bottom-link"><a href="#html" class="up-arrow">Back to top</a></span>
           </div>
         </section>
       </div>
-      <script src="/js/province.js"></script>
     <//>
   `
 
