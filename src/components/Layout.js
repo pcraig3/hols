@@ -7,7 +7,7 @@ const header = css`
   font-size: 0.9em;
   font-weight: 600;
   ${horizontalPadding};
-  padding-top: ${theme.space.xs};
+  padding-top: calc(${theme.space.xs} + 3px);
   padding-bottom: ${theme.space.xs};
 
   @media (${theme.mq.md}) {

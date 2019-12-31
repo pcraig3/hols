@@ -98,7 +98,7 @@ const contentPageStyles = css`
 
 const horizontalPadding = css`
   padding-left: ${theme.space.sm};
-  padding-right: ${theme.space.lg};
+  padding-right: ${theme.space.md};
 
   @media (${theme.mq.lg}) {
     padding-left: ${theme.space.lg};
@@ -110,7 +110,7 @@ const insideContainer = css`
   margin: 0 auto;
 
   @media (${theme.mq.sm}) {
-    width: 90%;
+    width: 95%;
   }
 
   @media (${theme.mq.lg}) {

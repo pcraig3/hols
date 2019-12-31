@@ -1,13 +1,14 @@
 # TODO
 
-- make it work for 2020
+- top menu
+- continuous deployment
 - add a better province picker
 - add a print feature
 - add an export ics feature
 - sticky header?
 - add holidays by year to the frontend
-  - 2020
   - 2021
+  - 2022
 - https://matthewsmith.io/blog/how-to-set-up-cache-busting-in-express
 - list of holidays
 - ? put federal holidays on the canada holiday box province list
@@ -97,3 +98,4 @@
 - wiki problems
   - nunavut day
   - st george's day is wrong
+- make it work for 2020
