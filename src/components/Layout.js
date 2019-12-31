@@ -4,8 +4,6 @@ const { theme, horizontalPadding } = require('../styles')
 const Nav = require('./Nav')
 
 const header = css`
-  font-size: 0.9em;
-  font-weight: 600;
   ${horizontalPadding};
   padding-top: calc(${theme.space.xs} + 3px);
   padding-bottom: ${theme.space.xs};
@@ -13,7 +11,6 @@ const header = css`
   @media (${theme.mq.md}) {
     padding-top: ${theme.space.sm};
     padding-bottom: ${theme.space.sm};
-    font-size: 1em;
   }
 `
 const main = css`

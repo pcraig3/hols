@@ -27,6 +27,12 @@ const MapleLeaf = ({ fill = '#DD2E44' }) => {
 const div = color => css`
   position: relative;
   display: inline-block;
+  font-size: 0.9em;
+  font-weight: 600;
+
+  @media (${theme.mq.md}) {
+    font-size: 1em;
+  }
 
   a {
     position: relative;
