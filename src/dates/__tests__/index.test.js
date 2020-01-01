@@ -28,10 +28,6 @@ describe('Test getISODate', () => {
       test(`returns correct 2019 ISO date string for: "${day.str}"`, () => {
         expect(getISODate(day.str, 2019)).toEqual(day.iso)
       })
-
-      test(`DEFAULT returns correct ISO date string for: "${day.str}"`, () => {
-        expect(getISODate(day.str)).toEqual(day.iso)
-      })
     })
   })
 
@@ -61,6 +57,10 @@ describe('Test getISODate', () => {
     days2020.map(day => {
       test(`returns correct 2020 ISO date string for: "${day.str}"`, () => {
         expect(getISODate(day.str, 2020)).toEqual(day.iso)
+      })
+
+      test(`DEFAULT returns correct ISO date string for: "${day.str}"`, () => {
+        expect(getISODate(day.str)).toEqual(day.iso)
       })
     })
   })
