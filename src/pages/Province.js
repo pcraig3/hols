@@ -113,8 +113,14 @@ const createRows = (holidays, federal) => {
 }
 
 const ifPastHolidays = (holidays = []) => {
+  // there must be at least 6 past holidays before the button appears
+  const minimum = 6
   const today = new Date(Date.now()).toISOString().slice(0, 10)
-  return holidays[0].date < today
+  if (!holidays[minimum]) {
+    return false
+  }
+
+  return holidays[minimum].date < today
 }
 
 const Province = ({
@@ -161,12 +167,15 @@ const Province = ({
                     data-label="toggle-past"
                     >Show past holidays<//
                   >
-                  <script src="/js/province.js"></script>
                 `}
             <//>
             <span class="bottom-link"><a href="#html" class="up-arrow">Back to top</a></span>
           </div>
         </section>
+        ${ifPastHolidays(holidays) &&
+          html`
+            <script src="/js/province.js"></script>
+          `}
       </div>
     <//>
   `
