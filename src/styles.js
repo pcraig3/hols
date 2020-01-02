@@ -66,6 +66,8 @@ const visuallyHidden = css`
 `
 
 const contentPageStyles = css`
+  line-height: 1.4;
+
   > *:not(ul) {
     width: 100%;
 
