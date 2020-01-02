@@ -7,7 +7,11 @@ const Details = require('./Details')
 const styles = css`
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: baseline;
+
+  @media (${theme.mq.md}) {
+    align-items: center;
+  }
 
   ${insideContainer};
 
