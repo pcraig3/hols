@@ -104,7 +104,24 @@ describe('Test ui responses', () => {
         expect($('h1').text()).toEqual('About')
         expect($('title').text()).toEqual('About — Canada statutory holidays')
         expect($('meta[name="description"]').attr('content')).toEqual(
-          'Give feedback, use the API, get in touch, report a proble, etc.',
+          'Check my sources, use the API, get in touch, etc.',
+        )
+      })
+    })
+
+    describe('Test /feedback response', () => {
+      test('it should return 200', async () => {
+        const response = await request(app).get('/feedback')
+        expect(response.statusCode).toBe(200)
+      })
+
+      test('it should return the h1, title, and meta tag', async () => {
+        const response = await request(app).get('/feedback')
+        const $ = cheerio.load(response.text)
+        expect($('h1').text()).toEqual('Feedback')
+        expect($('title').text()).toEqual('Feedback — Canada statutory holidays')
+        expect($('meta[name="description"]').attr('content')).toEqual(
+          'Reprt a problem, tell me I’m cool, or let’s just chat even.',
         )
       })
     })
