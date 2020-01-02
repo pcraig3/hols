@@ -1,19 +1,11 @@
-const { css } = require('emotion')
 const { html } = require('../utils')
-const { theme } = require('../styles')
 const Layout = require('../components/Layout.js')
 const Content = require('../components/Content.js')
-
-const styles = css`
-  #pcraig3 {
-    color: ${theme.color.red};
-  }
-`
 
 const About = ({ data: { nextHoliday } }) =>
   html`
     <${Layout} route="/about">
-      <${Content} class=${styles}>
+      <${Content}>
         <h1>About</h1>
 
         <p>
@@ -21,19 +13,17 @@ const About = ({ data: { nextHoliday } }) =>
           <a href="/">${nextHoliday.nameEn}</a> is what we have to look forward to.
         </p>
 
-        <h2>Feedback</h2>
-        <p>
-          If you notice any wrong info or weird layouts, please${' '}
-          <a href="https://pcraig3.ca/contact">get in touch</a>. You’ll be helping lots of people
-          out b/c of how crazy good my <abbr title="Search Engine Optimization">SEO</abbr> is.
-        </p>
-
         <h2>API</h2>
+        <p>Yes,${' '}<a href="/api" target="_blank">there’s an API</a>.</p>
         <p>
-          Yes,${' '}<a href="/api" target="_blank">there’s an API</a>. Scraped from the Wikipedia
-          article “<a href="https://en.wikipedia.org/wiki/Public_holidays_in_Canada"
+          Scraped the data from the Wikipedia article “<a
+            href="https://en.wikipedia.org/wiki/Public_holidays_in_Canada"
             >Public holidays in Canada</a
-          >,” it knows about which provinces observe which holidays and vice-versa.
+          >” that knows about which provinces observe which holidays and vice-versa. And${' '}
+          <em>then</em>${' '}I even${' '}
+          <a href="https://github.com/pcraig3/hols/#citations" title="Citations" target="_blank"
+            >double-checked</a
+          >${' '} so we should be all good.
         </p>
         <p>
           <a
@@ -44,10 +34,16 @@ const About = ({ data: { nextHoliday } }) =>
           >; it should be fairly accurate.
         </p>
 
+        <h2>“Something is wrong”</h2>
+        <p>
+          Leave me some <a href="/feedback">/feedback</a> and I’ll do my best. I will at least tell
+          you if I can’t fix it.
+        </p>
+
         <h2>Me</h2>
         <p>
           Hello, my name is${' '}
-          <a id="pcraig3" href="https://pcraig3.ca" title="Paul Craig" target="_blank">Paul</a
+          <a class="pcraig3" href="https://pcraig3.ca" title="Paul Craig" target="_blank">Paul</a
           >${' '} and I am paying for this site for some reason.
         </p>
       <//>

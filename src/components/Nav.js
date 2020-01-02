@@ -73,11 +73,7 @@ const NavLinks = ({ route }) => {
       <li><a class=${route === '/federal' ? 'active' : ''} href="/federal">Federal holidays</a></li>
       <li><a class=${route === '/about' ? 'active' : ''} href="/about">About</a></li>
       <li>
-        <a
-          class=${route === '/feedback' ? 'active' : ''}
-          href="mailto:paul@pcraig3.ca?subject=Something is UP with canada-holidays.ca"
-          >Feedback</a
-        >
+        <a class=${route === '/feedback' ? 'active' : ''} href="/feedback">Feedback</a>
       </li>
     </ul>
   `

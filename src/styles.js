@@ -90,10 +90,6 @@ const contentPageStyles = css`
       margin-top: ${theme.space.xxl};
     }
   }
-
-  > p:nth-last-child(2) {
-    margin-bottom: calc(${theme.space.xl} + ${theme.space.xl});
-  }
 `
 
 const horizontalPadding = css`

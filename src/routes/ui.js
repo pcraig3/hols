@@ -109,10 +109,23 @@ router.get('/about', dbmw(db, getHolidaysWithProvinces), (req, res) => {
       pageComponent: 'About',
       title: 'About — Canada statutory holidays',
       docProps: {
-        meta: 'Give feedback, use the API, get in touch, report a proble, etc.',
+        meta: 'Check my sources, use the API, get in touch, etc.',
         path: req.path,
       },
       props: { data: { nextHoliday: nextHol } },
+    }),
+  )
+})
+
+router.get('/feedback', (req, res) => {
+  return res.send(
+    renderPage({
+      pageComponent: 'Feedback',
+      title: 'Feedback — Canada statutory holidays',
+      docProps: {
+        meta: 'Reprt a problem, tell me I’m cool, or let’s just chat even.',
+        path: req.path,
+      },
     }),
   )
 })

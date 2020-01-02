@@ -73,6 +73,10 @@ const document = ({ title, content, docProps: { meta, path } }) => {
           h2, h3, p {
             margin: 0 0 ${theme.space.md} 0;
           }
+
+          .pcraig3 {
+            color: ${theme.color.red};
+          }
         </style>
       </head>
       <body id="body">
