@@ -1,9 +1,5 @@
 # TODO
 
-- top menu
-  - active link style in top menu
-- continuous deployment
-- quick feedback page
 - add a better province picker
 - add a print feature
 - add an export ics feature
@@ -17,87 +13,91 @@
 
 # DONE
 
-- move cookie config into utils
-- check meta param can't break the app
-- install basic SQLite
-- basic table
-- provinces table
-- return provinces
-- return basic list of provinces as a page
-- change the url for the page component
-- add holidays table
-- return holidays JSON
-- return list of holidays in a page
-- add a many-to-one association between provinces and holidays
-- return holidays JSON without a recursion error
-- add api router instead of all routes in server.js
-- add root api domain
-- run web scraper again
-- update web scraper for new table names
-- return nextHoliday for each province
-- create generic error API message
-- return holidays by id
-- return provinces by id
-- create federal route
-- free deployment
-- think about how much hateoas we want in the api
-- return better error message for province with bad id
-- tests for API routes
-  - root route
-  - provinces route
-  - provinces by ID route
-  - holidays route
-  - holidays by ID route
-  - federal route
-  - test for error routes
-- add styles js file
-- next holiday canada
-  - actually get next holiday
-  - square box for next holiday
-- remove junk page
-- list of holidays canada
-  - list upcoming holidays
-  - list relevant provinces for upcoming holidays
-  - table that breaks
-- slide down effect
-- favicon
-- page title and meta tag
-- generic 404 page
-- frontend specific router + smoke tests
-- next holiday provinces
-- sketch design for frontend
-- links on the list on the front page
-- fix the summary table for two values
-- up arrows down arrows CSS content
-- colours for all the provinces
-- fix layout for province pages
-- one column layout, wink
-- add bottom menu link
-- list of provinces
-- vh bug omg
-- all provinces link bug
-- big text for big screens
-- analytics
-- put your name in it somewhere
-- update README
-- add API docs
-- about page
-- add federal holidays
-  - add a page for federal holidays
-  - add more tests for federal holidays
-  - add a menu item for federal holidays
-  - explain what federal holidays are
-- add test for menu item component
-- details element for ie11
-- better meta for social
-- add holidays by year to the API
-  - 2019
-  - 2020
-  - 2021
-- show all holidays not just upcoming holidays
-  - style past holidays differently
-  - show upcoming holidays if preferred
-- wiki problems
-  - nunavut day
-  - st george's day is wrong
+- quick feedback page
+- continuous deployment
+  - active link style in top menu
+- top menu
 - make it work for 2020
+  - st george's day is wrong
+  - nunavut day
+- wiki problems
+  - show upcoming holidays if preferred
+  - style past holidays differently
+- show all holidays not just upcoming holidays
+  - 2021
+  - 2020
+  - 2019
+- add holidays by year to the API
+- better meta for social
+- details element for ie11
+- add test for menu item component
+  - explain what federal holidays are
+  - add a menu item for federal holidays
+  - add more tests for federal holidays
+  - add a page for federal holidays
+- add federal holidays
+- about page
+- add API docs
+- update README
+- put your name in it somewhere
+- analytics
+- big text for big screens
+- all provinces link bug
+- vh bug omg
+- list of provinces
+- add bottom menu link
+- one column layout, wink
+- fix layout for province pages
+- colours for all the provinces
+- up arrows down arrows CSS content
+- fix the summary table for two values
+- links on the list on the front page
+- sketch design for frontend
+- next holiday provinces
+- frontend specific router + smoke tests
+- generic 404 page
+- page title and meta tag
+- favicon
+- slide down effect
+  - table that breaks
+  - list relevant provinces for upcoming holidays
+  - list upcoming holidays
+- list of holidays canada
+- remove junk page
+  - square box for next holiday
+  - actually get next holiday
+- next holiday canada
+- add styles js file
+  - test for error routes
+  - federal route
+  - holidays by ID route
+  - holidays route
+  - provinces by ID route
+  - provinces route
+  - root route
+- tests for API routes
+- return better error message for province with bad id
+- think about how much hateoas we want in the api
+- free deployment
+- create federal route
+- return provinces by id
+- return holidays by id
+- create generic error API message
+- return nextHoliday for each province
+- update web scraper for new table names
+- run web scraper again
+- add root api domain
+- add api router instead of all routes in server.js
+- return holidays JSON without a recursion error
+- add a many-to-one association between provinces and holidays
+- return list of holidays in a page
+- return holidays JSON
+- add holidays table
+- change the url for the page component
+- return basic list of provinces as a page
+- return provinces
+- provinces table
+- basic table
+- install basic SQLite
+- check meta param can't break the app
+- move cookie config into utils

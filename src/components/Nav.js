@@ -7,7 +7,7 @@ const Details = require('./Details')
 const styles = css`
   display: flex;
   justify-content: space-between;
-  align-items: baseline;
+  align-items: center;
 
   ${insideContainer};
 
