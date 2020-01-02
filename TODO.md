@@ -15,27 +15,27 @@
 
 - quick feedback page
 - continuous deployment
-  - active link style in top menu
 - top menu
+  - active link style in top menu
 - make it work for 2020
+- wiki problems
   - st george's day is wrong
   - nunavut day
-- wiki problems
+- show all holidays not just upcoming holidays
   - show upcoming holidays if preferred
   - style past holidays differently
-- show all holidays not just upcoming holidays
+- add holidays by year to the API
   - 2021
   - 2020
   - 2019
-- add holidays by year to the API
 - better meta for social
 - details element for ie11
 - add test for menu item component
+- add federal holidays
   - explain what federal holidays are
   - add a menu item for federal holidays
   - add more tests for federal holidays
   - add a page for federal holidays
-- add federal holidays
 - about page
 - add API docs
 - update README
@@ -59,15 +59,16 @@
 - page title and meta tag
 - favicon
 - slide down effect
+- list of holidays canada
   - table that breaks
   - list relevant provinces for upcoming holidays
   - list upcoming holidays
-- list of holidays canada
 - remove junk page
+- next holiday canada
   - square box for next holiday
   - actually get next holiday
-- next holiday canada
 - add styles js file
+- tests for API routes
   - test for error routes
   - federal route
   - holidays by ID route
@@ -75,7 +76,6 @@
   - provinces by ID route
   - provinces route
   - root route
-- tests for API routes
 - return better error message for province with bad id
 - think about how much hateoas we want in the api
 - free deployment
