@@ -14,14 +14,15 @@ const styles = css`
   .links {
     flex: auto;
     text-align: right;
-    font-size: 0.76em;
 
     .links--sm {
       display: initial;
+      font-size: 0.86em;
     }
 
     .links--md {
       display: none;
+      font-size: 0.76em;
     }
 
     @media (${theme.mq.md}) {
@@ -44,15 +45,16 @@ const linkStyles = css`
     color: ${theme.color.grey};
   }
 
+  li {
+    margin-top: ${theme.space.xs};
+  }
+
   @media (${theme.mq.md}) {
     li {
       display: inline-block;
       margin-left: ${theme.space.md};
+      margin-top: 0;
     }
-  }
-
-  details & {
-    margin-top: ${theme.space.xs};
   }
 `
 
