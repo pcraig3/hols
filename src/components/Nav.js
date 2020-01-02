@@ -2,6 +2,7 @@ const { css } = require('emotion')
 const { html } = require('../utils')
 const { theme, insideContainer } = require('../styles')
 const Logo = require('./Logo')
+const Details = require('./Details')
 
 const styles = css`
   display: flex;
@@ -60,7 +61,11 @@ const NavLinks = () => {
     <ul class=${linkStyles}>
       <li><a href="/federal">Federal holidays</a></li>
       <li><a href="/about">About</a></li>
-      <li><a href="#">Feedback</a></li>
+      <li>
+        <a href="mailto:paul@pcraig3.ca?subject=Something is UP with canada-holidays.ca"
+          >Feedback</a
+        >
+      </li>
     </ul>
   `
 }
@@ -71,10 +76,9 @@ const Nav = ({ color }) => {
       <${Logo} color=${color} />
       <div class="links">
         <div class="links--sm">
-          <details>
-            <summary>Menu</summary>
+          <${Details} summary="Menu">
             <${NavLinks} />
-          </details>
+          <//>
         </div>
         <div class="links--md">
           <${NavLinks} />

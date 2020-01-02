@@ -1,7 +1,9 @@
 # TODO
 
 - top menu
+  - active link style in top menu
 - continuous deployment
+- quick feedback page
 - add a better province picker
 - add a print feature
 - add an export ics feature
