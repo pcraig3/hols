@@ -79,7 +79,7 @@ const contentPageStyles = css`
   }
 
   h1 {
-    margin: ${theme.space.xs} 0 ${theme.space.xl} 0;
+    margin: ${theme.space.xl} 0;
   }
 
   h2 {
