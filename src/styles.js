@@ -7,7 +7,7 @@ const theme = {
     red: '#9f2f10',
     yellowPale: '#fffcf0',
     greyLight: '#bfc1c3',
-    grey: '#585858',
+    grey: '#4D4D4D',
     focus: 'cornflowerblue',
     federal: { accent: '#b04f72', focus: 'cornflowerblue' },
     AB: { accent: '#a50069', focus: '#00aad2' },

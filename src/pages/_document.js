@@ -46,7 +46,7 @@ const document = ({ title, content, docProps: { meta, path } }) => {
             word-break: break-word;
             line-height: 1.33;
             font-weight: 400;
-            color: #585858;
+            color: ${theme.color.grey};
           }
 
           @media (${theme.mq.md}) {
