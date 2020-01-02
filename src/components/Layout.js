@@ -24,11 +24,11 @@ const main = css`
   }
 `
 
-const Layout = ({ color, children }) =>
+const Layout = ({ color, route, children }) =>
   html`
     <div>
       <header class=${header}>
-        <${Nav} color=${color} //>
+        <${Nav} color=${color} route=${route} //>
       </header>
       <main class=${main}>
         ${children}

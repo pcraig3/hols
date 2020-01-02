@@ -134,7 +134,7 @@ const Province = ({
   } = {},
 }) =>
   html`
-    <${Layout} color=${federal ? 'federal' : provinceId}>
+    <${Layout} color=${federal ? 'federal' : provinceId} route=${federal ? '/federal' : undefined}>
       <div
         class=${federal || provinceId
           ? styles(theme.color[federal ? 'federal' : provinceId])

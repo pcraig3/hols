@@ -12,7 +12,7 @@ const styles = css`
 
 const About = ({ data: { nextHoliday } }) =>
   html`
-    <${Layout}>
+    <${Layout} route="/about">
       <${Content} class=${styles}>
         <h1>About</h1>
 

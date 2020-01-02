@@ -41,12 +41,16 @@ const linkStyles = css`
   list-style: none;
   margin: 0;
 
-  a {
-    color: ${theme.color.grey};
-  }
-
   li {
     margin-top: ${theme.space.xs};
+
+    a {
+      color: ${theme.color.grey};
+
+      &.active {
+        font-weight: 600;
+      }
+    }
   }
 
   @media (${theme.mq.md}) {
@@ -54,17 +58,24 @@ const linkStyles = css`
       display: inline-block;
       margin-left: ${theme.space.md};
       margin-top: 0;
+
+      a.active {
+          font-weight: 500;
+        }
+      }
     }
   }
 `
 
-const NavLinks = () => {
+const NavLinks = ({ route }) => {
   return html`
     <ul class=${linkStyles}>
-      <li><a href="/federal">Federal holidays</a></li>
-      <li><a href="/about">About</a></li>
+      <li><a class=${route === '/federal' ? 'active' : ''} href="/federal">Federal holidays</a></li>
+      <li><a class=${route === '/about' ? 'active' : ''} href="/about">About</a></li>
       <li>
-        <a href="mailto:paul@pcraig3.ca?subject=Something is UP with canada-holidays.ca"
+        <a
+          class=${route === '/feedback' ? 'active' : ''}
+          href="mailto:paul@pcraig3.ca?subject=Something is UP with canada-holidays.ca"
           >Feedback</a
         >
       </li>
@@ -72,18 +83,18 @@ const NavLinks = () => {
   `
 }
 
-const Nav = ({ color }) => {
+const Nav = ({ color, route }) => {
   return html`
     <nav class=${styles}>
       <${Logo} color=${color} />
       <div class="links">
         <div class="links--sm">
           <${Details} summary="Menu">
-            <${NavLinks} />
+            <${NavLinks} route=${route} />
           <//>
         </div>
         <div class="links--md">
-          <${NavLinks} />
+          <${NavLinks} route=${route} />
         </div>
       </div>
     </nav>
