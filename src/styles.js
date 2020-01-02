@@ -7,7 +7,7 @@ const theme = {
     red: '#9f2f10',
     yellowPale: '#fffcf0',
     greyLight: '#bfc1c3',
-    grey: '#585858',
+    grey: '#4D4D4D',
     focus: 'cornflowerblue',
     federal: { accent: '#b04f72', focus: 'cornflowerblue' },
     AB: { accent: '#a50069', focus: '#00aad2' },
@@ -66,6 +66,8 @@ const visuallyHidden = css`
 `
 
 const contentPageStyles = css`
+  line-height: 1.4;
+
   > *:not(ul) {
     width: 100%;
 
@@ -79,7 +81,7 @@ const contentPageStyles = css`
   }
 
   h1 {
-    margin: ${theme.space.xs} 0 ${theme.space.xl} 0;
+    margin: ${theme.space.xl} 0;
   }
 
   h2 {
@@ -89,10 +91,6 @@ const contentPageStyles = css`
     @media (${theme.mq.md}) {
       margin-top: ${theme.space.xxl};
     }
-  }
-
-  > p:nth-last-child(2) {
-    margin-bottom: calc(${theme.space.xl} + ${theme.space.xl});
   }
 `
 

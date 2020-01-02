@@ -27,7 +27,7 @@ const styles = ({ accent = theme.color.red } = {}) => css`
     .h1--intro {
       font-size: 0.533em;
       font-weight: 400;
-      margin-bottom: 8px;
+      margin-bottom: 5px;
 
       @media (${theme.mq.lg}) {
         font-weight: 300;
@@ -37,7 +37,6 @@ const styles = ({ accent = theme.color.red } = {}) => css`
     .h1--date {
       font-size: 1.3em;
       font-weight: 700;
-      margin-bottom: 3px;
     }
 
     .h1--name {

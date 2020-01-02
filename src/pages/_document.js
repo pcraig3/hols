@@ -46,7 +46,7 @@ const document = ({ title, content, docProps: { meta, path } }) => {
             word-break: break-word;
             line-height: 1.33;
             font-weight: 400;
-            color: #585858;
+            color: ${theme.color.grey};
           }
 
           @media (${theme.mq.md}) {
@@ -72,6 +72,10 @@ const document = ({ title, content, docProps: { meta, path } }) => {
 
           h2, h3, p {
             margin: 0 0 ${theme.space.md} 0;
+          }
+
+          .pcraig3 {
+            color: ${theme.color.red};
           }
         </style>
       </head>
