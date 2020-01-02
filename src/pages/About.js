@@ -50,14 +50,6 @@ const About = ({ data: { nextHoliday } }) =>
           <a id="pcraig3" href="https://pcraig3.ca" title="Paul Craig" target="_blank">Paul</a
           >${' '} and I am paying for this site for some reason.
         </p>
-
-        <footer>
-          <p>
-            <span aria-hidden="true">←</span>${' '}back to ${' '}<a href="/provinces"
-              >all regions in Canada</a
-            >
-          </p>
-        </footer>
       <//>
     <//>
   `

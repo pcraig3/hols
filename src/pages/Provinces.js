@@ -34,12 +34,6 @@ const styles = css`
       }
     }
   }
-
-  @media (${theme.mq.xs}) {
-    footer p {
-      width: 105%;
-    }
-  }
 `
 
 const Provinces = ({ data }) =>
@@ -83,13 +77,6 @@ const Provinces = ({ data }) =>
             `,
           )}
         </ul>
-        <footer>
-          <p>
-            more good stuff on ${' '}<a id="about-link" href="/about"
-              >the about page <span aria-hidden="true">→</span>
-            </a>
-          </p>
-        </footer>
       <//>
     <//>
   `
