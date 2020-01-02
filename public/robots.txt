@@ -1,6 +1,7 @@
 User-agent: *
 Allow: /
 Disallow: /about
+Disallow: /feedback
 
 Sitemap: https://canada-holidays.ca/sitemap.xml
 
