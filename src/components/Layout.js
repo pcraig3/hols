@@ -32,6 +32,10 @@ const header = css`
   }
 `
 const main = css`
+  :focus {
+    outline: none;
+  }
+
   section {
     position: relative;
     padding-bottom: ${theme.space.md};
