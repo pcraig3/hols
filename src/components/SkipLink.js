@@ -2,7 +2,7 @@ const { html } = require('../utils')
 const { css } = require('emotion')
 const { theme, insideContainer, horizontalPadding } = require('../styles')
 
-const styles = color => css`
+const styles = css`
   ${insideContainer};
 
   a {
@@ -34,7 +34,6 @@ const styles = color => css`
     }
 
     &:focus {
-      outline: 3px solid ${color ? theme.color[color].focus : theme.color.focus};
       outline-offset: -3px;
     }
 
@@ -48,9 +47,9 @@ const styles = color => css`
   }
 `
 
-const SkipLink = ({ color }) => {
+const SkipLink = () => {
   return html`
-    <div class=${styles(color)}>
+    <div class=${styles}>
       <a href="#content">Skip to main content</a>
     </div>
   `

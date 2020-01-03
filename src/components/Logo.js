@@ -48,7 +48,7 @@ const div = color => css`
     }
 
     &:focus {
-      outline: 2px solid ${color ? theme.color[color].focus : theme.color.focus};
+      outline: 3px solid ${color ? theme.color[color].focus : theme.color.focus};
       outline-offset: 8px;
     }
   }

@@ -1,6 +1,5 @@
 # TODO
 
-- skip links
 - add a better province picker
 - add a print feature
 - add an export ics feature
@@ -14,6 +13,7 @@
 
 # DONE
 
+- skip link
 - quick feedback page
 - continuous deployment
 - top menu
