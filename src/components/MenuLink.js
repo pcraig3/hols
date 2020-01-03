@@ -44,7 +44,7 @@ const styles3Columns = css`
   }
 `
 
-const DateHtml = ({ canada }) => {
+const MenuLink = ({ canada }) => {
   return html`
     <span
       class=${canada
@@ -57,4 +57,4 @@ const DateHtml = ({ canada }) => {
   `
 }
 
-module.exports = DateHtml
+module.exports = MenuLink

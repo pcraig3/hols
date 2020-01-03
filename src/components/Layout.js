@@ -2,6 +2,7 @@ const { css } = require('emotion')
 const { html } = require('../utils')
 const { theme, horizontalPadding } = require('../styles')
 const Nav = require('./Nav')
+const SkipLink = require('./SkipLink')
 
 const header = css`
   ${horizontalPadding};
@@ -27,10 +28,11 @@ const main = css`
 const Layout = ({ color, route, children }) =>
   html`
     <div>
+      <${SkipLink} color=${color} />
       <header class=${header}>
         <${Nav} color=${color} route=${route} //>
       </header>
-      <main class=${main}>
+      <main id="content" class=${main}>
         ${children}
       </main>
     </div>
