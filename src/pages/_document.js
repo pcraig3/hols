@@ -2,6 +2,7 @@ const { renderStylesToString } = require('emotion-server')
 const render = require('preact-render-to-string')
 const { html, metaIfSHA, gaIfProd } = require('../utils')
 const { theme } = require('../styles')
+const { printStyles } = require('../printStyles')
 
 const document = ({ title, content, docProps: { meta, path } }) => {
   return `
@@ -77,6 +78,8 @@ const document = ({ title, content, docProps: { meta, path } }) => {
           .pcraig3 {
             color: ${theme.color.red};
           }
+
+         ${printStyles};
         </style>
       </head>
       <body id="body">

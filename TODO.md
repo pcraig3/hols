@@ -1,9 +1,9 @@
 # TODO
 
 - add a better province picker
-- add a print feature
 - add an export ics feature
 - sticky header?
+- add a print button?
 - add holidays by year to the frontend
   - 2021
   - 2022
@@ -13,6 +13,7 @@
 
 # DONE
 
+- add print styles
 - skip link
 - quick feedback page
 - continuous deployment
