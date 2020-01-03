@@ -149,7 +149,7 @@ const Province = ({
           ? styles(theme.color[federal ? 'federal' : provinceId])
           : styles()}
       >
-        <section>
+        <section id="next-holiday">
           <${NextHolidayBox} ...${{ nextHoliday, provinceName, provinceId, federal }} />
           <${ProvincePicker} //>
         </section>

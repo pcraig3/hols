@@ -13,7 +13,7 @@ module.exports = {
     }
 
     header,
-    section:first-of-type,
+    #next-holiday,
     .bottom-link {
       display: none;
     }
@@ -27,9 +27,19 @@ module.exports = {
       width: 100% !important;
     }
 
-    section h2:first-of-type {
+    section h1 {
+      margin-top: 0 !important;
+    }
+
+    section h2 {
+      margin: 0 !important;
       padding-top: 0 !important;
       padding-bottom: 24px !important;
+    }
+
+    section h1 ~ h2 {
+      padding-top: 16px !important;
+      padding-bottom: 8px !important;
     }
 
     dl {
