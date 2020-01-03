@@ -13,6 +13,7 @@
 
 # DONE
 
+- skip link
 - quick feedback page
 - continuous deployment
 - top menu

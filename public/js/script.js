@@ -15,7 +15,10 @@ document.addEventListener('DOMContentLoaded', function () {
     easing: 'easeOutExpo',
     after: function after(offset, $trigger) {
       window.setTimeout(function () {
-        document.getElementById($trigger.hash.substr(1)).focus();
+        var id = $trigger.hash.substr(1)
+        document.getElementById(id).focus();
+        // the disappearing skip link messes with the scrollTo otherwise
+        id === 'content' && window.scrollTo(0, 58);
       }, 1);
     }
   });

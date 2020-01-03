@@ -39,7 +39,7 @@ const styles = ({ accent = theme.color.red, focus = theme.color.focus } = {}) =>
 
   div.past {
     > * {
-      opacity: 0.45;
+      opacity: 0.6;
     }
 
     &:hover > * {
