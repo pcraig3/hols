@@ -43,13 +43,6 @@ module.exports = {
       padding: 8px 8px 8px 0 !important;
       border-width: 1px !important;
     }
-    dt.key {
-      width: 45% !important;
-    }
-    dd.value,
-    dd.value2 {
-      width: 27.5% !important;
-    }
   }
 `,
 }
