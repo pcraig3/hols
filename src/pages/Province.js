@@ -75,7 +75,7 @@ const createRows = (holidays, federal) => {
       return 'National holiday'
     }
 
-    return holiday.provinces.map(
+    let provincesHTML = holiday.provinces.map(
       (p, i) =>
         html`
           <a href="/province/${p.id}" title="Holidays for ${p.nameEn}">${p.id}</a>${i + 1 ===
@@ -84,6 +84,15 @@ const createRows = (holidays, federal) => {
             : ', '}
         `,
     )
+
+    if (holiday.federal) {
+      provincesHTML = html`
+        <a href="/federal" title="Federal holidays">Federal</a>${provincesHTML.length
+          ? ', '
+          : ''}${provincesHTML}
+      `
+    }
+    return provincesHTML
   }
 
   const today = new Date(Date.now()).toISOString().slice(0, 10)

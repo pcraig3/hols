@@ -13,6 +13,7 @@
 
 # DONE
 
+- bug: federal hols are not shown on the homepage holidays table
 - add print styles
 - skip link
 - quick feedback page
