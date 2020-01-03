@@ -1,5 +1,6 @@
 # TODO
 
+- skip links
 - add a better province picker
 - add a print feature
 - add an export ics feature
