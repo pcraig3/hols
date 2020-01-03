@@ -49,7 +49,7 @@ const Layout = ({ color, route, children }) =>
       <header class=${header}>
         <${Nav} color=${color} route=${route} //>
       </header>
-      <main id="content" class=${main}>
+      <main id="content" tabindex="-1" class=${main}>
         ${children}
       </main>
     </div>
