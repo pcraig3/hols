@@ -95,7 +95,7 @@ describe('Test /api responses', () => {
         BC: 10,
         MB: 8,
         NB: 8,
-        NL: 11,
+        NL: 12,
         NS: 6,
         NT: 10,
         NU: 9,
@@ -228,14 +228,14 @@ describe('Test /api responses', () => {
   })
 
   describe('for /api/v1/holidays/:holidayId path', () => {
-    test('it should a holiday for a good ID', async () => {
-      const response = await request(app).get('/api/v1/holidays/16')
+    test('it should return a holiday for a good ID', async () => {
+      const response = await request(app).get('/api/v1/holidays/17')
       expect(response.statusCode).toBe(200)
 
       let { holiday } = JSON.parse(response.text)
 
       expect(holiday).toMatchObject({
-        id: 16,
+        id: 17,
         date: '2020-08-03',
         nameEn: 'Civic Holiday',
         nameFr: 'Premier lundi d’août',
