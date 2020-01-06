@@ -48,7 +48,7 @@ INSERT INTO Holiday (date, nameEn, nameFr) VALUES ('Monday before May 25', 'Nati
 INSERT INTO Holiday (date, nameEn, nameFr) VALUES ('Monday before May 25', 'Victoria Day', 'Fête de la Reine');
 INSERT INTO Holiday (date, nameEn, nameFr) VALUES ('June 21', 'National Aboriginal Day', 'Journée nationale des Autochthones');
 INSERT INTO Holiday (date, nameEn, nameFr) VALUES ('Monday before June 25', 'Discovery Day', 'Journée découverte');
-INSERT INTO Holiday (date, nameEn, nameFr) VALUES ('June 24', 'National Holiday', 'Fête nationale du Québec / Saint-Jean-Baptiste');
+INSERT INTO Holiday (date, nameEn, nameFr) VALUES ('June 24', 'Saint-Jean-Baptiste Day', 'Saint-Jean-Baptiste / Fête nationale du Québec');
 INSERT INTO Holiday (date, nameEn, nameFr) VALUES ('July 1', 'Canada Day', 'Fête du Canada');
 INSERT INTO Holiday (date, nameEn, nameFr) VALUES ('July 12', 'Orangemen’s Day', 'Fête des orangistes');
 INSERT INTO Holiday (date, nameEn, nameFr) VALUES ('First Monday in August', 'Civic Holiday', 'Premier lundi d’août');
