@@ -4,7 +4,7 @@ const db = require('sqlite')
 const ics = require('ics')
 const createError = require('http-errors')
 const { dbmw } = require('../utils/index')
-const { startDate, endDate, getDescription } = require('../utils/ics')
+const { startDate, endDate, getTitle, getDescription } = require('../utils/ics')
 const { getHolidaysWithProvinces } = require('../queries')
 
 /**
@@ -15,7 +15,7 @@ const formatEvent = holiday => {
   return {
     start: startDate(holiday.date),
     end: endDate(holiday.date),
-    title: holiday.nameEn,
+    title: getTitle(holiday),
     description: getDescription(holiday),
     productId: '-//pcraig3//hols//EN',
     uid: `${new Date(holiday.date).getTime()}@hols.ca`,
