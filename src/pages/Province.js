@@ -30,13 +30,6 @@ const styles = ({ accent = theme.color.red, focus = theme.color.focus } = {}) =>
     }
   }
 
-  h2 {
-    margin: 0;
-    padding-top: ${theme.space.md};
-    padding-bottom: ${theme.space.xl};
-    font-size: 1.566em;
-  }
-
   div.past {
     > * {
       opacity: 0.6;
@@ -60,6 +53,36 @@ const styles = ({ accent = theme.color.red, focus = theme.color.focus } = {}) =>
   #toggle-past {
     margin-top: ${theme.space.sm};
     margin-bottom: ${theme.space.xl};
+  }
+
+  >
+`
+
+const titleStyles = css`
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  flex-direction: column;
+  margin-top: ${theme.space.md};
+  margin-bottom: ${theme.space.md};
+
+  @media (${theme.mq.lg}) {
+    flex-direction: row;
+  }
+
+  h2 {
+    margin: 0;
+    margin-bottom: 10px;
+    font-size: 1.566em;
+  }
+
+  button,
+  a[role='button'] {
+    margin-bottom: ${theme.space.md};
+
+    @media (${theme.mq.md}) {
+      margin-bottom: ${theme.space.lg};
+    }
   }
 `
 
@@ -160,23 +183,22 @@ const Province = ({
               title=${getTitleString(provinceName, federal, year)}
               rows=${createRows(holidays, federal)}
             >
-              <h2 id="holidays-table">
-                ${provinceName}${federal ? ' federal' : ''}
-                <span class=${visuallyHidden}> statutory</span> holidays in ${year}
-              </h2>
-              ${ifPastHolidays(holidays) &&
-                html`
-                  <${Button}
-                    id="toggle-past"
-                    color=${federal || provinceId
-                      ? theme.color[federal ? 'federal' : provinceId]
-                      : {}}
-                    style="display: none;"
-                    data-event="true"
-                    data-label="toggle-past"
-                    >Show past holidays<//
-                  >
-                `}
+              <div class=${titleStyles}>
+                <h2 id="holidays-table">
+                  ${provinceName}${federal ? ' federal' : ''}
+                  <span class=${visuallyHidden}> statutory</span> holidays in ${year}
+                </h2>
+                <${Button}
+                  id="ics"
+                  href="#file"
+                  color=${federal || provinceId
+                    ? theme.color[federal ? 'federal' : provinceId]
+                    : {}}
+                  data-event="true"
+                  data-label="download"
+                  >Add to your calendar<//
+                >
+              </div>
             <//>
             <span class="bottom-link"><a href="#html" class="up-arrow">Back to top</a></span>
           </div>

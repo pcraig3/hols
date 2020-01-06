@@ -27,7 +27,7 @@ const formatEvent = holiday => {
  make the date thing a method
 */
 router.get('/ics', dbmw(db, getHolidaysWithProvinces), (req, res) => {
-  const holiday = res.locals.rows[1]
+  const holiday = res.locals.rows[3]
 
   ics.createEvent(formatEvent(holiday), (error, value) => {
     if (error) {
@@ -36,15 +36,14 @@ router.get('/ics', dbmw(db, getHolidaysWithProvinces), (req, res) => {
 
     res.set({
       'Content-Type': 'text/calendar',
-      'Content-disposition': 'attachment; filename=newYear.ics',
+      'Content-disposition': 'attachment; filename=canada-holidays-2020.ics',
     })
     return res.send(value)
   })
 })
 
 router.get('/ics/test', dbmw(db, getHolidaysWithProvinces), (req, res) => {
-  const hols = [res.locals.rows[0], res.locals.rows[1]]
-  const formattedEvents = hols.map(h => formatEvent(h))
+  const formattedEvents = [res.locals.rows[1]].map(h => formatEvent(h))
 
   ics.createEvents(formattedEvents, (error, value) => {
     if (error) {

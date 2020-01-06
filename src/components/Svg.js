@@ -80,4 +80,25 @@ const Collapse = () => {
   `
 }
 
-module.exports = { Expand, Collapse }
+const Download = () => {
+  return html`
+    <svg
+      x="0px"
+      y="0px"
+      viewBox="0 0 451.111 451.111"
+      xml:space="preserve"
+      fill="#DD2E44"
+      style="vertical-align: -0.125em;-ms-transform: rotate(360deg); -webkit-transform: rotate(360deg); transform: rotate(360deg);"
+      class="arrows--collapse"
+      aria-hidden="true"
+      focusable="false"
+    >
+      <path
+        d="m225.556 354.445 145-145-48.333-48.333-64.444 64.444v-225.556h-64.444v225.556l-64.444-64.444-48.333 48.333z"
+      />
+      <path d="m0 386.667h451.111v64.444h-451.111z" />
+    </svg>
+  `
+}
+
+module.exports = { Expand, Collapse, Download }
