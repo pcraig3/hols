@@ -33,6 +33,9 @@ app.use((req, res, next) => {
 const apiRouter = require('./routes/api')
 app.use('/api', apiRouter)
 
+const icsRouter = require('./routes/ics')
+app.use(icsRouter)
+
 const uiRouter = require('./routes/ui')
 app.use(uiRouter)
 
