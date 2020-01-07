@@ -95,7 +95,7 @@ describe('Test /api responses', () => {
         BC: 10,
         MB: 8,
         NB: 8,
-        NL: 12,
+        NL: 11,
         NS: 6,
         NT: 10,
         NU: 9,
