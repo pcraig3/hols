@@ -53,6 +53,9 @@ const _getDayCount = ({ position, weekday, anchorDate }) => {
     case 'after':
       return after
     case 'near':
+      if (before === -7) {
+        return 0
+      }
       return Math.abs(before) <= after ? before : after
     default:
       throw new Error(`Date string position not parsable: ${position}`)

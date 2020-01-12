@@ -43,14 +43,14 @@ INSERT INTO Holiday (date, nameEn, nameFr) VALUES ('Third Monday in February', '
 INSERT INTO Holiday (date, nameEn, nameFr) VALUES ('Monday March 17', 'Saint Patrick’s Day', 'Jour de la Saint-Patrick');
 INSERT INTO Holiday (date, nameEn, nameFr) VALUES ('Friday before Easter Day', 'Good Friday', 'Vendredi saint');
 INSERT INTO Holiday (date, nameEn, nameFr) VALUES ('Monday after Easter Day', 'Easter Monday', 'Lundi de Pâques');
-INSERT INTO Holiday (date, nameEn, nameFr) VALUES ('Monday April 23', 'Saint George’s Day', 'Jour de St. George');
+INSERT INTO Holiday (date, nameEn, nameFr) VALUES ('Monday near April 23', 'Saint George’s Day', 'Jour de St. George');
 INSERT INTO Holiday (date, nameEn, nameFr) VALUES ('Monday before May 25', 'National Patriots’ Day', 'Journée nationale des patriotes');
 INSERT INTO Holiday (date, nameEn, nameFr) VALUES ('Monday before May 25', 'Victoria Day', 'Fête de la Reine');
 INSERT INTO Holiday (date, nameEn, nameFr) VALUES ('June 21', 'National Aboriginal Day', 'Journée nationale des Autochthones');
 INSERT INTO Holiday (date, nameEn, nameFr) VALUES ('Monday June 24', 'Discovery Day', 'Journée découverte');
 INSERT INTO Holiday (date, nameEn, nameFr) VALUES ('June 24', 'Saint-Jean-Baptiste Day', 'Saint-Jean-Baptiste / Fête nationale du Québec');
 INSERT INTO Holiday (date, nameEn, nameFr) VALUES ('July 1', 'Canada Day', 'Fête du Canada');
-INSERT INTO Holiday (date, nameEn, nameFr) VALUES ('Monday July 12', 'Orangemen’s Day', 'Fête des orangistes');
+INSERT INTO Holiday (date, nameEn, nameFr) VALUES ('Monday near July 12', 'Orangemen’s Day', 'Fête des orangistes');
 INSERT INTO Holiday (date, nameEn, nameFr) VALUES ('First Monday in August', 'Civic Holiday', 'Premier lundi d’août');
 INSERT INTO Holiday (date, nameEn, nameFr) VALUES ('First Monday in August', 'British Columbia Day', 'Jour de Colombie-Britannique');
 INSERT INTO Holiday (date, nameEn, nameFr) VALUES ('First Monday in August', 'Heritage Day', 'Fête du patrimoine');
@@ -118,7 +118,7 @@ INSERT INTO ProvinceHoliday (holidayId, provinceId) VALUES ((SELECT id FROM Holi
 INSERT INTO ProvinceHoliday (holidayId, provinceId) VALUES ((SELECT id FROM Holiday WHERE (date = 'Friday before Easter Day' AND nameEn = 'Good Friday')), 'SK');
 INSERT INTO ProvinceHoliday (holidayId, provinceId) VALUES ((SELECT id FROM Holiday WHERE (date = 'Friday before Easter Day' AND nameEn = 'Good Friday')), 'YT');
 
-INSERT INTO ProvinceHoliday (holidayId, provinceId) VALUES ((SELECT id FROM Holiday WHERE (date = 'Monday April 23' AND nameEn = 'Saint George’s Day')), 'NL');
+INSERT INTO ProvinceHoliday (holidayId, provinceId) VALUES ((SELECT id FROM Holiday WHERE (date = 'Monday near April 23' AND nameEn = 'Saint George’s Day')), 'NL');
 
 INSERT INTO ProvinceHoliday (holidayId, provinceId) VALUES ((SELECT id FROM Holiday WHERE (date = 'Monday before May 25' AND nameEn = 'National Patriots’ Day')), 'QC');
 
@@ -152,7 +152,7 @@ INSERT INTO ProvinceHoliday (holidayId, provinceId) VALUES ((SELECT id FROM Holi
 INSERT INTO ProvinceHoliday (holidayId, provinceId) VALUES ((SELECT id FROM Holiday WHERE (date = 'July 1' AND nameEn = 'Canada Day')), 'SK');
 INSERT INTO ProvinceHoliday (holidayId, provinceId) VALUES ((SELECT id FROM Holiday WHERE (date = 'July 1' AND nameEn = 'Canada Day')), 'YT');
 
-INSERT INTO ProvinceHoliday (holidayId, provinceId) VALUES ((SELECT id FROM Holiday WHERE (date = 'Monday July 12' AND nameEn = 'Orangemen’s Day')), 'NL');
+INSERT INTO ProvinceHoliday (holidayId, provinceId) VALUES ((SELECT id FROM Holiday WHERE (date = 'Monday near July 12' AND nameEn = 'Orangemen’s Day')), 'NL');
 
 INSERT INTO ProvinceHoliday (holidayId, provinceId) VALUES ((SELECT id FROM Holiday WHERE (date = 'First Monday in August' AND nameEn = 'British Columbia Day')), 'BC');
 
