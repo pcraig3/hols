@@ -24,4 +24,18 @@ describe('Test ui responses', () => {
       expect(response.statusCode).toBe(200)
     })
   })
+
+  describe('Test /ics/federal response', () => {
+    test('it should return 200', async () => {
+      const response = await request(app).get('/ics/federal')
+      expect(response.statusCode).toBe(200)
+    })
+  })
+
+  describe('Test /ics/AB response', () => {
+    test('it should return 200', async () => {
+      const response = await request(app).get('/ics/AB')
+      expect(response.statusCode).toBe(200)
+    })
+  })
 })

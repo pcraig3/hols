@@ -43,14 +43,38 @@ const getTitle = holiday => {
  * If a national holiday, returns "National holiday" else a warning that the holiday isn't observed everywhere
  * @param {obj} holiday a holiday object containing a 'provinces' key
  */
-const getDescription = holiday =>
+const getNationalDescription = holiday =>
   holiday.provinces && holiday.provinces.length === 13
     ? 'National holiday'
     : 'This is not a national holiday; it may not be observed in your region'
 
+/**
+ * Returns a description string to use for .ics files
+ * If a national holiday, returns "National holiday" else a warning that the holiday isn't observed everywhere
+ * @param {obj} holiday a holiday object containing a 'provinces' key
+ */
+const getProvinceDescription = holiday => {
+  if (!holiday.provinces || holiday.provinces.length === 13) {
+    return 'National holiday'
+  }
+
+  let provinceIds = []
+  holiday.provinces.length === 1
+    ? holiday.provinces.map(p => provinceIds.push(p.nameEn))
+    : holiday.provinces.map(p => provinceIds.push(p.id))
+
+  holiday.federal && provinceIds.push('federal industries')
+  if (provinceIds.length > 1) {
+    provinceIds[provinceIds.length - 1] = `and ${provinceIds[provinceIds.length - 1]}`
+  }
+
+  return `Observed by ${provinceIds.length === 2 ? provinceIds.join(' ') : provinceIds.join(', ')}.`
+}
+
 module.exports = {
   startDate,
   endDate,
-  getDescription,
+  getNationalDescription,
+  getProvinceDescription,
   getTitle,
 }

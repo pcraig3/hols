@@ -189,13 +189,14 @@ const Province = ({
                   <span class=${visuallyHidden}> statutory</span> holidays in ${year}
                 </h2>
                 <${Button}
-                  id="ics"
-                  href="#file"
+                  id="download-holidays"
+                  href="/canada-holidays-2020.ics"
+                  download="canada-holidays-2020.ics"
                   color=${federal || provinceId
                     ? theme.color[federal ? 'federal' : provinceId]
                     : {}}
                   data-event="true"
-                  data-label="download"
+                  data-label="download-holidays"
                   >Add to your calendar<//
                 >
               </div>

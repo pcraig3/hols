@@ -1,4 +1,10 @@
-const { startDate, endDate, getDescription, getTitle } = require('../ics')
+const {
+  startDate,
+  endDate,
+  getNationalDescription,
+  getProvinceDescription,
+  getTitle,
+} = require('../ics')
 
 describe('Test startDate', () => {
   test('Returns [1979, 11, 07] for 1979-11-07', () => {
@@ -65,29 +71,81 @@ describe('Test getTitle', () => {
   })
 })
 
-describe('Test getDescription', () => {
+describe('Test getNationalDescription', () => {
   test('"National holiday" for a holiday with 13 provinces', () => {
     const holidayStub = { provinces: [...Array(13).keys()] }
-    expect(getDescription(holidayStub)).toMatch('National holiday')
+    expect(getNationalDescription(holidayStub)).toMatch('National holiday')
   })
 
   test('Not a national holiday for a holiday with 1 province', () => {
     const holidayStub = { provinces: [...Array(1).keys()] }
-    expect(getDescription(holidayStub)).toMatch('This is not a national holiday')
+    expect(getNationalDescription(holidayStub)).toMatch('This is not a national holiday')
   })
 
   test('Not a national holiday for a holiday with 12 provinces', () => {
     const holidayStub = { provinces: [...Array(12).keys()] }
-    expect(getDescription(holidayStub)).toMatch('This is not a national holiday')
+    expect(getNationalDescription(holidayStub)).toMatch('This is not a national holiday')
   })
 
   test('Not a national holiday for a holiday with 14 provinces', () => {
     const holidayStub = { provinces: [...Array(14).keys()] }
-    expect(getDescription(holidayStub)).toMatch('This is not a national holiday')
+    expect(getNationalDescription(holidayStub)).toMatch('This is not a national holiday')
   })
 
   test('Not a national holiday for an obj without a "provinces" key', () => {
     const holidayStub = {}
-    expect(getDescription(holidayStub)).toMatch('This is not a national holiday')
+    expect(getNationalDescription(holidayStub)).toMatch('This is not a national holiday')
+  })
+})
+
+describe('Test getProvinceDescription', () => {
+  test('"National holiday" for a holiday with 13 provinces', () => {
+    const holidayStub = { provinces: [...Array(13).keys()] }
+    expect(getProvinceDescription(holidayStub)).toMatch('National holiday')
+  })
+
+  test('"National holiday" for an obj without a "provinces" key', () => {
+    const holidayStub = {}
+    expect(getProvinceDescription(holidayStub)).toMatch('National holiday')
+  })
+
+  // 1 province
+  test('Description for 1 province', () => {
+    const holidayStub = { provinces: [{ id: 'AB', nameEn: 'Alberta' }] }
+    expect(getProvinceDescription(holidayStub)).toMatch('Observed by Alberta.')
+  })
+
+  // 1 federal
+  test('Description for federal holiday', () => {
+    const holidayStub = { provinces: [], federal: 1 }
+    expect(getProvinceDescription(holidayStub)).toMatch('Observed by federal industries.')
+  })
+
+  // 1 province 1 federal
+  test('Description for 1 province and federal', () => {
+    const holidayStub = { provinces: [{ id: 'AB', nameEn: 'Alberta' }], federal: 1 }
+    expect(getProvinceDescription(holidayStub)).toMatch(
+      'Observed by Alberta and federal industries.',
+    )
+  })
+
+  // 2 provinces
+  test('Description for 2 provinces', () => {
+    const holidayStub = { provinces: [{ id: 'AB' }, { id: 'BC' }] }
+    expect(getProvinceDescription(holidayStub)).toMatch('Observed by AB and BC.')
+  })
+
+  // 3 provinces
+  test('Description for 3 provinces', () => {
+    const holidayStub = { provinces: [{ id: 'AB' }, { id: 'BC' }, { id: 'MB' }] }
+    expect(getProvinceDescription(holidayStub)).toMatch('Observed by AB, BC, and MB.')
+  })
+
+  // 3 provinces 1 federal
+  test('Description for 3 provinces and federal', () => {
+    const holidayStub = { provinces: [{ id: 'AB' }, { id: 'BC' }, { id: 'MB' }], federal: 1 }
+    expect(getProvinceDescription(holidayStub)).toMatch(
+      'Observed by AB, BC, MB, and federal industries.',
+    )
   })
 })
