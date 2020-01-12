@@ -1,7 +1,6 @@
 # TODO
 
 - add a better province picker
-- add an export ics feature
 - sticky header?
 - add a print button?
 - add holidays by year to the frontend
@@ -13,6 +12,7 @@
 
 # DONE
 
+- add an export ics feature
 - bug: federal hols are not shown on the homepage holidays table
 - add print styles
 - skip link

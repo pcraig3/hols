@@ -69,12 +69,29 @@ const titleStyles = css`
     font-size: 1.566em;
   }
 
+  h2 + div {
+    margin-bottom: ${theme.space.md};
+  }
+
   button,
   a[role='button'] {
-    margin-bottom: ${theme.space.md};
+    text-align: left;
+  }
 
-    @media (${theme.mq.md}) {
+  @media (${theme.mq.md}) {
+    h2 {
+      flex: 3;
+    }
+
+    h2 + div {
+      flex: 2;
+      text-align: right;
       margin-bottom: ${theme.space.lg};
+    }
+
+    button,
+    a[role='button'] {
+      min-width: 234px;
     }
   }
 `
@@ -181,20 +198,22 @@ const Province = ({
                   ${provinceName}${federal ? ' federal' : ''}
                   <span class=${visuallyHidden}> statutory</span> holidays in ${year}
                 </h2>
-                <${Button}
-                  href=${federal ? '/ics/federal' : provinceId ? `/ics/${provinceId}` : '/ics'}
-                  download=${federal
-                    ? `canada-holidays-federal-${year}.ics`
-                    : provinceId
-                    ? `canada-holidays-${provinceId}-${year}.ics`
-                    : `canada-holidays-${year}.ics`}
-                  color=${federal || provinceId
-                    ? theme.color[federal ? 'federal' : provinceId]
-                    : {}}
-                  data-event="true"
-                  data-label="download-holidays"
-                  >Add to your calendar<//
-                >
+                <div>
+                  <${Button}
+                    href=${federal ? '/ics/federal' : provinceId ? `/ics/${provinceId}` : '/ics'}
+                    download=${federal
+                      ? `canada-holidays-federal-${year}.ics`
+                      : provinceId
+                      ? `canada-holidays-${provinceId}-${year}.ics`
+                      : `canada-holidays-${year}.ics`}
+                    color=${federal || provinceId
+                      ? theme.color[federal ? 'federal' : provinceId]
+                      : {}}
+                    data-event="true"
+                    data-label="download-holidays"
+                    >Add to your calendar<//
+                  >
+                </div>
               </div>
             <//>
             <span class="bottom-link"><a href="#html" class="up-arrow">Back to top</a></span>
