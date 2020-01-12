@@ -35,7 +35,7 @@ describe('Test getISODate', () => {
     const days2020 = [
       { str: 'January 1', iso: '2020-01-01' },
       { str: 'Third Monday in February', iso: '2020-02-17' },
-      { str: 'March 17', iso: '2020-03-17' },
+      { str: 'Monday March 17', iso: '2020-03-16' },
       { str: 'Friday before Easter Day', iso: '2020-04-10' },
       { str: 'Monday after Easter Day', iso: '2020-04-13' },
       { str: 'Monday April 23', iso: '2020-04-20' },
