@@ -30,8 +30,8 @@ router.get('/', dbmw(db, getHolidaysWithProvinces), (req, res) => {
 
 router.get(
   '/province/:provinceId',
-  dbmw(db, getProvincesWithHolidays),
   checkProvinceIdErr,
+  dbmw(db, getProvincesWithHolidays),
   (req, res) => {
     const year = getCurrentHolidayYear()
     const { holidays, nextHoliday, nameEn: provinceName, id: provinceId } = res.locals.rows[0]

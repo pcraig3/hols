@@ -1,11 +1,12 @@
 const { html } = require('../utils')
 const { css } = require('emotion')
 const { theme } = require('../styles')
-const { Expand, Collapse } = require('./ExpandCollapse')
+const { Expand, Collapse, Download } = require('./Svg')
 
 const styles = ({ accent = theme.color.red, focus = theme.color.focus } = {}) => css`
   margin: 0;
   width: auto;
+  display: inline-block;
   overflow: visible;
   background: transparent;
   font: inherit;
@@ -14,6 +15,7 @@ const styles = ({ accent = theme.color.red, focus = theme.color.focus } = {}) =>
   -moz-osx-font-smoothing: inherit;
   -webkit-appearance: none;
   border-radius: 1px;
+  text-decoration: none;
 
   border: 2px solid ${accent};
   border-bottom: none;
@@ -25,14 +27,14 @@ const styles = ({ accent = theme.color.red, focus = theme.color.focus } = {}) =>
 
   &:hover,
   &:focus {
-    color: white;
+    color: white !important;
     background-color: ${accent};
     box-shadow: 0 4px black;
   }
 
   &:focus {
-    outline: 3px dashed ${focus};
-    outline-offset: 8px;
+    outline: 3px dashed ${focus} !important;
+    outline-offset: 8px !important;
   }
 
   &::-moz-focus-inner {
@@ -83,12 +85,28 @@ const styles = ({ accent = theme.color.red, focus = theme.color.focus } = {}) =>
   }
 `
 
-const Button = ({ children, color = {}, ...props }) => {
+const NativeButton = ({ children, color = {}, ...props }) => {
   return html`
-    <button class=${styles(color)} ...${props}>
-      <${Expand} //><${Collapse} //><span>${children}</span>
-    </button>
+    <button class=${styles(color)} ...${props}>${children}</button>
   `
+}
+
+const LinkButton = ({ children, color = {}, ...props }) => {
+  return html`
+    <a class=${styles(color)} role="button" draggable="false" ...${props}>${children}</a>
+  `
+}
+
+const Button = ({ children, color = {}, ...props }) => {
+  return props.href
+    ? html`
+        <${LinkButton} color=${color} ...${props}><${Download} //><span>${children}</span><//>
+      `
+    : html`
+        <${NativeButton} color=${color} ...${props}
+          ><${Expand} //><${Collapse} //><span>${children}</span><//
+        >
+      `
 }
 
 module.exports = Button

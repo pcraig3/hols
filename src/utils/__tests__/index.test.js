@@ -1,4 +1,10 @@
-const { array2Obj, nextHoliday, upcomingHolidays, getCurrentHolidayYear } = require('../index')
+const {
+  array2Obj,
+  nextHoliday,
+  upcomingHolidays,
+  getCurrentHolidayYear,
+  isProvinceId,
+} = require('../index')
 const holidays = require('./data.skip')
 
 describe('Test array2Obj', () => {
@@ -111,5 +117,19 @@ describe('Test getCurrentHolidayYear', () => {
   test('returns 2020 for December 31st, 2019', () => {
     mockDate('2019-12-31')
     expect(getCurrentHolidayYear()).toEqual(2020)
+  })
+})
+
+describe('Test isProvinceId', () => {
+  test('returns true for a real province id', () => {
+    expect(isProvinceId('AB')).toBe(true)
+  })
+
+  test('returns true for a real province id (lowercase)', () => {
+    expect(isProvinceId('ab')).toBe(true)
+  })
+
+  test('returns false for a non-province id', () => {
+    expect(isProvinceId('hawaii')).toBe(false)
   })
 })
