@@ -5,7 +5,7 @@ describe('Test getISODate', () => {
     const days2019 = [
       { str: 'January 1', iso: '2019-01-01' },
       { str: 'Third Monday in February', iso: '2019-02-18' },
-      { str: 'March 17', iso: '2019-03-17' },
+      { str: 'March 17', iso: '2019-03-18' },
       { str: 'Friday before Easter Day', iso: '2019-04-19' },
       { str: 'Monday after Easter Day', iso: '2019-04-22' },
       { str: 'April 23', iso: '2019-04-23' },
@@ -51,7 +51,7 @@ describe('Test getISODate', () => {
       { str: 'Second Monday in October', iso: '2020-10-12' },
       { str: 'November 11', iso: '2020-11-11' },
       { str: 'December 25', iso: '2020-12-25' },
-      { str: 'December 26', iso: '2020-12-26' },
+      { str: 'December 26', iso: '2020-12-28' },
     ]
 
     days2020.map(day => {
@@ -84,8 +84,8 @@ describe('Test getISODate', () => {
       { str: 'First Monday in September', iso: '2021-09-06' },
       { str: 'Second Monday in October', iso: '2021-10-11' },
       { str: 'November 11', iso: '2021-11-11' },
-      { str: 'December 25', iso: '2021-12-25' },
-      { str: 'December 26', iso: '2021-12-26' },
+      { str: 'December 25', iso: '2021-12-24' },
+      { str: 'December 26', iso: '2021-12-27' },
     ]
 
     days2020.map(day => {

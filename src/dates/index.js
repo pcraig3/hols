@@ -58,6 +58,16 @@ const getISODate = (dateString, year = new Date(Date.now()).getUTCFullYear()) =>
     date = Sugar.Date.create(dateString)
   }
 
+  // If Christmas is on a Saturday, move to Friday
+  if ([6].includes(getISODay(date)) && /December 25/i.test(dateString)) {
+    date = _parseRelativeDates(`Friday before ${dateString}`)
+  }
+
+  // If it lands on a Saturday or Sunday (and not National Aboriginal Day) move to Monday
+  if ([6, 7].includes(getISODay(date)) && !/June 21/i.test(dateString)) {
+    date = _parseRelativeDates(`Monday after ${dateString}`)
+  }
+
   // Test for invalid dates
   if (isNaN(date)) {
     throw new Error(`Date string not parsable: ${dateString}`)
