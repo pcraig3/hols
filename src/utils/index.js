@@ -52,13 +52,25 @@ const dbmw = (db, cb) => {
   }
 }
 
+// returns true if province ID exists else false. Case insensitive.
+const isProvinceId = provinceId => {
+  return ['AB', 'BC', 'MB', 'NB', 'NL', 'NS', 'NT', 'NU', 'ON', 'PE', 'QC', 'SK', 'YT'].includes(
+    provinceId.toUpperCase(),
+  )
+}
+
 // middleware for returning "province id doesn't exist" errors
 const checkProvinceIdErr = (req, res, next) => {
-  const provinceMsg =
-    'Accepted province IDs are: [AB, BC, MB, NB, NL, NS, NT, NU, ON, PE, QC, SK, YT].'
-  if (!res.locals.rows.length) {
+  const provinceId = req.params.provinceId
+
+  if (!isProvinceId(provinceId)) {
     res.status(400)
-    next(createError(400, `Error: No province with id “${req.params.provinceId}”. ${provinceMsg}`))
+    next(
+      createError(
+        400,
+        `Error: No province with id “${provinceId}”. Accepted province IDs are: [AB, BC, MB, NB, NL, NS, NT, NU, ON, PE, QC, SK, YT].`,
+      ),
+    )
   }
 
   next()
@@ -161,6 +173,7 @@ module.exports = {
   gaIfProd,
   array2Obj,
   dbmw,
+  isProvinceId,
   checkProvinceIdErr,
   nextHoliday,
   upcomingHolidays,

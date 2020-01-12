@@ -3,7 +3,7 @@ const router = express.Router()
 const db = require('sqlite')
 const ics = require('ics')
 const createError = require('http-errors')
-const { dbmw, getCurrentHolidayYear } = require('../utils/index')
+const { dbmw, isProvinceId, getCurrentHolidayYear } = require('../utils/index')
 const {
   startDate,
   endDate,
@@ -69,7 +69,12 @@ router.get('/ics/federal', dbmw(db, getHolidaysWithProvinces), (req, res) => {
 })
 
 router.get('/ics/:provinceId', dbmw(db, getHolidaysWithProvinces), (req, res) => {
-  const provinceId = req.params.provinceId.toUpperCase()
+  let provinceId = req.params.provinceId
+  if (!isProvinceId(provinceId)) {
+    return res.redirect(`/province/${provinceId}`)
+  }
+
+  provinceId = provinceId.toUpperCase()
   const filteredRows = res.locals.rows.filter(h => {
     return h.provinces.find(p => p.id === provinceId)
   })

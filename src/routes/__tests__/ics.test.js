@@ -3,7 +3,7 @@ const db = require('sqlite')
 const Promise = require('bluebird')
 const app = require('../../server.js')
 
-describe('Test ui responses', () => {
+describe('Test ics responses', () => {
   beforeAll(async () => {
     await Promise.resolve()
       // First, try to open the database
@@ -36,6 +36,14 @@ describe('Test ui responses', () => {
     test('it should return 200', async () => {
       const response = await request(app).get('/ics/AB')
       expect(response.statusCode).toBe(200)
+    })
+  })
+
+  describe('Test /ics/fake response', () => {
+    test('it should return 302', async () => {
+      const response = await request(app).get('/ics/fake')
+      expect(response.statusCode).toBe(302)
+      expect(response.headers.location).toBe('/province/fake')
     })
   })
 })
