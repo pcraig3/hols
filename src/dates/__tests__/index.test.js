@@ -1,14 +1,35 @@
 const { getISODate } = require('../index')
 
+/*
+'Monday April 23',
+'Monday before May 25',
+'Monday June 24',
+'June 24', 'Saint-Jean-Baptiste Day',
+'July 1',
+'Monday July 12',
+'First Monday in August',
+'First Monday in August',
+'First Monday in August',
+'First Monday in August',
+'First Monday in August',
+'First Wednesday in August',
+'Third Monday in August',
+'First Monday in September',
+'Second Monday in October',
+'November 11',
+'December 25',
+'December 26',
+*/
+
 describe('Test getISODate', () => {
   describe('for 2019', () => {
     const days2019 = [
       { str: 'January 1', iso: '2019-01-01' },
       { str: 'Third Monday in February', iso: '2019-02-18' },
-      { str: 'March 17', iso: '2019-03-18' },
+      { str: 'Monday March 17', iso: '2019-03-18' },
       { str: 'Friday before Easter Day', iso: '2019-04-19' },
       { str: 'Monday after Easter Day', iso: '2019-04-22' },
-      { str: 'April 23', iso: '2019-04-23' },
+      { str: 'Monday near April 23', iso: '2019-04-22' },
       { str: 'Monday before May 25', iso: '2019-05-20' },
       { str: 'June 21', iso: '2019-06-21' },
       { str: 'June 24', iso: '2019-06-24' },
@@ -38,7 +59,7 @@ describe('Test getISODate', () => {
       { str: 'Monday March 17', iso: '2020-03-16' },
       { str: 'Friday before Easter Day', iso: '2020-04-10' },
       { str: 'Monday after Easter Day', iso: '2020-04-13' },
-      { str: 'Monday April 23', iso: '2020-04-20' },
+      { str: 'Monday near April 23', iso: '2020-04-20' },
       { str: 'Monday before May 25', iso: '2020-05-18' },
       { str: 'June 21', iso: '2020-06-21' },
       { str: 'Monday June 24', iso: '2020-06-22' },
@@ -69,10 +90,10 @@ describe('Test getISODate', () => {
     const days2020 = [
       { str: 'January 1', iso: '2021-01-01' },
       { str: 'Third Monday in February', iso: '2021-02-15' },
-      { str: 'March 17', iso: '2021-03-17' },
+      { str: 'Monday March 17', iso: '2021-03-15' },
       { str: 'Friday before Easter Day', iso: '2021-04-02' },
       { str: 'Monday after Easter Day', iso: '2021-04-05' },
-      { str: 'April 23', iso: '2021-04-23' },
+      { str: 'Monday near April 23', iso: '2021-04-26' },
       { str: 'Monday before May 25', iso: '2021-05-24' },
       { str: 'June 21', iso: '2021-06-21' },
       { str: 'June 24', iso: '2021-06-24' },

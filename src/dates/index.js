@@ -20,6 +20,45 @@ const _getISODayInt = weekday => {
   throw new Error(`Weekday not parsable: ${weekday}`)
 }
 
+const _getBeforePosition = ({ weekdayInt, anchorDate }) => {
+  let count = -1
+
+  // addDays to the current anchorDay until the day of the week matches
+  while (weekdayInt !== getISODay(addDays(anchorDate, count))) {
+    count--
+  }
+
+  return count
+}
+
+const _getAfterPosition = ({ weekdayInt, anchorDate }) => {
+  let count = 1
+
+  // addDays to the current anchorDay until the day of the week matches
+  while (weekdayInt !== getISODay(addDays(anchorDate, count))) {
+    count++
+  }
+
+  return count
+}
+
+const _getDayCount = ({ position, weekday, anchorDate }) => {
+  const weekdayInt = _getISODayInt(weekday)
+  let before = _getBeforePosition({ weekdayInt, anchorDate })
+  let after = _getAfterPosition({ weekdayInt, anchorDate })
+
+  switch (position) {
+    case 'before':
+      return before
+    case 'after':
+      return after
+    case 'near':
+      return Math.abs(before) <= after ? before : after
+    default:
+      throw new Error(`Date string position not parsable: ${position}`)
+  }
+}
+
 const _parseRelativeDates = dateString => {
   let [weekday, position, ...anchorDate] = dateString.split(' ')
 
@@ -32,16 +71,8 @@ const _parseRelativeDates = dateString => {
     anchorDate = Sugar.Date.create(anchorDate)
   }
 
-  weekday = _getISODayInt(weekday)
-  position = position === 'before' ? -1 : 1
-
-  let count = 1
-  // addDays to the current anchorDay until the day of the week matches
-  while (weekday !== getISODay(addDays(anchorDate, position * count))) {
-    count++
-  }
-
-  return addDays(anchorDate, position * count)
+  const count = _getDayCount({ position, weekday, anchorDate })
+  return addDays(anchorDate, count)
 }
 
 const getISODate = (dateString, year = new Date(Date.now()).getUTCFullYear()) => {
@@ -52,7 +83,7 @@ const getISODate = (dateString, year = new Date(Date.now()).getUTCFullYear()) =>
     dateString = `The ${dateString}`
   }
 
-  if (/before|after/i.test(dateString)) {
+  if (/before|after|near/i.test(dateString)) {
     date = _parseRelativeDates(dateString)
   } else {
     date = Sugar.Date.create(dateString)
