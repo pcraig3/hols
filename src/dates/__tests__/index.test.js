@@ -1,21 +1,5 @@
 const { getISODate } = require('../index')
 
-/*
-'Monday near July 12',
-'First Monday in August',
-'First Monday in August',
-'First Monday in August',
-'First Monday in August',
-'First Monday in August',
-'First Wednesday in August',
-'Third Monday in August',
-'First Monday in September',
-'Second Monday in October',
-'November 11',
-'December 25',
-'December 26',
-*/
-
 describe('Test getISODate', () => {
   describe('for 2019', () => {
     const days2019 = [

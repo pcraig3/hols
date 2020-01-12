@@ -46,7 +46,7 @@ INSERT INTO Holiday (date, nameEn, nameFr) VALUES ('Monday after Easter Day', 'E
 INSERT INTO Holiday (date, nameEn, nameFr) VALUES ('Monday near April 23', 'Saint George’s Day', 'Jour de St. George');
 INSERT INTO Holiday (date, nameEn, nameFr) VALUES ('Monday before May 25', 'National Patriots’ Day', 'Journée nationale des patriotes');
 INSERT INTO Holiday (date, nameEn, nameFr) VALUES ('Monday before May 25', 'Victoria Day', 'Fête de la Reine');
-INSERT INTO Holiday (date, nameEn, nameFr) VALUES ('June 21', 'National Aboriginal Day', 'Journée nationale des Autochthones');
+INSERT INTO Holiday (date, nameEn, nameFr) VALUES ('June 21', 'National Indigenous Peoples Day', 'Journée nationale des peuples autochtones');
 INSERT INTO Holiday (date, nameEn, nameFr) VALUES ('Monday June 24', 'Discovery Day', 'Journée découverte');
 INSERT INTO Holiday (date, nameEn, nameFr) VALUES ('June 24', 'Saint-Jean-Baptiste Day', 'Saint-Jean-Baptiste / Fête nationale du Québec');
 INSERT INTO Holiday (date, nameEn, nameFr) VALUES ('July 1', 'Canada Day', 'Fête du Canada');
@@ -131,8 +131,8 @@ INSERT INTO ProvinceHoliday (holidayId, provinceId) VALUES ((SELECT id FROM Holi
 INSERT INTO ProvinceHoliday (holidayId, provinceId) VALUES ((SELECT id FROM Holiday WHERE (date = 'Monday before May 25' AND nameEn = 'Victoria Day')), 'SK');
 INSERT INTO ProvinceHoliday (holidayId, provinceId) VALUES ((SELECT id FROM Holiday WHERE (date = 'Monday before May 25' AND nameEn = 'Victoria Day')), 'YT');
 
-INSERT INTO ProvinceHoliday (holidayId, provinceId) VALUES ((SELECT id FROM Holiday WHERE (date = 'June 21' AND nameEn = 'National Aboriginal Day')), 'NT');
-INSERT INTO ProvinceHoliday (holidayId, provinceId) VALUES ((SELECT id FROM Holiday WHERE (date = 'June 21' AND nameEn = 'National Aboriginal Day')), 'YT');
+INSERT INTO ProvinceHoliday (holidayId, provinceId) VALUES ((SELECT id FROM Holiday WHERE (date = 'June 21' AND nameEn = 'National Indigenous Peoples Day')), 'NT');
+INSERT INTO ProvinceHoliday (holidayId, provinceId) VALUES ((SELECT id FROM Holiday WHERE (date = 'June 21' AND nameEn = 'National Indigenous Peoples Day')), 'YT');
 
 INSERT INTO ProvinceHoliday (holidayId, provinceId) VALUES ((SELECT id FROM Holiday WHERE (date = 'Monday June 24' AND nameEn = 'Discovery Day')), 'NL');
 
