@@ -49,13 +49,6 @@ const styles = ({ accent = theme.color.red, focus = theme.color.focus } = {}) =>
       color: ${theme.color.grey};
     }
   }
-
-  #toggle-past {
-    margin-top: ${theme.space.sm};
-    margin-bottom: ${theme.space.xl};
-  }
-
-  >
 `
 
 const titleStyles = css`
@@ -189,9 +182,12 @@ const Province = ({
                   <span class=${visuallyHidden}> statutory</span> holidays in ${year}
                 </h2>
                 <${Button}
-                  id="download-holidays"
-                  href="/canada-holidays-2020.ics"
-                  download="canada-holidays-2020.ics"
+                  href=${federal ? '/ics/federal' : provinceId ? `/ics/${provinceId}` : '/ics'}
+                  download=${federal
+                    ? `canada-holidays-federal-${year}.ics`
+                    : provinceId
+                    ? `canada-holidays-${provinceId}-${year}.ics`
+                    : `canada-holidays-${year}.ics`}
                   color=${federal || provinceId
                     ? theme.color[federal ? 'federal' : provinceId]
                     : {}}
