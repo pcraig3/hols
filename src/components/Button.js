@@ -21,7 +21,7 @@ const styles = ({ accent = theme.color.red, focus = theme.color.focus } = {}) =>
   border-bottom: none;
   box-shadow: 0 4px ${accent};
 
-  color: ${accent};
+  color: ${accent} !important;
   padding: 3px 5px;
   cursor: pointer;
 

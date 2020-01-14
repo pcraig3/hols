@@ -8,28 +8,7 @@ const ProvincePicker = require('../components/ProvincePicker.js')
 const SummaryTable = require('../components/SummaryTable.js')
 const Button = require('../components/Button.js')
 
-const styles = ({ accent = theme.color.red, focus = theme.color.focus } = {}) => css`
-  a,
-  a:visited {
-    color: ${accent};
-
-    &.up-arrow::after {
-      content: ' ↑';
-    }
-
-    &.down-arrow::after {
-      content: ' ↓';
-    }
-
-    &.right-arrow::after {
-      content: ' →';
-    }
-
-    &:focus {
-      outline-color: ${focus};
-    }
-  }
-
+const styles = ({ accent = theme.color.red } = {}) => css`
   div.past {
     > * {
       opacity: 0.6;

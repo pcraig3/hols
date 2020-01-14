@@ -126,6 +126,25 @@ describe('Test ui responses', () => {
       })
     })
 
+    describe('Test /add-holidays-to-calendar response', () => {
+      test('it should return 200', async () => {
+        const response = await request(app).get('/add-holidays-to-calendar')
+        expect(response.statusCode).toBe(200)
+      })
+
+      test('it should return the h1, title, and meta tag', async () => {
+        const response = await request(app).get('/add-holidays-to-calendar')
+        const $ = cheerio.load(response.text)
+        expect($('h1').text()).toEqual('Add Canada’s 2020 holidays to your calendar')
+        expect($('title').text()).toEqual(
+          'Add Canada’s 2020 holidays to your calendar — Canada statutory holidays',
+        )
+        expect($('meta[name="description"]').attr('content')).toEqual(
+          'Download Canadian holidays and import them to your Outlook, iCal, or Google Calendar. Add all Canadian statutory holidays or just for your region.',
+        )
+      })
+    })
+
     describe('Test /do-federal-holidays-apply-to-me response', () => {
       test('it should return 200', async () => {
         const response = await request(app).get('/do-federal-holidays-apply-to-me')

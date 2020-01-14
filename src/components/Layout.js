@@ -5,9 +5,26 @@ const Nav = require('./Nav')
 const SkipLink = require('./SkipLink')
 
 const linkStyles = color => css`
-  a:focus {
-    outline: 3px solid ${color ? theme.color[color].focus : theme.color.focus};
-    outline-offset: 5px;
+  a,
+  a:visited {
+    color: ${color ? theme.color[color].accent : theme.color.red};
+
+    &.up-arrow::after {
+      content: ' ↑';
+    }
+
+    &.down-arrow::after {
+      content: ' ↓';
+    }
+
+    &.right-arrow::after {
+      content: ' →';
+    }
+
+    &:focus {
+      outline: 3px solid ${color ? theme.color[color].focus : theme.color.focus};
+      outline-offset: 5px;
+    }
   }
 
   details summary:focus,
