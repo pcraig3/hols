@@ -13,7 +13,6 @@ const Feedback = () =>
         </p>
         <p>
           <span aria-hidden="true">👉</span>${' '}
-
           <a href="https://canada-holidays.ca/api/v1/" target="_blank"
             >https://canada-holidays.ca/api/v1/</a
           >

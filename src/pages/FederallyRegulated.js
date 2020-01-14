@@ -78,13 +78,8 @@ const FederallyRegulated = () =>
             >the list of federally regulated industries</a
           >.
         </p>
-
         <footer>
-          <p>
-            <span aria-hidden="true">←</span>${' '}Back to ${' '}<a href="/provinces"
-              >all regions in Canada</a
-            >
-          </p>
+          <span class="bottom-link"><a href="#html" class="up-arrow">Back to top</a></span>
         </footer>
       <//>
     <//>

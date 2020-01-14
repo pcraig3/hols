@@ -92,6 +92,22 @@ const contentPageStyles = css`
       margin-top: ${theme.space.xxl};
     }
   }
+
+  ul {
+    padding-left: ${theme.space.md};
+
+    @media (${theme.mq.sm}) {
+      padding-left: ${theme.space.lg};
+    }
+
+    @media (${theme.mq.md}) {
+      padding-left: ${theme.space.xl};
+    }
+  }
+
+  footer {
+    margin-top: calc(${theme.space.xl} + ${theme.space.xl});
+  }
 `
 
 const horizontalPadding = css`

@@ -47,13 +47,17 @@ const linkStyles = css`
   padding-left: ${theme.space.sm};
 
   li {
-    margin-top: ${theme.space.xs};
+    margin-top: ${theme.space.sm};
 
     &:first-of-type {
-      margin-top: ${theme.space.sm};
+      margin-top: ${theme.space.lg};
     }
 
-    a {
+    &:last-of-type {
+      margin-bottom: ${theme.space.xs};
+    }
+
+    a, a:visited {
       color: ${theme.color.grey};
 
       &.active {
@@ -68,8 +72,10 @@ const linkStyles = css`
       margin-left: ${theme.space.md};
       margin-top: 0;
 
-      &:first-of-type {
+      &:first-of-type,
+      &:last-of-type {
         margin-top: 0;
+        margin-bottom: 0;
       }
 
       a.active {
