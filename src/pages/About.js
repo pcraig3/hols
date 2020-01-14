@@ -35,10 +35,7 @@ const About = ({ data: { nextHoliday } }) =>
         </p>
 
         <h2>“Something is wrong”</h2>
-        <p>
-          Leave me some <a href="/feedback">/feedback</a> and I’ll do my best. I will at least tell
-          you if I can’t fix it.
-        </p>
+        <p>Leave me some <a href="/feedback">/feedback</a> and I’ll do my best.</p>
 
         <h2>Me</h2>
         <p>
