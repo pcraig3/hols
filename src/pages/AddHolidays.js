@@ -48,19 +48,21 @@ const AddHolidays = ({ data: { provinces, year } }) => {
       <${Content}>
         <h1>Add Canada’s ${year} holidays to your calendar</h1>
         <p>
-          Download Canadian holidays and import them to your Outlook, iCal, or Google Calendar.
-          (There are probably other calendars but those are the main ones.)
+          Download Canadian holidays and import them to your Outlook, iCal, or Google Calendar (or
+          your hipster calendar client).
         </p>
         <p>Adding holidays to your calendar is easy.</p>
         <ol>
-          <li>You can add all Canadian holidays or just those for your region</li>
-          <li>Click to download an <code>.ics</code> file with the dates</li>
+          <li>Scroll down for all Canadian holidays</li>
+          <li>Keep scrolling for just those in your region</li>
+          <li>Click the button to download an <code>.ics</code> file with the dates for 2020</li>
           <li>Double-click the file (or drag it into your preferred calendar)</li>
+          <li>Import ’em</li>
           <li>Done! <span role="img" aria-label="Happy cowboy">🤠</span></li>
         </ol>
         <p>
-          You can also just peek at the <a href="/provinces">holidays for your region</a> and add
-          them later.
+          You can also check out the <a href="/provinces">holidays for your region</a> first and add
+          them after.
         </p>
 
         <${SummaryTable}

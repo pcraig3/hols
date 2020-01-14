@@ -12,7 +12,7 @@ const About = ({ data: { nextHoliday } }) =>
           <a href="/">${nextHoliday.nameEn}</a> is what we have to look forward to.
         </p>
 
-        <h2>“I want to add all the holidays to my calendar”</h2>
+        <h2>“I want to add holidays to my calendar”</h2>
         <p>
           Heck yes you do! And${' '}
           <a
