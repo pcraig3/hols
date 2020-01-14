@@ -7,13 +7,15 @@ This is an API that lists
 - all 27 public holidays in Canada
 - all 13 provinces and territories in Canada
 - which provinces/territories observe which holidays
-- (TODO: which holidays are federal holidays)
+- which holidays are federal holidays
+- returns holidays for years: 2019, 2020, 2021
+- (TODO: more years)
 
 I scraped the data from [the Canadian holidays page on Wikipedia](https://en.wikipedia.org/wiki/Public_holidays_in_Canada), so if you notice an issue, please edit the page yourself and then [email me](mailto:paul@pcraig3.ca) so that I know.
 
 This is a node API, so it's pretty straightforward. Using an SQL migrations file, we put all our data into an in-memory SQLite database and then we do reads.
 
-The [Government of Canada API guidance](https://www.canada.ca/en/government/publicservice/modernizing/government-canada-standards-apis.html) wants a slightly more rigourous API design, but "design with users" is actually the first rule and none of them have complained yet.
+The [Government of Canada API guidance](https://www.canada.ca/en/government/publicservice/modernizing/government-canada-standards-apis.html) wants a slightly more rigourous API design, but "design with users" is actually the first rule and none of them have complained yet. ([Be the first](mailto:paul@pcraig3.ca)!)
 
 ## Docs
 
@@ -27,6 +29,15 @@ None of the fields ever return `null` values.
 - [`/api/v1/provinces/{id}`](https://github.com/pcraig3/hols/blob/master/API.md#apiv1provincesid--get-one-province-or-territory)
 - [`/api/v1/holidays`](https://github.com/pcraig3/hols/blob/master/API.md#apiv1holidays--get-all-holidays)
 - [`/api/v1/holidays/{id}`](https://github.com/pcraig3/hols/blob/master/API.md#v1holidaysid--get-one-holiday)
+
+### Filters
+
+There are 2 filter values you can use. Probably not on the root route but on others they will work.
+
+1. `?year=2019|2020|2021`. Defaults to current year.
+2. `?federal=true|false`. `true` returns only federal holidays; `false` returns _everything but_ federal holidays.
+
+You can combine them and they will work (eg, `/api/v1/holidays?year=2021&federal=true`).
 
 ### Routes
 
