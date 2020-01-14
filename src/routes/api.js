@@ -2,6 +2,7 @@ const express = require('express')
 const router = express.Router()
 const db = require('sqlite')
 const createError = require('http-errors')
+const renderPage = require('../pages/_document.js')
 const { dbmw, checkProvinceIdErr } = require('../utils')
 const { getProvincesWithHolidays, getHolidaysWithProvinces } = require('../queries')
 
@@ -36,7 +37,7 @@ router.get('/v1/', (req, res) => {
 
   res.send({
     message:
-      'Hello / Bonjour! Welcome to the Canadian holidays API | Bienvenue dans l’API canadienne des jours fériés',
+      'Hello / Bonjour! Welcome to the Canada Holidays API / Bienvenue dans l’API canadienne des jours fériés',
     _links: {
       self: {
         href: `${protocol}://${req.get('host')}/api/v1/`,
@@ -51,7 +52,19 @@ router.get('/v1/', (req, res) => {
   })
 })
 
-router.get('/', (req, res) => res.redirect(302, '/api/v1/'))
+router.get('/', (req, res) => {
+  return res.send(
+    renderPage({
+      pageComponent: 'API',
+      title: 'Holidays API — Canada statutory holidays',
+      docProps: {
+        meta:
+          'A free JSON API for Canada’s statutory holidays. Return all holidays or filter by a specific region.',
+        path: req.path,
+      },
+    }),
+  )
+})
 
 router.get('*', (req, res) => {
   res.status(404)

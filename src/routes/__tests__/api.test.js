@@ -3,6 +3,7 @@ const db = require('sqlite')
 const Promise = require('bluebird')
 const app = require('../../server.js')
 const { getCurrentHolidayYear } = require('../../utils')
+const cheerio = require('cheerio')
 
 describe('Test /api responses', () => {
   beforeAll(async () => {
@@ -48,10 +49,21 @@ describe('Test /api responses', () => {
     )
   }
 
-  test('for /api path it should return a 302 status', async () => {
-    const response = await request(app).get('/api/')
-    expect(response.statusCode).toBe(302)
-    expect(response.headers.location).toEqual('/api/v1/')
+  describe('Test /api response', () => {
+    test('it should return 200', async () => {
+      const response = await request(app).get('/api')
+      expect(response.statusCode).toBe(200)
+    })
+
+    test('it should return the h1, title, and meta tag', async () => {
+      const response = await request(app).get('/api')
+      const $ = cheerio.load(response.text)
+      expect($('h1').text()).toEqual('Holidays API')
+      expect($('title').text()).toEqual('Holidays API — Canada statutory holidays')
+      expect($('meta[name="description"]').attr('content')).toEqual(
+        'A free JSON API for Canada’s statutory holidays. Return all holidays or filter by a specific region.',
+      )
+    })
   })
 
   test('for /api/v1/* not found path a 404 status', async () => {
