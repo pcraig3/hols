@@ -6,106 +6,117 @@
             http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
 <!-- created with Free Online Sitemap Generator www.xml-sitemaps.com -->
 
-
 <url>
   <loc>https://canada-holidays.ca/</loc>
-  <lastmod>2020-01-12T06:18:54+00:00</lastmod>
+  <lastmod>2020-01-14T05:36:10+00:00</lastmod>
   <changefreq>daily</changefreq>
   <priority>1.00</priority>
 </url>
 <url>
   <loc>https://canada-holidays.ca/federal</loc>
-  <lastmod>2020-01-12T06:18:54+00:00</lastmod>
+  <lastmod>2020-01-14T05:36:10+00:00</lastmod>
   <changefreq>daily</changefreq>
   <priority>1.00</priority>
 </url>
 <url>
+  <loc>https://canada-holidays.ca/api</loc>
+  <lastmod>2020-01-14T05:36:10+00:00</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>1.00</priority>
+</url>
+<url>
+  <loc>https://canada-holidays.ca/add-holidays-to-calendar</loc>
+  <lastmod>2020-01-14T05:36:10+00:00</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>1.00</priority>
+</url>
+<url>
   <loc>https://canada-holidays.ca/province/AB</loc>
-  <lastmod>2020-01-12T06:18:54+00:00</lastmod>
+  <lastmod>2020-01-14T05:36:10+00:00</lastmod>
   <changefreq>daily</changefreq>
   <priority>1.00</priority>
 </url>
 <url>
   <loc>https://canada-holidays.ca/province/BC</loc>
-  <lastmod>2020-01-12T06:18:54+00:00</lastmod>
+  <lastmod>2020-01-14T05:36:10+00:00</lastmod>
   <changefreq>daily</changefreq>
   <priority>1.00</priority>
 </url>
 <url>
   <loc>https://canada-holidays.ca/province/NB</loc>
-  <lastmod>2020-01-12T06:18:54+00:00</lastmod>
+  <lastmod>2020-01-14T05:36:10+00:00</lastmod>
   <changefreq>daily</changefreq>
   <priority>1.00</priority>
 </url>
 <url>
   <loc>https://canada-holidays.ca/province/ON</loc>
-  <lastmod>2020-01-12T06:18:54+00:00</lastmod>
+  <lastmod>2020-01-14T05:36:10+00:00</lastmod>
   <changefreq>daily</changefreq>
   <priority>1.00</priority>
 </url>
 <url>
   <loc>https://canada-holidays.ca/province/SK</loc>
-  <lastmod>2020-01-12T06:18:54+00:00</lastmod>
+  <lastmod>2020-01-14T05:36:10+00:00</lastmod>
   <changefreq>daily</changefreq>
   <priority>1.00</priority>
 </url>
 <url>
   <loc>https://canada-holidays.ca/provinces</loc>
-  <lastmod>2020-01-12T06:18:54+00:00</lastmod>
+  <lastmod>2020-01-14T05:36:10+00:00</lastmod>
   <changefreq>monthly</changefreq>
   <priority>0.80</priority>
 </url>
 <url>
   <loc>https://canada-holidays.ca/province/MB</loc>
-  <lastmod>2020-01-12T06:18:54+00:00</lastmod>
+  <lastmod>2020-01-14T05:36:10+00:00</lastmod>
   <changefreq>daily</changefreq>
   <priority>1.00</priority>
 </url>
 <url>
   <loc>https://canada-holidays.ca/province/PE</loc>
-  <lastmod>2020-01-12T06:18:54+00:00</lastmod>
+  <lastmod>2020-01-14T05:36:10+00:00</lastmod>
   <changefreq>daily</changefreq>
   <priority>1.00</priority>
 </url>
 <url>
   <loc>https://canada-holidays.ca/province/NS</loc>
-  <lastmod>2020-01-12T06:18:54+00:00</lastmod>
+  <lastmod>2020-01-14T05:36:10+00:00</lastmod>
   <changefreq>daily</changefreq>
   <priority>1.00</priority>
 </url>
 <url>
   <loc>https://canada-holidays.ca/province/NL</loc>
-  <lastmod>2020-01-12T06:18:54+00:00</lastmod>
+  <lastmod>2020-01-14T05:36:10+00:00</lastmod>
   <changefreq>daily</changefreq>
   <priority>1.00</priority>
 </url>
 <url>
   <loc>https://canada-holidays.ca/province/QC</loc>
-  <lastmod>2020-01-12T06:18:54+00:00</lastmod>
+  <lastmod>2020-01-14T05:36:10+00:00</lastmod>
   <changefreq>daily</changefreq>
   <priority>1.00</priority>
 </url>
 <url>
   <loc>https://canada-holidays.ca/province/NT</loc>
-  <lastmod>2020-01-12T06:18:54+00:00</lastmod>
+  <lastmod>2020-01-14T05:36:10+00:00</lastmod>
   <changefreq>daily</changefreq>
   <priority>1.00</priority>
 </url>
 <url>
   <loc>https://canada-holidays.ca/province/NU</loc>
-  <lastmod>2020-01-12T06:18:54+00:00</lastmod>
+  <lastmod>2020-01-14T05:36:10+00:00</lastmod>
   <changefreq>daily</changefreq>
   <priority>1.00</priority>
 </url>
 <url>
   <loc>https://canada-holidays.ca/province/YT</loc>
-  <lastmod>2020-01-12T06:18:54+00:00</lastmod>
+  <lastmod>2020-01-14T05:36:10+00:00</lastmod>
   <changefreq>daily</changefreq>
   <priority>1.00</priority>
 </url>
 <url>
   <loc>https://canada-holidays.ca/do-federal-holidays-apply-to-me</loc>
-  <lastmod>2020-01-12T06:18:54+00:00</lastmod>
+  <lastmod>2020-01-14T05:36:10+00:00</lastmod>
   <changefreq>monthly</changefreq>
   <priority>0.80</priority>
 </url>
