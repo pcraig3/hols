@@ -20,7 +20,7 @@ describe('Nav', () => {
     expect($('nav').length).toBe(1)
     // links appear twice because technically we have 2 menus
     expect($('nav .links').text()).toEqual(
-      'MenuFederal holidaysAboutFeedbackFederal holidaysAboutFeedback',
+      'MenuFederal holidaysAboutAPIFeedbackFederal holidaysAboutAPIFeedback',
     )
   })
 

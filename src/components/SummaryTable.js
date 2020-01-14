@@ -11,6 +11,10 @@ const summaryRow = css`
     padding-top: 0;
   }
 
+  &:last-of-type {
+    border-bottom: 2px solid ${theme.color.greyLight};
+  }
+
   &.repeatDate {
     border-top: none;
     padding-top: ${theme.space.xs};
@@ -57,6 +61,14 @@ const summaryRow = css`
       .value,
       .value2 {
         border-top: none;
+      }
+    }
+
+    &:last-of-type {
+      .key,
+      .value,
+      .value2 {
+        border-bottom: 2px solid ${theme.color.greyLight};
       }
     }
 

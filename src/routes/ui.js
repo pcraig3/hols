@@ -130,6 +130,22 @@ router.get('/feedback', (req, res) => {
   )
 })
 
+router.get('/add-holidays-to-calendar', dbmw(db, getProvinces), (req, res) => {
+  const year = getCurrentHolidayYear()
+  return res.send(
+    renderPage({
+      pageComponent: 'AddHolidays',
+      title: 'Add Canada’s 2020 holidays to your calendar — Canada statutory holidays',
+      docProps: {
+        meta:
+          'Download Canadian holidays and import them to your Outlook, iCal, or Google Calendar. Add all Canadian statutory holidays or just for your region.',
+        path: req.path,
+      },
+      props: { data: { provinces: res.locals.rows, year } },
+    }),
+  )
+})
+
 router.get('*', (req, res) => {
   res.status(404)
   throw new createError(404, 'Oopsie daisy. Maybe head back to the home page? 👇')
