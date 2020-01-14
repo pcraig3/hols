@@ -44,9 +44,14 @@ const styles = css`
 const linkStyles = css`
   list-style: none;
   margin: 0;
+  padding-left: ${theme.space.sm};
 
   li {
     margin-top: ${theme.space.xs};
+
+    &:first-of-type {
+      margin-top: ${theme.space.sm};
+    }
 
     a {
       color: ${theme.color.grey};
@@ -63,6 +68,10 @@ const linkStyles = css`
       margin-left: ${theme.space.md};
       margin-top: 0;
 
+      &:first-of-type {
+        margin-top: 0;
+      }
+
       a.active {
           font-weight: 500;
         }
@@ -76,6 +85,7 @@ const NavLinks = ({ route }) => {
     <ul class=${linkStyles}>
       <li><a class=${route === '/federal' ? 'active' : ''} href="/federal">Federal holidays</a></li>
       <li><a class=${route === '/about' ? 'active' : ''} href="/about">About</a></li>
+      <li><a class=${route === '/api' ? 'active' : ''} href="/api">API</a></li>
       <li>
         <a class=${route === '/feedback' ? 'active' : ''} href="/feedback">Feedback</a>
       </li>

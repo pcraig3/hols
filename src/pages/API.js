@@ -4,7 +4,7 @@ const Content = require('../components/Content.js')
 
 const Feedback = () =>
   html`
-    <${Layout}>
+    <${Layout} route="/api">
       <${Content}>
         <h1>Holidays API</h1>
         <p>
