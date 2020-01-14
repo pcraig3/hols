@@ -12,7 +12,10 @@
 
 # DONE
 
+- add a page for the API
+  - add the API link to the header so people know about it
 - add an export ics feature
+  - add a page where you can download all holidays
 - bug: federal hols are not shown on the homepage holidays table
 - add print styles
 - skip link
