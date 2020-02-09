@@ -33,21 +33,21 @@
     "express": "^4.17.1",
     "express-http-to-https": "^1.1.4",
     "helmet": "^3.21.2",
-    "htm": "^3.0.1",
+    "htm": "^3.0.3",
     "http-errors": "^1.7.3",
     "ics": "^2.18.0",
     "morgan": "^1.9.1",
-    "preact": "^10.2.1",
+    "preact": "^10.3.1",
     "preact-render-to-string": "^5.1.4",
     "sqlite": "^3.0.3",
     "sugar-date": "^2.0.6",
     "sweet-scroll": "^4.0.0",
-    "validator": "^12.1.0"
+    "validator": "^12.2.0"
   },
   "devDependencies": {
     "cheerio": "^1.0.0-rc.3",
     "eslint": "^6.8.0",
-    "eslint-plugin-jest": "^23.6.0",
+    "eslint-plugin-jest": "^23.7.0",
     "jest": "^25.1.0",
     "nodemon": "^2.0.2",
     "supertest": "^4.0.2"
