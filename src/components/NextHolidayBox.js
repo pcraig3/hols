@@ -3,11 +3,17 @@ const { html } = require('../utils')
 const { theme, insideContainer, horizontalPadding, visuallyHidden } = require('../styles')
 const DateHtml = require('./DateHtml.js')
 const { relativeDate } = require('../dates')
+const { shade, randomInt } = require('../utils/so.js')
 
-const styles = ({ accent = theme.color.red } = {}) => css`
+const styles = ({
+  accent = theme.color.red,
+  bg = { angle: 65, width: 62, slant: 35, shade: -14 },
+} = {}) => css`
   padding-top: ${theme.space.xl};
   padding-bottom: ${theme.space.xl};
-  background-color: ${accent};
+  background: ${accent};
+  background: linear-gradient(${bg.angle}deg, ${accent} ${bg.width}%, rgba(0, 0, 0, 0) 50%),
+    linear-gradient(10deg, ${accent} ${bg.slant}%, ${shade(accent, bg.shade)} ${bg.slant}%);
   color: white;
   ${horizontalPadding};
 
@@ -115,12 +121,17 @@ const renderRelativeDate = dateString => {
 }
 
 const nextHolidayBox = ({ nextHoliday, provinceName = 'Canada', provinceId, federal }) => {
+  let bg = {
+    angle: randomInt(63, 66),
+    width: randomInt(61, 64),
+    slant: randomInt(32, 37),
+    shade: -randomInt(12, 15),
+  }
+  let color =
+    federal || provinceId ? theme.color[federal ? 'federal' : provinceId] : theme.color.red
+
   return html`
-    <div
-      class=${federal || provinceId
-        ? styles(theme.color[federal ? 'federal' : provinceId])
-        : styles()}
-    >
+    <div class=${styles({ ...color, bg })}>
       <div>
         <h1>
           <div class="h1--intro">

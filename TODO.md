@@ -1,17 +1,20 @@
 # TODO
 
-- add a better province picker
-- sticky header?
-- add a print button?
+- make API to return CSV format
+  - page for CSV downloads
 - add holidays by year to the frontend
   - 2021
   - 2022
+- add a better province picker
+- sticky header?
+- add a print button?
 - https://matthewsmith.io/blog/how-to-set-up-cache-busting-in-express
 - list of holidays
 - ? put federal holidays on the canada holiday box province list
 
 # DONE
 
+- fun colours backgrounds
 - add a page for the API
   - add the API link to the header so people know about it
 - add an export ics feature
