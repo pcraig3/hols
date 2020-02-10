@@ -1,6 +1,5 @@
 # TODO
 
-- fun colours backgrounds
 - make API to return CSV format
   - page for CSV downloads
 - add holidays by year to the frontend
@@ -15,6 +14,7 @@
 
 # DONE
 
+- fun colours backgrounds
 - add a page for the API
   - add the API link to the header so people know about it
 - add an export ics feature
