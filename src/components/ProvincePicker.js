@@ -104,9 +104,20 @@ const ProvincePicker = ({ provinceId, federal }) => {
           <select name="region" id="region-select">
             <option value="" selected=${!provinceId && !federal}>Nationwide</option>
             <option value="federal" selected=${!provinceId && federal}>Federal holidays</option>
+            <option disabled>──────────</option>
             <option value="AB" selected=${provinceId === 'AB'}>Alberta</option>
+            <option value="BC" selected=${provinceId === 'BC'}>British Columbia</option>
+            <option value="MB" selected=${provinceId === 'MB'}>Manitoba</option>
+            <option value="NB" selected=${provinceId === 'NB'}>New Brunswick</option>
+            <option value="NL" selected=${provinceId === 'NL'}>Newfoundland and Labrador</option>
+            <option value="NS" selected=${provinceId === 'NS'}>Nova Scotia</option>
+            <option value="NT" selected=${provinceId === 'NT'}>Northwest Territories</option>
+            <option value="NU" selected=${provinceId === 'NU'}>Nunavut</option>
             <option value="ON" selected=${provinceId === 'ON'}>Ontario</option>
             <option value="PE" selected=${provinceId === 'PE'}>Prince Edward Island</option>
+            <option value="QC" selected=${provinceId === 'QC'}>Quebec</option>
+            <option value="SK" selected=${provinceId === 'SK'}>Saskatchewan</option>
+            <option value="YT" selected=${provinceId === 'YT'}>Yukon</option>
           </select>
 
           <${Button}

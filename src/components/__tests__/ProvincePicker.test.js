@@ -19,9 +19,9 @@ describe('<ProvincePicker>', () => {
     const $ = renderProvincePicker()
     expect($('label').text()).toEqual('View by region')
     expect($('select').length).toBe(1)
-    expect($('select option').length).toBe(5)
+    expect($('select option').length).toBe(16)
     expect($('select option').text()).toEqual(
-      'NationwideFederal holidaysAlbertaOntarioPrince Edward Island',
+      'NationwideFederal holidays──────────AlbertaBritish ColumbiaManitobaNew BrunswickNewfoundland and LabradorNova ScotiaNorthwest TerritoriesNunavutOntarioPrince Edward IslandQuebecSaskatchewanYukon',
     )
   })
 
