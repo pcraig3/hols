@@ -5,7 +5,6 @@
 - add holidays by year to the frontend
   - 2021
   - 2022
-- add a better province picker
 - sticky header?
 - add a print button?
 - https://matthewsmith.io/blog/how-to-set-up-cache-busting-in-express
@@ -14,6 +13,15 @@
 
 # DONE
 
+- add a better province picker
+  - design for the select
+  - put in a submit button
+  - put in a post route to handle form submissions
+  - pass in the current value as pre-selected
+  - pass in the accent colour
+  - switch out with ProvincePicker based on screen size
+  - javascript hide button
+  - add javascript onChange select
 - add LGTM security scans because why not
 - fun colours backgrounds
 - add a page for the API

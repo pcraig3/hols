@@ -39,20 +39,66 @@ describe('Test ui responses', () => {
     })
   })
 
-  describe('Test /provinces response', () => {
-    test('it should return 200', async () => {
-      const response = await request(app).get('/provinces')
-      expect(response.statusCode).toBe(200)
+  describe('Test /provinces responses', () => {
+    describe('Test /provinces GET response', () => {
+      test('it should return 200', async () => {
+        const response = await request(app).get('/provinces')
+        expect(response.statusCode).toBe(200)
+      })
+
+      test('it should return the h1, title, and meta tag', async () => {
+        const response = await request(app).get('/provinces')
+        const $ = cheerio.load(response.text)
+        expect($('h1').text()).toEqual('All regions in Canada')
+        expect($('title').text()).toEqual('All regions in Canada — Canada statutory holidays')
+        expect($('meta[name="description"]').attr('content')).toEqual(
+          'Upcoming stat holidays for all regions in Canada. See all federal statutory holidays in Canada in 2020.',
+        )
+      })
     })
 
-    test('it should return the h1, title, and meta tag', async () => {
-      const response = await request(app).get('/provinces')
-      const $ = cheerio.load(response.text)
-      expect($('h1').text()).toEqual('All regions in Canada')
-      expect($('title').text()).toEqual('All regions in Canada — Canada statutory holidays')
-      expect($('meta[name="description"]').attr('content')).toEqual(
-        'Upcoming stat holidays for all regions in Canada. See all federal statutory holidays in Canada in 2020.',
-      )
+    describe('Test /provinces POST response', () => {
+      test('it should return 302 to / for no param', async () => {
+        const response = await request(app).post('/provinces')
+        expect(response.statusCode).toBe(302)
+        expect(response.headers.location).toBe('/')
+      })
+
+      test('it should return 302 to /federal for "federal"', async () => {
+        const response = await request(app)
+          .post('/provinces')
+          .send({ region: 'federal' })
+        expect(response.statusCode).toBe(302)
+        expect(response.headers.location).toBe('/federal')
+      })
+
+      test('it should return 302 to /province/:id for a good param', async () => {
+        const response = await request(app)
+          .post('/provinces')
+          .send({ region: 'AB' })
+        expect(response.statusCode).toBe(302)
+        expect(response.headers.location).toBe('/province/AB')
+      })
+
+      const params = [
+        { region: 'AB', url: '/province/AB' },
+        { region: 'ab', url: '/province/AB' },
+        { region: 'Alberta', url: '/province/AL' },
+        { region: 'a', url: '/province/A' },
+        { region: '<script>', url: '/province/%3CS' },
+        { region: 'https://evil.org', url: '/province/HT' },
+        { region: 'false', url: '/province/FA' },
+        { region: '1', url: '/province/1' },
+      ]
+      params.map(p => {
+        test(`it should return 302 to ${p.url} uppercased for param: '${p.region}'`, async () => {
+          const response = await request(app)
+            .post('/provinces')
+            .send({ region: p.region })
+          expect(response.statusCode).toBe(302)
+          expect(response.headers.location).toBe(p.url)
+        })
+      })
     })
   })
 

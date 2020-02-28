@@ -38,7 +38,7 @@ const styles = css`
 
 const Provinces = ({ data }) =>
   html`
-    <${Layout}>
+    <${Layout} route="/provinces">
       <${Content} class=${styles}>
         <h1>All regions in Canada</h1>
 
