@@ -29,6 +29,7 @@ const styles = css`
   select {
     display: inline-block;
     font-size: 1em;
+    line-height: 1.33;
     width: auto;
     padding: ${theme.space.xxs};
     padding-right: ${theme.space.lg};
@@ -37,6 +38,7 @@ const styles = css`
     margin: 0;
     border: 2px solid ${theme.color.red};
     border-bottom: none;
+    border-radius: 0;
     box-shadow: 0 4px ${theme.color.red};
 
     -moz-appearance: none;
@@ -64,8 +66,10 @@ const styles = css`
       color: ${theme.color.grey};
       cursor: pointer;
 
+      /*
       outline: 3px dashed ${theme.color.focus} !important;
       outline-offset: 8px !important;
+      */
     }
 
     option {
@@ -88,7 +92,7 @@ const Picker = () => {
             <option value="PE">Prince Edward Island</option>
           </select>
 
-          <${Button} type="submit" style="padding: 6.5px 9px 4px 9px; margin-left: 10px;"
+          <${Button} type="submit" style="padding: 6.5px 9px 3.5px 9px; margin-left: 10px;"
             ><span class=${visuallyHidden}>Submit</span>→<//
           >
         </form>

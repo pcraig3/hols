@@ -10,7 +10,8 @@ const styles = ({ accent = theme.color.red, focus = theme.color.focus } = {}) =>
   overflow: visible;
   background: transparent;
   font: inherit;
-  line-height: normal;
+  font-size: 1em;
+  line-height: 1.33;
   -webkit-font-smoothing: inherit;
   -moz-osx-font-smoothing: inherit;
   -webkit-appearance: none;
@@ -20,6 +21,7 @@ const styles = ({ accent = theme.color.red, focus = theme.color.focus } = {}) =>
   border: 2px solid ${accent};
   border-bottom: none;
   box-shadow: 0 4px ${accent};
+  border-radius: 0;
 
   color: ${accent} !important;
   padding: 3px 5px;
