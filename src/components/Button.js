@@ -100,11 +100,20 @@ const LinkButton = ({ children, color = {}, ...props }) => {
 const Button = ({ children, color = {}, ...props }) => {
   return props.href
     ? html`
-        <${LinkButton} color=${color} ...${props}><${Download} //><span>${children}</span><//>
+        <${LinkButton} color=${color} ...${props}>
+          <${Download} />
+          <span>${children}</span>
+        <//>
       `
     : html`
-        <${NativeButton} color=${color} ...${props}
-          ><${Expand} //><${Collapse} //><span>${children}</span><//
+        <${NativeButton} color=${color} ...${props}>
+          ${props.expand
+            ? html`
+                <${Expand} />
+                <${Collapse} />
+              `
+            : ''}
+          <span>${children}</span><//
         >
       `
 }

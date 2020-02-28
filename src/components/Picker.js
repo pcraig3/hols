@@ -1,6 +1,7 @@
 const { html } = require('../utils')
 const { css } = require('emotion')
-const { theme, insideContainer, horizontalPadding } = require('../styles')
+const { theme, insideContainer, horizontalPadding, visuallyHidden } = require('../styles')
+const Button = require('./Button')
 
 const styles = css`
   padding-top: ${theme.space.md};
@@ -77,14 +78,20 @@ const Picker = () => {
   return html`
     <div class=${styles}>
       <div>
-        <label for="region-select">View by region</label>
+        <form>
+          <label for="region-select">View by region</label>
 
-        <select name="region" id="region-select">
-          <option value="nationwide">Nationwide</option>
-          <option value="AB">Alberta</option>
-          <option value="ON">Ontario</option>
-          <option value="PE">Prince Edward Island</option>
-        </select>
+          <select name="region" id="region-select">
+            <option value="CAN">Nationwide</option>
+            <option value="AB">Alberta</option>
+            <option value="ON">Ontario</option>
+            <option value="PE">Prince Edward Island</option>
+          </select>
+
+          <${Button} type="submit" style="padding: 6.5px 9px 4px 9px; margin-left: 10px;"
+            ><span class=${visuallyHidden}>Submit</span>→<//
+          >
+        </form>
       </div>
     </div>
   `
