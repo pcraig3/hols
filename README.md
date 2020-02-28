@@ -17,7 +17,7 @@ Please get in touch if you are using the API, because I can probably make it wor
 
 `npm` is a javascript package manager. It downloads project dependencies and runs node applications.
 
-You'll need node version `v10.15.0` or higher to run the app.
+You'll need node version `v10.19.0` or higher to run the app.
 
 ### [Install `docker`](https://docs.docker.com/install/)
 
@@ -77,11 +77,11 @@ On a Mac, press `Control` + `C` to quit the running docker container.
 
 ## Citations
 
-- AB: 9 https://www.alberta.ca/alberta-general-holidays.aspx
+- AB: 10 https://www.alberta.ca/alberta-general-holidays.aspx
 - BC: 10 https://www2.gov.bc.ca/gov/content/employment-business/employment-standards-advice/employment-standards/statutory-holidays
 - MB: 8 https://www.gov.mb.ca/labour/standards/doc,gen-holidays-after-april-30-07,factsheet.html#q12
 - NB: 8 https://www2.gnb.ca/content/dam/gnb/Departments/petl-epft/PDF/es/FactSheets/PublicHolidaysVacation.pdf
-- NL: 9 https://www.newfoundlandlabrador.com/about-this-place/nl-facts
+- NL: 12 https://www.newfoundlandlabrador.com/about-this-place/nl-facts
 - NS: 6 https://novascotia.ca/lae/employmentrights/holidaychart.asp
 - NT: 10 https://www.ece.gov.nt.ca/en/services/employment-standards/frequently-asked-questions
 - NU: 9 http://nu-lsco.ca/faq-s?tmpl=component&faqid=11
