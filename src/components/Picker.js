@@ -82,7 +82,7 @@ const Picker = () => {
   return html`
     <div class=${styles}>
       <div>
-        <form>
+        <form action="/provinces" method="post">
           <label for="region-select">View by region</label>
 
           <select name="region" id="region-select">

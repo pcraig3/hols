@@ -1,11 +1,11 @@
 /* eslint-disable */
 // docs: https://helmetjs.github.io/docs/csp/
 module.exports = {
-  defaultSrc: ["'none'"],
+  defaultSrc: ["'self'"],
   connectSrc: ["'none'"],
   baseUri: ["'none'"],
   fontSrc: ["'self'", 'https://fonts.gstatic.com'],
-  formAction: ["'none'"],
+  formAction: ["'self'"],
   frameAncestors: ["'none'"],
   imgSrc: ["'self'", 'data:', 'https://www.google-analytics.com'],
   scriptSrc: ["'self'", 'https://www.google-analytics.com'],

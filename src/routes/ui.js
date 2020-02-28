@@ -86,6 +86,24 @@ router.get('/provinces', dbmw(db, getProvinces), (req, res) => {
   )
 })
 
+router.post('/provinces', (req, res) => {
+  let url = '/'
+  const region = req.body.region || ''
+
+  switch (region) {
+    case 'CAN':
+    case '':
+      break
+    case 'federal':
+      url = '/federal'
+      break
+    default:
+      url = `/province/${encodeURIComponent(region.substring(0, 2).toUpperCase())}`
+  }
+
+  return res.redirect(url)
+})
+
 router.get('/province', (req, res) => res.redirect(302, '/provinces'))
 
 router.get('/do-federal-holidays-apply-to-me', (req, res) => {
