@@ -2,7 +2,6 @@
 
 - add a better province picker
   - add javascript onChange select
-  - javascript hide button
 - make API to return CSV format
   - page for CSV downloads
 - add holidays by year to the frontend
@@ -23,6 +22,7 @@
   - pass in the current value as pre-selected
   - pass in the accent colour
   - switch out with ProvincePicker based on screen size
+  - javascript hide button
 - add LGTM security scans because why not
 - fun colours backgrounds
 - add a page for the API

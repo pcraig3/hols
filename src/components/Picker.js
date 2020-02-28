@@ -81,6 +81,10 @@ const styles = ({ accent = theme.color.red, focus = theme.color.focus } = {}) =>
       font-weight: normal;
     }
   }
+
+  *[data-hidden] {
+    display: none;
+  }
 `
 
 const Picker = ({ provinceId, federal }) => {
@@ -104,12 +108,14 @@ const Picker = ({ provinceId, federal }) => {
 
           <${Button}
             type="submit"
+            id="region-select__button"
             style="padding: 6.5px 9px 3.5px 9px; margin-left: 10px;"
             color="${federal || provinceId ? theme.color[federal ? 'federal' : provinceId] : {}}"
             ><span class=${visuallyHidden}>Submit</span>→<//
           >
         </form>
       </div>
+      <script src="/js/picker.js"></script>
     </div>
   `
 }
