@@ -14,6 +14,7 @@
 
 # DONE
 
+- add LGTM security scans because why not
 - fun colours backgrounds
 - add a page for the API
   - add the API link to the header so people know about it
