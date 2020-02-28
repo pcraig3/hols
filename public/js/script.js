@@ -7,7 +7,7 @@ if (typeof Promise !== 'function' && document.querySelector('details') !== null)
 
 // set up sweet scroll ッ
 document.addEventListener('DOMContentLoaded', function () {
-  var scroller = new SweetScroll({
+  new SweetScroll({
     trigger: 'a[href^="#"]',
     // Selector for trigger (must be a valid css selector)
     duration: 650,
