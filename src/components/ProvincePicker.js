@@ -90,7 +90,7 @@ const styles = ({ accent = theme.color.red, focus = theme.color.focus } = {}) =>
   }
 `
 
-const Picker = ({ provinceId, federal }) => {
+const ProvincePicker = ({ provinceId, federal }) => {
   return html`
     <div
       class=${federal || provinceId
@@ -123,4 +123,4 @@ const Picker = ({ provinceId, federal }) => {
   `
 }
 
-module.exports = Picker
+module.exports = ProvincePicker
