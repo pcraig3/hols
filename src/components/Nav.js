@@ -89,7 +89,7 @@ const linkStyles = css`
 const NavLinks = ({ route }) => {
   return html`
     <ul class=${linkStyles}>
-      <li><a class=${route === '/federal' ? 'active' : ''} href="/federal">Federal holidays</a></li>
+      <li><a class=${route === '/provinces' ? 'active' : ''} href="/provinces">All regions</a></li>
       <li><a class=${route === '/about' ? 'active' : ''} href="/about">About</a></li>
       <li><a class=${route === '/api' ? 'active' : ''} href="/api">API</a></li>
       <li>
