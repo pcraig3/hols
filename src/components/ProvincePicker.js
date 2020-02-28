@@ -101,7 +101,7 @@ const ProvincePicker = ({ provinceId, federal }) => {
         <form action="/provinces" method="post">
           <label for="region-select">View by region</label>
 
-          <select name="region" id="region-select">
+          <select name="region" id="region-select" data-event="true" data-label="region-select">
             <option value="" selected=${!provinceId && !federal}>Nationwide</option>
             <option value="federal" selected=${!provinceId && federal}>Federal holidays</option>
             <option disabled>──────────</option>
