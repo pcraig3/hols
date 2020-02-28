@@ -3,14 +3,12 @@ const { css } = require('emotion')
 const { theme, insideContainer, horizontalPadding } = require('../styles')
 
 const styles = css`
-  display: none;
   padding-top: ${theme.space.md};
   padding-bottom: ${theme.space.md};
   border-top: 3px solid ${theme.color.greyLight};
   border-bottom: 3px solid ${theme.color.greyLight};
 
   @media (${theme.mq.md}) {
-    display: block;
     padding-top: ${theme.space.lg};
     padding-bottom: ${theme.space.lg};
   }

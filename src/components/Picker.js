@@ -4,14 +4,12 @@ const { theme, insideContainer, horizontalPadding, visuallyHidden } = require('.
 const Button = require('./Button')
 
 const styles = ({ accent = theme.color.red, focus = theme.color.focus } = {}) => css`
-  display: block;
   padding-top: ${theme.space.md};
   padding-bottom: ${theme.space.md};
   border-top: 3px solid ${theme.color.greyLight};
   border-bottom: 3px solid ${theme.color.greyLight};
 
   @media (${theme.mq.md}) {
-    display: none;
     padding-top: ${theme.space.lg};
     padding-bottom: ${theme.space.lg};
   }
@@ -24,8 +22,13 @@ const styles = ({ accent = theme.color.red, focus = theme.color.focus } = {}) =>
 
   label {
     display: block;
+    margin-right: ${theme.space.xs};
     font-weight: 600;
     margin-bottom: ${theme.space.xxs};
+
+    @media (${theme.mq.md}) {
+      display: inline-block;
+    }
   }
 
   select {
