@@ -91,7 +91,6 @@ router.post('/provinces', (req, res) => {
   const region = req.body.region || ''
 
   switch (region) {
-    case 'CAN':
     case '':
       break
     case 'federal':

@@ -165,7 +165,7 @@ const Province = ({
         <section id="next-holiday">
           <${NextHolidayBox} ...${{ nextHoliday, provinceName, provinceId, federal }} />
           <${ProvincePicker} />
-          <${Picker} />
+          <${Picker} ...${{ provinceId, federal }}=/>
         </section>
 
         <section class=${horizontalPadding}>

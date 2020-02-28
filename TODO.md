@@ -2,7 +2,6 @@
 
 - add a better province picker
   - pass in the accent colour
-  - pass in the default value
   - switch out with ProvincePicker based on screen size
   - add javascript onChange select
   - javascript hide button
@@ -23,6 +22,7 @@
   - design for the select
   - put in a submit button
   - put in a post route to handle form submissions
+  - pass in the current value as pre-selected
 - add LGTM security scans because why not
 - fun colours backgrounds
 - add a page for the API

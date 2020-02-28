@@ -78,7 +78,7 @@ const styles = css`
   }
 `
 
-const Picker = () => {
+const Picker = ({ provinceId, federal }) => {
   return html`
     <div class=${styles}>
       <div>
@@ -86,10 +86,11 @@ const Picker = () => {
           <label for="region-select">View by region</label>
 
           <select name="region" id="region-select">
-            <option value="CAN">Nationwide</option>
-            <option value="AB">Alberta</option>
-            <option value="ON">Ontario</option>
-            <option value="PE">Prince Edward Island</option>
+            <option value="" selected=${!provinceId && !federal}>Nationwide</option>
+            <option value="federal" selected=${!provinceId && federal}>Federal holidays</option>
+            <option value="AB" selected=${provinceId === 'AB'}>Alberta</option>
+            <option value="ON" selected=${provinceId === 'ON'}>Ontario</option>
+            <option value="PE" selected=${provinceId === 'PE'}>Prince Edward Island</option>
           </select>
 
           <${Button} type="submit" style="padding: 6.5px 9px 3.5px 9px; margin-left: 10px;"
