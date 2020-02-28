@@ -135,8 +135,8 @@ const nextHolidayBox = ({ nextHoliday, provinceName = 'Canada', provinceId, fede
       <div>
         <h1>
           <div class="h1--intro">
-            ${provinceName}’s next${' '}${federal && 'federal '}<span class=${visuallyHidden}
-              >statutory </span
+            ${provinceName}’${provinceName.slice(-1) === 's' ? '' : 's'}
+            ${' '}next${' '}${federal && 'federal '}<span class=${visuallyHidden}>statutory </span
             >holiday is
           </div>
           <div class="h1--date"><${DateHtml} dateString=${nextHoliday.date} //></div>
