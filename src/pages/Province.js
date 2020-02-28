@@ -5,6 +5,7 @@ const Layout = require('../components/Layout.js')
 const DateHtml = require('../components/DateHtml.js')
 const NextHolidayBox = require('../components/NextHolidayBox.js')
 const ProvincePicker = require('../components/ProvincePicker.js')
+const Picker = require('../components/Picker.js')
 const SummaryTable = require('../components/SummaryTable.js')
 const Button = require('../components/Button.js')
 
@@ -163,7 +164,7 @@ const Province = ({
       >
         <section id="next-holiday">
           <${NextHolidayBox} ...${{ nextHoliday, provinceName, provinceId, federal }} />
-          <${ProvincePicker} //>
+          <${ProvincePicker} //> <${Picker} //>
         </section>
 
         <section class=${horizontalPadding}>
