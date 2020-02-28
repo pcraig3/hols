@@ -1,7 +1,6 @@
 # TODO
 
 - add a better province picker
-  - switch out with ProvincePicker based on screen size
   - add javascript onChange select
   - javascript hide button
 - make API to return CSV format
@@ -23,6 +22,7 @@
   - put in a post route to handle form submissions
   - pass in the current value as pre-selected
   - pass in the accent colour
+  - switch out with ProvincePicker based on screen size
 - add LGTM security scans because why not
 - fun colours backgrounds
 - add a page for the API
