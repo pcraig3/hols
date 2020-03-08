@@ -18,25 +18,39 @@ const styles = ({ accent = theme.color.red, focus = theme.color.focus } = {}) =>
   border-radius: 1px;
   text-decoration: none;
 
-  border: 2px solid ${accent};
-  border-bottom: none;
-  box-shadow: 0 4px ${accent};
-  border-radius: 0;
-
   color: ${accent} !important;
   padding: 3px 5px;
   cursor: pointer;
+
+  &.ghost {
+    text-decoration: underline;
+  }
+
+  &:not(.ghost) {
+    border: 2px solid ${accent};
+    border-bottom: none;
+    box-shadow: 0 4px ${accent};
+    border-radius: 0;
+
+    &:hover,
+    &:focus {
+      box-shadow: 0 4px black;
+    }
+
+    &:focus {
+      outline: 3px dashed ${focus} !important;
+      outline-offset: 8px !important;
+    }
+
+    &:active {
+      box-shadow: 0 1px black;
+    }
+  }
 
   &:hover,
   &:focus {
     color: white !important;
     background-color: ${accent};
-    box-shadow: 0 4px black;
-  }
-
-  &:focus {
-    outline: 3px dashed ${focus} !important;
-    outline-offset: 8px !important;
   }
 
   &::-moz-focus-inner {
@@ -45,7 +59,6 @@ const styles = ({ accent = theme.color.red, focus = theme.color.focus } = {}) =>
   }
 
   &:active {
-    box-shadow: 0 1px black;
     transform: translateY(3px);
   }
 
@@ -95,7 +108,7 @@ const NativeButton = ({ children, color = {}, ...props }) => {
 
 const LinkButton = ({ children, color = {}, ...props }) => {
   return html`
-    <a class=${styles(color)} role="button" draggable="false" ...${props}>${children}</a>
+    <a class=${`ghost ${styles(color)}`} role="button" draggable="false" ...${props}>${children}</a>
   `
 }
 

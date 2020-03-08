@@ -74,10 +74,8 @@ const styles = ({ accent = theme.color.red, focus = theme.color.focus } = {}) =>
       color: ${theme.color.grey};
       cursor: pointer;
 
-      /*
-      outline: 3px dashed ${focus} !important;
-      outline-offset: 8px !important;
-      */
+      outline: 4px solid ${focus} !important;
+      outline-offset: -3px !important;
     }
 
     option {
