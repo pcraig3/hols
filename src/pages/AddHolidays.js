@@ -48,21 +48,12 @@ const AddHolidays = ({ data: { provinces, year } }) => {
       <${Content}>
         <h1>Add Canada’s ${year} holidays to your calendar</h1>
         <p>
-          Download Canadian holidays and import them to your Outlook, iCal, or Google Calendar (or
-          your hipster calendar client).
-        </p>
-        <p>Adding holidays to your calendar is easy.</p>
-        <ol>
-          <li>Scroll down for all Canadian holidays</li>
-          <li>Keep scrolling for just those in your region</li>
-          <li>Click the button to download an <code>.ics</code> file with the dates for 2020</li>
-          <li>Double-click the file (or drag it into your preferred calendar)</li>
-          <li>Import ’em</li>
-          <li>Done! <span role="img" aria-label="Happy cowboy">🤠</span></li>
-        </ol>
-        <p>
-          You can also check out the <a href="/provinces">holidays for your region</a> first and add
-          them after.
+          If you’re not sure how to import them,${' '}
+          <a
+            href="#import-holidays"
+            aria-label="On-page link: import statutory holidays into your calendar"
+            >there’s a little "how-to" further down</a
+          >.
         </p>
 
         <${SummaryTable}
@@ -99,6 +90,22 @@ const AddHolidays = ({ data: { provinces, year } }) => {
           <h2>Download regional <span class=${visuallyHidden}>statutory</span> holidays</h2>
           <p>For regular folks or secessionists.</p>
         <//>
+
+        <h2 id="import-holidays">
+          Import <span class=${visuallyHidden}>statutory</span> holidays into your calendar
+        </h2>
+        <p>
+          Download Canadian holidays and then import them to your Outlook, iCal, or Google Calendar.
+        </p>
+        <p>Adding holidays to your calendar is easy.</p>
+        <ol>
+          <li>Clicking a button on this page will download an <code>.ics</code> file for 2020</li>
+          <li>Double-click the file (or drag it into your preferred calendar)</li>
+          <li>Confirm you want to import ’em</li>
+          <li>Done! <span role="img" aria-label="Happy cowboy">🤠</span></li>
+        </ol>
+        <br />
+
         <span class="bottom-link"><a href="#html" class="up-arrow">Back to top</a></span>
       <//>
     <//>
