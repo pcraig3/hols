@@ -13,6 +13,8 @@
 
 # DONE
 
+- de-emphasize the "download" button
+  - bug: shim the link button with JS
 - add a better province picker
   - design for the select
   - put in a submit button
@@ -22,6 +24,7 @@
   - switch out with ProvincePicker based on screen size
   - javascript hide button
   - add javascript onChange select
+  - add a focus style
 - add LGTM security scans because why not
 - fun colours backgrounds
 - add a page for the API
