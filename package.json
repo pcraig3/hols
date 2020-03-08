@@ -37,7 +37,7 @@
     "http-errors": "^1.7.3",
     "ics": "^2.19.0",
     "morgan": "^1.9.1",
-    "preact": "^10.3.2",
+    "preact": "^10.3.3",
     "preact-render-to-string": "^5.1.4",
     "sqlite": "^3.0.3",
     "sugar-date": "^2.0.6",
@@ -47,7 +47,7 @@
   "devDependencies": {
     "cheerio": "^1.0.0-rc.3",
     "eslint": "^6.8.0",
-    "eslint-plugin-jest": "^23.8.0",
+    "eslint-plugin-jest": "^23.8.2",
     "jest": "^25.1.0",
     "nodemon": "^2.0.2",
     "supertest": "^4.0.2"
