@@ -29,11 +29,9 @@ const renderPage = () => {
   )
 }
 
-//   data: { holidays, nextHoliday, provinceName = 'Canada', provinceId, federal = false } = {},
-
 describe('Province page', () => {
   test('renders h1 and h2', () => {
-    const $ = renderPage({ nextHoliday: { nameEn: 'May Day' } })
+    const $ = renderPage()
     expect($('h1').length).toBe(1)
     expect($('h1').text()).toEqual('Canada’s next statutory holiday isAugust 16Gold Cup Parade Day')
     expect($('h2').length).toBe(1)
