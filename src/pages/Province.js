@@ -65,6 +65,7 @@ const titleStyles = css`
     h2 + div {
       flex: 2;
       text-align: right;
+      margin-top: 6px;
       margin-bottom: ${theme.space.lg};
     }
 
