@@ -106,9 +106,15 @@ const NativeButton = ({ children, color = {}, ...props }) => {
   `
 }
 
-const LinkButton = ({ children, color = {}, ...props }) => {
+const LinkButton = ({ children, color = {}, ghost = false, ...props }) => {
   return html`
-    <a class=${`ghost ${styles(color)}`} role="button" draggable="false" ...${props}>${children}</a>
+    <a
+      class=${`${ghost ? 'ghost ' : ''}${styles(color)}`}
+      role="button"
+      draggable="false"
+      ...${props}
+      >${children}</a
+    >
   `
 }
 
