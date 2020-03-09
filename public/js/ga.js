@@ -11,6 +11,11 @@ ga('send', 'pageview');
 document.addEventListener('click', function (event) {
   if (event.target.dataset.event) {
     // ga(‘send’, ‘event’, ‘Category’, ‘Action’, ‘Label’, ‘Value’);
-    ga('send', 'event', 'Event', 'Click', event.target.dataset.label);
+    ga('send', 'event', {
+      eventCategory: event.target.tagName,
+      eventAction: event.target.dataset.action,
+      eventLabel: event.target.dataset.label,
+      transport: 'beacon'
+    })
   }
 }, false);

@@ -183,7 +183,8 @@ const Province = ({
                       : `canada-holidays-${year}.ics`}
                     color=${provinceIdOrFederal ? theme.color[provinceIdOrFederal] : {}}
                     data-event="true"
-                    data-label="download-holidays"
+                    data-action="download-holidays"
+                    data-label=${`download-holidays-${provinceIdOrFederal || 'canada'}`}
                     >Add to your calendar<//
                   >
                 </div>
