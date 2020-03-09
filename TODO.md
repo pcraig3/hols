@@ -13,8 +13,10 @@
 
 # DONE
 
+- google analytics events capture specific pages
 - de-emphasize the "download" button
   - bug: shim the link button with JS
+  - bug: not on the 'download holidays' page
 - add a better province picker
   - design for the select
   - put in a submit button
