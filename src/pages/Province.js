@@ -178,10 +178,8 @@ const Province = ({
                 <div>
                   <${Button}
                     href=${federal ? '/ics/federal' : provinceId ? `/ics/${provinceId}` : '/ics'}
-                    download=${federal
-                      ? `canada-holidays-federal-${year}.ics`
-                      : provinceId
-                      ? `canada-holidays-${provinceId}-${year}.ics`
+                    download=${provinceIdOrFederal
+                      ? `canada-holidays-${provinceIdOrFederal}-${year}.ics`
                       : `canada-holidays-${year}.ics`}
                     color=${provinceIdOrFederal ? theme.color[provinceIdOrFederal] : {}}
                     data-event="true"
