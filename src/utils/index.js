@@ -167,6 +167,24 @@ const getCurrentHolidayYear = () => {
   return d.getUTCFullYear()
 }
 
+/**
+ * This function returns a provinceId if one is passed in, the string 'federal', if federal exists and is truthy,
+ * or undefined, if neither are there.
+ *
+ * @param { String } provinceId a string representing a province id
+ * @param { boolean } federal a true or false whether we're on the federal page
+ */
+const getProvinceIdOrFederalString = ({ provinceId, federal } = {}) => {
+  if (provinceId) {
+    return provinceId
+  }
+  if (federal) {
+    return 'federal'
+  }
+
+  return undefined
+}
+
 module.exports = {
   html,
   metaIfSHA,
@@ -178,4 +196,5 @@ module.exports = {
   nextHoliday,
   upcomingHolidays,
   getCurrentHolidayYear,
+  getProvinceIdOrFederalString,
 }
