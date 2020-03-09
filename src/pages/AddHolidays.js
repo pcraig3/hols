@@ -27,7 +27,8 @@ const downloadButton = ({ provinceId, year }) => {
       download=${`canada-holidays-${provinceId ? `${provinceId}-` : ''}${year}.ics`}
       color=${provinceId && theme.color[provinceId]}
       data-event="true"
-      data-label=${`download-holidays-page-${provinceId || 'canada'}`}
+      data-action="page-download-holidays"
+      data-label=${`page-download-holidays-${provinceId || 'canada'}`}
       >Get ${provinceId || 'all'} holidays<//
     >
   `

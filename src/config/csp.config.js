@@ -2,7 +2,7 @@
 // docs: https://helmetjs.github.io/docs/csp/
 module.exports = {
   defaultSrc: ["'self'"],
-  connectSrc: ["'none'"],
+  connectSrc: ["'self'", 'https://www.google-analytics.com'],
   baseUri: ["'none'"],
   fontSrc: ["'self'", 'https://fonts.gstatic.com'],
   formAction: ["'self'"],

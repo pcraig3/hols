@@ -4,6 +4,7 @@ const {
   upcomingHolidays,
   getCurrentHolidayYear,
   isProvinceId,
+  getProvinceIdOrFederalString,
 } = require('../index')
 const holidays = require('./data.skip')
 
@@ -131,5 +132,27 @@ describe('Test isProvinceId', () => {
 
   test('returns false for a non-province id', () => {
     expect(isProvinceId('hawaii')).toBe(false)
+  })
+})
+
+describe('Test getProvinceIdOrFederalString', () => {
+  test('returns undefined for no parameters', () => {
+    expect(getProvinceIdOrFederalString()).toBe(undefined)
+  })
+
+  test('returns undefined for an empty object', () => {
+    expect(getProvinceIdOrFederalString({})).toBe(undefined)
+  })
+
+  test('returns the provinceID for a provinceID', () => {
+    expect(getProvinceIdOrFederalString({ provinceId: 'ON' })).toEqual('ON')
+  })
+
+  test('returns "federal" string for a federal boolean', () => {
+    expect(getProvinceIdOrFederalString({ federal: true })).toBe('federal')
+  })
+
+  test('returns the provinceID for a provinceID and federal', () => {
+    expect(getProvinceIdOrFederalString({ provinceId: 'ON', federal: true })).toEqual('ON')
   })
 })

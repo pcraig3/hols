@@ -1,5 +1,5 @@
 const { css } = require('emotion')
-const { html } = require('../utils')
+const { html, getProvinceIdOrFederalString } = require('../utils')
 const { theme, insideContainer, horizontalPadding, visuallyHidden } = require('../styles')
 const DateHtml = require('./DateHtml.js')
 const { relativeDate } = require('../dates')
@@ -127,8 +127,8 @@ const nextHolidayBox = ({ nextHoliday, provinceName = 'Canada', provinceId, fede
     slant: randomInt(32, 37),
     shade: -randomInt(9, 11),
   }
-  let color =
-    federal || provinceId ? theme.color[federal ? 'federal' : provinceId] : theme.color.red
+  const provinceIdOrFederal = getProvinceIdOrFederalString({ provinceId, federal })
+  let color = provinceIdOrFederal ? theme.color[provinceIdOrFederal] : theme.color.red
 
   return html`
     <div class=${styles({ ...color, bg })}>
