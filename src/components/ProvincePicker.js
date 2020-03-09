@@ -1,4 +1,4 @@
-const { html } = require('../utils')
+const { html, getProvinceIdOrFederalString } = require('../utils')
 const { css } = require('emotion')
 const { theme, insideContainer, horizontalPadding, visuallyHidden } = require('../styles')
 const Button = require('./Button')
@@ -89,12 +89,9 @@ const styles = ({ accent = theme.color.red, focus = theme.color.focus } = {}) =>
 `
 
 const ProvincePicker = ({ provinceId, federal }) => {
+  const provinceIdOrFederal = getProvinceIdOrFederalString({ provinceId, federal })
   return html`
-    <div
-      class=${federal || provinceId
-        ? styles(theme.color[federal ? 'federal' : provinceId])
-        : styles()}
-    >
+    <div class=${provinceIdOrFederal ? styles(theme.color[provinceIdOrFederal]) : styles()}>
       <div>
         <form action="/provinces" method="post">
           <label for="region-select">View by region</label>
@@ -122,7 +119,7 @@ const ProvincePicker = ({ provinceId, federal }) => {
             type="submit"
             id="region-select__button"
             style="padding: 6.5px 9px 3.5px 9px; margin-left: 10px;"
-            color="${federal || provinceId ? theme.color[federal ? 'federal' : provinceId] : {}}"
+            color="${provinceIdOrFederal ? theme.color[provinceIdOrFederal] : {}}"
             ><span class=${visuallyHidden}>Submit</span>→<//
           >
         </form>

@@ -1,5 +1,5 @@
 const { css } = require('emotion')
-const { html } = require('../utils')
+const { html, getProvinceIdOrFederalString } = require('../utils')
 const { theme, visuallyHidden, horizontalPadding, insideContainer } = require('../styles')
 const Layout = require('../components/Layout.js')
 const DateHtml = require('../components/DateHtml.js')
@@ -154,14 +154,11 @@ const Province = ({
     federal = false,
     year = 2019,
   } = {},
-}) =>
-  html`
+}) => {
+  const provinceIdOrFederal = getProvinceIdOrFederalString({ provinceId, federal })
+  return html`
     <${Layout} color=${federal ? 'federal' : provinceId}>
-      <div
-        class=${federal || provinceId
-          ? styles(theme.color[federal ? 'federal' : provinceId])
-          : styles()}
-      >
+      <div class=${provinceIdOrFederal ? styles(theme.color[provinceIdOrFederal]) : styles()}>
         <section id="next-holiday">
           <${NextHolidayBox} ...${{ nextHoliday, provinceName, provinceId, federal }} />
           <${ProvincePicker} ...${{ provinceId, federal }}=/>
@@ -186,9 +183,7 @@ const Province = ({
                       : provinceId
                       ? `canada-holidays-${provinceId}-${year}.ics`
                       : `canada-holidays-${year}.ics`}
-                    color=${federal || provinceId
-                      ? theme.color[federal ? 'federal' : provinceId]
-                      : {}}
+                    color=${provinceIdOrFederal ? theme.color[provinceIdOrFederal] : {}}
                     data-event="true"
                     data-label="download-holidays"
                     >Add to your calendar<//
@@ -206,5 +201,6 @@ const Province = ({
       </div>
     <//>
   `
+}
 
 module.exports = Province
