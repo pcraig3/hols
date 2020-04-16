@@ -2,7 +2,6 @@
 
 - look at the little subtitle on the main page
   - bug: add federal holidays to the mix
-  - make it say "observed in" because it's more common
 - make API to return CSV format
   - page for CSV downloads
 - add holidays by year to the frontend
@@ -18,6 +17,7 @@
 
 - look at the little subtitle on the main page
   - bug: only says "celebrated by" for federal holidays
+  - make it say "observed in" because it's more common
 - google analytics events capture specific pages
 - de-emphasize the "download" button
   - bug: shim the link button with JS

@@ -87,25 +87,34 @@ const styles = ({
 `
 
 const renderCelebratingProvinces = (provinces) => {
+  if (provinces.length === 13) {
+    return html`<p>National holiday</p>`
+  }
+
   if (provinces.length === 0) {
     return html`<p>Observed by${' '}<a href="/federal">federal industries</a></p> `
   }
 
   if (provinces.length === 1) {
     return html`
-      <p>Celebrated by${' '}<a href=${`/province/${provinces[0].id}`}>${provinces[0].nameEn}</a></p>
+      <p>Observed in${' '}<a href=${`/province/${provinces[0].id}`}>${provinces[0].nameEn}</a></p>
     `
   }
 
-  if (provinces.length === 13) {
-    return html`<p>National holiday</p>`
+  if (provinces.length === 2) {
+    return html`
+      <p>
+        Observed in${' '}<a href=${`/province/${provinces[0].id}`}>${provinces[0].nameEn}</a> and
+        ${' '}<a href=${`/province/${provinces[1].id}`}>${provinces[1].nameEn}</a>
+      </p>
+    `
   }
 
   const isLastProvince = (province) => province.id === provinces[provinces.length - 1].id
 
   return html`
     <p>
-      Celebrated by
+      Observed in
       ${provinces.map(
         (p) => html`
           ${isLastProvince(p) ? ' and ' : ' '}<a href=${`/province/${p.id}`}>${p.id}</a
