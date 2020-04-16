@@ -33,7 +33,7 @@
     "express": "^4.17.1",
     "express-http-to-https": "^1.1.4",
     "helmet": "^3.22.0",
-    "htm": "^3.0.3",
+    "htm": "^3.0.4",
     "http-errors": "^1.7.3",
     "ics": "^2.19.0",
     "morgan": "^1.10.0",
