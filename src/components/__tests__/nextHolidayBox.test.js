@@ -15,21 +15,11 @@ const getProvince = ({ endsWithS = false } = {}) => {
 }
 
 const getNextHoliday = ({ federal } = {}) => {
-  if (federal) {
-    return {
-      id: 8,
-      date: '2020-04-13',
-      nameEn: 'Easter Monday',
-      federal: 1,
-      provinces: [],
-    }
-  }
-
   return {
     id: 20,
     date: '2019-08-16',
     nameEn: 'Gold Cup Parade Day',
-    federal: 0,
+    federal: federal ? 1 : 0,
     provinces: [getProvince()],
   }
 }
@@ -44,48 +34,68 @@ test('nextHolidayBox displays next holiday properly for Canada', () => {
   expect($('h1').text()).toEqual(
     `Canada’s next statutory holiday is${sp2nbsp('August 16')}${sp2nbsp(nextHoliday.nameEn)}`,
   )
-  expect($('h1 + p').text()).toEqual('Observed in Prince Edward Island')
 })
 
-test('nextHolidayBox uses full province name when 2 provinces exist', () => {
-  const nextHoliday = getNextHoliday()
-  nextHoliday.provinces = [
-    { id: 'PE', nameEn: 'Prince Edward Island' },
-    { id: 'AB', nameEn: 'Alberta' },
-  ]
+describe('nextHolidayBox subtext', () => {
+  test('uses full province name when one province exists', () => {
+    const nextHoliday = getNextHoliday()
+    const $ = renderNextHolidayBox({ nextHoliday })
+    expect($('h1 + p').text()).toEqual('Observed in Prince Edward Island')
+  })
 
-  const $ = renderNextHolidayBox({ nextHoliday })
+  test('uses full province names when 2 provinces exist', () => {
+    const nextHoliday = getNextHoliday()
+    nextHoliday.provinces = [
+      { id: 'PE', nameEn: 'Prince Edward Island' },
+      { id: 'AB', nameEn: 'Alberta' },
+    ]
+    const $ = renderNextHolidayBox({ nextHoliday })
+    expect($('h1 + p').text()).toEqual('Observed in Prince Edward Island and Alberta')
+  })
 
-  expect($('div h1').length).toBe(1)
-  expect($('h1').text()).toEqual(
-    `Canada’s next statutory holiday is${sp2nbsp('August 16')}${sp2nbsp(nextHoliday.nameEn)}`,
-  )
-  expect($('h1 + p').text()).toEqual('Observed in Prince Edward Island and Alberta')
-})
+  test('uses province IDs when more than 2 province exist', () => {
+    const nextHoliday = getNextHoliday()
+    nextHoliday.provinces = [
+      { id: 'PE', nameEn: 'Prince Edward Island' },
+      { id: 'AB' },
+      { id: 'QC' },
+    ]
 
-test('nextHolidayBox uses province IDs when more than 2 province exists', () => {
-  const nextHoliday = getNextHoliday()
-  nextHoliday.provinces = [{ id: 'PE', nameEn: 'Prince Edward Island' }, { id: 'AB' }, { id: 'QC' }]
+    const $ = renderNextHolidayBox({ nextHoliday })
+    expect($('h1 + p').text()).toEqual('Observed in PE, AB, and QC')
+  })
 
-  const $ = renderNextHolidayBox({ nextHoliday })
+  test('nextHolidayBox refers only to federal holidays when no provinces exist', () => {
+    const nextHoliday = getNextHoliday({ federal: true })
+    nextHoliday.provinces = []
 
-  expect($('div h1').length).toBe(1)
-  expect($('h1').text()).toEqual(
-    `Canada’s next statutory holiday is${sp2nbsp('August 16')}${sp2nbsp(nextHoliday.nameEn)}`,
-  )
-  expect($('h1 + p').text()).toEqual('Observed in PE, AB, and QC')
-})
+    const $ = renderNextHolidayBox({ nextHoliday })
+    expect($('h1 + p').text()).toEqual('Observed by federal industries')
+  })
 
-test('nextHolidayBox refers to federal holidays when no provinces exist', () => {
-  const nextHoliday = getNextHoliday({ federal: true })
+  test('uses full province name and "federal" message when one province exists', () => {
+    const nextHoliday = getNextHoliday({ federal: true })
+    const $ = renderNextHolidayBox({ nextHoliday })
+    expect($('h1 + p').text()).toEqual('Observed in Prince Edward Island and by federal industries')
+  })
 
-  const $ = renderNextHolidayBox({ nextHoliday })
+  test('uses full province names and "federal" message when 2 provinces exist', () => {
+    const nextHoliday = getNextHoliday({ federal: true })
+    const $ = renderNextHolidayBox({ nextHoliday })
+    expect($('h1 + p').text()).toEqual('Observed in Prince Edward Island and by federal industries')
+  })
 
-  expect($('div h1').length).toBe(1)
-  expect($('h1').text()).toEqual(
-    `Canada’s next statutory holiday is${sp2nbsp('April 13')}${sp2nbsp(nextHoliday.nameEn)}`,
-  )
-  expect($('h1 + p').text()).toEqual('Observed by federal industries')
+  test('uses province IDs and "federal" message when more than 2 provinces exist', () => {
+    const nextHoliday = getNextHoliday({ federal: true })
+    nextHoliday.provinces = [
+      { id: 'PE', nameEn: 'Prince Edward Island' },
+      { id: 'AB' },
+      { id: 'QC' },
+    ]
+
+    const $ = renderNextHolidayBox({ nextHoliday })
+    expect($('h1 + p').text()).toEqual('Observed in PE, AB, QC and by federal industries')
+  })
 })
 
 test('nextHolidayBox refers to federal holidays when "federal" variable is passed in', () => {
