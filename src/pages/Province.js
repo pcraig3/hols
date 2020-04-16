@@ -83,7 +83,7 @@ const getTitleString = (provinceName, federal, year) => {
 }
 
 const createRows = (holidays, federal) => {
-  const _provinces = holiday => {
+  const _provinces = (holiday) => {
     if (holiday.provinces.length === 13) {
       return 'National holiday'
     }
@@ -111,11 +111,9 @@ const createRows = (holidays, federal) => {
   const today = new Date(Date.now()).toISOString().slice(0, 10)
   var previousDate = null
 
-  return holidays.map(holiday => {
+  return holidays.map((holiday) => {
     const row = {
-      key: html`
-        <${DateHtml} dateString=${holiday.date} weekday=${true} //>
-      `,
+      key: html` <${DateHtml} dateString=${holiday.date} weekday=${true} //> `,
       value: holiday.nameEn,
     }
 
@@ -132,17 +130,6 @@ const createRows = (holidays, federal) => {
     previousDate = holiday.date
     return row
   })
-}
-
-const ifPastHolidays = (holidays = []) => {
-  // there must be at least 6 past holidays before the button appears
-  const minimum = 6
-  const today = new Date(Date.now()).toISOString().slice(0, 10)
-  if (!holidays[minimum]) {
-    return false
-  }
-
-  return holidays[minimum].date < today
 }
 
 const Province = ({
@@ -194,10 +181,6 @@ const Province = ({
             <span class="bottom-link"><a href="#html" class="up-arrow">Back to top</a></span>
           </div>
         </section>
-        ${ifPastHolidays(holidays) &&
-          html`
-            <script src="/js/province.js"></script>
-          `}
       </div>
     <//>
   `
