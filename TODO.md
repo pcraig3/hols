@@ -13,6 +13,10 @@
 
 # DONE
 
+- look at the little subtitle on the main page
+  - bug: only says "celebrated by" for federal holidays
+  - make it say "observed in" because it's more common
+    - bug: add federal holidays to the mix
 - google analytics events capture specific pages
 - de-emphasize the "download" button
   - bug: shim the link button with JS
