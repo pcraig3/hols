@@ -4,14 +4,8 @@ const { html } = require('../../utils')
 
 const NextHolidayBox = require('../NextHolidayBox.js')
 
-const renderNextHolidayBox = props => {
-  return cheerio.load(
-    render(
-      html`
-        <${NextHolidayBox} ...${props} //>
-      `,
-    ),
-  )
+const renderNextHolidayBox = (props) => {
+  return cheerio.load(render(html` <${NextHolidayBox} ...${props} //> `))
 }
 
 const getProvince = ({ endsWithS = false } = {}) => {
@@ -20,7 +14,17 @@ const getProvince = ({ endsWithS = false } = {}) => {
     : { id: 'PE', nameEn: 'Prince Edward Island' }
 }
 
-const getNextHoliday = () => {
+const getNextHoliday = ({ federal } = {}) => {
+  if (federal) {
+    return {
+      id: 8,
+      date: '2020-04-13',
+      nameEn: 'Easter Monday',
+      federal: 1,
+      provinces: [],
+    }
+  }
+
   return {
     id: 20,
     date: '2019-08-16',
@@ -30,7 +34,7 @@ const getNextHoliday = () => {
   }
 }
 
-const sp2nbsp = str => str.replace(/ /g, '\u00a0')
+const sp2nbsp = (str) => str.replace(/ /g, '\u00a0')
 
 test('nextHolidayBox displays next holiday properly for Canada', () => {
   const nextHoliday = getNextHoliday()
@@ -54,6 +58,18 @@ test('nextHolidayBox uses province IDs when more than 1 province exists', () => 
     `Canada’s next statutory holiday is${sp2nbsp('August 16')}${sp2nbsp(nextHoliday.nameEn)}`,
   )
   expect($('h1 + p').text()).toEqual('Celebrated by PE, AB, and QC')
+})
+
+test('nextHolidayBox refers to federal holidays when no provinces exist', () => {
+  const nextHoliday = getNextHoliday({ federal: true })
+
+  const $ = renderNextHolidayBox({ nextHoliday })
+
+  expect($('div h1').length).toBe(1)
+  expect($('h1').text()).toEqual(
+    `Canada’s next statutory holiday is${sp2nbsp('April 13')}${sp2nbsp(nextHoliday.nameEn)}`,
+  )
+  expect($('h1 + p').text()).toEqual('Observed by federal industries')
 })
 
 test('nextHolidayBox refers to federal holidays when "federal" variable is passed in', () => {

@@ -86,7 +86,11 @@ const styles = ({
   }
 `
 
-const renderCelebratingProvinces = provinces => {
+const renderCelebratingProvinces = (provinces) => {
+  if (provinces.length === 0) {
+    return html`<p>Observed by${' '}<a href="/federal">federal industries</a></p> `
+  }
+
   if (provinces.length === 1) {
     return html`
       <p>Celebrated by${' '}<a href=${`/province/${provinces[0].id}`}>${provinces[0].nameEn}</a></p>
@@ -94,18 +98,16 @@ const renderCelebratingProvinces = provinces => {
   }
 
   if (provinces.length === 13) {
-    return html`
-      <p>National holiday</p>
-    `
+    return html`<p>National holiday</p>`
   }
 
-  const isLastProvince = province => province.id === provinces[provinces.length - 1].id
+  const isLastProvince = (province) => province.id === provinces[provinces.length - 1].id
 
   return html`
     <p>
       Celebrated by
       ${provinces.map(
-        p => html`
+        (p) => html`
           ${isLastProvince(p) ? ' and ' : ' '}<a href=${`/province/${p.id}`}>${p.id}</a
           >${isLastProvince(p) ? '' : ','}
         `,
@@ -114,10 +116,8 @@ const renderCelebratingProvinces = provinces => {
   `
 }
 
-const renderRelativeDate = dateString => {
-  return html`
-    <p>${relativeDate(dateString)}</p>
-  `
+const renderRelativeDate = (dateString) => {
+  return html`<p>${relativeDate(dateString)}</p>`
 }
 
 const nextHolidayBox = ({ nextHoliday, provinceName = 'Canada', provinceId, federal }) => {
@@ -146,14 +146,14 @@ const nextHolidayBox = ({ nextHoliday, provinceName = 'Canada', provinceId, fede
           ? renderCelebratingProvinces(nextHoliday.provinces)
           : renderRelativeDate(nextHoliday.date)}
         ${federal &&
-          html`
-            <p>
-              <a href="/do-federal-holidays-apply-to-me"
-                >Find out who gets federal${' '}
-                <span class=${visuallyHidden}>statutory </span>holidays</a
-              >
-            </p>
-          `}
+        html`
+          <p>
+            <a href="/do-federal-holidays-apply-to-me"
+              >Find out who gets federal${' '}
+              <span class=${visuallyHidden}>statutory </span>holidays</a
+            >
+          </p>
+        `}
       </div>
     </div>
   `
