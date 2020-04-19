@@ -7,7 +7,7 @@ const { dbmw, checkProvinceIdErr, nextHoliday, getCurrentHolidayYear } = require
 const { getProvinces, getHolidaysWithProvinces, getProvincesWithHolidays } = require('../queries')
 const { displayDate } = require('../dates')
 
-const getMeta = holiday => `${holiday.nameEn} on ${displayDate(holiday.date)}`
+const getMeta = (holiday) => `${holiday.nameEn} on ${displayDate(holiday.date)}`
 
 router.get('/', dbmw(db, getHolidaysWithProvinces), (req, res) => {
   const year = getCurrentHolidayYear()
@@ -43,6 +43,31 @@ router.get(
     return res.send(
       renderPage({
         pageComponent: 'Province',
+        title: `${provinceName} (${provinceId}) statutory holidays in ${year}`,
+        docProps: { meta, path: req.path },
+        props: {
+          data: { holidays, nextHoliday, provinceName, provinceId, year },
+        },
+      }),
+    )
+  },
+)
+
+router.get(
+  '/province/:provinceId/2021',
+  checkProvinceIdErr,
+  dbmw(db, getProvincesWithHolidays),
+  (req, res) => {
+    const year = getCurrentHolidayYear()
+    const { holidays, nextHoliday, nameEn: provinceName, id: provinceId } = res.locals.rows[0]
+
+    const meta = `${provinceId}’s next stat holiday is ${getMeta(
+      nextHoliday,
+    )}. See all statutory holidays in ${provinceName}, Canada in ${year}.`
+
+    return res.send(
+      renderPage({
+        pageComponent: 'Province2021',
         title: `${provinceName} (${provinceId}) statutory holidays in ${year}`,
         docProps: { meta, path: req.path },
         props: {
@@ -169,7 +194,7 @@ router.get('*', (req, res) => {
 })
 
 // eslint-disable-next-line no-unused-vars
-router.use(function(err, req, res, next) {
+router.use(function (err, req, res, next) {
   return res.send(
     renderPage({
       pageComponent: 'Error',
