@@ -60,10 +60,6 @@ const styles = ({
   }
 `
 
-const renderRelativeDate = (dateString) => {
-  return html`<p>${relativeDate(dateString)}</p>`
-}
-
 const NextHolidayBox = ({ nextHoliday, provinceName = 'Canada', provinceId, federal }) => {
   let bg = {
     angle: randomInt(63, 66),
@@ -78,10 +74,10 @@ const NextHolidayBox = ({ nextHoliday, provinceName = 'Canada', provinceId, fede
     <div class=${styles({ ...color, bg })}>
       <div>
         <${NextHoliday} ...${{ nextHoliday, provinceName, federal }} //>
-        ${nextHoliday.provinces && !federal
+        ${provinceName == 'Canada' && !federal
           ? html`<${ObservingProvinces} provinces=${nextHoliday.provinces}
             federal=${nextHoliday.federal} //>`
-          : renderRelativeDate(nextHoliday.date)}
+          : html`<p>${relativeDate(nextHoliday.date)}</p>`}
         ${federal &&
         html`
           <p>
