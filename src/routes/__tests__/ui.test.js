@@ -7,6 +7,8 @@ const { ALLOWED_YEARS } = require('../../config/vars.config')
 const { getCurrentHolidayYear } = require('../../utils')
 
 describe('Test ui responses', () => {
+  const currentYear = getCurrentHolidayYear()
+
   beforeAll(async () => {
     await Promise.resolve()
       // First, try to open the database
@@ -117,9 +119,37 @@ describe('Test ui responses', () => {
       })
     })
 
-    describe('Test /province/:provinceId/:year responses', () => {
-      const currentYear = getCurrentHolidayYear()
+    describe('Test /province/:provinceId responses for a good provinceId', () => {
+      describe('with "year" query params', () => {
+        const INVALID_YEARS = [-1, 0, 1, 2018, 2022, 'pterodactyl']
+        INVALID_YEARS.map((invalidYear) => {
+          test(`it should return 200 for a bad query param: "${invalidYear}"`, async () => {
+            const response = await request(app).get(`/province/MB?year=${invalidYear}`)
+            expect(response.statusCode).toBe(200)
+            const $ = cheerio.load(response.text)
+            expect($('h1').text()).toMatch(/^Manitoba’s next statutory holiday is/)
+          })
+        })
 
+        test(`it should return 200 for current year query param: "${currentYear}"`, async () => {
+          const response = await request(app).get(`/province/MB?year=${currentYear}`)
+          expect(response.statusCode).toBe(200)
+          const $ = cheerio.load(response.text)
+          expect($('h1').text()).toMatch(/^Manitoba’s next statutory holiday is/)
+        })
+
+        const GOOD_YEARS = ALLOWED_YEARS.filter((y) => y !== currentYear)
+        GOOD_YEARS.map((year) => {
+          test(`it should return 302 for other allowed years: "${year}"`, async () => {
+            const response = await request(app).get(`/province/MB?year=${year}`)
+            expect(response.statusCode).toBe(302)
+            expect(response.headers.location).toEqual(`/province/MB/${year}`)
+          })
+        })
+      })
+    })
+
+    describe('Test /province/:provinceId/:year responses', () => {
       test('it should return the h1, title, and meta tag for MB in 2021', async () => {
         const response = await request(app).get('/province/MB/2021')
         const $ = cheerio.load(response.text)
