@@ -4,6 +4,7 @@ const Promise = require('bluebird')
 const app = require('../../server.js')
 const cheerio = require('cheerio')
 const { ALLOWED_YEARS } = require('../../config/vars.config')
+const { getCurrentHolidayYear } = require('../../utils')
 
 describe('Test ui responses', () => {
   beforeAll(async () => {
@@ -117,6 +118,8 @@ describe('Test ui responses', () => {
     })
 
     describe('Test /province/:provinceId/:year responses', () => {
+      const currentYear = getCurrentHolidayYear()
+
       test('it should return the h1, title, and meta tag for MB in 2021', async () => {
         const response = await request(app).get('/province/MB/2021')
         const $ = cheerio.load(response.text)
@@ -128,11 +131,18 @@ describe('Test ui responses', () => {
       })
 
       describe('for a good year', () => {
-        ALLOWED_YEARS.map((year) => {
+        const GOOD_YEARS = ALLOWED_YEARS.filter((y) => y !== currentYear)
+        GOOD_YEARS.map((year) => {
           test(`it should return 200 for year: "${year}"`, async () => {
             const response = await request(app).get(`/province/MB/${year}`)
             expect(response.statusCode).toBe(200)
           })
+        })
+
+        test(`it should return 302 to the province page for current year: "${currentYear}"`, async () => {
+          const response = await request(app).get(`/province/MB/${currentYear}`)
+          expect(response.statusCode).toBe(302)
+          expect(response.headers.location).toEqual('/province/MB')
         })
 
         describe('for an invalid year', () => {

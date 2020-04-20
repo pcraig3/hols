@@ -5,9 +5,9 @@
   - federal
   - 2022/2018
   - redirects query param
-  - redirect current year?
   - add new pages to sitemap
   - don't be grey for past holidays on dedicated pages
+- put "download" button/link onto other year pages
 - add picker for year
 - make API to return CSV format
   - page for CSV downloads
@@ -24,6 +24,7 @@
   - provinces
   - allowed years in global var
   - tests for responses
+  - redirect current year
 - look at the little subtitle on the main page
   - bug: only says "celebrated by" for federal holidays
   - make it say "observed in" because it's more common
