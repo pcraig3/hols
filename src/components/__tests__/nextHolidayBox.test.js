@@ -8,10 +8,8 @@ const renderNextHolidayBox = (props) => {
   return cheerio.load(render(html` <${NextHolidayBox} ...${props} //> `))
 }
 
-const getProvince = ({ endsWithS = false } = {}) => {
-  return endsWithS
-    ? { id: 'NT', nameEn: 'Northwest Territories' }
-    : { id: 'PE', nameEn: 'Prince Edward Island' }
+const getProvince = () => {
+  return { id: 'PE', nameEn: 'Prince Edward Island' }
 }
 
 const getNextHoliday = ({ federal } = {}) => {
@@ -55,7 +53,6 @@ test('nextHolidayBox displays next holiday properly for a given province', () =>
 
   const $ = renderNextHolidayBox({
     nextHoliday,
-    provinceId: getProvince().id,
     provinceName: getProvince().nameEn,
   })
 
@@ -66,22 +63,4 @@ test('nextHolidayBox displays next holiday properly for a given province', () =>
     )}`,
   )
   expect($('h1 + p').text()).toMatch(/That’s in (about )?(\d\d days|\d month(s)?)/)
-})
-
-test('nextHolidayBox doesn’t put an "s" after the apostrophe for a province that ends in "s"', () => {
-  const nextHoliday = getNextHoliday()
-  delete nextHoliday.provinces
-
-  const $ = renderNextHolidayBox({
-    nextHoliday,
-    provinceId: getProvince({ endsWithS: true }).id,
-    provinceName: getProvince({ endsWithS: true }).nameEn,
-  })
-
-  expect($('div h1').length).toBe(1)
-  expect($('h1').text()).toEqual(
-    `Northwest Territories’ next statutory holiday is${sp2nbsp('August 16')}${sp2nbsp(
-      nextHoliday.nameEn,
-    )}`,
-  )
 })

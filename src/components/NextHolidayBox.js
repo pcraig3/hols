@@ -1,7 +1,7 @@
 const { css } = require('emotion')
 const { html, getProvinceIdOrFederalString } = require('../utils')
 const { theme, insideContainer, horizontalPadding, visuallyHidden } = require('../styles')
-const DateHtml = require('./DateHtml.js')
+const NextHoliday = require('./NextHoliday.js')
 const ObservingProvinces = require('./ObservingProvinces.js')
 const { relativeDate } = require('../dates')
 const { shade, randomInt } = require('../utils/so.js')
@@ -28,33 +28,6 @@ const styles = ({
 
   > div {
     ${insideContainer};
-  }
-
-  h1 {
-    .h1--intro {
-      font-size: 0.533em;
-      font-weight: 400;
-      margin-bottom: 5px;
-
-      @media (${theme.mq.lg}) {
-        font-weight: 300;
-      }
-    }
-
-    .h1--date {
-      font-size: 1.3em;
-      font-weight: 700;
-    }
-
-    .h1--name {
-      font-size: 0.75em;
-      font-weight: 400;
-
-      @media (${theme.mq.lg}) {
-        font-size: 0.83em;
-        font-weight: 300;
-      }
-    }
   }
 
   h1,
@@ -104,15 +77,7 @@ const NextHolidayBox = ({ nextHoliday, provinceName = 'Canada', provinceId, fede
   return html`
     <div class=${styles({ ...color, bg })}>
       <div>
-        <h1>
-          <div class="h1--intro">
-            ${provinceName}’${provinceName.slice(-1) === 's' ? '' : 's'}
-            ${' '}next${' '}${federal && 'federal '}<span class=${visuallyHidden}>statutory </span
-            >holiday is
-          </div>
-          <div class="h1--date"><${DateHtml} dateString=${nextHoliday.date} //></div>
-          <div class="h1--name">${nextHoliday.nameEn.replace(/ /g, '\u00a0')}</div>
-        </h1>
+        <${NextHoliday} ...${{ nextHoliday, provinceName, federal }} //>
         ${nextHoliday.provinces && !federal
           ? html`<${ObservingProvinces} provinces=${nextHoliday.provinces}
             federal=${nextHoliday.federal} //>`
