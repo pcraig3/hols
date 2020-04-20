@@ -139,7 +139,7 @@ const Province = ({
     provinceName = 'Canada',
     provinceId,
     federal = false,
-    year = 2019,
+    year = 2020,
   } = {},
 }) => {
   const provinceIdOrFederal = getProvinceIdOrFederalString({ provinceId, federal })

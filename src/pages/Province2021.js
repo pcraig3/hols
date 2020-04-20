@@ -1,12 +1,11 @@
 const { css } = require('emotion')
 const { html, getProvinceIdOrFederalString } = require('../utils')
-const { theme, visuallyHidden, horizontalPadding, insideContainer } = require('../styles')
+const { theme, horizontalPadding, insideContainer } = require('../styles')
 const Layout = require('../components/Layout.js')
 const DateHtml = require('../components/DateHtml.js')
-const NextHolidayBox = require('../components/NextHolidayBox2021.js')
+const NextHolidayBox = require('../components/NextHolidayBox.js')
 const ProvincePicker = require('../components/ProvincePicker.js')
 const SummaryTable = require('../components/SummaryTable.js')
-const Button = require('../components/Button.js')
 
 const styles = ({ accent = theme.color.red } = {}) => css`
   div.past {
@@ -30,56 +29,8 @@ const styles = ({ accent = theme.color.red } = {}) => css`
   }
 `
 
-const titleStyles = css`
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  flex-direction: column;
-  margin-top: ${theme.space.md};
-  margin-bottom: ${theme.space.md};
-
-  @media (${theme.mq.lg}) {
-    flex-direction: row;
-  }
-
-  h2 {
-    margin: 0;
-    margin-bottom: 10px;
-    font-size: 1.566em;
-  }
-
-  h2 + div {
-    margin-bottom: ${theme.space.md};
-  }
-
-  button,
-  a[role='button'] {
-    text-align: left;
-  }
-
-  @media (${theme.mq.md}) {
-    h2 {
-      flex: 3;
-    }
-
-    h2 + div {
-      flex: 2;
-      text-align: right;
-      margin-top: 6px;
-      margin-bottom: ${theme.space.lg};
-    }
-
-    button,
-    a[role='button'] {
-      min-width: 234px;
-    }
-  }
-`
-
 const getTitleString = (provinceName, federal, year) => {
-  return `
-    ${provinceName}${federal ? ' federal' : ''} statutory holidays in ${year}
-  `
+  return `${provinceName}${federal ? ' federal' : ''} statutory holidays in ${year}`
 }
 
 const createRows = (holidays, federal) => {
@@ -139,7 +90,7 @@ const Province = ({
     provinceName = 'Canada',
     provinceId,
     federal = false,
-    year = 2019,
+    year = 2020,
   } = {},
 }) => {
   const provinceIdOrFederal = getProvinceIdOrFederalString({ provinceId, federal })
@@ -147,7 +98,7 @@ const Province = ({
     <${Layout} color=${federal ? 'federal' : provinceId}>
       <div class=${provinceIdOrFederal ? styles(theme.color[provinceIdOrFederal]) : styles()}>
         <section id="next-holiday">
-          <${NextHolidayBox} ...${{ nextHoliday, provinceName, provinceId, federal }} />
+          <${NextHolidayBox} ...${{ nextHoliday, provinceName, provinceId, federal, year }} />
           <${ProvincePicker} ...${{ provinceId, federal }}=/>
         </section>
 

@@ -24,7 +24,7 @@ const getNextHoliday = ({ federal } = {}) => {
 
 const sp2nbsp = (str) => str.replace(/ /g, '\u00a0')
 
-test('nextHolidayBox displays next holiday properly for Canada', () => {
+test('NextHolidayBox displays next holiday properly for Canada', () => {
   const nextHoliday = getNextHoliday()
   const $ = renderNextHolidayBox({ nextHoliday })
 
@@ -34,7 +34,7 @@ test('nextHolidayBox displays next holiday properly for Canada', () => {
   )
 })
 
-test('nextHolidayBox refers to federal holidays when "federal" variable is passed in', () => {
+test('NextHolidayBox refers to federal holidays when "federal" variable is passed in', () => {
   const nextHoliday = getNextHoliday()
   const $ = renderNextHolidayBox({ nextHoliday, federal: true })
 
@@ -45,9 +45,10 @@ test('nextHolidayBox refers to federal holidays when "federal" variable is passe
     )}`,
   )
   expect($('h1 + p').text()).toMatch(/That’s in (about )?(\d\d days|\d month(s)?)/)
+  expect($('h1 + p + p').text()).toEqual('Find out who gets federal statutory holidays')
 })
 
-test('nextHolidayBox displays next holiday properly for a given province', () => {
+test('NextHolidayBox displays next holiday properly for a given province', () => {
   const nextHoliday = getNextHoliday()
   delete nextHoliday.provinces
 
@@ -63,4 +64,46 @@ test('nextHolidayBox displays next holiday properly for a given province', () =>
     )}`,
   )
   expect($('h1 + p').text()).toMatch(/That’s in (about )?(\d\d days|\d month(s)?)/)
+})
+
+test('NextHolidayBox displays next holiday properly for a given province', () => {
+  const nextHoliday = getNextHoliday()
+  delete nextHoliday.provinces
+
+  const $ = renderNextHolidayBox({
+    nextHoliday,
+    provinceName: getProvince().nameEn,
+  })
+
+  expect($('div h1').length).toBe(1)
+  expect($('h1').text()).toEqual(
+    `Prince Edward Island’s next statutory holiday is${sp2nbsp('August 16')}${sp2nbsp(
+      nextHoliday.nameEn,
+    )}`,
+  )
+  expect($('h1 + p').text()).toMatch(/That’s in (about )?(\d\d days|\d month(s)?)/)
+})
+
+test('NextHolidayBox displays provinceName and year when no next holiday', () => {
+  const $ = renderNextHolidayBox({
+    nextHoliday: undefined,
+    provinceName: getProvince().nameEn,
+    year: 2022,
+  })
+
+  expect($('div h1').length).toBe(1)
+  expect($('h1').text()).toEqual('Prince Edward Islandstatutory Holidays in 2022')
+  expect($('h1 + p').length).toBe(0)
+})
+
+test('NextHolidayBox displays provinceName and year for federal holidays when no next holiday', () => {
+  const $ = renderNextHolidayBox({
+    nextHoliday: undefined,
+    federal: true,
+    year: 2022,
+  })
+
+  expect($('div h1').length).toBe(1)
+  expect($('h1').text()).toEqual('CanadaFederal statutory holidays in 2022')
+  expect($('h1 + p').text()).toEqual('Find out who gets federal statutory holidays')
 })

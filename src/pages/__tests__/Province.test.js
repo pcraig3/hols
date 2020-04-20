@@ -35,6 +35,6 @@ describe('Province page', () => {
     expect($('h1').length).toBe(1)
     expect($('h1').text()).toEqual('Canada’s next statutory holiday isAugust 16Gold Cup Parade Day')
     expect($('h2').length).toBe(1)
-    expect($('h2').text()).toEqual('Canada statutory holidays in 2019')
+    expect($('h2').text()).toEqual('Canada statutory holidays in 2020')
   })
 })

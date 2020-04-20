@@ -12,7 +12,7 @@ const html = htm.bind(h)
 // "try / catch" in all our database query functions
 const dbmw = (db, cb) => {
   return async (req, res, next) => {
-    const _parseFederal = req => {
+    const _parseFederal = (req) => {
       if (req.query.federal !== undefined) {
         return req.query.federal
       }
@@ -24,7 +24,7 @@ const dbmw = (db, cb) => {
       return undefined
     }
 
-    const _parseYear = req => {
+    const _parseYear = (req) => {
       const year = parseInt(req.query.year)
 
       if (![2019, 2020, 2021].includes(year)) {
@@ -53,7 +53,7 @@ const dbmw = (db, cb) => {
 }
 
 // returns true if province ID exists else false. Case insensitive.
-const isProvinceId = provinceId => {
+const isProvinceId = (provinceId) => {
   return ['AB', 'BC', 'MB', 'NB', 'NL', 'NS', 'NT', 'NU', 'ON', 'PE', 'QC', 'SK', 'YT'].includes(
     provinceId.toUpperCase(),
   )
@@ -104,7 +104,7 @@ const gaIfProd = () =>
  * @param {*} key the key whose value use as the top-level key
  */
 const array2Obj = (arr, key = 'id') => {
-  return arr.reduce(function(obj, item) {
+  return arr.reduce(function (obj, item) {
     obj[item[key]] = item
     return obj
   }, {})
@@ -122,11 +122,11 @@ const nextHoliday = (holidays, dateString) => {
     dateString = new Date(Date.now()).toISOString().substring(0, 10)
   }
 
-  const nextDate = holidays.find(holiday => {
+  const nextDate = holidays.find((holiday) => {
     return holiday.date >= dateString
   }).date
 
-  const nextHolidays = holidays.filter(holiday => holiday.date === nextDate)
+  const nextHolidays = holidays.filter((holiday) => holiday.date === nextDate)
 
   nextHolidays.sort((h1, h2) => {
     if (h1.provinces.length <= h2.provinces.length) {
@@ -150,7 +150,7 @@ const upcomingHolidays = (holidays, dateString) => {
     dateString = new Date(Date.now()).toISOString().substring(0, 10)
   }
 
-  return holidays.filter(holiday => holiday.date >= dateString)
+  return holidays.filter((holiday) => holiday.date >= dateString)
 }
 
 /**

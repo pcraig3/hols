@@ -3,6 +3,7 @@ const { html, getProvinceIdOrFederalString } = require('../utils')
 const { theme, insideContainer, horizontalPadding, visuallyHidden } = require('../styles')
 const NextHoliday = require('./NextHoliday.js')
 const ObservingProvinces = require('./ObservingProvinces.js')
+const ProvinceTitle = require('./ProvinceTitle.js')
 const { relativeDate } = require('../dates')
 const { shade, randomInt } = require('../utils/so.js')
 
@@ -28,6 +29,33 @@ const styles = ({
 
   > div {
     ${insideContainer};
+  }
+
+  h1 {
+    .h1--xs {
+      font-size: 0.533em;
+      font-weight: 400;
+      margin-bottom: 5px;
+
+      @media (${theme.mq.lg}) {
+        font-weight: 300;
+      }
+    }
+
+    .h1--lg {
+      font-size: 1.3em;
+      font-weight: 700;
+    }
+
+    .h1--md {
+      font-size: 0.75em;
+      font-weight: 400;
+
+      @media (${theme.mq.lg}) {
+        font-size: 0.83em;
+        font-weight: 300;
+      }
+    }
   }
 
   h1,
@@ -60,7 +88,15 @@ const styles = ({
   }
 `
 
-const NextHolidayBox = ({ nextHoliday, provinceName = 'Canada', provinceId, federal }) => {
+const renderNextHolidayTitle = ({ nextHoliday, provinceName, federal }) => {
+  return html`<${NextHoliday} ...${{ nextHoliday, provinceName, federal }} //>
+  ${provinceName == 'Canada' && !federal
+    ? html`<${ObservingProvinces} provinces=${nextHoliday.provinces} federal=${nextHoliday.federal}
+      //>`
+    : html`<p>${relativeDate(nextHoliday.date)}</p>`}`
+}
+
+const NextHolidayBox = ({ nextHoliday, provinceName = 'Canada', provinceId, federal, year }) => {
   let bg = {
     angle: randomInt(63, 66),
     width: randomInt(61, 64),
@@ -73,11 +109,9 @@ const NextHolidayBox = ({ nextHoliday, provinceName = 'Canada', provinceId, fede
   return html`
     <div class=${styles({ ...color, bg })}>
       <div>
-        <${NextHoliday} ...${{ nextHoliday, provinceName, federal }} //>
-        ${provinceName == 'Canada' && !federal
-          ? html`<${ObservingProvinces} provinces=${nextHoliday.provinces}
-            federal=${nextHoliday.federal} //>`
-          : html`<p>${relativeDate(nextHoliday.date)}</p>`}
+        ${nextHoliday
+          ? renderNextHolidayTitle({ nextHoliday, provinceName, federal })
+          : html`<${ProvinceTitle} ...${{ provinceName, federal, year }} //>`}
         ${federal &&
         html`
           <p>
