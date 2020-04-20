@@ -2,6 +2,7 @@ const express = require('express')
 const router = express.Router()
 const db = require('sqlite')
 const createError = require('http-errors')
+const { ALLOWED_YEARS } = require('../config/vars.config')
 const renderPage = require('../pages/_document.js')
 const {
   dbmw,
@@ -69,7 +70,9 @@ router.get(
   checkProvinceIdErr,
   dbmw(db, getProvincesWithHolidays),
   (req, res) => {
-    const year = req.query.year
+    // if the year value isn't in ALLOWED_YEARS, it will be caught by "checkYearErr"
+    const year = ALLOWED_YEARS.find((y) => y === parseInt(req.query.year))
+
     const isCurrentYear = getCurrentHolidayYear() === year
     const { holidays, nextHoliday, nameEn: provinceName, id: provinceId } = res.locals.rows[0]
 

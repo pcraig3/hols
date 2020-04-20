@@ -2,6 +2,7 @@ const { h } = require('preact')
 const htm = require('htm')
 const validator = require('validator')
 const createError = require('http-errors')
+const { ALLOWED_YEARS } = require('../config/vars.config')
 
 const html = htm.bind(h)
 
@@ -27,7 +28,7 @@ const dbmw = (db, cb) => {
     const _parseYear = (req) => {
       const year = parseInt(req.query.year)
 
-      if (![2019, 2020, 2021].includes(year)) {
+      if (!ALLOWED_YEARS.includes(year)) {
         return getCurrentHolidayYear()
       }
 
@@ -63,7 +64,7 @@ const isProvinceId = (provinceId) => {
 const checkYearErr = (req, res, next) => {
   const year = parseInt(req.query.year)
 
-  if (![2019, 2020, 2021].includes(year)) {
+  if (!ALLOWED_YEARS.includes(year)) {
     res.status(400)
     next(
       createError(400, `Error: No holidays for “${year}”. Accepted years are: [2019, 2020, 2021].`),
