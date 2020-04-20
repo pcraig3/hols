@@ -84,7 +84,7 @@ const getTitleString = (provinceName, federal, year) => {
   `
 }
 
-const createRows = (holidays, federal) => {
+const createRows = (holidays, federal, isCurrentYear) => {
   const _provinces = (holiday) => {
     if (holiday.provinces.length === 13) {
       return 'National holiday'
@@ -123,7 +123,9 @@ const createRows = (holidays, federal) => {
       row.value2 = _provinces(holiday)
     }
 
-    row.className = holiday.date < today ? 'past' : 'upcoming'
+    if (isCurrentYear) {
+      row.className = holiday.date < today ? 'past' : 'upcoming'
+    }
 
     if (previousDate === holiday.date) {
       row.className += ' repeatDate'
@@ -145,6 +147,7 @@ const Province = ({
   } = {},
 }) => {
   const provinceIdOrFederal = getProvinceIdOrFederalString({ provinceId, federal })
+  const isCurrentYear = !!nextHoliday
   return html`
     <${Layout} color=${federal ? 'federal' : provinceId}>
       <div class=${provinceIdOrFederal ? styles(theme.color[provinceIdOrFederal]) : styles()}>
@@ -157,7 +160,7 @@ const Province = ({
           <div class=${insideContainer}>
             <${SummaryTable}
               title=${getTitleString(provinceName, federal, year)}
-              rows=${createRows(holidays, federal)}
+              rows=${createRows(holidays, federal, isCurrentYear)}
             >
               ${nextHoliday &&
               html` <div class=${titleStyles}>
