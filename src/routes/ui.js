@@ -66,8 +66,8 @@ router.get(
     req.query.year = req.params.year
     next()
   },
-  checkYearErr,
   checkProvinceIdErr,
+  checkYearErr,
   dbmw(db, getProvincesWithHolidays),
   (req, res) => {
     // if the year value isn't in ALLOWED_YEARS, it will be caught by "checkYearErr"

@@ -67,7 +67,10 @@ const checkYearErr = (req, res, next) => {
   if (!ALLOWED_YEARS.includes(year)) {
     res.status(400)
     next(
-      createError(400, `Error: No holidays for “${year}”. Accepted years are: [2019, 2020, 2021].`),
+      createError(
+        400,
+        `Error: No holidays for the year “${year}”. Accepted years are: [2019, 2020, 2021].`,
+      ),
     )
   }
 

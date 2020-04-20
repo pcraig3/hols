@@ -3,6 +3,7 @@ const db = require('sqlite')
 const Promise = require('bluebird')
 const app = require('../../server.js')
 const cheerio = require('cheerio')
+const { ALLOWED_YEARS } = require('../../config/vars.config')
 
 describe('Test ui responses', () => {
   beforeAll(async () => {
@@ -12,7 +13,7 @@ describe('Test ui responses', () => {
       // Update db schema to the latest version using SQL-based migrations
       .then(() => db.migrate()) // <=
       // Display error message if something went wrong
-      .catch(err => console.error(err.stack)) // eslint-disable-line no-console
+      .catch((err) => console.error(err.stack)) // eslint-disable-line no-console
   })
 
   afterAll(() => {
@@ -65,17 +66,13 @@ describe('Test ui responses', () => {
       })
 
       test('it should return 302 to /federal for "federal"', async () => {
-        const response = await request(app)
-          .post('/provinces')
-          .send({ region: 'federal' })
+        const response = await request(app).post('/provinces').send({ region: 'federal' })
         expect(response.statusCode).toBe(302)
         expect(response.headers.location).toBe('/federal')
       })
 
       test('it should return 302 to /province/:id for a good param', async () => {
-        const response = await request(app)
-          .post('/provinces')
-          .send({ region: 'AB' })
+        const response = await request(app).post('/provinces').send({ region: 'AB' })
         expect(response.statusCode).toBe(302)
         expect(response.headers.location).toBe('/province/AB')
       })
@@ -90,11 +87,9 @@ describe('Test ui responses', () => {
         { region: 'false', url: '/province/FA' },
         { region: '1', url: '/province/1' },
       ]
-      params.map(p => {
+      params.map((p) => {
         test(`it should return 302 to ${p.url} uppercased for param: '${p.region}'`, async () => {
-          const response = await request(app)
-            .post('/provinces')
-            .send({ region: p.region })
+          const response = await request(app).post('/provinces').send({ region: p.region })
           expect(response.statusCode).toBe(302)
           expect(response.headers.location).toBe(p.url)
         })
@@ -121,6 +116,51 @@ describe('Test ui responses', () => {
       })
     })
 
+    describe('Test /province/:provinceId/:year responses', () => {
+      test('it should return the h1, title, and meta tag for MB in 2021', async () => {
+        const response = await request(app).get('/province/MB/2021')
+        const $ = cheerio.load(response.text)
+        expect($('h1').text()).toEqual('Manitobastatutory Holidays in 2021')
+        expect($('title').text()).toEqual('Manitoba (MB) statutory holidays in 2021')
+        expect($('meta[name="description"]').attr('content')).toEqual(
+          'See all statutory holidays in Manitoba, Canada in 2021.',
+        )
+      })
+
+      describe('for a good year', () => {
+        ALLOWED_YEARS.map((year) => {
+          test(`it should return 200 for year: "${year}"`, async () => {
+            const response = await request(app).get(`/province/MB/${year}`)
+            expect(response.statusCode).toBe(200)
+          })
+        })
+
+        describe('for an invalid year', () => {
+          test('it should return a 400 along with the h1, title, and meta tag', async () => {
+            const response = await request(app).get('/province/MB/1000')
+            const $ = cheerio.load(response.text)
+            expect($('h1').text()).toEqual('400')
+            expect($('p').text()).toMatch(
+              `Error: No holidays for the year “1000”. Accepted years are: [${ALLOWED_YEARS.join(
+                ', ',
+              )}].`,
+            )
+            expect($('title').text()).toEqual('Error: 400 — Canada statutory holidays')
+            expect($('meta[name="description"]').attr('content')).toEqual(
+              'Error: No holidays for the year “1000”',
+            )
+          })
+
+          const INVALID_YEARS = [-1, 0, 1, 2018, 2022, 'pterodactyl']
+          INVALID_YEARS.map((invalidYear) => {
+            test(`it should return 400 for year: "${invalidYear}"`, async () => {
+              const response = await request(app).get(`/province/MB/${invalidYear}`)
+              expect(response.statusCode).toBe(400)
+            })
+          })
+        })
+      })
+    })
     describe('Test /federal responses', () => {
       test('it should return 200', async () => {
         const response = await request(app).get('/federal')
@@ -211,11 +251,32 @@ describe('Test ui responses', () => {
     })
 
     describe('for a bad province ID', () => {
-      test('it should return 400', async () => {
+      test('it should return 404', async () => {
         const response = await request(app).get('/allosaurus')
         expect(response.statusCode).toBe(404)
       })
 
+      const yearPaths = ['', '/2021', '/1000']
+      yearPaths.map((yearPath) => {
+        test(`${
+          !yearPath
+            ? ''
+            : yearPath.startsWith('/1')
+            ? `and an invalid year ("${yearPath}") `
+            : `and a good year ("${yearPath}") `
+        }it should return the h1, title, and meta tag`, async () => {
+          const response = await request(app).get(`/province/pangea${yearPath}`)
+          const $ = cheerio.load(response.text)
+          expect($('h1').text()).toEqual('400')
+          expect($('p').text()).toEqual(
+            'Error: No province with id “pangea”. Accepted province IDs are: [AB, BC, MB, NB, NL, NS, NT, NU, ON, PE, QC, SK, YT].',
+          )
+          expect($('title').text()).toEqual('Error: 400 — Canada statutory holidays')
+          expect($('meta[name="description"]').attr('content')).toEqual(
+            'Error: No province with id “pangea”',
+          )
+        })
+      })
       test('it should return the h1, title, and meta tag', async () => {
         const response = await request(app).get('/province/pangea')
         const $ = cheerio.load(response.text)
