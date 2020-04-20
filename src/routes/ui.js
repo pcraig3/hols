@@ -3,7 +3,13 @@ const router = express.Router()
 const db = require('sqlite')
 const createError = require('http-errors')
 const renderPage = require('../pages/_document.js')
-const { dbmw, checkProvinceIdErr, nextHoliday, getCurrentHolidayYear } = require('../utils')
+const {
+  dbmw,
+  checkProvinceIdErr,
+  checkYearErr,
+  nextHoliday,
+  getCurrentHolidayYear,
+} = require('../utils')
 const { getProvinces, getHolidaysWithProvinces, getProvincesWithHolidays } = require('../queries')
 const { displayDate } = require('../dates')
 
@@ -54,15 +60,16 @@ router.get(
 )
 
 router.get(
-  '/province/:provinceId/2021',
+  '/province/:provinceId/:year',
   (req, res, next) => {
-    req.query.year = '2021'
+    req.query.year = req.params.year
     next()
   },
+  checkYearErr,
   checkProvinceIdErr,
   dbmw(db, getProvincesWithHolidays),
   (req, res) => {
-    const year = 2021
+    const year = req.query.year
     const isCurrentYear = getCurrentHolidayYear() === year
     const { holidays, nextHoliday, nameEn: provinceName, id: provinceId } = res.locals.rows[0]
 
@@ -74,7 +81,7 @@ router.get(
 
     return res.send(
       renderPage({
-        pageComponent: 'Province2021',
+        pageComponent: 'Province',
         title: `${provinceName} (${provinceId}) statutory holidays in ${year}`,
         docProps: { meta, path: req.path },
         props: {

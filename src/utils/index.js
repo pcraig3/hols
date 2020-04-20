@@ -59,6 +59,20 @@ const isProvinceId = (provinceId) => {
   )
 }
 
+// middleware for returning "bad year" errors
+const checkYearErr = (req, res, next) => {
+  const year = parseInt(req.query.year)
+
+  if (![2019, 2020, 2021].includes(year)) {
+    res.status(400)
+    next(
+      createError(400, `Error: No holidays for “${year}”. Accepted years are: [2019, 2020, 2021].`),
+    )
+  }
+
+  next()
+}
+
 // middleware for returning "province id doesn't exist" errors
 const checkProvinceIdErr = (req, res, next) => {
   const provinceId = req.params.provinceId
@@ -193,6 +207,7 @@ module.exports = {
   dbmw,
   isProvinceId,
   checkProvinceIdErr,
+  checkYearErr,
   nextHoliday,
   upcomingHolidays,
   getCurrentHolidayYear,
