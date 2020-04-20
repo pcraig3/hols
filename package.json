@@ -1,6 +1,6 @@
 {
   "name": "hols",
-  "version": "1.9.0-alpha",
+  "version": "1.9.1-alpha",
   "description": "hols for cans: holidays api and holidays frontend",
   "main": "index.js",
   "author": "pcraig3",
