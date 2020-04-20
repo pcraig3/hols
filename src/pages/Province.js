@@ -38,10 +38,6 @@ const titleStyles = css`
   margin-top: ${theme.space.md};
   margin-bottom: ${theme.space.md};
 
-  @media (${theme.mq.lg}) {
-    flex-direction: row;
-  }
-
   h2 {
     margin: 0;
     margin-bottom: 10px;
@@ -58,6 +54,8 @@ const titleStyles = css`
   }
 
   @media (${theme.mq.md}) {
+    margin-top: ${theme.space.lg};
+
     h2 {
       flex: 3;
     }
@@ -73,6 +71,10 @@ const titleStyles = css`
     a[role='button'] {
       min-width: 234px;
     }
+  }
+
+  @media (${theme.mq.lg}) {
+    flex-direction: row;
   }
 `
 
@@ -139,7 +141,7 @@ const Province = ({
     provinceName = 'Canada',
     provinceId,
     federal = false,
-    year = 2019,
+    year = 2020,
   } = {},
 }) => {
   const provinceIdOrFederal = getProvinceIdOrFederalString({ provinceId, federal })
@@ -147,7 +149,7 @@ const Province = ({
     <${Layout} color=${federal ? 'federal' : provinceId}>
       <div class=${provinceIdOrFederal ? styles(theme.color[provinceIdOrFederal]) : styles()}>
         <section id="next-holiday">
-          <${NextHolidayBox} ...${{ nextHoliday, provinceName, provinceId, federal }} />
+          <${NextHolidayBox} ...${{ nextHoliday, provinceName, provinceId, federal, year }} />
           <${ProvincePicker} ...${{ provinceId, federal }}=/>
         </section>
 
@@ -157,7 +159,8 @@ const Province = ({
               title=${getTitleString(provinceName, federal, year)}
               rows=${createRows(holidays, federal)}
             >
-              <div class=${titleStyles}>
+              ${nextHoliday &&
+              html` <div class=${titleStyles}>
                 <h2 id="holidays-table">
                   ${provinceName}${federal ? ' federal' : ''}
                   <span class=${visuallyHidden}> statutory</span> holidays in ${year}
@@ -176,7 +179,7 @@ const Province = ({
                     >Add to your calendar<//
                   >
                 </div>
-              </div>
+              </div>`}
             <//>
             <span class="bottom-link"><a href="#html" class="up-arrow">Back to top</a></span>
           </div>

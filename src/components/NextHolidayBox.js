@@ -1,7 +1,9 @@
 const { css } = require('emotion')
 const { html, getProvinceIdOrFederalString } = require('../utils')
 const { theme, insideContainer, horizontalPadding, visuallyHidden } = require('../styles')
-const DateHtml = require('./DateHtml.js')
+const NextHoliday = require('./NextHoliday.js')
+const ObservingProvinces = require('./ObservingProvinces.js')
+const ProvinceTitle = require('./ProvinceTitle.js')
 const { relativeDate } = require('../dates')
 const { shade, randomInt } = require('../utils/so.js')
 
@@ -30,7 +32,7 @@ const styles = ({
   }
 
   h1 {
-    .h1--intro {
+    .h1--xs {
       font-size: 0.533em;
       font-weight: 400;
       margin-bottom: 5px;
@@ -40,12 +42,12 @@ const styles = ({
       }
     }
 
-    .h1--date {
+    .h1--lg {
       font-size: 1.3em;
       font-weight: 700;
     }
 
-    .h1--name {
+    .h1--md {
       font-size: 0.75em;
       font-weight: 400;
 
@@ -86,81 +88,15 @@ const styles = ({
   }
 `
 
-const renderObservingProvinces = ({ provinces, federal }) => {
-  if (provinces.length === 13) {
-    return html`<p>National holiday</p>`
-  }
-
-  if (provinces.length === 0) {
-    return html`<p>Observed by${' '}<a href="/federal">federal industries</a></p>`
-  }
-
-  if (provinces.length === 1) {
-    return federal
-      ? html`
-          <p>
-            Observed in${' '}<a href=${`/province/${provinces[0].id}`}>${provinces[0].nameEn}</a>
-            ${' '}and by${' '}<a href="/federal">federal industries</a>
-          </p>
-        `
-      : html`
-          <p>
-            Observed in${' '}<a href=${`/province/${provinces[0].id}`}>${provinces[0].nameEn}</a>
-          </p>
-        `
-  }
-
-  if (provinces.length === 2) {
-    return federal
-      ? html`
-          <p>
-            Observed in${' '}<a href=${`/province/${provinces[0].id}`}>${provinces[0].nameEn}</a>,
-            ${' '}<a href=${`/province/${provinces[1].id}`}>${provinces[1].nameEn}</a>${' '}and
-            by${' '}<a href="/federal">federal industries</a>
-          </p>
-        `
-      : html`
-          <p>
-            Observed in${' '}<a href=${`/province/${provinces[0].id}`}>${provinces[0].nameEn}</a>
-            ${' '}and${' '}<a href=${`/province/${provinces[1].id}`}>${provinces[1].nameEn}</a>
-          </p>
-        `
-  }
-
-  const isLastProvince = (province) => province.id === provinces[provinces.length - 1].id
-
-  if (federal) {
-    return html`
-      <p>
-        Observed in
-        ${provinces.map(
-          (p) => html`
-            ${' '}<a href=${`/province/${p.id}`}>${p.id}</a>${isLastProvince(p) ? '' : ','}
-          `,
-        )}
-        ${' '}and by${' '}<a href="/federal">federal industries</a>
-      </p>
-    `
-  }
-
-  return html`
-    <p>
-      Observed in
-      ${provinces.map(
-        (p) => html`
-          ${isLastProvince(p) ? ' and ' : ' '}<a href=${`/province/${p.id}`}>${p.id}</a
-          >${isLastProvince(p) ? '' : ','}
-        `,
-      )}
-    </p>
-  `
+const renderNextHolidayTitle = ({ nextHoliday, provinceName, federal }) => {
+  return html`<${NextHoliday} ...${{ nextHoliday, provinceName, federal }} //>
+  ${provinceName == 'Canada' && !federal
+    ? html`<${ObservingProvinces} provinces=${nextHoliday.provinces} federal=${nextHoliday.federal}
+      //>`
+    : html`<p>${relativeDate(nextHoliday.date)}</p>`}`
 }
 
-const renderRelativeDate = (dateString) => {
-  return html`<p>${relativeDate(dateString)}</p>`
-}
-
-const nextHolidayBox = ({ nextHoliday, provinceName = 'Canada', provinceId, federal }) => {
+const NextHolidayBox = ({ nextHoliday, provinceName = 'Canada', provinceId, federal, year }) => {
   let bg = {
     angle: randomInt(63, 66),
     width: randomInt(61, 64),
@@ -173,21 +109,9 @@ const nextHolidayBox = ({ nextHoliday, provinceName = 'Canada', provinceId, fede
   return html`
     <div class=${styles({ ...color, bg })}>
       <div>
-        <h1>
-          <div class="h1--intro">
-            ${provinceName}’${provinceName.slice(-1) === 's' ? '' : 's'}
-            ${' '}next${' '}${federal && 'federal '}<span class=${visuallyHidden}>statutory </span
-            >holiday is
-          </div>
-          <div class="h1--date"><${DateHtml} dateString=${nextHoliday.date} //></div>
-          <div class="h1--name">${nextHoliday.nameEn.replace(/ /g, '\u00a0')}</div>
-        </h1>
-        ${nextHoliday.provinces && !federal
-          ? renderObservingProvinces({
-              provinces: nextHoliday.provinces,
-              federal: nextHoliday.federal,
-            })
-          : renderRelativeDate(nextHoliday.date)}
+        ${nextHoliday
+          ? renderNextHolidayTitle({ nextHoliday, provinceName, federal })
+          : html`<${ProvinceTitle} ...${{ provinceName, federal, year }} //>`}
         ${federal &&
         html`
           <p>
@@ -202,4 +126,4 @@ const nextHolidayBox = ({ nextHoliday, provinceName = 'Canada', provinceId, fede
   `
 }
 
-module.exports = nextHolidayBox
+module.exports = NextHolidayBox

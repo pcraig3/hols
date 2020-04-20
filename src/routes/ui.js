@@ -2,12 +2,19 @@ const express = require('express')
 const router = express.Router()
 const db = require('sqlite')
 const createError = require('http-errors')
+const { ALLOWED_YEARS } = require('../config/vars.config')
 const renderPage = require('../pages/_document.js')
-const { dbmw, checkProvinceIdErr, nextHoliday, getCurrentHolidayYear } = require('../utils')
+const {
+  dbmw,
+  checkProvinceIdErr,
+  checkYearErr,
+  nextHoliday,
+  getCurrentHolidayYear,
+} = require('../utils')
 const { getProvinces, getHolidaysWithProvinces, getProvincesWithHolidays } = require('../queries')
 const { displayDate } = require('../dates')
 
-const getMeta = holiday => `${holiday.nameEn} on ${displayDate(holiday.date)}`
+const getMeta = (holiday) => `${holiday.nameEn} on ${displayDate(holiday.date)}`
 
 router.get('/', dbmw(db, getHolidaysWithProvinces), (req, res) => {
   const year = getCurrentHolidayYear()
@@ -47,6 +54,47 @@ router.get(
         docProps: { meta, path: req.path },
         props: {
           data: { holidays, nextHoliday, provinceName, provinceId, year },
+        },
+      }),
+    )
+  },
+)
+
+router.get(
+  '/province/:provinceId/:year',
+  (req, res, next) => {
+    req.query.year = req.params.year
+    next()
+  },
+  checkProvinceIdErr,
+  checkYearErr,
+  dbmw(db, getProvincesWithHolidays),
+  (req, res) => {
+    // if the year value isn't in ALLOWED_YEARS, it will be caught by "checkYearErr"
+    const year = ALLOWED_YEARS.find((y) => y === parseInt(req.query.year))
+
+    const isCurrentYear = getCurrentHolidayYear() === year
+    const { holidays, nextHoliday, nameEn: provinceName, id: provinceId } = res.locals.rows[0]
+
+    let meta = `See all statutory holidays in ${provinceName}, Canada in ${year}.`
+
+    if (isCurrentYear) {
+      meta = `${provinceId}’s next stat holiday is ${getMeta(nextHoliday)}. ${meta}`
+    }
+
+    return res.send(
+      renderPage({
+        pageComponent: 'Province',
+        title: `${provinceName} (${provinceId}) statutory holidays in ${year}`,
+        docProps: { meta, path: req.path },
+        props: {
+          data: {
+            holidays,
+            nextHoliday: isCurrentYear ? nextHoliday : undefined,
+            provinceName,
+            provinceId,
+            year,
+          },
         },
       }),
     )
@@ -169,7 +217,7 @@ router.get('*', (req, res) => {
 })
 
 // eslint-disable-next-line no-unused-vars
-router.use(function(err, req, res, next) {
+router.use(function (err, req, res, next) {
   return res.send(
     renderPage({
       pageComponent: 'Error',

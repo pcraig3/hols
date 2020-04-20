@@ -137,21 +137,20 @@ const SummaryRow = ({ row: { key, value, value2, className } = {} }) => {
         ${value}
       </dd>
       ${value2 &&
-        html`
-          <dd class="value2">
-            ${value2}
-          </dd>
-        `}
+      html`
+        <dd class="value2">
+          ${value2}
+        </dd>
+      `}
     </div>
   `
 }
 
-const renderSummaryRow = (row, props) =>
-  html`
-    <${SummaryRow} row=${row} ...${props} //>
-  `
+const renderSummaryRow = (row, props) => html` <${SummaryRow} row=${row} ...${props} //> `
 
 const summaryTable = css`
+  margin-top: ${theme.space.xs};
+
   dl {
     margin: 0;
     margin-bottom: calc(${theme.space.xl} + ${theme.space.xl});
@@ -159,6 +158,8 @@ const summaryTable = css`
 
   /* on larger screens */
   @media (${theme.mq.md}) {
+    margin-top: -${theme.space.xs};
+
     dl {
       display: table;
       width: 100%;
@@ -172,7 +173,7 @@ const SummaryTable = ({ rows, title = false, children, ...props }) =>
     <div class=${summaryTable}>
       ${children}
       <dl title=${title}>
-        ${rows.map(row => renderSummaryRow(row, props))}
+        ${rows.map((row) => renderSummaryRow(row, props))}
       </dl>
     </div>
   `
