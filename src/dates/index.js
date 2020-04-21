@@ -8,7 +8,7 @@ const differenceInDays = require('date-fns/differenceInDays')
 const startOfDay = require('date-fns/startOfDay')
 const formatDistance = require('date-fns/formatDistance')
 
-const _getISODayInt = weekday => {
+const _getISODayInt = (weekday) => {
   if (weekday === 'Monday') {
     return 1
   }
@@ -62,7 +62,7 @@ const _getDayCount = ({ position, weekday, anchorDate }) => {
   }
 }
 
-const _parseRelativeDates = dateString => {
+const _parseRelativeDates = (dateString) => {
   let [weekday, position, ...anchorDate] = dateString.split(' ')
 
   let year = anchorDate[anchorDate.length - 1]
@@ -111,9 +111,9 @@ const getISODate = (dateString, year = new Date(Date.now()).getUTCFullYear()) =>
 }
 
 // 60 minutes * 24 hours = 1440
-const getDateBeforeMidnightFromString = str => addMinutes(new Date(str), 1439)
+const getDateBeforeMidnightFromString = (str) => addMinutes(new Date(str), 1439)
 
-const space2Nbsp = str => str.replace(/ /g, ' ')
+const space2Nbsp = (str) => str.replace(/ /g, ' ')
 
 const displayDate = (dateString, weekday = false) => {
   dateString = getDateBeforeMidnightFromString(dateString)
@@ -122,7 +122,7 @@ const displayDate = (dateString, weekday = false) => {
   return weekday ? `${msg}, ${format(dateString, 'EEEE')}` : msg
 }
 
-const relativeDate = dateString => {
+const relativeDate = (dateString) => {
   const daysOffset = differenceInDays(
     startOfDay(new Date(Date.now())),
     getDateBeforeMidnightFromString(dateString),

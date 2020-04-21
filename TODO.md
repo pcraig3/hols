@@ -2,14 +2,14 @@
 
 - add holidays by year to the frontend
   - canada
-  - federal
   - 2022/2018
+  - Add years to dates on years pages
   - add new pages to sitemap
 - put "download" button/link onto other year pages
 - add picker for year
 - make API to return CSV format
   - page for CSV downloads
-- sticky header?
+- swagger api docs?
 - add a print button?
 - https://matthewsmith.io/blog/how-to-set-up-cache-busting-in-express
 - list of holidays
@@ -25,6 +25,7 @@
   - redirect current year
   - don't be grey for past holidays on dedicated pages
   - redirects query param
+  - federal
 - look at the little subtitle on the main page
   - bug: only says "celebrated by" for federal holidays
   - make it say "observed in" because it's more common

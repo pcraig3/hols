@@ -18,7 +18,7 @@ const dbmw = (db, cb) => {
         return req.query.federal
       }
 
-      if (req.path === '/federal') {
+      if (req.path && req.path.startsWith('/federal')) {
         return 'true'
       }
 
@@ -92,6 +92,37 @@ const checkProvinceIdErr = (req, res, next) => {
   }
 
   next()
+}
+
+// middleware to redirect to permitted /:year endpoints for whitelisted query strings
+const checkRedirectYear = (req, res, next) => {
+  const year = req.query.year && parseInt(req.query.year)
+  const GOOD_YEARS = ALLOWED_YEARS.filter((y) => y !== getCurrentHolidayYear())
+
+  if (year && GOOD_YEARS.includes(year)) {
+    return res.redirect(`${req.path}/${req.query.year}`)
+  }
+
+  next()
+}
+
+// middleware to redirect current year to the not !/:year endpoint
+const checkRedirectIfCurrentYear = (req, res, next) => {
+  if (getCurrentHolidayYear() === parseInt(req.query.year)) {
+    let urlParts = req.path.split('/')
+    urlParts.pop()
+    return res.redirect(urlParts.join('/'))
+  }
+
+  next()
+}
+
+// middleware to copy a request parameter into req.query
+const param2query = (param) => {
+  return (req, res, next) => {
+    req.query[param] = req.params[param]
+    next()
+  }
 }
 
 // return a meta tag if a GITHUB_SHA environment variable exists
@@ -212,6 +243,9 @@ module.exports = {
   isProvinceId,
   checkProvinceIdErr,
   checkYearErr,
+  checkRedirectYear,
+  checkRedirectIfCurrentYear,
+  param2query,
   nextHoliday,
   upcomingHolidays,
   getCurrentHolidayYear,
