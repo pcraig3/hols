@@ -111,12 +111,13 @@ const createRows = (holidays, federal, isCurrentYear) => {
   }
 
   const today = new Date(Date.now()).toISOString().slice(0, 10)
-  var previousDate = null
+  let previousDate = null
 
   return holidays.map((holiday) => {
     const row = {
       key: html` <${DateHtml} dateString=${holiday.date} weekday=${true} //> `,
       value: holiday.nameEn,
+      className: '',
     }
 
     if (!federal && holiday.provinces) {

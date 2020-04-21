@@ -132,6 +132,41 @@ router.get('/federal', dbmw(db, getHolidaysWithProvinces), (req, res) => {
   )
 })
 
+router.get(
+  '/federal/:year',
+  (req, res, next) => {
+    req.query.year = req.params.year
+    next()
+  },
+  checkYearErr,
+  (req, res, next) => {
+    // redirect current year to the /federal endpoint
+    if (getCurrentHolidayYear() === parseInt(req.query.year)) {
+      return res.redirect('/federal')
+    }
+
+    next()
+  },
+  dbmw(db, getHolidaysWithProvinces),
+  (req, res) => {
+    // if the year value isn't in ALLOWED_YEARS, it will be caught by "checkYearErr"
+    const year = ALLOWED_YEARS.find((y) => y === parseInt(req.query.year))
+
+    const holidays = res.locals.rows
+
+    const meta = `See all federal statutory holidays in Canada in ${year}.`
+
+    return res.send(
+      renderPage({
+        pageComponent: 'Province',
+        title: `Federal statutory holidays in Canada in ${year}`,
+        docProps: { meta, path: req.path },
+        props: { data: { holidays, nextHoliday: undefined, federal: true, year } },
+      }),
+    )
+  },
+)
+
 router.get('/provinces', dbmw(db, getProvinces), (req, res) => {
   return res.send(
     renderPage({
