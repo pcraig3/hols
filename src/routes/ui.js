@@ -65,7 +65,7 @@ router.get(
 )
 
 router.get(
-  '/province/:provinceId/:year',
+  '/province/:provinceId/:year(\\d{4})',
   param2query('year'),
   checkProvinceIdErr,
   checkYearErr,
@@ -116,7 +116,7 @@ router.get('/federal', checkRedirectYear, dbmw(db, getHolidaysWithProvinces), (r
 })
 
 router.get(
-  '/federal/:year',
+  '/federal/:year(\\d{4})',
   param2query('year'),
   checkYearErr,
   checkRedirectIfCurrentYear,

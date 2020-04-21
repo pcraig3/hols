@@ -13,7 +13,7 @@ describe('Test /api responses', () => {
       // Update db schema to the latest version using SQL-based migrations
       .then(() => db.migrate()) // <=
       // Display error message if something went wrong
-      .catch(err => console.error(err.stack)) // eslint-disable-line no-console
+      .catch((err) => console.error(err.stack)) // eslint-disable-line no-console
   })
 
   afterAll(() => {
@@ -94,7 +94,7 @@ describe('Test /api responses', () => {
 
       let { provinces } = JSON.parse(response.text)
 
-      provinces.map(province => {
+      provinces.map((province) => {
         let provinceExpect = expectProvinceKeys()
         provinceExpect.nextHoliday = expect.objectContaining(expectHolidayKeys(false))
         expect(province).toEqual(expect.objectContaining(provinceExpect))
@@ -124,7 +124,7 @@ describe('Test /api responses', () => {
       let { provinces } = JSON.parse(response.text)
       expect(provinces.length).toBe(Object.keys(provinceHolidayLength).length)
 
-      provinces.map(province => {
+      provinces.map((province) => {
         expect(`${province.id} ${province.holidays.length}`).toEqual(
           `${province.id} ${provinceHolidayLength[province.id]}`,
         )
@@ -134,7 +134,7 @@ describe('Test /api responses', () => {
 
   describe('for /api/v1/provinces/:provinceId path', () => {
     const goodNBs = ['nb', 'NB', 'nB']
-    goodNBs.map(nb => {
+    goodNBs.map((nb) => {
       test(`it should a province for a good ID: ${nb}`, async () => {
         const response = await request(app).get(`/api/v1/provinces/${nb}`)
         expect(response.statusCode).toBe(200)
@@ -173,20 +173,20 @@ describe('Test /api responses', () => {
 
       let { holidays } = JSON.parse(response.text)
 
-      holidays.map(holiday => {
+      holidays.map((holiday) => {
         expect(holiday).toEqual(expect.objectContaining(expectHolidayKeys()))
       })
     })
 
     const yesFederal = ['1', 'true', 'TRUE', 'tRuE']
-    yesFederal.map(val => {
+    yesFederal.map((val) => {
       test(`it should return ONLY federal holidays for “?federal=${val}”`, async () => {
         const response = await request(app).get(`/api/v1/holidays?federal=${val}`)
         expect(response.statusCode).toBe(200)
 
         let { holidays } = JSON.parse(response.text)
 
-        holidays.map(holiday => {
+        holidays.map((holiday) => {
           expect(holiday).toEqual(expect.objectContaining(expectHolidayKeys()))
           expect(holiday.federal).toBe(1)
         })
@@ -194,14 +194,14 @@ describe('Test /api responses', () => {
     })
 
     const noFederal = ['0', 'false', 'FALSE', 'FaLSe']
-    noFederal.map(val => {
+    noFederal.map((val) => {
       test(`it should return NO federal holidays for “?federal=${val}”`, async () => {
         const response = await request(app).get(`/api/v1/holidays?federal=${val}`)
         expect(response.statusCode).toBe(200)
 
         let { holidays } = JSON.parse(response.text)
 
-        holidays.map(holiday => {
+        holidays.map((holiday) => {
           expect(holiday).toEqual(expect.objectContaining(expectHolidayKeys()))
           expect(holiday.federal).toBe(0)
         })
@@ -210,28 +210,28 @@ describe('Test /api responses', () => {
 
     describe('with ?years=', () => {
       let years = ['2019', '2020', '2021']
-      years.map(year => {
+      years.map((year) => {
         test(`${year} it should return all holidays for ${year}`, async () => {
           const response = await request(app).get(`/api/v1/holidays?year=${year}`)
           expect(response.statusCode).toBe(200)
 
           let { holidays } = JSON.parse(response.text)
 
-          holidays.map(holiday => {
+          holidays.map((holiday) => {
             expect(holiday.date.slice(0, 4)).toEqual(year)
           })
         })
       })
 
       let badYears = ['2018', '2022', '1', null, undefined, false, 'orange', 'christmas']
-      badYears.map(year => {
+      badYears.map((year) => {
         test(`${year} it should return all holidays for ${getCurrentHolidayYear()} with the current year`, async () => {
           const response = await request(app).get(`/api/v1/holidays?year=${year}`)
           expect(response.statusCode).toBe(200)
 
           let { holidays } = JSON.parse(response.text)
 
-          holidays.map(holiday => {
+          holidays.map((holiday) => {
             expect(holiday.date.slice(0, 4)).toEqual(getCurrentHolidayYear().toString())
           })
         })
@@ -271,7 +271,7 @@ describe('Test /api responses', () => {
 
     describe('with ?years=', () => {
       let years = ['2019', '2020', '2021']
-      years.map(year => {
+      years.map((year) => {
         test(`${year} it should a holiday with the right dateString`, async () => {
           const response = await request(app).get(`/api/v1/holidays/16?year=${year}`)
           expect(response.statusCode).toBe(200)
@@ -283,7 +283,7 @@ describe('Test /api responses', () => {
       })
 
       let badYears = ['2018', '2022', '1', null, undefined, false, 'orange', 'christmas']
-      badYears.map(year => {
+      badYears.map((year) => {
         test(`${year} it should a holiday with the current year`, async () => {
           const response = await request(app).get(`/api/v1/holidays/16?year=${year}`)
           expect(response.statusCode).toBe(200)
