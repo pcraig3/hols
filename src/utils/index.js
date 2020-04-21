@@ -100,7 +100,7 @@ const checkRedirectYear = (req, res, next) => {
   const GOOD_YEARS = ALLOWED_YEARS.filter((y) => y !== getCurrentHolidayYear())
 
   if (year && GOOD_YEARS.includes(year)) {
-    return res.redirect(`${req.path}/${req.query.year}`)
+    return res.redirect(`${req.path === '/' ? '' : req.path}/${req.query.year}`)
   }
 
   next()
@@ -111,7 +111,7 @@ const checkRedirectIfCurrentYear = (req, res, next) => {
   if (getCurrentHolidayYear() === parseInt(req.query.year)) {
     let urlParts = req.path.split('/')
     urlParts.pop()
-    return res.redirect(urlParts.join('/'))
+    return res.redirect(urlParts.join('/') || '/')
   }
 
   next()
