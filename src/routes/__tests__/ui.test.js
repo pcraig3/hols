@@ -214,7 +214,15 @@ describe('Test ui responses', () => {
         })
 
         describe('for an invalid year', () => {
-          const INVALID_YEARS = [-1, 0, 1, 2018, 2022, 'pterodactyl']
+          const INVALID_VALUES = [-1, 0, 1, 'pterodactyl']
+          INVALID_VALUES.map((invalidValue) => {
+            test(`it should return 400 for url: "${url}" and year: "${invalidValue}"`, async () => {
+              const response = await request(app).get(`${url}/${invalidValue}`)
+              expect(response.statusCode).toBe(404)
+            })
+          })
+
+          const INVALID_YEARS = [2017, 2018, 2022, 2023]
           INVALID_YEARS.map((invalidYear) => {
             test(`it should return 400 for url: "${url}" and year: "${invalidYear}"`, async () => {
               const response = await request(app).get(`${url}/${invalidYear}`)
