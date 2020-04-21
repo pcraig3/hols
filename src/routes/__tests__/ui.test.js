@@ -119,36 +119,6 @@ describe('Test ui responses', () => {
       })
     })
 
-    describe('Test /province/:provinceId responses for a good provinceId', () => {
-      describe('with "year" query params', () => {
-        const INVALID_YEARS = [-1, 0, 1, 2018, 2022, 'pterodactyl']
-        INVALID_YEARS.map((invalidYear) => {
-          test(`it should return 200 for a bad query param: "${invalidYear}"`, async () => {
-            const response = await request(app).get(`/province/MB?year=${invalidYear}`)
-            expect(response.statusCode).toBe(200)
-            const $ = cheerio.load(response.text)
-            expect($('h1').text()).toMatch(/^Manitoba’s next statutory holiday is/)
-          })
-        })
-
-        test(`it should return 200 for current year query param: "${currentYear}"`, async () => {
-          const response = await request(app).get(`/province/MB?year=${currentYear}`)
-          expect(response.statusCode).toBe(200)
-          const $ = cheerio.load(response.text)
-          expect($('h1').text()).toMatch(/^Manitoba’s next statutory holiday is/)
-        })
-
-        const GOOD_YEARS = ALLOWED_YEARS.filter((y) => y !== currentYear)
-        GOOD_YEARS.map((year) => {
-          test(`it should return 302 for other allowed years: "${year}"`, async () => {
-            const response = await request(app).get(`/province/MB?year=${year}`)
-            expect(response.statusCode).toBe(302)
-            expect(response.headers.location).toEqual(`/province/MB/${year}`)
-          })
-        })
-      })
-    })
-
     describe('Test /province/:provinceId/:year responses', () => {
       test('it should return the h1, title, and meta tag for MB in 2021', async () => {
         const response = await request(app).get('/province/MB/2021')
@@ -160,47 +130,24 @@ describe('Test ui responses', () => {
         )
       })
 
-      describe('for a good year', () => {
-        const GOOD_YEARS = ALLOWED_YEARS.filter((y) => y !== currentYear)
-        GOOD_YEARS.map((year) => {
-          test(`it should return 200 for year: "${year}"`, async () => {
-            const response = await request(app).get(`/province/MB/${year}`)
-            expect(response.statusCode).toBe(200)
-          })
-        })
-
-        test(`it should return 302 to the province page for current year: "${currentYear}"`, async () => {
-          const response = await request(app).get(`/province/MB/${currentYear}`)
-          expect(response.statusCode).toBe(302)
-          expect(response.headers.location).toEqual('/province/MB')
-        })
-
-        describe('for an invalid year', () => {
-          test('it should return a 400 along with the h1, title, and meta tag', async () => {
-            const response = await request(app).get('/province/MB/1000')
-            const $ = cheerio.load(response.text)
-            expect($('h1').text()).toEqual('400')
-            expect($('p').text()).toMatch(
-              `Error: No holidays for the year “1000”. Accepted years are: [${ALLOWED_YEARS.join(
-                ', ',
-              )}].`,
-            )
-            expect($('title').text()).toEqual('Error: 400 — Canada statutory holidays')
-            expect($('meta[name="description"]').attr('content')).toEqual(
-              'Error: No holidays for the year “1000”',
-            )
-          })
-
-          const INVALID_YEARS = [-1, 0, 1, 2018, 2022, 'pterodactyl']
-          INVALID_YEARS.map((invalidYear) => {
-            test(`it should return 400 for year: "${invalidYear}"`, async () => {
-              const response = await request(app).get(`/province/MB/${invalidYear}`)
-              expect(response.statusCode).toBe(400)
-            })
-          })
+      describe('for an invalid year', () => {
+        test('it should return a 400 along with the h1, title, and meta tag', async () => {
+          const response = await request(app).get('/province/MB/1000')
+          const $ = cheerio.load(response.text)
+          expect($('h1').text()).toEqual('400')
+          expect($('p').text()).toMatch(
+            `Error: No holidays for the year “1000”. Accepted years are: [${ALLOWED_YEARS.join(
+              ', ',
+            )}].`,
+          )
+          expect($('title').text()).toEqual('Error: 400 — Canada statutory holidays')
+          expect($('meta[name="description"]').attr('content')).toEqual(
+            'Error: No holidays for the year “1000”',
+          )
         })
       })
     })
+
     describe('Test /federal responses', () => {
       test('it should return 200', async () => {
         const response = await request(app).get('/federal')
@@ -215,6 +162,98 @@ describe('Test ui responses', () => {
         expect($('meta[name="description"]').attr('content')).toMatch(
           /^Canada’s next federal stat holiday is/,
         )
+      })
+    })
+
+    describe('Test /federal/:year responses', () => {
+      test('it should return the h1, title, and meta tag for federal hols in 2021', async () => {
+        const response = await request(app).get('/federal/2021')
+        const $ = cheerio.load(response.text)
+        expect($('h1').text()).toEqual('CanadaFederal statutory holidays in 2021')
+        expect($('title').text()).toEqual('Federal statutory holidays in Canada in 2021')
+        expect($('meta[name="description"]').attr('content')).toEqual(
+          'See all federal statutory holidays in Canada in 2021.',
+        )
+      })
+
+      describe('for an invalid year', () => {
+        test('it should return a 400 along with the h1, title, and meta tag', async () => {
+          const response = await request(app).get('/federal/1000')
+          const $ = cheerio.load(response.text)
+          expect($('h1').text()).toEqual('400')
+          expect($('p').text()).toMatch(
+            `Error: No holidays for the year “1000”. Accepted years are: [${ALLOWED_YEARS.join(
+              ', ',
+            )}].`,
+          )
+          expect($('title').text()).toEqual('Error: 400 — Canada statutory holidays')
+          expect($('meta[name="description"]').attr('content')).toEqual(
+            'Error: No holidays for the year “1000”',
+          )
+        })
+      })
+    })
+
+    describe('Test /*/:year responses', () => {
+      const URLS = ['/federal', '/province/MB']
+      URLS.map((url) => {
+        describe('for a good year', () => {
+          const GOOD_YEARS = ALLOWED_YEARS.filter((y) => y !== currentYear)
+          GOOD_YEARS.map((year) => {
+            test(`it should return 200 for url: "${url}" and year: "${year}"`, async () => {
+              const response = await request(app).get(`${url}/${year}`)
+              expect(response.statusCode).toBe(200)
+            })
+          })
+
+          test(`it should return 302 to the province page for url: "${url}" and current year: "${currentYear}"`, async () => {
+            const response = await request(app).get(`${url}/${currentYear}`)
+            expect(response.statusCode).toBe(302)
+            expect(response.headers.location).toEqual(url)
+          })
+        })
+
+        describe('for an invalid year', () => {
+          const INVALID_YEARS = [-1, 0, 1, 2018, 2022, 'pterodactyl']
+          INVALID_YEARS.map((invalidYear) => {
+            test(`it should return 400 for url: "${url}" and year: "${invalidYear}"`, async () => {
+              const response = await request(app).get(`${url}/${invalidYear}`)
+              expect(response.statusCode).toBe(400)
+            })
+          })
+        })
+
+        describe('with "year" query params', () => {
+          const INVALID_YEARS = [-1, 0, 1, 2018, 2022, 'pterodactyl']
+          INVALID_YEARS.map((invalidYear) => {
+            test(`it should return 200 for url: "${url}" and a bad query param: "${invalidYear}"`, async () => {
+              const response = await request(app).get(`${url}?year=${invalidYear}`)
+              expect(response.statusCode).toBe(200)
+              const $ = cheerio.load(response.text)
+              expect($('h1').text()).toMatch(
+                /^(Manitoba|Canada)’s next (?:federal\s)*statutory holiday is/,
+              )
+            })
+          })
+
+          test(`it should return 200 for url: "${url}" and current year query param: "${currentYear}"`, async () => {
+            const response = await request(app).get(`${url}?year=${currentYear}`)
+            expect(response.statusCode).toBe(200)
+            const $ = cheerio.load(response.text)
+            expect($('h1').text()).toMatch(
+              /^(Manitoba|Canada)’s next (?:federal\s)*statutory holiday is/,
+            )
+          })
+
+          const GOOD_YEARS = ALLOWED_YEARS.filter((y) => y !== currentYear)
+          GOOD_YEARS.map((year) => {
+            test(`it should return 302 for url: "${url}" and other allowed years: "${year}"`, async () => {
+              const response = await request(app).get(`${url}?year=${year}`)
+              expect(response.statusCode).toBe(302)
+              expect(response.headers.location).toEqual(`${url}/${year}`)
+            })
+          })
+        })
       })
     })
 

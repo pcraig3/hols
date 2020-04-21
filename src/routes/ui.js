@@ -41,7 +41,7 @@ router.get(
   (req, res, next) => {
     const year = req.query.year && parseInt(req.query.year)
     // redirect allowed years (not current year) to /province/:provinceId/:year endpoint
-    if (getCurrentHolidayYear() !== parseInt(req.query.year) && ALLOWED_YEARS.includes(year)) {
+    if (ALLOWED_YEARS.includes(year) && getCurrentHolidayYear() !== parseInt(req.query.year)) {
       return res.redirect(`/province/${req.params.provinceId}/${req.query.year}`)
     }
 
@@ -89,10 +89,8 @@ router.get(
   (req, res) => {
     // if the year value isn't in ALLOWED_YEARS, it will be caught by "checkYearErr"
     const year = ALLOWED_YEARS.find((y) => y === parseInt(req.query.year))
-
     const { holidays, nameEn: provinceName, id: provinceId } = res.locals.rows[0]
-
-    let meta = `See all statutory holidays in ${provinceName}, Canada in ${year}.`
+    const meta = `See all statutory holidays in ${provinceName}, Canada in ${year}.`
 
     return res.send(
       renderPage({
@@ -113,24 +111,37 @@ router.get(
   },
 )
 
-router.get('/federal', dbmw(db, getHolidaysWithProvinces), (req, res) => {
-  const year = getCurrentHolidayYear()
-  const holidays = res.locals.rows
-  const nextHol = nextHoliday(holidays)
+router.get(
+  '/federal',
+  (req, res, next) => {
+    const year = req.query.year && parseInt(req.query.year)
+    // redirect allowed years (not current year) to /province/:provinceId/:year endpoint
+    if (ALLOWED_YEARS.includes(year) && getCurrentHolidayYear() !== parseInt(req.query.year)) {
+      return res.redirect(`/federal/${req.query.year}`)
+    }
 
-  const meta = `Canada’s next federal stat holiday is ${getMeta(
-    nextHol,
-  )}. See all federal statutory holidays in Canada in ${year}.`
+    next()
+  },
+  dbmw(db, getHolidaysWithProvinces),
+  (req, res) => {
+    const year = getCurrentHolidayYear()
+    const holidays = res.locals.rows
+    const nextHol = nextHoliday(holidays)
 
-  return res.send(
-    renderPage({
-      pageComponent: 'Province',
-      title: `Federal statutory holidays in Canada in ${year}`,
-      docProps: { meta, path: req.path },
-      props: { data: { holidays, nextHoliday: nextHol, federal: true, year } },
-    }),
-  )
-})
+    const meta = `Canada’s next federal stat holiday is ${getMeta(
+      nextHol,
+    )}. See all federal statutory holidays in Canada in ${year}.`
+
+    return res.send(
+      renderPage({
+        pageComponent: 'Province',
+        title: `Federal statutory holidays in Canada in ${year}`,
+        docProps: { meta, path: req.path },
+        props: { data: { holidays, nextHoliday: nextHol, federal: true, year } },
+      }),
+    )
+  },
+)
 
 router.get(
   '/federal/:year',
@@ -151,9 +162,7 @@ router.get(
   (req, res) => {
     // if the year value isn't in ALLOWED_YEARS, it will be caught by "checkYearErr"
     const year = ALLOWED_YEARS.find((y) => y === parseInt(req.query.year))
-
     const holidays = res.locals.rows
-
     const meta = `See all federal statutory holidays in Canada in ${year}.`
 
     return res.send(
