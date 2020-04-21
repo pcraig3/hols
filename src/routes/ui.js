@@ -9,6 +9,7 @@ const {
   checkProvinceIdErr,
   checkYearErr,
   checkRedirectYear,
+  param2query,
   nextHoliday,
   getCurrentHolidayYear,
 } = require('../utils')
@@ -64,10 +65,7 @@ router.get(
 
 router.get(
   '/province/:provinceId/:year',
-  (req, res, next) => {
-    req.query.year = req.params.year
-    next()
-  },
+  param2query('year'),
   checkProvinceIdErr,
   checkYearErr,
   (req, res, next) => {
@@ -125,10 +123,7 @@ router.get('/federal', checkRedirectYear, dbmw(db, getHolidaysWithProvinces), (r
 
 router.get(
   '/federal/:year',
-  (req, res, next) => {
-    req.query.year = req.params.year
-    next()
-  },
+  param2query('year'),
   checkYearErr,
   (req, res, next) => {
     // redirect current year to the /federal endpoint
