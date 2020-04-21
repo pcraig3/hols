@@ -106,7 +106,18 @@ const checkRedirectYear = (req, res, next) => {
   next()
 }
 
-// copy a request parameter into req.query
+// middleware to redirect current year to the not !/:year endpoint
+const checkRedirectIfCurrentYear = (req, res, next) => {
+  if (getCurrentHolidayYear() === parseInt(req.query.year)) {
+    let urlParts = req.path.split('/')
+    urlParts.pop()
+    return res.redirect(urlParts.join('/'))
+  }
+
+  next()
+}
+
+// middleware to copy a request parameter into req.query
 const param2query = (param) => {
   return (req, res, next) => {
     req.query[param] = req.params[param]
@@ -233,6 +244,7 @@ module.exports = {
   checkProvinceIdErr,
   checkYearErr,
   checkRedirectYear,
+  checkRedirectIfCurrentYear,
   param2query,
   nextHoliday,
   upcomingHolidays,

@@ -9,6 +9,7 @@ const {
   checkProvinceIdErr,
   checkYearErr,
   checkRedirectYear,
+  checkRedirectIfCurrentYear,
   param2query,
   nextHoliday,
   getCurrentHolidayYear,
@@ -68,14 +69,7 @@ router.get(
   param2query('year'),
   checkProvinceIdErr,
   checkYearErr,
-  (req, res, next) => {
-    // redirect current year to the /province/:provinceId endpoint
-    if (getCurrentHolidayYear() === parseInt(req.query.year)) {
-      return res.redirect(`/province/${req.params.provinceId}`)
-    }
-
-    next()
-  },
+  checkRedirectIfCurrentYear,
   dbmw(db, getProvincesWithHolidays),
   (req, res) => {
     // if the year value isn't in ALLOWED_YEARS, it will be caught by "checkYearErr"
@@ -125,14 +119,7 @@ router.get(
   '/federal/:year',
   param2query('year'),
   checkYearErr,
-  (req, res, next) => {
-    // redirect current year to the /federal endpoint
-    if (getCurrentHolidayYear() === parseInt(req.query.year)) {
-      return res.redirect('/federal')
-    }
-
-    next()
-  },
+  checkRedirectIfCurrentYear,
   dbmw(db, getHolidaysWithProvinces),
   (req, res) => {
     // if the year value isn't in ALLOWED_YEARS, it will be caught by "checkYearErr"
