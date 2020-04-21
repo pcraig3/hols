@@ -94,6 +94,18 @@ const checkProvinceIdErr = (req, res, next) => {
   next()
 }
 
+// middleware to redirect to permitted /:year endpoints for whitelisted query strings
+const checkRedirectYear = (req, res, next) => {
+  const year = req.query.year && parseInt(req.query.year)
+  const GOOD_YEARS = ALLOWED_YEARS.filter((y) => y !== getCurrentHolidayYear())
+
+  if (year && GOOD_YEARS.includes(year)) {
+    return res.redirect(`${req.path}/${req.query.year}`)
+  }
+
+  next()
+}
+
 // return a meta tag if a GITHUB_SHA environment variable exists
 const metaIfSHA = () =>
   process.env.GITHUB_SHA &&
@@ -212,6 +224,7 @@ module.exports = {
   isProvinceId,
   checkProvinceIdErr,
   checkYearErr,
+  checkRedirectYear,
   nextHoliday,
   upcomingHolidays,
   getCurrentHolidayYear,
