@@ -43,6 +43,18 @@ describe('Test ui responses', () => {
     })
   })
 
+  describe('Test /:year responses', () => {
+    test('it should return the h1, title, and meta tag for MB in 2021', async () => {
+      const response = await request(app).get('/2021')
+      const $ = cheerio.load(response.text)
+      expect($('h1').text()).toEqual('Canadastatutory Holidays in 2021')
+      expect($('title').text()).toEqual('Canadian statutory holidays in 2021')
+      expect($('meta[name="description"]').attr('content')).toEqual(
+        'See all statutory holidays in Canada in 2021.',
+      )
+    })
+  })
+
   describe('Test /provinces responses', () => {
     describe('Test /provinces GET response', () => {
       test('it should return 200', async () => {
@@ -129,23 +141,6 @@ describe('Test ui responses', () => {
           'See all statutory holidays in Manitoba, Canada in 2021.',
         )
       })
-
-      describe('for an invalid year', () => {
-        test('it should return a 400 along with the h1, title, and meta tag', async () => {
-          const response = await request(app).get('/province/MB/1000')
-          const $ = cheerio.load(response.text)
-          expect($('h1').text()).toEqual('400')
-          expect($('p').text()).toMatch(
-            `Error: No holidays for the year “1000”. Accepted years are: [${ALLOWED_YEARS.join(
-              ', ',
-            )}].`,
-          )
-          expect($('title').text()).toEqual('Error: 400 — Canada statutory holidays')
-          expect($('meta[name="description"]').attr('content')).toEqual(
-            'Error: No holidays for the year “1000”',
-          )
-        })
-      })
     })
 
     describe('Test /federal responses', () => {
@@ -175,27 +170,10 @@ describe('Test ui responses', () => {
           'See all federal statutory holidays in Canada in 2021.',
         )
       })
-
-      describe('for an invalid year', () => {
-        test('it should return a 400 along with the h1, title, and meta tag', async () => {
-          const response = await request(app).get('/federal/1000')
-          const $ = cheerio.load(response.text)
-          expect($('h1').text()).toEqual('400')
-          expect($('p').text()).toMatch(
-            `Error: No holidays for the year “1000”. Accepted years are: [${ALLOWED_YEARS.join(
-              ', ',
-            )}].`,
-          )
-          expect($('title').text()).toEqual('Error: 400 — Canada statutory holidays')
-          expect($('meta[name="description"]').attr('content')).toEqual(
-            'Error: No holidays for the year “1000”',
-          )
-        })
-      })
     })
 
     describe('Test /*/:year responses', () => {
-      const URLS = ['/federal', '/province/MB']
+      const URLS = ['', '/federal', '/province/MB']
       URLS.map((url) => {
         describe('for a good year', () => {
           const GOOD_YEARS = ALLOWED_YEARS.filter((y) => y !== currentYear)
@@ -209,11 +187,26 @@ describe('Test ui responses', () => {
           test(`it should return 302 to the province page for url: "${url}" and current year: "${currentYear}"`, async () => {
             const response = await request(app).get(`${url}/${currentYear}`)
             expect(response.statusCode).toBe(302)
-            expect(response.headers.location).toEqual(url)
+            expect(response.headers.location).toEqual(url || '/')
           })
         })
 
         describe('for an invalid year', () => {
+          test('it should return a 400 along with the h1, title, and meta tag', async () => {
+            const response = await request(app).get(`${url}/1000`)
+            const $ = cheerio.load(response.text)
+            expect($('h1').text()).toEqual('400')
+            expect($('p').text()).toMatch(
+              `Error: No holidays for the year “1000”. Accepted years are: [${ALLOWED_YEARS.join(
+                ', ',
+              )}].`,
+            )
+            expect($('title').text()).toEqual('Error: 400 — Canada statutory holidays')
+            expect($('meta[name="description"]').attr('content')).toEqual(
+              'Error: No holidays for the year “1000”',
+            )
+          })
+
           const INVALID_VALUES = [-1, 0, 1, 'pterodactyl']
           INVALID_VALUES.map((invalidValue) => {
             test(`it should return 400 for url: "${url}" and year: "${invalidValue}"`, async () => {

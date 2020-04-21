@@ -19,7 +19,7 @@ const { displayDate } = require('../dates')
 
 const getMeta = (holiday) => `${holiday.nameEn} on ${displayDate(holiday.date)}`
 
-router.get('/', dbmw(db, getHolidaysWithProvinces), (req, res) => {
+router.get('/', checkRedirectYear, dbmw(db, getHolidaysWithProvinces), (req, res) => {
   const year = getCurrentHolidayYear()
   const holidays = res.locals.rows
   const nextHol = nextHoliday(holidays)
@@ -37,6 +37,29 @@ router.get('/', dbmw(db, getHolidaysWithProvinces), (req, res) => {
     }),
   )
 })
+
+router.get(
+  '/:year(\\d{4})',
+  param2query('year'),
+  checkYearErr,
+  checkRedirectIfCurrentYear,
+  dbmw(db, getHolidaysWithProvinces),
+  (req, res) => {
+    // if the year value isn't in ALLOWED_YEARS, it will be caught by "checkYearErr"
+    const year = ALLOWED_YEARS.find((y) => y === parseInt(req.query.year))
+    const holidays = res.locals.rows
+    const meta = `See all statutory holidays in Canada in ${year}.`
+
+    return res.send(
+      renderPage({
+        pageComponent: 'Province',
+        title: `Canadian statutory holidays in ${year}`,
+        docProps: { meta, path: req.path },
+        props: { data: { holidays, nextHoliday: undefined, year } },
+      }),
+    )
+  },
+)
 
 router.get(
   '/province/:provinceId',
