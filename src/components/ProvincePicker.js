@@ -1,7 +1,13 @@
 const { html, getProvinceIdOrFederalString } = require('../utils')
 const { css } = require('emotion')
 const { ALLOWED_YEARS, PROVINCE_IDS } = require('../config/vars.config')
-const { theme, insideContainer, horizontalPadding, visuallyHidden } = require('../styles')
+const {
+  theme,
+  insideContainer,
+  hiddenOnMobile,
+  horizontalPadding,
+  visuallyHidden,
+} = require('../styles')
 const Button = require('./Button')
 
 const styles = ({ accent = theme.color.red, focus = theme.color.focus } = {}) => css`
@@ -23,11 +29,16 @@ const styles = ({ accent = theme.color.red, focus = theme.color.focus } = {}) =>
 
   form > div {
     display: inline-block;
-    margin-right: ${theme.space.xs};
+    margin-right: ${theme.space.xxs};
     margin-bottom: ${theme.space.xs};
+
+    @media (${theme.mq.md}) {
+      margin-right: ${theme.space.xs};
+    }
 
     &:last-of-type{
       display: block;
+
       @media (${theme.mq.md}) {
         display: inline-block;
       }
@@ -37,7 +48,11 @@ const styles = ({ accent = theme.color.red, focus = theme.color.focus } = {}) =>
   form span {
     font-weight: 500;
     display: inline-block;
-    margin-right: ${theme.space.xs};
+    margin-right: ${theme.space.xxs};
+
+    @media (${theme.mq.md}) {
+      margin-right: ${theme.space.xs};
+    }
   }
 
   select {
@@ -97,7 +112,7 @@ const styles = ({ accent = theme.color.red, focus = theme.color.focus } = {}) =>
   }
 
   #region-select-width {
-    font-weight: 600;
+    font-weight: 500;
     position: absolute;
     visibility: hidden;
   }
@@ -153,7 +168,7 @@ const ProvincePicker = ({ provinceId, federal, year = 2020 }) => {
             <div id="region-select-width" aria-hidden="true">${regionName}</div>
 
             <label for="region-select" class=${visuallyHidden}>View by region</label>
-            <span aria-hidden="true">See</span>
+            <span class=${hiddenOnMobile} aria-hidden="true">See</span>
             <select
               name="region"
               id="region-select"

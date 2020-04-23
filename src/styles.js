@@ -137,6 +137,14 @@ const insideContainer = css`
   }
 `
 
+const hiddenOnMobile = css`
+  display: none !important;
+
+  @media (${theme.mq.md}) {
+    display: initial !important;
+  }
+`
+
 module.exports = {
   theme,
   visuallyHidden,
@@ -144,4 +152,5 @@ module.exports = {
   contentPageStyles,
   insideContainer,
   horizontalPadding,
+  hiddenOnMobile,
 }

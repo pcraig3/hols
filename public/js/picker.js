@@ -1,5 +1,5 @@
 /* eslint-disable */
-var selectPadding = 40;
+var selectPadding = 42;
 var root = document.documentElement;
 var regionButton = document.getElementById('region-select__button');
 regionButton.setAttribute('data-hidden', true);
