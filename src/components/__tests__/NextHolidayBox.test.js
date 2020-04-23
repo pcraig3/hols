@@ -84,7 +84,7 @@ test('NextHolidayBox displays next holiday properly for a given province', () =>
   expect($('h1 + p').text()).toMatch(/That’s in (about )?(\d\d days|\d month(s)?)/)
 })
 
-test('NextHolidayBox displays provinceName and year when no next holiday', () => {
+test('NextHolidayBox displays provinceName and year and "add to calendar" link', () => {
   const $ = renderNextHolidayBox({
     nextHoliday: undefined,
     provinceName: getProvince().nameEn,
@@ -93,10 +93,11 @@ test('NextHolidayBox displays provinceName and year when no next holiday', () =>
 
   expect($('div h1').length).toBe(1)
   expect($('h1').text()).toEqual('Prince Edward Islandstatutory Holidays in 2022')
-  expect($('h1 + p').length).toBe(0)
+  expect($('h1 + p').length).toBe(1)
+  expect($('h1 ~ p').text()).toEqual('Add to your calendar')
 })
 
-test('NextHolidayBox displays provinceName and year for federal holidays when no next holiday', () => {
+test('NextHolidayBox displays provinceName and year and "add to calendar" link for federal holidays when no next holiday', () => {
   const $ = renderNextHolidayBox({
     nextHoliday: undefined,
     federal: true,
@@ -105,5 +106,5 @@ test('NextHolidayBox displays provinceName and year for federal holidays when no
 
   expect($('div h1').length).toBe(1)
   expect($('h1').text()).toEqual('CanadaFederal statutory holidays in 2022')
-  expect($('h1 + p').text()).toEqual('Find out who gets federal statutory holidays')
+  expect($('h1 ~ p').text()).toEqual('Add to your calendar')
 })

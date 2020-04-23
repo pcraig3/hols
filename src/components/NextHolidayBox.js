@@ -4,6 +4,7 @@ const { theme, insideContainer, horizontalPadding, visuallyHidden } = require('.
 const NextHoliday = require('./NextHoliday.js')
 const ObservingProvinces = require('./ObservingProvinces.js')
 const ProvinceTitle = require('./ProvinceTitle.js')
+const Button = require('../components/Button.js')
 const { relativeDate } = require('../dates')
 const { shade, randomInt } = require('../utils/so.js')
 
@@ -96,6 +97,26 @@ const renderNextHolidayTitle = ({ nextHoliday, provinceName, federal }) => {
     : html`<p>${relativeDate(nextHoliday.date)}</p>`}`
 }
 
+const renderYearPageTitle = ({ provinceName, provinceId, federal, year }) => {
+  const provinceIdOrFederal = getProvinceIdOrFederalString({ provinceId, federal })
+
+  return html`<${ProvinceTitle} ...${{ provinceName, federal, year }} //>
+    <p>
+      <${Button}
+        href=${federal ? '/ics/federal' : provinceId ? `/ics/${provinceId}` : '/ics'}
+        download=${provinceIdOrFederal
+          ? `canada-holidays-${provinceIdOrFederal}-${year}.ics`
+          : `canada-holidays-${year}.ics`}
+        color=${provinceIdOrFederal ? theme.color[provinceIdOrFederal] : {}}
+        className=${'hover-color ghost'}
+        data-event="true"
+        data-action="download-holidays"
+        data-label=${`download-holidays-${provinceIdOrFederal || 'canada'}-${year}`}
+        >Add to your calendar<//
+      >
+    </p>`
+}
+
 const NextHolidayBox = ({ nextHoliday, provinceName = 'Canada', provinceId, federal, year }) => {
   let bg = {
     angle: randomInt(63, 66),
@@ -111,8 +132,9 @@ const NextHolidayBox = ({ nextHoliday, provinceName = 'Canada', provinceId, fede
       <div>
         ${nextHoliday
           ? renderNextHolidayTitle({ nextHoliday, provinceName, federal })
-          : html`<${ProvinceTitle} ...${{ provinceName, federal, year }} //>`}
-        ${federal &&
+          : renderYearPageTitle({ provinceName, provinceId, federal, year })}
+        ${nextHoliday &&
+        federal &&
         html`
           <p>
             <a href="/do-federal-holidays-apply-to-me"

@@ -179,7 +179,7 @@ const Province = ({
                     className=${'ghost'}
                     data-event="true"
                     data-action="download-holidays"
-                    data-label=${`download-holidays-${provinceIdOrFederal || 'canada'}`}
+                    data-label=${`download-holidays-${provinceIdOrFederal || 'canada'}-${year}`}
                     >Add to your calendar<//
                   >
                 </div>
