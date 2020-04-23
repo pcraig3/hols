@@ -103,7 +103,7 @@ const renderYearPageTitle = ({ provinceName, provinceId, federal, year }) => {
   return html`<${ProvinceTitle} ...${{ provinceName, federal, year }} //>
     <p>
       <${Button}
-        href=${federal ? '/ics/federal' : provinceId ? `/ics/${provinceId}` : '/ics'}
+        href=${`${federal ? '/ics/federal' : provinceId ? `/ics/${provinceId}` : '/ics'}/${year}`}
         download=${provinceIdOrFederal
           ? `canada-holidays-${provinceIdOrFederal}-${year}.ics`
           : `canada-holidays-${year}.ics`}
