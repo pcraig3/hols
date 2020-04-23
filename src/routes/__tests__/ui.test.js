@@ -67,7 +67,7 @@ describe('Test ui responses', () => {
         const response = await request(app).get('/provinces')
         const $ = cheerio.load(response.text)
         expect($('h1').text()).toEqual('All regions in Canada')
-        expect($('title').text()).toEqual('All regions in Canada — Canada statutory holidays')
+        expect($('title').text()).toEqual('All regions in Canada — Canada Holidays')
         expect($('meta[name="description"]').attr('content')).toEqual(
           'Upcoming stat holidays for all regions in Canada. See all federal statutory holidays in Canada in 2020.',
         )
@@ -159,26 +159,6 @@ describe('Test ui responses', () => {
             })
           })
         })
-
-        /*
-        const params = [
-          { region: 'AB', url: '/province/AB' },
-          { region: 'ab', url: '/province/AB' },
-          { region: 'Alberta', url: '/province/AL' },
-          { region: 'a', url: '/province/A' },
-          { region: '<script>', url: '/province/%3CS' },
-          { region: 'https://evil.org', url: '/province/HT' },
-          { region: 'false', url: '/province/FA' },
-          { region: '1', url: '/province/1' },
-        ]
-        params.map((p) => {
-          test(`it should return 302 to ${p.url} uppercased for param: '${p.region}'`, async () => {
-            const response = await request(app).post('/provinces').send({ region: p.region })
-            expect(response.statusCode).toBe(302)
-            expect(response.headers.location).toBe(p.url)
-          })
-        })
-        */
       })
     })
   })
@@ -194,7 +174,9 @@ describe('Test ui responses', () => {
         const response = await request(app).get('/province/MB')
         const $ = cheerio.load(response.text)
         expect($('h1').text()).toMatch(/^Manitoba’s next statutory holiday is/)
-        expect($('title').text()).toEqual('Manitoba (MB) statutory holidays in 2020')
+        expect($('title').text()).toEqual(
+          'Manitoba (MB) statutory holidays in 2020 — Canada Holidays',
+        )
         expect($('meta[name="description"]').attr('content')).toMatch(/^MB’s next stat holiday is/)
         expect($('meta[name="description"]').attr('content')).toMatch(
           /See all statutory holidays in Manitoba, Canada in 2020/,
@@ -207,7 +189,9 @@ describe('Test ui responses', () => {
         const response = await request(app).get('/province/MB/2021')
         const $ = cheerio.load(response.text)
         expect($('h1').text()).toEqual('Manitobastatutory Holidays in 2021')
-        expect($('title').text()).toEqual('Manitoba (MB) statutory holidays in 2021')
+        expect($('title').text()).toEqual(
+          'Manitoba (MB) statutory holidays in 2021 — Canada Holidays',
+        )
         expect($('meta[name="description"]').attr('content')).toEqual(
           'See all statutory holidays in Manitoba, Canada in 2021.',
         )
@@ -271,7 +255,7 @@ describe('Test ui responses', () => {
                 ', ',
               )}].`,
             )
-            expect($('title').text()).toEqual('Error: 400 — Canada statutory holidays')
+            expect($('title').text()).toEqual('Error: 400 — Canada Holidays')
             expect($('meta[name="description"]').attr('content')).toEqual(
               'Error: No holidays for the year “1000”',
             )
@@ -337,7 +321,7 @@ describe('Test ui responses', () => {
         const response = await request(app).get('/about')
         const $ = cheerio.load(response.text)
         expect($('h1').text()).toEqual('About')
-        expect($('title').text()).toEqual('About — Canada statutory holidays')
+        expect($('title').text()).toEqual('About — Canada Holidays')
         expect($('meta[name="description"]').attr('content')).toEqual(
           'Check my sources, use the API, get in touch, etc.',
         )
@@ -354,7 +338,7 @@ describe('Test ui responses', () => {
         const response = await request(app).get('/feedback')
         const $ = cheerio.load(response.text)
         expect($('h1').text()).toEqual('Feedback')
-        expect($('title').text()).toEqual('Feedback — Canada statutory holidays')
+        expect($('title').text()).toEqual('Feedback — Canada Holidays')
         expect($('meta[name="description"]').attr('content')).toEqual(
           'Reprt a problem, tell me I’m cool, or let’s just chat even.',
         )
@@ -372,7 +356,7 @@ describe('Test ui responses', () => {
         const $ = cheerio.load(response.text)
         expect($('h1').text()).toEqual('Add Canada’s 2020 holidays to your calendar')
         expect($('title').text()).toEqual(
-          'Add Canada’s 2020 holidays to your calendar — Canada statutory holidays',
+          'Add Canada’s 2020 holidays to your calendar — Canada Holidays',
         )
         expect($('meta[name="description"]').attr('content')).toEqual(
           'Download Canadian holidays and import them to your Outlook, iCal, or Google Calendar. Add all Canadian statutory holidays or just for your region.',
@@ -390,9 +374,7 @@ describe('Test ui responses', () => {
         const response = await request(app).get('/do-federal-holidays-apply-to-me')
         const $ = cheerio.load(response.text)
         expect($('h1').text()).toEqual('Do federal holidays apply to me?')
-        expect($('title').text()).toEqual(
-          'Do federal holidays apply to me? — Canada statutory holidays',
-        )
+        expect($('title').text()).toEqual('Do federal holidays apply to me? — Canada Holidays')
         expect($('meta[name="description"]').attr('content')).toEqual(
           'How to tell if you get federal holidays or provincial holidays in Canada.',
         )
@@ -420,7 +402,7 @@ describe('Test ui responses', () => {
           expect($('p').text()).toEqual(
             'Error: No province with id “pangea”. Accepted province IDs are: [AB, BC, MB, NB, NL, NS, NT, NU, ON, PE, QC, SK, YT].',
           )
-          expect($('title').text()).toEqual('Error: 400 — Canada statutory holidays')
+          expect($('title').text()).toEqual('Error: 400 — Canada Holidays')
           expect($('meta[name="description"]').attr('content')).toEqual(
             'Error: No province with id “pangea”',
           )
@@ -433,7 +415,7 @@ describe('Test ui responses', () => {
         expect($('p').text()).toEqual(
           'Error: No province with id “pangea”. Accepted province IDs are: [AB, BC, MB, NB, NL, NS, NT, NU, ON, PE, QC, SK, YT].',
         )
-        expect($('title').text()).toEqual('Error: 400 — Canada statutory holidays')
+        expect($('title').text()).toEqual('Error: 400 — Canada Holidays')
         expect($('meta[name="description"]').attr('content')).toEqual(
           'Error: No province with id “pangea”',
         )
@@ -451,7 +433,7 @@ describe('Test ui responses', () => {
       const response = await request(app).get('/allosaurus')
       const $ = cheerio.load(response.text)
       expect($('h1').text()).toEqual('404')
-      expect($('title').text()).toEqual('Error: 404 — Canada statutory holidays')
+      expect($('title').text()).toEqual('Error: 404 — Canada Holidays')
       expect($('meta[name="description"]').attr('content')).toEqual('Oopsie daisy')
     })
   })

@@ -77,7 +77,7 @@ router.get(
     return res.send(
       renderPage({
         pageComponent: 'Province',
-        title: `${provinceName} (${provinceId}) statutory holidays in ${year}`,
+        title: `${provinceName} (${provinceId}) statutory holidays in ${year} — Canada Holidays`,
         docProps: { meta, path: req.path },
         props: {
           data: { holidays, nextHoliday, provinceName, provinceId, year },
@@ -103,7 +103,7 @@ router.get(
     return res.send(
       renderPage({
         pageComponent: 'Province',
-        title: `${provinceName} (${provinceId}) statutory holidays in ${year}`,
+        title: `${provinceName} (${provinceId}) statutory holidays in ${year} — Canada Holidays`,
         docProps: { meta, path: req.path },
         props: {
           data: {
@@ -165,7 +165,7 @@ router.get('/provinces', dbmw(db, getProvinces), (req, res) => {
   return res.send(
     renderPage({
       pageComponent: 'Provinces',
-      title: 'All regions in Canada — Canada statutory holidays',
+      title: 'All regions in Canada — Canada Holidays',
       docProps: {
         meta: `Upcoming stat holidays for all regions in Canada. See all federal statutory holidays in Canada in ${getCurrentHolidayYear()}.`,
         path: req.path,
@@ -205,7 +205,7 @@ router.get('/do-federal-holidays-apply-to-me', (req, res) => {
   return res.send(
     renderPage({
       pageComponent: 'FederallyRegulated',
-      title: 'Do federal holidays apply to me? — Canada statutory holidays',
+      title: 'Do federal holidays apply to me? — Canada Holidays',
       docProps: {
         meta: 'How to tell if you get federal holidays or provincial holidays in Canada.',
         path: req.path,
@@ -220,7 +220,7 @@ router.get('/about', dbmw(db, getHolidaysWithProvinces), (req, res) => {
   return res.send(
     renderPage({
       pageComponent: 'About',
-      title: 'About — Canada statutory holidays',
+      title: 'About — Canada Holidays',
       docProps: {
         meta: 'Check my sources, use the API, get in touch, etc.',
         path: req.path,
@@ -234,7 +234,7 @@ router.get('/feedback', (req, res) => {
   return res.send(
     renderPage({
       pageComponent: 'Feedback',
-      title: 'Feedback — Canada statutory holidays',
+      title: 'Feedback — Canada Holidays',
       docProps: {
         meta: 'Reprt a problem, tell me I’m cool, or let’s just chat even.',
         path: req.path,
@@ -248,7 +248,7 @@ router.get('/add-holidays-to-calendar', dbmw(db, getProvinces), (req, res) => {
   return res.send(
     renderPage({
       pageComponent: 'AddHolidays',
-      title: 'Add Canada’s 2020 holidays to your calendar — Canada statutory holidays',
+      title: 'Add Canada’s 2020 holidays to your calendar — Canada Holidays',
       docProps: {
         meta:
           'Download Canadian holidays and import them to your Outlook, iCal, or Google Calendar. Add all Canadian statutory holidays or just for your region.',
@@ -269,7 +269,7 @@ router.use(function (err, req, res, next) {
   return res.send(
     renderPage({
       pageComponent: 'Error',
-      title: `Error: ${res.statusCode} — Canada statutory holidays`,
+      title: `Error: ${res.statusCode} — Canada Holidays`,
       docProps: { meta: err.message.split('.')[0], path: req.path },
       props: {
         data: {
