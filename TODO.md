@@ -3,7 +3,6 @@
 - add holidays by year to the frontend
   - Add years to dates on years pages?
   - add new pages to sitemap
-- put "download" button/link onto other year pages
 - make API to return CSV format
   - page for CSV downloads
 - swagger api docs?
@@ -14,6 +13,9 @@
 
 # DONE
 
+- bug: events on the same date should have different UIDs in .isc output
+- add years to ICS download paths as well
+- put "download" button/link onto other year pages
 - more specific name for the API
 - allowed province ids in global var
 - add picker for year
