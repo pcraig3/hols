@@ -59,8 +59,8 @@ describe('Test /api responses', () => {
     test('it should return the h1, title, and meta tag', async () => {
       const response = await request(app).get('/api')
       const $ = cheerio.load(response.text)
-      expect($('h1').text()).toEqual('Holidays API')
-      expect($('title').text()).toEqual('Holidays API — Canada statutory holidays')
+      expect($('h1').text()).toEqual('Canada Holidays API')
+      expect($('title').text()).toEqual('Canada Holidays API — Canada Holidays')
       expect($('meta[name="description"]').attr('content')).toEqual(
         'A free JSON API for Canada’s statutory holidays. Return all holidays or filter by a specific region.',
       )

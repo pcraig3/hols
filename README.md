@@ -1,9 +1,9 @@
 # hols
 
-This is a fun little node app for Canada's public holidays. There's a frontend you can look at and an API you can use.
+This is a fun little node app for Canada's statutory holidays. There's a frontend you can look at and an API you can use.
 
 - The frontend is written using [htm](https://github.com/developit/htm) on the server. Very amusing.
-- The backend API is pretty bare-metal: it's using an initial SQLite thing and then it does "db reads" and spits out rows.
+- The backend API is pretty bare-metal: it's using an initial SQLite migration file stored in memory and then it does "db reads" and spits out rows.
 
 ## Using the API
 

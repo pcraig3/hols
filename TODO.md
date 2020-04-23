@@ -14,6 +14,7 @@
 
 # DONE
 
+- more specific name for the API
 - allowed province ids in global var
 - add picker for year
   - make it functional
