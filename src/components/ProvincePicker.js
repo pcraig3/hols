@@ -1,6 +1,6 @@
 const { html, getProvinceIdOrFederalString } = require('../utils')
 const { css } = require('emotion')
-const { ALLOWED_YEARS } = require('../config/vars.config')
+const { ALLOWED_YEARS, PROVINCE_IDS } = require('../config/vars.config')
 const { theme, insideContainer, horizontalPadding, visuallyHidden } = require('../styles')
 const Button = require('./Button')
 
@@ -164,19 +164,12 @@ const ProvincePicker = ({ provinceId, federal, year = 2020 }) => {
               <option value="" selected=${!provinceId && !federal}>Nationwide</option>
               <option value="federal" selected=${!provinceId && federal}>Federal</option>
               <option disabled>──────────</option>
-              <option value="AB" selected=${provinceId === 'AB'}>Alberta</option>
-              <option value="BC" selected=${provinceId === 'BC'}>British Columbia</option>
-              <option value="MB" selected=${provinceId === 'MB'}>Manitoba</option>
-              <option value="NB" selected=${provinceId === 'NB'}>New Brunswick</option>
-              <option value="NL" selected=${provinceId === 'NL'}>Newfoundland and Labrador</option>
-              <option value="NS" selected=${provinceId === 'NS'}>Nova Scotia</option>
-              <option value="NT" selected=${provinceId === 'NT'}>Northwest Territories</option>
-              <option value="NU" selected=${provinceId === 'NU'}>Nunavut</option>
-              <option value="ON" selected=${provinceId === 'ON'}>Ontario</option>
-              <option value="PE" selected=${provinceId === 'PE'}>Prince Edward Island</option>
-              <option value="QC" selected=${provinceId === 'QC'}>Quebec</option>
-              <option value="SK" selected=${provinceId === 'SK'}>Saskatchewan</option>
-              <option value="YT" selected=${provinceId === 'YT'}>Yukon</option>
+              ${PROVINCE_IDS.map(
+                (pid) =>
+                  html`<option value=${pid} selected=${provinceId === pid}
+                    >${getProvinceNameFromId(pid)}</option
+                  >`,
+              )}
             </select>
           </div>
 
@@ -190,13 +183,9 @@ const ProvincePicker = ({ provinceId, federal, year = 2020 }) => {
               data-action="year-select"
               data-label=${`year-select-${provinceIdOrFederal || 'canada'}`}
             >
-              ${ALLOWED_YEARS.map((allowedYear) => {
-                return html`
-                  <option value=${allowedYear} selected=${year === allowedYear}
-                    >${allowedYear}</option
-                  >
-                `
-              })}
+              ${ALLOWED_YEARS.map(
+                (y) => html` <option value=${y} selected=${year === y}>${y}</option> `,
+              )}
             </select>
           </div>
 

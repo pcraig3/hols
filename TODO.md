@@ -15,6 +15,7 @@
 
 # DONE
 
+- allowed province ids in global var
 - add picker for year
   - make it functional
   - make it look good on screen sizes

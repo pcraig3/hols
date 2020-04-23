@@ -2,7 +2,7 @@ const { h } = require('preact')
 const htm = require('htm')
 const validator = require('validator')
 const createError = require('http-errors')
-const { ALLOWED_YEARS } = require('../config/vars.config')
+const { ALLOWED_YEARS, PROVINCE_IDS } = require('../config/vars.config')
 
 const html = htm.bind(h)
 
@@ -55,9 +55,7 @@ const dbmw = (db, cb) => {
 
 // returns true if province ID exists else false. Case insensitive.
 const isProvinceId = (provinceId) => {
-  return ['AB', 'BC', 'MB', 'NB', 'NL', 'NS', 'NT', 'NU', 'ON', 'PE', 'QC', 'SK', 'YT'].includes(
-    provinceId.toUpperCase(),
-  )
+  return PROVINCE_IDS.includes(provinceId.toUpperCase())
 }
 
 // middleware for returning "bad year" errors
@@ -69,7 +67,9 @@ const checkYearErr = (req, res, next) => {
     next(
       createError(
         400,
-        `Error: No holidays for the year “${year}”. Accepted years are: [2019, 2020, 2021].`,
+        `Error: No holidays for the year “${year}”. Accepted years are: [${ALLOWED_YEARS.join(
+          ', ',
+        )}].`,
       ),
     )
   }
@@ -86,7 +86,9 @@ const checkProvinceIdErr = (req, res, next) => {
     next(
       createError(
         400,
-        `Error: No province with id “${provinceId}”. Accepted province IDs are: [AB, BC, MB, NB, NL, NS, NT, NU, ON, PE, QC, SK, YT].`,
+        `Error: No province with id “${provinceId}”. Accepted province IDs are: [${PROVINCE_IDS.join(
+          ', ',
+        )}].`,
       ),
     )
   }
