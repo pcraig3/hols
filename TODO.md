@@ -13,6 +13,7 @@
 
 # DONE
 
+- margin at the bottom
 - bug: events on the same date should have different UIDs in .isc output
 - add years to ICS download paths as well
 - put "download" button/link onto other year pages

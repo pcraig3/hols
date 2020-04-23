@@ -4,7 +4,7 @@ const { theme, insideContainer, horizontalPadding, visuallyHidden } = require('.
 const NextHoliday = require('./NextHoliday.js')
 const ObservingProvinces = require('./ObservingProvinces.js')
 const ProvinceTitle = require('./ProvinceTitle.js')
-const Button = require('../components/Button.js')
+const CalButton = require('../components/CalButton.js')
 const { relativeDate } = require('../dates')
 const { shade, randomInt } = require('../utils/so.js')
 
@@ -98,22 +98,10 @@ const renderNextHolidayTitle = ({ nextHoliday, provinceName, federal }) => {
 }
 
 const renderYearPageTitle = ({ provinceName, provinceId, federal, year }) => {
-  const provinceIdOrFederal = getProvinceIdOrFederalString({ provinceId, federal })
-
   return html`<${ProvinceTitle} ...${{ provinceName, federal, year }} //>
     <p>
-      <${Button}
-        href=${`${federal ? '/ics/federal' : provinceId ? `/ics/${provinceId}` : '/ics'}/${year}`}
-        download=${provinceIdOrFederal
-          ? `canada-holidays-${provinceIdOrFederal}-${year}.ics`
-          : `canada-holidays-${year}.ics`}
-        color=${provinceIdOrFederal ? theme.color[provinceIdOrFederal] : {}}
-        className=${'hover-color ghost'}
-        data-event="true"
-        data-action="download-holidays"
-        data-label=${`download-holidays-${provinceIdOrFederal || 'canada'}-${year}`}
-        >Add to your calendar<//
-      >
+      <${CalButton} provinceId=${provinceId} federal=${federal} year=${year}
+      className=${'hover-color ghost'} //>
     </p>`
 }
 
