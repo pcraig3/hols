@@ -15,13 +15,14 @@ const {
   startDate,
   endDate,
   getTitle,
+  getUid,
   getNationalDescription,
   getProvinceDescription,
 } = require('../utils/ics')
 const { getHolidaysWithProvinces } = require('../queries')
 
 /**
- * Returns an event formatted in a way the ICS library understands
+ * Returns a NATIONAL event formatted in a way the ICS library understands
  * @param {obj} holiday a holiday object
  */
 const formatNationalEvent = (holiday) => {
@@ -31,10 +32,14 @@ const formatNationalEvent = (holiday) => {
     title: getTitle(holiday),
     description: getNationalDescription(holiday),
     productId: '-//pcraig3//hols//EN',
-    uid: `${new Date(holiday.date).getTime()}@hols.ca`,
+    uid: `${getUid(holiday)}@hols.ca`,
   }
 }
 
+/**
+ * Returns a PROVINCIAL or FEDERAL event formatted in a way the ICS library understands
+ * @param {obj} holiday a holiday object
+ */
 const formatProvinceEvent = (holiday) => {
   return {
     start: startDate(holiday.date),
@@ -42,7 +47,7 @@ const formatProvinceEvent = (holiday) => {
     title: holiday.nameEn,
     description: getProvinceDescription(holiday),
     productId: '-//pcraig3//hols//EN',
-    uid: `${new Date(holiday.date).getTime()}@hols.ca`,
+    uid: `${getUid(holiday)}@hols.ca`,
   }
 }
 
@@ -67,6 +72,21 @@ router.get('/ics', dbmw(db, getHolidaysWithProvinces), (req, res) => {
 
   ics.createEvents(holidays, downloadICS({ req, res }))
 })
+
+router.get(
+  '/ics/:year(\\d{4})',
+  param2query('year'),
+  checkRedirectIfCurrentYear,
+  dbmw(db, getHolidaysWithProvinces),
+  (req, res) => {
+    let year = ALLOWED_YEARS.find((y) => y === parseInt(req.query.year))
+    if (!year) return res.redirect('/')
+
+    const holidays = res.locals.rows.map((h) => formatNationalEvent(h))
+
+    ics.createEvents(holidays, downloadICS({ req, res, year }))
+  },
+)
 
 router.get('/ics/federal', dbmw(db, getHolidaysWithProvinces), (req, res) => {
   const filteredRows = res.locals.rows.filter((h) => h.federal)

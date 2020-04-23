@@ -4,6 +4,7 @@ const {
   getNationalDescription,
   getProvinceDescription,
   getTitle,
+  getUid,
 } = require('../ics')
 
 describe('Test startDate', () => {
@@ -61,7 +62,7 @@ describe('Test getTitle', () => {
   test('returns title with 12 bracketed province IDs for a holiday with 12 provinces', () => {
     // missing "AB"
     const ids = ['BC', 'MB', 'NB', 'NL', 'NS', 'NT', 'NU', 'ON', 'PE', 'QC', 'SK', 'YT']
-    const provinces = ids.map(v => {
+    const provinces = ids.map((v) => {
       return { id: v }
     })
     const holidayStub = { provinces, ...name }
@@ -147,5 +148,113 @@ describe('Test getProvinceDescription', () => {
     expect(getProvinceDescription(holidayStub)).toMatch(
       'Observed by AB, BC, MB, and federal industries.',
     )
+  })
+})
+
+describe('Test getUid', () => {
+  test('Returns a hash for a holiday object', () => {
+    const holiday = {
+      date: '2022-02-21',
+      nameEn: 'Family Day',
+    }
+    const uid = getUid(holiday)
+    expect(uid).toEqual('r+uDBpoFv1GNOoweYULVnz0lF8s=')
+  })
+
+  test('Different ids for different date, different title', () => {
+    const holiday1 = {
+      date: '2022-02-21',
+      nameEn: 'Family Day',
+    }
+    const holiday2 = {
+      date: '2022-10-10',
+      nameEn: 'Thanksgiving',
+    }
+
+    expect(getUid(holiday1)).not.toEqual(getUid(holiday2))
+  })
+
+  test('Different ids for different date, same title', () => {
+    const holiday1 = {
+      date: '2022-02-21',
+      nameEn: 'Family Day',
+    }
+    const holiday2 = {
+      date: '2022-02-28',
+      nameEn: 'Family Day',
+    }
+
+    expect(getUid(holiday1)).not.toEqual(getUid(holiday2))
+  })
+
+  test('Different ids for same date, different title', () => {
+    const holiday1 = {
+      date: '2022-02-21',
+      nameEn: 'Family Day',
+    }
+    const holiday2 = {
+      date: '2022-02-21',
+      nameEn: 'Louis Riel Day',
+    }
+
+    expect(getUid(holiday1)).not.toEqual(getUid(holiday2))
+  })
+
+  test('Different ids for same date, same title, different provinces', () => {
+    const holiday1 = {
+      date: '2022-02-21',
+      nameEn: 'Family Day',
+      provinces: [{ id: 'ON' }],
+    }
+    const holiday2 = {
+      date: '2022-02-21',
+      nameEn: 'Family Day',
+      provinces: [{ id: 'BC' }],
+    }
+
+    expect(getUid(holiday1)).not.toEqual(getUid(holiday2))
+  })
+
+  test('Different ids for same date, same title, one federal', () => {
+    const holiday1 = {
+      date: '2022-02-21',
+      nameEn: 'Family Day',
+      federal: true,
+    }
+    const holiday2 = {
+      date: '2022-02-21',
+      nameEn: 'Family Day',
+      federal: false,
+    }
+
+    expect(getUid(holiday1)).not.toEqual(getUid(holiday2))
+  })
+
+  test('Same ids for same date, same title, same provinces', () => {
+    const holiday1 = {
+      date: '2022-02-21',
+      nameEn: 'Family Day',
+      provinces: [{ id: 'ON' }],
+    }
+    const holiday2 = {
+      date: '2022-02-21',
+      nameEn: 'Family Day',
+      provinces: [{ id: 'ON' }],
+    }
+
+    expect(getUid(holiday1)).toEqual(getUid(holiday2))
+  })
+
+  test('Same ids for same date, same title, no provinces', () => {
+    const holiday1 = {
+      date: '2022-02-21',
+      nameEn: 'Family Day',
+    }
+    const holiday2 = {
+      date: '2022-02-21',
+      nameEn: 'Family Day',
+    }
+
+    expect(getUid(holiday1)).toEqual(getUid(holiday2))
   })
 })
