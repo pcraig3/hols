@@ -13,7 +13,7 @@
 
 # DONE
 
-- margin at the bottom
+- remove shortcut ICS routes — all routes need years now
 - bug: events on the same date should have different UIDs in .isc output
 - add years to ICS download paths as well
 - put "download" button/link onto other year pages
