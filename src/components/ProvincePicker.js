@@ -143,7 +143,7 @@ const ProvincePicker = ({ provinceId, federal, year = 2020 }) => {
 
           <div>
             <label for="year-select" class=${visuallyHidden}>View by year</label>
-            <span>holidays for</span>
+            <span aria-hidden="true">holidays for</span>
 
             <select
               name="year"
