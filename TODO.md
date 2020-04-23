@@ -1,8 +1,7 @@
 # TODO
 
 - add picker for year
-  - make it functional
-  - make it look good on screen sizes
+  - update the picker to know about dates
   - add aria stuff
   - make the JS width happen
   - add some tests
@@ -21,6 +20,9 @@
 
 # DONE
 
+- add picker for year
+  - make it functional
+  - make it look good on screen sizes
 - add holidays by year to the frontend
   - 2021/2019
   - provinces

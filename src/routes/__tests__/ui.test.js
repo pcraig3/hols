@@ -8,6 +8,7 @@ const { getCurrentHolidayYear } = require('../../utils')
 
 describe('Test ui responses', () => {
   const currentYear = getCurrentHolidayYear()
+  const GOOD_YEARS = ALLOWED_YEARS.filter((y) => y !== currentYear)
 
   beforeAll(async () => {
     await Promise.resolve()
@@ -74,40 +75,110 @@ describe('Test ui responses', () => {
     })
 
     describe('Test /provinces POST response', () => {
-      test('it should return 302 to / for no param', async () => {
+      test('it should return 302 to / for no params', async () => {
         const response = await request(app).post('/provinces')
         expect(response.statusCode).toBe(302)
         expect(response.headers.location).toBe('/')
       })
 
-      test('it should return 302 to /federal for "federal"', async () => {
-        const response = await request(app).post('/provinces').send({ region: 'federal' })
-        expect(response.statusCode).toBe(302)
-        expect(response.headers.location).toBe('/federal')
-      })
-
-      test('it should return 302 to /province/:id for a good param', async () => {
-        const response = await request(app).post('/provinces').send({ region: 'AB' })
-        expect(response.statusCode).toBe(302)
-        expect(response.headers.location).toBe('/province/AB')
-      })
-
-      const params = [
-        { region: 'AB', url: '/province/AB' },
-        { region: 'ab', url: '/province/AB' },
-        { region: 'Alberta', url: '/province/AL' },
-        { region: 'a', url: '/province/A' },
-        { region: '<script>', url: '/province/%3CS' },
-        { region: 'https://evil.org', url: '/province/HT' },
-        { region: 'false', url: '/province/FA' },
-        { region: '1', url: '/province/1' },
-      ]
-      params.map((p) => {
-        test(`it should return 302 to ${p.url} uppercased for param: '${p.region}'`, async () => {
-          const response = await request(app).post('/provinces').send({ region: p.region })
+      describe('for param "region"', () => {
+        test('it should return 302 to /federal for "federal"', async () => {
+          const response = await request(app).post('/provinces').send({ region: 'federal' })
           expect(response.statusCode).toBe(302)
-          expect(response.headers.location).toBe(p.url)
+          expect(response.headers.location).toBe('/federal')
         })
+
+        test('it should return 302 to /province/:id for a good param', async () => {
+          const response = await request(app).post('/provinces').send({ region: 'AB' })
+          expect(response.statusCode).toBe(302)
+          expect(response.headers.location).toBe('/province/AB')
+        })
+
+        const params = [
+          { region: 'AB', url: '/province/AB' },
+          { region: 'ab', url: '/province/AB' },
+          { region: 'Alberta', url: '/province/AL' },
+          { region: 'a', url: '/province/A' },
+          { region: '<script>', url: '/province/%3CS' },
+          { region: 'https://evil.org', url: '/province/HT' },
+          { region: 'false', url: '/province/FA' },
+          { region: '1', url: '/province/1' },
+        ]
+        params.map((p) => {
+          test(`it should return 302 to ${p.url} uppercased for param: '${p.region}'`, async () => {
+            const response = await request(app).post('/provinces').send({ region: p.region })
+            expect(response.statusCode).toBe(302)
+            expect(response.headers.location).toBe(p.url)
+          })
+        })
+      })
+
+      describe('for param "year"', () => {
+        test('it should return no year path for current year', async () => {
+          const response = await request(app).post('/provinces').send({ year: '2020' })
+          expect(response.statusCode).toBe(302)
+          expect(response.headers.location).toBe('/')
+        })
+
+        GOOD_YEARS.map((year) => {
+          test(`it should return a year path for a good year: "${year}`, async () => {
+            const response = await request(app).post('/provinces').send({ year })
+            expect(response.statusCode).toBe(302)
+            expect(response.headers.location).toBe(`/${year}`)
+          })
+        })
+
+        const BAD_YEARS = ['2017', '2018', '2022', '2023', '1', 'false', 'diplodocus']
+        BAD_YEARS.map((badYear) => {
+          test(`it should return no year path for an invalid year: "${badYear}`, async () => {
+            const response = await request(app).post('/provinces').send({ badYear })
+            expect(response.statusCode).toBe(302)
+            expect(response.headers.location).toBe('/')
+          })
+        })
+
+        describe('for param "region" AND param "year"', () => {
+          const params = [
+            { region: 'AB', year: '2018', url: '/province/AB' },
+            { region: 'federal', year: '2018', url: '/federal' },
+            { region: '', year: '2018', url: '/' },
+            { region: 'AB', year: '2021', url: '/province/AB/2021' },
+            { region: 'federal', year: '2021', url: '/federal/2021' },
+            { region: '', year: '2021', url: '/2021' },
+            { region: 'AB', year: '2020', url: '/province/AB' },
+            { region: 'federal', year: '2020', url: '/federal' },
+            { region: '', year: '2020', url: '/' },
+          ]
+          params.map((p) => {
+            test(`it should return 302 to ${p.url} for params: region:'${p.region}' year:'${p.year}'`, async () => {
+              const response = await request(app)
+                .post('/provinces')
+                .send({ region: p.region, year: p.year })
+              expect(response.statusCode).toBe(302)
+              expect(response.headers.location).toBe(p.url)
+            })
+          })
+        })
+
+        /*
+        const params = [
+          { region: 'AB', url: '/province/AB' },
+          { region: 'ab', url: '/province/AB' },
+          { region: 'Alberta', url: '/province/AL' },
+          { region: 'a', url: '/province/A' },
+          { region: '<script>', url: '/province/%3CS' },
+          { region: 'https://evil.org', url: '/province/HT' },
+          { region: 'false', url: '/province/FA' },
+          { region: '1', url: '/province/1' },
+        ]
+        params.map((p) => {
+          test(`it should return 302 to ${p.url} uppercased for param: '${p.region}'`, async () => {
+            const response = await request(app).post('/provinces').send({ region: p.region })
+            expect(response.statusCode).toBe(302)
+            expect(response.headers.location).toBe(p.url)
+          })
+        })
+        */
       })
     })
   })
@@ -176,7 +247,6 @@ describe('Test ui responses', () => {
       const URLS = ['', '/federal', '/province/MB']
       URLS.map((url) => {
         describe('for a good year', () => {
-          const GOOD_YEARS = ALLOWED_YEARS.filter((y) => y !== currentYear)
           GOOD_YEARS.map((year) => {
             test(`it should return 200 for url: "${url}" and year: "${year}"`, async () => {
               const response = await request(app).get(`${url}/${year}`)
@@ -246,7 +316,6 @@ describe('Test ui responses', () => {
             )
           })
 
-          const GOOD_YEARS = ALLOWED_YEARS.filter((y) => y !== currentYear)
           GOOD_YEARS.map((year) => {
             test(`it should return 302 for url: "${url}" and other allowed years: "${year}"`, async () => {
               const response = await request(app).get(`${url}?year=${year}`)

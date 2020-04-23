@@ -178,6 +178,8 @@ router.get('/provinces', dbmw(db, getProvinces), (req, res) => {
 router.post('/provinces', (req, res) => {
   let url = '/'
   const region = req.body.region || ''
+  const year = parseInt(req.body.year)
+  const GOOD_YEARS = ALLOWED_YEARS.filter((y) => y !== getCurrentHolidayYear())
 
   switch (region) {
     case '':
@@ -187,6 +189,11 @@ router.post('/provinces', (req, res) => {
       break
     default:
       url = `/province/${encodeURIComponent(region.substring(0, 2).toUpperCase())}`
+  }
+
+  // if year is a truthy value and is whitelisted, add it to the path
+  if (year && GOOD_YEARS.includes(year)) {
+    url = url.endsWith('/') ? `${url}${year}` : `${url}/${year}`
   }
 
   return res.redirect(url)

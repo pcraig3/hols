@@ -24,6 +24,13 @@ const styles = ({ accent = theme.color.red, focus = theme.color.focus } = {}) =>
     display: inline-block;
     margin-right: ${theme.space.xs};
     margin-bottom: ${theme.space.xs};
+
+    &:last-of-type{
+      display: block;
+      @media (${theme.mq.md}) {
+        display: inline-block;
+      }
+    }
   }
 
   form span {
