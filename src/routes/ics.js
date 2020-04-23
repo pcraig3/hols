@@ -3,13 +3,7 @@ const router = express.Router()
 const db = require('sqlite')
 const ics = require('ics')
 const createError = require('http-errors')
-const {
-  dbmw,
-  isProvinceId,
-  getCurrentHolidayYear,
-  checkRedirectIfCurrentYear,
-  param2query,
-} = require('../utils/index')
+const { dbmw, isProvinceId, getCurrentHolidayYear, param2query } = require('../utils/index')
 const { ALLOWED_YEARS } = require('../config/vars.config')
 const {
   startDate,
@@ -67,16 +61,9 @@ const downloadICS = ({ req, res, modifier = null, year = getCurrentHolidayYear()
   }
 }
 
-router.get('/ics', dbmw(db, getHolidaysWithProvinces), (req, res) => {
-  const holidays = res.locals.rows.map((h) => formatNationalEvent(h))
-
-  ics.createEvents(holidays, downloadICS({ req, res }))
-})
-
 router.get(
   '/ics/:year(\\d{4})',
   param2query('year'),
-  checkRedirectIfCurrentYear,
   dbmw(db, getHolidaysWithProvinces),
   (req, res) => {
     let year = ALLOWED_YEARS.find((y) => y === parseInt(req.query.year))
@@ -88,17 +75,9 @@ router.get(
   },
 )
 
-router.get('/ics/federal', dbmw(db, getHolidaysWithProvinces), (req, res) => {
-  const filteredRows = res.locals.rows.filter((h) => h.federal)
-  const holidays = filteredRows.map((h) => formatProvinceEvent(h))
-
-  ics.createEvents(holidays, downloadICS({ req, res, modifier: 'federal' }))
-})
-
 router.get(
   '/ics/federal/:year(\\d{4})',
   param2query('year'),
-  checkRedirectIfCurrentYear,
   dbmw(db, getHolidaysWithProvinces),
   (req, res) => {
     let year = ALLOWED_YEARS.find((y) => y === parseInt(req.query.year))
@@ -111,23 +90,9 @@ router.get(
   },
 )
 
-router.get('/ics/:provinceId', dbmw(db, getHolidaysWithProvinces), (req, res) => {
-  let provinceId = req.params.provinceId
-  if (!isProvinceId(provinceId)) {
-    return res.redirect(`/province/${provinceId}`)
-  }
-
-  provinceId = provinceId.toUpperCase()
-  const filteredRows = res.locals.rows.filter((h) => h.provinces.find((p) => p.id === provinceId))
-  const holidays = filteredRows.map((h) => formatProvinceEvent(h))
-
-  ics.createEvents(holidays, downloadICS({ req, res, modifier: provinceId }))
-})
-
 router.get(
   '/ics/:provinceId/:year(\\d{4})',
   param2query('year'),
-  checkRedirectIfCurrentYear,
   dbmw(db, getHolidaysWithProvinces),
   (req, res) => {
     let provinceId = req.params.provinceId
