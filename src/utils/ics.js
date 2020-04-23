@@ -1,20 +1,18 @@
 const addDays = require('date-fns/addDays')
+const crypto = require('crypto')
 
 /**
  * Takes an ISO-formatted date string (1990-10-08), and returns an array with [year, month, day]
  * @param {string} dateString an ISO-formatted date string (1990-10-08)
  */
-const startDate = dateString => dateString.split('-')
+const startDate = (dateString) => dateString.split('-')
 
 /**
  * Takes an ISO-formatted date string (1990-10-08), and returns an array with the [year, month, day] of the NEXT day
  * @param {*} dateString an ISO-formatted date string (1990-10-08)
  */
-const endDate = dateString =>
-  addDays(new Date(dateString), 1)
-    .toISOString()
-    .substring(0, 10)
-    .split('-')
+const endDate = (dateString) =>
+  addDays(new Date(dateString), 1).toISOString().substring(0, 10).split('-')
 
 /**
  * Returns a title string from a holiday obj to use for .ics files
@@ -26,13 +24,18 @@ const endDate = dateString =>
  *
  * @param {obj} holiday a holiday object containing 'provinces' and 'nameEn' keys
  */
-const getTitle = holiday => {
-  if (!holiday.provinces || holiday.provinces.length === 13) {
+const getTitle = (holiday) => {
+  if (
+    // all provinces AND federal holidays
+    holiday.provinces &&
+    holiday.provinces.length === 13 &&
+    holiday.federal
+  ) {
     return holiday.nameEn
   }
 
   let provinceIds = []
-  holiday.provinces.map(p => provinceIds.push(p.id))
+  holiday.provinces && holiday.provinces.map((p) => provinceIds.push(p.id))
   holiday.federal && provinceIds.push('Federal')
 
   return `${holiday.nameEn} (${provinceIds.join(', ')})`
@@ -43,7 +46,7 @@ const getTitle = holiday => {
  * If a national holiday, returns "National holiday" else a warning that the holiday isn't observed everywhere
  * @param {obj} holiday a holiday object containing a 'provinces' key
  */
-const getNationalDescription = holiday =>
+const getNationalDescription = (holiday) =>
   holiday.provinces && holiday.provinces.length === 13
     ? 'National holiday'
     : 'This is not a national holiday; it may not be observed in your region'
@@ -53,15 +56,15 @@ const getNationalDescription = holiday =>
  * If a national holiday, returns "National holiday" else a warning that the holiday isn't observed everywhere
  * @param {obj} holiday a holiday object containing a 'provinces' key
  */
-const getProvinceDescription = holiday => {
+const getProvinceDescription = (holiday) => {
   if (!holiday.provinces || holiday.provinces.length === 13) {
     return 'National holiday'
   }
 
   let provinceIds = []
   holiday.provinces.length === 1
-    ? holiday.provinces.map(p => provinceIds.push(p.nameEn))
-    : holiday.provinces.map(p => provinceIds.push(p.id))
+    ? holiday.provinces.map((p) => provinceIds.push(p.nameEn))
+    : holiday.provinces.map((p) => provinceIds.push(p.id))
 
   holiday.federal && provinceIds.push('federal industries')
   if (provinceIds.length > 1) {
@@ -71,10 +74,26 @@ const getProvinceDescription = holiday => {
   return `Observed by ${provinceIds.length === 2 ? provinceIds.join(' ') : provinceIds.join(', ')}.`
 }
 
+/**
+ * Return a unique identifier per holiday.
+ * A unique identifier can be found by hashing the date + the title
+ * This means events with the same title across multiple years can be added
+ * Also events on the same date with different titles
+ *
+ * @param {Object} holiday a hols holiday object
+ */
+const getUid = (holiday) => {
+  return crypto
+    .createHash('sha1')
+    .update(new Date(holiday.date).getTime() + getTitle(holiday))
+    .digest('base64')
+}
+
 module.exports = {
   startDate,
   endDate,
   getNationalDescription,
   getProvinceDescription,
   getTitle,
+  getUid,
 }

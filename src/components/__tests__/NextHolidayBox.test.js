@@ -84,19 +84,22 @@ test('NextHolidayBox displays next holiday properly for a given province', () =>
   expect($('h1 + p').text()).toMatch(/That’s in (about )?(\d\d days|\d month(s)?)/)
 })
 
-test('NextHolidayBox displays provinceName and year when no next holiday', () => {
+test('NextHolidayBox displays provinceName and year and "add to calendar" link', () => {
   const $ = renderNextHolidayBox({
     nextHoliday: undefined,
     provinceName: getProvince().nameEn,
-    year: 2022,
+    provinceId: getProvince().id,
+    year: 2021,
   })
 
   expect($('div h1').length).toBe(1)
-  expect($('h1').text()).toEqual('Prince Edward Islandstatutory Holidays in 2022')
-  expect($('h1 + p').length).toBe(0)
+  expect($('h1').text()).toEqual('Prince Edward Islandstatutory Holidays in 2021')
+  expect($('h1 + p').length).toBe(1)
+  expect($('h1 ~ p').text()).toEqual('Add to your calendar')
+  expect($('h1 ~ p a').attr('href')).toEqual('/ics/PE/2021')
 })
 
-test('NextHolidayBox displays provinceName and year for federal holidays when no next holiday', () => {
+test('NextHolidayBox displays provinceName and year and "add to calendar" link for federal holidays when no next holiday', () => {
   const $ = renderNextHolidayBox({
     nextHoliday: undefined,
     federal: true,
@@ -105,5 +108,18 @@ test('NextHolidayBox displays provinceName and year for federal holidays when no
 
   expect($('div h1').length).toBe(1)
   expect($('h1').text()).toEqual('CanadaFederal statutory holidays in 2022')
-  expect($('h1 + p').text()).toEqual('Find out who gets federal statutory holidays')
+  expect($('h1 ~ p').text()).toEqual('Add to your calendar')
+  expect($('h1 ~ p a').attr('href')).toEqual('/ics/federal/2022')
+})
+
+test('NextHolidayBox displays provinceName and year and "add to calendar" link for Canada when no next holiday', () => {
+  const $ = renderNextHolidayBox({
+    nextHoliday: undefined,
+    year: 2019,
+  })
+
+  expect($('div h1').length).toBe(1)
+  expect($('h1').text()).toEqual('Canadastatutory Holidays in 2019')
+  expect($('h1 ~ p').text()).toEqual('Add to your calendar')
+  expect($('h1 ~ p a').attr('href')).toEqual('/ics/2019')
 })

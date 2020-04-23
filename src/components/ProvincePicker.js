@@ -12,7 +12,7 @@ const Button = require('./Button')
 
 const styles = ({ accent = theme.color.red, focus = theme.color.focus } = {}) => css`
   padding-top: ${theme.space.md};
-  padding-bottom: ${theme.space.md};
+  padding-bottom: ${theme.space.xxs};
   border-top: 3px solid ${theme.color.greyLight};
   border-bottom: 3px solid ${theme.color.greyLight};
 

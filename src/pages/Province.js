@@ -6,7 +6,7 @@ const DateHtml = require('../components/DateHtml.js')
 const NextHolidayBox = require('../components/NextHolidayBox.js')
 const ProvincePicker = require('../components/ProvincePicker.js')
 const SummaryTable = require('../components/SummaryTable.js')
-const Button = require('../components/Button.js')
+const CalButton = require('../components/CalButton.js')
 
 const styles = ({ accent = theme.color.red } = {}) => css`
   div.past {
@@ -170,18 +170,8 @@ const Province = ({
                   <span class=${visuallyHidden}> statutory</span> holidays in ${year}
                 </h2>
                 <div>
-                  <${Button}
-                    href=${federal ? '/ics/federal' : provinceId ? `/ics/${provinceId}` : '/ics'}
-                    download=${provinceIdOrFederal
-                      ? `canada-holidays-${provinceIdOrFederal}-${year}.ics`
-                      : `canada-holidays-${year}.ics`}
-                    color=${provinceIdOrFederal ? theme.color[provinceIdOrFederal] : {}}
-                    className=${'ghost'}
-                    data-event="true"
-                    data-action="download-holidays"
-                    data-label=${`download-holidays-${provinceIdOrFederal || 'canada'}`}
-                    >Add to your calendar<//
-                  >
+                  <${CalButton} provinceId=${provinceId} federal=${federal} year=${year}
+                  className=${'ghost'} //>
                 </div>
               </div>`}
             <//>
