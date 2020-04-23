@@ -176,7 +176,7 @@ const Province = ({
                       ? `canada-holidays-${provinceIdOrFederal}-${year}.ics`
                       : `canada-holidays-${year}.ics`}
                     color=${provinceIdOrFederal ? theme.color[provinceIdOrFederal] : {}}
-                    ghost=${true}
+                    className=${'ghost'}
                     data-event="true"
                     data-action="download-holidays"
                     data-label=${`download-holidays-${provinceIdOrFederal || 'canada'}`}

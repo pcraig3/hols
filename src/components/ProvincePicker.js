@@ -154,6 +154,7 @@ const ProvincePicker = ({ provinceId, federal, year = 2020 }) => {
             <${Button}
               type="submit"
               id="region-select__button"
+              className=${'hover-color'}
               style="padding: 6.5px 9px 3.5px 9px; font-weight: 500;"
               color="${provinceIdOrFederal ? theme.color[provinceIdOrFederal] : {}}"
               ><span class="">Submit</span> →<//

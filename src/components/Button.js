@@ -32,6 +32,7 @@ const styles = ({ accent = theme.color.red, focus = theme.color.focus } = {}) =>
     box-shadow: 0 4px ${accent};
     border-radius: 0;
 
+    &.hover-color,
     &:hover,
     &:focus {
       box-shadow: 0 4px black;
@@ -47,6 +48,7 @@ const styles = ({ accent = theme.color.red, focus = theme.color.focus } = {}) =>
     }
   }
 
+  &.hover-color,
   &:hover,
   &:focus {
     color: white !important;
@@ -80,6 +82,7 @@ const styles = ({ accent = theme.color.red, focus = theme.color.focus } = {}) =>
     }
   }
 
+  &.hover-color,
   &:hover,
   &:focus {
     svg {
@@ -100,16 +103,18 @@ const styles = ({ accent = theme.color.red, focus = theme.color.focus } = {}) =>
   }
 `
 
-const NativeButton = ({ children, color = {}, ...props }) => {
+const NativeButton = ({ children, color = {}, className = '', ...props }) => {
   return html`
-    <button class=${styles(color)} ...${props}>${children}</button>
+    <button class=${`${className ? `${className} ` : ''}${styles(color)}`} ...${props}>
+      ${children}
+    </button>
   `
 }
 
-const LinkButton = ({ children, color = {}, ghost = false, ...props }) => {
+const LinkButton = ({ children, color = {}, className = '', ...props }) => {
   return html`
     <a
-      class=${`${ghost ? 'ghost ' : ''}${styles(color)}`}
+      class=${`${className ? `${className} ` : ''}${styles(color)}`}
       role="button"
       draggable="false"
       ...${props}
