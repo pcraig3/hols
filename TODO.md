@@ -23,6 +23,7 @@
   - make it look good on screen sizes
   - update the picker to know about dates
   - add aria stuff
+  - update the JS change event
 - add holidays by year to the frontend
   - 2021/2019
   - provinces
