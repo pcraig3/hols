@@ -20,15 +20,16 @@ const styles = ({ accent = theme.color.red, focus = theme.color.focus } = {}) =>
     ${insideContainer};
   }
 
-  label {
-    display: block;
+  form > div {
+    display: inline-block;
     margin-right: ${theme.space.xs};
-    font-weight: 600;
-    margin-bottom: ${theme.space.xxs};
+    margin-bottom: ${theme.space.xs};
+  }
 
-    @media (${theme.mq.md}) {
-      display: inline-block;
-    }
+  form span {
+    font-weight: 500;
+    display: inline-block;
+    margin-right: ${theme.space.xs};
   }
 
   select {
@@ -83,51 +84,81 @@ const styles = ({ accent = theme.color.red, focus = theme.color.focus } = {}) =>
     }
   }
 
+  /*
+  #region-select {
+    width: 9em;
+    margin-right: ${theme.space.xs};
+  }
+  */
+
   *[data-hidden] {
     display: none;
   }
 `
 
-const ProvincePicker = ({ provinceId, federal }) => {
+const ProvincePicker = ({ provinceId, federal, year = 2020 }) => {
   const provinceIdOrFederal = getProvinceIdOrFederalString({ provinceId, federal })
   return html`
     <div class=${provinceIdOrFederal ? styles(theme.color[provinceIdOrFederal]) : styles()}>
       <div>
         <form action="/provinces" method="post">
-          <label for="region-select">View by region</label>
+          <div>
+            <label for="region-select" class=${visuallyHidden}>View by region</label>
 
-          <select
-            name="region"
-            id="region-select"
-            data-event="true"
-            data-action="region-select"
-            data-label=${`region-select-${provinceIdOrFederal || 'canada'}`}
-          >
-            <option value="" selected=${!provinceId && !federal}>Nationwide</option>
-            <option value="federal" selected=${!provinceId && federal}>Federal holidays</option>
-            <option disabled>──────────</option>
-            <option value="AB" selected=${provinceId === 'AB'}>Alberta</option>
-            <option value="BC" selected=${provinceId === 'BC'}>British Columbia</option>
-            <option value="MB" selected=${provinceId === 'MB'}>Manitoba</option>
-            <option value="NB" selected=${provinceId === 'NB'}>New Brunswick</option>
-            <option value="NL" selected=${provinceId === 'NL'}>Newfoundland and Labrador</option>
-            <option value="NS" selected=${provinceId === 'NS'}>Nova Scotia</option>
-            <option value="NT" selected=${provinceId === 'NT'}>Northwest Territories</option>
-            <option value="NU" selected=${provinceId === 'NU'}>Nunavut</option>
-            <option value="ON" selected=${provinceId === 'ON'}>Ontario</option>
-            <option value="PE" selected=${provinceId === 'PE'}>Prince Edward Island</option>
-            <option value="QC" selected=${provinceId === 'QC'}>Quebec</option>
-            <option value="SK" selected=${provinceId === 'SK'}>Saskatchewan</option>
-            <option value="YT" selected=${provinceId === 'YT'}>Yukon</option>
-          </select>
+            <select
+              name="region"
+              id="region-select"
+              data-event="true"
+              data-action="region-select"
+              data-label=${`region-select-${provinceIdOrFederal || 'canada'}`}
+            >
+              <option value="" selected=${!provinceId && !federal}>Nationwide</option>
+              <option value="federal" selected=${!provinceId && federal}>Federal holidays</option>
+              <option disabled>──────────</option>
+              <option value="AB" selected=${provinceId === 'AB'}>Alberta</option>
+              <option value="BC" selected=${provinceId === 'BC'}>British Columbia</option>
+              <option value="MB" selected=${provinceId === 'MB'}>Manitoba</option>
+              <option value="NB" selected=${provinceId === 'NB'}>New Brunswick</option>
+              <option value="NL" selected=${provinceId === 'NL'}>Newfoundland and Labrador</option>
+              <option value="NS" selected=${provinceId === 'NS'}>Nova Scotia</option>
+              <option value="NT" selected=${provinceId === 'NT'}
+                >Northwest <span class=${visuallyHidden}>Territories</span></option
+              >
+              <option value="NU" selected=${provinceId === 'NU'}>Nunavut</option>
+              <option value="ON" selected=${provinceId === 'ON'}>Ontario</option>
+              <option value="PE" selected=${provinceId === 'PE'}>Prince Edward Island</option>
+              <option value="QC" selected=${provinceId === 'QC'}>Quebec</option>
+              <option value="SK" selected=${provinceId === 'SK'}>Saskatchewan</option>
+              <option value="YT" selected=${provinceId === 'YT'}>Yukon</option>
+            </select>
+          </div>
 
-          <${Button}
-            type="submit"
-            id="region-select__button"
-            style="padding: 6.5px 9px 3.5px 9px; margin-left: 10px;"
-            color="${provinceIdOrFederal ? theme.color[provinceIdOrFederal] : {}}"
-            ><span class=${visuallyHidden}>Submit</span>→<//
-          >
+          <div>
+            <label for="year-select" class=${visuallyHidden}>View by year</label>
+            <span>holidays for</span>
+
+            <select
+              name="year"
+              id="year-select"
+              data-event="true"
+              data-action="year-select"
+              data-label=${`year-select-${provinceIdOrFederal || 'canada'}`}
+            >
+              <option value="2019" selected=${year === 2019}>2019</option>
+              <option value="2020" selected=${year === 2020}>2020</option>
+              <option value="2021" selected=${year === 2021}>2021</option>
+            </select>
+          </div>
+
+          <div>
+            <${Button}
+              type="submit"
+              id="region-select__button"
+              style="padding: 6.5px 9px 3.5px 9px; font-weight: 500;"
+              color="${provinceIdOrFederal ? theme.color[provinceIdOrFederal] : {}}"
+              ><span class="">Submit</span> →<//
+            >
+          </div>
         </form>
       </div>
       <script src="/js/picker.js"></script>
