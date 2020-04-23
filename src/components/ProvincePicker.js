@@ -92,27 +92,68 @@ const styles = ({ accent = theme.color.red, focus = theme.color.focus } = {}) =>
     }
   }
 
-  /*
   #region-select {
-    width: 9em;
-    margin-right: ${theme.space.xs};
+    width: var(--region-select-width);
   }
-  */
+
+  #region-select-width {
+    font-weight: 600;
+    position: absolute;
+    visibility: hidden;
+  }
 
   *[data-hidden] {
     display: none;
   }
 `
 
+const getProvinceNameFromId = (provinceId) => {
+  switch (provinceId) {
+    case 'AB':
+      return 'Alberta'
+    case 'BC':
+      return 'British Columbia'
+    case 'MB':
+      return 'Manitoba'
+    case 'NB':
+      return 'New Brunswick'
+    case 'NL':
+      return 'Newfoundland and Labrador'
+    case 'NS':
+      return 'Nova Scotia'
+    case 'NT':
+      return 'Northwest Territories'
+    case 'NU':
+      return 'Nunavut'
+    case 'ON':
+      return 'Ontario'
+    case 'PE':
+      return 'Prince Edward Island'
+    case 'QC':
+      return 'Quebec'
+    case 'SK':
+      return 'Saskatchewan'
+    case 'YT':
+      return 'Yukon'
+    default:
+      return
+  }
+}
+
 const ProvincePicker = ({ provinceId, federal, year = 2020 }) => {
   const provinceIdOrFederal = getProvinceIdOrFederalString({ provinceId, federal })
+  let regionName = getProvinceNameFromId(provinceId)
+  regionName = regionName || (federal ? 'Federal' : 'Nationwide')
+
   return html`
     <div class=${provinceIdOrFederal ? styles(theme.color[provinceIdOrFederal]) : styles()}>
       <div>
         <form action="/provinces" method="post">
           <div>
-            <label for="region-select" class=${visuallyHidden}>View by region</label>
+            <div id="region-select-width" aria-hidden="true">${regionName}</div>
 
+            <label for="region-select" class=${visuallyHidden}>View by region</label>
+            <span aria-hidden="true">See</span>
             <select
               name="region"
               id="region-select"
@@ -121,7 +162,7 @@ const ProvincePicker = ({ provinceId, federal, year = 2020 }) => {
               data-label=${`region-select-${provinceIdOrFederal || 'canada'}`}
             >
               <option value="" selected=${!provinceId && !federal}>Nationwide</option>
-              <option value="federal" selected=${!provinceId && federal}>Federal holidays</option>
+              <option value="federal" selected=${!provinceId && federal}>Federal</option>
               <option disabled>──────────</option>
               <option value="AB" selected=${provinceId === 'AB'}>Alberta</option>
               <option value="BC" selected=${provinceId === 'BC'}>British Columbia</option>
@@ -129,9 +170,7 @@ const ProvincePicker = ({ provinceId, federal, year = 2020 }) => {
               <option value="NB" selected=${provinceId === 'NB'}>New Brunswick</option>
               <option value="NL" selected=${provinceId === 'NL'}>Newfoundland and Labrador</option>
               <option value="NS" selected=${provinceId === 'NS'}>Nova Scotia</option>
-              <option value="NT" selected=${provinceId === 'NT'}
-                >Northwest <span class=${visuallyHidden}>Territories</span></option
-              >
+              <option value="NT" selected=${provinceId === 'NT'}>Northwest Territories</option>
               <option value="NU" selected=${provinceId === 'NU'}>Nunavut</option>
               <option value="ON" selected=${provinceId === 'ON'}>Ontario</option>
               <option value="PE" selected=${provinceId === 'PE'}>Prince Edward Island</option>
@@ -144,7 +183,6 @@ const ProvincePicker = ({ provinceId, federal, year = 2020 }) => {
           <div>
             <label for="year-select" class=${visuallyHidden}>View by year</label>
             <span aria-hidden="true">holidays for</span>
-
             <select
               name="year"
               id="year-select"

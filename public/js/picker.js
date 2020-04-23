@@ -1,4 +1,6 @@
 /* eslint-disable */
+var selectPadding = 40;
+var root = document.documentElement;
 var regionButton = document.getElementById('region-select__button');
 regionButton.setAttribute('data-hidden', true);
 
@@ -14,3 +16,6 @@ addChangeListener(regionSelect);
 
 var yearSelect = document.getElementById('year-select');
 addChangeListener(yearSelect);
+
+var regionSelectWidth = document.getElementById('region-select-width');
+root.style.setProperty('--region-select-width', regionSelectWidth.offsetWidth + selectPadding + "px");

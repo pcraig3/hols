@@ -16,7 +16,7 @@ describe('<ProvincePicker>', () => {
     expect($('select').length).toBe(2)
     expect($('select option').length).toBe(19)
     expect($('select option').text()).toEqual(
-      'NationwideFederal holidays──────────AlbertaBritish ColumbiaManitobaNew BrunswickNewfoundland and LabradorNova ScotiaNorthwest TerritoriesNunavutOntarioPrince Edward IslandQuebecSaskatchewanYukon201920202021',
+      'NationwideFederal──────────AlbertaBritish ColumbiaManitobaNew BrunswickNewfoundland and LabradorNova ScotiaNorthwest TerritoriesNunavutOntarioPrince Edward IslandQuebecSaskatchewanYukon201920202021',
     )
   })
 
@@ -36,9 +36,9 @@ describe('<ProvincePicker>', () => {
       expect($('select').eq(0).find('option[selected]').length).toBe(0)
     })
 
-    test('renders selected region as "Federal holidays" if "federal" is true', () => {
+    test('renders selected region as "Federal" if "federal" is true', () => {
       const $ = renderProvincePicker({ federal: true })
-      expect($('select').eq(0).find('option[selected]').text()).toEqual('Federal holidays')
+      expect($('select').eq(0).find('option[selected]').text()).toEqual('Federal')
     })
 
     test('renders province region if a provinceId AND a federal option are passed in', () => {

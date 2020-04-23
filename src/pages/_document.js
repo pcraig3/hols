@@ -31,6 +31,10 @@ const document = ({ title, content, docProps: { meta, path } }) => {
         <link rel="shortcut icon" href="/favicon.png" type="image/x-icon" sizes="32x32" />
         <link href="https://fonts.googleapis.com/css?family=Gothic+A1:300,400,500,600,700&display=swap" rel="stylesheet" />
         <style>
+          :root {
+            --region-select-width: auto;
+          }
+
           * {
             box-sizing: border-box;
           }
@@ -94,11 +98,7 @@ const document = ({ title, content, docProps: { meta, path } }) => {
 const renderPage = ({ pageComponent, title = '', props, docProps }) => {
   const Page = require(`./${pageComponent}.js`)
 
-  const content = render(
-    html`
-      <${Page} ...${props} />
-    `,
-  )
+  const content = render(html` <${Page} ...${props} /> `)
 
   // if title is not explicitly passed in, use the name of the page component
   title = title || pageComponent

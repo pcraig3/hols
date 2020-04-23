@@ -1,8 +1,5 @@
 # TODO
 
-- add picker for year
-  - make the JS width happen
-  - add some tests
 - add holidays by year to the frontend
   - 2022/2018
   - Add years to dates on years pages?
@@ -24,6 +21,8 @@
   - update the picker to know about dates
   - add aria stuff
   - update the JS change event
+  - make the JS width happen
+  - add some tests
 - add holidays by year to the frontend
   - 2021/2019
   - provinces
