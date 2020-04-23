@@ -1,5 +1,6 @@
 const { html, getProvinceIdOrFederalString } = require('../utils')
 const { css } = require('emotion')
+const { ALLOWED_YEARS } = require('../config/vars.config')
 const { theme, insideContainer, horizontalPadding, visuallyHidden } = require('../styles')
 const Button = require('./Button')
 
@@ -151,9 +152,13 @@ const ProvincePicker = ({ provinceId, federal, year = 2020 }) => {
               data-action="year-select"
               data-label=${`year-select-${provinceIdOrFederal || 'canada'}`}
             >
-              <option value="2019" selected=${year === 2019}>2019</option>
-              <option value="2020" selected=${year === 2020}>2020</option>
-              <option value="2021" selected=${year === 2021}>2021</option>
+              ${ALLOWED_YEARS.map((allowedYear) => {
+                return html`
+                  <option value=${allowedYear} selected=${year === allowedYear}
+                    >${allowedYear}</option
+                  >
+                `
+              })}
             </select>
           </div>
 

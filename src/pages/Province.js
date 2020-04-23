@@ -154,7 +154,7 @@ const Province = ({
       <div class=${provinceIdOrFederal ? styles(theme.color[provinceIdOrFederal]) : styles()}>
         <section id="next-holiday">
           <${NextHolidayBox} ...${{ nextHoliday, provinceName, provinceId, federal, year }} />
-          <${ProvincePicker} ...${{ provinceId, federal }}=/>
+          <${ProvincePicker} ...${{ provinceId, federal, year }}=/>
         </section>
 
         <section class=${horizontalPadding}>
