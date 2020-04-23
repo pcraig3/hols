@@ -128,7 +128,7 @@ describe('Test ui responses', () => {
           })
         })
 
-        const BAD_YEARS = ['2017', '2018', '2022', '2023', '1', 'false', 'diplodocus']
+        const BAD_YEARS = ['2016', '2017', '2023', '2024', '1', 'false', 'diplodocus']
         BAD_YEARS.map((badYear) => {
           test(`it should return no year path for an invalid year: "${badYear}`, async () => {
             const response = await request(app).post('/provinces').send({ badYear })
@@ -139,9 +139,9 @@ describe('Test ui responses', () => {
 
         describe('for param "region" AND param "year"', () => {
           const params = [
-            { region: 'AB', year: '2018', url: '/province/AB' },
-            { region: 'federal', year: '2018', url: '/federal' },
-            { region: '', year: '2018', url: '/' },
+            { region: 'AB', year: '1000', url: '/province/AB' },
+            { region: 'federal', year: '1000', url: '/federal' },
+            { region: '', year: '1000', url: '/' },
             { region: 'AB', year: '2021', url: '/province/AB/2021' },
             { region: 'federal', year: '2021', url: '/federal/2021' },
             { region: '', year: '2021', url: '/2021' },
@@ -285,7 +285,7 @@ describe('Test ui responses', () => {
             })
           })
 
-          const INVALID_YEARS = [2017, 2018, 2022, 2023]
+          const INVALID_YEARS = [2016, 2017, 2023, 2024]
           INVALID_YEARS.map((invalidYear) => {
             test(`it should return 400 for url: "${url}" and year: "${invalidYear}"`, async () => {
               const response = await request(app).get(`${url}/${invalidYear}`)
@@ -295,7 +295,7 @@ describe('Test ui responses', () => {
         })
 
         describe('with "year" query params', () => {
-          const INVALID_YEARS = [-1, 0, 1, 2018, 2022, 'pterodactyl']
+          const INVALID_YEARS = [-1, 0, 1, 2017, 2023, 'pterodactyl']
           INVALID_YEARS.map((invalidYear) => {
             test(`it should return 200 for url: "${url}" and a bad query param: "${invalidYear}"`, async () => {
               const response = await request(app).get(`${url}?year=${invalidYear}`)

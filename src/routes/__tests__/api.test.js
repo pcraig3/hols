@@ -2,8 +2,9 @@ const request = require('supertest')
 const db = require('sqlite')
 const Promise = require('bluebird')
 const app = require('../../server.js')
-const { getCurrentHolidayYear } = require('../../utils')
 const cheerio = require('cheerio')
+const { ALLOWED_YEARS } = require('../../config/vars.config')
+const { getCurrentHolidayYear } = require('../../utils')
 
 describe('Test /api responses', () => {
   beforeAll(async () => {
@@ -209,8 +210,7 @@ describe('Test /api responses', () => {
     })
 
     describe('with ?years=', () => {
-      let years = ['2019', '2020', '2021']
-      years.map((year) => {
+      ALLOWED_YEARS.map((year) => {
         test(`${year} it should return all holidays for ${year}`, async () => {
           const response = await request(app).get(`/api/v1/holidays?year=${year}`)
           expect(response.statusCode).toBe(200)
@@ -218,12 +218,12 @@ describe('Test /api responses', () => {
           let { holidays } = JSON.parse(response.text)
 
           holidays.map((holiday) => {
-            expect(holiday.date.slice(0, 4)).toEqual(year)
+            expect(holiday.date.slice(0, 4)).toEqual(`${year}`)
           })
         })
       })
 
-      let badYears = ['2018', '2022', '1', null, undefined, false, 'orange', 'christmas']
+      let badYears = ['2017', '2023', '1', null, undefined, false, 'orange', 'christmas']
       badYears.map((year) => {
         test(`${year} it should return all holidays for ${getCurrentHolidayYear()} with the current year`, async () => {
           const response = await request(app).get(`/api/v1/holidays?year=${year}`)
@@ -270,19 +270,18 @@ describe('Test /api responses', () => {
     })
 
     describe('with ?years=', () => {
-      let years = ['2019', '2020', '2021']
-      years.map((year) => {
+      ALLOWED_YEARS.map((year) => {
         test(`${year} it should a holiday with the right dateString`, async () => {
           const response = await request(app).get(`/api/v1/holidays/16?year=${year}`)
           expect(response.statusCode).toBe(200)
 
           let { holiday } = JSON.parse(response.text)
 
-          expect(holiday.date.slice(0, 4)).toEqual(year)
+          expect(holiday.date.slice(0, 4)).toEqual(`${year}`)
         })
       })
 
-      let badYears = ['2018', '2022', '1', null, undefined, false, 'orange', 'christmas']
+      let badYears = ['2017', '2023', '1', null, undefined, false, 'orange', 'christmas']
       badYears.map((year) => {
         test(`${year} it should a holiday with the current year`, async () => {
           const response = await request(app).get(`/api/v1/holidays/16?year=${year}`)

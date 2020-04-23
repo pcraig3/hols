@@ -1,7 +1,6 @@
 # TODO
 
 - add holidays by year to the frontend
-  - 2022/2018
   - Add years to dates on years pages?
   - add new pages to sitemap
 - put "download" button/link onto other year pages
@@ -34,6 +33,7 @@
   - redirects query param
   - federal
   - canada
+  - 2022/2018
 - look at the little subtitle on the main page
   - bug: only says "celebrated by" for federal holidays
   - make it say "observed in" because it's more common
