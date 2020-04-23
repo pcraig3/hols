@@ -36,3 +36,21 @@ test('Button displays properly as a link', () => {
   expect($('a').attr('href')).toEqual('/download')
   expect($('a').text()).toEqual('Click me')
 })
+
+test('Button displays with className as a link', () => {
+  expect(1).toBe(1)
+  const $ = cheerio.load(
+    render(
+      html`
+        <${Button} id="link-button" className="ghost" href="/download">Click me</button>
+      `,
+    ),
+  )
+
+  expect($('button').length).toBe(0)
+  expect($('a').length).toBe(1)
+  expect($('a').attr('id')).toEqual('link-button')
+  expect($('a').attr('href')).toEqual('/download')
+  expect($('a').attr('class')).toMatch(/^ghost/)
+  expect($('a').text()).toEqual('Click me')
+})

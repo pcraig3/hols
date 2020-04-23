@@ -6,7 +6,7 @@ const Feedback = () =>
   html`
     <${Layout} route="/api">
       <${Content}>
-        <h1>Holidays API</h1>
+        <h1>Canada Holidays API</h1>
         <p>
           <a href="/">canada-holidays.ca</a> is powered by a JSON API that returns Canada’s
           statutory holidays, and you can use it too.${' '}

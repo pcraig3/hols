@@ -56,7 +56,7 @@ router.get('/', (req, res) => {
   return res.send(
     renderPage({
       pageComponent: 'API',
-      title: 'Holidays API — Canada statutory holidays',
+      title: 'Canada Holidays API — Canada Holidays',
       docProps: {
         meta:
           'A free JSON API for Canada’s statutory holidays. Return all holidays or filter by a specific region.',
@@ -72,7 +72,7 @@ router.get('*', (req, res) => {
 })
 
 // eslint-disable-next-line no-unused-vars
-router.use(function(err, req, res, next) {
+router.use(function (err, req, res, next) {
   return res.send({
     error: {
       status: res.statusCode,
