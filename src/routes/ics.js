@@ -75,6 +75,22 @@ router.get('/ics/federal', dbmw(db, getHolidaysWithProvinces), (req, res) => {
   ics.createEvents(holidays, downloadICS({ req, res, modifier: 'federal' }))
 })
 
+router.get(
+  '/ics/federal/:year(\\d{4})',
+  param2query('year'),
+  checkRedirectIfCurrentYear,
+  dbmw(db, getHolidaysWithProvinces),
+  (req, res) => {
+    let year = ALLOWED_YEARS.find((y) => y === parseInt(req.query.year))
+    if (!year) return res.redirect('/federal')
+
+    const filteredRows = res.locals.rows.filter((h) => h.federal)
+    const holidays = filteredRows.map((h) => formatProvinceEvent(h))
+
+    ics.createEvents(holidays, downloadICS({ req, res, modifier: 'federal', year }))
+  },
+)
+
 router.get('/ics/:provinceId', dbmw(db, getHolidaysWithProvinces), (req, res) => {
   let provinceId = req.params.provinceId
   if (!isProvinceId(provinceId)) {

@@ -44,34 +44,38 @@ describe('Test ics responses', () => {
     })
   })
 
-  describe('Test /ics/AB/:year response', () => {
-    const INVALID_YEARS = ['1', 'false', 'diplodocus']
-    INVALID_YEARS.map((invalidYear) => {
-      test(`it should return 404 for badly formatted year "/ics/AB/${invalidYear}"`, async () => {
-        const response = await request(app).get(`/ics/AB/${invalidYear}`)
-        expect(response.statusCode).toBe(404)
+  describe('Test /ics/*/:year response', () => {
+    const paths = ['AB', 'federal']
+    paths.map((path) => {
+      const INVALID_YEARS = ['1', 'false', 'diplodocus']
+      INVALID_YEARS.map((invalidYear) => {
+        test(`it should return 404 for badly formatted year "/ics/${path}/${invalidYear}"`, async () => {
+          const response = await request(app).get(`/ics/${path}/${invalidYear}`)
+          expect(response.statusCode).toBe(404)
+        })
       })
-    })
 
-    const BAD_YEARS = ['2016', '2017', '2023', '2024']
-    BAD_YEARS.map((badYear) => {
-      test(`it should return 302 for unsupported year "/ics/AB/${badYear}"`, async () => {
-        const response = await request(app).get(`/ics/AB/${badYear}`)
+      const BAD_YEARS = ['2016', '2017', '2023', '2024']
+      BAD_YEARS.map((badYear) => {
+        test(`it should return 302 for unsupported year "/ics/${path}/${badYear}"`, async () => {
+          const response = await request(app).get(`/ics/${path}/${badYear}`)
+          expect(response.statusCode).toBe(302)
+          const expectedPath = path && path !== 'federal' ? `/province/${path}` : `/${path}`
+          expect(response.headers.location).toBe(expectedPath)
+        })
+      })
+
+      test(`it should return 302 for current year "/ics/${path}/${currentYear}"`, async () => {
+        const response = await request(app).get(`/ics/${path}/${currentYear}`)
         expect(response.statusCode).toBe(302)
-        expect(response.headers.location).toBe('/province/AB')
+        expect(response.headers.location).toBe(`/ics/${path}`)
       })
-    })
 
-    test(`it should return 302 for current year "/ics/AB/${currentYear}"`, async () => {
-      const response = await request(app).get(`/ics/AB/${currentYear}`)
-      expect(response.statusCode).toBe(302)
-      expect(response.headers.location).toBe('/ics/AB')
-    })
-
-    GOOD_YEARS.map((goodYear) => {
-      test(`it should return 200 for supported year "/ics/AB/${goodYear}"`, async () => {
-        const response = await request(app).get(`/ics/AB/${goodYear}`)
-        expect(response.statusCode).toBe(200)
+      GOOD_YEARS.map((goodYear) => {
+        test(`it should return 200 for supported year "/ics/${path}/${goodYear}"`, async () => {
+          const response = await request(app).get(`/ics/${path}/${goodYear}`)
+          expect(response.statusCode).toBe(200)
+        })
       })
     })
   })
