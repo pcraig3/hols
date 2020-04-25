@@ -266,6 +266,23 @@ router.get('*', (req, res) => {
 
 // eslint-disable-next-line no-unused-vars
 router.use(function (err, req, res, next) {
+  const errObj = {}
+
+  const status = err.status || err.statusCode || 500
+  res.statusCode = status
+
+  errObj.status = status
+  if (err.message) errObj.message = err.message
+  if (err.stack) errObj.stack = err.stack
+  if (err.code) errObj.code = err.code
+  if (err.name) errObj.name = err.name
+  if (err.type) errObj.type = err.type
+
+  res.locals.err = errObj
+
+  // eslint-disable-next-line no-console
+  process.env.NODE_ENV !== 'production' && console.error(errObj)
+
   return res.send(
     renderPage({
       pageComponent: 'Error',

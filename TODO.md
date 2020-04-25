@@ -1,8 +1,6 @@
 # TODO
 
 - server logs
-  - standard format
-  - handle errors
   - somewhere persistent (thinking azure)
 - Add years to dates on years pages?
 - make API to return CSV format
@@ -14,6 +12,9 @@
 
 # DONE
 
+- server logs
+  - standard format
+  - handle errors
 - remove shortcut ICS routes — all routes need years now
 - bug: events on the same date should have different UIDs in .isc output
 - add years to ICS download paths as well
