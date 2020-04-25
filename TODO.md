@@ -1,18 +1,20 @@
 # TODO
 
-- add holidays by year to the frontend
-  - Add years to dates on years pages?
-  - add new pages to sitemap
+- server logs
+  - somewhere persistent (thinking azure)
+- Add years to dates on years pages?
 - make API to return CSV format
   - page for CSV downloads
 - swagger api docs?
 - add a print button?
 - https://matthewsmith.io/blog/how-to-set-up-cache-busting-in-express
 - list of holidays
-- ? put federal holidays on the canada holiday box province list
 
 # DONE
 
+- server logs
+  - standard format
+  - handle errors
 - remove shortcut ICS routes — all routes need years now
 - bug: events on the same date should have different UIDs in .isc output
 - add years to ICS download paths as well
@@ -38,10 +40,12 @@
   - federal
   - canada
   - 2022/2018
+  - add new pages to sitemap
 - look at the little subtitle on the main page
   - bug: only says "celebrated by" for federal holidays
   - make it say "observed in" because it's more common
     - bug: add federal holidays to the mix
+    - put federal holidays on the canada holiday box province list
 - google analytics events capture specific pages
 - de-emphasize the "download" button
   - bug: shim the link button with JS

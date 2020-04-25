@@ -1,5 +1,6 @@
 const express = require('express')
-const logger = require('morgan')
+const morgan = require('morgan')
+const morganConfig = require('./config/morgan.config')
 const helmet = require('helmet')
 const compression = require('compression')
 const redirectToHTTPS = require('express-http-to-https').redirectToHTTPS
@@ -19,7 +20,7 @@ app
   .use(compression())
 
 // if NODE_ENV does not equal 'test', add a request logger
-process.env.NODE_ENV !== 'test' && app.use(logger('dev'))
+process.env.NODE_ENV !== 'test' && app.use(morgan(morganConfig))
 
 // redirect from the Heroku url to the custom one
 app.use((req, res, next) => {
