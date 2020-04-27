@@ -1,7 +1,7 @@
 openapi: 3.0.0
 info:
   title: Canada Holidays API
-  version: '1.0'
+  version: 1.0.2
   description: 'This API that lists all 28 public holidays for all 13 provinces and territories in Canada, including federal holidays.'
   contact:
     name: Paul Craig
@@ -60,11 +60,11 @@ paths:
                     message: 'Hello / Bonjour! Welcome to the Canada Holidays API / Bienvenue dans l’API canadienne des jours fériés'
                     _links:
                       self:
-                        href: 'http://localhost:3000/api/v1/'
+                        href: 'https://canada-holidays.ca/api/v1/'
                       holidays:
-                        href: 'http://localhost:3000/api/v1/holidays'
+                        href: 'https://canada-holidays.ca/api/v1/holidays'
                       provinces:
-                        href: 'http://localhost:3000/api/v1/provinces'
+                        href: 'https://canada-holidays.ca/api/v1/provinces'
       operationId: Root
       description: Returns a welcome message.
   /api/v1/holidays:
@@ -145,11 +145,10 @@ paths:
       description: Returns Canadian public holidays. Each holiday lists the regions that observe it.
       parameters:
         - schema:
-            type: string
-            default: '2020'
-            pattern: "^\\d{4}$"
-            minLength: 4
-            maxLength: 4
+            type: integer
+            default: 2020
+            minimum: 2018
+            maximum: 2022
           in: query
           description: A calendar year
           name: year
@@ -163,7 +162,7 @@ paths:
               - 'false'
           in: query
           name: federal
-          description: 'A boolean parameter. If true, will return only federal holidays. If false, will return no federal holidays.'
+          description: 'A boolean parameter. If true or 1, will return only federal holidays. If false or 0, will return no federal holidays.'
           allowEmptyValue: true
       tags:
         - holidays
@@ -232,11 +231,10 @@ paths:
       operationId: Provinces
       parameters:
         - schema:
-            type: string
-            default: '2020'
-            pattern: "^\\d{4}$"
-            minLength: 4
-            maxLength: 4
+            type: integer
+            default: 2020
+            minimum: 2018
+            maximum: 2022
           in: query
           description: A calendar year
           name: year
@@ -300,11 +298,10 @@ paths:
       description: Returns a Canadian province or territory with its associated holidays.
       parameters:
         - schema:
-            type: string
-            default: '2020'
-            pattern: "^\\d{4}$"
-            minLength: 4
-            maxLength: 4
+            type: integer
+            default: 2020
+            minimum: 2018
+            maximum: 2022
           in: query
           description: A calendar year
           name: year
@@ -337,8 +334,6 @@ paths:
     parameters:
       - schema:
           type: integer
-          minLength: 1
-          maxLength: 28
           example: 2
           minimum: 1
           maximum: 28
@@ -392,11 +387,10 @@ paths:
       description: Returns one Canadian statutory holiday by integer id. Returns a 404 response for invalid ids.
       parameters:
         - schema:
-            type: string
-            default: '2020'
-            pattern: "^\\d{4}$"
-            minLength: 4
-            maxLength: 4
+            type: integer
+            default: 2020
+            minimum: 2018
+            maximum: 2022
           in: query
           description: A calendar year
           name: year
@@ -441,13 +435,11 @@ components:
           description: French name
           example: Journée Louis Riel
         federal:
-          type: string
+          type: number
           description: Whether this holiday is observed by federally-regulated industries.
           enum:
-            - '0'
-            - '1'
-            - 'true'
-            - 'false'
+            - 1
+            - 0
           format: binary
         provinces:
           type: array
