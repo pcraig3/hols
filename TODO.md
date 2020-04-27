@@ -1,7 +1,6 @@
 # TODO
 
-- server logs
-  - somewhere persistent (thinking azure)
+- /favicon.ico works
 - Add years to dates on years pages?
 - make API to return CSV format
   - page for CSV downloads
@@ -12,9 +11,11 @@
 
 # DONE
 
+- CORS for the API
 - server logs
   - standard format
   - handle errors
+  - somewhere (kind of) persistent
 - remove shortcut ICS routes — all routes need years now
 - bug: events on the same date should have different UIDs in .isc output
 - add years to ICS download paths as well

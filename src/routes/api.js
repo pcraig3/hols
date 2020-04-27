@@ -1,10 +1,13 @@
 const express = require('express')
+var cors = require('cors')
 const router = express.Router()
 const db = require('sqlite')
 const createError = require('http-errors')
 const renderPage = require('../pages/_document.js')
 const { dbmw, checkProvinceIdErr } = require('../utils')
 const { getProvincesWithHolidays, getHolidaysWithProvinces } = require('../queries')
+
+router.use(cors())
 
 router.get('/v1/provinces', dbmw(db, getProvincesWithHolidays), (req, res) => {
   return res.send({ provinces: res.locals.rows })

@@ -281,7 +281,7 @@ router.use(function (err, req, res, next) {
   res.locals.err = errObj
 
   // eslint-disable-next-line no-console
-  process.env.NODE_ENV !== 'production' && console.error(errObj)
+  process.env.NODE_ENV === 'development' && console.error(errObj)
 
   return res.send(
     renderPage({

@@ -42,6 +42,11 @@ describe('Test ui responses', () => {
         /See all statutory holidays in Canada in 2020./,
       )
     })
+
+    test('it should NOT return a CORS header', async () => {
+      const response = await request(app).get('/')
+      expect(response.headers['access-control-allow-origin']).toBe(undefined)
+    })
   })
 
   describe('Test /:year responses', () => {
