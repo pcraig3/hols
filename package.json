@@ -27,6 +27,7 @@
     "@jsbits/easter-day": "^1.0.1",
     "bluebird": "^3.7.2",
     "compression": "^1.7.4",
+    "cors": "^2.8.5",
     "date-fns": "^2.12.0",
     "emotion": "^10.0.27",
     "emotion-server": "^10.0.27",
