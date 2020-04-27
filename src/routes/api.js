@@ -7,10 +7,24 @@ const renderPage = require('../pages/_document.js')
 const { dbmw, checkProvinceIdErr } = require('../utils')
 const { getProvincesWithHolidays, getHolidaysWithProvinces } = require('../queries')
 
+// 1. Import the express-openapi-validator library
+const OpenApiValidator = require('express-openapi-validator').OpenApiValidator
+const path = require('path')
+
 router.use(cors())
 
+// 3. (optionally) Serve the OpenAPI spec
+const spec = path.join(__dirname, '../../reference/Canada-Holidays-API.v1.yaml')
+router.use('/spec', express.static(spec))
+
+new OpenApiValidator({
+  apiSpec: spec,
+  validateRequests: true, // (default)
+  validateResponses: true, // false by default
+}).installSync(router)
+
 router.get('/v1/provinces', dbmw(db, getProvincesWithHolidays), (req, res) => {
-  return res.send({ provinces: res.locals.rows })
+  return res.send({ provinc: res.locals.rows })
 })
 
 router.get(
@@ -76,6 +90,9 @@ router.get('*', (req, res) => {
 
 // eslint-disable-next-line no-unused-vars
 router.use(function (err, req, res, next) {
+  console.log('errs', err)
+  console.log('json', err.toJSON())
+  console.log('string', err.toString())
   return res.send({
     error: {
       status: res.statusCode,

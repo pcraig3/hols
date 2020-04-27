@@ -33,6 +33,7 @@
     "emotion-server": "^10.0.27",
     "express": "^4.17.1",
     "express-http-to-https": "^1.1.4",
+    "express-openapi-validator": "^3.12.7",
     "helmet": "^3.22.0",
     "htm": "^3.0.4",
     "http-errors": "^1.7.3",
