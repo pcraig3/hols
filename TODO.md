@@ -1,7 +1,6 @@
 # TODO
 
 - /favicon.ico works
-- CORS for the API
 - Add years to dates on years pages?
 - make API to return CSV format
   - page for CSV downloads
@@ -12,6 +11,7 @@
 
 # DONE
 
+- CORS for the API
 - server logs
   - standard format
   - handle errors

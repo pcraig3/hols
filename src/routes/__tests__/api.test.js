@@ -50,6 +50,24 @@ describe('Test /api responses', () => {
     )
   }
 
+  describe('Verify CORS headers', () => {
+    const ApiUrls = [
+      '/api',
+      '/api/v1/',
+      '/api/antarctosaurus',
+      '/api/v1/provinces',
+      '/api/v1/holidays',
+      '/api/v1/provinces/AB',
+      '/api/v1/holidays/1',
+    ]
+    ApiUrls.map((url) => {
+      test(`"${url}" should return a CORS header`, async () => {
+        const response = await request(app).get(url)
+        expect(response.headers['access-control-allow-origin']).toEqual('*')
+      })
+    })
+  })
+
   describe('Test /api response', () => {
     test('it should return 200', async () => {
       const response = await request(app).get('/api')
