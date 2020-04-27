@@ -4,6 +4,9 @@
 - make API to return CSV format
   - page for CSV downloads
 - swagger api docs?
+  - add them
+  - test them
+  - write about them
 - add a print button?
 - https://matthewsmith.io/blog/how-to-set-up-cache-busting-in-express
 - list of holidays
