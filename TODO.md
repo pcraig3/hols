@@ -3,9 +3,8 @@
 - Add years to dates on years pages?
 - make API to return CSV format
   - page for CSV downloads
-- swagger api docs?
-  - add them
-  - test them
+- swagger api spec
+  - swagger ui?
   - write about them
 - add a print button?
 - https://matthewsmith.io/blog/how-to-set-up-cache-busting-in-express
@@ -13,6 +12,9 @@
 
 # DONE
 
+- swagger api spec
+  - add them
+  - test them
 - /favicon.ico less 404s
 - CORS for the API
 - server logs
