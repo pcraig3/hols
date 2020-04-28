@@ -1,8 +1,8 @@
 openapi: 3.0.0
 info:
   title: Canada Holidays API
-  version: 1.0.2
-  description: 'This API that lists all 28 public holidays for all 13 provinces and territories in Canada, including federal holidays.'
+  version: 1.0.3
+  description: 'This API lists all 28 public holidays for all 13 provinces and territories in Canada, including federal holidays.'
   contact:
     name: Paul Craig
     url: 'https://canada-holidays.ca/feedback'
@@ -38,22 +38,28 @@ paths:
                         properties:
                           href:
                             type: string
-                            example: 'http://localhost:3000/api/v1/'
+                            example: 'https://canada-holidays.ca/api/v1/'
                             description: Root domain
                       holidays:
                         type: object
                         properties:
                           href:
                             type: string
-                            example: 'http://localhost:3000/api/v1/holidays'
+                            example: 'https://canada-holidays.ca/api/v1/holidays'
                             description: Domain to get all holidays
                       provinces:
                         type: object
                         properties:
                           href:
                             type: string
-                            example: 'http://localhost:3000/api/v1/provinces'
+                            example: 'https://canada-holidays.ca/api/v1/provinces'
                             description: Domain to get all provinces
+                      spec:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+                            example: 'https://canada-holidays.ca/api/v1/spec'
               examples:
                 /:
                   value:
@@ -65,6 +71,8 @@ paths:
                         href: 'https://canada-holidays.ca/api/v1/holidays'
                       provinces:
                         href: 'https://canada-holidays.ca/api/v1/provinces'
+                      spec:
+                        href: 'https://canada-holidays.ca/api/v1/spec'
       operationId: Root
       description: Returns a welcome message.
   /api/v1/holidays:
