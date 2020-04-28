@@ -22,46 +22,49 @@ new OpenApiValidator({
   apiSpec: spec,
   validateRequests: true, // (default)
   validateResponses: true, // false by default
-}).installSync(v1Router)
-
-v1Router.get('/provinces', dbmw(db, getProvincesWithHolidays), (req, res) => {
-  return res.send({ provinces: res.locals.rows })
 })
+  .install(v1Router)
+  .then(() => {
+    // 5. Define routes using Express
+    v1Router.get('/provinces', dbmw(db, getProvincesWithHolidays), (req, res) => {
+      return res.send({ provinces: res.locals.rows })
+    })
 
-v1Router.get('/provinces/:provinceId', dbmw(db, getProvincesWithHolidays), (req, res) => {
-  return res.send({ province: res.locals.rows[0] })
-})
+    v1Router.get('/provinces/:provinceId', dbmw(db, getProvincesWithHolidays), (req, res) => {
+      return res.send({ province: res.locals.rows[0] })
+    })
 
-v1Router.get('/holidays', dbmw(db, getHolidaysWithProvinces), (req, res) => {
-  return res.send({ holidays: res.locals.rows })
-})
+    v1Router.get('/holidays', dbmw(db, getHolidaysWithProvinces), (req, res) => {
+      return res.send({ holidays: res.locals.rows })
+    })
 
-v1Router.get('/holidays/:holidayId', dbmw(db, getHolidaysWithProvinces), (req, res) => {
-  return res.send({ holiday: res.locals.rows[0] })
-})
+    v1Router.get('/holidays/:holidayId', dbmw(db, getHolidaysWithProvinces), (req, res) => {
+      return res.send({ holiday: res.locals.rows[0] })
+    })
 
-v1Router.get('/', (req, res) => {
-  const protocol = req.get('host').includes('localhost') ? 'http' : 'https'
+    v1Router.get('/', (req, res) => {
+      const protocol = req.get('host').includes('localhost') ? 'http' : 'https'
 
-  res.send({
-    message:
-      'Hello / Bonjour! Welcome to the Canada Holidays API / Bienvenue dans l’API canadienne des jours fériés',
-    _links: {
-      self: {
-        href: `${protocol}://${req.get('host')}/api/v1/`,
-      },
-      holidays: {
-        href: `${protocol}://${req.get('host')}/api/v1/holidays`,
-      },
-      provinces: {
-        href: `${protocol}://${req.get('host')}/api/v1/provinces`,
-      },
-      spec: {
-        href: `${protocol}://${req.get('host')}/api/v1/spec`,
-      },
-    },
+      res.send({
+        message:
+          'Hello / Bonjour! Welcome to the Canada Holidays API / Bienvenue dans l’API canadienne des jours fériés',
+        _links: {
+          self: {
+            href: `${protocol}://${req.get('host')}/api/v1/`,
+          },
+          holidays: {
+            href: `${protocol}://${req.get('host')}/api/v1/holidays`,
+          },
+          provinces: {
+            href: `${protocol}://${req.get('host')}/api/v1/provinces`,
+          },
+          spec: {
+            href: `${protocol}://${req.get('host')}/api/v1/spec`,
+          },
+        },
+      })
+    })
   })
-})
 
 apiRouter.get('/', (req, res) => {
   return res.send(
