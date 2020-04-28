@@ -56,6 +56,9 @@ v1Router.get('/', (req, res) => {
       provinces: {
         href: `${protocol}://${req.get('host')}/api/v1/provinces`,
       },
+      spec: {
+        href: `${protocol}://${req.get('host')}/api/v1/spec`,
+      },
     },
   })
 })

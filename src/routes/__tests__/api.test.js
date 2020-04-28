@@ -52,6 +52,7 @@ describe('Test /api responses', () => {
   describe('Verify CORS headers', () => {
     const corsUrls = [
       '/api/v1/',
+      '/api/v1/spec',
       '/api/v1/provinces',
       '/api/v1/holidays',
       '/api/v1/provinces/AB',
@@ -70,6 +71,15 @@ describe('Test /api responses', () => {
         const response = await request(app).get(url)
         expect(response.headers['access-control-allow-origin']).toBe(undefined)
       })
+    })
+  })
+
+  describe('Test /api/spec response', () => {
+    test('it should return 200', async () => {
+      const response = await request(app).get('/api/v1/spec')
+      expect(response.statusCode).toBe(200)
+      expect(response.headers['content-type']).toEqual('text/yaml; charset=UTF-8')
+      expect(response.text).toMatch(/openapi: 3.0.0/)
     })
   })
 
@@ -108,7 +118,7 @@ describe('Test /api responses', () => {
 
     let json = JSON.parse(response.text)
     expect(json.message).toMatch(/Hello \/ Bonjour!/)
-    expect(Object.keys(json._links)).toEqual(['self', 'holidays', 'provinces'])
+    expect(Object.keys(json._links)).toEqual(['self', 'holidays', 'provinces', 'spec'])
   })
 
   describe('for /api/v1/provinces path', () => {

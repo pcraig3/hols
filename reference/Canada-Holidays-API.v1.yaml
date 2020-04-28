@@ -278,8 +278,8 @@ paths:
                         nameEn: Victoria Day
                         nameFr: Fête de la Reine
                         federal: 1
-        '404':
-          description: Not Found
+        '400':
+          description: Bad Request
           content:
             application/json:
               schema:
@@ -291,11 +291,11 @@ paths:
                 /holidays/100:
                   value:
                     error:
-                      status: 404
-                      message: 'Error: No holiday with id “100”'
-                      timestamp: '2020-04-27T05:41:10.710Z'
+                      status: 400
+                      message: 'Error: request.params.provinceId should be equal to one of the allowed values: AB, BC, MB, NB, NL, NS, NT, NU, ON, PE, QC, SK, YT'
+                      timestamp: '2020-04-28T04:02:38.813Z'
       operationId: Province
-      description: Returns a Canadian province or territory with its associated holidays.
+      description: Returns a Canadian province or territory with its associated holidays. Returns a 404 response for invalid abbreviations.
       parameters:
         - schema:
             type: integer
@@ -307,7 +307,7 @@ paths:
           name: year
           allowEmptyValue: true
       tags:
-        - root
+        - provinces
     parameters:
       - schema:
           type: string
@@ -367,8 +367,8 @@ paths:
                         - id: MB
                           nameEn: Manitoba
                           nameFr: Manitoba
-        '404':
-          description: Not Found
+        '400':
+          description: Bad Request
           content:
             application/json:
               schema:
@@ -380,9 +380,9 @@ paths:
                 /holidays/100:
                   value:
                     error:
-                      status: 404
-                      message: 'Error: No holiday with id “100”'
-                      timestamp: '2020-04-27T05:41:10.710Z'
+                      status: 400
+                      message: 'Error: request.params.holidayId should be <= 28'
+                      timestamp: '2020-04-28T03:59:56.605Z'
       operationId: Holiday
       description: Returns one Canadian statutory holiday by integer id. Returns a 404 response for invalid ids.
       parameters:
@@ -539,9 +539,10 @@ components:
       type: object
       x-examples:
         /holidays/100:
-          status: 404
-          message: 'Error: No holiday with id “100”'
-          timestamp: '2020-04-27T05:41:10.710Z'
+          error:
+            status: 400
+            message: 'Error: request.params.holidayId should be <= 28'
+            timestamp: '2020-04-28T03:59:12.427Z'
       properties:
         status:
           type: integer
