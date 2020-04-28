@@ -4,7 +4,6 @@ const Promise = require('bluebird')
 const app = require('../../server.js')
 const cheerio = require('cheerio')
 const { ALLOWED_YEARS } = require('../../config/vars.config')
-const { getCurrentHolidayYear } = require('../../utils')
 
 describe('Test /api responses', () => {
   beforeAll(async () => {
@@ -51,20 +50,36 @@ describe('Test /api responses', () => {
   }
 
   describe('Verify CORS headers', () => {
-    const ApiUrls = [
-      '/api',
+    const corsUrls = [
       '/api/v1/',
-      '/api/antarctosaurus',
+      '/api/v1/spec',
       '/api/v1/provinces',
       '/api/v1/holidays',
       '/api/v1/provinces/AB',
       '/api/v1/holidays/1',
     ]
-    ApiUrls.map((url) => {
+    corsUrls.map((url) => {
       test(`"${url}" should return a CORS header`, async () => {
         const response = await request(app).get(url)
         expect(response.headers['access-control-allow-origin']).toEqual('*')
       })
+    })
+
+    const noCorsUrls = ['/api', '/api/antarctosaurus']
+    noCorsUrls.map((url) => {
+      test(`"${url}" should NOT return a CORS header`, async () => {
+        const response = await request(app).get(url)
+        expect(response.headers['access-control-allow-origin']).toBe(undefined)
+      })
+    })
+  })
+
+  describe('Test /api/spec response', () => {
+    test('it should return 200', async () => {
+      const response = await request(app).get('/api/v1/spec')
+      expect(response.statusCode).toBe(200)
+      expect(response.headers['content-type']).toEqual('text/yaml; charset=UTF-8')
+      expect(response.text).toMatch(/openapi: 3.0.0/)
     })
   })
 
@@ -91,7 +106,7 @@ describe('Test /api responses', () => {
 
     let { error } = JSON.parse(response.text)
     expect(error).toMatchObject({
-      message: 'Error: Could not find route “/v1/dinosaur”',
+      message: 'Error: not found',
       status: response.statusCode,
       timestamp: expect.any(String),
     })
@@ -103,7 +118,7 @@ describe('Test /api responses', () => {
 
     let json = JSON.parse(response.text)
     expect(json.message).toMatch(/Hello \/ Bonjour!/)
-    expect(Object.keys(json._links)).toEqual(['self', 'holidays', 'provinces'])
+    expect(Object.keys(json._links)).toEqual(['self', 'holidays', 'provinces', 'spec'])
   })
 
   describe('for /api/v1/provinces path', () => {
@@ -152,35 +167,35 @@ describe('Test /api responses', () => {
   })
 
   describe('for /api/v1/provinces/:provinceId path', () => {
-    const goodNBs = ['nb', 'NB', 'nB']
-    goodNBs.map((nb) => {
-      test(`it should a province for a good ID: ${nb}`, async () => {
-        const response = await request(app).get(`/api/v1/provinces/${nb}`)
-        expect(response.statusCode).toBe(200)
+    test('it should return a province for a good ID: "NB"', async () => {
+      const response = await request(app).get('/api/v1/provinces/NB')
+      expect(response.statusCode).toBe(200)
 
-        let { province } = JSON.parse(response.text)
+      let { province } = JSON.parse(response.text)
 
-        expect(province).toMatchObject({
-          id: 'NB',
-          nameEn: 'New Brunswick',
-          nameFr: 'Nouveau-Brunswick',
-          nextHoliday: expect.any(Object),
-          holidays: expect.any(Array),
-        })
+      expect(province).toMatchObject({
+        id: 'NB',
+        nameEn: 'New Brunswick',
+        nameFr: 'Nouveau-Brunswick',
+        nextHoliday: expect.any(Object),
+        holidays: expect.any(Array),
       })
     })
 
-    test('it should return an error message for a bad ID', async () => {
-      const response = await request(app).get('/api/v1/provinces/FAKE')
-      expect(response.statusCode).toBe(400)
+    const badIDs = ['nb', 'Nb', 'FAKE']
+    badIDs.map((id) => {
+      test(`it should return an error message for a bad ID: ${id}`, async () => {
+        const response = await request(app).get(`/api/v1/provinces/${id}`)
+        expect(response.statusCode).toBe(400)
 
-      let { error } = JSON.parse(response.text)
+        let { error } = JSON.parse(response.text)
 
-      expect(error).toMatchObject({
-        message:
-          'Error: No province with id “FAKE”. Accepted province IDs are: [AB, BC, MB, NB, NL, NS, NT, NU, ON, PE, QC, SK, YT].',
-        status: response.statusCode,
-        timestamp: expect.any(String),
+        expect(error).toMatchObject({
+          message:
+            'Error: request.params.provinceId should be equal to one of the allowed values: AB, BC, MB, NB, NL, NS, NT, NU, ON, PE, QC, SK, YT',
+          status: response.statusCode,
+          timestamp: expect.any(String),
+        })
       })
     })
   })
@@ -197,7 +212,7 @@ describe('Test /api responses', () => {
       })
     })
 
-    const yesFederal = ['1', 'true', 'TRUE', 'tRuE']
+    const yesFederal = ['1', 'true']
     yesFederal.map((val) => {
       test(`it should return ONLY federal holidays for “?federal=${val}”`, async () => {
         const response = await request(app).get(`/api/v1/holidays?federal=${val}`)
@@ -212,7 +227,7 @@ describe('Test /api responses', () => {
       })
     })
 
-    const noFederal = ['0', 'false', 'FALSE', 'FaLSe']
+    const noFederal = ['0', 'false']
     noFederal.map((val) => {
       test(`it should return NO federal holidays for “?federal=${val}”`, async () => {
         const response = await request(app).get(`/api/v1/holidays?federal=${val}`)
@@ -243,15 +258,14 @@ describe('Test /api responses', () => {
 
       let badYears = ['2017', '2023', '1', null, undefined, false, 'orange', 'christmas']
       badYears.map((year) => {
-        test(`${year} it should return all holidays for ${getCurrentHolidayYear()} with the current year`, async () => {
+        test(`"${year}" it should return 400 with an error message`, async () => {
           const response = await request(app).get(`/api/v1/holidays?year=${year}`)
-          expect(response.statusCode).toBe(200)
+          expect(response.statusCode).toBe(400)
 
-          let { holidays } = JSON.parse(response.text)
-
-          holidays.map((holiday) => {
-            expect(holiday.date.slice(0, 4)).toEqual(getCurrentHolidayYear().toString())
-          })
+          let { error } = JSON.parse(response.text)
+          expect(error.message).toMatch(
+            /^Error: request.query.year should be (integer|>= 2018|<= 2022)/,
+          )
         })
       })
     })
@@ -276,12 +290,12 @@ describe('Test /api responses', () => {
 
     test('it should return an error message for a bad ID', async () => {
       const response = await request(app).get('/api/v1/holidays/1000')
-      expect(response.statusCode).toBe(404)
+      expect(response.statusCode).toBe(400)
 
       let { error } = JSON.parse(response.text)
 
       expect(error).toMatchObject({
-        message: 'Error: No holiday with id “1000”',
+        message: 'Error: request.params.holidayId should be <= 28',
         status: response.statusCode,
         timestamp: expect.any(String),
       })
@@ -301,12 +315,14 @@ describe('Test /api responses', () => {
 
       let badYears = ['2017', '2023', '1', null, undefined, false, 'orange', 'christmas']
       badYears.map((year) => {
-        test(`${year} it should a holiday with the current year`, async () => {
-          const response = await request(app).get(`/api/v1/holidays/16?year=${year}`)
-          expect(response.statusCode).toBe(200)
+        test(`"${year}" it should return 400 with an error message`, async () => {
+          const response = await request(app).get(`/api/v1/holidays?year=${year}`)
+          expect(response.statusCode).toBe(400)
 
-          let { holiday } = JSON.parse(response.text)
-          expect(holiday.date.slice(0, 4)).toEqual(getCurrentHolidayYear().toString())
+          let { error } = JSON.parse(response.text)
+          expect(error.message).toMatch(
+            /^Error: request.query.year should be (integer|>= 2018|<= 2022)/,
+          )
         })
       })
     })
