@@ -13,7 +13,7 @@ Features:
 - Returns "next" holiday for each region
 - Returns holidays for years: `2018`, `2019`, `2020`, `2021`, `2022`
 
-Plus(!) check out all these goodies you get ✨ for free ✨:
+Plus(!) check out all these goodies you get for ✨ free ✨:
 
 - It’s free (✨)
 - <a href="https://twitter.com/pcraig3" target="_blank">Dedicated support channel</a>

@@ -1,10 +1,25 @@
 const { html } = require('../utils')
 const { css } = require('emotion')
+const { theme } = require('../styles')
 const Layout = require('../components/Layout.js')
 const Content = require('../components/Content.js')
+const Details = require('../components/Details.js')
 
 const linkStyle = css`
   text-decoration: none;
+`
+
+const detailsStyle = css`
+  font-size: 1em !important;
+  margin-bottom: ${theme.space.md};
+
+  ul {
+    padding-left: 25px !important;
+
+    @media (${theme.mq.md}) {
+      padding-left: 35px !important;
+    }
+  }
 `
 
 const API = () =>
@@ -39,37 +54,39 @@ const API = () =>
             <code>2020</code>, <code>2021</code>, <code>2022</code>.
           </li>
         </ul>
-        <p>
-          Plus(!!!) check out all these goodies you get for${' '}
-          <span aria-hidden="true">✨</span> free <span aria-hidden="true">✨</span>:
-        </p>
-
-        <ul>
-          <li>It’s free (<span aria-hidden="true">✨</span>)</li>
-          <li>
-            <a href="https://twitter.com/pcraig3" target="_blank">Dedicated support channel</a>
-          </li>
-          <li>Kind of bilingual (EN & FR)</li>
-          <li>
-            Pretty much compliant with the${' '}
-            <a
-              href="https://www.canada.ca/en/government/system/digital-government/modern-emerging-technologies/government-canada-standards-apis.html"
-              target="_blank"
-              >Government of Canada Standards on APIs</a
-            >${' '} (heck yes <span aria-hidden="true">🤙</span>)
-          </li>
-          <li>
-            <a href="https://github.com/pcraig3/hols" target="_blank">Open source</a> which is cool
-            if you’re a nerd
-          </li>
-          <li>
-            <a
-              href="https://github.com/pcraig3/hols/blob/master/reference/Canada-Holidays-API.v1.yaml"
-              target="_blank"
-              >Documented with an OpenAPI spec</a
-            >${' '}which is <em>even more</em> cool for <em>even nerdier</em> nerds
-          </li>
-        </ul>
+        <${Details}
+          summary="Plus(!!!) check out all the goodies you get for free"
+          className=${detailsStyle}
+          data-event="true"
+          data-label="api-features"
+        >
+          <ul>
+            <li>It’s free (<span aria-hidden="true">✨</span>)</li>
+            <li>
+              <a href="https://twitter.com/pcraig3" target="_blank">Dedicated support channel</a>
+            </li>
+            <li>Kind of bilingual (EN & FR)</li>
+            <li>
+              Pretty much compliant with the${' '}
+              <a
+                href="https://www.canada.ca/en/government/system/digital-government/modern-emerging-technologies/government-canada-standards-apis.html"
+                target="_blank"
+                >Government of Canada Standards on APIs</a
+              >${' '} (heck yes <span aria-hidden="true">🤙</span>)
+            </li>
+            <li>
+              <a href="https://github.com/pcraig3/hols" target="_blank">Open source</a> which is
+              cool if you’re a nerd
+            </li>
+            <li>
+              <a
+                href="https://github.com/pcraig3/hols/blob/master/reference/Canada-Holidays-API.v1.yaml"
+                target="_blank"
+                >Documented with an OpenAPI spec</a
+              >${' '}which is <em>even more</em> cool for <em>even nerdier</em> nerds
+            </li>
+          </ul>
+        <//>
         <p>Definitely use it for your billions of dollars mission-critical system.</p>
 
         <h2>Documentation</h2>

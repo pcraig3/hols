@@ -67,9 +67,9 @@ const styles = css`
   }
 `
 
-const Details = ({ summary, id, children, ...props }) => {
+const Details = ({ summary, id, children, className, ...props }) => {
   return html`
-    <details class=${styles} id=${id}>
+    <details class=${className ? `${styles} ${className}` : styles} id=${id}>
       <summary ...${props}>
         <span ...${props}>${summary}</span>
       </summary>
