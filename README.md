@@ -1,15 +1,17 @@
-# hols
+# Canada Holidays
 
-This is a fun little node app for Canada's statutory holidays. There's a frontend you can look at and an API you can use.
+This is a fun little [express](https://expressjs.com/) app for Canada's statutory holidays. There's a frontend you can look at and an API you can use.
 
-- The frontend is written using [htm](https://github.com/developit/htm) on the server. Very amusing.
-- The backend API is pretty bare-metal: it's using an initial SQLite migration file stored in memory and then it does "db reads" and spits out rows.
+- The frontend is using [htm](https://github.com/developit/htm) server-rendered components. Very amusing.
+- The backend API is pretty bare-metal: it's using an initial SQLite migration file stored in memory and then it does "db reads" and spits out JSON.
 
 ## Using the API
 
 Please get in touch if you are using the API, because I can probably make it work better if I have real-life use-cases.
 
 [Read the API docs](https://github.com/pcraig3/hols/blob/master/API.md).
+
+There's an OpenAPI spec at [`Canada-Holidays-API.v1.yaml`](https://github.com/pcraig3/hols/blob/master/reference/Canada-Holidays-API.v1.yaml) and a <a href="https://app.swaggerhub.com/apis/pcraig3/canada-holidays/" target="_blank">SwaggerHub</a> page where you can test the endpoints.
 
 ## Getting started
 
