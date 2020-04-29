@@ -105,6 +105,10 @@ const contentPageStyles = css`
     }
   }
 
+  code {
+    font-size: 1.05em;
+  }
+
   footer {
     margin-top: calc(${theme.space.xl} + ${theme.space.xl});
   }
