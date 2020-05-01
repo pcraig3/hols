@@ -9,6 +9,7 @@
 
 # DONE
 
+- redirect yearless /ics url paths to the current year
 - swagger api spec
   - add them
   - test them

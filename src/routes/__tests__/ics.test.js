@@ -20,23 +20,26 @@ describe('Test ics responses', () => {
   })
 
   describe('Test /ics response', () => {
-    test('it should return 404', async () => {
+    test('it should return 301 with current year in domain', async () => {
       const response = await request(app).get('/ics')
-      expect(response.statusCode).toBe(404)
+      expect(response.statusCode).toBe(301)
+      expect(response.headers.location).toBe('/ics/2020')
     })
   })
 
   describe('Test /ics/federal response', () => {
-    test('it should return 404', async () => {
+    test('it should return 301 with current year in domain', async () => {
       const response = await request(app).get('/ics/federal')
-      expect(response.statusCode).toBe(404)
+      expect(response.statusCode).toBe(301)
+      expect(response.headers.location).toBe('/ics/federal/2020')
     })
   })
 
   describe('Test /ics/AB response', () => {
-    test('it should return 404', async () => {
+    test('it should return 301 with current year in domain', async () => {
       const response = await request(app).get('/ics/AB')
-      expect(response.statusCode).toBe(404)
+      expect(response.statusCode).toBe(301)
+      expect(response.headers.location).toBe('/ics/AB/2020')
     })
   })
 
