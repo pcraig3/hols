@@ -19,24 +19,14 @@ describe('Test ics responses', () => {
     db.close()
   })
 
-  describe('Test /ics response', () => {
-    test('it should return 404', async () => {
-      const response = await request(app).get('/ics')
-      expect(response.statusCode).toBe(404)
-    })
-  })
-
-  describe('Test /ics/federal response', () => {
-    test('it should return 404', async () => {
-      const response = await request(app).get('/ics/federal')
-      expect(response.statusCode).toBe(404)
-    })
-  })
-
-  describe('Test /ics/AB response', () => {
-    test('it should return 404', async () => {
-      const response = await request(app).get('/ics/AB')
-      expect(response.statusCode).toBe(404)
+  const noYearURLs = ['/ics', '/ics/federal', '/ics/AB']
+  noYearURLs.map((url) => {
+    describe(`Test "${url}" response`, () => {
+      test('it should return 301 with current year in domain', async () => {
+        const response = await request(app).get(url)
+        expect(response.statusCode).toBe(301)
+        expect(response.headers.location).toBe(`${url}/2020`)
+      })
     })
   })
 

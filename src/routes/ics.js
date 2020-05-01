@@ -61,6 +61,8 @@ const downloadICS = ({ req, res, modifier = null, year = getCurrentHolidayYear()
   }
 }
 
+router.get('/ics', (req, res) => res.redirect(301, `/ics/${getCurrentHolidayYear()}`))
+
 router.get(
   '/ics/:year(\\d{4})',
   param2query('year'),
@@ -74,6 +76,10 @@ router.get(
     ics.createEvents(holidays, downloadICS({ req, res, year }))
   },
 )
+
+router.get('/ics/federal', (req, res) => {
+  return res.redirect(301, `/ics/federal/${getCurrentHolidayYear()}`)
+})
 
 router.get(
   '/ics/federal/:year(\\d{4})',
@@ -90,8 +96,15 @@ router.get(
   },
 )
 
+router.get('/ics/:provinceId(\\w{2})', (req, res) => {
+  let provinceId = req.params.provinceId
+  return isProvinceId(provinceId)
+    ? res.redirect(301, `/ics/${provinceId}/${getCurrentHolidayYear()}`)
+    : res.redirect(`/province/${provinceId}`) // if bad province ID, redirect will be to a 404 page
+})
+
 router.get(
-  '/ics/:provinceId/:year(\\d{4})',
+  '/ics/:provinceId(\\w{2})/:year(\\d{4})',
   param2query('year'),
   dbmw(db, getHolidaysWithProvinces),
   (req, res) => {
