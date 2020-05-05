@@ -4,6 +4,7 @@ const {
   upcomingHolidays,
   getCurrentHolidayYear,
   isProvinceId,
+  pe2pei,
   getProvinceIdOrFederalString,
 } = require('../index')
 const holidays = require('./data.skip')
@@ -91,7 +92,7 @@ describe('Test getCurrentHolidayYear', () => {
     global.Date = RealDate
   })
 
-  const mockDate = dateString => {
+  const mockDate = (dateString) => {
     global.Date.now = () => new Date(dateString)
   }
 
@@ -132,6 +133,16 @@ describe('Test isProvinceId', () => {
 
   test('returns false for a non-province id', () => {
     expect(isProvinceId('hawaii')).toBe(false)
+  })
+})
+
+describe('Test pe2pei', () => {
+  test('returns "PEI" for "PE"', () => {
+    expect(pe2pei('PE')).toBe('PEI')
+  })
+
+  test('returns original string for anything else', () => {
+    expect(pe2pei('ON')).toBe('ON')
   })
 })
 

@@ -1,5 +1,5 @@
 const { css } = require('emotion')
-const { html, getProvinceIdOrFederalString } = require('../utils')
+const { html, pe2pei, getProvinceIdOrFederalString } = require('../utils')
 const { theme, visuallyHidden, horizontalPadding, insideContainer } = require('../styles')
 const Layout = require('../components/Layout.js')
 const DateHtml = require('../components/DateHtml.js')
@@ -93,7 +93,8 @@ const createRows = (holidays, federal, isCurrentYear) => {
     let provincesHTML = holiday.provinces.map(
       (p, i) =>
         html`
-          <a href="/province/${p.id}" title="Holidays for ${p.nameEn}">${p.id}</a>${i + 1 ===
+          <a href="/province/${p.id}" title="Holidays for ${p.nameEn}">${pe2pei(p.id)}</a>${i +
+            1 ===
           holiday.provinces.length
             ? ''
             : ', '}
