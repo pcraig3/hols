@@ -1,4 +1,4 @@
-const { html } = require('../utils')
+const { html, pe2pei } = require('../utils')
 
 const ObservingProvinces = ({ provinces = [], federal = false }) => {
   if (provinces.length === 13) {
@@ -47,7 +47,9 @@ const ObservingProvinces = ({ provinces = [], federal = false }) => {
     return html`
       <p>
         Observed in
-        ${provinces.map((p) => html`${' '}<a href=${`/province/${p.id}`}>${p.id}</a>${','}`)}
+        ${provinces.map(
+          (p) => html`${' '}<a href=${`/province/${p.id}`}>${pe2pei(p.id)}</a>${','}`,
+        )}
         ${' '}and by${' '}<a href="/federal">federal industries</a>
       </p>
     `
@@ -58,7 +60,7 @@ const ObservingProvinces = ({ provinces = [], federal = false }) => {
       Observed in
       ${provinces.map(
         (p) => html`
-          ${isLastProvince(p) ? ' and ' : ' '}<a href=${`/province/${p.id}`}>${p.id}</a
+          ${isLastProvince(p) ? ' and ' : ' '}<a href=${`/province/${p.id}`}>${pe2pei(p.id)}</a
           >${isLastProvince(p) ? '' : ','}
         `,
       )}

@@ -218,6 +218,8 @@ const getCurrentHolidayYear = () => {
   return d.getUTCFullYear()
 }
 
+const pe2pei = (provinceId) => (provinceId === 'PE' ? 'PEI' : provinceId)
+
 /**
  * This function returns a provinceId if one is passed in, the string 'federal', if federal exists and is truthy,
  * or undefined, if neither are there.
@@ -251,5 +253,6 @@ module.exports = {
   nextHoliday,
   upcomingHolidays,
   getCurrentHolidayYear,
+  pe2pei,
   getProvinceIdOrFederalString,
 }

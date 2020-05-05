@@ -12,6 +12,7 @@ const {
   checkRedirectIfCurrentYear,
   param2query,
   nextHoliday,
+  pe2pei,
   getCurrentHolidayYear,
 } = require('../utils')
 const { getProvinces, getHolidaysWithProvinces, getProvincesWithHolidays } = require('../queries')
@@ -61,6 +62,8 @@ router.get(
   },
 )
 
+router.get('/province/PEI', (req, res) => res.redirect(301, '/province/PE'))
+
 router.get(
   '/province/:provinceId',
   checkProvinceIdErr,
@@ -70,14 +73,16 @@ router.get(
     const year = getCurrentHolidayYear()
     const { holidays, nextHoliday, nameEn: provinceName, id: provinceId } = res.locals.rows[0]
 
-    const meta = `${provinceId}’s next stat holiday is ${getMeta(
+    const meta = `${provinceName}’s next stat holiday is ${getMeta(
       nextHoliday,
     )}. See all statutory holidays in ${provinceName}, Canada in ${year}.`
 
     return res.send(
       renderPage({
         pageComponent: 'Province',
-        title: `${provinceName} (${provinceId}) statutory holidays in ${year} — Canada Holidays`,
+        title: `${provinceName} (${pe2pei(
+          provinceId,
+        )}) statutory holidays in ${year} — Canada Holidays`,
         docProps: { meta, path: req.path },
         props: {
           data: { holidays, nextHoliday, provinceName, provinceId, year },
@@ -103,7 +108,9 @@ router.get(
     return res.send(
       renderPage({
         pageComponent: 'Province',
-        title: `${provinceName} (${provinceId}) statutory holidays in ${year} — Canada Holidays`,
+        title: `${provinceName} (${pe2pei(
+          provinceId,
+        )}) statutory holidays in ${year} — Canada Holidays`,
         docProps: { meta, path: req.path },
         props: {
           data: {

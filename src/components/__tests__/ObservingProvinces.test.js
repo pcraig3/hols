@@ -48,7 +48,7 @@ describe('ObservingProvinces', () => {
     const provinces = getProvinces(3)
 
     const $ = renderObservingProvinces({ provinces })
-    expect($('p').text()).toEqual('Observed in PE, QC, and SK')
+    expect($('p').text()).toEqual('Observed in PEI, QC, and SK')
   })
 
   describe('with federal industries', () => {
@@ -79,7 +79,7 @@ describe('ObservingProvinces', () => {
       const provinces = getProvinces(3)
 
       const $ = renderObservingProvinces({ provinces, federal: true })
-      expect($('p').text()).toEqual('Observed in PE, QC, SK, and by federal industries')
+      expect($('p').text()).toEqual('Observed in PEI, QC, SK, and by federal industries')
     })
   })
 

@@ -182,10 +182,20 @@ describe('Test ui responses', () => {
         expect($('title').text()).toEqual(
           'Manitoba (MB) statutory holidays in 2020 — Canada Holidays',
         )
-        expect($('meta[name="description"]').attr('content')).toMatch(/^MB’s next stat holiday is/)
+        expect($('meta[name="description"]').attr('content')).toMatch(
+          /^Manitoba’s next stat holiday is/,
+        )
         expect($('meta[name="description"]').attr('content')).toMatch(
           /See all statutory holidays in Manitoba, Canada in 2020/,
         )
+      })
+    })
+
+    describe('Test /province/PEI response', () => {
+      test('it should return 301', async () => {
+        const response = await request(app).get('/province/PEI')
+        expect(response.statusCode).toBe(301)
+        expect(response.headers.location).toEqual('/province/PE')
       })
     })
 
