@@ -1,9 +1,5 @@
 # TODO
 
-- PEI, let's call it "PEI" on the screen at least
-  - on the meta tag
-  - on the holiday listing page
-  - on the holiday box
 - sqlite new version?
 - Add years to dates on years pages?
 - make API to return CSV format
@@ -14,6 +10,11 @@
 
 # DONE
 
+- PEI, let's call it "PEI" on the screen at least
+  - on the meta tag
+  - on the holiday listing page
+  - on the holiday box
+  - redirect /provinces/PEI to /provinces/PE
 - redirect yearless /ics url paths to the current year
 - swagger api spec
   - add them
