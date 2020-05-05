@@ -70,7 +70,7 @@ router.get(
     const year = getCurrentHolidayYear()
     const { holidays, nextHoliday, nameEn: provinceName, id: provinceId } = res.locals.rows[0]
 
-    const meta = `${provinceId}’s next stat holiday is ${getMeta(
+    const meta = `${provinceName}’s next stat holiday is ${getMeta(
       nextHoliday,
     )}. See all statutory holidays in ${provinceName}, Canada in ${year}.`
 

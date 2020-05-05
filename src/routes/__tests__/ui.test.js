@@ -182,7 +182,9 @@ describe('Test ui responses', () => {
         expect($('title').text()).toEqual(
           'Manitoba (MB) statutory holidays in 2020 — Canada Holidays',
         )
-        expect($('meta[name="description"]').attr('content')).toMatch(/^MB’s next stat holiday is/)
+        expect($('meta[name="description"]').attr('content')).toMatch(
+          /^Manitoba’s next stat holiday is/,
+        )
         expect($('meta[name="description"]').attr('content')).toMatch(
           /See all statutory holidays in Manitoba, Canada in 2020/,
         )
