@@ -191,6 +191,14 @@ describe('Test ui responses', () => {
       })
     })
 
+    describe('Test /province/PEI response', () => {
+      test('it should return 301', async () => {
+        const response = await request(app).get('/province/PEI')
+        expect(response.statusCode).toBe(301)
+        expect(response.headers.location).toEqual('/province/PE')
+      })
+    })
+
     describe('Test /province/:provinceId/:year responses', () => {
       test('it should return the h1, title, and meta tag for MB in 2021', async () => {
         const response = await request(app).get('/province/MB/2021')

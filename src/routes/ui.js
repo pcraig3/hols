@@ -62,6 +62,8 @@ router.get(
   },
 )
 
+router.get('/province/PEI', (req, res) => res.redirect(301, '/province/PE'))
+
 router.get(
   '/province/:provinceId',
   checkProvinceIdErr,
