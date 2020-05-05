@@ -103,7 +103,7 @@ const createRows = (holidays, federal, isCurrentYear) => {
 
     if (holiday.federal) {
       provincesHTML = html`
-        <a href="/federal" title="Federal holidays">Federal</a>${provincesHTML.length
+        <a href="/federal" title="Federal holidays">Federal holiday</a>${provincesHTML.length
           ? ', '
           : ''}${provincesHTML}
       `
