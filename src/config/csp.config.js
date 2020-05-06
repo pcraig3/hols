@@ -8,6 +8,10 @@ module.exports = {
   formAction: ["'self'"],
   frameAncestors: ["'none'"],
   imgSrc: ["'self'", 'data:', 'https://www.google-analytics.com'],
-  scriptSrc: ["'self'", 'https://www.google-analytics.com'],
+  scriptSrc: [
+    "'self'",
+    "'sha256-vmyqYv8llK+DTbFomsM0G2wJMexFKZZPejzpvzQF+ek='",
+    'https://www.google-analytics.com',
+  ],
   styleSrc: ["'self'", "'unsafe-inline'", 'https://fonts.googleapis.com'],
 }
