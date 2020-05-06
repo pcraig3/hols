@@ -2,7 +2,7 @@ const { renderStylesToString } = require('emotion-server')
 const render = require('preact-render-to-string')
 const { html, metaIfSHA, gaIfProd } = require('../utils')
 const { theme } = require('../styles')
-const { printStyles } = require('../printStyles')
+const { fontStyles, printStyles } = require('../headStyles')
 
 const document = ({ title, content, docProps: { meta, path } }) => {
   return `
@@ -32,7 +32,7 @@ const document = ({ title, content, docProps: { meta, path } }) => {
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
         <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
         <link rel="manifest" href="/site.webmanifest">
-        <link href="https://fonts.googleapis.com/css?family=Gothic+A1:300,400,500,600,700&display=swap" rel="stylesheet" />
+        <style>${fontStyles};</style>
         <style>
           :root {
             --region-select-width: auto;
