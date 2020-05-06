@@ -1,8 +1,8 @@
 const { renderStylesToString } = require('emotion-server')
 const render = require('preact-render-to-string')
-const { html, metaIfSHA, gaIfProd } = require('../utils')
+const { html, metaIfSHA } = require('../utils')
 const { theme } = require('../styles')
-const { fontStyles, printStyles } = require('../headStyles')
+const { fontStyles, printStyles, ga } = require('../headStyles')
 
 const document = ({ title, content, docProps: { meta, path } }) => {
   return `
@@ -27,7 +27,12 @@ const document = ({ title, content, docProps: { meta, path } }) => {
         <meta name="twitter:creator" content="@pcraig3" />
 
         <title>${title}</title>
-        ${gaIfProd() || ''}
+        ${
+          process.env.NODE_ENV === 'production'
+            ? `<script>${ga}</script>
+              <script async src='https://www.google-analytics.com/analytics.js'></script>`
+            : ''
+        }
         <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
         <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">

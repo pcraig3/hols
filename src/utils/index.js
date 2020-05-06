@@ -132,13 +132,6 @@ const metaIfSHA = () =>
   process.env.GITHUB_SHA &&
   `<meta name="keywords" content="GITHUB_SHA=${validator.escape(process.env.GITHUB_SHA)}" />`
 
-// return analytics scripts if "production" rather than dev
-const gaIfProd = () =>
-  process.env.NODE_ENV === 'production' &&
-  `<script src="/js/ga.js"></script>
-  <script async src='https://www.google-analytics.com/analytics.js'></script>
-  `
-
 /**
  * Function to take an array of objects and object of objects
  * with the keys being one of the inner-object values
@@ -241,7 +234,6 @@ const getProvinceIdOrFederalString = ({ provinceId, federal } = {}) => {
 module.exports = {
   html,
   metaIfSHA,
-  gaIfProd,
   array2Obj,
   dbmw,
   isProvinceId,
