@@ -117,8 +117,14 @@ const styles = ({ accent = theme.color.red, focus = theme.color.focus } = {}) =>
     visibility: hidden;
   }
 
-  *[data-hidden] {
-    display: none;
+  .js & {
+    *[data-display-none="true"] {
+      display: none;
+    }
+
+    *[data-hidden="true"] {
+      visibility: hidden;
+    }
   }
 `
 
@@ -162,7 +168,7 @@ const ProvincePicker = ({ provinceId, federal, year = 2020 }) => {
 
   return html`
     <div class=${provinceIdOrFederal ? styles(theme.color[provinceIdOrFederal]) : styles()}>
-      <div>
+      <div id="picker-container" data-hidden="true">
         <form action="/provinces" method="post">
           <div>
             <div id="region-select-width" aria-hidden="true">${regionName}</div>

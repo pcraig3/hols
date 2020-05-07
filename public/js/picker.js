@@ -2,7 +2,10 @@
 var selectPadding = 42;
 var root = document.documentElement;
 var regionButton = document.getElementById('region-select__button');
-regionButton.setAttribute('data-hidden', true);
+regionButton.setAttribute('data-display-none', true);
+
+var pickerContainer = document.getElementById('picker-container');
+pickerContainer.setAttribute('data-hidden', false);
 
 function addChangeListener(node) {
   node.addEventListener('change', function (event) {

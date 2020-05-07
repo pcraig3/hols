@@ -94,7 +94,11 @@ const document = ({ title, content, docProps: { meta, path } }) => {
          ${printStyles};
         </style>
       </head>
-      <body id="body">
+      <body id="body" class='no-js'>
+        <script>
+          document.body.classList.remove("no-js");
+          document.body.classList.add("js");
+        </script>
         ${content}
         <script src="/js/sweet-scroll.min.js?v=${process.env.npm_package_version}"></script>
         <script src="/js/script.js?v=${process.env.npm_package_version}"></script>

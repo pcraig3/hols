@@ -11,6 +11,7 @@ module.exports = {
   scriptSrc: [
     "'self'",
     "'sha256-vmyqYv8llK+DTbFomsM0G2wJMexFKZZPejzpvzQF+ek='",
+    "'sha256-Wezgm/yRorRVzqbr6vDdLOJEGKDTVKRuWZ2Yh53e/EU='",
     'https://www.google-analytics.com',
   ],
   styleSrc: ["'self'", "'unsafe-inline'", 'https://fonts.googleapis.com'],
