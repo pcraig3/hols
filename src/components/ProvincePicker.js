@@ -216,7 +216,7 @@ const ProvincePicker = ({ provinceId, federal, year = 2020 }) => {
           </div>
         </form>
       </div>
-      <script src="/js/picker.js"></script>
+      <script src="/js/picker.js?v=${process.env.npm_package_version}"></script>
     </div>
   `
 }
