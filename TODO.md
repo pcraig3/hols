@@ -5,11 +5,12 @@
 - make API to return CSV format
   - page for CSV downloads
 - add a print button?
-- https://matthewsmith.io/blog/how-to-set-up-cache-busting-in-express
 - list of holidays
 
 # DONE
 
+- cache static files for longer than not at all
+  - set up cache busting in express
 - PEI, let's call it "PEI" on the screen at least
   - on the meta tag
   - on the holiday listing page
