@@ -10,6 +10,7 @@
 
 # DONE
 
+- cache static files for longer than not at all
 - PEI, let's call it "PEI" on the screen at least
   - on the meta tag
   - on the holiday listing page

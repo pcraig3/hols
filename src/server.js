@@ -16,7 +16,7 @@ app
   // both of these are needed to parse post request params
   .use(express.urlencoded({ extended: true }))
   .use(express.json())
-  .use(express.static('public'))
+  .use(express.static('public', { maxage: '3d' }))
   .use(compression())
 
 // if NODE_ENV does not equal 'test', add a request logger
