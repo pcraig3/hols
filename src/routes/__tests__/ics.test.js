@@ -1,5 +1,5 @@
 const request = require('supertest')
-const db = require('sqlite')
+const { initDB, getDB } = require('../../db.js')
 const Promise = require('bluebird')
 const app = require('../../server.js')
 const { ALLOWED_YEARS } = require('../../config/vars.config')
@@ -8,15 +8,13 @@ describe('Test ics responses', () => {
   beforeAll(async () => {
     await Promise.resolve()
       // First, try to open the database
-      .then(() => db.open('./database.sqlite', { Promise, cached: true })) // <=
-      // Update db schema to the latest version using SQL-based migrations
-      .then(() => db.migrate()) // <=
+      .then(() => initDB())
       // Display error message if something went wrong
       .catch((err) => console.error(err.stack)) // eslint-disable-line no-console
   })
 
   afterAll(() => {
-    db.close()
+    getDB().close()
   })
 
   const noYearURLs = ['/ics', '/ics/federal', '/ics/AB']

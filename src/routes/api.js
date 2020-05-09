@@ -4,7 +4,6 @@ const v1Router = express.Router()
 
 const cors = require('cors')
 const path = require('path')
-const db = require('sqlite')
 const createError = require('http-errors')
 const renderPage = require('../pages/_document.js')
 const { dbmw } = require('../utils')
@@ -26,19 +25,19 @@ new OpenApiValidator({
   .install(v1Router)
   .then(() => {
     // 5. Define routes using Express
-    v1Router.get('/provinces', dbmw(db, getProvincesWithHolidays), (req, res) => {
+    v1Router.get('/provinces', dbmw(getProvincesWithHolidays), (req, res) => {
       return res.send({ provinces: res.locals.rows })
     })
 
-    v1Router.get('/provinces/:provinceId', dbmw(db, getProvincesWithHolidays), (req, res) => {
+    v1Router.get('/provinces/:provinceId', dbmw(getProvincesWithHolidays), (req, res) => {
       return res.send({ province: res.locals.rows[0] })
     })
 
-    v1Router.get('/holidays', dbmw(db, getHolidaysWithProvinces), (req, res) => {
+    v1Router.get('/holidays', dbmw(getHolidaysWithProvinces), (req, res) => {
       return res.send({ holidays: res.locals.rows })
     })
 
-    v1Router.get('/holidays/:holidayId', dbmw(db, getHolidaysWithProvinces), (req, res) => {
+    v1Router.get('/holidays/:holidayId', dbmw(getHolidaysWithProvinces), (req, res) => {
       return res.send({ holiday: res.locals.rows[0] })
     })
 

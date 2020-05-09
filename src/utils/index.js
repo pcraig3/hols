@@ -2,6 +2,7 @@ const { h } = require('preact')
 const htm = require('htm')
 const validator = require('validator')
 const createError = require('http-errors')
+const { getDB } = require('../db')
 const { ALLOWED_YEARS, PROVINCE_IDS } = require('../config/vars.config')
 
 const html = htm.bind(h)
@@ -11,7 +12,7 @@ const html = htm.bind(h)
 // takes a function that is a database query
 // this middleware is a convience function so that we don't have to write
 // "try / catch" in all our database query functions
-const dbmw = (db, cb) => {
+const dbmw = (cb) => {
   return async (req, res, next) => {
     const _parseFederal = (req) => {
       if (req.query.federal !== undefined) {
@@ -44,7 +45,7 @@ const dbmw = (db, cb) => {
     }
 
     try {
-      res.locals.rows = await cb(db, options)
+      res.locals.rows = await cb(getDB(), options)
     } catch (err) {
       return next(err)
     }
