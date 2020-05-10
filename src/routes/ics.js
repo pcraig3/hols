@@ -1,6 +1,5 @@
 const express = require('express')
 const router = express.Router()
-const db = require('sqlite')
 const ics = require('ics')
 const createError = require('http-errors')
 const { dbmw, isProvinceId, getCurrentHolidayYear, param2query } = require('../utils/index')
@@ -66,7 +65,7 @@ router.get('/ics', (req, res) => res.redirect(301, `/ics/${getCurrentHolidayYear
 router.get(
   '/ics/:year(\\d{4})',
   param2query('year'),
-  dbmw(db, getHolidaysWithProvinces),
+  dbmw(getHolidaysWithProvinces),
   (req, res) => {
     let year = ALLOWED_YEARS.find((y) => y === parseInt(req.query.year))
     if (!year) return res.redirect('/')
@@ -84,7 +83,7 @@ router.get('/ics/federal', (req, res) => {
 router.get(
   '/ics/federal/:year(\\d{4})',
   param2query('year'),
-  dbmw(db, getHolidaysWithProvinces),
+  dbmw(getHolidaysWithProvinces),
   (req, res) => {
     let year = ALLOWED_YEARS.find((y) => y === parseInt(req.query.year))
     if (!year) return res.redirect('/federal')
@@ -106,7 +105,7 @@ router.get('/ics/:provinceId(\\w{2})', (req, res) => {
 router.get(
   '/ics/:provinceId(\\w{2})/:year(\\d{4})',
   param2query('year'),
-  dbmw(db, getHolidaysWithProvinces),
+  dbmw(getHolidaysWithProvinces),
   (req, res) => {
     let provinceId = req.params.provinceId
     let year = ALLOWED_YEARS.find((y) => y === parseInt(req.query.year))
