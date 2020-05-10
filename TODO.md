@@ -1,11 +1,11 @@
 # TODO
 
-- sqlite new version?
 - Add years to dates on years pages?
 - make API to return CSV format
   - page for CSV downloads
 - add a print button?
 - list of holidays
+- sqlite new version?
 
 # DONE
 
