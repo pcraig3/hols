@@ -1,5 +1,8 @@
 # TODO
 
+- add next/previous links at the bottom
+- add sources
+- figure out about optional holidays
 - Add years to dates on years pages?
 - make API to return CSV format
   - page for CSV downloads
