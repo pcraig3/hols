@@ -1,11 +1,11 @@
 openapi: 3.0.0
 info:
   title: Canada Holidays API
-  version: 1.0.3
+  version: 1.1.0
   description: 'This API lists all 28 public holidays for all 13 provinces and territories in Canada, including federal holidays.'
   contact:
     name: Paul Craig
-    url: 'https://canada-holidays.ca/feedback'
+    url: 'https://canada-holidays.ca/api'
     email: paul@pcraig3.ca
   license:
     name: MIT
@@ -96,10 +96,11 @@ paths:
                   value:
                     holidays:
                       - id: 1
-                        observedDate: '2020-01-01'
+                        date: '2020-01-01'
                         nameEn: New Year’s Day
                         nameFr: Jour de l’An
                         federal: 1
+                        observedDate: '2020-01-01'
                         provinces:
                           - id: AB
                             nameEn: Alberta
@@ -141,10 +142,11 @@ paths:
                             nameEn: Yukon
                             nameFr: Yukon
                       - id: 2
-                        observedDate: '2020-02-17'
+                        date: '2020-02-17'
                         nameEn: Louis Riel Day
                         nameFr: Journée Louis Riel
                         federal: 0
+                        observedDate: '2020-02-17'
                         provinces:
                           - id: MB
                             nameEn: Manitoba
@@ -201,41 +203,47 @@ paths:
                         nameFr: Alberta
                         holidays:
                           - id: 1
-                            observedDate: '2020-01-01'
+                            date: '2020-01-01'
                             nameEn: New Year’s Day
                             nameFr: Jour de l’An
                             federal: 1
+                            observedDate: '2020-01-01'
                           - id: 4
-                            observedDate: '2020-02-17'
+                            date: '2020-02-17'
                             nameEn: Family Day
                             nameFr: Fête de la famille
                             federal: 0
+                            observedDate: '2020-02-17'
                         nextHoliday:
                           id: 11
-                          observedDate: '2020-05-18'
+                          date: '2020-05-18'
                           nameEn: Victoria Day
                           nameFr: Fête de la Reine
                           federal: 1
+                          observedDate: '2020-05-18'
                       - id: BC
                         nameEn: British Columbia
                         nameFr: Colombie-Britannique
                         holidays:
                           - id: 1
-                            observedDate: '2020-01-01'
+                            date: '2020-01-01'
                             nameEn: New Year’s Day
                             nameFr: Jour de l’An
                             federal: 1
+                            observedDate: '2020-01-01'
                           - id: 4
-                            observedDate: '2020-02-17'
+                            date: '2020-02-17'
                             nameEn: Family Day
                             nameFr: Fête de la famille
                             federal: 0
+                            observedDate: '2020-02-17'
                         nextHoliday:
                           id: 11
-                          observedDate: '2020-05-18'
+                          date: '2020-05-18'
                           nameEn: Victoria Day
                           nameFr: Fête de la Reine
                           federal: 1
+                          observedDate: '2020-05-18'
       operationId: Provinces
       parameters:
         - schema:
@@ -271,21 +279,24 @@ paths:
                       nameFr: Manitoba
                       holidays:
                         - id: 1
-                          observedDate: '2020-01-01'
+                          date: '2020-01-01'
                           nameEn: New Year’s Day
                           nameFr: Jour de l’An
                           federal: 1
+                          observedDate: '2020-01-01'
                         - id: 2
-                          observedDate: '2020-02-17'
+                          date: '2020-02-17'
                           nameEn: Louis Riel Day
                           nameFr: Journée Louis Riel
                           federal: 0
+                          observedDate: '2020-02-17'
                       nextHoliday:
-                        id: 11
-                        observedDate: '2020-05-18'
-                        nameEn: Victoria Day
-                        nameFr: Fête de la Reine
+                        id: 15
+                        date: '2020-07-01'
+                        nameEn: Canada Day
+                        nameFr: Fête du Canada
                         federal: 1
+                        observedDate: '2020-07-01'
         '400':
           description: Bad Request
           content:
@@ -366,15 +377,19 @@ paths:
                 /holidays/2:
                   value:
                     holiday:
-                      id: 2
-                      observedDate: '2020-02-17'
-                      nameEn: Louis Riel Day
-                      nameFr: Journée Louis Riel
-                      federal: 0
+                      id: 28
+                      date: '2020-12-26'
+                      nameEn: Boxing Day
+                      nameFr: Lendemain de Noël
+                      federal: 1
+                      observedDate: '2020-12-28'
                       provinces:
-                        - id: MB
-                          nameEn: Manitoba
-                          nameFr: Manitoba
+                        - id: NL
+                          nameEn: Newfoundland and Labrador
+                          nameFr: Terre-Neuve-et-Labrador
+                        - id: 'ON'
+                          nameEn: Ontario
+                          nameFr: Ontario
         '400':
           description: Bad Request
           content:
@@ -410,18 +425,22 @@ components:
     Holiday:
       title: Holiday
       type: object
-      description: 'A Canadian holiday. Includes a name, date, and a list of regions that observe this holiday.'
+      description: 'A Canadian holiday. Includes a name, the literal date of the holiday, the observed date of the holiday (ie, accommodating for weekends), and a list of regions that observe this holiday.'
       x-examples:
         /holidays/2:
-          id: 2
-          observedDate: '2020-02-17'
-          nameEn: Louis Riel Day
-          nameFr: Journée Louis Riel
-          federal: 0
+          id: 28
+          date: '2020-12-26'
+          nameEn: Boxing Day
+          nameFr: Lendemain de Noël
+          federal: 1
+          observedDate: '2020-12-28'
           provinces:
-            - id: MB
-              nameEn: Manitoba
-              nameFr: Manitoba
+            - id: NL
+              nameEn: Newfoundland and Labrador
+              nameFr: Terre-Neuve-et-Labrador
+            - id: 'ON'
+              nameEn: Ontario
+              nameFr: Ontario
       properties:
         id:
           type: integer
@@ -429,11 +448,11 @@ components:
           example: 2
           minimum: 1
           maximum: 28
-        observedDate:
+        date:
           type: string
-          description: ISO date
+          description: 'ISO date: the literal date of the holiday'
           format: date
-          example: '2020-02-17'
+          example: '2020-12-26'
         nameEn:
           type: string
           description: English name
@@ -449,6 +468,11 @@ components:
             - 1
             - 0
           format: binary
+        observedDate:
+          type: string
+          description: 'ISO date: when this holiday is observed'
+          format: date
+          example: '2020-12-28'
         provinces:
           type: array
           items:
@@ -458,56 +482,66 @@ components:
       type: object
       x-examples:
         /provinces/MB:
-          id: MB
-          nameEn: Manitoba
-          nameFr: Manitoba
-          holidays:
-            - id: 1
-              observedDate: '2020-01-01'
-              nameEn: New Year’s Day
-              nameFr: Jour de l’An
-              federal: 1
-            - id: 2
-              observedDate: '2020-02-17'
-              nameEn: Louis Riel Day
-              nameFr: Journée Louis Riel
-              federal: 0
-            - id: 7
-              observedDate: '2020-04-10'
-              nameEn: Good Friday
-              nameFr: Vendredi saint
-              federal: 1
-            - id: 11
-              observedDate: '2020-05-18'
-              nameEn: Victoria Day
-              nameFr: Fête de la Reine
-              federal: 1
-            - id: 15
-              observedDate: '2020-07-01'
+          province:
+            id: MB
+            nameEn: Manitoba
+            nameFr: Manitoba
+            holidays:
+              - id: 1
+                date: '2020-01-01'
+                nameEn: New Year’s Day
+                nameFr: Jour de l’An
+                federal: 1
+                observedDate: '2020-01-01'
+              - id: 2
+                date: '2020-02-17'
+                nameEn: Louis Riel Day
+                nameFr: Journée Louis Riel
+                federal: 0
+                observedDate: '2020-02-17'
+              - id: 7
+                date: '2020-04-10'
+                nameEn: Good Friday
+                nameFr: Vendredi saint
+                federal: 1
+                observedDate: '2020-04-10'
+              - id: 11
+                date: '2020-05-18'
+                nameEn: Victoria Day
+                nameFr: Fête de la Reine
+                federal: 1
+                observedDate: '2020-05-18'
+              - id: 15
+                date: '2020-07-01'
+                nameEn: Canada Day
+                nameFr: Fête du Canada
+                federal: 1
+                observedDate: '2020-07-01'
+              - id: 24
+                date: '2020-09-07'
+                nameEn: Labour Day
+                nameFr: Fête du travail
+                federal: 1
+                observedDate: '2020-09-07'
+              - id: 25
+                date: '2020-10-12'
+                nameEn: Thanksgiving
+                nameFr: Action de grâce
+                federal: 1
+                observedDate: '2020-10-12'
+              - id: 27
+                date: '2020-12-25'
+                nameEn: Christmas Day
+                nameFr: Noël
+                federal: 1
+                observedDate: '2020-12-25'
+            nextHoliday:
+              id: 15
+              date: '2020-07-01'
               nameEn: Canada Day
               nameFr: Fête du Canada
               federal: 1
-            - id: 24
-              observedDate: '2020-09-07'
-              nameEn: Labour Day
-              nameFr: Fête du travail
-              federal: 1
-            - id: 25
-              observedDate: '2020-10-12'
-              nameEn: Thanksgiving
-              nameFr: Action de grâce
-              federal: 1
-            - id: 27
-              observedDate: '2020-12-25'
-              nameEn: Christmas Day
-              nameFr: Noël
-              federal: 1
-          nextHoliday:
-            id: 11
-            observedDate: '2020-05-18'
-            nameEn: Victoria Day
-            nameFr: Fête de la Reine
-            federal: 1
+              observedDate: '2020-07-01'
       description: 'A Canadian province or territory '
       properties:
         id:
@@ -549,7 +583,7 @@ components:
         /holidays/100:
           error:
             status: 400
-            message: 'Error: request.params.holidayId should be <= 28'
+            message: 'Bad Request: request.params.holidayId should be <= 28'
             timestamp: '2020-04-28T03:59:12.427Z'
       properties:
         status:
