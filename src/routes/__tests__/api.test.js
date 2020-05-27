@@ -106,7 +106,7 @@ describe('Test /api responses', () => {
 
     let { error } = JSON.parse(response.text)
     expect(error).toMatchObject({
-      message: 'Error: not found',
+      message: 'Not Found: not found',
       status: response.statusCode,
       timestamp: expect.any(String),
     })
@@ -192,7 +192,7 @@ describe('Test /api responses', () => {
 
         expect(error).toMatchObject({
           message:
-            'Error: request.params.provinceId should be equal to one of the allowed values: AB, BC, MB, NB, NL, NS, NT, NU, ON, PE, QC, SK, YT',
+            'Bad Request: request.params.provinceId should be equal to one of the allowed values: AB, BC, MB, NB, NL, NS, NT, NU, ON, PE, QC, SK, YT',
           status: response.statusCode,
           timestamp: expect.any(String),
         })
@@ -264,7 +264,7 @@ describe('Test /api responses', () => {
 
           let { error } = JSON.parse(response.text)
           expect(error.message).toMatch(
-            /^Error: request.query.year should be (integer|>= 2018|<= 2022)/,
+            /^Bad Request: request.query.year should be (integer|>= 2018|<= 2022)/,
           )
         })
       })
@@ -295,7 +295,7 @@ describe('Test /api responses', () => {
       let { error } = JSON.parse(response.text)
 
       expect(error).toMatchObject({
-        message: 'Error: request.params.holidayId should be <= 28',
+        message: 'Bad Request: request.params.holidayId should be <= 28',
         status: response.statusCode,
         timestamp: expect.any(String),
       })
@@ -321,7 +321,7 @@ describe('Test /api responses', () => {
 
           let { error } = JSON.parse(response.text)
           expect(error.message).toMatch(
-            /^Error: request.query.year should be (integer|>= 2018|<= 2022)/,
+            /^Bad Request: request.query.year should be (integer|>= 2018|<= 2022)/,
           )
         })
       })
