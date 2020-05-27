@@ -1,5 +1,7 @@
 # TODO
 
+- New key "observedDate"
+- "date" is the date
 - add next/previous links at the bottom
 - add sources
 - figure out about optional holidays
@@ -12,6 +14,7 @@
 
 # DONE
 
+- Christmas is after Saturday
 - cache static files for longer than not at all
   - set up cache busting in express
 - PEI, let's call it "PEI" on the screen at least

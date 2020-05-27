@@ -13,6 +13,10 @@ const _getISODayInt = (weekday) => {
     return 1
   }
 
+  if (weekday === 'Tuesday') {
+    return 2
+  }
+
   if (weekday === 'Friday') {
     return 5
   }
@@ -92,9 +96,9 @@ const getISODate = (dateString, year = new Date(Date.now()).getUTCFullYear()) =>
     date = Sugar.Date.create(dateString)
   }
 
-  // If Christmas is on a Saturday, move to Friday
-  if ([6].includes(getISODay(date)) && /December 25/i.test(dateString)) {
-    date = _parseRelativeDates(`Friday before ${dateString}`)
+  // If Boxing Day is on a Sunday, move to Tuesday (Christmas will be Monday)
+  if ([7].includes(getISODay(date)) && /December 26/i.test(dateString)) {
+    date = _parseRelativeDates(`Tuesday after ${dateString}`)
   }
 
   // If it lands on a Saturday or Sunday (and not National Aboriginal Day) move to Monday
