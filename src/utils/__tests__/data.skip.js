@@ -1,7 +1,7 @@
 module.exports = [
   {
     id: 1,
-    date: '2019-01-01',
+    observedDate: '2019-01-01',
     nameEn: 'New Year’s Day',
     nameFr: 'Jour de l’An',
     federal: 1,
@@ -23,7 +23,7 @@ module.exports = [
   },
   {
     id: 2,
-    date: '2019-02-18',
+    observedDate: '2019-02-18',
     nameEn: 'Louis Riel Day',
     nameFr: 'Journée Louis Riel',
     federal: 0,
@@ -31,7 +31,7 @@ module.exports = [
   },
   {
     id: 3,
-    date: '2019-02-18',
+    observedDate: '2019-02-18',
     nameEn: 'Islander Day',
     nameFr: 'Fête des Insulaires',
     federal: 0,
@@ -39,7 +39,7 @@ module.exports = [
   },
   {
     id: 4,
-    date: '2019-02-18',
+    observedDate: '2019-02-18',
     nameEn: 'Family Day',
     nameFr: 'Fête de la famille',
     federal: 0,
@@ -53,7 +53,7 @@ module.exports = [
   },
   {
     id: 5,
-    date: '2019-02-18',
+    observedDate: '2019-02-18',
     nameEn: 'Heritage Day',
     nameFr: 'Fête du Patrimoine',
     federal: 0,
@@ -61,7 +61,7 @@ module.exports = [
   },
   {
     id: 6,
-    date: '2019-03-17',
+    observedDate: '2019-03-17',
     nameEn: 'Saint Patrick’s Day',
     nameFr: 'Jour de la Saint-Patrick',
     federal: 0,

@@ -11,7 +11,7 @@ const renderNextHoliday = (props) => {
 const getNextHoliday = ({ federal } = {}) => {
   return {
     id: 20,
-    date: '2019-08-16',
+    observedDate: '2019-08-16',
     nameEn: 'Gold Cup Parade Day',
     federal: federal ? 1 : 0,
     provinces: [{ id: 'PE', nameEn: 'Prince Edward Island' }],

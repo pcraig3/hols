@@ -108,7 +108,8 @@ Returns a list of provinces and territories in Canada. Each province or territor
           "date": "2019-01-01",
           "nameEn": "New Year’s Day",
           "nameFr": "Jour de l’An",
-          "federal": 1
+          "federal": 1,
+          "observedDate": "2019-01-01"
         },
         ...
       ],
@@ -117,7 +118,8 @@ Returns a list of provinces and territories in Canada. Each province or territor
         "date": "2019-02-18",
         "nameEn": "Family Day",
         "nameFr": "Fête de la famille",
-        "federal": 0
+        "federal": 0,
+        "observedDate": "2019-02-18"
       }
     },
     ...
@@ -146,7 +148,8 @@ Returns one province or territory in Canada by [two-letter postal abbreviations]
         "date": "2019-01-01",
         "nameEn": "New Year’s Day",
         "nameFr": "Jour de l’An",
-        "federal": 1
+        "federal": 1,
+        "observedDate": "2019-01-01"
       },
       ...
     ],
@@ -155,7 +158,8 @@ Returns one province or territory in Canada by [two-letter postal abbreviations]
       "date": "2019-02-18",
       "nameEn": "Family Day",
       "nameFr": "Fête de la famille",
-      "federal": 0
+      "federal": 0,
+      "observedDate": "2019-02-18"
     }
   }
 }
@@ -179,6 +183,7 @@ Returns a list of Canadian public holidays. Each holiday lists the regions that 
       "nameEn": "New Year’s Day",
       "nameFr": "Jour de l’An",
       "federal": 1,
+      "observedDate": "2019-01-01",
       "provinces": [
         {
           "id": "AB",
@@ -210,6 +215,7 @@ Returns one Canadian statutory holiday by integer id. Returns [a `400` response]
     "nameEn": "New Year’s Day",
     "nameFr": "Jour de l’An",
     "federal": 1,
+    "observedDate": "2019-01-01",
     "provinces": [
       {
         "id": "AB",

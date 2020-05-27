@@ -1,5 +1,5 @@
 const { array2Obj } = require('../utils')
-const { getObservedDate } = require('../dates')
+const { getObservedDate, getLiteralDate } = require('../dates')
 
 const _getProvinces = async (db) => await db.all('SELECT * FROM Province ORDER BY id ASC;')
 
@@ -53,7 +53,9 @@ const getHolidays = async (db, { holidayId, federal, year }) => {
   }
 
   return holidays.map((holiday) => {
-    holiday.date = getObservedDate(holiday.date, year)
+    const dateString = holiday.date
+    holiday.date = getLiteralDate(dateString, year)
+    holiday.observedDate = getObservedDate(dateString, year)
     return holiday
   })
 }
@@ -67,7 +69,7 @@ const getNextHoliday = (provinces) => {
   provinces.map((province) => {
     province.nextHoliday = province.holidays.find((holiday) => {
       // compare iso strings: eg, "2019-09-04" >= "2019-08-04"
-      return holiday.date >= new Date(Date.now()).toISOString().substring(0, 10)
+      return holiday.observedDate >= new Date(Date.now()).toISOString().substring(0, 10)
     })
   })
 }

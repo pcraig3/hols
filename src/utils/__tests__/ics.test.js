@@ -154,7 +154,7 @@ describe('Test getProvinceDescription', () => {
 describe('Test getUid', () => {
   test('Returns a hash for a holiday object', () => {
     const holiday = {
-      date: '2022-02-21',
+      observedDate: '2022-02-21',
       nameEn: 'Family Day',
     }
     const uid = getUid(holiday)
@@ -163,11 +163,11 @@ describe('Test getUid', () => {
 
   test('Different ids for different date, different title', () => {
     const holiday1 = {
-      date: '2022-02-21',
+      observedDate: '2022-02-21',
       nameEn: 'Family Day',
     }
     const holiday2 = {
-      date: '2022-10-10',
+      observedDate: '2022-10-10',
       nameEn: 'Thanksgiving',
     }
 
@@ -176,11 +176,11 @@ describe('Test getUid', () => {
 
   test('Different ids for different date, same title', () => {
     const holiday1 = {
-      date: '2022-02-21',
+      observedDate: '2022-02-21',
       nameEn: 'Family Day',
     }
     const holiday2 = {
-      date: '2022-02-28',
+      observedDate: '2022-02-28',
       nameEn: 'Family Day',
     }
 
@@ -189,11 +189,11 @@ describe('Test getUid', () => {
 
   test('Different ids for same date, different title', () => {
     const holiday1 = {
-      date: '2022-02-21',
+      observedDate: '2022-02-21',
       nameEn: 'Family Day',
     }
     const holiday2 = {
-      date: '2022-02-21',
+      observedDate: '2022-02-21',
       nameEn: 'Louis Riel Day',
     }
 
@@ -202,12 +202,12 @@ describe('Test getUid', () => {
 
   test('Different ids for same date, same title, different provinces', () => {
     const holiday1 = {
-      date: '2022-02-21',
+      observedDate: '2022-02-21',
       nameEn: 'Family Day',
       provinces: [{ id: 'ON' }],
     }
     const holiday2 = {
-      date: '2022-02-21',
+      observedDate: '2022-02-21',
       nameEn: 'Family Day',
       provinces: [{ id: 'BC' }],
     }
@@ -217,12 +217,12 @@ describe('Test getUid', () => {
 
   test('Different ids for same date, same title, one federal', () => {
     const holiday1 = {
-      date: '2022-02-21',
+      observedDate: '2022-02-21',
       nameEn: 'Family Day',
       federal: true,
     }
     const holiday2 = {
-      date: '2022-02-21',
+      observedDate: '2022-02-21',
       nameEn: 'Family Day',
       federal: false,
     }
@@ -232,12 +232,12 @@ describe('Test getUid', () => {
 
   test('Same ids for same date, same title, same provinces', () => {
     const holiday1 = {
-      date: '2022-02-21',
+      observedDate: '2022-02-21',
       nameEn: 'Family Day',
       provinces: [{ id: 'ON' }],
     }
     const holiday2 = {
-      date: '2022-02-21',
+      observedDate: '2022-02-21',
       nameEn: 'Family Day',
       provinces: [{ id: 'ON' }],
     }
@@ -247,11 +247,11 @@ describe('Test getUid', () => {
 
   test('Same ids for same date, same title, no provinces', () => {
     const holiday1 = {
-      date: '2022-02-21',
+      observedDate: '2022-02-21',
       nameEn: 'Family Day',
     }
     const holiday2 = {
-      date: '2022-02-21',
+      observedDate: '2022-02-21',
       nameEn: 'Family Day',
     }
 

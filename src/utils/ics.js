@@ -85,7 +85,7 @@ const getProvinceDescription = (holiday) => {
 const getUid = (holiday) => {
   return crypto
     .createHash('sha1')
-    .update(new Date(holiday.date).getTime() + getTitle(holiday))
+    .update(new Date(holiday.observedDate).getTime() + getTitle(holiday))
     .digest('base64')
 }
 
