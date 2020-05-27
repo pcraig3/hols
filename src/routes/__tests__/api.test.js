@@ -44,6 +44,7 @@ describe('Test /api responses', () => {
         nameEn: expect.any(String),
         nameFr: expect.any(String),
         federal: expect.any(Number),
+        date: expect.any(String),
       },
       withProvinces ? provinces : {},
     )
@@ -273,17 +274,18 @@ describe('Test /api responses', () => {
 
   describe('for /api/v1/holidays/:holidayId path', () => {
     test('it should return a holiday for a good ID', async () => {
-      const response = await request(app).get('/api/v1/holidays/17')
+      const response = await request(app).get('/api/v1/holidays/28')
       expect(response.statusCode).toBe(200)
 
       let { holiday } = JSON.parse(response.text)
 
       expect(holiday).toMatchObject({
-        id: 17,
-        observedDate: '2020-08-03',
-        nameEn: 'Civic Holiday',
-        nameFr: 'Premier lundi d’août',
+        id: 28,
+        date: '2020-12-26',
+        nameEn: 'Boxing Day',
+        nameFr: 'Lendemain de Noël',
         federal: 1,
+        observedDate: '2020-12-28',
         provinces: expect.any(Array),
       })
     })
