@@ -10,7 +10,7 @@ const NextHoliday = ({ nextHoliday, provinceName = 'Canada', federal }) => {
         ${' '}next${' '}${federal && 'federal '}<span class=${visuallyHidden}>statutory </span
         >holiday is
       </div>
-      <div class="h1--lg"><${DateHtml} dateString=${nextHoliday.date} //></div>
+      <div class="h1--lg"><${DateHtml} dateString=${nextHoliday.observedDate} //></div>
       <div class="h1--md">${nextHoliday.nameEn.replace(/ /g, '\u00a0')}</div>
     </h1>
   `

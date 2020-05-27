@@ -40,7 +40,7 @@ describe('Test /api responses', () => {
       {},
       {
         id: expect.any(Number),
-        date: expect.any(String),
+        observedDate: expect.any(String),
         nameEn: expect.any(String),
         nameFr: expect.any(String),
         federal: expect.any(Number),
@@ -251,7 +251,7 @@ describe('Test /api responses', () => {
           let { holidays } = JSON.parse(response.text)
 
           holidays.map((holiday) => {
-            expect(holiday.date.slice(0, 4)).toEqual(`${year}`)
+            expect(holiday.observedDate.slice(0, 4)).toEqual(`${year}`)
           })
         })
       })
@@ -280,7 +280,7 @@ describe('Test /api responses', () => {
 
       expect(holiday).toMatchObject({
         id: 17,
-        date: '2020-08-03',
+        observedDate: '2020-08-03',
         nameEn: 'Civic Holiday',
         nameFr: 'Premier lundi d’août',
         federal: 1,
@@ -309,7 +309,7 @@ describe('Test /api responses', () => {
 
           let { holiday } = JSON.parse(response.text)
 
-          expect(holiday.date.slice(0, 4)).toEqual(`${year}`)
+          expect(holiday.observedDate.slice(0, 4)).toEqual(`${year}`)
         })
       })
 

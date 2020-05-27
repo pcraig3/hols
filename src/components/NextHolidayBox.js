@@ -94,7 +94,7 @@ const renderNextHolidayTitle = ({ nextHoliday, provinceName, federal }) => {
   ${provinceName == 'Canada' && !federal
     ? html`<${ObservingProvinces} provinces=${nextHoliday.provinces} federal=${nextHoliday.federal}
       //>`
-    : html`<p>${relativeDate(nextHoliday.date)}</p>`}`
+    : html`<p>${relativeDate(nextHoliday.observedDate)}</p>`}`
 }
 
 const renderYearPageTitle = ({ provinceName, provinceId, federal, year }) => {

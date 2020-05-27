@@ -116,7 +116,7 @@ const createRows = (holidays, federal, isCurrentYear) => {
 
   return holidays.map((holiday) => {
     const row = {
-      key: html` <${DateHtml} dateString=${holiday.date} weekday=${true} //> `,
+      key: html` <${DateHtml} dateString=${holiday.observedDate} weekday=${true} //> `,
       value: holiday.nameEn,
       className: '',
     }
@@ -126,14 +126,14 @@ const createRows = (holidays, federal, isCurrentYear) => {
     }
 
     if (isCurrentYear) {
-      row.className = holiday.date < today ? 'past' : 'upcoming'
+      row.className = holiday.observedDate < today ? 'past' : 'upcoming'
     }
 
-    if (previousDate === holiday.date) {
+    if (previousDate === holiday.observedDate) {
       row.className += ' repeatDate'
     }
 
-    previousDate = holiday.date
+    previousDate = holiday.observedDate
     return row
   })
 }

@@ -96,7 +96,7 @@ paths:
                   value:
                     holidays:
                       - id: 1
-                        date: '2020-01-01'
+                        observedDate: '2020-01-01'
                         nameEn: New Year’s Day
                         nameFr: Jour de l’An
                         federal: 1
@@ -141,7 +141,7 @@ paths:
                             nameEn: Yukon
                             nameFr: Yukon
                       - id: 2
-                        date: '2020-02-17'
+                        observedDate: '2020-02-17'
                         nameEn: Louis Riel Day
                         nameFr: Journée Louis Riel
                         federal: 0
@@ -201,18 +201,18 @@ paths:
                         nameFr: Alberta
                         holidays:
                           - id: 1
-                            date: '2020-01-01'
+                            observedDate: '2020-01-01'
                             nameEn: New Year’s Day
                             nameFr: Jour de l’An
                             federal: 1
                           - id: 4
-                            date: '2020-02-17'
+                            observedDate: '2020-02-17'
                             nameEn: Family Day
                             nameFr: Fête de la famille
                             federal: 0
                         nextHoliday:
                           id: 11
-                          date: '2020-05-18'
+                          observedDate: '2020-05-18'
                           nameEn: Victoria Day
                           nameFr: Fête de la Reine
                           federal: 1
@@ -221,18 +221,18 @@ paths:
                         nameFr: Colombie-Britannique
                         holidays:
                           - id: 1
-                            date: '2020-01-01'
+                            observedDate: '2020-01-01'
                             nameEn: New Year’s Day
                             nameFr: Jour de l’An
                             federal: 1
                           - id: 4
-                            date: '2020-02-17'
+                            observedDate: '2020-02-17'
                             nameEn: Family Day
                             nameFr: Fête de la famille
                             federal: 0
                         nextHoliday:
                           id: 11
-                          date: '2020-05-18'
+                          observedDate: '2020-05-18'
                           nameEn: Victoria Day
                           nameFr: Fête de la Reine
                           federal: 1
@@ -271,18 +271,18 @@ paths:
                       nameFr: Manitoba
                       holidays:
                         - id: 1
-                          date: '2020-01-01'
+                          observedDate: '2020-01-01'
                           nameEn: New Year’s Day
                           nameFr: Jour de l’An
                           federal: 1
                         - id: 2
-                          date: '2020-02-17'
+                          observedDate: '2020-02-17'
                           nameEn: Louis Riel Day
                           nameFr: Journée Louis Riel
                           federal: 0
                       nextHoliday:
                         id: 11
-                        date: '2020-05-18'
+                        observedDate: '2020-05-18'
                         nameEn: Victoria Day
                         nameFr: Fête de la Reine
                         federal: 1
@@ -367,7 +367,7 @@ paths:
                   value:
                     holiday:
                       id: 2
-                      date: '2020-02-17'
+                      observedDate: '2020-02-17'
                       nameEn: Louis Riel Day
                       nameFr: Journée Louis Riel
                       federal: 0
@@ -414,7 +414,7 @@ components:
       x-examples:
         /holidays/2:
           id: 2
-          date: '2020-02-17'
+          observedDate: '2020-02-17'
           nameEn: Louis Riel Day
           nameFr: Journée Louis Riel
           federal: 0
@@ -429,7 +429,7 @@ components:
           example: 2
           minimum: 1
           maximum: 28
-        date:
+        observedDate:
           type: string
           description: ISO date
           format: date
@@ -463,48 +463,48 @@ components:
           nameFr: Manitoba
           holidays:
             - id: 1
-              date: '2020-01-01'
+              observedDate: '2020-01-01'
               nameEn: New Year’s Day
               nameFr: Jour de l’An
               federal: 1
             - id: 2
-              date: '2020-02-17'
+              observedDate: '2020-02-17'
               nameEn: Louis Riel Day
               nameFr: Journée Louis Riel
               federal: 0
             - id: 7
-              date: '2020-04-10'
+              observedDate: '2020-04-10'
               nameEn: Good Friday
               nameFr: Vendredi saint
               federal: 1
             - id: 11
-              date: '2020-05-18'
+              observedDate: '2020-05-18'
               nameEn: Victoria Day
               nameFr: Fête de la Reine
               federal: 1
             - id: 15
-              date: '2020-07-01'
+              observedDate: '2020-07-01'
               nameEn: Canada Day
               nameFr: Fête du Canada
               federal: 1
             - id: 24
-              date: '2020-09-07'
+              observedDate: '2020-09-07'
               nameEn: Labour Day
               nameFr: Fête du travail
               federal: 1
             - id: 25
-              date: '2020-10-12'
+              observedDate: '2020-10-12'
               nameEn: Thanksgiving
               nameFr: Action de grâce
               federal: 1
             - id: 27
-              date: '2020-12-25'
+              observedDate: '2020-12-25'
               nameEn: Christmas Day
               nameFr: Noël
               federal: 1
           nextHoliday:
             id: 11
-            date: '2020-05-18'
+            observedDate: '2020-05-18'
             nameEn: Victoria Day
             nameFr: Fête de la Reine
             federal: 1

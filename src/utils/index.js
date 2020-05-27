@@ -168,10 +168,10 @@ const nextHoliday = (holidays, dateString) => {
   }
 
   const nextDate = holidays.find((holiday) => {
-    return holiday.date >= dateString
-  }).date
+    return holiday.observedDate >= dateString
+  }).observedDate
 
-  const nextHolidays = holidays.filter((holiday) => holiday.date === nextDate)
+  const nextHolidays = holidays.filter((holiday) => holiday.observedDate === nextDate)
 
   nextHolidays.sort((h1, h2) => {
     if (h1.provinces.length <= h2.provinces.length) {
@@ -195,7 +195,7 @@ const upcomingHolidays = (holidays, dateString) => {
     dateString = new Date(Date.now()).toISOString().substring(0, 10)
   }
 
-  return holidays.filter((holiday) => holiday.date >= dateString)
+  return holidays.filter((holiday) => holiday.observedDate >= dateString)
 }
 
 /**

@@ -17,7 +17,7 @@ const {
 const { getProvinces, getHolidaysWithProvinces, getProvincesWithHolidays } = require('../queries')
 const { displayDate } = require('../dates')
 
-const getMeta = (holiday) => `${holiday.nameEn} on ${displayDate(holiday.date)}`
+const getMeta = (holiday) => `${holiday.nameEn} on ${displayDate(holiday.observedDate)}`
 
 router.get('/', checkRedirectYear, dbmw(getHolidaysWithProvinces), (req, res) => {
   const year = getCurrentHolidayYear()
