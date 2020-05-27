@@ -82,7 +82,8 @@ const _parseRelativeDates = (dateString) => {
   return addDays(anchorDate, count)
 }
 
-const getISODate = (dateString, year = new Date(Date.now()).getUTCFullYear()) => {
+// returns a Date object
+const _getDate = (dateString, year) => {
   let date
   dateString = `${dateString} ${year}`
 
@@ -96,19 +97,35 @@ const getISODate = (dateString, year = new Date(Date.now()).getUTCFullYear()) =>
     date = Sugar.Date.create(dateString)
   }
 
-  // If Boxing Day is on a Sunday, move to Tuesday (Christmas will be Monday)
-  if ([7].includes(getISODay(date)) && /December 26/i.test(dateString)) {
-    date = _parseRelativeDates(`Tuesday after ${dateString}`)
+  // Test for invalid dates
+  if (isNaN(date)) {
+    throw new Error(`Date string not parsable: ${dateString}`)
+  }
+
+  return date
+}
+
+const getLiteralDate = (dateString, year = new Date(Date.now()).getUTCFullYear()) => {
+  const endsWithNumber = !!parseInt(dateString.slice(-2))
+  dateString =
+    endsWithNumber && !/May/i.test(dateString)
+      ? dateString.split(' ').slice(-2).join(' ')
+      : dateString
+
+  return _getDate(dateString, year).toISOString().substring(0, 10)
+}
+
+const getObservedDate = (dateString, year = new Date(Date.now()).getUTCFullYear()) => {
+  let date = _getDate(dateString, year)
+
+  // If Boxing Day is on a Sunday or Monday, move to Tuesday (Christmas will be Monday)
+  if ([1, 7].includes(getISODay(date)) && /December 26/i.test(dateString)) {
+    date = _parseRelativeDates(`Tuesday after ${dateString} ${year}`)
   }
 
   // If it lands on a Saturday or Sunday (and not National Aboriginal Day) move to Monday
   if ([6, 7].includes(getISODay(date)) && !/June 21/i.test(dateString)) {
-    date = _parseRelativeDates(`Monday after ${dateString}`)
-  }
-
-  // Test for invalid dates
-  if (isNaN(date)) {
-    throw new Error(`Date string not parsable: ${dateString}`)
+    date = _parseRelativeDates(`Monday after ${dateString} ${year}`)
   }
 
   return date.toISOString().substring(0, 10)
@@ -145,4 +162,4 @@ const relativeDate = (dateString) => {
   }
 }
 
-module.exports = { getISODate, displayDate, relativeDate }
+module.exports = { getLiteralDate, getObservedDate, displayDate, relativeDate }
