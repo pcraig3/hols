@@ -114,6 +114,55 @@ const getISODate = (dateString, year = new Date(Date.now()).getUTCFullYear()) =>
   return date.toISOString().substring(0, 10)
 }
 
+// returns a Date object
+const _getDate = (dateString, year) => {
+  let date
+  dateString = `${dateString} ${year}`
+
+  if (/First|Second|Third|Fourth/i.test(dateString)) {
+    dateString = `The ${dateString}`
+  }
+
+  if (/before|after|near/i.test(dateString)) {
+    date = _parseRelativeDates(dateString)
+  } else {
+    date = Sugar.Date.create(dateString)
+  }
+
+  // Test for invalid dates
+  if (isNaN(date)) {
+    throw new Error(`Date string not parsable: ${dateString}`)
+  }
+
+  return date
+}
+
+const getLiteralDate = (dateString, year = new Date(Date.now()).getUTCFullYear()) => {
+  const endsWithNumber = !!parseInt(dateString.slice(-2))
+  dateString =
+    endsWithNumber && !/May/i.test(dateString)
+      ? dateString.split(' ').slice(-2).join(' ')
+      : dateString
+
+  return _getDate(dateString, year).toISOString().substring(0, 10)
+}
+
+const getObservedDate = (dateString, year = new Date(Date.now()).getUTCFullYear()) => {
+  let date = _getDate(dateString, year)
+
+  // If Boxing Day is on a Sunday, move to Tuesday (Christmas will be Monday)
+  if ([7].includes(getISODay(date)) && /December 26/i.test(dateString)) {
+    date = _parseRelativeDates(`Tuesday after ${dateString} ${year}`)
+  }
+
+  // If it lands on a Saturday or Sunday (and not National Aboriginal Day) move to Monday
+  if ([6, 7].includes(getISODay(date)) && !/June 21/i.test(dateString)) {
+    date = _parseRelativeDates(`Monday after ${dateString} ${year}`)
+  }
+
+  return date.toISOString().substring(0, 10)
+}
+
 // 60 minutes * 24 hours = 1440
 const getDateBeforeMidnightFromString = (str) => addMinutes(new Date(str), 1439)
 
@@ -145,4 +194,4 @@ const relativeDate = (dateString) => {
   }
 }
 
-module.exports = { getISODate, displayDate, relativeDate }
+module.exports = { getISODate, getLiteralDate, getObservedDate, displayDate, relativeDate }
