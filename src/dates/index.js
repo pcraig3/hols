@@ -150,8 +150,8 @@ const getLiteralDate = (dateString, year = new Date(Date.now()).getUTCFullYear()
 const getObservedDate = (dateString, year = new Date(Date.now()).getUTCFullYear()) => {
   let date = _getDate(dateString, year)
 
-  // If Boxing Day is on a Sunday, move to Tuesday (Christmas will be Monday)
-  if ([7].includes(getISODay(date)) && /December 26/i.test(dateString)) {
+  // If Boxing Day is on a Sunday or Monday, move to Tuesday (Christmas will be Monday)
+  if ([1, 7].includes(getISODay(date)) && /December 26/i.test(dateString)) {
     date = _parseRelativeDates(`Tuesday after ${dateString} ${year}`)
   }
 

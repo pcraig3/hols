@@ -295,4 +295,17 @@ describe('Test getObservedDate', () => {
       })
     })
   })
+
+  describe('for 2022', () => {
+    const days2020 = [
+      { str: 'December 25', iso: '2022-12-26' },
+      { str: 'December 26', iso: '2022-12-27' },
+    ]
+
+    days2020.map((day) => {
+      test(`returns correct 2022 ISO date string for: "${day.str}"`, () => {
+        expect(getObservedDate(day.str, 2022)).toEqual(day.iso)
+      })
+    })
+  })
 })
