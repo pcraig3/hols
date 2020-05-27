@@ -1,7 +1,5 @@
 # TODO
 
-- New key "observedDate"
-- "date" is the date
 - add next/previous links at the bottom
 - add sources
 - figure out about optional holidays
@@ -14,6 +12,9 @@
 
 # DONE
 
+- New key "observedDate"
+  - update Swagger
+- "date" is the literal date
 - Christmas is after Saturday
 - cache static files for longer than not at all
   - set up cache busting in express
