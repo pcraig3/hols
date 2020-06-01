@@ -2,7 +2,6 @@ const Sugar = require('sugar-date')
 const easterDay = require('@jsbits/easter-day')
 const format = require('date-fns/format')
 const addDays = require('date-fns/addDays')
-const addMinutes = require('date-fns/addMinutes')
 const getISODay = require('date-fns/getISODay')
 const differenceInDays = require('date-fns/differenceInDays')
 const startOfDay = require('date-fns/startOfDay')
@@ -131,13 +130,10 @@ const getObservedDate = (dateString, year = new Date(Date.now()).getUTCFullYear(
   return date.toISOString().substring(0, 10)
 }
 
-// 60 minutes * 24 hours = 1440
-const getDateBeforeMidnightFromString = (str) => addMinutes(new Date(str), 1439)
-
 const space2Nbsp = (str) => str.replace(/ /g, ' ')
 
 const displayDate = (dateString, weekday = false) => {
-  dateString = getDateBeforeMidnightFromString(dateString)
+  dateString = Sugar.Date.create(dateString)
   let msg = space2Nbsp(format(dateString, 'MMMM d'))
 
   return weekday ? `${msg}, ${format(dateString, 'EEEE')}` : msg
@@ -146,7 +142,7 @@ const displayDate = (dateString, weekday = false) => {
 const relativeDate = (dateString) => {
   const daysOffset = differenceInDays(
     startOfDay(new Date(Date.now())),
-    getDateBeforeMidnightFromString(dateString),
+    Sugar.Date.create(dateString),
   )
 
   switch (daysOffset) {
@@ -156,8 +152,8 @@ const relativeDate = (dateString) => {
       return 'That’s tomorrow!'
     default:
       return `That’s in ${formatDistance(
-        getDateBeforeMidnightFromString(dateString),
-        new Date(Date.now()),
+        Sugar.Date.create(dateString),
+        Sugar.Date.create(Date.now()),
       )}`
   }
 }
