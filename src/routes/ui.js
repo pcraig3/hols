@@ -115,7 +115,13 @@ router.get(
   (req, res) => {
     // if the year value isn't in ALLOWED_YEARS, it will be caught by "checkYearErr"
     const year = ALLOWED_YEARS.find((y) => y === parseInt(req.query.year))
-    const { holidays, nameEn: provinceName, id: provinceId } = res.locals.rows[0]
+    const {
+      holidays,
+      nameEn: provinceName,
+      id: provinceId,
+      sourceLink,
+      sourceEn,
+    } = res.locals.rows[0]
     const meta = `See all statutory holidays in ${provinceName}, Canada in ${year}.`
 
     return res.send(
@@ -132,6 +138,7 @@ router.get(
             provinceName,
             provinceId,
             year,
+            source: { link: sourceLink, nameEn: sourceEn },
           },
         },
       }),
