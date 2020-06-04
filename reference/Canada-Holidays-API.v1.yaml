@@ -1,7 +1,7 @@
 openapi: 3.0.0
 info:
   title: Canada Holidays API
-  version: 1.1.0
+  version: 1.2.0
   description: 'This API lists all 28 public holidays for all 13 provinces and territories in Canada, including federal holidays.'
   contact:
     name: Paul Craig
@@ -105,42 +105,68 @@ paths:
                           - id: AB
                             nameEn: Alberta
                             nameFr: Alberta
+                            sourceLink: 'https://www.alberta.ca/alberta-general-holidays.aspx'
+                            sourceEn: Alberta general holidays
                           - id: BC
                             nameEn: British Columbia
                             nameFr: Colombie-Britannique
+                            sourceLink: 'https://www2.gov.bc.ca/gov/content/employment-business/employment-standards-advice/employment-standards/statutory-holidays'
+                            sourceEn: Statutory Holidays
                           - id: MB
                             nameEn: Manitoba
                             nameFr: Manitoba
+                            sourceLink: 'https://www.gov.mb.ca/labour/standards/doc,gen-holidays-after-april-30-07,factsheet.html#q12'
+                            sourceEn: What are the general holidays in Manitoba?
                           - id: NB
                             nameEn: New Brunswick
                             nameFr: Nouveau-Brunswick
+                            sourceLink: 'https://www2.gnb.ca/content/gnb/en/departments/elg/local_government/content/governance/content/days_of_rest_act/faq.html#2'
+                            sourceEn: What are the 10 prescribed days of rest?
                           - id: NL
                             nameEn: Newfoundland and Labrador
                             nameFr: Terre-Neuve-et-Labrador
+                            sourceLink: 'https://gist.github.com/pcraig3/81dff348ddf52777c9f918c3032531bd'
+                            sourceEn: Clarification on public holidays in Newfoundland
                           - id: NT
                             nameEn: Northwest Territories
                             nameFr: Territoires du Nord-Ouest
+                            sourceLink: 'https://www.ece.gov.nt.ca/en/services/employment-standards/frequently-asked-questions'
+                            sourceEn: 'Employment Standards: Frequently Asked Questions'
                           - id: NS
                             nameEn: Nova Scotia
                             nameFr: Nouvelle-Écosse
+                            sourceLink: 'https://novascotia.ca/lae/employmentrights/holidaychart.asp'
+                            sourceEn: Holiday and Retail Closing Day Charts
                           - id: NU
                             nameEn: Nunavut
                             nameFr: Nunavut
+                            sourceLink: 'https://nu-lsco.ca/faq-s?tmpl=component&faqid=11'
+                            sourceEn: 'Nunavut Labour Standards Compliance Office: General Holidays'
                           - id: 'ON'
                             nameEn: Ontario
                             nameFr: Ontario
+                            sourceLink: 'https://www.ontario.ca/document/your-guide-employment-standards-act-0/public-holidays'
+                            sourceEn: Public holidays
                           - id: PE
                             nameEn: Prince Edward Island
                             nameFr: Île-du-Prince-Édouard
+                            sourceLink: 'https://www.princeedwardisland.ca/en/information/economic-growth-tourism-and-culture/paid-holidays'
+                            sourceEn: Paid Holidays
                           - id: QC
                             nameEn: Quebec
                             nameFr: Québec
+                            sourceLink: 'https://www2.gouv.qc.ca/entreprises/portail/quebec/ressourcesh?lang=fr&g=ressourcesh&sg=personnel&t=o&e=2318829344:3908165687'
+                            sourceEn: 'Jours fériés, chômés et payés'
                           - id: SK
                             nameEn: Saskatchewan
                             nameFr: Saskatchewan
+                            sourceLink: 'https://www.saskatchewan.ca/business/employment-standards/vacations-holidays-leaves-and-absences/public-statutory-holidays/list-of-saskatchewan-public-holidays'
+                            sourceEn: List of Saskatchewan Public Holidays
                           - id: YT
                             nameEn: Yukon
                             nameFr: Yukon
+                            sourceLink: 'https://yukon.ca/en/doing-business/employer-responsibilities/find-yukon-statutory-holiday'
+                            sourceEn: Find a Yukon statutory holiday
                       - id: 2
                         date: '2020-02-17'
                         nameEn: Louis Riel Day
@@ -151,6 +177,8 @@ paths:
                           - id: MB
                             nameEn: Manitoba
                             nameFr: Manitoba
+                            sourceLink: 'https://www.gov.mb.ca/labour/standards/doc,gen-holidays-after-april-30-07,factsheet.html#q12'
+                            sourceEn: What are the general holidays in Manitoba?
       operationId: Holidays
       description: Returns Canadian public holidays. Each holiday lists the regions that observe it.
       parameters:
@@ -201,6 +229,8 @@ paths:
                       - id: AB
                         nameEn: Alberta
                         nameFr: Alberta
+                        sourceLink: 'https://www.alberta.ca/alberta-general-holidays.aspx'
+                        sourceEn: Alberta general holidays
                         holidays:
                           - id: 1
                             date: '2020-01-01'
@@ -224,6 +254,8 @@ paths:
                       - id: BC
                         nameEn: British Columbia
                         nameFr: Colombie-Britannique
+                        sourceLink: 'https://www2.gov.bc.ca/gov/content/employment-business/employment-standards-advice/employment-standards/statutory-holidays'
+                        sourceEn: Statutory Holidays
                         holidays:
                           - id: 1
                             date: '2020-01-01'
@@ -277,6 +309,8 @@ paths:
                       id: MB
                       nameEn: Manitoba
                       nameFr: Manitoba
+                      sourceLink: 'https://www.gov.mb.ca/labour/standards/doc,gen-holidays-after-april-30-07,factsheet.html#q12'
+                      sourceEn: What are the general holidays in Manitoba?
                       holidays:
                         - id: 1
                           date: '2020-01-01'
@@ -374,10 +408,10 @@ paths:
                   holiday:
                     $ref: '#/components/schemas/Holiday'
               examples:
-                /holidays/2:
+                /holidays/27:
                   value:
                     holiday:
-                      id: 28
+                      id: 27
                       date: '2020-12-26'
                       nameEn: Boxing Day
                       nameFr: Lendemain de Noël
@@ -387,9 +421,13 @@ paths:
                         - id: NL
                           nameEn: Newfoundland and Labrador
                           nameFr: Terre-Neuve-et-Labrador
+                          sourceLink: 'https://gist.github.com/pcraig3/81dff348ddf52777c9f918c3032531bd'
+                          sourceEn: Clarification on public holidays in Newfoundland
                         - id: 'ON'
                           nameEn: Ontario
                           nameFr: Ontario
+                          sourceLink: 'https://www.ontario.ca/document/your-guide-employment-standards-act-0/public-holidays'
+                          sourceEn: Public holidays
         '400':
           description: Bad Request
           content:
@@ -427,20 +465,25 @@ components:
       type: object
       description: 'A Canadian holiday. Includes a name, the literal date of the holiday, the observed date of the holiday (ie, accommodating for weekends), and a list of regions that observe this holiday.'
       x-examples:
-        /holidays/2:
-          id: 28
-          date: '2020-12-26'
-          nameEn: Boxing Day
-          nameFr: Lendemain de Noël
-          federal: 1
-          observedDate: '2020-12-28'
-          provinces:
-            - id: NL
-              nameEn: Newfoundland and Labrador
-              nameFr: Terre-Neuve-et-Labrador
-            - id: 'ON'
-              nameEn: Ontario
-              nameFr: Ontario
+        /holidays/27:
+          holiday:
+            id: 27
+            date: '2020-12-26'
+            nameEn: Boxing Day
+            nameFr: Lendemain de Noël
+            federal: 1
+            observedDate: '2020-12-28'
+            provinces:
+              - id: NL
+                nameEn: Newfoundland and Labrador
+                nameFr: Terre-Neuve-et-Labrador
+                sourceLink: 'https://gist.github.com/pcraig3/81dff348ddf52777c9f918c3032531bd'
+                sourceEn: Clarification on public holidays in Newfoundland
+              - id: 'ON'
+                nameEn: Ontario
+                nameFr: Ontario
+                sourceLink: 'https://www.ontario.ca/document/your-guide-employment-standards-act-0/public-holidays'
+                sourceEn: Public holidays
       properties:
         id:
           type: integer
@@ -486,6 +529,8 @@ components:
             id: MB
             nameEn: Manitoba
             nameFr: Manitoba
+            sourceLink: 'https://www.gov.mb.ca/labour/standards/doc,gen-holidays-after-april-30-07,factsheet.html#q12'
+            sourceEn: What are the general holidays in Manitoba?
             holidays:
               - id: 1
                 date: '2020-01-01'
@@ -517,19 +562,19 @@ components:
                 nameFr: Fête du Canada
                 federal: 1
                 observedDate: '2020-07-01'
-              - id: 24
+              - id: 23
                 date: '2020-09-07'
                 nameEn: Labour Day
                 nameFr: Fête du travail
                 federal: 1
                 observedDate: '2020-09-07'
-              - id: 25
+              - id: 24
                 date: '2020-10-12'
                 nameEn: Thanksgiving
                 nameFr: Action de grâce
                 federal: 1
                 observedDate: '2020-10-12'
-              - id: 27
+              - id: 26
                 date: '2020-12-25'
                 nameEn: Christmas Day
                 nameFr: Noël
@@ -576,6 +621,16 @@ components:
           type: string
           description: English name
           example: Manitoba
+        sourceLink:
+          type: string
+          example: 'https://www.gov.mb.ca/labour/standards/doc,gen-holidays-after-april-30-07,factsheet.html#q12'
+          format: uri
+          pattern: https+
+          description: URL to public holidays reference for this region
+        sourceEn:
+          type: string
+          description: Name of reference page with public holidays for this region
+          example: What are the general holidays in Manitoba?
     Error:
       title: Error
       type: object

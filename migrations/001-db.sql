@@ -44,7 +44,7 @@ UPDATE Province SET sourceEn = 'What are the 10 prescribed days of rest?', sourc
 UPDATE Province SET sourceEn = 'Clarification on public holidays in Newfoundland', sourceLink = 'https://gist.github.com/pcraig3/81dff348ddf52777c9f918c3032531bd' WHERE id = 'NL';
 UPDATE Province SET sourceEn = 'Holiday and Retail Closing Day Charts', sourceLink = 'https://novascotia.ca/lae/employmentrights/holidaychart.asp' WHERE id = 'NS';
 UPDATE Province SET sourceEn = 'Employment Standards: Frequently Asked Questions', sourceLink = 'https://www.ece.gov.nt.ca/en/services/employment-standards/frequently-asked-questions' WHERE id = 'NT';
-UPDATE Province SET sourceEn = 'Nunavut Labour Standards Compliance Office: General Holidays', sourceLink = 'http://nu-lsco.ca/faq-s?tmpl=component&faqid=11' WHERE id = 'NU';
+UPDATE Province SET sourceEn = 'Nunavut Labour Standards Compliance Office: General Holidays', sourceLink = 'https://nu-lsco.ca/faq-s?tmpl=component&faqid=11' WHERE id = 'NU';
 UPDATE Province SET sourceEn = 'Public holidays', sourceLink = 'https://www.ontario.ca/document/your-guide-employment-standards-act-0/public-holidays' WHERE id = 'ON';
 UPDATE Province SET sourceEn = 'Paid Holidays', sourceLink = 'https://www.princeedwardisland.ca/en/information/economic-growth-tourism-and-culture/paid-holidays' WHERE id = 'PE';
 UPDATE Province SET sourceEn = 'Jours fériés, chômés et payés', sourceLink = 'https://www2.gouv.qc.ca/entreprises/portail/quebec/ressourcesh?lang=fr&g=ressourcesh&sg=personnel&t=o&e=2318829344:3908165687' WHERE id = 'QC';
