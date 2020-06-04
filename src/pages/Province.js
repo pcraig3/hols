@@ -30,7 +30,7 @@ const styles = ({ accent = theme.color.red } = {}) => css`
     }
   }
 
-  .bottom-link__container {
+  .bottom-link__container.with-source {
     position: relative;
 
     @media (${theme.mq.md}) {
@@ -184,6 +184,7 @@ const Province = ({
     provinceId,
     federal = false,
     year = 2020,
+    source = false,
   } = {},
 }) => {
   const provinceIdOrFederal = getProvinceIdOrFederalString({ provinceId, federal })
@@ -214,10 +215,12 @@ const Province = ({
                 </div>
               </div>`}
             <//>
-            <div class="bottom-link__container">
-              <span class="bottom-link external-link"
-                >Source:${' '}<a href="#html">Alberta general holidays <${External} /></a
-              ></span>
+            <div class="bottom-link__container${source ? ' with-source' : ''}">
+              ${source &&
+              html`<span class="bottom-link external-link"
+                >Source:${' '}<a href=${source.link} target="_blank"
+                  >${source.nameEn} <${External} /></a
+              ></span>`}
               <span class="bottom-link"><a href="#html" class="up-arrow">Back to top</a></span>
             </div>
           </div>
