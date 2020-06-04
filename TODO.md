@@ -2,7 +2,8 @@
 
 - add next/previous links at the bottom
 - add sources
-  - add to the frontend
+  - add federal sources
+  - add page with sources
 - figure out about optional holidays
 - Add years to dates on years pages?
 - make API to return CSV format
@@ -14,6 +15,7 @@
 # DONE
 
 - add sources
+  - add to the frontend
   - add to the API
 - New key "observedDate"
   - update Swagger
