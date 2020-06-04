@@ -31,21 +31,22 @@ const styles = ({ accent = theme.color.red } = {}) => css`
   }
 
   .bottom-link__container.with-source {
-    position: relative;
+    display: flex;
+    flex-direction: column;
+    margin-top: -${theme.space.xxl};
 
     @media (${theme.mq.md}) {
-      display: flex;
       flex-direction: row-reverse;
       justify-content: space-between;
+      margin-top: 0;
     }
 
     .external-link {
-      position: absolute;
-      bottom: ${theme.space.xxl};
+      margin-bottom: ${theme.space.xxl};
 
       @media (${theme.mq.md}) {
         position: relative;
-        bottom: unset;
+        margin-bottom: 0;
       }
 
       svg {
