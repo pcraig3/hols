@@ -4,7 +4,7 @@ const { theme, horizontalPadding } = require('../styles')
 const Nav = require('./Nav')
 const SkipLink = require('./SkipLink')
 
-const linkStyles = color => css`
+const linkStyles = (color) => css`
   a,
   a:visited {
     color: ${color ? theme.color[color].accent : theme.color.red};

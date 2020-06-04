@@ -101,4 +101,55 @@ const Download = () => {
   `
 }
 
-module.exports = { Expand, Collapse, Download }
+const External = () => {
+  return html`
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      xmlns:xlink="http://www.w3.org/1999/xlink"
+      version="1.1"
+      x="0px"
+      y="0px"
+      viewBox="0 0 90 90"
+      enable-background="new 0 0 90 90"
+      xml:space="preserve"
+    >
+      <g display="none">
+        <polyline
+          display="inline"
+          fill="#000000"
+          stroke="#E00C02"
+          stroke-width="4"
+          stroke-miterlimit="10"
+          points="60,17 85,17 85,42  "
+        />
+        <line
+          display="inline"
+          fill="#000000"
+          stroke="#E00C02"
+          stroke-width="4"
+          stroke-miterlimit="10"
+          x1="47"
+          y1="55"
+          x2="85"
+          y2="17"
+        />
+        <g display="inline">
+          <path
+            fill="#000000"
+            stroke="#E00C02"
+            stroke-width="4"
+            stroke-miterlimit="10"
+            d="M77,44v32c0,1.65-1.35,3-3,3H26    c-1.65,0-3-1.35-3-3V28c0-1.65,1.35-3,3-3h32"
+          />
+        </g>
+      </g>
+      <g>
+        <path
+          d="M87,15v27h-4V21.828L48.414,56.414l-2.828-2.828L80.172,19H60v-4H87z M75,76c0,0.542-0.458,1-1,1H26c-0.542,0-1-0.458-1-1   V28c0-0.542,0.458-1,1-1h32v-4H26c-2.757,0-5,2.243-5,5v48c0,2.757,2.243,5,5,5h48c2.757,0,5-2.243,5-5V44h-4V76z"
+        />
+      </g>
+    </svg>
+  `
+}
+
+module.exports = { Expand, Collapse, Download, External }

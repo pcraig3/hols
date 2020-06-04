@@ -7,6 +7,7 @@ const NextHolidayBox = require('../components/NextHolidayBox.js')
 const ProvincePicker = require('../components/ProvincePicker.js')
 const SummaryTable = require('../components/SummaryTable.js')
 const CalButton = require('../components/CalButton.js')
+const { External } = require('../components/Svg.js')
 
 const styles = ({ accent = theme.color.red } = {}) => css`
   div.past {
@@ -26,6 +27,43 @@ const styles = ({ accent = theme.color.red } = {}) => css`
   @media (${theme.mq.lg}) {
     div.upcoming ~ div.upcoming .key {
       color: ${theme.color.grey};
+    }
+  }
+
+  .bottom-link__container {
+    position: relative;
+
+    @media (${theme.mq.md}) {
+      display: flex;
+      flex-direction: row-reverse;
+      justify-content: space-between;
+    }
+
+    .external-link {
+      position: absolute;
+      bottom: ${theme.space.xxl};
+
+      @media (${theme.mq.md}) {
+        position: relative;
+        bottom: unset;
+      }
+
+      svg {
+        height: 19.5px;
+        width: 19.5px;
+        fill: ${accent};
+        vertical-align: sub;
+
+        @media (${theme.mq.md}) {
+          height: 21px;
+          width: 21px;
+        }
+
+        @media (${theme.mq.lg}) {
+          height: 25px;
+          width: 25px;
+        }
+      }
     }
   }
 `
@@ -176,7 +214,12 @@ const Province = ({
                 </div>
               </div>`}
             <//>
-            <span class="bottom-link"><a href="#html" class="up-arrow">Back to top</a></span>
+            <div class="bottom-link__container">
+              <span class="bottom-link external-link"
+                >Source:${' '}<a href="#html">Alberta general holidays <${External} /></a
+              ></span>
+              <span class="bottom-link"><a href="#html" class="up-arrow">Back to top</a></span>
+            </div>
           </div>
         </section>
       </div>
