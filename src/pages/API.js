@@ -108,17 +108,17 @@ const API = () =>
             target="_blank"
             >basic overview on GitHub</a
           >
-          ${' '}if you’re a “read the first and last chapter” kind of person.
+          ${' '}if you’re a “read-the-first-and-last-chapter” kind of person.
         </p>
 
         <h2>Citations</h2>
         <p>
-          I’ve pulled the public holidays from each region in Canada with their${' '}<a
+          I’ve referenced the${' '}<a
             href="https://github.com/pcraig3/hols/#citations"
             title="Citations"
             target="_blank"
             >official sources</a
-          >, so we should be good.
+          >${' '}for each region in Canada, so we should be good.
         </p>
         <p>Mistaeks do happen, however — <a href="/feedback">lemme know</a> if you spot any.<//>
       <//>

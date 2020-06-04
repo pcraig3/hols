@@ -26,7 +26,7 @@ Definitely use it for your billions of dollars mission-critical system.
 
 ## Docs
 
-If you know your way around a REST API with JSON responses, you’re in good shape. There's an OpenAPI spec describing the API, and a more prose-y overview if you keep reading. Both should be equivalent — the spec is more exact but the overview is easier to skim.
+If you know your way around a REST API with JSON responses, you’re in good shape. There's an OpenAPI spec below describing the API, and a bite-sized brief overview if you keep reading.
 
 ### OpenAPI (formerly Swagger)
 
