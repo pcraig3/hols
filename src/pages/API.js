@@ -102,27 +102,25 @@ const API = () =>
           >${' '}page where you can test the endpoints.
         </p>
         <p>
-          Otherwise, the${' '}<a
+          There’s also a ${' '}<a
             title="API documentation"
-            href="https://github.com/pcraig3/hols/blob/master/API.md"
+            href="https://github.com/pcraig3/hols/blob/master/API.md#basic-overview"
             target="_blank"
-            >documentation on GitHub</a
+            >basic overview on GitHub</a
           >
-          ${' '}is pretty good.
+          ${' '}if you’re a “read the first and last chapter” kind of person.
         </p>
 
         <h2>Citations</h2>
         <p>
-          Scraped the data from the Wikipedia article “<a
-            href="https://en.wikipedia.org/wiki/Public_holidays_in_Canada"
-            >Public holidays in Canada</a
-          >” that tables out which provinces observe which holidays and vice-versa. And${' '}
-          <em>then</em>${' '}I even${' '}
-          <a href="https://github.com/pcraig3/hols/#citations" title="Citations" target="_blank"
-            >double-checked</a
-          >${' '} so we should be all good.
+          I’ve pulled the public holidays from each region in Canada with their${' '}<a
+            href="https://github.com/pcraig3/hols/#citations"
+            title="Citations"
+            target="_blank"
+            >official sources</a
+          >, so we should be good.
         </p>
-        <p>Mistaeks do happen, so <a href="/feedback">lemme know</a>.<//>
+        <p>Mistaeks do happen, however — <a href="/feedback">lemme know</a> if you spot any.<//>
       <//>
     <//>
   `

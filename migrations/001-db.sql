@@ -2,7 +2,9 @@
 CREATE TABLE Province (
   id CHAR(2) PRIMARY KEY,
   nameEn TEXT,
-  nameFr TEXT
+  nameFr TEXT,
+  sourceLink TEXT DFEAULT null,
+  sourceEn TEXT DEFAULT null
 );
 
 CREATE TABLE Holiday (
@@ -35,6 +37,20 @@ INSERT INTO Province (id, nameEn, nameFr) VALUES ('QC', 'Quebec', 'Québec');
 INSERT INTO Province (id, nameEn, nameFr) VALUES ('SK', 'Saskatchewan', 'Saskatchewan');
 INSERT INTO Province (id, nameEn, nameFr) VALUES ('YT', 'Yukon', 'Yukon');
 
+UPDATE Province SET sourceEn = 'Alberta general holidays', sourceLink = 'https://www.alberta.ca/alberta-general-holidays.aspx' WHERE id = 'AB';
+UPDATE Province SET sourceEn = 'Statutory Holidays', sourceLink = 'https://www2.gov.bc.ca/gov/content/employment-business/employment-standards-advice/employment-standards/statutory-holidays' WHERE id = 'BC';
+UPDATE Province SET sourceEn = 'What are the general holidays in Manitoba?', sourceLink = 'https://www.gov.mb.ca/labour/standards/doc,gen-holidays-after-april-30-07,factsheet.html#q12' WHERE id = 'MB';
+UPDATE Province SET sourceEn = 'What are the 10 prescribed days of rest?', sourceLink = 'https://www2.gnb.ca/content/gnb/en/departments/elg/local_government/content/governance/content/days_of_rest_act/faq.html#2' WHERE id = 'NB';
+UPDATE Province SET sourceEn = 'Clarification on public holidays in Newfoundland', sourceLink = 'https://gist.github.com/pcraig3/81dff348ddf52777c9f918c3032531bd' WHERE id = 'NL';
+UPDATE Province SET sourceEn = 'Holiday and Retail Closing Day Charts', sourceLink = 'https://novascotia.ca/lae/employmentrights/holidaychart.asp' WHERE id = 'NS';
+UPDATE Province SET sourceEn = 'Employment Standards: Frequently Asked Questions', sourceLink = 'https://www.ece.gov.nt.ca/en/services/employment-standards/frequently-asked-questions' WHERE id = 'NT';
+UPDATE Province SET sourceEn = 'Nunavut Labour Standards Compliance Office: General Holidays', sourceLink = 'https://nu-lsco.ca/faq-s?tmpl=component&faqid=11' WHERE id = 'NU';
+UPDATE Province SET sourceEn = 'Public holidays', sourceLink = 'https://www.ontario.ca/document/your-guide-employment-standards-act-0/public-holidays' WHERE id = 'ON';
+UPDATE Province SET sourceEn = 'Paid Holidays', sourceLink = 'https://www.princeedwardisland.ca/en/information/economic-growth-tourism-and-culture/paid-holidays' WHERE id = 'PE';
+UPDATE Province SET sourceEn = 'Jours fériés, chômés et payés', sourceLink = 'https://www2.gouv.qc.ca/entreprises/portail/quebec/ressourcesh?lang=fr&g=ressourcesh&sg=personnel&t=o&e=2318829344:3908165687' WHERE id = 'QC';
+UPDATE Province SET sourceEn = 'List of Saskatchewan Public Holidays', sourceLink = 'https://www.saskatchewan.ca/business/employment-standards/vacations-holidays-leaves-and-absences/public-statutory-holidays/list-of-saskatchewan-public-holidays' WHERE id = 'SK';
+UPDATE Province SET sourceEn = 'Find a Yukon statutory holiday', sourceLink = 'https://yukon.ca/en/doing-business/employer-responsibilities/find-yukon-statutory-holiday' WHERE id = 'YT';
+
 INSERT INTO Holiday (date, nameEn, nameFr) VALUES ('January 1', 'New Year’s Day', 'Jour de l’An');
 INSERT INTO Holiday (date, nameEn, nameFr) VALUES ('Third Monday in February', 'Louis Riel Day', 'Journée Louis Riel');
 INSERT INTO Holiday (date, nameEn, nameFr) VALUES ('Third Monday in February', 'Islander Day', 'Fête des Insulaires');
@@ -53,7 +69,6 @@ INSERT INTO Holiday (date, nameEn, nameFr) VALUES ('July 1', 'Canada Day', 'Fêt
 INSERT INTO Holiday (date, nameEn, nameFr) VALUES ('Monday near July 12', 'Orangemen’s Day', 'Fête des orangistes');
 INSERT INTO Holiday (date, nameEn, nameFr) VALUES ('First Monday in August', 'Civic Holiday', 'Premier lundi d’août');
 INSERT INTO Holiday (date, nameEn, nameFr) VALUES ('First Monday in August', 'British Columbia Day', 'Jour de Colombie-Britannique');
-INSERT INTO Holiday (date, nameEn, nameFr) VALUES ('First Monday in August', 'Heritage Day', 'Fête du patrimoine');
 INSERT INTO Holiday (date, nameEn, nameFr) VALUES ('First Monday in August', 'New Brunswick Day', 'Jour de Nouveau Brunswick');
 INSERT INTO Holiday (date, nameEn, nameFr) VALUES ('First Monday in August', 'Saskatchewan Day', 'Jour de Saskatchewan');
 INSERT INTO Holiday (date, nameEn, nameFr) VALUES ('First Wednesday in August', 'Regatta Day', 'Journée des régates');
@@ -160,8 +175,6 @@ INSERT INTO ProvinceHoliday (holidayId, provinceId) VALUES ((SELECT id FROM Holi
 INSERT INTO ProvinceHoliday (holidayId, provinceId) VALUES ((SELECT id FROM Holiday WHERE (date = 'First Monday in August' AND nameEn = 'Civic Holiday')), 'NU');
 
 INSERT INTO ProvinceHoliday (holidayId, provinceId) VALUES ((SELECT id FROM Holiday WHERE (date = 'First Monday in August' AND nameEn = 'Saskatchewan Day')), 'SK');
-
-INSERT INTO ProvinceHoliday (holidayId, provinceId) VALUES ((SELECT id FROM Holiday WHERE (date = 'First Monday in August' AND nameEn = 'Heritage Day')), 'AB');
 
 INSERT INTO ProvinceHoliday (holidayId, provinceId) VALUES ((SELECT id FROM Holiday WHERE (date = 'First Monday in August' AND nameEn = 'New Brunswick Day')), 'NB');
 
