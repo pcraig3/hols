@@ -39,11 +39,11 @@ INSERT INTO Province (id, nameEn, nameFr) VALUES ('YT', 'Yukon', 'Yukon');
 
 UPDATE Province SET sourceEn = 'General holidays in Alberta', sourceLink = 'https://www.alberta.ca/alberta-general-holidays.aspx#toc-1' WHERE id = 'AB';
 UPDATE Province SET sourceEn = 'Statutory Holidays in British Columbia', sourceLink = 'https://www2.gov.bc.ca/gov/content/employment-business/employment-standards-advice/employment-standards/statutory-holidays#body' WHERE id = 'BC';
-UPDATE Province SET sourceEn = 'General holidays in Manitoba?', sourceLink = 'https://www.gov.mb.ca/labour/standards/doc,gen-holidays-after-april-30-07,factsheet.html#q12' WHERE id = 'MB';
+UPDATE Province SET sourceEn = 'General holidays in Manitoba', sourceLink = 'https://www.gov.mb.ca/labour/standards/doc,gen-holidays-after-april-30-07,factsheet.html#q12' WHERE id = 'MB';
 UPDATE Province SET sourceEn = '10 prescribed days of rest', sourceLink = 'https://www2.gnb.ca/content/gnb/en/departments/elg/local_government/content/governance/content/days_of_rest_act/faq.html#2' WHERE id = 'NB';
 UPDATE Province SET sourceEn = 'Public holidays in Newfoundland', sourceLink = 'https://gist.github.com/pcraig3/81dff348ddf52777c9f918c3032531bd' WHERE id = 'NL';
 UPDATE Province SET sourceEn = 'Paid holidays in Nova Scotia', sourceLink = 'https://novascotia.ca/lae/employmentrights/holidaychart.asp' WHERE id = 'NS';
-UPDATE Province SET sourceEn = 'Employment Standards: Northwest Territories', sourceLink = 'https://www.ece.gov.nt.ca/en/services/employment-standards/frequently-asked-questions' WHERE id = 'NT';
+UPDATE Province SET sourceEn = 'Employment Standards, Northwest Territories', sourceLink = 'https://www.ece.gov.nt.ca/en/services/employment-standards/frequently-asked-questions' WHERE id = 'NT';
 UPDATE Province SET sourceEn = 'Nunavut General Holidays', sourceLink = 'https://nu-lsco.ca/faq-s?tmpl=component&faqid=11' WHERE id = 'NU';
 UPDATE Province SET sourceEn = 'Ontario Public holidays', sourceLink = 'https://www.ontario.ca/document/your-guide-employment-standards-act-0/public-holidays' WHERE id = 'ON';
 UPDATE Province SET sourceEn = 'PEI Paid Holidays', sourceLink = 'https://www.princeedwardisland.ca/en/information/economic-growth-tourism-and-culture/paid-holidays' WHERE id = 'PE';

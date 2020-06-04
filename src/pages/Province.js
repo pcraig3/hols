@@ -31,24 +31,30 @@ const styles = ({ accent = theme.color.red } = {}) => css`
   }
 
   .bottom-link__container.with-source {
-    position: relative;
+    display: flex;
+    flex-direction: column;
+    margin-top: -${theme.space.xxl};
 
     @media (${theme.mq.md}) {
-      display: flex;
       flex-direction: row-reverse;
       justify-content: space-between;
+      margin-top: 0;
+    }
+
+    .bottom-link:last-of-type {
+      margin-right: ${theme.space.md};
     }
 
     .external-link {
-      position: absolute;
-      bottom: ${theme.space.xxl};
+      margin-bottom: ${theme.space.xxl};
 
       @media (${theme.mq.md}) {
         position: relative;
-        bottom: unset;
+        margin-bottom: 0;
       }
 
       svg {
+        padding-left: 2px;
         height: 19.5px;
         width: 19.5px;
         fill: ${accent};
@@ -219,7 +225,7 @@ const Province = ({
               ${source &&
               html`<span class="bottom-link external-link"
                 >Source:${' '}<a href=${source.link} target="_blank"
-                  >${source.nameEn} <${External} /></a
+                  >${source.nameEn}<${External} /></a
               ></span>`}
               <span class="bottom-link"><a href="#html" class="up-arrow">Back to top</a></span>
             </div>

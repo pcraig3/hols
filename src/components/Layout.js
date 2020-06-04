@@ -10,15 +10,15 @@ const linkStyles = (color) => css`
     color: ${color ? theme.color[color].accent : theme.color.red};
 
     &.up-arrow::after {
-      content: ' ↑';
+      content: '\u00A0↑';
     }
 
     &.down-arrow::after {
-      content: ' ↓';
+      content: '\u00A0↓';
     }
 
     &.right-arrow::after {
-      content: ' →';
+      content: '\u00A0→';
     }
 
     &:focus {
