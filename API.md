@@ -38,15 +38,17 @@ If you know your way around a REST API with JSON responses, you’re in good sha
 
 The SwaggerHub link includes an API explorer so you can give it a spin before you drive it off the lot.
 
-### Overview
+### Basic overview
 
-There are 5 endpoints. All are `GET` requests. As much as I know you would love to, it’s not yet possible to `PUT` additional public holidays. None of the fields ever return `null` values.
+There are 5 endpoints. All are `GET` requests. As much as I know you would love to, it’s not yet possible to `PUT` additional public holidays.
 
-- [`/api/v1`](https://github.com/pcraig3/hols/blob/master/API.md#apiv1--root)
-- [`/api/v1/provinces`](https://github.com/pcraig3/hols/blob/master/API.md#apiv1provinces--get-all-provinces-and-territories)
-- [`/api/v1/provinces/{provinceId}`](https://github.com/pcraig3/hols/blob/master/API.md#apiv1provincesid--get-one-province-or-territory)
-- [`/api/v1/holidays`](https://github.com/pcraig3/hols/blob/master/API.md#apiv1holidays--get-all-holidays)
-- [`/api/v1/holidays/{holidayId}`](https://github.com/pcraig3/hols/blob/master/API.md#v1holidaysid--get-one-holiday)
+- `/api/v1`
+- `/api/v1/provinces`
+- `/api/v1/provinces/{provinceId}`
+- `/api/v1/holidays`
+- `/api/v1/holidays/{holidayId}`
+
+None of the response object keys ever contain `null` values.
 
 #### Query parameters
 
@@ -57,196 +59,4 @@ There are 2 query parameters values you can use. Probably not on the root route 
 
 You can combine them and they will work (eg, `/api/v1/holidays?year=2021&federal=true`).
 
-#### Routes
-
-##### `/api/v1/` → root
-
-Returns a welcome message and navigational links.
-
-<details>
-<summary>Example response</summary>
-
-```json
-{
-  "_links": {
-    "holidays": {
-      "href": "url"
-    },
-    "self": {
-      "href": "url"
-    },
-    "provinces": {
-      "href": "url"
-    },
-    "spec": {
-      "href": "url"
-    }
-  },
-  "message": "welcome message"
-}
-```
-
-</details>
-
-##### `/api/v1/provinces` → GET all provinces and territories
-
-Returns a list of provinces and territories in Canada. Each province or territory lists its associated holidays.
-
-<details>
-<summary>Example response</summary>
-
-```json
-{
-  "provinces": [
-    {
-      "id": "AB",
-      "nameEn": "Alberta",
-      "nameFr": "Alberta",
-      "holidays": [
-        {
-          "id": 1,
-          "date": "2019-01-01",
-          "nameEn": "New Year’s Day",
-          "nameFr": "Jour de l’An",
-          "federal": 1,
-          "observedDate": "2019-01-01"
-        },
-        ...
-      ],
-      "nextHoliday": {
-        "id": 4,
-        "date": "2019-02-18",
-        "nameEn": "Family Day",
-        "nameFr": "Fête de la famille",
-        "federal": 0,
-        "observedDate": "2019-02-18"
-      }
-    },
-    ...
-  ]
-}
-```
-
-</details>
-
-##### `/api/v1/provinces/{provinceId}` → GET one province or territory
-
-Returns one province or territory in Canada by [two-letter postal abbreviations](https://en.wikipedia.org/wiki/Canadian_postal_abbreviations_for_provinces_and_territories#Names_and_abbreviations). Must be uppercase. Returns [a `400` response](https://github.com/pcraig3/holidays-canada#errors) for invalid `provinceId`s.
-
-<details>
-<summary>Example response</summary>
-
-```json
-{
-  "province": {
-    "id": "AB",
-    "nameEn": "Alberta",
-    "nameFr": "Alberta",
-    "holidays": [
-      {
-        "id": 1,
-        "date": "2019-01-01",
-        "nameEn": "New Year’s Day",
-        "nameFr": "Jour de l’An",
-        "federal": 1,
-        "observedDate": "2019-01-01"
-      },
-      ...
-    ],
-    "nextHoliday": {
-      "id": 4,
-      "date": "2019-02-18",
-      "nameEn": "Family Day",
-      "nameFr": "Fête de la famille",
-      "federal": 0,
-      "observedDate": "2019-02-18"
-    }
-  }
-}
-```
-
-</details>
-
-##### `/api/v1/holidays` → GET all holidays
-
-Returns a list of Canadian public holidays. Each holiday lists the regions that observe it.
-
-<details>
-<summary>Example response</summary>
-
-```json
-{
-  "holidays": [
-    {
-      "id": 1,
-      "date": "2019-01-01",
-      "nameEn": "New Year’s Day",
-      "nameFr": "Jour de l’An",
-      "federal": 1,
-      "observedDate": "2019-01-01",
-      "provinces": [
-        {
-          "id": "AB",
-          "nameEn": "Alberta",
-          "nameFr": "Alberta"
-        },
-        ...
-      ],
-    },
-    ...
-  ]
-}
-```
-
-</details>
-
-##### `/v1/holidays/{holidayId}` → GET one holiday
-
-Returns one Canadian statutory holiday by integer id. Returns [a `400` response](https://github.com/pcraig3/holidays-canada#errors) for invalid `holidayId`s.
-
-<details>
-<summary>Example response</summary>
-
-```json
-{
-  "holiday": {
-    "id": 1,
-    "date": "2019-01-01",
-    "nameEn": "New Year’s Day",
-    "nameFr": "Jour de l’An",
-    "federal": 1,
-    "observedDate": "2019-01-01",
-    "provinces": [
-      {
-        "id": "AB",
-        "nameEn": "Alberta",
-        "nameFr": "Alberta"
-      },
-      ...
-    ]
-  }
-}
-```
-
-</details>
-
-#### errors
-
-Errors are returned for invalid url paths or bad `id` values.
-
-<details>
-<summary>Example response</summary>
-
-```json
-{
-  "error": {
-    "message": "error message",
-    "status": 400,
-    "timestamp": "2019-01-27T22:13:56.734Z"
-  }
-}
-```
-
-</details>
-
-Easy.
+That should be enough to get you started. Remember, the design goal here is _simple_.
