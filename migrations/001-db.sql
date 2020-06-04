@@ -69,7 +69,6 @@ INSERT INTO Holiday (date, nameEn, nameFr) VALUES ('July 1', 'Canada Day', 'Fêt
 INSERT INTO Holiday (date, nameEn, nameFr) VALUES ('Monday near July 12', 'Orangemen’s Day', 'Fête des orangistes');
 INSERT INTO Holiday (date, nameEn, nameFr) VALUES ('First Monday in August', 'Civic Holiday', 'Premier lundi d’août');
 INSERT INTO Holiday (date, nameEn, nameFr) VALUES ('First Monday in August', 'British Columbia Day', 'Jour de Colombie-Britannique');
-INSERT INTO Holiday (date, nameEn, nameFr) VALUES ('First Monday in August', 'Heritage Day', 'Fête du patrimoine');
 INSERT INTO Holiday (date, nameEn, nameFr) VALUES ('First Monday in August', 'New Brunswick Day', 'Jour de Nouveau Brunswick');
 INSERT INTO Holiday (date, nameEn, nameFr) VALUES ('First Monday in August', 'Saskatchewan Day', 'Jour de Saskatchewan');
 INSERT INTO Holiday (date, nameEn, nameFr) VALUES ('First Wednesday in August', 'Regatta Day', 'Journée des régates');
@@ -176,8 +175,6 @@ INSERT INTO ProvinceHoliday (holidayId, provinceId) VALUES ((SELECT id FROM Holi
 INSERT INTO ProvinceHoliday (holidayId, provinceId) VALUES ((SELECT id FROM Holiday WHERE (date = 'First Monday in August' AND nameEn = 'Civic Holiday')), 'NU');
 
 INSERT INTO ProvinceHoliday (holidayId, provinceId) VALUES ((SELECT id FROM Holiday WHERE (date = 'First Monday in August' AND nameEn = 'Saskatchewan Day')), 'SK');
-
-INSERT INTO ProvinceHoliday (holidayId, provinceId) VALUES ((SELECT id FROM Holiday WHERE (date = 'First Monday in August' AND nameEn = 'Heritage Day')), 'AB');
 
 INSERT INTO ProvinceHoliday (holidayId, provinceId) VALUES ((SELECT id FROM Holiday WHERE (date = 'First Monday in August' AND nameEn = 'New Brunswick Day')), 'NB');
 
