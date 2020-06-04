@@ -18,7 +18,7 @@ const getNextHoliday = ({ federal } = {}) => {
   }
 }
 
-const sp2nbsp = (str) => str.replace(/ /g, '\u00a0')
+const sp2nbsp = (str) => str.replace(/ /, '\u00a0')
 
 describe('NextHoliday', () => {
   test('renders next holiday for Canada page', () => {

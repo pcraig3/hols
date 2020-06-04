@@ -22,7 +22,7 @@ const getNextHoliday = ({ federal } = {}) => {
   }
 }
 
-const sp2nbsp = (str) => str.replace(/ /g, '\u00a0')
+const sp2nbsp = (str) => str.replace(/ /, '\u00a0')
 
 test('NextHolidayBox displays next holiday properly for Canada', () => {
   const nextHoliday = getNextHoliday()
