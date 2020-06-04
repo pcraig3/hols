@@ -33,7 +33,7 @@ describe('Province page', () => {
   test('renders h1 and h2', () => {
     const $ = renderPage()
     expect($('h1').length).toBe(1)
-    expect($('h1').text()).toEqual('Canada’s next statutory holiday isAugust 16Gold Cup Parade Day')
+    expect($('h1').text()).toEqual('Canada’s next statutory holiday isAugust 16Gold Cup Parade Day')
     expect($('h2').length).toBe(1)
     expect($('h2').text()).toEqual('Canada statutory holidays in 2020')
   })
