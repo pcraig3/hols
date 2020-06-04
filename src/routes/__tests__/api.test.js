@@ -28,6 +28,8 @@ describe('Test /api responses', () => {
         id: expect.any(String),
         nameEn: expect.any(String),
         nameFr: expect.any(String),
+        sourceLink: expect.any(String),
+        sourceEn: expect.any(String),
       },
       withHolidays ? holidays : {},
     )
@@ -138,7 +140,7 @@ describe('Test /api responses', () => {
 
     test('it should return the right number of holidays per province', async () => {
       const provinceHolidayLength = {
-        AB: 10,
+        AB: 9,
         BC: 10,
         MB: 8,
         NB: 8,
@@ -274,13 +276,13 @@ describe('Test /api responses', () => {
 
   describe('for /api/v1/holidays/:holidayId path', () => {
     test('it should return a holiday for a good ID', async () => {
-      const response = await request(app).get('/api/v1/holidays/28')
+      const response = await request(app).get('/api/v1/holidays/27')
       expect(response.statusCode).toBe(200)
 
       let { holiday } = JSON.parse(response.text)
 
       expect(holiday).toMatchObject({
-        id: 28,
+        id: 27,
         date: '2020-12-26',
         nameEn: 'Boxing Day',
         nameFr: 'Lendemain de Noël',
