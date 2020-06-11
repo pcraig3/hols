@@ -3,7 +3,6 @@ const morgan = require('morgan')
 const morganConfig = require('./config/morgan.config')
 const helmet = require('helmet')
 const compression = require('compression')
-const redirectToHTTPS = require('express-http-to-https').redirectToHTTPS
 const csp = require('./config/csp.config')
 
 const app = express()
@@ -11,8 +10,6 @@ const app = express()
 app
   .use(helmet())
   .use(helmet.contentSecurityPolicy({ directives: csp }))
-  // redirect http connections to https (unless localhost:{4 digits}, or 127.0.0.1:{5 digits} (for supertest))
-  .use(redirectToHTTPS([/localhost:(\d{4})|127.0.0.1:(\d{5})/], [], 301))
   // both of these are needed to parse post request params
   .use(express.urlencoded({ extended: true }))
   .use(express.json())
