@@ -1,7 +1,11 @@
-/node_modules
+# git stuff
+.git
+
+# project stuff
+node_modules/
 database.sqlite
 npm-debug.log
 .DS_Store
-/*.env
-/coverage
-.vscode
+*.env
+coverage/
+.vscode/
