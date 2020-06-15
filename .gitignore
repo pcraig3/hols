@@ -9,3 +9,4 @@ npm-debug.log
 *.env
 coverage/
 .vscode/
+.can-hols*.json
