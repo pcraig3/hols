@@ -1,4 +1,4 @@
-name: Cloud Run
+name: Run tests and deploy to Cloud Run
 on: [push]
 env:
   PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
@@ -24,7 +24,7 @@ jobs:
       - name: Run JS linter
         run: npm run lint
   deploy:
-    name: Deploy
+    name: Deploy to Cloud Run
     runs-on: ubuntu-latest
     needs: test
     if: github.ref == 'refs/heads/master'
