@@ -36,19 +36,8 @@ jobs:
           project_id: ${{ secrets.GCP_PROJECT_ID }}
 
       # Build and push image to Google Container Registry
-      - name: Build
+      - name: Build & deploy
         run: |-
           gcloud builds submit \
-            --quiet \
-            --tag "gcr.io/$PROJECT_ID/$SERVICE_NAME:$GITHUB_SHA"
-            --substitutions=COMMIT_SHA=${GITHUB_SHA}
-
-      # Deploy image to Cloud Run
-      - name: Deploy
-        run: |-
-          gcloud run deploy "$SERVICE_NAME" \
-            --quiet \
-            --region "$RUN_REGION" \
-            --image "gcr.io/$PROJECT_ID/$SERVICE_NAME:$GITHUB_SHA" \
-            --platform "managed" \
-            --allow-unauthenticated
+            --config cloudbuild.yaml \
+            --substitutions=COMMIT_SHA=$GITHUB_SHA,_SERVICE_NAME=${{ secrets.GCP_SERVICE_NAME }}
