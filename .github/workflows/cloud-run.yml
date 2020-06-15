@@ -41,6 +41,7 @@ jobs:
           gcloud builds submit \
             --quiet \
             --tag "gcr.io/$PROJECT_ID/$SERVICE_NAME:$GITHUB_SHA"
+            --substitutions=COMMIT_SHA=${GITHUB_SHA}
 
       # Deploy image to Cloud Run
       - name: Deploy
