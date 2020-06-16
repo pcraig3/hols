@@ -67,15 +67,23 @@ Instead, using [`cheerio`](https://cheerio.js.org/), we can load in a string lik
 
 ```bash
 # build an image locally
-docker build -t pcraig3/hols .
+docker build -t pcraig3/hols:tag --build-arg GITHUB_SHA_ARG=<tag> .
 
 # run the container
-docker run -it -p 3000:3000 pcraig3/hols
+docker run -it -p 3000:3000 pcraig3/hols:tag
 ```
 
 The container should be running at [http://localhost:3000/](http://localhost:3000/).
 
 On a Mac, press `Control` + `C` to quit the running docker container.
+
+### Push to Cloud Run
+
+The [`cloudbuild.yaml`](https://github.com/pcraig3/hols/blob/master/cloudbuild.yaml) file allows the service to be deployed on [Cloud Run](https://cloud.google.com/run).
+
+```
+gcloud builds submit --tag gcr.io/{PROJECT}/{SERVICE}:{TAG} --build-arg GITHUB_SHA_ARG={TAG}
+```
 
 ## Citations
 
