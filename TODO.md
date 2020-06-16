@@ -14,6 +14,7 @@
 
 # DONE
 
+- swap from Heroku to Cloud Run
 - add sources
   - add to the frontend
   - add to the API
