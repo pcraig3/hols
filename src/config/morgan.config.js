@@ -10,6 +10,10 @@ morgan.token('host', function getHost(req, res) {
   return req.headers.host
 })
 
+morgan.token('ip', function getErr(req, res) {
+  return req.clientIp
+})
+
 morgan.token('err', function getErr(req, res) {
   return res.locals.err
 })
@@ -38,6 +42,7 @@ function jsonFormatProduction(tokens, req, res) {
     'content-length': tokens['res'](req, res, 'content-length'),
     referrer: tokens['referrer'](req, res),
     'user-agent': tokens['user-agent'](req, res),
+    ip: tokens['ip'](req, res),
     err: tokens['err'](req, res),
   })
 }
