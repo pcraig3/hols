@@ -14,6 +14,7 @@
 
 # DONE
 
+- log ips in prod (temporarily)
 - swap from Heroku to Cloud Run
 - add sources
   - add to the frontend

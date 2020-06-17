@@ -4,6 +4,7 @@ const morganConfig = require('./config/morgan.config')
 const helmet = require('helmet')
 const compression = require('compression')
 const csp = require('./config/csp.config')
+const requestIp = require('request-ip')
 
 const app = express()
 
@@ -15,6 +16,7 @@ app
   .use(express.json())
   .use(express.static('public', { maxage: process.env.NODE_ENV === 'production' ? '3d' : '0' }))
   .use(compression())
+  .use(requestIp.mw())
 
 // if NODE_ENV does not equal 'test', add a request logger
 process.env.NODE_ENV !== 'test' && app.use(morgan(morganConfig))
