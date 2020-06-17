@@ -8,6 +8,11 @@ const createError = require('http-errors')
 const renderPage = require('../pages/_document.js')
 const { dbmw } = require('../utils')
 const { getProvincesWithHolidays, getHolidaysWithProvinces } = require('../queries')
+const rateLimit = require('express-rate-limit')
+const rateLimitConfig = require('../config/rateLimit.config')
+
+// Set the rate limiter on the API in prod
+process.env.NODE_ENV === 'production' && v1Router.use(rateLimit(rateLimitConfig))
 
 // Import the express-openapi-validator library
 const OpenApiValidator = require('express-openapi-validator').OpenApiValidator
@@ -79,7 +84,7 @@ apiRouter.get('/', (req, res) => {
   )
 })
 
-apiRouter.use('/v1', v1Router)
+apiRouter.use('/v1', v1Router).use
 
 apiRouter.get('*', (req, res) => {
   res.status(404)
