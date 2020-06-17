@@ -5,6 +5,15 @@ const helmet = require('helmet')
 const compression = require('compression')
 const csp = require('./config/csp.config')
 const requestIp = require('request-ip')
+const rateLimit = require('express-rate-limit')
+
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 100, // limit each IP to 100 requests per windowMs,
+  keyGenerator: function (req) {
+    req.clientIp
+  },
+})
 
 const app = express()
 
@@ -17,6 +26,7 @@ app
   .use(express.static('public', { maxage: process.env.NODE_ENV === 'production' ? '3d' : '0' }))
   .use(compression())
   .use(requestIp.mw())
+  .use(limiter)
 
 // if NODE_ENV does not equal 'test', add a request logger
 process.env.NODE_ENV !== 'test' && app.use(morgan(morganConfig))
