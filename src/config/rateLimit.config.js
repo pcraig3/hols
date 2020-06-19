@@ -3,9 +3,9 @@ const createError = require('http-errors')
 // https://github.com/nfriedly/express-rate-limit
 module.exports = {
   windowMs: 5 * 60 * 1000, // 5 minutes
-  max: 2, // limit each IP to 100 requests per 5 minutes,
+  max: 100, // limit each IP to 100 requests per 5 minutes,
   keyGenerator: function (req) {
-    req.clientIp
+    return req.clientIp
   },
   handler: function (req, res, options) {
     const statusCode = 429

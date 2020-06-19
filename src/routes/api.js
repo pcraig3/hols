@@ -11,14 +11,12 @@ const { getProvincesWithHolidays, getHolidaysWithProvinces } = require('../queri
 const rateLimit = require('express-rate-limit')
 const rateLimitConfig = require('../config/rateLimit.config')
 
-// Set the rate limiter on the API in prod
-process.env.NODE_ENV === 'production' && v1Router.use(rateLimit(rateLimitConfig))
-
 // Import the express-openapi-validator library
 const OpenApiValidator = require('express-openapi-validator').OpenApiValidator
 const spec = path.join(__dirname, '../../reference/Canada-Holidays-API.v1.yaml')
 
 v1Router.use(cors())
+
 // Serve the OpenAPI spec
 v1Router.use('/spec', express.static(spec))
 
@@ -69,6 +67,9 @@ new OpenApiValidator({
       })
     })
   })
+
+// Set the rate limiter on the API in prod
+process.env.NODE_ENV === 'production' && v1Router.use(rateLimit(rateLimitConfig))
 
 apiRouter.get('/', (req, res) => {
   return res.send(
