@@ -454,7 +454,7 @@ describe('Test ui responses', () => {
   })
 
   describe('Test for external source links', () => {
-    const noSourceURLs = ['/', '/2021', '/federal', '/federal/2021']
+    const noSourceURLs = ['/', '/2021']
     noSourceURLs.map((url) => {
       test(`should not return an external source for "${url}"`, async () => {
         const response = await request(app).get(url)
@@ -463,7 +463,7 @@ describe('Test ui responses', () => {
       })
     })
 
-    const sourceURLs = ['/province/AB', '/province/AB/2021']
+    const sourceURLs = ['/federal', '/federal/2021', '/province/AB', '/province/AB/2021']
     sourceURLs.map((url) => {
       test(`should return an external source for "${url}"`, async () => {
         const response = await request(app).get(url)
