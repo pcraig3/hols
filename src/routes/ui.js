@@ -146,6 +146,13 @@ router.get(
   },
 )
 
+// manually add source for federal holidays — it's not clean but w/e
+const federalSource = {
+  link:
+    'https://www.tpsgc-pwgsc.gc.ca/remuneration-compensation/services-paye-pay-services/paye-information-pay/vie-life/vie-conge-life-leave/conge-paye-holiday-pay-eng.html',
+  nameEn: 'Statutory holiday pay, Canada.ca',
+}
+
 router.get('/federal', checkRedirectYear, dbmw(getHolidaysWithProvinces), (req, res) => {
   const year = getCurrentHolidayYear()
   const holidays = res.locals.rows
@@ -160,7 +167,15 @@ router.get('/federal', checkRedirectYear, dbmw(getHolidaysWithProvinces), (req, 
       pageComponent: 'Province',
       title: `Federal statutory holidays in Canada in ${year}`,
       docProps: { meta, path: req.path },
-      props: { data: { holidays, nextHoliday: nextHol, federal: true, year } },
+      props: {
+        data: {
+          holidays,
+          nextHoliday: nextHol,
+          federal: true,
+          year,
+          source: federalSource,
+        },
+      },
     }),
   )
 })
@@ -182,7 +197,9 @@ router.get(
         pageComponent: 'Province',
         title: `Federal statutory holidays in Canada in ${year}`,
         docProps: { meta, path: req.path },
-        props: { data: { holidays, nextHoliday: undefined, federal: true, year } },
+        props: {
+          data: { holidays, nextHoliday: undefined, federal: true, year, source: federalSource },
+        },
       }),
     )
   },
