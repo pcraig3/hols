@@ -5,6 +5,33 @@ const Nav = require('./Nav')
 const SkipLink = require('./SkipLink')
 
 const linkStyles = (color) => css`
+  .external-link {
+    margin-bottom: ${theme.space.xxl};
+
+    @media (${theme.mq.md}) {
+      position: relative;
+      margin-bottom: 0;
+    }
+
+    svg {
+      padding-left: 2px;
+      height: 19.5px;
+      width: 19.5px;
+      fill: ${color ? theme.color[color].accent : theme.color.red};
+      vertical-align: sub;
+
+      @media (${theme.mq.md}) {
+        height: 21px;
+        width: 21px;
+      }
+
+      @media (${theme.mq.lg}) {
+        height: 25px;
+        width: 25px;
+      }
+    }
+  }
+
   a,
   a:visited {
     color: ${color ? theme.color[color].accent : theme.color.red};

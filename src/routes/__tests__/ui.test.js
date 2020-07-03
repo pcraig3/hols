@@ -360,6 +360,23 @@ describe('Test ui responses', () => {
       })
     })
 
+    describe('Test /sources response', () => {
+      test('it should return 200', async () => {
+        const response = await request(app).get('/sources')
+        expect(response.statusCode).toBe(200)
+      })
+
+      test('it should return the h1, title, and meta tag', async () => {
+        const response = await request(app).get('/sources')
+        const $ = cheerio.load(response.text)
+        expect($('h1').text()).toEqual('All sources')
+        expect($('title').text()).toEqual('All sources — Canada Holidays')
+        expect($('meta[name="description"]').attr('content')).toEqual(
+          'Aggregated sources for Canadian statutory holidays. Canada’s holidays vary by region and industry, so here they are collected in one place.',
+        )
+      })
+    })
+
     describe('Test /add-holidays-to-calendar response', () => {
       test('it should return 200', async () => {
         const response = await request(app).get('/add-holidays-to-calendar')
