@@ -47,12 +47,15 @@ const AddHolidays = ({ data: { provinces } }) => {
           formats.
         </p>
         <p>
-          If you’re here for the deep cuts, I have the${' '}
+          If you’re here for the deep cuts, I also have all of the${' '}
           <a
-            href="https://github.com/pcraig3/hols/blob/master/README.md"
+            href="https://github.com/pcraig3/hols#citations"
             title="Sources (including legislation) on Github"
             target="_blank"
-            >links to the relevant legislation per region on GitHub</a
+            data-event="true"
+            data-action="all-sources-link"
+            data-label="all-sources-link-canada"
+            >links to the relevant legislation per region</a
           >. (Probably you don’t need them.)
         </p>
 
