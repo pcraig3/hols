@@ -1,3 +1,92 @@
+# Canada Holidays
+
+This is a fun little [express](https://expressjs.com/) app for Canada's statutory holidays. There's a frontend you can look at and an API you can use.
+
+- The frontend is using [htm](https://github.com/developit/htm) server-rendered components. Very amusing.
+- The backend API is pretty bare-metal: it's using an initial SQLite migration file stored in memory and then it does "db reads" and spits out JSON.
+
+## Using the API
+
+Please get in touch if you are using the API, because I can probably make it work better if I have real-life use-cases.
+
+[Read the API docs](https://github.com/pcraig3/hols/blob/master/API.md).
+
+There's an OpenAPI spec at [`Canada-Holidays-API.v1.yaml`](https://github.com/pcraig3/hols/blob/master/reference/Canada-Holidays-API.v1.yaml) and a <a href="https://app.swaggerhub.com/apis/pcraig3/canada-holidays/" target="_blank">SwaggerHub</a> page where you can test the endpoints.
+
+## Getting started
+
+### [Install `npm`](https://www.npmjs.com/get-npm)
+
+`npm` is a javascript package manager. It downloads project dependencies and runs node applications.
+
+You'll need node version `v10.21.0` or higher to run the app.
+
+### [Install `docker`](https://docs.docker.com/install/)
+
+A docker container allows a developer to package up an application and all of its parts. This means we can build an app in any language, in any stack, and then run it anywhere — whether locally or on a server.
+
+## Build and run with npm
+
+Guess what? There is **no build step**. Just install the dependencies and run it.
+
+Pretty slick. 😎
+
+```bash
+# install dependencies
+npm install
+
+# run application in 'dev' mode
+# (ie, the server restarts when you save a file)
+npm run dev
+
+# run application in 'prod' mode
+npm start
+```
+
+The app should be running at [http://localhost:3000/](http://localhost:3000/).
+
+On a Mac, press `Control` + `C` to quit the running application.
+
+### Run tests with npm
+
+```bash
+# run unit tests
+npm test
+
+# run linting
+npm run lint
+```
+
+#### unit tests
+
+Since we are still using components as interface, this makes testing really easily. On the server, we render out our components as strings that we send to the browser, but when we run tests, we want to do a bit more than that. Looking for values in big strings is pretty ugly.
+
+Instead, using [`cheerio`](https://cheerio.js.org/), we can load in a string like `"<main><p>hello</p></main>"` and then traverse it using jQuery selector syntax. So we can write assertions against stuff like `$('main > p').text()`, which is far better than string testing.
+
+## Build and run as a Docker container
+
+```bash
+# build an image locally
+docker build -t pcraig3/hols:tag --build-arg GITHUB_SHA_ARG=<tag> .
+
+# run the container
+docker run -it -p 3000:3000 pcraig3/hols:tag
+```
+
+The container should be running at [http://localhost:3000/](http://localhost:3000/).
+
+On a Mac, press `Control` + `C` to quit the running docker container.
+
+### Push to Cloud Run
+
+The [`cloudbuild.yaml`](https://github.com/pcraig3/hols/blob/master/cloudbuild.yaml) file allows the service to be deployed on [Cloud Run](https://cloud.google.com/run).
+
+```
+gcloud builds submit --tag gcr.io/{PROJECT}/{SERVICE}:{TAG} --build-arg GITHUB_SHA_ARG={TAG}
+```
+
+## Citations
+
 | Region  | #   | Readable source                                                                                                                                                                                            | Legislation                                                                                                                                                                                                           |
 | ------- | --- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Federal | 11  | [Statutory holiday pay - Canada.ca](https://www.tpsgc-pwgsc.gc.ca/remuneration-compensation/services-paye-pay-services/paye-information-pay/vie-life/vie-conge-life-leave/conge-paye-holiday-pay-eng.html) | -                                                                                                                                                                                                                     |
