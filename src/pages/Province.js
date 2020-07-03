@@ -194,17 +194,26 @@ const Province = ({
                 </div>
               </div>`}
             <//>
-            <div class="bottom-link__container${source ? ' with-source' : ''}">
-              ${source &&
-              html`<span class="bottom-link external-link"
-                >Source:${' '}<a
-                  href=${source.link}
-                  target="_blank"
-                  data-event="true"
-                  data-action="source-link"
-                  data-label=${`source-link-${provinceIdOrFederal || 'canada'}`}
-                  >${source.nameEn}<${External} /></a
-              ></span>`}
+            <div class="bottom-link__container with-source">
+              ${source
+                ? html`<span class="bottom-link external-link"
+                    >Source:${' '}<a
+                      href=${source.link}
+                      target="_blank"
+                      data-event="true"
+                      data-action="source-link"
+                      data-label=${`source-link-${provinceIdOrFederal || 'canada'}`}
+                      >${source.nameEn}<${External} /></a
+                  ></span>`
+                : html`<span class="bottom-link external-link"
+                    ><a
+                      href="/sources"
+                      data-event="true"
+                      data-action="source-link"
+                      data-label="source-link-canada"
+                      >All sources</a
+                    ></span
+                  >`}
               <span class="bottom-link"><a href="#html" class="up-arrow">Back to top</a></span>
             </div>
           </div>

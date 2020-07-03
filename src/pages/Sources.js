@@ -43,8 +43,8 @@ const AddHolidays = ({ data: { provinces } }) => {
       <${Content}>
         <h1>All sources</h1>
         <p>
-          Canada’s holidays vary by region and industry, so here they are collected in one place in
-          reasonably friendly formats.
+          Canada’s holidays vary by region and industry, so here they are in reasonably friendly
+          formats.
         </p>
         <p>
           If you’re here for the deep cuts, I have the${' '}
@@ -57,7 +57,7 @@ const AddHolidays = ({ data: { provinces } }) => {
         </p>
 
         <${SummaryTable}
-          title="Source for federally-regulated industries"
+          title="Federally-regulated industries"
           rows=${[
             {
               key: html`<a href="/federal">Federal holidays</a>`,
@@ -71,17 +71,14 @@ const AddHolidays = ({ data: { provinces } }) => {
             },
           ]}
         >
-          <h2>Source for federally-regulated industries</h2>
+          <h2>Federally-regulated industries</h2>
           <p>
             11 holidays a year, plus Friday afternoons.
           </p>
         <//>
 
-        <${SummaryTable}
-          title="Sources for provinces and territories"
-          rows=${createRows({ provinces })}
-        >
-          <h2>Sources for provinces and territories</h2>
+        <${SummaryTable} title="Provinces and territories" rows=${createRows({ provinces })}>
+          <h2>Provinces and territories</h2>
           <p>
             Made in Canada, assembled by hand in Ottawa.
           </p>
