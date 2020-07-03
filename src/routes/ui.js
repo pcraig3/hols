@@ -287,6 +287,21 @@ router.get('/feedback', (req, res) => {
   )
 })
 
+router.get('/sources', dbmw(getProvinces), (req, res) => {
+  return res.send(
+    renderPage({
+      pageComponent: 'Sources',
+      title: 'All sources — Canada Holidays',
+      docProps: {
+        meta:
+          'Aggregated sources for Canadian statutory holidays. Canada’s holidays vary by region and industry, so here they are collected in one place.',
+        path: req.path,
+      },
+      props: { data: { provinces: res.locals.rows } },
+    }),
+  )
+})
+
 router.get('/add-holidays-to-calendar', dbmw(getProvinces), (req, res) => {
   const year = getCurrentHolidayYear()
   return res.send(

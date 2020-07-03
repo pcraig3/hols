@@ -34,7 +34,7 @@ const downloadButton = ({ provinceId, year }) => {
   `
 }
 const createRows = ({ provinces, year }) => {
-  return provinces.map(p => {
+  return provinces.map((p) => {
     return {
       key: p.nameEn,
       value: downloadButton({ provinceId: p.id, year }),

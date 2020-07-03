@@ -1,8 +1,6 @@
 # TODO
 
 - add next/previous links at the bottom
-- add sources
-  - add page with sources?
 - guess location?
 - figure out about optional holidays
 - Add years to dates on years pages?
@@ -20,6 +18,7 @@
   - add to the frontend
   - add to the API
   - add federal sources
+  - add page with sources
 - New key "observedDate"
   - update Swagger
 - "date" is the literal date

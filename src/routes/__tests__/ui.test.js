@@ -360,6 +360,23 @@ describe('Test ui responses', () => {
       })
     })
 
+    describe('Test /sources response', () => {
+      test('it should return 200', async () => {
+        const response = await request(app).get('/sources')
+        expect(response.statusCode).toBe(200)
+      })
+
+      test('it should return the h1, title, and meta tag', async () => {
+        const response = await request(app).get('/sources')
+        const $ = cheerio.load(response.text)
+        expect($('h1').text()).toEqual('All sources')
+        expect($('title').text()).toEqual('All sources — Canada Holidays')
+        expect($('meta[name="description"]').attr('content')).toEqual(
+          'Aggregated sources for Canadian statutory holidays. Canada’s holidays vary by region and industry, so here they are collected in one place.',
+        )
+      })
+    })
+
     describe('Test /add-holidays-to-calendar response', () => {
       test('it should return 200', async () => {
         const response = await request(app).get('/add-holidays-to-calendar')
@@ -454,16 +471,14 @@ describe('Test ui responses', () => {
   })
 
   describe('Test for external source links', () => {
-    const noSourceURLs = ['/', '/2021']
-    noSourceURLs.map((url) => {
-      test(`should not return an external source for "${url}"`, async () => {
-        const response = await request(app).get(url)
-        const $ = cheerio.load(response.text)
-        expect($('.bottom-link__container.with-source').length).toBe(0)
-      })
-    })
-
-    const sourceURLs = ['/federal', '/federal/2021', '/province/AB', '/province/AB/2021']
+    const sourceURLs = [
+      '/',
+      '/2021',
+      '/federal',
+      '/federal/2021',
+      '/province/AB',
+      '/province/AB/2021',
+    ]
     sourceURLs.map((url) => {
       test(`should return an external source for "${url}"`, async () => {
         const response = await request(app).get(url)
