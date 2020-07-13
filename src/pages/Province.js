@@ -130,6 +130,7 @@ const createRows = (holidays, federal, isCurrentYear) => {
 
   const today = new Date(Date.now()).toISOString().slice(0, 10)
   let previousDate = null
+  let nextFound = false
 
   return holidays.map((holiday) => {
     const row = {
@@ -144,6 +145,12 @@ const createRows = (holidays, federal, isCurrentYear) => {
 
     if (isCurrentYear) {
       row.className = holiday.observedDate < today ? 'past' : 'upcoming'
+
+      if (nextFound === false && row.className === 'upcoming') {
+        // add "next-holiday-row" id to first upcoming holiday
+        row.id = 'next-holiday-row'
+        nextFound = true
+      }
     }
 
     if (previousDate === holiday.observedDate) {

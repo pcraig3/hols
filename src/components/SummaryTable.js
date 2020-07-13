@@ -125,10 +125,12 @@ const summaryRow2 = css`
     }
   }
 `
-const SummaryRow = ({ row: { key, value, value2, className } = {} }) => {
+const SummaryRow = ({ row: { key, value, id, value2, className } = {} }) => {
   return html`
     <div
       class=${`${summaryRow}${value2 ? ` ${summaryRow2}` : ''}${className ? ` ${className}` : ''}`}
+      id=${id}
+      tabindex=${id ? '-1' : null}
     >
       <dt class="key">
         ${key}

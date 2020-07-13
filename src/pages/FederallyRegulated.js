@@ -78,9 +78,10 @@ const FederallyRegulated = () =>
             >the list of federally regulated industries</a
           >.
         </p>
-        <footer>
-          <span class="bottom-link"><a href="#html" class="up-arrow">Back to top</a></span>
-        </footer>
+
+        <br />
+        <br />
+        <span class="bottom-link"><a href="#html" class="up-arrow">Back to top</a></span>
       <//>
     <//>
   `

@@ -5,15 +5,15 @@ const { html } = require('../../utils')
 const Province = require('../Province.js')
 
 const getProvince = () => {
-  return { id: 'PE', nameEn: 'Prince Edward Island' }
+  return { id: 'NL', nameEn: 'Newfoundland and Labrador' }
 }
 
 const getNextHoliday = () => {
   return {
-    id: 20,
-    observedDate: '2019-08-16',
-    nameEn: 'Gold Cup Parade Day',
-    federal: 0,
+    id: 27,
+    observedDate: '2020-12-28',
+    nameEn: 'Boxing Day',
+    federal: 1,
     provinces: [getProvince()],
   }
 }
@@ -33,8 +33,16 @@ describe('Province page', () => {
   test('renders h1 and h2', () => {
     const $ = renderPage()
     expect($('h1').length).toBe(1)
-    expect($('h1').text()).toEqual('Canada’s next statutory holiday isAugust 16Gold Cup Parade Day')
+    expect($('h1').text()).toEqual('Canada’s next statutory holiday isDecember 28Boxing Day')
     expect($('h2').length).toBe(1)
     expect($('h2').text()).toEqual('Canada statutory holidays in 2020')
+    // check the data label is lowercasing the province name
+    expect($('.h1--lg a').attr('data-label')).toEqual('next-holidays-row-link-canada')
+  })
+
+  test('renders #next-holiday-row id', () => {
+    const $ = renderPage()
+    expect($('h2#holidays-table').text()).toBe('Canada statutory holidays in 2020')
+    expect($('#next-holiday-row').text()).toBe(' December 28, Monday Boxing DayFederal holiday, NL')
   })
 })

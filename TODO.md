@@ -7,12 +7,14 @@
 - make API to return CSV format
   - page for CSV downloads
 - add a print button?
-- list of holidays
 - sqlite new version?
 
 # DONE
 
-- log ips in prod (temporarily)
+- link to next holiday row to reduce scrolling
+- bug: fix broken links after changing to main branch
+- log ips in prod
+  - refuse too many requests from one IP
 - swap from Heroku to Cloud Run
 - add sources
   - add to the frontend

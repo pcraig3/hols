@@ -9,9 +9,9 @@ This is a fun little [express](https://expressjs.com/) app for Canada's statutor
 
 Please get in touch if you are using the API, because I can probably make it work better if I have real-life use-cases.
 
-[Read the API docs](https://github.com/pcraig3/hols/blob/master/API.md).
+[Read the API docs](https://github.com/pcraig3/hols/blob/main/API.md).
 
-There's an OpenAPI spec at [`Canada-Holidays-API.v1.yaml`](https://github.com/pcraig3/hols/blob/master/reference/Canada-Holidays-API.v1.yaml) and a <a href="https://app.swaggerhub.com/apis/pcraig3/canada-holidays/" target="_blank">SwaggerHub</a> page where you can test the endpoints.
+There's an OpenAPI spec at [`Canada-Holidays-API.v1.yaml`](https://github.com/pcraig3/hols/blob/main/reference/Canada-Holidays-API.v1.yaml) and a <a href="https://app.swaggerhub.com/apis/pcraig3/canada-holidays/" target="_blank">SwaggerHub</a> page where you can test the endpoints.
 
 ## Getting started
 
@@ -79,7 +79,7 @@ On a Mac, press `Control` + `C` to quit the running docker container.
 
 ### Push to Cloud Run
 
-The [`cloudbuild.yaml`](https://github.com/pcraig3/hols/blob/master/cloudbuild.yaml) file allows the service to be deployed on [Cloud Run](https://cloud.google.com/run).
+The [`cloudbuild.yaml`](https://github.com/pcraig3/hols/blob/main/cloudbuild.yaml) file allows the service to be deployed on [Cloud Run](https://cloud.google.com/run).
 
 ```
 gcloud builds submit --tag gcr.io/{PROJECT}/{SERVICE}:{TAG} --build-arg GITHUB_SHA_ARG={TAG}

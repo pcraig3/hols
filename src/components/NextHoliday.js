@@ -10,7 +10,17 @@ const NextHoliday = ({ nextHoliday, provinceName = 'Canada', federal }) => {
         ${' '}next${' '}${federal && 'federal '}<span class=${visuallyHidden}>statutory </span
         >holiday is
       </div>
-      <div class="h1--lg"><${DateHtml} dateString=${nextHoliday.observedDate} //></div>
+      <div class="h1--lg">
+        <a
+          href="#next-holiday-row"
+          data-event="true"
+          data-action="next-holidays-row-link"
+          data-label=${`next-holidays-row-link-${
+            federal ? 'federal' : provinceName.replace(/\s+/g, '-').toLowerCase()
+          }`}
+          ><${DateHtml} dateString=${nextHoliday.observedDate} //></a
+        >
+      </div>
       <div class="h1--md">
         ${nextHoliday.nameEn.replace(/ /, '\u00a0').replace(/Peoples Day/, 'Peoples\u00a0Day')}
       </div>

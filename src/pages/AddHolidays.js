@@ -105,8 +105,9 @@ const AddHolidays = ({ data: { provinces, year } }) => {
           <li>Confirm you want to import ’em</li>
           <li>Done! <span role="img" aria-label="Happy cowboy">🤠</span></li>
         </ol>
-        <br />
 
+        <br />
+        <br />
         <span class="bottom-link"><a href="#html" class="up-arrow">Back to top</a></span>
       <//>
     <//>
