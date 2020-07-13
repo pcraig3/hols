@@ -47,16 +47,7 @@ const AddHolidays = ({ data: { provinces } }) => {
           formats.
         </p>
         <p>
-          If you’re here for the deep cuts, I also have all of the${' '}
-          <a
-            href="https://github.com/pcraig3/hols#citations"
-            title="Sources (including legislation) on Github"
-            target="_blank"
-            data-event="true"
-            data-action="all-sources-link"
-            data-label="all-sources-link-canada"
-            >links to the relevant legislation per region</a
-          >. (Probably you don’t need them.)
+          (I can also offer <a href="#legislation">unfriendly formats</a> for the holiday scholar.)
         </p>
 
         <${SummaryTable}
@@ -87,6 +78,22 @@ const AddHolidays = ({ data: { provinces } }) => {
           </p>
         <//>
 
+        <h2 id="legislation" tabindex="-1">Public holiday legislation</h2>
+        <p>
+          If you’re a legal eagle, I’ve collected${' '}
+          <a
+            href="https://github.com/pcraig3/hols#citations"
+            title="Sources (including legislation) on Github"
+            target="_blank"
+            data-event="true"
+            data-action="all-sources-link"
+            data-label="all-sources-link-canada"
+            >links to the relevant legislation per region</a
+          >. Fill yer boots, as they say.
+        </p>
+
+        <br />
+        <br />
         <span class="bottom-link"><a href="#html" class="up-arrow">Back to top</a></span>
       <//>
     <//>

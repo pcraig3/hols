@@ -113,14 +113,14 @@ const API = () =>
 
         <h2>Citations</h2>
         <p>
-          I’ve referenced the${' '}<a
-            href="https://github.com/pcraig3/hols/#citations"
-            title="Citations"
-            target="_blank"
-            >official sources</a
-          >${' '}for each region in Canada, so we should be good.
+          I’ve references to${' '}<a href="/sources">all the sources</a>${' '}I’m using for each
+          region in Canada, so it should all be accurate.
         </p>
         <p>Mistaeks do happen, however — <a href="/feedback">lemme know</a> if you spot any.<//>
+
+        <br />
+        <br />
+        <span class="bottom-link"><a href="#html" class="up-arrow">Back to top</a></span>
       <//>
     <//>
   `
