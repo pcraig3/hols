@@ -30,7 +30,7 @@ test('NextHolidayBox displays next holiday properly for Canada', () => {
 
   expect($('div h1').length).toBe(1)
   expect($('h1').text()).toEqual(
-    `Canada’s next statutory holiday is${sp2nbsp('August 16')}${sp2nbsp(nextHoliday.nameEn)}`,
+    `Canada’s next statutory holiday\u00a0is${sp2nbsp('August 16')}${sp2nbsp(nextHoliday.nameEn)}`,
   )
 })
 
@@ -40,7 +40,7 @@ test('NextHolidayBox refers to federal holidays when "federal" variable is passe
 
   expect($('div h1').length).toBe(1)
   expect($('h1').text()).toEqual(
-    `Canada’s next federal statutory holiday is${sp2nbsp('August 16')}${sp2nbsp(
+    `Canada’s next federal statutory holiday\u00a0is${sp2nbsp('August 16')}${sp2nbsp(
       nextHoliday.nameEn,
     )}`,
   )
@@ -59,7 +59,7 @@ test('NextHolidayBox displays next holiday properly for a given province', () =>
 
   expect($('div h1').length).toBe(1)
   expect($('h1').text()).toEqual(
-    `Prince Edward Island’s next statutory holiday is${sp2nbsp('August 16')}${sp2nbsp(
+    `Prince Edward Island’s next statutory holiday\u00a0is${sp2nbsp('August 16')}${sp2nbsp(
       nextHoliday.nameEn,
     )}`,
   )
@@ -77,7 +77,7 @@ test('NextHolidayBox displays next holiday properly for a given province', () =>
 
   expect($('div h1').length).toBe(1)
   expect($('h1').text()).toEqual(
-    `Prince Edward Island’s next statutory holiday is${sp2nbsp('August 16')}${sp2nbsp(
+    `Prince Edward Island’s next statutory holiday\u00a0is${sp2nbsp('August 16')}${sp2nbsp(
       nextHoliday.nameEn,
     )}`,
   )

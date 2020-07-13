@@ -33,7 +33,7 @@ describe('Province page', () => {
   test('renders h1 and h2', () => {
     const $ = renderPage()
     expect($('h1').length).toBe(1)
-    expect($('h1').text()).toEqual('Canada’s next statutory holiday isDecember 28Boxing Day')
+    expect($('h1').text()).toEqual('Canada’s next statutory holiday\u00a0isDecember 28Boxing Day')
     expect($('h2').length).toBe(1)
     expect($('h2').text()).toEqual('Canada statutory holidays in 2020')
     // check the data label is lowercasing the province name

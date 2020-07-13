@@ -8,7 +8,7 @@ const NextHoliday = ({ nextHoliday, provinceName = 'Canada', federal }) => {
       <div class="h1--xs">
         ${provinceName}’${provinceName.slice(-1) === 's' ? '' : 's'}
         ${' '}next${' '}${federal && 'federal '}<span class=${visuallyHidden}>statutory </span
-        >holiday is
+        >holiday${' '.replace(/ /, '\u00a0')}is
       </div>
       <div class="h1--lg">
         <a

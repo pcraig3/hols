@@ -33,7 +33,7 @@ describe('Test ui responses', () => {
     test('it should return the h1, title, and meta tag', async () => {
       const response = await request(app).get('/')
       const $ = cheerio.load(response.text)
-      expect($('h1').text()).toMatch(/^Canada’s next statutory holiday is/)
+      expect($('h1').text()).toMatch(/^Canada’s next statutory holiday\u00a0is/)
       expect($('title').text()).toEqual('Canadian statutory holidays in 2020')
       expect($('meta[name="description"]').attr('content')).toMatch(
         /^Canada’s next stat holiday is/,
@@ -178,7 +178,7 @@ describe('Test ui responses', () => {
       test('it should return the h1, title, and meta tag', async () => {
         const response = await request(app).get('/province/MB')
         const $ = cheerio.load(response.text)
-        expect($('h1').text()).toMatch(/^Manitoba’s next statutory holiday is/)
+        expect($('h1').text()).toMatch(/^Manitoba’s next statutory holiday\u00a0is/)
         expect($('title').text()).toEqual(
           'Manitoba (MB) statutory holidays in 2020 — Canada Holidays',
         )
@@ -222,7 +222,7 @@ describe('Test ui responses', () => {
       test('it should return the h1, title, and meta tag', async () => {
         const response = await request(app).get('/federal')
         const $ = cheerio.load(response.text)
-        expect($('h1').text()).toMatch(/^Canada’s next federal statutory holiday is/)
+        expect($('h1').text()).toMatch(/^Canada’s next federal statutory holiday\u00a0is/)
         expect($('title').text()).toEqual('Federal statutory holidays in Canada in 2020')
         expect($('meta[name="description"]').attr('content')).toMatch(
           /^Canada’s next federal stat holiday is/,
@@ -301,7 +301,7 @@ describe('Test ui responses', () => {
               expect(response.statusCode).toBe(200)
               const $ = cheerio.load(response.text)
               expect($('h1').text()).toMatch(
-                /^(Manitoba|Canada)’s next (?:federal\s)*statutory holiday is/,
+                /^(Manitoba|Canada)’s next (?:federal\s)*statutory holiday/,
               )
             })
           })
@@ -311,7 +311,7 @@ describe('Test ui responses', () => {
             expect(response.statusCode).toBe(200)
             const $ = cheerio.load(response.text)
             expect($('h1').text()).toMatch(
-              /^(Manitoba|Canada)’s next (?:federal\s)*statutory holiday is/,
+              /^(Manitoba|Canada)’s next (?:federal\s)*statutory holiday/,
             )
           })
 
