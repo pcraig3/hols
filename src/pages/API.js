@@ -80,7 +80,7 @@ const API = () =>
             </li>
             <li>
               <a
-                href="https://github.com/pcraig3/hols/blob/master/reference/Canada-Holidays-API.v1.yaml"
+                href="https://github.com/pcraig3/hols/blob/main/reference/Canada-Holidays-API.v1.yaml"
                 target="_blank"
                 >Documented with an OpenAPI spec</a
               >${' '}which is <em>even more</em> cool for <em>even nerdier</em> nerds
@@ -92,7 +92,7 @@ const API = () =>
         <h2>Documentation</h2>
         <p>
           There's an OpenAPI spec at${' '}<a
-            href="https://github.com/pcraig3/hols/blob/master/reference/Canada-Holidays-API.v1.yaml"
+            href="https://github.com/pcraig3/hols/blob/main/reference/Canada-Holidays-API.v1.yaml"
             target="_blank"
             ><code>Canada-Holidays-API.v1.yaml</code></a
           >${' '}and a${' '}<a
@@ -104,7 +104,7 @@ const API = () =>
         <p>
           There’s also a ${' '}<a
             title="API documentation"
-            href="https://github.com/pcraig3/hols/blob/master/API.md#basic-overview"
+            href="https://github.com/pcraig3/hols/blob/main/API.md"
             target="_blank"
             >basic overview on GitHub</a
           >

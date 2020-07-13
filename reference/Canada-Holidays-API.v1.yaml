@@ -1,7 +1,7 @@
 openapi: 3.0.0
 info:
   title: Canada Holidays API
-  version: 1.2.0
+  version: 1.2.1
   description: 'This API lists all 28 public holidays for all 13 provinces and territories in Canada, including federal holidays.'
   contact:
     name: Paul Craig
@@ -9,7 +9,7 @@ info:
     email: paul@pcraig3.ca
   license:
     name: MIT
-    url: 'https://github.com/pcraig3/hols/blob/master/LICENSE'
+    url: 'https://github.com/pcraig3/hols/blob/main/LICENSE'
 servers:
   - url: 'https://canada-holidays.ca'
 paths:

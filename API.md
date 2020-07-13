@@ -32,7 +32,7 @@ If you know your way around a REST API with JSON responses, you’re in good sha
 
 <a href="https://swagger.io/docs/specification/about/" target="_blank">The OpenAPI Specification</a> is a broadly-adopted industry standard for describing APIs. The OpenAPI spec for this API is in a few places.
 
-- <a href="https://github.com/pcraig3/hols/blob/master/reference/Canada-Holidays-API.v1.yaml" target="_blank">`Canada-Holidays-API.v1.yaml`</a> on GitHub
+- <a href="https://github.com/pcraig3/hols/blob/main/reference/Canada-Holidays-API.v1.yaml" target="_blank">`Canada-Holidays-API.v1.yaml`</a> on GitHub
 - At <a href="https://canada-holidays.ca/api/v1/spec" target="_blank">https://canada-holidays.ca/api/v1/spec</a>
 - <a href="https://app.swaggerhub.com/apis/pcraig3/canada-holidays/" target="_blank">`canada-holidays`</a> on SwaggerHub
 
