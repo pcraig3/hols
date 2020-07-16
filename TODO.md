@@ -12,6 +12,7 @@
 # DONE
 
 - link to next holiday row to reduce scrolling
+  - bug: events target the time element
 - bug: fix broken links after changing to main branch
 - log ips in prod
   - refuse too many requests from one IP
