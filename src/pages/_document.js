@@ -13,7 +13,6 @@ const document = ({ title, content, docProps: { meta, path } }) => {
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta name="description" content="${meta ? meta : 'Canadian statutory holidays'}">
-        <meta name="yandex-verification" content="8712a4ba6f7a7abc" />
 
         <!-- facebook open graph tags -->
         <meta property="og:type" content="website" />

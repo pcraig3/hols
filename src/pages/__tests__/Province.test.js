@@ -37,7 +37,7 @@ describe('Province page', () => {
     expect($('h2').length).toBe(1)
     expect($('h2').text()).toEqual('Canada statutory holidays in 2020')
     // check the data label is lowercasing the province name
-    expect($('.h1--lg a').attr('data-label')).toEqual('next-holidays-row-link-canada')
+    expect($('.h1--lg a time').attr('data-label')).toEqual('next-holidays-row-link-canada')
   })
 
   test('renders #next-holiday-row id', () => {
