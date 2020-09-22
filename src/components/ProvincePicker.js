@@ -56,12 +56,13 @@ const styles = ({ accent = theme.color.red, focus = theme.color.focus } = {}) =>
   }
 
   select {
+    font-family: inherit;
     display: inline-block;
     font-size: 1em;
     line-height: 1.33;
     width: auto;
     padding: ${theme.space.xxs};
-    padding-right: ${theme.space.lg};
+    padding-right: 25px;
     max-width: 100%;
     box-sizing: border-box;
     margin: 0;
