@@ -19,7 +19,7 @@
   ],
   "scripts": {
     "dev": "nodemon index.js",
-    "lint": "node_modules/eslint/bin/eslint.js src",
+    "lint": "eslint src",
     "start": "NODE_ENV=production node index.js",
     "test": "jest --testPathIgnorePatterns='skip*'"
   },
