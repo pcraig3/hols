@@ -44,7 +44,7 @@ test('NextHolidayBox refers to federal holidays when "federal" variable is passe
       nextHoliday.nameEn,
     )}`,
   )
-  expect($('h1 + p').text()).toMatch(/That’s in (about)?\d\d (days|month(s)?)/)
+  expect($('h1 + p').text()).toMatch(/That’s in (about )?\d+ (days|month(s)?|year)/)
   expect($('h1 + p + p').text()).toEqual('Find out who gets federal statutory holidays')
 })
 
@@ -63,7 +63,7 @@ test('NextHolidayBox displays next holiday properly for a given province', () =>
       nextHoliday.nameEn,
     )}`,
   )
-  expect($('h1 + p').text()).toMatch(/That’s in (about)?\d\d (days|month(s)?)/)
+  expect($('h1 + p').text()).toMatch(/That’s in (about )?\d+ (days|month(s)?|year)/)
 })
 
 test('NextHolidayBox displays next holiday properly for a given province', () => {
@@ -81,7 +81,7 @@ test('NextHolidayBox displays next holiday properly for a given province', () =>
       nextHoliday.nameEn,
     )}`,
   )
-  expect($('h1 + p').text()).toMatch(/That’s in (about)?\d\d (days|month(s)?)/)
+  expect($('h1 + p').text()).toMatch(/That’s in (about )?\d+ (days|month(s)?|year)/)
 })
 
 test('NextHolidayBox displays provinceName and year and "add to calendar" link', () => {

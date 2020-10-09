@@ -42,7 +42,7 @@ describe('Test server responses', () => {
     )
     expect(response.headers['x-download-options']).toEqual('noopen')
     expect(response.headers['x-content-type-options']).toEqual('nosniff')
-    expect(response.headers['x-xss-protection']).toEqual('1; mode=block')
+    expect(response.headers['x-xss-protection']).toEqual('0')
 
     expect(response.headers['x-powered-by']).toBeUndefined()
   })
