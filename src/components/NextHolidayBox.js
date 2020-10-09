@@ -113,7 +113,10 @@ const NextHolidayBox = ({ nextHoliday, provinceName = 'Canada', provinceId, fede
     slant: randomInt(32, 37),
     shade: -randomInt(9, 11),
   }
-  const provinceIdOrFederal = getProvinceIdOrFederalString({ provinceId, federal })
+  const provinceIdOrFederal = getProvinceIdOrFederalString({
+    provinceId,
+    federal,
+  })
   let color = provinceIdOrFederal ? theme.color[provinceIdOrFederal] : theme.color.red
 
   return html`
