@@ -11,6 +11,8 @@
 
 # DONE
 
+- put days until on main page
+  - bug: "days until" counter actually works now
 - link to next holiday row to reduce scrolling
   - bug: events target the time element
 - bug: fix broken links after changing to main branch

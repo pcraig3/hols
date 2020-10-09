@@ -74,7 +74,7 @@ const styles = ({
     margin-top: calc(${theme.space.xl} + ${theme.space.md});
 
     + p {
-      margin-top: ${theme.space.xs};
+      margin-top: ${theme.space.md};
     }
 
     @media (${theme.mq.lg}) {
@@ -91,10 +91,11 @@ const styles = ({
 
 const renderNextHolidayTitle = ({ nextHoliday, provinceName, federal }) => {
   return html`<${NextHoliday} ...${{ nextHoliday, provinceName, federal }} //>
-  ${provinceName == 'Canada' && !federal
-    ? html`<${ObservingProvinces} provinces=${nextHoliday.provinces} federal=${nextHoliday.federal}
-      //>`
-    : html`<p>${relativeDate(nextHoliday.observedDate)}</p>`}`
+    <p>${relativeDate(nextHoliday.observedDate)}</p>
+    ${provinceName == 'Canada' &&
+    !federal &&
+    html`<${ObservingProvinces} provinces=${nextHoliday.provinces} federal=${nextHoliday.federal}
+    //>`}`
 }
 
 const renderYearPageTitle = ({ provinceName, provinceId, federal, year }) => {
@@ -112,7 +113,10 @@ const NextHolidayBox = ({ nextHoliday, provinceName = 'Canada', provinceId, fede
     slant: randomInt(32, 37),
     shade: -randomInt(9, 11),
   }
-  const provinceIdOrFederal = getProvinceIdOrFederalString({ provinceId, federal })
+  const provinceIdOrFederal = getProvinceIdOrFederalString({
+    provinceId,
+    federal,
+  })
   let color = provinceIdOrFederal ? theme.color[provinceIdOrFederal] : theme.color.red
 
   return html`

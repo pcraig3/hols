@@ -141,19 +141,19 @@ const displayDate = (dateString, weekday = false) => {
 
 const relativeDate = (dateString) => {
   const daysOffset = differenceInDays(
-    startOfDay(new Date(Date.now())),
     Sugar.Date.create(dateString),
+    startOfDay(new Date(Date.now())),
   )
 
   switch (daysOffset) {
     case 0:
       return 'That’s today!'
-    case -1:
+    case 1:
       return 'That’s tomorrow!'
     default:
       return `That’s in ${formatDistance(
         Sugar.Date.create(dateString),
-        Sugar.Date.create(Date.now()),
+        startOfDay(new Date(Date.now())),
       )}`
   }
 }
