@@ -21,7 +21,8 @@
     "dev": "nodemon index.js",
     "lint": "eslint src",
     "start": "NODE_ENV=production node index.js",
-    "test": "jest --testPathIgnorePatterns='skip*'"
+    "test": "jest --testPathIgnorePatterns='skip*'",
+    "build": "workbox generateSW workbox-config.js"
   },
   "dependencies": {
     "@jsbits/easter-day": "^1.0.1",
