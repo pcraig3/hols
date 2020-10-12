@@ -8,6 +8,7 @@ WORKDIR /app
 COPY . .
 
 RUN npm install --production --silent
+RUN npm install -g workbox-cli
 RUN npm run build
 
 EXPOSE 3000
