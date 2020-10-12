@@ -33,10 +33,23 @@ const document = ({ title, content, docProps: { meta, path } }) => {
               <script async src='https://www.google-analytics.com/analytics.js'></script>`
             : ''
         }
+
+        <meta name="application-name" content="${title}" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+        <meta name="apple-mobile-web-app-title" content="Canada Holidays" />
+        <meta name="description" content="${
+          meta ? meta : 'Upcoming statutory holidays in Canada'
+        }" />
+        <meta name="format-detection" content="telephone=no" />
+        <meta name="mobile-web-app-capable" content="yes" />
+        <meta name="theme-color" content="#FFFFFF" />
+
         <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
         <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
         <link rel="manifest" href="/site.webmanifest">
+
         <style>${fontStyles};</style>
         <style>
           :root {
@@ -91,8 +104,16 @@ const document = ({ title, content, docProps: { meta, path } }) => {
             color: ${theme.color.red};
           }
 
-         ${printStyles};
+          ${printStyles};
         </style>
+        <!-- from https://developers.google.com/web/fundamentals/primers/service-workers/registration -->
+        <script>
+          if ('serviceWorker' in navigator) {
+            window.addEventListener('load', function() {
+              navigator.serviceWorker.register('/sw.js');
+            });
+          }
+        </script>
       </head>
       <body id="body" class='no-js'>
         <script>

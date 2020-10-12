@@ -1,6 +1,6 @@
 {
   "name": "hols",
-  "version": "2.8.2",
+  "version": "2.9.0",
   "description": "hols for cans: canada holidays api and canada holidays frontend",
   "main": "index.js",
   "author": "pcraig3",
@@ -21,7 +21,8 @@
     "dev": "nodemon index.js",
     "lint": "eslint src",
     "start": "NODE_ENV=production node index.js",
-    "test": "jest --testPathIgnorePatterns='skip*'"
+    "test": "jest --testPathIgnorePatterns='skip*'",
+    "build": "workbox generateSW workbox-config.js"
   },
   "dependencies": {
     "@jsbits/easter-day": "^1.0.1",

@@ -11,6 +11,7 @@
 
 # DONE
 
+- make it a PWA
 - put days until on main page
   - bug: "days until" counter actually works now
 - link to next holiday row to reduce scrolling
