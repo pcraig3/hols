@@ -10,3 +10,7 @@ npm-debug.log
 coverage/
 .vscode/
 .can-hols*.json
+
+# pwa stuff
+public/sw*
+public/workbox*

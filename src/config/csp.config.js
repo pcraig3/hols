@@ -12,6 +12,7 @@ module.exports = {
     "'self'",
     "'sha256-vmyqYv8llK+DTbFomsM0G2wJMexFKZZPejzpvzQF+ek='",
     "'sha256-Wezgm/yRorRVzqbr6vDdLOJEGKDTVKRuWZ2Yh53e/EU='",
+    "'sha256-/PhlWtWSFKGpnQswrM5AJwZ6WsgKO5Bn3J8jgWZfT4Q='",
     'https://www.google-analytics.com',
   ],
   styleSrc: ["'self'", "'unsafe-inline'", 'https://fonts.googleapis.com'],
