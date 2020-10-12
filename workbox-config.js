@@ -1,6 +1,7 @@
 module.exports = {
   globDirectory: 'public/',
-  globPatterns: ['**/*.{png,ico,eot,svg,ttf,woff,woff2,js,txt,webmanifest,xml}'],
+  globPatterns: ['**/*.{png,ico,eot,svg,ttf,woff,woff2,txt,webmanifest,xml}', '**/js/*.js'],
+  offlineGoogleAnalytics: false,
   runtimeCaching: [
     {
       urlPattern: '/',
