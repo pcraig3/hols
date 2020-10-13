@@ -1,6 +1,6 @@
 module.exports = {
   globDirectory: 'public/',
-  globPatterns: ['**/*.{png,ico,eot,svg,ttf,woff,woff2,txt,webmanifest,xml}', '**/js/*.js'],
+  globPatterns: [],
   offlineGoogleAnalytics: false,
   runtimeCaching: [
     {
@@ -11,6 +11,28 @@ module.exports = {
         cacheName: 'start-url',
         expiration: {
           maxEntries: 1,
+          maxAgeSeconds: 24 * 60 * 60, // 24 hours
+        },
+      },
+    },
+    {
+      urlPattern: /\.(?:eot|otf|ttc|ttf|woff|woff2|font.css)$/i,
+      handler: 'StaleWhileRevalidate',
+      options: {
+        cacheName: 'static-fonts',
+        expiration: {
+          maxEntries: 4,
+          maxAgeSeconds: 7 * 24 * 60 * 60, // 7 days
+        },
+      },
+    },
+    {
+      urlPattern: /\.(?:jpg|jpeg|gif|png|svg|ico|webp|js)$/i,
+      handler: 'StaleWhileRevalidate',
+      options: {
+        cacheName: 'static-assets',
+        expiration: {
+          maxEntries: 64,
           maxAgeSeconds: 24 * 60 * 60, // 24 hours
         },
       },
