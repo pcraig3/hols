@@ -7,6 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.12.0] - 2020-10-26
+
+### Added
+
+- Rich results for datasets. Added metadata to pages for all provincial, federal, and national holidays.
+
+### Updated
+
+- Added holidays count to the meta string for each region.
+
+
 ## [2.11.1] - 2020-10-21
 
 ### Fixed

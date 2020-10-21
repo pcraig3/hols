@@ -24,9 +24,9 @@ router.get('/', checkRedirectYear, dbmw(getHolidaysWithProvinces), (req, res) =>
   const holidays = res.locals.rows
   const nextHol = nextHoliday(holidays)
 
-  const meta = `Canada’s next stat holiday is ${getMeta(
-    nextHol,
-  )}. See all statutory holidays in Canada in ${year}.`
+  const meta = `Canada’s next stat holiday is ${getMeta(nextHol)}. See all ${
+    holidays.length
+  } statutory holidays in Canada in ${year}.`
 
   return res.send(
     renderPage({
@@ -36,7 +36,8 @@ router.get('/', checkRedirectYear, dbmw(getHolidaysWithProvinces), (req, res) =>
         meta,
         path: req.path,
         region: 'Canada',
-        richSnippets: ['breadcrumb', 'speakable'],
+        year,
+        richSnippets: ['breadcrumb', 'dataset', 'speakable'],
       },
       props: { data: { holidays, nextHoliday: nextHol, year } },
     }),
@@ -53,7 +54,7 @@ router.get(
     // if the year value isn't in ALLOWED_YEARS, it will be caught by "checkYearErr"
     const year = ALLOWED_YEARS.find((y) => y === parseInt(req.query.year))
     const holidays = res.locals.rows
-    const meta = `See all statutory holidays in Canada in ${year}.`
+    const meta = `See all ${holidays.length} statutory holidays in Canada in ${year}.`
 
     return res.send(
       renderPage({
@@ -63,7 +64,8 @@ router.get(
           meta,
           path: req.path,
           region: 'Canada',
-          richSnippets: ['breadcrumb'],
+          year,
+          richSnippets: ['breadcrumb', 'dataset'],
         },
         props: { data: { holidays, nextHoliday: undefined, year } },
       }),
@@ -89,9 +91,9 @@ router.get(
       sourceEn,
     } = res.locals.rows[0]
 
-    const meta = `${provinceName}’s next stat holiday is ${getMeta(
-      nextHoliday,
-    )}. See all statutory holidays in ${provinceName}, Canada in ${year}.`
+    const meta = `${provinceName}’s next stat holiday is ${getMeta(nextHoliday)}. See all ${
+      holidays.length
+    } statutory holidays in ${provinceName}, Canada in ${year}.`
 
     return res.send(
       renderPage({
@@ -103,7 +105,8 @@ router.get(
           meta,
           path: req.path,
           region: provinceName,
-          richSnippets: ['breadcrumb', 'speakable'],
+          year,
+          richSnippets: ['breadcrumb', 'dataset', 'speakable'],
         },
         props: {
           data: {
@@ -137,7 +140,7 @@ router.get(
       sourceLink,
       sourceEn,
     } = res.locals.rows[0]
-    const meta = `See all statutory holidays in ${provinceName}, Canada in ${year}.`
+    const meta = `See all ${holidays.length} statutory holidays in ${provinceName}, Canada in ${year}.`
 
     return res.send(
       renderPage({
@@ -149,7 +152,8 @@ router.get(
           meta,
           path: req.path,
           region: provinceName,
-          richSnippets: ['breadcrumb'],
+          year,
+          richSnippets: ['breadcrumb', 'dataset'],
         },
         props: {
           data: {
@@ -178,9 +182,9 @@ router.get('/federal', checkRedirectYear, dbmw(getHolidaysWithProvinces), (req, 
   const holidays = res.locals.rows
   const nextHol = nextHoliday(holidays)
 
-  const meta = `Canada’s next federal stat holiday is ${getMeta(
-    nextHol,
-  )}. See all federal statutory holidays in Canada in ${year}.`
+  const meta = `Canada’s next federal stat holiday is ${getMeta(nextHol)}. See all ${
+    holidays.length
+  } federal statutory holidays in Canada in ${year}.`
 
   return res.send(
     renderPage({
@@ -190,7 +194,8 @@ router.get('/federal', checkRedirectYear, dbmw(getHolidaysWithProvinces), (req, 
         meta,
         path: req.path,
         region: 'Federal',
-        richSnippets: ['breadcrumb', 'speakable'],
+        year,
+        richSnippets: ['breadcrumb', 'dataset', 'speakable'],
       },
       props: {
         data: {
@@ -215,7 +220,7 @@ router.get(
     // if the year value isn't in ALLOWED_YEARS, it will be caught by "checkYearErr"
     const year = ALLOWED_YEARS.find((y) => y === parseInt(req.query.year))
     const holidays = res.locals.rows
-    const meta = `See all federal statutory holidays in Canada in ${year}.`
+    const meta = `See all ${holidays.length} federal statutory holidays in Canada in ${year}.`
 
     return res.send(
       renderPage({
@@ -225,7 +230,8 @@ router.get(
           meta,
           path: req.path,
           region: 'Federal',
-          richSnippets: ['breadcrumb'],
+          year,
+          richSnippets: ['breadcrumb', 'dataset'],
         },
         props: {
           data: { holidays, nextHoliday: undefined, federal: true, year, source: federalSource },

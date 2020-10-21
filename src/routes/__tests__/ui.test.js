@@ -39,7 +39,7 @@ describe('Test ui responses', () => {
         /^Canada’s next stat holiday is/,
       )
       expect($('meta[name="description"]').attr('content')).toMatch(
-        /See all statutory holidays in Canada in 2020./,
+        /See all \d{1,2} statutory holidays in Canada in 2020./,
       )
     })
 
@@ -55,8 +55,8 @@ describe('Test ui responses', () => {
       const $ = cheerio.load(response.text)
       expect($('h1').text()).toEqual('Canadastatutory Holidays in 2021')
       expect($('title').text()).toEqual('Canadian statutory holidays in 2021')
-      expect($('meta[name="description"]').attr('content')).toEqual(
-        'See all statutory holidays in Canada in 2021.',
+      expect($('meta[name="description"]').attr('content')).toMatch(
+        /See all \d{1,2} statutory holidays in Canada in 2021./,
       )
     })
   })
@@ -186,7 +186,7 @@ describe('Test ui responses', () => {
           /^Manitoba’s next stat holiday is/,
         )
         expect($('meta[name="description"]').attr('content')).toMatch(
-          /See all statutory holidays in Manitoba, Canada in 2020/,
+          /See all \d{1,2} statutory holidays in Manitoba, Canada in 2020/,
         )
       })
     })
@@ -207,8 +207,8 @@ describe('Test ui responses', () => {
         expect($('title').text()).toEqual(
           'Manitoba (MB) statutory holidays in 2021 — Canada Holidays',
         )
-        expect($('meta[name="description"]').attr('content')).toEqual(
-          'See all statutory holidays in Manitoba, Canada in 2021.',
+        expect($('meta[name="description"]').attr('content')).toMatch(
+          /See all \d{1,2} statutory holidays in Manitoba, Canada in 2021./,
         )
       })
     })
@@ -236,8 +236,8 @@ describe('Test ui responses', () => {
         const $ = cheerio.load(response.text)
         expect($('h1').text()).toEqual('CanadaFederal statutory holidays in 2021')
         expect($('title').text()).toEqual('Federal statutory holidays in Canada in 2021')
-        expect($('meta[name="description"]').attr('content')).toEqual(
-          'See all federal statutory holidays in Canada in 2021.',
+        expect($('meta[name="description"]').attr('content')).toMatch(
+          /See all \d{1,2} federal statutory holidays in Canada in 2021./,
         )
       })
     })
