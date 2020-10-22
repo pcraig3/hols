@@ -91,7 +91,7 @@ const styles = ({
 
 const renderNextHolidayTitle = ({ nextHoliday, provinceName, federal }) => {
   return html`<${NextHoliday} ...${{ nextHoliday, provinceName, federal }} //>
-    <p>${relativeDate(nextHoliday.observedDate)}</p>
+    <p>${relativeDate(nextHoliday.observedDate)}<span class="visuallyHidden">.</span></p>
     ${provinceName == 'Canada' &&
     !federal &&
     html`<${ObservingProvinces} provinces=${nextHoliday.provinces} federal=${nextHoliday.federal}

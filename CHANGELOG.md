@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.10.0] - 2020-10-21
+
+### Added
+
+- Breadcrumbs rich search results. Does it matter? Maybe.
+
 ## [2.9.0] - 2020-10-12
 
 ### Added
