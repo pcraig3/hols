@@ -2,7 +2,6 @@
 
 - add google rich results 💰
   - dataset
-  - speakable
 - add next/previous links at the bottom
 - guess location?
 - figure out about optional holidays
@@ -14,8 +13,10 @@
 
 # DONE
 
+- make screen reader improvements for the "next holidays" page
 - add google rich results 💰
   - breadcrumbs
+  - speakable
 - make it a PWA
 - put days until on main page
   - bug: "days until" counter actually works now
