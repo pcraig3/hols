@@ -32,7 +32,12 @@ router.get('/', checkRedirectYear, dbmw(getHolidaysWithProvinces), (req, res) =>
     renderPage({
       pageComponent: 'Province',
       title: `Canadian statutory holidays in ${year}`,
-      docProps: { meta, path: req.path, region: 'Canada' },
+      docProps: {
+        meta,
+        path: req.path,
+        region: 'Canada',
+        richSnippets: ['breadcrumb', 'speakable'],
+      },
       props: { data: { holidays, nextHoliday: nextHol, year } },
     }),
   )
@@ -54,7 +59,12 @@ router.get(
       renderPage({
         pageComponent: 'Province',
         title: `Canadian statutory holidays in ${year}`,
-        docProps: { meta, path: req.path, region: 'Canada' },
+        docProps: {
+          meta,
+          path: req.path,
+          region: 'Canada',
+          richSnippets: ['breadcrumb'],
+        },
         props: { data: { holidays, nextHoliday: undefined, year } },
       }),
     )
@@ -89,7 +99,12 @@ router.get(
         title: `${provinceName} (${pe2pei(
           provinceId,
         )}) statutory holidays in ${year} — Canada Holidays`,
-        docProps: { meta, path: req.path, region: provinceName },
+        docProps: {
+          meta,
+          path: req.path,
+          region: provinceName,
+          richSnippets: ['breadcrumb', 'speakable'],
+        },
         props: {
           data: {
             holidays,
@@ -130,7 +145,12 @@ router.get(
         title: `${provinceName} (${pe2pei(
           provinceId,
         )}) statutory holidays in ${year} — Canada Holidays`,
-        docProps: { meta, path: req.path, region: provinceName },
+        docProps: {
+          meta,
+          path: req.path,
+          region: provinceName,
+          richSnippets: ['breadcrumb'],
+        },
         props: {
           data: {
             holidays,
@@ -166,7 +186,12 @@ router.get('/federal', checkRedirectYear, dbmw(getHolidaysWithProvinces), (req, 
     renderPage({
       pageComponent: 'Province',
       title: `Federal statutory holidays in Canada in ${year}`,
-      docProps: { meta, path: req.path, region: 'Federal' },
+      docProps: {
+        meta,
+        path: req.path,
+        region: 'Federal',
+        richSnippets: ['breadcrumb', 'speakable'],
+      },
       props: {
         data: {
           holidays,
@@ -196,7 +221,12 @@ router.get(
       renderPage({
         pageComponent: 'Province',
         title: `Federal statutory holidays in Canada in ${year}`,
-        docProps: { meta, path: req.path, region: 'Federal' },
+        docProps: {
+          meta,
+          path: req.path,
+          region: 'Federal',
+          richSnippets: ['breadcrumb'],
+        },
         props: {
           data: { holidays, nextHoliday: undefined, federal: true, year, source: federalSource },
         },

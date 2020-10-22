@@ -34,21 +34,21 @@ describe('ObservingProvinces', () => {
     const provinces = getProvinces(1)
 
     const $ = renderObservingProvinces({ provinces })
-    expect($('p').text()).toEqual('Observed in Prince Edward Island')
+    expect($('p').text()).toEqual('Observed in Prince Edward Island.')
   })
 
   test('refers to provinces by full name when less than 3 provinces exist', () => {
     const provinces = getProvinces(2)
 
     const $ = renderObservingProvinces({ provinces })
-    expect($('p').text()).toEqual('Observed in Prince Edward Island and Quebec')
+    expect($('p').text()).toEqual('Observed in Prince Edward Island and Quebec.')
   })
 
   test('refers to provinces by ID when at least 3 provinces exist', () => {
     const provinces = getProvinces(3)
 
     const $ = renderObservingProvinces({ provinces })
-    expect($('p').text()).toEqual('Observed in PEI, QC, and SK')
+    expect($('p').text()).toEqual('Observed in PEI, QC, and SK.')
   })
 
   describe('with federal industries', () => {
@@ -56,14 +56,14 @@ describe('ObservingProvinces', () => {
       const provinces = []
 
       const $ = renderObservingProvinces({ provinces, federal: true })
-      expect($('p').text()).toEqual('Observed by federal industries')
+      expect($('p').text()).toEqual('Observed by federal industries.')
     })
 
     test('refers to one province by full name and federal industries when only one province exists', () => {
       const provinces = getProvinces(1)
 
       const $ = renderObservingProvinces({ provinces, federal: true })
-      expect($('p').text()).toEqual('Observed in Prince Edward Island and by federal industries')
+      expect($('p').text()).toEqual('Observed in Prince Edward Island and by federal industries.')
     })
 
     test('refers to provinces by full name and federal industries when less than 3 provinces exist', () => {
@@ -71,7 +71,7 @@ describe('ObservingProvinces', () => {
 
       const $ = renderObservingProvinces({ provinces, federal: true })
       expect($('p').text()).toEqual(
-        'Observed in Prince Edward Island, Quebec, and by federal industries',
+        'Observed in Prince Edward Island, Quebec, and by federal industries.',
       )
     })
 
@@ -79,7 +79,7 @@ describe('ObservingProvinces', () => {
       const provinces = getProvinces(3)
 
       const $ = renderObservingProvinces({ provinces, federal: true })
-      expect($('p').text()).toEqual('Observed in PEI, QC, SK, and by federal industries')
+      expect($('p').text()).toEqual('Observed in PEI, QC, SK, and by federal industries.')
     })
   })
 

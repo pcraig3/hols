@@ -1,6 +1,6 @@
 const { css } = require('emotion')
 const { html, pe2pei, getProvinceIdOrFederalString } = require('../utils')
-const { theme, visuallyHidden, horizontalPadding, insideContainer } = require('../styles')
+const { theme, horizontalPadding, insideContainer } = require('../styles')
 const Layout = require('../components/Layout.js')
 const DateHtml = require('../components/DateHtml.js')
 const NextHolidayBox = require('../components/NextHolidayBox.js')
@@ -193,7 +193,7 @@ const Province = ({
               html` <div class=${titleStyles}>
                 <h2 id="holidays-table">
                   ${provinceName}${federal ? ' federal' : ''}
-                  <span class=${visuallyHidden}> statutory</span> holidays in ${year}
+                  <span class="visuallyHidden"> statutory</span> holidays in ${year}
                 </h2>
                 <div>
                   <${CalButton} provinceId=${provinceId} federal=${federal} year=${year}

@@ -1,12 +1,11 @@
 const { html } = require('../utils')
-const { visuallyHidden } = require('../styles')
 
 const ProvinceTitle = ({ provinceName = 'Canada', federal, year }) => {
   return html`
     <h1>
       <div class="h1--lg">${provinceName}</div>
       <div class="h1--md">
-        ${federal ? 'Federal ' : ''}<span class=${visuallyHidden}>statutory</span>${federal
+        ${federal ? 'Federal ' : ''}<span class="visuallyHidden">statutory</span>${federal
           ? ' h'
           : ' H'}olidays${` in ${year}`}
       </div>

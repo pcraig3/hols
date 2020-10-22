@@ -51,7 +51,7 @@ const pageMargin = css`
   padding: 0 ${theme.space.md};
 `
 
-const visuallyHidden = css`
+const visuallyHidden = `
   position: absolute !important;
   width: 1px !important;
   height: 1px !important;
