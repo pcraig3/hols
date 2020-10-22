@@ -32,7 +32,7 @@ test('NextHolidayBox displays next holiday properly for Canada', () => {
   expect($('h1 span.visuallyHidden').text()).toEqual(
     `Canada’s next statutory holiday is ${nextHoliday.nameEn}, on ${sp2nbsp('August 16')}.`,
   )
-  expect($('h1 span:last-of-type').text()).toEqual(
+  expect($('h1 .visible').text()).toEqual(
     `Canada’s next holiday\u00a0is${sp2nbsp('August 16')}${sp2nbsp(nextHoliday.nameEn)}`,
   )
 })
@@ -45,7 +45,7 @@ test('NextHolidayBox refers to federal holidays when "federal" variable is passe
   expect($('h1 span.visuallyHidden').text()).toEqual(
     `Canada’s next federal statutory holiday is ${nextHoliday.nameEn}, on ${sp2nbsp('August 16')}.`,
   )
-  expect($('h1 span:last-of-type').text()).toEqual(
+  expect($('h1 .visible').text()).toEqual(
     `Canada’s next federal holiday\u00a0is${sp2nbsp('August 16')}${sp2nbsp(nextHoliday.nameEn)}`,
   )
   expect($('h1 + p').text()).toMatch(/That’s in (about )?\d+ (days|month(s)?|year)/)
@@ -67,7 +67,7 @@ test('NextHolidayBox displays next holiday properly for a given province', () =>
       'August 16.',
     )}`,
   )
-  expect($('h1 span:last-of-type').text()).toEqual(
+  expect($('h1 .visible').text()).toEqual(
     `Prince Edward Island’s next holiday\u00a0is${sp2nbsp('August 16')}${sp2nbsp(
       nextHoliday.nameEn,
     )}`,

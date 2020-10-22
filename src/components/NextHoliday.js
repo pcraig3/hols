@@ -12,7 +12,7 @@ const NextHoliday = ({ nextHoliday, provinceName = 'Canada', federal }) => {
   return html`
     <h1>
       <span class="visuallyHidden">${screenReaderTitle(nextHoliday, provinceName, federal)}</span>
-      <span aria-hidden="true">
+      <div class="visible" aria-hidden="true">
         <div class="h1--xs">
           ${provinceName}’${provinceName.slice(-1) === 's' ? '' : 's'}
           ${' '}next${' '}${federal && 'federal '}holiday${' '.replace(/ /, '\u00a0')}is
@@ -29,7 +29,7 @@ const NextHoliday = ({ nextHoliday, provinceName = 'Canada', federal }) => {
         <div class="h1--md">
           ${nextHoliday.nameEn.replace(/ /, '\u00a0').replace(/Peoples Day/, 'Peoples\u00a0Day')}
         </div>
-      </span>
+      </div>
     </h1>
   `
 }
