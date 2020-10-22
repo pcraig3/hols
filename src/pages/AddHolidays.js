@@ -1,6 +1,6 @@
 const { html } = require('../utils')
 const { css } = require('emotion')
-const { theme, visuallyHidden } = require('../styles')
+const { theme } = require('../styles')
 const Layout = require('../components/Layout.js')
 const Content = require('../components/Content.js')
 const Button = require('../components/Button.js')
@@ -63,7 +63,7 @@ const AddHolidays = ({ data: { provinces, year } }) => {
             { key: 'Canada', value: downloadButton({ year }), className: summaryTableStyles },
           ]}
         >
-          <h2>Download all Canadian <span class=${visuallyHidden}>statutory</span> holidays</h2>
+          <h2>Download all Canadian <span class="visuallyHidden">statutory</span> holidays</h2>
           <p>For the Canadian completist.</p>
         <//>
 
@@ -78,7 +78,7 @@ const AddHolidays = ({ data: { provinces, year } }) => {
           ]}
         >
           <h2>
-            Download federally-regulated <span class=${visuallyHidden}>statutory</span> holidays
+            Download federally-regulated <span class="visuallyHidden">statutory</span> holidays
           </h2>
           <p>
             For airline pilots, federal policy wonks, etc.${' '}
@@ -88,12 +88,12 @@ const AddHolidays = ({ data: { provinces, year } }) => {
         <//>
 
         <${SummaryTable} title="Regional holidays" rows=${createRows({ provinces, year })}>
-          <h2>Download regional <span class=${visuallyHidden}>statutory</span> holidays</h2>
+          <h2>Download regional <span class="visuallyHidden">statutory</span> holidays</h2>
           <p>For regular folks or secessionists.</p>
         <//>
 
         <h2 id="import-holidays">
-          Import <span class=${visuallyHidden}>statutory</span> holidays into your calendar
+          Import <span class="visuallyHidden">statutory</span> holidays into your calendar
         </h2>
         <p>
           Download Canadian holidays and then import them to your Outlook, iCal, or Google Calendar.

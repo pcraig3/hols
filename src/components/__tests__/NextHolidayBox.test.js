@@ -49,7 +49,7 @@ test('NextHolidayBox refers to federal holidays when "federal" variable is passe
     `Canada’s next federal holiday\u00a0is${sp2nbsp('August 16')}${sp2nbsp(nextHoliday.nameEn)}`,
   )
   expect($('h1 + p').text()).toMatch(/That’s in (about )?\d+ (days|month(s)?|year)/)
-  expect($('h1 + p + p').text()).toEqual('Find out who gets federal statutory holidays')
+  expect($('h1 + p + p').text()).toEqual('Find out who gets federal holidays')
 })
 
 test('NextHolidayBox displays next holiday properly for a given province', () => {

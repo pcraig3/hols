@@ -2,7 +2,7 @@ const { renderStylesToString } = require('emotion-server')
 const render = require('preact-render-to-string')
 const { html, metaIfSHA } = require('../utils')
 const { breadcrumb } = require('../utils/richSnippets')
-const { theme } = require('../styles')
+const { theme, visuallyHidden } = require('../styles')
 const { fontStyles, printStyles, ga } = require('../headStyles')
 
 const document = ({ title, content, docProps: { meta, path, region } }) => {
@@ -103,6 +103,10 @@ const document = ({ title, content, docProps: { meta, path, region } }) => {
 
           .pcraig3 {
             color: ${theme.color.red};
+          }
+
+          .visuallyHidden {
+            ${visuallyHidden}
           }
 
           ${printStyles};

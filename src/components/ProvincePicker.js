@@ -1,13 +1,7 @@
 const { html, getProvinceIdOrFederalString } = require('../utils')
 const { css } = require('emotion')
 const { ALLOWED_YEARS, PROVINCE_IDS } = require('../config/vars.config')
-const {
-  theme,
-  insideContainer,
-  hiddenOnMobile,
-  horizontalPadding,
-  visuallyHidden,
-} = require('../styles')
+const { theme, insideContainer, hiddenOnMobile, horizontalPadding } = require('../styles')
 const Button = require('./Button')
 
 const styles = ({ accent = theme.color.red, focus = theme.color.focus } = {}) => css`
@@ -36,7 +30,7 @@ const styles = ({ accent = theme.color.red, focus = theme.color.focus } = {}) =>
       margin-right: ${theme.space.xs};
     }
 
-    &:last-of-type{
+    &:last-of-type {
       display: block;
 
       @media (${theme.mq.md}) {
@@ -78,9 +72,9 @@ const styles = ({ accent = theme.color.red, focus = theme.color.focus } = {}) =>
     color: ${theme.color.grey};
     background-color: transparent;
     background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23${accent.replace(
-      /#/g,
-      '',
-    )}%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E'),
+        /#/g,
+        '',
+      )}%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E'),
       linear-gradient(to bottom, white 0%, white 100%);
     background-repeat: no-repeat, repeat;
     background-position: right ${theme.space.xs} top 50%, 0 0;
@@ -119,11 +113,11 @@ const styles = ({ accent = theme.color.red, focus = theme.color.focus } = {}) =>
   }
 
   .js & {
-    *[data-display-none="true"] {
+    *[data-display-none='true'] {
       display: none;
     }
 
-    *[data-hidden="true"] {
+    *[data-hidden='true'] {
       visibility: hidden;
     }
   }
@@ -174,7 +168,7 @@ const ProvincePicker = ({ provinceId, federal, year = 2020 }) => {
           <div>
             <div id="region-select-width" aria-hidden="true">${regionName}</div>
 
-            <label for="region-select" class=${visuallyHidden}>View by region</label>
+            <label for="region-select" class="visuallyHidden">View by region</label>
             <span class=${hiddenOnMobile} aria-hidden="true">See</span>
             <select
               name="region"
@@ -188,15 +182,15 @@ const ProvincePicker = ({ provinceId, federal, year = 2020 }) => {
               <option disabled>──────────</option>
               ${PROVINCE_IDS.map(
                 (pid) =>
-                  html`<option value=${pid} selected=${provinceId === pid}
-                    >${getProvinceNameFromId(pid)}</option
-                  >`,
+                  html`<option value=${pid} selected=${provinceId === pid}>
+                    ${getProvinceNameFromId(pid)}
+                  </option>`,
               )}
             </select>
           </div>
 
           <div>
-            <label for="year-select" class=${visuallyHidden}>View by year</label>
+            <label for="year-select" class="visuallyHidden">View by year</label>
             <span aria-hidden="true">holidays for</span>
             <select
               name="year"

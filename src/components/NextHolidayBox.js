@@ -1,6 +1,6 @@
 const { css } = require('emotion')
 const { html, getProvinceIdOrFederalString } = require('../utils')
-const { theme, insideContainer, horizontalPadding, visuallyHidden } = require('../styles')
+const { theme, insideContainer, horizontalPadding } = require('../styles')
 const NextHoliday = require('./NextHoliday.js')
 const ObservingProvinces = require('./ObservingProvinces.js')
 const ProvinceTitle = require('./ProvinceTitle.js')
@@ -129,10 +129,7 @@ const NextHolidayBox = ({ nextHoliday, provinceName = 'Canada', provinceId, fede
         federal &&
         html`
           <p>
-            <a href="/do-federal-holidays-apply-to-me"
-              >Find out who gets federal${' '}
-              <span class=${visuallyHidden}>statutory </span>holidays</a
-            >
+            <a href="/do-federal-holidays-apply-to-me">Find out who gets federal holidays</a>
           </p>
         `}
       </div>
