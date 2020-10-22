@@ -13,7 +13,7 @@ const document = ({ title, content, docProps: { meta, path, region, richSnippets
         ${metaIfSHA() || ''}
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta name="description" content="${meta ? meta : 'Canadian statutory holidays'}">
+        <meta name="description" content="${meta ? meta : 'Upcoming statutory holidays in Canada'}">
 
         <!-- facebook open graph tags -->
         <meta property="og:type" content="website" />
@@ -39,9 +39,6 @@ const document = ({ title, content, docProps: { meta, path, region, richSnippets
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="default" />
         <meta name="apple-mobile-web-app-title" content="Canada Holidays" />
-        <meta name="description" content="${
-          meta ? meta : 'Upcoming statutory holidays in Canada'
-        }" />
         <meta name="format-detection" content="telephone=no" />
         <meta name="mobile-web-app-capable" content="yes" />
         <meta name="theme-color" content="#FFFFFF" />
@@ -51,7 +48,7 @@ const document = ({ title, content, docProps: { meta, path, region, richSnippets
         <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
         <link rel="manifest" href="/site.webmanifest">
 
-        <style>${fontStyles};</style>
+        <style>${fontStyles}</style>
         <style>
           :root {
             --region-select-width: auto;
@@ -109,7 +106,7 @@ const document = ({ title, content, docProps: { meta, path, region, richSnippets
             ${visuallyHidden}
           }
 
-          ${printStyles};
+          ${printStyles}
         </style>
         ${
           richSnippets
