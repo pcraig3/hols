@@ -41,6 +41,25 @@ const breadcrumb = (region) => {
   }
 }
 
+const speakable = (region, path) => {
+  const name =
+    region === 'Federal'
+      ? 'Canada’s next federal holiday'
+      : `${region}’${region.slice(-1) === 's' ? '' : 's'} next holiday`
+
+  return {
+    '@context': 'https://schema.org/',
+    '@type': 'WebPage',
+    name,
+    speakable: {
+      '@type': 'SpeakableSpecification',
+      cssSelector: region === 'Canada' ? ['h1', 'h1 ~ p'] : ['h1', 'h1 + p'],
+    },
+    url: `https://canada-holidays.ca${path}`,
+  }
+}
+
 module.exports = {
   breadcrumb,
+  speakable,
 }
