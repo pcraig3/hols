@@ -1,5 +1,8 @@
 # TODO
 
+- add google rich results 💰
+  - dataset
+  - speakable
 - add next/previous links at the bottom
 - guess location?
 - figure out about optional holidays
@@ -11,6 +14,8 @@
 
 # DONE
 
+- add google rich results 💰
+  - breadcrumbs
 - make it a PWA
 - put days until on main page
   - bug: "days until" counter actually works now

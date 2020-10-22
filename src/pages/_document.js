@@ -1,10 +1,11 @@
 const { renderStylesToString } = require('emotion-server')
 const render = require('preact-render-to-string')
 const { html, metaIfSHA } = require('../utils')
+const { breadcrumb } = require('../utils/richSnippets')
 const { theme } = require('../styles')
 const { fontStyles, printStyles, ga } = require('../headStyles')
 
-const document = ({ title, content, docProps: { meta, path } }) => {
+const document = ({ title, content, docProps: { meta, path, region } }) => {
   return `
     <!DOCTYPE html>
     <html lang="en" id="html">
@@ -106,7 +107,16 @@ const document = ({ title, content, docProps: { meta, path } }) => {
 
           ${printStyles};
         </style>
-        <!-- from https://developers.google.com/web/fundamentals/primers/service-workers/registration -->
+        ${
+          region
+            ? `<!-- rich snippets 💰✂️ -->
+          <script type="application/ld+json">
+            ${JSON.stringify(breadcrumb(region))}
+          </script>`
+            : ''
+        }
+
+        <!-- https://developers.google.com/web/fundamentals/primers/service-workers/registration -->
         <script>
           if ('serviceWorker' in navigator) {
             window.addEventListener('load', function() {

@@ -32,7 +32,7 @@ router.get('/', checkRedirectYear, dbmw(getHolidaysWithProvinces), (req, res) =>
     renderPage({
       pageComponent: 'Province',
       title: `Canadian statutory holidays in ${year}`,
-      docProps: { meta, path: req.path },
+      docProps: { meta, path: req.path, region: 'Canada' },
       props: { data: { holidays, nextHoliday: nextHol, year } },
     }),
   )
@@ -54,7 +54,7 @@ router.get(
       renderPage({
         pageComponent: 'Province',
         title: `Canadian statutory holidays in ${year}`,
-        docProps: { meta, path: req.path },
+        docProps: { meta, path: req.path, region: 'Canada' },
         props: { data: { holidays, nextHoliday: undefined, year } },
       }),
     )
@@ -89,7 +89,7 @@ router.get(
         title: `${provinceName} (${pe2pei(
           provinceId,
         )}) statutory holidays in ${year} — Canada Holidays`,
-        docProps: { meta, path: req.path },
+        docProps: { meta, path: req.path, region: provinceName },
         props: {
           data: {
             holidays,
@@ -130,7 +130,7 @@ router.get(
         title: `${provinceName} (${pe2pei(
           provinceId,
         )}) statutory holidays in ${year} — Canada Holidays`,
-        docProps: { meta, path: req.path },
+        docProps: { meta, path: req.path, region: provinceName },
         props: {
           data: {
             holidays,
@@ -166,7 +166,7 @@ router.get('/federal', checkRedirectYear, dbmw(getHolidaysWithProvinces), (req, 
     renderPage({
       pageComponent: 'Province',
       title: `Federal statutory holidays in Canada in ${year}`,
-      docProps: { meta, path: req.path },
+      docProps: { meta, path: req.path, region: 'Federal' },
       props: {
         data: {
           holidays,
@@ -196,7 +196,7 @@ router.get(
       renderPage({
         pageComponent: 'Province',
         title: `Federal statutory holidays in Canada in ${year}`,
-        docProps: { meta, path: req.path },
+        docProps: { meta, path: req.path, region: 'Federal' },
         props: {
           data: { holidays, nextHoliday: undefined, federal: true, year, source: federalSource },
         },
