@@ -207,6 +207,7 @@ const Province = ({
                     >Source:${' '}<a
                       href=${source.link}
                       target="_blank"
+                      rel="noopener"
                       data-event="true"
                       data-action="source-link"
                       data-label=${`source-link-${provinceIdOrFederal || 'canada'}`}

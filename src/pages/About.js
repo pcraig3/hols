@@ -28,10 +28,18 @@ const About = ({ data: { nextHoliday } }) =>
         <h2>Me</h2>
         <p>
           Hello, my name is${' '}
-          <a class="pcraig3" href="https://pcraig3.ca" title="Paul Craig" target="_blank">Paul</a
+          <a
+            class="pcraig3"
+            href="https://pcraig3.ca"
+            title="Paul Craig"
+            target="_blank"
+            rel="noopener"
+            >Paul</a
           >${' '} and I am paying for this site for some reason.${' '}
-          <a href="https://github.com/pcraig3/hols" target="_blank">Code is on GitHub</a> if you
-          want to “borrow” all my intellectual property.
+          <a href="https://github.com/pcraig3/hols" target="_blank" rel="noopener"
+            >Code is on GitHub</a
+          >
+          if you want to “borrow” all my intellectual property.
         </p>
       <//>
     <//>

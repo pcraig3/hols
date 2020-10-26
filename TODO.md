@@ -12,6 +12,8 @@
 
 # DONE
 
+- bug: rel no-opener
+- bug: don't focus on aria-hidden date in header
 - make screen reader improvements for the "next holidays" page
 - add google rich results 💰
   - breadcrumbs

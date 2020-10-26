@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.12.1] - 2020-10-26
+
+### Fixed
+
+- rel="noopener" for target=_blank links offsite
+- add cloudflare beacon script to CSP
+- a11y: no tabbed focus on the date in the header
+
 ## [2.12.0] - 2020-10-26
 
 ### Added
