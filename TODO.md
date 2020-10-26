@@ -1,6 +1,5 @@
 # TODO
 
-- rel no-opener: https://web.dev/external-anchors-use-rel-noopener/
 - Change province urls to provinces to match API (so dumb)
 - add next/previous links at the bottom
 - guess location?
@@ -13,7 +12,8 @@
 
 # DONE
 
-- don't focus on aria-hidden date in header
+- bug: rel no-opener
+- bug: don't focus on aria-hidden date in header
 - make screen reader improvements for the "next holidays" page
 - add google rich results 💰
   - breadcrumbs
