@@ -18,7 +18,7 @@ const NextHoliday = ({ nextHoliday, provinceName = 'Canada', federal }) => {
           ${' '}next${' '}${federal && 'federal '}holiday${' '.replace(/ /, '\u00a0')}is
         </div>
         <div class="h1--lg">
-          <a href="#next-holiday-row"
+          <a href="#next-holiday-row" tabindex="-1"
             ><${DateHtml} data-event="true" data-action="next-holidays-row-link"
             data-label=${`next-holidays-row-link-${
               federal ? 'federal' : provinceName.replace(/\s+/g, '-').toLowerCase()
