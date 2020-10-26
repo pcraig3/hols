@@ -1,11 +1,11 @@
 const { renderStylesToString } = require('emotion-server')
 const render = require('preact-render-to-string')
 const { html, metaIfSHA } = require('../utils')
-const { breadcrumb, speakable } = require('../utils/richSnippets')
+const { breadcrumb, dataset, speakable } = require('../utils/richSnippets')
 const { theme, visuallyHidden } = require('../styles')
 const { fontStyles, printStyles, ga } = require('../headStyles')
 
-const document = ({ title, content, docProps: { meta, path, region, richSnippets } }) => {
+const document = ({ title, content, docProps: { meta, path, region, richSnippets, year } }) => {
   return `
     <!DOCTYPE html>
     <html lang="en" id="html">
@@ -112,13 +112,15 @@ const document = ({ title, content, docProps: { meta, path, region, richSnippets
           richSnippets
             ? `<!-- rich snippets 💰✂️ -->
               <script type="application/ld+json">
-                ${
-                  richSnippets.length === 1
-                    ? JSON.stringify(breadcrumb(region))
-                    : `[
-                        ${JSON.stringify(breadcrumb(region))},
-                        ${JSON.stringify(speakable(region, path))}]`
-                }
+                [
+                  ${JSON.stringify(breadcrumb({ region }))},
+                  ${JSON.stringify(dataset({ region, path, year, title, meta }))}
+                  ${
+                    richSnippets.length === 3
+                      ? `, ${JSON.stringify(speakable({ region, path }))}`
+                      : ''
+                  }
+                ]
               </script>`
             : ''
         }

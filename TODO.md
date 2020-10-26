@@ -1,7 +1,6 @@
 # TODO
 
-- add google rich results 💰
-  - dataset
+- Change province urls to provinces to match API (so dumb)
 - add next/previous links at the bottom
 - guess location?
 - figure out about optional holidays
@@ -17,6 +16,7 @@
 - add google rich results 💰
   - breadcrumbs
   - speakable
+  - dataset
 - make it a PWA
 - put days until on main page
   - bug: "days until" counter actually works now
