@@ -58,6 +58,7 @@ const Provinces = ({ data }) =>
                 <a
                   href="https://www.canada.ca/en/employment-social-development/programs/employment-equity/regulated-industries.html"
                   target="_blank"
+                  rel="noopener"
                   >federally-regulated industries</a
                 >
                 ${' '}observe federal holidays instead of provincial holidays.
@@ -72,7 +73,7 @@ const Provinces = ({ data }) =>
         </div>
         <ul>
           ${data.provinces.map(
-            province => html`
+            (province) => html`
               <li><a href=${`/province/${province.id}`}>${province.nameEn}</a></li>
             `,
           )}

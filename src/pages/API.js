@@ -63,7 +63,9 @@ const API = () =>
           <ul>
             <li>It’s free (<span aria-hidden="true">✨</span>)</li>
             <li>
-              <a href="https://twitter.com/pcraig3" target="_blank">Dedicated support channel</a>
+              <a href="https://twitter.com/pcraig3" target="_blank" rel="noopener"
+                >Dedicated support channel</a
+              >
             </li>
             <li>Kind of bilingual (EN & FR)</li>
             <li>
@@ -75,13 +77,16 @@ const API = () =>
               >${' '} (heck yes <span aria-hidden="true">🤙</span>)
             </li>
             <li>
-              <a href="https://github.com/pcraig3/hols" target="_blank">Open source</a> which is
-              cool if you’re a nerd
+              <a href="https://github.com/pcraig3/hols" target="_blank" rel="noopener"
+                >Open source</a
+              >
+              which is cool if you’re a nerd
             </li>
             <li>
               <a
                 href="https://github.com/pcraig3/hols/blob/main/reference/Canada-Holidays-API.v1.yaml"
                 target="_blank"
+                rel="noopener"
                 >Documented with an OpenAPI spec</a
               >${' '}which is <em>even more</em> cool for <em>even nerdier</em> nerds
             </li>
@@ -94,10 +99,12 @@ const API = () =>
           There's an OpenAPI spec at${' '}<a
             href="https://github.com/pcraig3/hols/blob/main/reference/Canada-Holidays-API.v1.yaml"
             target="_blank"
+            rel="noopener"
             ><code>Canada-Holidays-API.v1.yaml</code></a
           >${' '}and a${' '}<a
             href="https://app.swaggerhub.com/apis/pcraig3/canada-holidays/"
             target="_blank"
+            rel="noopener"
             >SwaggerHub</a
           >${' '}page where you can test the endpoints.
         </p>
@@ -106,6 +113,7 @@ const API = () =>
             title="API documentation"
             href="https://github.com/pcraig3/hols/blob/main/API.md"
             target="_blank"
+            rel="noopener"
             >basic overview on GitHub</a
           >
           ${' '}if you’re a “read-the-first-and-last-chapter” kind of person.

@@ -43,6 +43,7 @@ const FederallyRegulated = () =>
             href="https://www.canada.ca/en/employment-social-development/programs/employment-equity/regulated-industries.html"
             title="the list of Federally Regulated Businesses and Industries"
             target="_blank"
+            rel="noopener"
             >the full list</a
           >.
         </p>
@@ -52,9 +53,7 @@ const FederallyRegulated = () =>
           Sometimes, provincial holidays are the same as federal holidays — like Christmas, or New
           Year’s — but not always.
         </p>
-        <p>
-          For example, the province of Ontario doesn’t observe Remembrance Day, which means
-        </p>
+        <p>For example, the province of Ontario doesn’t observe Remembrance Day, which means</p>
         <ul>
           <li>on November 11, post offices are closed but schools are open</li>
         </ul>
@@ -63,9 +62,7 @@ const FederallyRegulated = () =>
           However, Ontario observes Family Day but the federal government doesn’t. So that means
         </p>
         <ul>
-          <li>
-            on the third Monday in February, schools are closed but post offices will be open
-          </li>
+          <li>on the third Monday in February, schools are closed but post offices will be open</li>
         </ul>
 
         <h2>How can I tell which holidays apply to me?</h2>
@@ -75,6 +72,7 @@ const FederallyRegulated = () =>
           <a
             href="https://www.canada.ca/en/employment-social-development/programs/employment-equity/regulated-industries.html"
             target="_blank"
+            rel="noopener"
             >the list of federally regulated industries</a
           >.
         </p>

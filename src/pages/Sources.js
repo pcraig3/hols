@@ -30,7 +30,7 @@ const createRows = ({ provinces }) => {
     return {
       key: html`<a href="/province/${p.id}">${p.nameEn}</a>`,
       value: html`<span class="external-link"
-        ><a href="${p.sourceLink}" target="_blank">${p.sourceEn}<${External} /></a
+        ><a href="${p.sourceLink}" target="_blank" rel="noopener">${p.sourceEn}<${External} /></a
       ></span>`,
       className: summaryTableStyles,
     }
@@ -59,6 +59,7 @@ const AddHolidays = ({ data: { provinces } }) => {
                 ><a
                   href="https://www.tpsgc-pwgsc.gc.ca/remuneration-compensation/services-paye-pay-services/paye-information-pay/vie-life/vie-conge-life-leave/conge-paye-holiday-pay-eng.html"
                   target="_blank"
+                  rel="noopener"
                   >Statutory holiday pay, Canada.ca<${External} /></a
               ></span>`,
               className: summaryTableStyles,
@@ -66,16 +67,12 @@ const AddHolidays = ({ data: { provinces } }) => {
           ]}
         >
           <h2>Federally-regulated industries</h2>
-          <p>
-            11 holidays a year, plus Friday afternoons.
-          </p>
+          <p>11 holidays a year, plus Friday afternoons.</p>
         <//>
 
         <${SummaryTable} title="Provinces and territories" rows=${createRows({ provinces })}>
           <h2>Provinces and territories</h2>
-          <p>
-            Made in Canada, assembled by hand in Ottawa.
-          </p>
+          <p>Made in Canada, assembled by hand in Ottawa.</p>
         <//>
 
         <h2 id="legislation" tabindex="-1">Public holiday legislation</h2>
@@ -85,6 +82,7 @@ const AddHolidays = ({ data: { provinces } }) => {
             href="https://github.com/pcraig3/hols#citations"
             title="Sources (including legislation) on Github"
             target="_blank"
+            rel="noopener"
             data-event="true"
             data-action="all-sources-link"
             data-label="all-sources-link-canada"
