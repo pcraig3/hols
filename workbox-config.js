@@ -16,6 +16,14 @@ module.exports = {
       },
     },
     {
+      urlPattern: /.*\/(analytics|beacon.min)\.js$/,
+      handler: 'NetworkOnly',
+    },
+    {
+      urlPattern: /api\/*$/i,
+      handler: 'NetworkOnly',
+    },
+    {
       urlPattern: /\.(?:eot|otf|ttc|ttf|woff|woff2|font.css)$/i,
       handler: 'StaleWhileRevalidate',
       options: {
@@ -36,10 +44,6 @@ module.exports = {
           maxAgeSeconds: 24 * 60 * 60, // 24 hours
         },
       },
-    },
-    {
-      urlPattern: /\/api\/.*$/i,
-      handler: 'NetworkOnly',
     },
     {
       urlPattern: /.*/i,
