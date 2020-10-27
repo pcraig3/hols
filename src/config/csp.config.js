@@ -14,7 +14,7 @@ module.exports = {
     "'sha256-Wezgm/yRorRVzqbr6vDdLOJEGKDTVKRuWZ2Yh53e/EU='",
     "'sha256-/PhlWtWSFKGpnQswrM5AJwZ6WsgKO5Bn3J8jgWZfT4Q='",
     'https://www.google-analytics.com',
-    'https://static.cloudflareinsights.com/beacon.min.js',
+    'https://static.cloudflareinsights.com',
   ],
   styleSrc: ["'self'", "'unsafe-inline'", 'https://fonts.googleapis.com'],
 }

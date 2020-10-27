@@ -1,5 +1,6 @@
 # TODO
 
+- Service worker offline page?
 - Change province urls to provinces to match API (so dumb)
 - add next/previous links at the bottom
 - guess location?
