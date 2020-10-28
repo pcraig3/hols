@@ -42,15 +42,15 @@ const API = () =>
           >
           ${' '}
         </p>
-        <p>Features:</p>
+        <h2>Features</h2>
         <ul>
-          <li>Return holidays with associated regions</li>
-          <li>Return regions with associated holidays</li>
-          <li>Returns federal holidays</li>
-          <li>Returns national holidays</li>
-          <li>Returns “next” holiday for each region</li>
+          <li>Get all holidays with associated regions</li>
+          <li>Get all regions with associated holidays</li>
+          <li>Get federal holidays</li>
+          <li>Get national holidays</li>
+          <li>Get upcoming (“next”) holiday for each region</li>
           <li>
-            Returns holidays for multiple years: <code>2018</code>, <code>2019</code>,${' '}
+            Get holidays for multiple years: <code>2018</code>, <code>2019</code>,${' '}
             <code>2020</code>, <code>2021</code>, <code>2022</code>.
           </li>
         </ul>
@@ -69,18 +69,17 @@ const API = () =>
             </li>
             <li>Kind of bilingual (EN & FR)</li>
             <li>
-              Pretty much compliant with the${' '}
+              Basically compliant with the${' '}
               <a
                 href="https://www.canada.ca/en/government/system/digital-government/modern-emerging-technologies/government-canada-standards-apis.html"
                 target="_blank"
                 >Government of Canada Standards on APIs</a
-              >${' '} (heck yes <span aria-hidden="true">🤙</span>)
+              >${' '} (<span aria-hidden="true">🤙</span>)
             </li>
             <li>
               <a href="https://github.com/pcraig3/hols" target="_blank" rel="noopener"
                 >Open source</a
-              >
-              which is cool if you’re a nerd
+              >${' '}which is cool if you’re a nerd
             </li>
             <li>
               <a
@@ -121,8 +120,8 @@ const API = () =>
 
         <h2>Citations</h2>
         <p>
-          I’ve references to${' '}<a href="/sources">all the sources</a>${' '}I’m using for each
-          region in Canada, so it should all be accurate.
+          I’ve collected references to${' '}<a href="/sources">all the sources</a>${' '}I’m using
+          for each region in Canada, so data returned from the API should all be accurate.
         </p>
         <p>Mistaeks do happen, however — <a href="/feedback">lemme know</a> if you spot any.<//>
 
