@@ -123,7 +123,7 @@ const speakable = ({ region, path }) => {
     name,
     speakable: {
       '@type': 'SpeakableSpecification',
-      cssSelector: region === 'Canada' ? ['h1', 'h1 ~ p'] : ['h1', 'h1 + p'],
+      cssSelector: ['h1', 'h1 + p'],
     },
     url: `https://canada-holidays.ca${path}`,
   }
