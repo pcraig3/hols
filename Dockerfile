@@ -1,4 +1,4 @@
-FROM node:lts-alpine
+FROM node:12-alpine
 LABEL maintainer="paul@pcraig3.ca"
 
 ARG GITHUB_SHA_ARG
