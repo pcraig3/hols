@@ -1,6 +1,7 @@
 const { css } = require('emotion')
 const { html, pe2pei, getProvinceIdOrFederalString } = require('../utils')
 const { theme, horizontalPadding, insideContainer } = require('../styles')
+const { ALLOWED_YEARS } = require('../config/vars.config')
 const Layout = require('../components/Layout.js')
 const DateHtml = require('../components/DateHtml.js')
 const NextHolidayBox = require('../components/NextHolidayBox.js')
@@ -202,7 +203,7 @@ const Province = ({
                 </div>
               </div>`}
             <//>
-            ${year < 2022 &&
+            ${year < ALLOWED_YEARS[ALLOWED_YEARS.length - 1] &&
             html`<${NextYearLink}
               provinceName=${provinceName}
               provinceId=${provinceId}

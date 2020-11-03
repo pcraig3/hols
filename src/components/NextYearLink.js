@@ -27,7 +27,7 @@ const NextYearLink = ({ provinceName, provinceId, year, federal }) => {
     <div class=${styles}>
       <a
         href=${getLink({ provinceId, year, federal })}
-        class="right-arrow"
+        class="link__next-year right-arrow"
         data-event="true"
         data-action="source-link"
         data-label=${`source-link-${provinceId || federal ? 'federal' : 'canada'}`}
