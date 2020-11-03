@@ -29,8 +29,8 @@ const NextYearLink = ({ provinceName, provinceId, year, federal }) => {
         href=${getLink({ provinceId, year, federal })}
         class="link__next-year right-arrow"
         data-event="true"
-        data-action="source-link"
-        data-label=${`source-link-${provinceId || federal ? 'federal' : 'canada'}`}
+        data-action="next-year-link"
+        data-label=${`next-year-${provinceId ? provinceId : federal ? 'federal' : 'canada'}`}
         >${federal ? 'Federal' : provinceName}${' '}
         <span class="visuallyHidden">statutory</span>${' '}holidays in ${year + 1}</a
       >

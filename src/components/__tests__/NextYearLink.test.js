@@ -13,6 +13,7 @@ test('NextYearLink displays properly', () => {
   expect($('a').length).toBe(1)
   expect($('a').text()).toEqual('Canada statutory holidays in 2021')
   expect($('a').attr('href')).toEqual('/2021')
+  expect($('a').attr('data-label')).toEqual('next-year-canada')
 })
 
 test('NextYearLink displays federal text properly', () => {
@@ -20,6 +21,7 @@ test('NextYearLink displays federal text properly', () => {
   expect($('a').length).toBe(1)
   expect($('a').text()).toEqual('Federal statutory holidays in 2021')
   expect($('a').attr('href')).toEqual('/federal/2021')
+  expect($('a').attr('data-label')).toEqual('next-year-federal')
 })
 
 test('NextYearLink displays provincial text properly', () => {
@@ -27,6 +29,7 @@ test('NextYearLink displays provincial text properly', () => {
   expect($('a').length).toBe(1)
   expect($('a').text()).toEqual('Manitoba statutory holidays in 2021')
   expect($('a').attr('href')).toEqual('/province/MB/2021')
+  expect($('a').attr('data-label')).toEqual('next-year-MB')
 })
 
 test('NextYearLink displays future link and text properly', () => {
@@ -34,6 +37,7 @@ test('NextYearLink displays future link and text properly', () => {
   expect($('a').length).toBe(1)
   expect($('a').text()).toEqual('Canada statutory holidays in 2022')
   expect($('a').attr('href')).toEqual('/2022')
+  expect($('a').attr('data-label')).toEqual('next-year-canada')
 })
 
 test('NextYearLink displays past link and text properly', () => {
@@ -41,6 +45,7 @@ test('NextYearLink displays past link and text properly', () => {
   expect($('a').length).toBe(1)
   expect($('a').text()).toEqual('Federal statutory holidays in 2019')
   expect($('a').attr('href')).toEqual('/federal/2019')
+  expect($('a').attr('data-label')).toEqual('next-year-federal')
 })
 
 // the component doesn't know anything about dates: it just adds one to the year integer
@@ -49,4 +54,5 @@ test('NextYearLink displays VERY future link and text properly', () => {
   expect($('a').length).toBe(1)
   expect($('a').text()).toEqual('Nova Scotia statutory holidays in 5001')
   expect($('a').attr('href')).toEqual('/province/NS/5001')
+  expect($('a').attr('data-label')).toEqual('next-year-NS')
 })
