@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.13.0] - 2020-11-03
+
+### Added
+
+- add link to next year's holidays to all years but the current max (2022)
+  - not putting "past holidays" because nobody wants them
+
 ## [2.12.1] - 2020-10-26
 
 ### Fixed

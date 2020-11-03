@@ -1,12 +1,14 @@
 const { css } = require('emotion')
 const { html, pe2pei, getProvinceIdOrFederalString } = require('../utils')
 const { theme, horizontalPadding, insideContainer } = require('../styles')
+const { ALLOWED_YEARS } = require('../config/vars.config')
 const Layout = require('../components/Layout.js')
 const DateHtml = require('../components/DateHtml.js')
 const NextHolidayBox = require('../components/NextHolidayBox.js')
 const ProvincePicker = require('../components/ProvincePicker.js')
 const SummaryTable = require('../components/SummaryTable.js')
 const CalButton = require('../components/CalButton.js')
+const NextYearLink = require('../components/NextYearLink.js')
 const { External } = require('../components/Svg.js')
 
 const styles = ({ accent = theme.color.red } = {}) => css`
@@ -201,6 +203,13 @@ const Province = ({
                 </div>
               </div>`}
             <//>
+            ${year < ALLOWED_YEARS[ALLOWED_YEARS.length - 1] &&
+            html`<${NextYearLink}
+              provinceName=${provinceName}
+              provinceId=${provinceId}
+              federal=${federal}
+              year=${year}
+            />`}
             <div class="bottom-link__container with-source">
               ${source
                 ? html`<span class="bottom-link external-link"

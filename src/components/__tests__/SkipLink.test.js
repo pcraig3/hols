@@ -5,14 +5,7 @@ const { html } = require('../../utils')
 const SkipLink = require('../SkipLink.js')
 
 test('SkipLink displays link properly', () => {
-  expect(1).toBe(1)
-  const $ = cheerio.load(
-    render(
-      html`
-        <${SkipLink} //>
-      `,
-    ),
-  )
+  const $ = cheerio.load(render(html` <${SkipLink} //> `))
   expect($('a').length).toBe(1)
   expect($('a').text()).toEqual('Skip to main content')
   expect($('a').attr('href')).toEqual('#content')

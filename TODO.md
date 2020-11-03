@@ -2,7 +2,6 @@
 
 - Service worker offline page?
 - Change province urls to provinces to match API (so dumb)
-- add next/previous links at the bottom
 - guess location?
 - figure out about optional holidays
 - Add years to dates on years pages?
@@ -13,6 +12,7 @@
 
 # DONE
 
+- add next year links at the bottom
 - bug: rel no-opener
 - bug: don't focus on aria-hidden date in header
 - make screen reader improvements for the "next holidays" page
