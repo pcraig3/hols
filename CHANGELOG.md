@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.14.0] - 2020-11-15
+
+### Added
+
+- added images for opengraph (eg, FB and Twitter)
+
+### Fixed
+
+- shortened descriptions for opengraph
+
 ## [2.13.1] - 2020-11-03
 
 ### Fixed
