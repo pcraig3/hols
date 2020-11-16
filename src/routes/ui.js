@@ -106,6 +106,7 @@ router.get(
           path: req.path,
           region: provinceName,
           year,
+          id: provinceId,
           richSnippets: ['breadcrumb', 'dataset', 'speakable'],
         },
         props: {
@@ -153,6 +154,7 @@ router.get(
           path: req.path,
           region: provinceName,
           year,
+          id: provinceId,
           richSnippets: ['breadcrumb', 'dataset'],
         },
         props: {

@@ -1,11 +1,11 @@
 const { renderStylesToString } = require('emotion-server')
 const render = require('preact-render-to-string')
-const { html, metaIfSHA } = require('../utils')
+const { html, metaIfSHA, getOgImagePath } = require('../utils')
 const { breadcrumb, dataset, speakable } = require('../utils/richSnippets')
 const { theme, visuallyHidden } = require('../styles')
 const { fontStyles, printStyles, ga } = require('../headStyles')
 
-const document = ({ title, content, docProps: { meta, path, region, richSnippets, year } }) => {
+const document = ({ title, content, docProps: { id, meta, path, region, richSnippets, year } }) => {
   return `
     <!DOCTYPE html>
     <html lang="en" id="html">
@@ -15,13 +15,21 @@ const document = ({ title, content, docProps: { meta, path, region, richSnippets
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta name="description" content="${meta ? meta : 'Upcoming statutory holidays in Canada'}">
 
-        <!-- facebook open graph tags -->
+        <!-- open graph tags -->
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://canada-holidays.ca${path}" />
         <meta property="og:title" content="${title}" />
         <meta property="og:description" content="${
           meta ? meta : 'Upcoming statutory holidays in Canada'
         }" />
+
+        <meta property="og:image"  content="https://canada-holidays.ca${getOgImagePath({
+          id,
+          region,
+        })}" />
+        <meta property="og:image:type" content="image/png" />
+        <meta property="og:image:width" content="1024" />
+        <meta property="og:image:height" content="512" />
 
         <!-- twitter card tags additive with the og: tags -->
         <meta name="twitter:card" content="summary" />

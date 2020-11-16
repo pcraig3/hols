@@ -134,6 +134,18 @@ const metaIfSHA = () =>
   `<meta name="keywords" content="GITHUB_SHA=${validator.escape(process.env.GITHUB_SHA)}" />`
 
 /**
+ * Function that returns the path to the opengraph image to use
+ * If it is a province or a "federal" page, use those images. Otherwise, show the generic Canada image
+ * @param {String} redion a proper name string like "Prince Edward Island"
+ * @param {String} id an acronym ID like "PE"
+ */
+const getOgImagePath = ({ region, id }) => {
+  if (id) return `/img/og-${id.toLowerCase()}.png`
+  if (region === 'Federal') return '/img/og-federal.png'
+  return '/img/og-canada.png'
+}
+
+/**
  * Function to take an array of objects and object of objects
  * with the keys being one of the inner-object values
  *
@@ -235,6 +247,7 @@ const getProvinceIdOrFederalString = ({ provinceId, federal } = {}) => {
 module.exports = {
   html,
   metaIfSHA,
+  getOgImagePath,
   array2Obj,
   dbmw,
   isProvinceId,
