@@ -80,23 +80,27 @@ const Collapse = () => {
   `
 }
 
-const Download = () => {
+const CalendarDownload = () => {
   return html`
     <svg
       x="0px"
       y="0px"
-      viewBox="0 0 451.111 451.111"
-      xml:space="preserve"
+      enable-background="new 0 0 512 512"
+      viewBox="0 0 512 512"
       fill="#DD2E44"
-      style="vertical-align: -0.125em;-ms-transform: rotate(360deg); -webkit-transform: rotate(360deg); transform: rotate(360deg);"
-      class="arrows--collapse"
       aria-hidden="true"
       focusable="false"
+      xmlns="http://www.w3.org/2000/svg"
     >
-      <path
-        d="m225.556 354.445 145-145-48.333-48.333-64.444 64.444v-225.556h-64.444v225.556l-64.444-64.444-48.333 48.333z"
-      />
-      <path d="m0 386.667h451.111v64.444h-451.111z" />
+      <g>
+        <path
+          d="m391.5 43v-30h-30v30h-211v-30h-30v30h-120.5v456h512v-456zm-271 30v30h30v-30h211v30h30v-30h90.5v60h-452v-60zm-90.5 396v-306h452v306z"
+        />
+        <path
+          d="m330.92 291.783-21.213-21.213-38.707 38.706v-105.276h-30v105.276l-38.707-38.706-21.213 21.213 74.92 74.92z"
+        />
+        <path d="m165.961 396.941h180.078v30h-180.078z" />
+      </g>
     </svg>
   `
 }
@@ -152,4 +156,4 @@ const External = () => {
   `
 }
 
-module.exports = { Expand, Collapse, Download, External }
+module.exports = { Expand, Collapse, CalendarDownload, External }

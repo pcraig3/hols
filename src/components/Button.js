@@ -1,7 +1,7 @@
 const { html } = require('../utils')
 const { css } = require('@emotion/css')
 const { theme } = require('../styles')
-const { Expand, Collapse, Download } = require('./Svg')
+const { Expand, Collapse, CalendarDownload } = require('./Svg')
 
 const styles = ({ accent = theme.color.red, focus = theme.color.focus } = {}) => css`
   margin: 0;
@@ -65,20 +65,21 @@ const styles = ({ accent = theme.color.red, focus = theme.color.focus } = {}) =>
   }
 
   svg {
-    height: 16px;
-    width: 16px;
+    height: 19.5px;
+    width: 19.5px;
     margin-right: 7px;
     fill: ${accent};
+    vertical-align: text-bottom;
 
     @media (${theme.mq.md}) {
-      height: 18.5px;
-      width: 18.5px;
+      height: 22px;
+      width: 22px;
     }
 
     @media (${theme.mq.lg}) {
-      height: 20px;
-      width: 20px;
-      margin-right: 9px;
+      height: 24px;
+      width: 24px;
+      margin-right: 10px;
     }
   }
 
@@ -127,7 +128,7 @@ const Button = ({ children, color = {}, ...props }) => {
   return props.href
     ? html`
         <${LinkButton} color=${color} ...${props}>
-          <${Download} />
+          <${CalendarDownload} />
           <span>${children}</span>
         <//>
       `
