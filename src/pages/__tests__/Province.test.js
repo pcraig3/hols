@@ -47,7 +47,9 @@ describe('Province page', () => {
   test('renders #next-holiday-row id', () => {
     const $ = renderPage()
     expect($('h2#holidays-table').text()).toBe('Canada statutory holidays in 2020')
-    expect($('#next-holiday-row').text()).toBe(' December 28, Monday Boxing DayFederal holiday, NL')
+    expect($('#next-holiday-row').text()).toBe(
+      ' December 28, Monday Boxing Day Federal holiday, NL ',
+    )
   })
 
   test('does not render next year link', () => {
