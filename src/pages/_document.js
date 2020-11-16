@@ -20,7 +20,7 @@ const document = ({ title, content, docProps: { id, meta, path, region, richSnip
         <meta property="og:url" content="https://canada-holidays.ca${path}" />
         <meta property="og:title" content="${title}" />
         <meta property="og:description" content="${
-          meta ? meta : 'Upcoming statutory holidays in Canada'
+          meta ? meta.split('.')[0] : 'Upcoming statutory holidays in Canada'
         }" />
 
         <meta property="og:image"  content="https://canada-holidays.ca${getOgImagePath({
