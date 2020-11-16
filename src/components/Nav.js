@@ -1,4 +1,4 @@
-const { css } = require('emotion')
+const { css } = require('@emotion/css')
 const { html } = require('../utils')
 const { theme, insideContainer } = require('../styles')
 const Logo = require('./Logo')

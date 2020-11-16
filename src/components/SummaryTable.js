@@ -1,5 +1,5 @@
 const { html } = require('../utils')
-const { css } = require('emotion')
+const { css } = require('@emotion/css')
 const { theme, visuallyHidden } = require('../styles')
 
 const summaryRow = css`
@@ -132,18 +132,9 @@ const SummaryRow = ({ row: { key, value, id, value2, className } = {} }) => {
       id=${id}
       tabindex=${id ? '-1' : null}
     >
-      <dt class="key">
-        ${key}
-      </dt>
-      <dd class="value">
-        ${value}
-      </dd>
-      ${value2 &&
-      html`
-        <dd class="value2">
-          ${value2}
-        </dd>
-      `}
+      <dt class="key">${key}</dt>
+      <dd class="value">${value}</dd>
+      ${value2 && html` <dd class="value2">${value2}</dd> `}
     </div>
   `
 }
@@ -174,9 +165,7 @@ const SummaryTable = ({ rows, title = false, children, ...props }) =>
   html`
     <div class=${summaryTable}>
       ${children}
-      <dl title=${title}>
-        ${rows.map((row) => renderSummaryRow(row, props))}
-      </dl>
+      <dl title=${title}>${rows.map((row) => renderSummaryRow(row, props))}</dl>
     </div>
   `
 

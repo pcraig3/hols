@@ -1,5 +1,5 @@
 const { html } = require('../utils')
-const { css } = require('emotion')
+const { css } = require('@emotion/css')
 const { theme, insideContainer, horizontalPadding } = require('../styles')
 
 const styles = css`

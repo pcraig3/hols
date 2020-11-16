@@ -1,4 +1,4 @@
-const { css } = require('emotion')
+const { css } = require('@emotion/css')
 const { html, pe2pei, getProvinceIdOrFederalString } = require('../utils')
 const { theme, horizontalPadding, insideContainer } = require('../styles')
 const { ALLOWED_YEARS } = require('../config/vars.config')

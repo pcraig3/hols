@@ -1,4 +1,4 @@
-const { css } = require('emotion')
+const { css } = require('@emotion/css')
 
 /* Utilities */
 

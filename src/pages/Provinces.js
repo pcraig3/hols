@@ -1,4 +1,4 @@
-const { css } = require('emotion')
+const { css } = require('@emotion/css')
 const { html } = require('../utils')
 const { theme } = require('../styles')
 const Content = require('../components/Content.js')

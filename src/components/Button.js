@@ -1,5 +1,5 @@
 const { html } = require('../utils')
-const { css } = require('emotion')
+const { css } = require('@emotion/css')
 const { theme } = require('../styles')
 const { Expand, Collapse, Download } = require('./Svg')
 

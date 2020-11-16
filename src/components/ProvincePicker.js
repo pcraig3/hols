@@ -1,5 +1,5 @@
 const { html, getProvinceIdOrFederalString } = require('../utils')
-const { css } = require('emotion')
+const { css } = require('@emotion/css')
 const { ALLOWED_YEARS, PROVINCE_IDS } = require('../config/vars.config')
 const { theme, insideContainer, hiddenOnMobile, horizontalPadding } = require('../styles')
 const Button = require('./Button')

@@ -1,4 +1,4 @@
-const { renderStylesToString } = require('emotion-server')
+const { renderStylesToString } = require('@emotion/server')
 const render = require('preact-render-to-string')
 const { html, metaIfSHA, getOgImagePath } = require('../utils')
 const { breadcrumb, dataset, speakable } = require('../utils/richSnippets')

@@ -1,5 +1,5 @@
 const { html } = require('../utils')
-const { css } = require('emotion')
+const { css } = require('@emotion/css')
 const { theme } = require('../styles')
 
 const MapleLeaf = ({ fill = '#DD2E44' }) => {
@@ -24,7 +24,7 @@ const MapleLeaf = ({ fill = '#DD2E44' }) => {
   `
 }
 
-const div = color => css`
+const div = (color) => css`
   position: relative;
   display: inline-block;
   font-size: 0.9em;

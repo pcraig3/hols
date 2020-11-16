@@ -1,4 +1,4 @@
-const { css } = require('emotion')
+const { css } = require('@emotion/css')
 const { html, getProvinceIdOrFederalString } = require('../utils')
 const { theme, insideContainer, horizontalPadding } = require('../styles')
 const NextHoliday = require('./NextHoliday.js')

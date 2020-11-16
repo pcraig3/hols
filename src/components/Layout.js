@@ -1,4 +1,4 @@
-const { css } = require('emotion')
+const { css } = require('@emotion/css')
 const { html } = require('../utils')
 const { theme, horizontalPadding } = require('../styles')
 const Nav = require('./Nav')
@@ -94,12 +94,8 @@ const Layout = ({ color, route, children }) =>
   html`
     <div class=${linkStyles(color)}>
       <${SkipLink} />
-      <header class=${header}>
-        <${Nav} color=${color} route=${route} //>
-      </header>
-      <main id="content" tabindex="-1" class=${main}>
-        ${children}
-      </main>
+      <header class=${header}><${Nav} color=${color} route=${route} //></header>
+      <main id="content" tabindex="-1" class=${main}>${children}</main>
     </div>
   `
 
