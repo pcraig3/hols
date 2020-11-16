@@ -68,6 +68,7 @@ const styles = ({ accent = theme.color.red, focus = theme.color.focus } = {}) =>
     height: 19.5px;
     width: 19.5px;
     margin-right: 7px;
+    padding-right: 1.5px;
     fill: ${accent};
     vertical-align: text-bottom;
 
@@ -77,9 +78,10 @@ const styles = ({ accent = theme.color.red, focus = theme.color.focus } = {}) =>
     }
 
     @media (${theme.mq.lg}) {
+      paddiing-right: 0;
       height: 24px;
       width: 24px;
-      margin-right: 10px;
+      margin-right: 11px;
     }
   }
 
