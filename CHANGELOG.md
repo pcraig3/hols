@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.14.1] - 2020-11-16
+
+### Updated
+
+- "download" icon looks nicer
+
 ## [2.14.0] - 2020-11-15
 
 ### Added

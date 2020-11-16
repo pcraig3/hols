@@ -12,6 +12,7 @@
 
 # DONE
 
+- download link/button has nicer calendar icon
 - add opengraph images
   - shorten opengraph descriptions
 - add next year links at the bottom
