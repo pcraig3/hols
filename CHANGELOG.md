@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.14.2] - 2020-11-16
+
+### Fixed
+
+- update open graph images to aspect ratio of 1.91:1 (1200 x 628)
+
 ## [2.14.1] - 2020-11-16
 
 ### Updated

@@ -28,8 +28,8 @@ const document = ({ title, content, docProps: { id, meta, path, region, richSnip
           region,
         })}" />
         <meta property="og:image:type" content="image/png" />
-        <meta property="og:image:width" content="1024" />
-        <meta property="og:image:height" content="512" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="628" />
 
         <!-- twitter card tags additive with the og: tags -->
         <meta name="twitter:card" content="summary" />
