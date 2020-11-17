@@ -11,7 +11,7 @@ describe('Test server responses', () => {
       // Update db schema to the latest version using SQL-based migrations
       .then(() => db.migrate()) // <=
       // Display error message if something went wrong
-      .catch(err => console.error(err.stack)) // eslint-disable-line no-console
+      .catch((err) => console.error(err.stack)) // eslint-disable-line no-console
   })
 
   afterAll(() => {

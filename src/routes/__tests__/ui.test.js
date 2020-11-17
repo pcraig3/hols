@@ -488,3 +488,29 @@ describe('Test ui responses', () => {
     })
   })
 })
+
+describe('Test /province responses', () => {
+  describe('Test /province GET response', () => {
+    test('it should return 301', async () => {
+      const response = await request(app).get('/province')
+      expect(response.statusCode).toBe(301)
+      expect(response.headers.location).toBe('/provinces')
+    })
+  })
+
+  describe('Test /province/:provinceId GET response', () => {
+    test('it should return 301', async () => {
+      const response = await request(app).get('/province/MB')
+      expect(response.statusCode).toBe(301)
+      expect(response.headers.location).toBe('/provinces/MB')
+    })
+  })
+
+  describe('Test /province/:provinceId/:year GET response', () => {
+    test('it should return 301', async () => {
+      const response = await request(app).get('/province/MB/2020')
+      expect(response.statusCode).toBe(301)
+      expect(response.headers.location).toBe('/provinces/MB/2020')
+    })
+  })
+})
