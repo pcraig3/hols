@@ -1,6 +1,6 @@
 {
   "name": "hols",
-  "version": "2.14.3",
+  "version": "3.0.0",
   "description": "hols for cans: canada holidays api and canada holidays frontend",
   "main": "index.js",
   "author": "pcraig3",

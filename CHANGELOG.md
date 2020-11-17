@@ -7,6 +7,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [3.0.0] - 2020-11-17
+
+### Breaking change
+
+- Moved all the `/province/*` URLs to `/provinces/*`
+  - eg, `/province/MB/2021` is now `/provinces/MB/2021`
+  - old URLs will 301 redirect to the new URLs
+  - technically this is a breaking change, although I am more worried about search engines than actual users
+
+### Added
+
+- added a rel="canonical" link to the `<head>`
+
 ## [2.14.3] - 2020-11-16
 
 ### Fixed
@@ -66,7 +79,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Updated
 
 - Added holidays count to the meta string for each region.
-
 
 ## [2.11.1] - 2020-10-21
 
