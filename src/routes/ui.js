@@ -395,7 +395,7 @@ router.use(function (err, req, res, next) {
     renderPage({
       pageComponent: 'Error',
       title: `Error: ${res.statusCode} — Canada Holidays`,
-      docProps: { meta: err.message.split('.')[0], path: req.path },
+      docProps: { meta: err.message.split('.')[0], path: req.path, error: true },
       props: {
         data: {
           status: res.statusCode,
