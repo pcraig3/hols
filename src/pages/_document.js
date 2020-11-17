@@ -34,6 +34,11 @@ const document = ({ title, content, docProps: { id, meta, path, region, richSnip
         <!-- twitter card tags additive with the og: tags -->
         <meta name="twitter:card" content="summary" />
         <meta name="twitter:creator" content="@pcraig3" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:image" content="https://canada-holidays.ca${getOgImagePath({
+          id,
+          region,
+        })}" />
 
         <title>${title}</title>
         ${

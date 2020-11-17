@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.14.3] - 2020-11-16
+
+### Fixed
+
+- meta information for open graph is just one sentence — it gets cut off otherwise
+- update open graph images for twitter
+
 ## [2.14.2] - 2020-11-16
 
 ### Fixed

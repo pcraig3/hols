@@ -16,6 +16,7 @@
 - add opengraph images
   - shorten opengraph descriptions
   - aspect ratio 1.91:1 (1200 x 628)
+  - fix for twitter
 - add next year links at the bottom
 - bug: rel no-opener
 - bug: don't focus on aria-hidden date in header
