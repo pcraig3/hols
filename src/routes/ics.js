@@ -99,7 +99,7 @@ router.get('/ics/:provinceId(\\w{2})', (req, res) => {
   let provinceId = req.params.provinceId
   return isProvinceId(provinceId)
     ? res.redirect(301, `/ics/${provinceId}/${getCurrentHolidayYear()}`)
-    : res.redirect(`/province/${provinceId}`) // if bad province ID, redirect will be to a 404 page
+    : res.redirect(`/provinces/${provinceId}`) // if bad province ID, redirect will be to a 404 page
 })
 
 router.get(
@@ -110,7 +110,7 @@ router.get(
     let provinceId = req.params.provinceId
     let year = ALLOWED_YEARS.find((y) => y === parseInt(req.query.year))
     if (!isProvinceId(provinceId) || !year) {
-      return res.redirect(`/province/${provinceId}`)
+      return res.redirect(`/provinces/${provinceId}`)
     }
 
     provinceId = provinceId.toUpperCase()

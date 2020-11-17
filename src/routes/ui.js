@@ -73,7 +73,7 @@ router.get(
   },
 )
 
-router.get('/provinces/PEI', (req, res) => res.redirect(301, '/province/PE'))
+router.get('/provinces/PEI', (req, res) => res.redirect(301, '/provinces/PE'))
 router.get('/provinces/PEI/:year', (req, res) =>
   res.redirect(301, `/provinces/PE/${req.params.year}`),
 )
@@ -273,7 +273,7 @@ router.post('/provinces', (req, res) => {
       url = '/federal'
       break
     default:
-      url = `/province/${encodeURIComponent(region.substring(0, 2).toUpperCase())}`
+      url = `/provinces/${encodeURIComponent(region.substring(0, 2).toUpperCase())}`
   }
 
   // if year is a truthy value and is whitelisted, add it to the path

@@ -28,7 +28,7 @@ const summaryTableStyles = css`
 const createRows = ({ provinces }) => {
   return provinces.map((p) => {
     return {
-      key: html`<a href="/province/${p.id}">${p.nameEn}</a>`,
+      key: html`<a href="/provinces/${p.id}">${p.nameEn}</a>`,
       value: html`<span class="external-link"
         ><a href="${p.sourceLink}" target="_blank" rel="noopener">${p.sourceEn}<${External} /></a
       ></span>`,

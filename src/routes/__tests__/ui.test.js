@@ -93,21 +93,21 @@ describe('Test ui responses', () => {
           expect(response.headers.location).toBe('/federal')
         })
 
-        test('it should return 302 to /province/:id for a good param', async () => {
+        test('it should return 302 to /provinces/:id for a good param', async () => {
           const response = await request(app).post('/provinces').send({ region: 'AB' })
           expect(response.statusCode).toBe(302)
-          expect(response.headers.location).toBe('/province/AB')
+          expect(response.headers.location).toBe('/provinces/AB')
         })
 
         const params = [
-          { region: 'AB', url: '/province/AB' },
-          { region: 'ab', url: '/province/AB' },
-          { region: 'Alberta', url: '/province/AL' },
-          { region: 'a', url: '/province/A' },
-          { region: '<script>', url: '/province/%3CS' },
-          { region: 'https://evil.org', url: '/province/HT' },
-          { region: 'false', url: '/province/FA' },
-          { region: '1', url: '/province/1' },
+          { region: 'AB', url: '/provinces/AB' },
+          { region: 'ab', url: '/provinces/AB' },
+          { region: 'Alberta', url: '/provinces/AL' },
+          { region: 'a', url: '/provinces/A' },
+          { region: '<script>', url: '/provinces/%3CS' },
+          { region: 'https://evil.org', url: '/provinces/HT' },
+          { region: 'false', url: '/provinces/FA' },
+          { region: '1', url: '/provinces/1' },
         ]
         params.map((p) => {
           test(`it should return 302 to ${p.url} uppercased for param: '${p.region}'`, async () => {
@@ -144,13 +144,13 @@ describe('Test ui responses', () => {
 
         describe('for param "region" AND param "year"', () => {
           const params = [
-            { region: 'AB', year: '1000', url: '/province/AB' },
+            { region: 'AB', year: '1000', url: '/provinces/AB' },
             { region: 'federal', year: '1000', url: '/federal' },
             { region: '', year: '1000', url: '/' },
-            { region: 'AB', year: '2021', url: '/province/AB/2021' },
+            { region: 'AB', year: '2021', url: '/provinces/AB/2021' },
             { region: 'federal', year: '2021', url: '/federal/2021' },
             { region: '', year: '2021', url: '/2021' },
-            { region: 'AB', year: '2020', url: '/province/AB' },
+            { region: 'AB', year: '2020', url: '/provinces/AB' },
             { region: 'federal', year: '2020', url: '/federal' },
             { region: '', year: '2020', url: '/' },
           ]
@@ -168,15 +168,15 @@ describe('Test ui responses', () => {
     })
   })
 
-  describe('Test /province/:provinceId responses', () => {
+  describe('Test /provinces/:provinceId responses', () => {
     describe('for a good provinceId', () => {
       test('it should return 200', async () => {
-        const response = await request(app).get('/province/MB')
+        const response = await request(app).get('/provinces/MB')
         expect(response.statusCode).toBe(200)
       })
 
       test('it should return the h1, title, and meta tag', async () => {
-        const response = await request(app).get('/province/MB')
+        const response = await request(app).get('/provinces/MB')
         const $ = cheerio.load(response.text)
         expect($('h1 .visible').text()).toMatch(/^Manitoba’s next holiday\u00a0is/)
         expect($('title').text()).toEqual(
@@ -191,17 +191,23 @@ describe('Test ui responses', () => {
       })
     })
 
-    describe('Test /province/PEI response', () => {
+    describe('Test /provinces/PEI response', () => {
       test('it should return 301', async () => {
-        const response = await request(app).get('/province/PEI')
+        const response = await request(app).get('/provinces/PEI')
         expect(response.statusCode).toBe(301)
-        expect(response.headers.location).toEqual('/province/PE')
+        expect(response.headers.location).toEqual('/provinces/PE')
+      })
+
+      test('it should return 301 with the year included', async () => {
+        const response = await request(app).get('/provinces/PEI/2022')
+        expect(response.statusCode).toBe(301)
+        expect(response.headers.location).toEqual('/provinces/PE/2022')
       })
     })
 
-    describe('Test /province/:provinceId/:year responses', () => {
+    describe('Test /provinces/:provinceId/:year responses', () => {
       test('it should return the h1, title, and meta tag for MB in 2021', async () => {
-        const response = await request(app).get('/province/MB/2021')
+        const response = await request(app).get('/provinces/MB/2021')
         const $ = cheerio.load(response.text)
         expect($('h1').text()).toEqual('Manitobastatutory Holidays in 2021')
         expect($('title').text()).toEqual(
@@ -243,7 +249,7 @@ describe('Test ui responses', () => {
     })
 
     describe('Test /*/:year responses', () => {
-      const URLS = ['', '/federal', '/province/MB']
+      const URLS = ['', '/federal', '/provinces/MB']
       URLS.map((url) => {
         describe('for a good year', () => {
           GOOD_YEARS.map((year) => {
@@ -428,7 +434,7 @@ describe('Test ui responses', () => {
             ? `and an invalid year ("${yearPath}") `
             : `and a good year ("${yearPath}") `
         }it should return the h1, title, and meta tag`, async () => {
-          const response = await request(app).get(`/province/pangea${yearPath}`)
+          const response = await request(app).get(`/provinces/pangea${yearPath}`)
           const $ = cheerio.load(response.text)
           expect($('h1').text()).toEqual('400')
           expect($('p').text()).toEqual(
@@ -441,7 +447,7 @@ describe('Test ui responses', () => {
         })
       })
       test('it should return the h1, title, and meta tag', async () => {
-        const response = await request(app).get('/province/pangea')
+        const response = await request(app).get('/provinces/pangea')
         const $ = cheerio.load(response.text)
         expect($('h1').text()).toEqual('400')
         expect($('p').text()).toEqual(
@@ -476,8 +482,8 @@ describe('Test ui responses', () => {
       '/2021',
       '/federal',
       '/federal/2021',
-      '/province/AB',
-      '/province/AB/2021',
+      '/provinces/AB',
+      '/provinces/AB/2021',
     ]
     sourceURLs.map((url) => {
       test(`should return an external source for "${url}"`, async () => {
@@ -498,19 +504,24 @@ describe('Test /province responses', () => {
     })
   })
 
-  describe('Test /province/:provinceId GET response', () => {
-    test('it should return 301', async () => {
-      const response = await request(app).get('/province/MB')
-      expect(response.statusCode).toBe(301)
-      expect(response.headers.location).toBe('/provinces/MB')
-    })
-  })
+  // should be enough
+  const provinceIds = ['AB', 'BC', 'MB', 'NB', 'QC', 'YT']
 
-  describe('Test /province/:provinceId/:year GET response', () => {
-    test('it should return 301', async () => {
-      const response = await request(app).get('/province/MB/2020')
-      expect(response.statusCode).toBe(301)
-      expect(response.headers.location).toBe('/provinces/MB/2020')
+  provinceIds.map((provinceId) => {
+    describe(`Test /province/${provinceId} GET response`, () => {
+      test('it should return 301', async () => {
+        const response = await request(app).get(`/province/${provinceId}`)
+        expect(response.statusCode).toBe(301)
+        expect(response.headers.location).toBe(`/provinces/${provinceId}`)
+      })
+    })
+
+    describe(`Test /province/${provinceId}/:year GET response`, () => {
+      test('it should return 301', async () => {
+        const response = await request(app).get(`/province/${provinceId}/2020`)
+        expect(response.statusCode).toBe(301)
+        expect(response.headers.location).toBe(`/provinces/${provinceId}/2020`)
+      })
     })
   })
 })

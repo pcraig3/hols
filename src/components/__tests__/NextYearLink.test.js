@@ -28,7 +28,7 @@ test('NextYearLink displays provincial text properly', () => {
   const $ = renderNextYearLink({ provinceName: 'Manitoba', provinceId: 'MB', year: 2020 })
   expect($('a').length).toBe(1)
   expect($('a').text()).toEqual('Manitoba statutory holidays in 2021')
-  expect($('a').attr('href')).toEqual('/province/MB/2021')
+  expect($('a').attr('href')).toEqual('/provinces/MB/2021')
   expect($('a').attr('data-label')).toEqual('next-year-MB')
 })
 
@@ -53,6 +53,6 @@ test('NextYearLink displays VERY future link and text properly', () => {
   const $ = renderNextYearLink({ provinceName: 'Nova Scotia', provinceId: 'NS', year: 5000 })
   expect($('a').length).toBe(1)
   expect($('a').text()).toEqual('Nova Scotia statutory holidays in 5001')
-  expect($('a').attr('href')).toEqual('/province/NS/5001')
+  expect($('a').attr('href')).toEqual('/provinces/NS/5001')
   expect($('a').attr('data-label')).toEqual('next-year-NS')
 })

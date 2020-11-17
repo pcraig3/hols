@@ -72,7 +72,7 @@ describe('Test ics responses', () => {
         test(`it should return 302 for unsupported year "/ics/${path}/${badYear}"`, async () => {
           const response = await request(app).get(`/ics/${path}/${badYear}`)
           expect(response.statusCode).toBe(302)
-          const expectedPath = path && path !== 'federal' ? `/province/${path}` : `/${path}`
+          const expectedPath = path && path !== 'federal' ? `/provinces/${path}` : `/${path}`
           expect(response.headers.location).toBe(expectedPath)
         })
       })

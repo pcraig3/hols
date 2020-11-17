@@ -74,7 +74,7 @@ const Provinces = ({ data }) =>
         <ul>
           ${data.provinces.map(
             (province) => html`
-              <li><a href=${`/province/${province.id}`}>${province.nameEn}</a></li>
+              <li><a href=${`/provinces/${province.id}`}>${province.nameEn}</a></li>
             `,
           )}
         </ul>

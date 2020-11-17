@@ -17,7 +17,7 @@ const styles = css`
 
 const getLink = ({ provinceId, year, federal }) => {
   const nextYear = year + 1
-  if (provinceId) return `/province/${provinceId}/${nextYear}`
+  if (provinceId) return `/provinces/${provinceId}/${nextYear}`
   if (federal) return `/federal/${nextYear}`
   return `/${nextYear}`
 }
