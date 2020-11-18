@@ -5,7 +5,11 @@ const { breadcrumb, dataset, speakable } = require('../utils/richSnippets')
 const { theme, visuallyHidden } = require('../styles')
 const { fontStyles, printStyles, ga } = require('../headStyles')
 
-const document = ({ title, content, docProps: { id, meta, path, region, richSnippets, year } }) => {
+const document = ({
+  title,
+  content,
+  docProps: { id, meta, path, region, richSnippets, year, error },
+}) => {
   return `
     <!DOCTYPE html>
     <html lang="en" id="html">
@@ -14,6 +18,7 @@ const document = ({ title, content, docProps: { id, meta, path, region, richSnip
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta name="description" content="${meta ? meta : 'Upcoming statutory holidays in Canada'}">
+        ${!error ? `<link rel="canonical" href="https://canada-holidays.ca${path}" />` : ''}
 
         <!-- open graph tags -->
         <meta property="og:type" content="website" />

@@ -18,14 +18,14 @@ const ObservingProvinces = ({ provinces = [], federal = false }) => {
     return federal
       ? html`
           <p>
-            Observed in${' '}<a href=${`/province/${provinces[0].id}`}>${provinces[0].nameEn}</a>
+            Observed in${' '}<a href=${`/provinces/${provinces[0].id}`}>${provinces[0].nameEn}</a>
             ${' '}and by${' '}<a href="/federal">federal industries</a>
             <span class="visuallyHidden">.</span>
           </p>
         `
       : html`
           <p>
-            Observed in${' '}<a href=${`/province/${provinces[0].id}`}>${provinces[0].nameEn}</a>
+            Observed in${' '}<a href=${`/provinces/${provinces[0].id}`}>${provinces[0].nameEn}</a>
             <span class="visuallyHidden">.</span>
           </p>
         `
@@ -35,16 +35,16 @@ const ObservingProvinces = ({ provinces = [], federal = false }) => {
     return federal
       ? html`
           <p>
-            Observed in${' '}<a href=${`/province/${provinces[0].id}`}>${provinces[0].nameEn}</a>,
-            ${' '}<a href=${`/province/${provinces[1].id}`}>${provinces[1].nameEn},</a>${' '}and
+            Observed in${' '}<a href=${`/provinces/${provinces[0].id}`}>${provinces[0].nameEn}</a>,
+            ${' '}<a href=${`/provinces/${provinces[1].id}`}>${provinces[1].nameEn},</a>${' '}and
             ${' '}by${' '}<a href="/federal">federal industries</a>
             <span class="visuallyHidden">.</span>
           </p>
         `
       : html`
           <p>
-            Observed in${' '}<a href=${`/province/${provinces[0].id}`}>${provinces[0].nameEn}</a>
-            ${' '}and${' '}<a href=${`/province/${provinces[1].id}`}>${provinces[1].nameEn}</a>
+            Observed in${' '}<a href=${`/provinces/${provinces[0].id}`}>${provinces[0].nameEn}</a>
+            ${' '}and${' '}<a href=${`/provinces/${provinces[1].id}`}>${provinces[1].nameEn}</a>
             <span class="visuallyHidden">.</span>
           </p>
         `
@@ -58,7 +58,7 @@ const ObservingProvinces = ({ provinces = [], federal = false }) => {
         Observed in
         ${provinces.map(
           (p) =>
-            html`${' '}<a href=${`/province/${p.id}`} aria-label=${p.nameEn}>${pe2pei(p.id)}</a
+            html`${' '}<a href=${`/provinces/${p.id}`} aria-label=${p.nameEn}>${pe2pei(p.id)}</a
               >${','}`,
         )}
         ${' '}and by${' '}<a href="/federal">federal industries</a>
@@ -72,7 +72,7 @@ const ObservingProvinces = ({ provinces = [], federal = false }) => {
       Observed in
       ${provinces.map(
         (p) => html`
-          ${isLastProvince(p) ? ' and ' : ' '}<a href=${`/province/${p.id}`} aria-label=${p.nameEn}
+          ${isLastProvince(p) ? ' and ' : ' '}<a href=${`/provinces/${p.id}`} aria-label=${p.nameEn}
             >${pe2pei(p.id)}</a
           >${isLastProvince(p) ? '' : ','}
         `,

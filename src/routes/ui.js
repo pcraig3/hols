@@ -73,10 +73,13 @@ router.get(
   },
 )
 
-router.get('/province/PEI', (req, res) => res.redirect(301, '/province/PE'))
+router.get('/provinces/PEI', (req, res) => res.redirect(301, '/provinces/PE'))
+router.get('/provinces/PEI/:year', (req, res) =>
+  res.redirect(301, `/provinces/PE/${req.params.year}`),
+)
 
 router.get(
-  '/province/:provinceId',
+  '/provinces/:provinceId',
   checkProvinceIdErr,
   checkRedirectYear,
   dbmw(getProvincesWithHolidays),
@@ -125,7 +128,7 @@ router.get(
 )
 
 router.get(
-  '/province/:provinceId/:year(\\d{4})',
+  '/provinces/:provinceId/:year(\\d{4})',
   param2query('year'),
   checkProvinceIdErr,
   checkYearErr,
@@ -270,7 +273,7 @@ router.post('/provinces', (req, res) => {
       url = '/federal'
       break
     default:
-      url = `/province/${encodeURIComponent(region.substring(0, 2).toUpperCase())}`
+      url = `/provinces/${encodeURIComponent(region.substring(0, 2).toUpperCase())}`
   }
 
   // if year is a truthy value and is whitelisted, add it to the path
@@ -281,7 +284,15 @@ router.post('/provinces', (req, res) => {
   return res.redirect(url)
 })
 
-router.get('/province', (req, res) => res.redirect(302, '/provinces'))
+router.get('/province', (req, res) => res.redirect(301, '/provinces'))
+
+router.get('/province/:provinceId', (req, res) => {
+  return res.redirect(301, `/provinces/${req.params.provinceId}`)
+})
+
+router.get('/province/:provinceId/:year', (req, res) => {
+  return res.redirect(301, `/provinces/${req.params.provinceId}/${req.params.year}`)
+})
 
 router.get('/do-federal-holidays-apply-to-me', (req, res) => {
   return res.send(
@@ -384,7 +395,7 @@ router.use(function (err, req, res, next) {
     renderPage({
       pageComponent: 'Error',
       title: `Error: ${res.statusCode} — Canada Holidays`,
-      docProps: { meta: err.message.split('.')[0], path: req.path },
+      docProps: { meta: err.message.split('.')[0], path: req.path, error: true },
       props: {
         data: {
           status: res.statusCode,

@@ -112,7 +112,7 @@ const createRows = (holidays, federal, isCurrentYear) => {
     let provincesHTML = holiday.provinces.map(
       (p, i) =>
         html`
-          <a href="/province/${p.id}" title="Holidays for ${p.nameEn}">${pe2pei(p.id)}</a>${i +
+          <a href="/provinces/${p.id}" title="Holidays for ${p.nameEn}">${pe2pei(p.id)}</a>${i +
             1 ===
           holiday.provinces.length
             ? ''

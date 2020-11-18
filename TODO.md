@@ -1,7 +1,6 @@
 # TODO
 
 - Service worker offline page?
-- Change province urls to provinces to match API (so dumb)
 - guess location?
 - figure out about optional holidays
 - Add years to dates on years pages?
@@ -12,6 +11,7 @@
 
 # DONE
 
+- Change province urls to provinces to match API (so dumb that this happened)
 - download link/button has nicer calendar icon
 - add opengraph images
   - shorten opengraph descriptions

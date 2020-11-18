@@ -8,481 +8,301 @@
 
 <url>
   <loc>https://canada-holidays.ca/</loc>
-  <lastmod>2020-10-26T05:16:48+00:00</lastmod>
+  <lastmod>2020-11-17T17:21:50+00:00</lastmod>
   <changefreq>daily</changefreq>
   <priority>1.00</priority>
 </url>
 <url>
-  <loc>https://canada-holidays.ca/2018</loc>
-  <lastmod>2020-10-26T05:16:48+00:00</lastmod>
-  <changefreq>monthly</changefreq>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://canada-holidays.ca/2019</loc>
-  <lastmod>2020-10-26T05:16:48+00:00</lastmod>
-  <changefreq>monthly</changefreq>
-  <priority>0.80</priority>
-</url>
-<url>
   <loc>https://canada-holidays.ca/2021</loc>
-  <lastmod>2020-10-26T05:16:48+00:00</lastmod>
+  <lastmod>2020-11-17T17:21:50+00:00</lastmod>
   <changefreq>monthly</changefreq>
-  <priority>0.80</priority>
+  <priority>1.00</priority>
 </url>
 <url>
   <loc>https://canada-holidays.ca/2022</loc>
-  <lastmod>2020-10-26T05:16:48+00:00</lastmod>
+  <lastmod>2020-11-17T17:21:50+00:00</lastmod>
   <changefreq>monthly</changefreq>
   <priority>0.80</priority>
 </url>
 <url>
   <loc>https://canada-holidays.ca/federal</loc>
-  <lastmod>2020-10-26T05:16:48+00:00</lastmod>
+  <lastmod>2020-11-17T17:21:50+00:00</lastmod>
   <changefreq>daily</changefreq>
   <priority>1.00</priority>
 </url>
 <url>
-  <loc>https://canada-holidays.ca/federal/2018</loc>
-  <lastmod>2020-10-26T05:16:48+00:00</lastmod>
-  <changefreq>monthly</changefreq>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://canada-holidays.ca/federal/2019</loc>
-  <lastmod>2020-10-26T05:16:48+00:00</lastmod>
-  <changefreq>monthly</changefreq>
-  <priority>0.80</priority>
-</url>
-<url>
   <loc>https://canada-holidays.ca/federal/2021</loc>
-  <lastmod>2020-10-26T05:16:48+00:00</lastmod>
+  <lastmod>2020-11-17T17:21:50+00:00</lastmod>
   <changefreq>monthly</changefreq>
-  <priority>0.80</priority>
+  <priority>1.00</priority>
 </url>
 <url>
   <loc>https://canada-holidays.ca/federal/2022</loc>
-  <lastmod>2020-10-26T05:16:48+00:00</lastmod>
+  <lastmod>2020-11-17T17:21:50+00:00</lastmod>
   <changefreq>monthly</changefreq>
   <priority>0.80</priority>
 </url>
 <url>
   <loc>https://canada-holidays.ca/api</loc>
-  <lastmod>2020-06-04T06:50:47+00:00</lastmod>
+  <lastmod>2020-11-17T17:21:50+00:00</lastmod>
   <changefreq>monthly</changefreq>
   <priority>1.00</priority>
 </url>
 <url>
   <loc>https://canada-holidays.ca/add-holidays-to-calendar</loc>
-  <lastmod>2020-06-04T06:50:47+00:00</lastmod>
+  <lastmod>2020-11-17T17:21:50+00:00</lastmod>
   <changefreq>monthly</changefreq>
   <priority>0.80</priority>
 </url>
 <url>
-  <loc>https://canada-holidays.ca/province/AB</loc>
-  <lastmod>2020-10-26T05:16:48+00:00</lastmod>
+  <loc>https://canada-holidays.ca/provinces/AB</loc>
+  <lastmod>2020-11-17T17:21:50+00:00</lastmod>
   <changefreq>daily</changefreq>
   <priority>1.00</priority>
 </url>
 <url>
-  <loc>https://canada-holidays.ca/province/AB/2018</loc>
-  <lastmod>2020-10-26T05:16:48+00:00</lastmod>
+  <loc>https://canada-holidays.ca/provinces/AB/2021</loc>
+  <lastmod>2020-11-17T17:21:50+00:00</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>1.00</priority>
+</url>
+<url>
+  <loc>https://canada-holidays.ca/provinces/AB/2022</loc>
+  <lastmod>2020-11-17T17:21:50+00:00</lastmod>
   <changefreq>monthly</changefreq>
   <priority>0.80</priority>
 </url>
 <url>
-  <loc>https://canada-holidays.ca/province/AB/2019</loc>
-  <lastmod>2020-10-26T05:16:48+00:00</lastmod>
-  <changefreq>monthly</changefreq>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://canada-holidays.ca/province/AB/2021</loc>
-  <lastmod>2020-10-26T05:16:48+00:00</lastmod>
-  <changefreq>monthly</changefreq>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://canada-holidays.ca/province/AB/2022</loc>
-  <lastmod>2020-10-26T05:16:48+00:00</lastmod>
-  <changefreq>monthly</changefreq>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://canada-holidays.ca/province/BC</loc>
-  <lastmod>2020-10-26T05:16:48+00:00</lastmod>
+  <loc>https://canada-holidays.ca/provinces/BC</loc>
+  <lastmod>2020-11-17T17:21:50+00:00</lastmod>
   <changefreq>daily</changefreq>
   <priority>1.00</priority>
 </url>
 <url>
-  <loc>https://canada-holidays.ca/province/BC/2018</loc>
-  <lastmod>2020-10-26T05:16:48+00:00</lastmod>
+  <loc>https://canada-holidays.ca/provinces/BC/2021</loc>
+  <lastmod>2020-11-17T17:21:50+00:00</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>1.00</priority>
+</url>
+<url>
+  <loc>https://canada-holidays.ca/provinces/BC/2022</loc>
+  <lastmod>2020-11-17T17:21:50+00:00</lastmod>
   <changefreq>monthly</changefreq>
   <priority>0.80</priority>
 </url>
 <url>
-  <loc>https://canada-holidays.ca/province/BC/2019</loc>
-  <lastmod>2020-10-26T05:16:48+00:00</lastmod>
-  <changefreq>monthly</changefreq>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://canada-holidays.ca/province/BC/2021</loc>
-  <lastmod>2020-10-26T05:16:48+00:00</lastmod>
-  <changefreq>monthly</changefreq>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://canada-holidays.ca/province/BC/2022</loc>
-  <lastmod>2020-10-26T05:16:48+00:00</lastmod>
-  <changefreq>monthly</changefreq>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://canada-holidays.ca/province/NB</loc>
-  <lastmod>2020-10-26T05:16:48+00:00</lastmod>
+  <loc>https://canada-holidays.ca/provinces/NB</loc>
+  <lastmod>2020-11-17T17:21:50+00:00</lastmod>
   <changefreq>daily</changefreq>
   <priority>1.00</priority>
 </url>
 <url>
-  <loc>https://canada-holidays.ca/province/NB/2018</loc>
-  <lastmod>2020-10-26T05:16:48+00:00</lastmod>
+  <loc>https://canada-holidays.ca/provinces/NB/2021</loc>
+  <lastmod>2020-11-17T17:21:50+00:00</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>1.00</priority>
+</url>
+<url>
+  <loc>https://canada-holidays.ca/provinces/NB/2022</loc>
+  <lastmod>2020-11-17T17:21:50+00:00</lastmod>
   <changefreq>monthly</changefreq>
   <priority>0.80</priority>
 </url>
 <url>
-  <loc>https://canada-holidays.ca/province/NB/2019</loc>
-  <lastmod>2020-10-26T05:16:48+00:00</lastmod>
-  <changefreq>monthly</changefreq>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://canada-holidays.ca/province/NB/2021</loc>
-  <lastmod>2020-10-26T05:16:48+00:00</lastmod>
-  <changefreq>monthly</changefreq>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://canada-holidays.ca/province/NB/2022</loc>
-  <lastmod>2020-10-26T05:16:48+00:00</lastmod>
-  <changefreq>monthly</changefreq>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://canada-holidays.ca/province/ON</loc>
-  <lastmod>2020-10-26T05:16:48+00:00</lastmod>
+  <loc>https://canada-holidays.ca/provinces/ON</loc>
+  <lastmod>2020-11-17T17:21:50+00:00</lastmod>
   <changefreq>daily</changefreq>
   <priority>1.00</priority>
 </url>
 <url>
-  <loc>https://canada-holidays.ca/province/ON/2018</loc>
-  <lastmod>2020-10-26T05:16:48+00:00</lastmod>
+  <loc>https://canada-holidays.ca/provinces/ON/2021</loc>
+  <lastmod>2020-11-17T17:21:50+00:00</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>1.00</priority>
+</url>
+<url>
+  <loc>https://canada-holidays.ca/provinces/ON/2022</loc>
+  <lastmod>2020-11-17T17:21:50+00:00</lastmod>
   <changefreq>monthly</changefreq>
   <priority>0.80</priority>
 </url>
 <url>
-  <loc>https://canada-holidays.ca/province/ON/2019</loc>
-  <lastmod>2020-10-26T05:16:48+00:00</lastmod>
-  <changefreq>monthly</changefreq>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://canada-holidays.ca/province/ON/2021</loc>
-  <lastmod>2020-10-26T05:16:48+00:00</lastmod>
-  <changefreq>monthly</changefreq>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://canada-holidays.ca/province/ON/2022</loc>
-  <lastmod>2020-10-26T05:16:48+00:00</lastmod>
-  <changefreq>monthly</changefreq>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://canada-holidays.ca/province/SK</loc>
-  <lastmod>2020-10-26T05:16:48+00:00</lastmod>
+  <loc>https://canada-holidays.ca/provinces/SK</loc>
+  <lastmod>2020-11-17T17:21:50+00:00</lastmod>
   <changefreq>daily</changefreq>
   <priority>1.00</priority>
 </url>
 <url>
-  <loc>https://canada-holidays.ca/province/SK/2018</loc>
-  <lastmod>2020-10-26T05:16:48+00:00</lastmod>
+  <loc>https://canada-holidays.ca/provinces/SK/2021</loc>
+  <lastmod>2020-11-17T17:21:50+00:00</lastmod>
   <changefreq>monthly</changefreq>
-  <priority>0.80</priority>
+  <priority>1.00</priority>
 </url>
 <url>
-  <loc>https://canada-holidays.ca/province/SK/2019</loc>
-  <lastmod>2020-10-26T05:16:48+00:00</lastmod>
-  <changefreq>monthly</changefreq>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://canada-holidays.ca/province/SK/2021</loc>
-  <lastmod>2020-10-26T05:16:48+00:00</lastmod>
-  <changefreq>monthly</changefreq>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://canada-holidays.ca/province/SK/2022</loc>
-  <lastmod>2020-10-26T05:16:48+00:00</lastmod>
+  <loc>https://canada-holidays.ca/provinces/SK/2022</loc>
+  <lastmod>2020-11-17T17:21:50+00:00</lastmod>
   <changefreq>monthly</changefreq>
   <priority>0.80</priority>
 </url>
 <url>
   <loc>https://canada-holidays.ca/provinces</loc>
-  <lastmod>2020-06-04T06:50:47+00:00</lastmod>
+  <lastmod>2020-11-17T17:21:50+00:00</lastmod>
   <changefreq>monthly</changefreq>
   <priority>0.80</priority>
 </url>
 <url>
-  <loc>https://canada-holidays.ca/province/MB</loc>
-  <lastmod>2020-10-26T05:16:48+00:00</lastmod>
+  <loc>https://canada-holidays.ca/provinces/MB</loc>
+  <lastmod>2020-11-17T17:21:50+00:00</lastmod>
   <changefreq>daily</changefreq>
   <priority>1.00</priority>
 </url>
 <url>
-  <loc>https://canada-holidays.ca/province/MB/2018</loc>
-  <lastmod>2020-10-26T05:16:48+00:00</lastmod>
+  <loc>https://canada-holidays.ca/provinces/MB/2021</loc>
+  <lastmod>2020-11-17T17:21:50+00:00</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>1.00</priority>
+</url>
+<url>
+  <loc>https://canada-holidays.ca/provinces/MB/2022</loc>
+  <lastmod>2020-11-17T17:21:50+00:00</lastmod>
   <changefreq>monthly</changefreq>
   <priority>0.80</priority>
 </url>
 <url>
-  <loc>https://canada-holidays.ca/province/MB/2019</loc>
-  <lastmod>2020-10-26T05:16:48+00:00</lastmod>
-  <changefreq>monthly</changefreq>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://canada-holidays.ca/province/MB/2021</loc>
-  <lastmod>2020-10-26T05:16:48+00:00</lastmod>
-  <changefreq>monthly</changefreq>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://canada-holidays.ca/province/MB/2022</loc>
-  <lastmod>2020-10-26T05:16:48+00:00</lastmod>
-  <changefreq>monthly</changefreq>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://canada-holidays.ca/province/PE</loc>
-  <lastmod>2020-10-26T05:16:48+00:00</lastmod>
+  <loc>https://canada-holidays.ca/provinces/PE</loc>
+  <lastmod>2020-11-17T17:21:50+00:00</lastmod>
   <changefreq>daily</changefreq>
   <priority>1.00</priority>
 </url>
 <url>
-  <loc>https://canada-holidays.ca/province/PE/2018</loc>
-  <lastmod>2020-10-26T05:16:48+00:00</lastmod>
+  <loc>https://canada-holidays.ca/provinces/PE/2021</loc>
+  <lastmod>2020-11-17T17:21:50+00:00</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>1.00</priority>
+</url>
+<url>
+  <loc>https://canada-holidays.ca/provinces/PE/2022</loc>
+  <lastmod>2020-11-17T17:21:50+00:00</lastmod>
   <changefreq>monthly</changefreq>
   <priority>0.80</priority>
 </url>
 <url>
-  <loc>https://canada-holidays.ca/province/PE/2019</loc>
-  <lastmod>2020-10-26T05:16:48+00:00</lastmod>
-  <changefreq>monthly</changefreq>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://canada-holidays.ca/province/PE/2021</loc>
-  <lastmod>2020-10-26T05:16:48+00:00</lastmod>
-  <changefreq>monthly</changefreq>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://canada-holidays.ca/province/PE/2022</loc>
-  <lastmod>2020-10-26T05:16:48+00:00</lastmod>
-  <changefreq>monthly</changefreq>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://canada-holidays.ca/province/NS</loc>
-  <lastmod>2020-10-26T05:16:48+00:00</lastmod>
+  <loc>https://canada-holidays.ca/provinces/NS</loc>
+  <lastmod>2020-11-17T17:21:50+00:00</lastmod>
   <changefreq>daily</changefreq>
   <priority>1.00</priority>
 </url>
 <url>
-  <loc>https://canada-holidays.ca/province/NS/2018</loc>
-  <lastmod>2020-10-26T05:16:48+00:00</lastmod>
+  <loc>https://canada-holidays.ca/provinces/NS/2021</loc>
+  <lastmod>2020-11-17T17:21:50+00:00</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>1.00</priority>
+</url>
+<url>
+  <loc>https://canada-holidays.ca/provinces/NS/2022</loc>
+  <lastmod>2020-11-17T17:21:50+00:00</lastmod>
   <changefreq>monthly</changefreq>
   <priority>0.80</priority>
 </url>
 <url>
-  <loc>https://canada-holidays.ca/province/NS/2019</loc>
-  <lastmod>2020-10-26T05:16:48+00:00</lastmod>
-  <changefreq>monthly</changefreq>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://canada-holidays.ca/province/NS/2021</loc>
-  <lastmod>2020-10-26T05:16:48+00:00</lastmod>
-  <changefreq>monthly</changefreq>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://canada-holidays.ca/province/NS/2022</loc>
-  <lastmod>2020-10-26T05:16:48+00:00</lastmod>
-  <changefreq>monthly</changefreq>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://canada-holidays.ca/province/NL</loc>
-  <lastmod>2020-10-26T05:16:48+00:00</lastmod>
+  <loc>https://canada-holidays.ca/provinces/NL</loc>
+  <lastmod>2020-11-17T17:21:50+00:00</lastmod>
   <changefreq>daily</changefreq>
   <priority>1.00</priority>
 </url>
 <url>
-  <loc>https://canada-holidays.ca/province/NL/2018</loc>
-  <lastmod>2020-10-26T05:16:48+00:00</lastmod>
+  <loc>https://canada-holidays.ca/provinces/NL/2021</loc>
+  <lastmod>2020-11-17T17:21:50+00:00</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>1.00</priority>
+</url>
+<url>
+  <loc>https://canada-holidays.ca/provinces/NL/2022</loc>
+  <lastmod>2020-11-17T17:21:50+00:00</lastmod>
   <changefreq>monthly</changefreq>
   <priority>0.80</priority>
 </url>
 <url>
-  <loc>https://canada-holidays.ca/province/NL/2019</loc>
-  <lastmod>2020-10-26T05:16:48+00:00</lastmod>
-  <changefreq>monthly</changefreq>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://canada-holidays.ca/province/NL/2021</loc>
-  <lastmod>2020-10-26T05:16:48+00:00</lastmod>
-  <changefreq>monthly</changefreq>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://canada-holidays.ca/province/NL/2022</loc>
-  <lastmod>2020-10-26T05:16:48+00:00</lastmod>
-  <changefreq>monthly</changefreq>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://canada-holidays.ca/province/QC</loc>
-  <lastmod>2020-10-26T05:16:48+00:00</lastmod>
+  <loc>https://canada-holidays.ca/provinces/QC</loc>
+  <lastmod>2020-11-17T17:21:50+00:00</lastmod>
   <changefreq>daily</changefreq>
   <priority>1.00</priority>
 </url>
 <url>
-  <loc>https://canada-holidays.ca/province/QC/2018</loc>
-  <lastmod>2020-10-26T05:16:48+00:00</lastmod>
+  <loc>https://canada-holidays.ca/provinces/QC/2021</loc>
+  <lastmod>2020-11-17T17:21:50+00:00</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>1.00</priority>
+</url>
+<url>
+  <loc>https://canada-holidays.ca/provinces/QC/2022</loc>
+  <lastmod>2020-11-17T17:21:50+00:00</lastmod>
   <changefreq>monthly</changefreq>
   <priority>0.80</priority>
 </url>
 <url>
-  <loc>https://canada-holidays.ca/province/QC/2019</loc>
-  <lastmod>2020-10-26T05:16:48+00:00</lastmod>
-  <changefreq>monthly</changefreq>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://canada-holidays.ca/province/QC/2021</loc>
-  <lastmod>2020-10-26T05:16:48+00:00</lastmod>
-  <changefreq>monthly</changefreq>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://canada-holidays.ca/province/QC/2022</loc>
-  <lastmod>2020-10-26T05:16:48+00:00</lastmod>
-  <changefreq>monthly</changefreq>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://canada-holidays.ca/province/NT</loc>
-  <lastmod>2020-10-26T05:16:48+00:00</lastmod>
+  <loc>https://canada-holidays.ca/provinces/NT</loc>
+  <lastmod>2020-11-17T17:21:50+00:00</lastmod>
   <changefreq>daily</changefreq>
   <priority>1.00</priority>
 </url>
 <url>
-  <loc>https://canada-holidays.ca/province/NT/2018</loc>
-  <lastmod>2020-10-26T05:16:48+00:00</lastmod>
+  <loc>https://canada-holidays.ca/provinces/NT/2021</loc>
+  <lastmod>2020-11-17T17:21:50+00:00</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>1.00</priority>
+</url>
+<url>
+  <loc>https://canada-holidays.ca/provinces/NT/2022</loc>
+  <lastmod>2020-11-17T17:21:50+00:00</lastmod>
   <changefreq>monthly</changefreq>
   <priority>0.80</priority>
 </url>
 <url>
-  <loc>https://canada-holidays.ca/province/NT/2019</loc>
-  <lastmod>2020-10-26T05:16:48+00:00</lastmod>
-  <changefreq>monthly</changefreq>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://canada-holidays.ca/province/NT/2021</loc>
-  <lastmod>2020-10-26T05:16:48+00:00</lastmod>
-  <changefreq>monthly</changefreq>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://canada-holidays.ca/province/NT/2022</loc>
-  <lastmod>2020-10-26T05:16:48+00:00</lastmod>
-  <changefreq>monthly</changefreq>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://canada-holidays.ca/province/NU</loc>
-  <lastmod>2020-10-26T05:16:48+00:00</lastmod>
+  <loc>https://canada-holidays.ca/provinces/NU</loc>
+  <lastmod>2020-11-17T17:21:50+00:00</lastmod>
   <changefreq>daily</changefreq>
   <priority>1.00</priority>
 </url>
 <url>
-  <loc>https://canada-holidays.ca/province/NU/2018</loc>
-  <lastmod>2020-10-26T05:16:48+00:00</lastmod>
+  <loc>https://canada-holidays.ca/provinces/NU/2021</loc>
+  <lastmod>2020-11-17T17:21:50+00:00</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>1.00</priority>
+</url>
+<url>
+  <loc>https://canada-holidays.ca/provinces/NU/2022</loc>
+  <lastmod>2020-11-17T17:21:50+00:00</lastmod>
   <changefreq>monthly</changefreq>
   <priority>0.80</priority>
 </url>
 <url>
-  <loc>https://canada-holidays.ca/province/NU/2019</loc>
-  <lastmod>2020-10-26T05:16:48+00:00</lastmod>
-  <changefreq>monthly</changefreq>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://canada-holidays.ca/province/NU/2021</loc>
-  <lastmod>2020-10-26T05:16:48+00:00</lastmod>
-  <changefreq>monthly</changefreq>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://canada-holidays.ca/province/NU/2022</loc>
-  <lastmod>2020-10-26T05:16:48+00:00</lastmod>
-  <changefreq>monthly</changefreq>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://canada-holidays.ca/province/YT</loc>
-  <lastmod>2020-10-26T05:16:48+00:00</lastmod>
+  <loc>https://canada-holidays.ca/provinces/YT</loc>
+  <lastmod>2020-11-17T17:21:50+00:00</lastmod>
   <changefreq>daily</changefreq>
   <priority>1.00</priority>
 </url>
 <url>
-  <loc>https://canada-holidays.ca/province/YT/2018</loc>
-  <lastmod>2020-10-26T05:16:48+00:00</lastmod>
+  <loc>https://canada-holidays.ca/provinces/YT/2021</loc>
+  <lastmod>2020-11-17T17:21:50+00:00</lastmod>
   <changefreq>monthly</changefreq>
-  <priority>0.80</priority>
+  <priority>1.00</priority>
 </url>
 <url>
-  <loc>https://canada-holidays.ca/province/YT/2019</loc>
-  <lastmod>2020-10-26T05:16:48+00:00</lastmod>
-  <changefreq>monthly</changefreq>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://canada-holidays.ca/province/YT/2021</loc>
-  <lastmod>2020-10-26T05:16:48+00:00</lastmod>
-  <changefreq>monthly</changefreq>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://canada-holidays.ca/province/YT/2022</loc>
-  <lastmod>2020-10-26T05:16:48+00:00</lastmod>
+  <loc>https://canada-holidays.ca/provinces/YT/2022</loc>
+  <lastmod>2020-11-17T17:21:50+00:00</lastmod>
   <changefreq>monthly</changefreq>
   <priority>0.80</priority>
 </url>
 <url>
   <loc>https://canada-holidays.ca/do-federal-holidays-apply-to-me</loc>
-  <lastmod>2020-06-04T06:50:47+00:00</lastmod>
+  <lastmod>2020-11-17T17:21:50+00:00</lastmod>
   <changefreq>monthly</changefreq>
   <priority>1.00</priority>
 </url>
 <url>
   <loc>https://canada-holidays.ca/sources</loc>
-  <lastmod>2020-07-03T01:49:32+00:00</lastmod>
+  <lastmod>2020-11-17T17:21:50+00:00</lastmod>
   <changefreq>monthly</changefreq>
   <priority>1.00</priority>
 </url>
