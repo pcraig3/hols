@@ -356,7 +356,7 @@ router.get('/add-holidays-to-calendar', dbmw(getProvinces), (req, res) => {
   return res.send(
     renderPage({
       pageComponent: 'AddHolidays',
-      title: 'Add Canada’s 2020 holidays to your calendar — Canada Holidays',
+      title: `Add Canada’s ${year} holidays to your calendar — Canada Holidays`,
       docProps: {
         meta:
           'Download Canadian holidays and import them to your Outlook, iCal, or Google Calendar. Add all Canadian statutory holidays or just for your region.',

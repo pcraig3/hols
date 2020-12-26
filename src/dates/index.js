@@ -158,4 +158,24 @@ const relativeDate = (dateString) => {
   }
 }
 
-module.exports = { getLiteralDate, getObservedDate, displayDate, relativeDate }
+/**
+ * This function returns the current year, except after December 26th it returns the next year
+ */
+const getCurrentHolidayYear = () => {
+  const d = new Date(Date.now())
+
+  // return the next year if Dec 26 or later
+  if (d.getUTCMonth() === 11 && d.getUTCDate() >= 26) {
+    return d.getUTCFullYear() + 1
+  }
+
+  return d.getUTCFullYear()
+}
+
+module.exports = {
+  getCurrentHolidayYear,
+  getLiteralDate,
+  getObservedDate,
+  displayDate,
+  relativeDate,
+}

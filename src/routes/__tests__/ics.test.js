@@ -3,8 +3,10 @@ const db = require('sqlite')
 const Promise = require('bluebird')
 const app = require('../../server.js')
 const { ALLOWED_YEARS } = require('../../config/vars.config')
+const { getCurrentHolidayYear } = require('../../utils')
 
 describe('Test ics responses', () => {
+  const currentYear = getCurrentHolidayYear()
   beforeAll(async () => {
     await Promise.resolve()
       // First, try to open the database
@@ -25,7 +27,7 @@ describe('Test ics responses', () => {
       test('it should return 301 with current year in domain', async () => {
         const response = await request(app).get(url)
         expect(response.statusCode).toBe(301)
-        expect(response.headers.location).toBe(`${url}/2020`)
+        expect(response.headers.location).toBe(`${url}/${currentYear}`)
       })
     })
   })
