@@ -11,6 +11,8 @@
 
 # DONE
 
+- bug: boxing day was causing problems
+  - showing "next holidays" would always show new years, skipping boxing day
 - Change province urls to provinces to match API (so dumb that this happened)
 - download link/button has nicer calendar icon
 - add opengraph images
