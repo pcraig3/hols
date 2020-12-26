@@ -2,7 +2,8 @@ const express = require('express')
 const router = express.Router()
 const ics = require('ics')
 const createError = require('http-errors')
-const { dbmw, isProvinceId, getCurrentHolidayYear, param2query } = require('../utils/index')
+const { dbmw, isProvinceId, param2query } = require('../utils/index')
+const { getCurrentHolidayYear } = require('../dates/index')
 const { ALLOWED_YEARS } = require('../config/vars.config')
 const {
   startDate,
@@ -98,7 +99,7 @@ router.get(
 router.get('/ics/:provinceId(\\w{2})', (req, res) => {
   let provinceId = req.params.provinceId
   return isProvinceId(provinceId)
-    ? res.redirect(301, `/ics/${provinceId}/${getCurrentHolidayYear()}`)
+    ? res.redirect(301, `/ics/${provinceId}/${getCurrentHolidayYear(provinceId)}`)
     : res.redirect(`/provinces/${provinceId}`) // if bad province ID, redirect will be to a 404 page
 })
 

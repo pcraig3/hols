@@ -1,4 +1,4 @@
-const { getLiteralDate, getObservedDate } = require('../index')
+const { getLiteralDate, getObservedDate, getCurrentHolidayYear } = require('../index')
 
 describe('Test getLiteralDate', () => {
   describe('for 2019', () => {
@@ -208,5 +208,62 @@ describe('Test getObservedDate', () => {
         expect(getObservedDate(day.str, 2022)).toEqual(day.iso)
       })
     })
+  })
+})
+
+describe('Test getCurrentHolidayYear', () => {
+  const RealDate = Date
+
+  afterEach(() => {
+    global.Date = RealDate
+  })
+
+  const mockDate = (dateString) => {
+    global.Date.now = () => new Date(dateString)
+  }
+
+  test('returns the current year for 2019', () => {
+    mockDate('2019-01-01')
+    expect(getCurrentHolidayYear()).toEqual(2019)
+  })
+
+  test('returns the current year for 2020', () => {
+    mockDate('2020-01-01')
+    expect(getCurrentHolidayYear()).toEqual(2020)
+  })
+
+  test('returns 2019 for December 25th, 2019', () => {
+    mockDate('2019-12-25')
+    expect(getCurrentHolidayYear()).toEqual(2019)
+  })
+
+  test('returns 2020 for December 26th, 2019', () => {
+    mockDate('2019-12-26')
+    expect(getCurrentHolidayYear()).toEqual(2019)
+  })
+
+  test('returns 2020 for December 28th, 2020', () => {
+    mockDate('2020-12-28')
+    expect(getCurrentHolidayYear()).toEqual(2020)
+  })
+
+  test('returns 2021 for December 28th, 2020 for NB', () => {
+    mockDate('2020-12-28')
+    expect(getCurrentHolidayYear('NB')).toEqual(2021)
+  })
+
+  test('returns 2021 for December 28th, 2020 for ON', () => {
+    mockDate('2020-12-28')
+    expect(getCurrentHolidayYear('ON')).toEqual(2020)
+  })
+
+  test('returns 2021 for December 29th, 2020', () => {
+    mockDate('2020-12-29')
+    expect(getCurrentHolidayYear()).toEqual(2021)
+  })
+
+  test('returns 2020 for December 31st, 2019', () => {
+    mockDate('2019-12-31')
+    expect(getCurrentHolidayYear()).toEqual(2020)
   })
 })

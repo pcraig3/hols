@@ -3,8 +3,14 @@ const db = require('sqlite')
 const Promise = require('bluebird')
 const app = require('../../server.js')
 const { ALLOWED_YEARS } = require('../../config/vars.config')
+const { getCurrentHolidayYear } = require('../../dates')
 
 describe('Test ics responses', () => {
+  const currentYear = getCurrentHolidayYear()
+  const mockDate = (dateString) => {
+    global.Date.now = () => new Date(dateString)
+  }
+
   beforeAll(async () => {
     await Promise.resolve()
       // First, try to open the database
@@ -23,10 +29,27 @@ describe('Test ics responses', () => {
   noYearURLs.map((url) => {
     describe(`Test "${url}" response`, () => {
       test('it should return 301 with current year in domain', async () => {
+        mockDate(`${currentYear}-01-01`)
         const response = await request(app).get(url)
         expect(response.statusCode).toBe(301)
-        expect(response.headers.location).toBe(`${url}/2020`)
+        expect(response.headers.location).toBe(`${url}/${currentYear}`)
       })
+    })
+  })
+
+  describe('Test redirect responses before boxing day', () => {
+    test('it should return 301 with next year in domain before boxing day for AB', async () => {
+      mockDate('2020-12-27')
+      const response = await request(app).get('/ics/AB')
+      expect(response.statusCode).toBe(301)
+      expect(response.headers.location).toBe('/ics/AB/2021')
+    })
+
+    test('it should return 301 with current year in domain before boxing day for ON', async () => {
+      mockDate('2020-12-27')
+      const response = await request(app).get('/ics/ON')
+      expect(response.statusCode).toBe(301)
+      expect(response.headers.location).toBe('/ics/ON/2020')
     })
   })
 

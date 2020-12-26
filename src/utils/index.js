@@ -4,6 +4,7 @@ const htm = require('htm')
 const validator = require('validator')
 const createError = require('http-errors')
 const { ALLOWED_YEARS, PROVINCE_IDS } = require('../config/vars.config')
+const { getCurrentHolidayYear } = require('../dates')
 
 const html = htm.bind(h)
 
@@ -30,7 +31,8 @@ const dbmw = (cb) => {
       const year = parseInt(req.query.year)
 
       if (!ALLOWED_YEARS.includes(year)) {
-        return getCurrentHolidayYear()
+        const region = _parseFederal(req) ? 'federal' : req.params.provinceId
+        return getCurrentHolidayYear(region)
       }
 
       return year
@@ -100,7 +102,7 @@ const checkProvinceIdErr = (req, res, next) => {
 // middleware to redirect to permitted /:year endpoints for whitelisted query strings
 const checkRedirectYear = (req, res, next) => {
   const year = req.query.year && parseInt(req.query.year)
-  const GOOD_YEARS = ALLOWED_YEARS.filter((y) => y !== getCurrentHolidayYear())
+  const GOOD_YEARS = ALLOWED_YEARS.filter((y) => y !== getCurrentHolidayYear(req.params.provinceId))
 
   if (year && GOOD_YEARS.includes(year)) {
     return res.redirect(`${req.path === '/' ? '' : req.path}/${req.query.year}`)
@@ -109,15 +111,26 @@ const checkRedirectYear = (req, res, next) => {
   next()
 }
 
-// middleware to redirect current year to the not !/:year endpoint
-const checkRedirectIfCurrentYear = (req, res, next) => {
-  if (getCurrentHolidayYear() === parseInt(req.query.year)) {
-    let urlParts = req.path.split('/')
+/**
+ * Middleware to check if this page should have a canonical link
+ * If it is an error page, not a canonical link
+ * If the path includes the year and the year is the same as the currentYear, return the `/` domain (without the year)
+ * Otherwise, return the path
+ * @param {error} string errors thrown (like 500, 404, whatever)
+ * @param {path} string URL path after .ca. Minimum is "/"
+ * @param {provinceId} provinceId two letter acronym id of province. "undefined" if Canada or federal
+ * @param {year} int the year parameter passed into the URL string
+ */
+const getCanonical = ({ error, path, provinceId, year }) => {
+  if (error) return false
+
+  if (path.includes(year) && year === getCurrentHolidayYear(provinceId)) {
+    let urlParts = path.split('/')
     urlParts.pop()
-    return res.redirect(urlParts.join('/') || '/')
+    return urlParts.join('/') || '/'
   }
 
-  next()
+  return path
 }
 
 // middleware to copy a request parameter into req.query
@@ -210,20 +223,6 @@ const upcomingHolidays = (holidays, dateString) => {
   return holidays.filter((holiday) => holiday.observedDate >= dateString)
 }
 
-/**
- * This function returns the current year, except after December 26th it returns the next year
- */
-const getCurrentHolidayYear = () => {
-  const d = new Date(Date.now())
-
-  // return the next year if Dec 26 or later
-  if (d.getUTCMonth() === 11 && d.getUTCDate() >= 26) {
-    return d.getUTCFullYear() + 1
-  }
-
-  return d.getUTCFullYear()
-}
-
 const pe2pei = (provinceId) => (provinceId === 'PE' ? 'PEI' : provinceId)
 
 /**
@@ -254,11 +253,10 @@ module.exports = {
   checkProvinceIdErr,
   checkYearErr,
   checkRedirectYear,
-  checkRedirectIfCurrentYear,
+  getCanonical,
   param2query,
   nextHoliday,
   upcomingHolidays,
-  getCurrentHolidayYear,
   pe2pei,
   getProvinceIdOrFederalString,
 }
