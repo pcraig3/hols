@@ -8,14 +8,12 @@ const {
   checkProvinceIdErr,
   checkYearErr,
   checkRedirectYear,
-  checkRedirectIfCurrentYear,
   param2query,
   nextHoliday,
   pe2pei,
-  getCurrentHolidayYear,
 } = require('../utils')
 const { getProvinces, getHolidaysWithProvinces, getProvincesWithHolidays } = require('../queries')
-const { displayDate } = require('../dates')
+const { displayDate, getCurrentHolidayYear } = require('../dates')
 
 const getMeta = (holiday) => `${holiday.nameEn} on ${displayDate(holiday.observedDate)}`
 
@@ -48,7 +46,6 @@ router.get(
   '/:year(\\d{4})',
   param2query('year'),
   checkYearErr,
-  checkRedirectIfCurrentYear,
   dbmw(getHolidaysWithProvinces),
   (req, res) => {
     // if the year value isn't in ALLOWED_YEARS, it will be caught by "checkYearErr"
@@ -84,7 +81,6 @@ router.get(
   checkRedirectYear,
   dbmw(getProvincesWithHolidays),
   (req, res) => {
-    const year = getCurrentHolidayYear()
     const {
       holidays,
       nextHoliday,
@@ -93,6 +89,8 @@ router.get(
       sourceLink,
       sourceEn,
     } = res.locals.rows[0]
+
+    const year = getCurrentHolidayYear(provinceId)
 
     const meta = `${provinceName}’s next stat holiday is ${getMeta(nextHoliday)}. See all ${
       holidays.length
@@ -132,7 +130,6 @@ router.get(
   param2query('year'),
   checkProvinceIdErr,
   checkYearErr,
-  checkRedirectIfCurrentYear,
   dbmw(getProvincesWithHolidays),
   (req, res) => {
     // if the year value isn't in ALLOWED_YEARS, it will be caught by "checkYearErr"
@@ -183,7 +180,7 @@ const federalSource = {
 }
 
 router.get('/federal', checkRedirectYear, dbmw(getHolidaysWithProvinces), (req, res) => {
-  const year = getCurrentHolidayYear()
+  const year = getCurrentHolidayYear('federal')
   const holidays = res.locals.rows
   const nextHol = nextHoliday(holidays)
 
@@ -219,7 +216,6 @@ router.get(
   '/federal/:year(\\d{4})',
   param2query('year'),
   checkYearErr,
-  checkRedirectIfCurrentYear,
   dbmw(getHolidaysWithProvinces),
   (req, res) => {
     // if the year value isn't in ALLOWED_YEARS, it will be caught by "checkYearErr"
@@ -252,7 +248,7 @@ router.get('/provinces', dbmw(getProvinces), (req, res) => {
       pageComponent: 'Provinces',
       title: 'All regions in Canada — Canada Holidays',
       docProps: {
-        meta: `Upcoming stat holidays for all regions in Canada. See all federal statutory holidays in Canada in ${getCurrentHolidayYear()}.`,
+        meta: 'Upcoming stat holidays for all regions in Canada.',
         path: req.path,
       },
       props: { data: { provinces: res.locals.rows } },

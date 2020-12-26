@@ -4,11 +4,16 @@ const Promise = require('bluebird')
 const app = require('../../server.js')
 const cheerio = require('cheerio')
 const { ALLOWED_YEARS } = require('../../config/vars.config')
-const { getCurrentHolidayYear } = require('../../utils')
+const { getCurrentHolidayYear } = require('../../dates')
 
 describe('Test ui responses', () => {
   const currentYear = getCurrentHolidayYear()
   const nextYear = currentYear + 1
+
+  const mockDate = (dateString) => {
+    global.Date.now = () => new Date(dateString)
+  }
+
   const GOOD_YEARS = ALLOWED_YEARS.filter((y) => y !== currentYear)
 
   beforeAll(async () => {
@@ -80,7 +85,7 @@ describe('Test ui responses', () => {
         expect($('h1').text()).toEqual('All regions in Canada')
         expect($('title').text()).toEqual('All regions in Canada — Canada Holidays')
         expect($('meta[name="description"]').attr('content')).toEqual(
-          `Upcoming stat holidays for all regions in Canada. See all federal statutory holidays in Canada in ${currentYear}.`,
+          'Upcoming stat holidays for all regions in Canada.',
         )
         expect($('link[rel="canonical"]').attr('href')).toEqual(
           'https://canada-holidays.ca/provinces',
@@ -185,17 +190,18 @@ describe('Test ui responses', () => {
       })
 
       test('it should return the h1, title, meta tag, and canonical response', async () => {
+        const currentYearMB = getCurrentHolidayYear('MB')
         const response = await request(app).get('/provinces/MB')
         const $ = cheerio.load(response.text)
         expect($('h1 .visible').text()).toMatch(/^Manitoba’s next holiday\u00a0is/)
         expect($('title').text()).toEqual(
-          `Manitoba (MB) statutory holidays in ${currentYear} — Canada Holidays`,
+          `Manitoba (MB) statutory holidays in ${currentYearMB} — Canada Holidays`,
         )
         expect($('meta[name="description"]').attr('content')).toMatch(
           /^Manitoba’s next stat holiday is/,
         )
         const regex = new RegExp(
-          `See all \\d{1,2} statutory holidays in Manitoba, Canada in ${currentYear}`,
+          `See all \\d{1,2} statutory holidays in Manitoba, Canada in ${currentYearMB}`,
         )
         expect($('meta[name="description"]').attr('content')).toMatch(regex)
         expect($('link[rel="canonical"]').attr('href')).toEqual(
@@ -219,19 +225,20 @@ describe('Test ui responses', () => {
     })
 
     describe('Test /provinces/:provinceId/:year responses', () => {
-      test('it should return the h1, title, meta tag, and canonical link for MB in 2021', async () => {
-        const response = await request(app).get(`/provinces/MB/${nextYear}`)
+      test('it should return the h1, title, meta tag, and canonical link for MB next year', async () => {
+        const nextYearMB = getCurrentHolidayYear('MB') + 1
+        const response = await request(app).get(`/provinces/MB/${nextYearMB}`)
         const $ = cheerio.load(response.text)
-        expect($('h1').text()).toEqual(`Manitobastatutory Holidays in ${nextYear}`)
+        expect($('h1').text()).toEqual(`Manitobastatutory Holidays in ${nextYearMB}`)
         expect($('title').text()).toEqual(
-          `Manitoba (MB) statutory holidays in ${nextYear} — Canada Holidays`,
+          `Manitoba (MB) statutory holidays in ${nextYearMB} — Canada Holidays`,
         )
         const regex = new RegExp(
-          `See all \\d{1,2} statutory holidays in Manitoba, Canada in ${nextYear}`,
+          `See all \\d{1,2} statutory holidays in Manitoba, Canada in ${nextYearMB}`,
         )
         expect($('meta[name="description"]').attr('content')).toMatch(regex)
         expect($('link[rel="canonical"]').attr('href')).toEqual(
-          `https://canada-holidays.ca/provinces/MB/${nextYear}`,
+          `https://canada-holidays.ca/provinces/MB/${nextYearMB}`,
         )
       })
     })
@@ -273,7 +280,7 @@ describe('Test ui responses', () => {
     })
 
     describe('Test /*/:year responses', () => {
-      const URLS = ['', '/federal', '/provinces/MB']
+      const URLS = ['', '/federal', '/provinces/ON']
       URLS.map((url) => {
         describe('for a good year', () => {
           GOOD_YEARS.map((year) => {
@@ -285,8 +292,12 @@ describe('Test ui responses', () => {
 
           test(`it should return 302 to the province page for url: "${url}" and current year: "${currentYear}"`, async () => {
             const response = await request(app).get(`${url}/${currentYear}`)
-            expect(response.statusCode).toBe(302)
-            expect(response.headers.location).toEqual(url || '/')
+            expect(response.statusCode).toBe(200)
+
+            const $ = cheerio.load(response.text)
+            expect($('link[rel="canonical"]').attr('href')).toEqual(
+              `https://canada-holidays.ca${url || '/'}`,
+            )
           })
         })
 
@@ -332,7 +343,7 @@ describe('Test ui responses', () => {
               expect(response.statusCode).toBe(200)
               const $ = cheerio.load(response.text)
               expect($('h1').text()).toMatch(
-                /^(Manitoba|Canada)’s next (?:federal\s)*statutory holiday/,
+                /^(Ontario|Canada)’s next (?:federal\s)*statutory holiday/,
               )
             })
           })
@@ -342,7 +353,7 @@ describe('Test ui responses', () => {
             expect(response.statusCode).toBe(200)
             const $ = cheerio.load(response.text)
             expect($('h1').text()).toMatch(
-              /^(Manitoba|Canada)’s next (?:federal\s)*statutory holiday/,
+              /^(Ontario|Canada)’s next (?:federal\s)*statutory holiday/,
             )
           })
 
@@ -352,6 +363,46 @@ describe('Test ui responses', () => {
               expect(response.statusCode).toBe(302)
               expect(response.headers.location).toEqual(`${url}/${year}`)
             })
+          })
+        })
+      })
+
+      describe('for current year in a province without Boxing Day', () => {
+        const url = '/provinces/MB'
+        mockDate('2020-12-28')
+
+        test(`it should return 200 for url: "${url}" and year: "2020"`, async () => {
+          const response = await request(app).get(`${url}/2020`)
+          expect(response.statusCode).toBe(200)
+          const $ = cheerio.load(response.text)
+          expect($('link[rel="canonical"]').attr('href')).toEqual(
+            'https://canada-holidays.ca/provinces/MB/2020',
+          )
+        })
+
+        test(`it should return 200 to the province page for url: "${url}" and year: "2021"`, async () => {
+          const response = await request(app).get(`${url}/2021`)
+          expect(response.statusCode).toBe(200)
+          const $ = cheerio.load(response.text)
+          expect($('link[rel="canonical"]').attr('href')).toEqual(
+            'https://canada-holidays.ca/provinces/MB',
+          )
+        })
+
+        describe('with "year" query params', () => {
+          test(`it should return 200 for url: "${url}" and next year query param: "2021"`, async () => {
+            const response = await request(app).get(`${url}?year=2021`)
+            expect(response.statusCode).toBe(200)
+            const $ = cheerio.load(response.text)
+            expect($('h1').text()).toMatch(
+              /^(Manitoba|Canada)’s next (?:federal\s)*statutory holiday/,
+            )
+          })
+
+          test(`it should return 302 for url: "${url}" and current year query param: "2020"`, async () => {
+            const response = await request(app).get(`${url}?year=2020`)
+            expect(response.statusCode).toBe(302)
+            expect(response.headers.location).toEqual(`${url}/2020`)
           })
         })
       })
