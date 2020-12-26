@@ -4,7 +4,7 @@ const Promise = require('bluebird')
 const app = require('../../server.js')
 const cheerio = require('cheerio')
 const { ALLOWED_YEARS } = require('../../config/vars.config')
-const { getCurrentHolidayYear } = require('../../utils')
+const { getCurrentHolidayYear } = require('../../dates')
 
 describe('Test /api responses', () => {
   beforeAll(async () => {
@@ -185,7 +185,7 @@ describe('Test /api responses', () => {
       }
 
       const year = new Date(Date.now()).getUTCFullYear()
-      if (year === getCurrentHolidayYear()) expected['nextHoliday'] = expect.any(Object)
+      if (year === getCurrentHolidayYear('NB')) expected['nextHoliday'] = expect.any(Object)
 
       expect(province).toMatchObject(expected)
     })

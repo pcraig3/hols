@@ -5,6 +5,8 @@ const addDays = require('date-fns/addDays')
 const getISODay = require('date-fns/getISODay')
 const differenceInDays = require('date-fns/differenceInDays')
 const startOfDay = require('date-fns/startOfDay')
+const isAfter = require('date-fns/isAfter')
+
 const formatDistance = require('date-fns/formatDistance')
 
 const _getISODayInt = (weekday) => {
@@ -161,11 +163,17 @@ const relativeDate = (dateString) => {
 /**
  * This function returns the current year, except after December 26th it returns the next year
  */
-const getCurrentHolidayYear = () => {
+const getCurrentHolidayYear = (region = undefined) => {
   const d = new Date(Date.now())
+  const regions = [undefined, 'federal', 'NL', 'ON']
+  let lastObservedHoliday
 
-  // return the next year if Dec 26 or later
-  if (d.getUTCMonth() === 11 && d.getUTCDate() >= 26) {
+  lastObservedHoliday = regions.includes(region)
+    ? getObservedDate('December 26') // Boxing day
+    : getObservedDate('December 25') // Christmas day
+
+  // return the next year if after Boxing day
+  if (isAfter(d, Sugar.Date.create(lastObservedHoliday))) {
     return d.getUTCFullYear() + 1
   }
 
