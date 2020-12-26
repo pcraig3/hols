@@ -1,6 +1,6 @@
 const { renderStylesToString } = require('@emotion/server')
 const render = require('preact-render-to-string')
-const { html, metaIfSHA, getOgImagePath } = require('../utils')
+const { html, metaIfSHA, getOgImagePath, getCanonical } = require('../utils')
 const { breadcrumb, dataset, speakable } = require('../utils/richSnippets')
 const { theme, visuallyHidden } = require('../styles')
 const { fontStyles, printStyles, ga } = require('../headStyles')
@@ -18,7 +18,16 @@ const document = ({
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta name="description" content="${meta ? meta : 'Upcoming statutory holidays in Canada'}">
-        ${!error ? `<link rel="canonical" href="https://canada-holidays.ca${path}" />` : ''}
+        ${
+          getCanonical({ error, path, provinceId: id, year })
+            ? `<link rel="canonical" href="https://canada-holidays.ca${getCanonical({
+                error,
+                path,
+                provinceId: id,
+                year,
+              })}" />`
+            : ''
+        }
 
         <!-- open graph tags -->
         <meta property="og:type" content="website" />

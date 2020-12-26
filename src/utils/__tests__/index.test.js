@@ -2,7 +2,7 @@ const {
   array2Obj,
   nextHoliday,
   upcomingHolidays,
-  getCurrentHolidayYear,
+  getCanonical,
   isProvinceId,
   pe2pei,
   getProvinceIdOrFederalString,
@@ -165,5 +165,54 @@ describe('Test getProvinceIdOrFederalString', () => {
 
   test('returns the provinceID for a provinceID and federal', () => {
     expect(getProvinceIdOrFederalString({ provinceId: 'ON', federal: true })).toEqual('ON')
+  })
+})
+
+describe('Test getCanonical', () => {
+  const mockDate = (dateString) => {
+    global.Date.now = () => new Date(dateString)
+  }
+
+  test('returns path for no parameters', () => {
+    expect(getCanonical({ path: '/' })).toBe('/')
+  })
+
+  test('returns false for error', () => {
+    expect(getCanonical({ error: true, path: '/' })).toBe(false)
+  })
+
+  test('returns path for not currentYear', () => {
+    mockDate('2020-01-01')
+    expect(getCanonical({ year: 2019, path: '/2019' })).toBe('/2019')
+  })
+
+  test('returns path with NO year for currentYear', () => {
+    mockDate('2020-01-01')
+    expect(getCanonical({ year: 2020, path: '/2020' })).toBe('/')
+  })
+
+  test('returns path with year for currentYear after Boxing Day', () => {
+    mockDate('2020-12-30')
+    expect(getCanonical({ year: 2020, path: '/2020' })).toBe('/2020')
+  })
+
+  test('returns path with NO year for currentYear on Boxing Day', () => {
+    mockDate('2020-12-28')
+    expect(getCanonical({ year: 2020, path: '/2020', provinceId: 'ON' })).toBe('/')
+  })
+
+  test('returns path with NO year for currentYear on Boxing Day for province WITH Boxing Day', () => {
+    mockDate('2020-12-28')
+    expect(getCanonical({ year: 2020, path: '/2020', provinceId: 'ON' })).toBe('/')
+  })
+
+  test('returns path with year for currentYear before Boxing Day for province WITHOUT Boxing Day', () => {
+    mockDate('2020-12-28')
+    expect(getCanonical({ year: 2020, path: '/2020', provinceId: 'AB' })).toBe('/2020')
+  })
+
+  test('returns path with NO year for next year for province WITHOUT Boxing Day', () => {
+    mockDate('2020-12-28')
+    expect(getCanonical({ year: 2021, path: '/2021', provinceId: 'AB' })).toBe('/')
   })
 })
