@@ -1,6 +1,7 @@
 const Sugar = require('sugar-date')
 const easterDay = require('@jsbits/easter-day')
 const format = require('date-fns/format')
+const addHours = require('date-fns/addHours')
 const addDays = require('date-fns/addDays')
 const getISODay = require('date-fns/getISODay')
 const differenceInDays = require('date-fns/differenceInDays')
@@ -172,8 +173,10 @@ const getCurrentHolidayYear = (region = undefined) => {
     ? getObservedDate('December 26') // Boxing day
     : getObservedDate('December 25') // Christmas day
 
+  lastObservedHoliday = addHours(Sugar.Date.create(lastObservedHoliday), 23)
+
   // return the next year if after Boxing day
-  if (isAfter(d, Sugar.Date.create(lastObservedHoliday))) {
+  if (isAfter(d, lastObservedHoliday)) {
     return d.getUTCFullYear() + 1
   }
 
