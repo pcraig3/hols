@@ -10,10 +10,6 @@ describe('Test ui responses', () => {
   const currentYear = getCurrentHolidayYear()
   const nextYear = currentYear + 1
 
-  const mockDate = (dateString) => {
-    global.Date.now = () => new Date(dateString)
-  }
-
   const GOOD_YEARS = ALLOWED_YEARS.filter((y) => y !== currentYear)
 
   beforeAll(async () => {
@@ -363,46 +359,6 @@ describe('Test ui responses', () => {
               expect(response.statusCode).toBe(302)
               expect(response.headers.location).toEqual(`${url}/${year}`)
             })
-          })
-        })
-      })
-
-      describe('for current year in a province without Boxing Day', () => {
-        const url = '/provinces/MB'
-        mockDate('2020-12-28')
-
-        test(`it should return 200 for url: "${url}" and year: "2020"`, async () => {
-          const response = await request(app).get(`${url}/2020`)
-          expect(response.statusCode).toBe(200)
-          const $ = cheerio.load(response.text)
-          expect($('link[rel="canonical"]').attr('href')).toEqual(
-            'https://canada-holidays.ca/provinces/MB/2020',
-          )
-        })
-
-        test(`it should return 200 to the province page for url: "${url}" and year: "2021"`, async () => {
-          const response = await request(app).get(`${url}/2021`)
-          expect(response.statusCode).toBe(200)
-          const $ = cheerio.load(response.text)
-          expect($('link[rel="canonical"]').attr('href')).toEqual(
-            'https://canada-holidays.ca/provinces/MB',
-          )
-        })
-
-        describe('with "year" query params', () => {
-          test(`it should return 200 for url: "${url}" and next year query param: "2021"`, async () => {
-            const response = await request(app).get(`${url}?year=2021`)
-            expect(response.statusCode).toBe(200)
-            const $ = cheerio.load(response.text)
-            expect($('h1').text()).toMatch(
-              /^(Manitoba|Canada)’s next (?:federal\s)*statutory holiday/,
-            )
-          })
-
-          test(`it should return 302 for url: "${url}" and current year query param: "2020"`, async () => {
-            const response = await request(app).get(`${url}?year=2020`)
-            expect(response.statusCode).toBe(302)
-            expect(response.headers.location).toEqual(`${url}/2020`)
           })
         })
       })

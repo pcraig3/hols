@@ -132,6 +132,12 @@ describe('Test getProvinceIdOrFederalString', () => {
 })
 
 describe('Test getCanonical', () => {
+  const RealDate = Date
+
+  afterEach(() => {
+    global.Date = RealDate
+  })
+
   const mockDate = (dateString) => {
     global.Date.now = () => new Date(dateString)
   }

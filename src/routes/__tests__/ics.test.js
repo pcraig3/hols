@@ -6,10 +6,17 @@ const { ALLOWED_YEARS } = require('../../config/vars.config')
 const { getCurrentHolidayYear } = require('../../dates')
 
 describe('Test ics responses', () => {
-  const currentYear = getCurrentHolidayYear()
+  const RealDate = Date
+
+  afterEach(() => {
+    global.Date = RealDate
+  })
+
   const mockDate = (dateString) => {
     global.Date.now = () => new Date(dateString)
   }
+
+  const currentYear = getCurrentHolidayYear()
 
   beforeAll(async () => {
     await Promise.resolve()

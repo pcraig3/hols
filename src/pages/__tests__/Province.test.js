@@ -1,6 +1,7 @@
 const render = require('preact-render-to-string')
 const cheerio = require('cheerio')
 const { html } = require('../../utils')
+const { getCurrentHolidayYear } = require('../../dates')
 
 const Province = require('../Province.js')
 
@@ -8,7 +9,7 @@ const getProvince = () => {
   return { id: 'NL', nameEn: 'Newfoundland and Labrador' }
 }
 
-const getNextHoliday = (year = 2020) => {
+const getNextHoliday = (year = getCurrentHolidayYear()) => {
   return {
     id: 27,
     observedDate: `${year}-12-28`,
@@ -48,7 +49,7 @@ describe('Province page', () => {
     const $ = renderPage()
     expect($('h2#holidays-table').text()).toBe('Canada statutory holidays in 2020')
     expect($('#next-holiday-row').text()).toBe(
-      ' December 28, Monday Boxing Day Federal holiday, NL ',
+      ' December 28, Tuesday Boxing Day Federal holiday, NL ',
     )
   })
 
