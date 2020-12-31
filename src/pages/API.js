@@ -51,7 +51,7 @@ const API = () =>
           <li>Get upcoming (“next”) holiday for each region</li>
           <li>
             Get holidays for multiple years: <code>2018</code>, <code>2019</code>,${' '}
-            <code>2020</code>, <code>2021</code>, <code>2022</code>.
+            <code>2020</code>, <code>2021</code>, <code>2022</code>, <code>2023</code>.
           </li>
         </ul>
         <${Details}

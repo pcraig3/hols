@@ -5,7 +5,22 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
+## [3.1.1] - 2020-12-27
+
+### Updated
+
+- Date comparison adjusts for the end of the day (UTC) before deciding whether today is still a holiday
+
+## [3.1.0] - 2020-12-26
+
+### Added
+
+- Remove redirects for "current year"
+  - Adjust canonical tags though: we want current year pages to point to the yearless links
+
+### Updated
+
+- Calculate end of the year differently for different provinces (depends on boxing day)
 
 ## [3.0.0] - 2020-11-17
 

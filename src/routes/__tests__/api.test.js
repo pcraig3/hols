@@ -264,7 +264,7 @@ describe('Test /api responses', () => {
         })
       })
 
-      let badYears = ['2017', '2023', '1', null, undefined, false, 'orange', 'christmas']
+      let badYears = ['2017', '2024', '1', null, undefined, false, 'orange', 'christmas']
       badYears.map((year) => {
         test(`"${year}" it should return 400 with an error message`, async () => {
           const response = await request(app).get(`/api/v1/holidays?year=${year}`)
@@ -272,7 +272,7 @@ describe('Test /api responses', () => {
 
           let { error } = JSON.parse(response.text)
           expect(error.message).toMatch(
-            /^Bad Request: request.query.year should be (integer|>= 2018|<= 2022)/,
+            /^Bad Request: request.query.year should be (integer|>= 2018|<= 2023)/,
           )
         })
       })
@@ -288,11 +288,11 @@ describe('Test /api responses', () => {
 
       expect(holiday).toMatchObject({
         id: 27,
-        date: '2020-12-26',
+        date: '2021-12-26',
         nameEn: 'Boxing Day',
         nameFr: 'Lendemain de Noël',
         federal: 1,
-        observedDate: '2020-12-28',
+        observedDate: '2021-12-28',
         provinces: expect.any(Array),
       })
     })
@@ -322,7 +322,7 @@ describe('Test /api responses', () => {
         })
       })
 
-      let badYears = ['2017', '2023', '1', null, undefined, false, 'orange', 'christmas']
+      let badYears = ['2017', '2024', '1', null, undefined, false, 'orange', 'christmas']
       badYears.map((year) => {
         test(`"${year}" it should return 400 with an error message`, async () => {
           const response = await request(app).get(`/api/v1/holidays?year=${year}`)
@@ -330,7 +330,7 @@ describe('Test /api responses', () => {
 
           let { error } = JSON.parse(response.text)
           expect(error.message).toMatch(
-            /^Bad Request: request.query.year should be (integer|>= 2018|<= 2022)/,
+            /^Bad Request: request.query.year should be (integer|>= 2018|<= 2023)/,
           )
         })
       })
