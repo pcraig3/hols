@@ -149,7 +149,7 @@ INSERT INTO ProvinceHoliday (holidayId, provinceId) VALUES ((SELECT id FROM Holi
 INSERT INTO ProvinceHoliday (holidayId, provinceId) VALUES ((SELECT id FROM Holiday WHERE (date = 'June 21' AND nameEn = 'National Indigenous Peoples Day')), 'NT');
 INSERT INTO ProvinceHoliday (holidayId, provinceId) VALUES ((SELECT id FROM Holiday WHERE (date = 'June 21' AND nameEn = 'National Indigenous Peoples Day')), 'YT');
 
-INSERT INTO ProvinceHoliday (holidayId, provinceId) VALUES ((SELECT id FROM Holiday WHERE (date = 'Monday June 24' AND nameEn = 'Discovery Day')), 'NL');
+INSERT INTO ProvinceHoliday (holidayId, provinceId) VALUES ((SELECT id FROM Holiday WHERE (date = 'Monday after June 24' AND nameEn = 'Discovery Day')), 'NL');
 
 INSERT INTO ProvinceHoliday (holidayId, provinceId) VALUES ((SELECT id FROM Holiday WHERE (date = 'June 24' AND nameEn = 'Saint-Jean-Baptiste Day')), 'QC');
 
