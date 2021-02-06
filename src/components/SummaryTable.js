@@ -44,6 +44,10 @@ const summaryRow = css`
   .key {
     font-weight: 700;
     margin-bottom: ${theme.space.xs};
+
+    summary ~ * {
+      font-weight: 400;
+    }
   }
 
   .value {
