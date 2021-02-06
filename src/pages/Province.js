@@ -3,12 +3,13 @@ const { html, pe2pei, getProvinceIdOrFederalString } = require('../utils')
 const { theme, horizontalPadding, insideContainer } = require('../styles')
 const { ALLOWED_YEARS } = require('../config/vars.config')
 const Layout = require('../components/Layout.js')
-const DateHtml = require('../components/DateHtml.js')
 const NextHolidayBox = require('../components/NextHolidayBox.js')
 const ProvincePicker = require('../components/ProvincePicker.js')
 const SummaryTable = require('../components/SummaryTable.js')
 const CalButton = require('../components/CalButton.js')
 const NextYearLink = require('../components/NextYearLink.js')
+const ObservedDateKey = require('../components/ObservedDateKey')
+
 const { External } = require('../components/Svg.js')
 
 const styles = ({ accent = theme.color.red } = {}) => css`
@@ -45,6 +46,28 @@ const styles = ({ accent = theme.color.red } = {}) => css`
 
     .bottom-link:last-of-type {
       margin-right: ${theme.space.md};
+    }
+  }
+
+  details {
+    font-size: 1em;
+    margin-top: 0;
+
+    summary {
+      &:focus,
+      &:hover {
+        > span {
+          border-bottom: 3px solid ${accent};
+
+          @media (${theme.mq.md}) {
+            border-bottom: 5px solid ${accent};
+          }
+        }
+      }
+    }
+
+    summary ~ * {
+      color: ${theme.color.grey};
     }
   }
 `
@@ -136,7 +159,7 @@ const createRows = (holidays, federal, isCurrentYear) => {
 
   return holidays.map((holiday) => {
     const row = {
-      key: html` <${DateHtml} dateString=${holiday.observedDate} weekday=${true} //> `,
+      key: html`<${ObservedDateKey} holiday=${holiday} />`,
       value: holiday.nameEn,
       className: '',
     }

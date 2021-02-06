@@ -13,6 +13,7 @@ const getNextHoliday = (year = getCurrentHolidayYear()) => {
   return {
     id: 27,
     observedDate: `${year}-12-28`,
+    date: `${year}-12-26`,
     nameEn: 'Boxing Day',
     federal: 1,
     provinces: [getProvince()],
@@ -49,7 +50,7 @@ describe('Province page', () => {
     const $ = renderPage()
     expect($('h2#holidays-table').text()).toBe('Canada statutory holidays in 2020')
     expect($('#next-holiday-row').text()).toBe(
-      ' December 28, Tuesday Boxing Day Federal holiday, NL ',
+      'December 26, SundayObserved: December 28, TuesdayBecause Christmas is observed on Monday, Boxing Day is pushed to the following Tuesday.Boxing Day Federal holiday, NL ',
     )
   })
 
