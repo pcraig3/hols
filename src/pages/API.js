@@ -123,7 +123,7 @@ const API = () =>
           I’ve collected references to${' '}<a href="/sources">all the sources</a>${' '}I’m using
           for each region in Canada, so data returned from the API should all be accurate.
         </p>
-        <p>Mistaeks do happen, however — <a href="/feedback">lemme know</a> if you spot any.<//>
+        <p>Mistakes do happen, however — <a href="/feedback">lemme know</a> if you spot any.<//>
 
         <br />
         <br />
