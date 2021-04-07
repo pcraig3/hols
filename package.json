@@ -6,7 +6,7 @@
   "author": "pcraig3",
   "license": "MIT",
   "engines": {
-    "node": ">=10.21"
+    "node": ">=12"
   },
   "repository": {
     "type": "git",
