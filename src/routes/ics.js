@@ -21,8 +21,8 @@ const { getHolidaysWithProvinces } = require('../queries')
  */
 const formatNationalEvent = (holiday) => {
   return {
-    start: startDate(holiday.observedDate),
-    end: endDate(holiday.observedDate),
+    start: startDate(holiday.date),
+    end: endDate(holiday.date),
     title: getTitle(holiday),
     description: getNationalDescription(holiday),
     productId: '-//pcraig3//hols//EN',
@@ -36,8 +36,8 @@ const formatNationalEvent = (holiday) => {
  */
 const formatProvinceEvent = (holiday) => {
   return {
-    start: startDate(holiday.observedDate),
-    end: endDate(holiday.observedDate),
+    start: startDate(holiday.date),
+    end: endDate(holiday.date),
     title: holiday.nameEn,
     description: getProvinceDescription(holiday),
     productId: '-//pcraig3//hols//EN',
