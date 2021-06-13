@@ -10,26 +10,26 @@ const {
 describe('Test startDate', () => {
   test('Returns [1979, 11, 07] for 1979-11-07', () => {
     const dateString = '1979-11-07'
-    expect(startDate(dateString)).toEqual(['1979', '11', '07'])
+    expect(startDate(dateString)).toEqual([1979, 11, 7])
   })
 })
 
 describe('Test endDate', () => {
   test('Returns [1979, 11, 08] for 1979-11-07', () => {
     const dateString = '1979-11-07'
-    expect(endDate(dateString)).toEqual(['1979', '11', '08'])
+    expect(endDate(dateString)).toEqual([1979, 11, 8])
   })
 
   // test month
   test('Returns [1979, 12, 01] for 1979-11-30', () => {
     const dateString = '1979-11-30'
-    expect(endDate(dateString)).toEqual(['1979', '12', '01'])
+    expect(endDate(dateString)).toEqual([1979, 12, 1])
   })
 
   // test year
   test('Returns [1980, 01, 01] for 1979-12-31', () => {
     const dateString = '1979-12-31'
-    expect(endDate(dateString)).toEqual(['1980', '01', '01'])
+    expect(endDate(dateString)).toEqual([1980, 1, 1])
   })
 })
 

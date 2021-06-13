@@ -2,17 +2,22 @@ const addDays = require('date-fns/addDays')
 const crypto = require('crypto')
 
 /**
- * Takes an ISO-formatted date string (1990-10-08), and returns an array with [year, month, day]
+ * Takes an ISO-formatted date string (1990-10-08), and returns an array with [year, month, day] as integers
  * @param {string} dateString an ISO-formatted date string (1990-10-08)
  */
-const startDate = (dateString) => dateString.split('-')
+const startDate = (dateString) =>
+  dateString.split('-').map((dateSegment) => parseInt(dateSegment, 10))
 
 /**
- * Takes an ISO-formatted date string (1990-10-08), and returns an array with the [year, month, day] of the NEXT day
+ * Takes an ISO-formatted date string (1990-10-08), and returns an array with the [year, month, day] of the NEXT day as integers
  * @param {*} dateString an ISO-formatted date string (1990-10-08)
  */
 const endDate = (dateString) =>
-  addDays(new Date(dateString), 1).toISOString().substring(0, 10).split('-')
+  addDays(new Date(dateString), 1)
+    .toISOString()
+    .substring(0, 10)
+    .split('-')
+    .map((dateSegment) => parseInt(dateSegment, 10))
 
 /**
  * Returns a title string from a holiday obj to use for .ics files
