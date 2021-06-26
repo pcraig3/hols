@@ -8,6 +8,9 @@
 
 # DONE
 
+- add Truth and Reconciliation day
+  - to API and frontend
+  - not for previous years
 - add 2023
 - bug: boxing day was causing problems
   - showing "next holidays" would always show new years, skipping boxing day

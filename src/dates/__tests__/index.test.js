@@ -81,6 +81,7 @@ describe('Test getLiteralDate', () => {
       { str: 'Third Monday in August', iso: '2021-08-16' },
       { str: 'Third Friday in August', iso: '2021-08-20' },
       { str: 'First Monday in September', iso: '2021-09-06' },
+      { str: 'September 30', iso: '2021-09-30' },
       { str: 'Second Monday in October', iso: '2021-10-11' },
       { str: 'November 11', iso: '2021-11-11' },
       { str: 'December 25', iso: '2021-12-25' },
@@ -180,6 +181,7 @@ describe('Test getObservedDate', () => {
       { str: 'Third Monday in August', iso: '2021-08-16' },
       { str: 'Third Friday in August', iso: '2021-08-20' },
       { str: 'First Monday in September', iso: '2021-09-06' },
+      { str: 'September 30', iso: '2021-09-30' },
       { str: 'Second Monday in October', iso: '2021-10-11' },
       { str: 'November 11', iso: '2021-11-11' },
       { str: 'December 25', iso: '2021-12-27' },
@@ -228,6 +230,7 @@ describe('Test getObservedDate', () => {
       { str: 'Third Monday in August', iso: '2023-08-21' },
       { str: 'Third Friday in August', iso: '2023-08-18' },
       { str: 'First Monday in September', iso: '2023-09-04' },
+      { str: 'September 30', iso: '2023-10-02' },
       { str: 'Second Monday in October', iso: '2023-10-09' },
       { str: 'November 11', iso: '2023-11-13' },
       { str: 'December 25', iso: '2023-12-25' },
@@ -288,6 +291,7 @@ describe('Test getCurrentHolidayYear', () => {
     expect(getCurrentHolidayYear('ON')).toEqual(2020)
   })
 
+  // pretty sure this test is being skipped because it depends what time of day you run it
   test.skip('returns 2021 for December 29th, 2020', () => {
     mockDate('2020-12-29')
     expect(getCurrentHolidayYear()).toEqual(2020)
