@@ -33,7 +33,7 @@
     "cors": "^2.8.5",
     "date-fns": "^2.22.1",
     "express": "^4.17.1",
-    "express-openapi-validator": "^4.12.11",
+    "express-openapi-validator": "^4.12.14",
     "helmet": "^4.6.0",
     "htm": "^3.0.4",
     "http-errors": "^1.8.0",
@@ -49,9 +49,9 @@
   },
   "devDependencies": {
     "cheerio": "^1.0.0-rc.9",
-    "eslint": "^7.28.0",
+    "eslint": "^7.29.0",
     "eslint-plugin-jest": "^24.3.6",
-    "jest": "^27.0.4",
+    "jest": "^27.0.5",
     "nodemon": "^2.0.7",
     "supertest": "^6.1.3"
   }
