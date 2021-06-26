@@ -279,15 +279,44 @@ describe('Test /api responses', () => {
     })
   })
 
+  describe('with firstOccurence ?years=', () => {
+    let validYears = [2021, 2022]
+    validYears.map((year) => {
+      test(`it should return Truth and Reconciliation Day for ${year}`, async () => {
+        const response = await request(app).get(`/api/v1/holidays?year=${year}`)
+        expect(response.statusCode).toBe(200)
+
+        let { holidays } = JSON.parse(response.text)
+
+        const h = holidays.find((holiday) => holiday.nameEn === 'National Day for Truth and Reconciliation' )
+        expect(h.nameEn).toMatch('National Day for Truth and Reconciliation')
+      })
+    })
+
+    let invalidYears = [2020, 2019]
+    invalidYears.map((year) => {
+      test(`it should NOT return Truth and Reconciliation Day for ${year}`, async () => {
+        const response = await request(app).get(`/api/v1/holidays?year=${year}`)
+        expect(response.statusCode).toBe(200)
+
+        let { holidays } = JSON.parse(response.text)
+
+        const h = holidays.find((holiday) => holiday.nameEn === 'National Day for Truth and Reconciliation' )
+        expect(h).toBeUndefined()
+      })
+    })
+  })
+
+
   describe('for /api/v1/holidays/:holidayId path', () => {
     test('it should return a holiday for a good ID', async () => {
-      const response = await request(app).get('/api/v1/holidays/27')
+      const response = await request(app).get('/api/v1/holidays/28')
       expect(response.statusCode).toBe(200)
 
       let { holiday } = JSON.parse(response.text)
 
       expect(holiday).toMatchObject({
-        id: 27,
+        id: 28,
         date: '2021-12-26',
         nameEn: 'Boxing Day',
         nameFr: 'Lendemain de Noël',

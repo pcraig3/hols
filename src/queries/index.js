@@ -52,10 +52,16 @@ const getHolidays = async (db, { holidayId, federal, year }) => {
     holidays = await _getHolidays(db)
   }
 
-  return holidays.map((holiday) => {
+  return holidays.filter((holiday) => {
+    // filter out holidays that didn't used to exist (truth and reconciliation days)
+    const { firstOccurence } = holiday
+    return firstOccurence ? parseInt(firstOccurence) <= year : true
+  }).map((holiday) => {
+    // format output for API
     const dateString = holiday.date
     holiday.date = getLiteralDate(dateString, year)
     holiday.observedDate = getObservedDate(dateString, year)
+    delete holiday.firstOccurence
     return holiday
   })
 }
