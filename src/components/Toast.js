@@ -9,7 +9,7 @@ const styles = css`
   position: fixed;
   width: 100%;
   font-size: 90%;
-  bottom: -110px;
+  bottom: -150px;
   transition: bottom .8s ease;
 
   &.show {
@@ -36,7 +36,7 @@ const styles = css`
 const Toast = () => {
   return html`<div class="${styles}" id="toast">
     <div class="toast">
-      <span class="toast--close">How do you feel about meetings? <a href="https://forms.gle/7QVwkDKY7136dVn68" target="_blank" data-event="true" data-action="survey-link" data-label="survey-link-meetings">Answer a 5 min survey</a> to help me with a research project.</span>
+      <span class="toast--close">Do you have lots of meetings? <a href="https://forms.gle/7QVwkDKY7136dVn68" target="_blank" data-event="true" data-action="survey-link" data-label="survey-link-meetings">Take a 5 min survey</a> to help me with a research project.</span>
 
       <${Button} color=${{focus: 'black', accent: 'black' }} className="toast--yes">
           Close
