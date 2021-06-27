@@ -4,6 +4,7 @@ const { html, metaIfSHA, getOgImagePath, getCanonical } = require('../utils')
 const { breadcrumb, dataset, speakable } = require('../utils/richSnippets')
 const { theme, visuallyHidden } = require('../styles')
 const { fontStyles, printStyles, ga } = require('../headStyles')
+const Toast = require('../components/Toast')
 
 const document = ({
   title,
@@ -167,6 +168,7 @@ const document = ({
           document.body.classList.add("js");
         </script>
         ${content}
+        ${renderStylesToString(render(html`<${Toast} />`))}
         <script src="/js/sweet-scroll.min.js?v=${process.env.npm_package_version}"></script>
         <script src="/js/script.js?v=${process.env.npm_package_version}"></script>
       </body>

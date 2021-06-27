@@ -8,6 +8,7 @@
 
 # DONE
 
+- add notification shelf for ~annoying~ informative pop-up messages
 - add Truth and Reconciliation day
   - to API and frontend
   - not for previous years
