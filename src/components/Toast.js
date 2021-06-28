@@ -38,7 +38,7 @@ const Toast = () => {
     <div class="toast">
       <span class="toast--close">Do you have lots of meetings? <a href="https://forms.gle/7QVwkDKY7136dVn68" target="_blank" data-event="true" data-action="survey-link" data-label="survey-link-meetings">Take a 5 min survey</a> to help me with a research project.</span>
 
-      <${Button} color=${{focus: 'black', accent: 'black' }} className="toast--yes">
+      <${Button} color=${{focus: 'black', accent: 'black' }} className="toast--yes" data-event="true" data-action="close-survey-link" data-label="close-survey-link-meetings">
           Close
       </button>
     </div>
