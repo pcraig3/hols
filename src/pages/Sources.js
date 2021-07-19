@@ -67,7 +67,7 @@ const AddHolidays = ({ data: { provinces } }) => {
           ]}
         >
           <h2>Federally-regulated industries</h2>
-          <p>11 holidays a year, plus Friday afternoons.</p>
+          <p>12 holidays a year, plus Friday afternoons.</p>
         <//>
 
         <${SummaryTable} title="Provinces and territories" rows=${createRows({ provinces })}>
