@@ -5,6 +5,7 @@ const Layout = require('../components/Layout.js')
 const Content = require('../components/Content.js')
 const Button = require('../components/Button.js')
 const SummaryTable = require('../components/SummaryTable.js')
+const { getCurrentHolidayYear } = require('../dates')
 
 const summaryTableStyles = css`
   @media (${theme.mq.lg}) {
@@ -100,7 +101,7 @@ const AddHolidays = ({ data: { provinces, year } }) => {
         </p>
         <p>Adding holidays to your calendar is easy.</p>
         <ol>
-          <li>Clicking a button on this page will download an <code>.ics</code> file for 2020</li>
+          <li>Clicking a button on this page will download an <code>.ics</code> file for ${getCurrentHolidayYear()}</li>
           <li>Double-click the file (or drag it into your preferred calendar)</li>
           <li>Confirm you want to import ’em</li>
           <li>Done! <span role="img" aria-label="Happy cowboy">🤠</span></li>

@@ -1,6 +1,7 @@
 const { html } = require('../utils')
 const Layout = require('../components/Layout.js')
 const Content = require('../components/Content.js')
+const { getCurrentHolidayYear } = require('../dates')
 
 const About = ({ data: { nextHoliday } }) =>
   html`
@@ -17,7 +18,7 @@ const About = ({ data: { nextHoliday } }) =>
           Heck yes you do! And${' '}
           <a
             href="/add-holidays-to-calendar"
-            title="you can add Canada’s 2020 holidays to your calendar"
+            title="you can add Canada’s ${getCurrentHolidayYear()} holidays to your calendar"
             >you can</a
           >!
         </p>
