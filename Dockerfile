@@ -1,4 +1,4 @@
-FROM node:12-alpine
+FROM node:14-alpine
 LABEL maintainer="paul@pcraig3.ca"
 
 ARG GITHUB_SHA_ARG
@@ -11,7 +11,7 @@ RUN apk --no-cache --virtual build-dependencies add \
         python \
         make \
         g++
-RUN npm install --production
+RUN npm install --production --silent
 RUN npm install -g workbox-cli
 RUN apk del build-dependencies
 
