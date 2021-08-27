@@ -31,16 +31,28 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      # Setup gcloud CLI
-      - uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
+      - name: Set up Cloud SDK
+        uses: google-github-actions/setup-gcloud@master
         with:
-          version: '290.0.1'
+          project_id: ${{ env.PROJECT_ID }}
           service_account_key: ${{ secrets.GCP_SA_KEY_JSON }}
-          project_id: ${{ secrets.GCP_PROJECT_ID }}
+          export_default_credentials: true
 
-      # Build and push image to Google Container Registry
-      - name: Build & deploy
+      - name: Authorize Docker push
+        run: gcloud auth configure-docker
+
+      - name: Build and Push Container
         run: |-
-          gcloud builds submit \
-            --config cloudbuild.yaml \
-            --substitutions=COMMIT_SHA=$GITHUB_SHA,_SERVICE_NAME=${{ secrets.GCP_SERVICE_NAME }}
+          docker build -t gcr.io/${{ env.PROJECT_ID }}/${{ env.SERVICE_NAME }}:${{ github.sha }} --build-arg GITHUB_SHA_ARG=${{ github.sha }} .
+          docker push gcr.io/${{ env.PROJECT_ID }}/${{ env.SERVICE_NAME }}:${{ github.sha }}
+
+      - name: Deploy to Cloud Run
+        id: deploy
+        uses: google-github-actions/deploy-cloudrun@v0.4.0
+        with:
+          service: ${{ env.SERVICE_NAME }}
+          image: gcr.io/${{ env.PROJECT_ID }}/${{ env.SERVICE_NAME }}:${{  github.sha }}
+          region: ${{ env.RUN_REGION }}
+
+      - name: Use gcloud CLI
+        run: gcloud info
