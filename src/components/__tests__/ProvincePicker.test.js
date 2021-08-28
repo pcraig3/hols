@@ -14,7 +14,7 @@ describe('<ProvincePicker>', () => {
     const $ = renderProvincePicker()
     expect($('label').text()).toEqual('View by regionView by year')
     expect($('select').length).toBe(2)
-    expect($('select option').length).toBe(22)
+    expect($('select option').length).toBe(23)
     expect($('select option').text()).toEqual(
       `NationwideFederal──────────AlbertaBritish ColumbiaManitobaNew BrunswickNewfoundland and LabradorNova ScotiaNorthwest TerritoriesNunavutOntarioPrince Edward IslandQuebecSaskatchewanYukon${ALLOWED_YEARS.join(
         '',
@@ -55,9 +55,9 @@ describe('<ProvincePicker>', () => {
   })
 
   describe('year select', () => {
-    test('renders selected year as "2020" by default', () => {
+    test('renders selected year as "2021" by default', () => {
       const $ = renderProvincePicker()
-      expect($('select').eq(1).find('option[selected]').text()).toEqual('2020')
+      expect($('select').eq(1).find('option[selected]').text()).toEqual('2021')
     })
 
     ALLOWED_YEARS.map((year) => {

@@ -2,7 +2,7 @@ const { html, getProvinceIdOrFederalString } = require('../utils')
 const Button = require('../components/Button.js')
 const { theme } = require('../styles')
 
-const CalButton = ({ federal, provinceId, year = 2020, className = '' }) => {
+const CalButton = ({ federal, provinceId, year = 2021, className = '' }) => {
   const provinceIdOrFederal = getProvinceIdOrFederalString({ provinceId, federal })
 
   return html`

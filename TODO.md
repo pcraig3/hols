@@ -8,6 +8,7 @@
 
 # DONE
 
+- add 2024
 - update gcloud github actions to get CD working again
 - add notification shelf for ~annoying~ informative pop-up messages
 - add Truth and Reconciliation day

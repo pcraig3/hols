@@ -11,7 +11,7 @@ Features:
 - Returns only federal holidays
 - Returns only national holidays
 - Returns "next" holiday for each region
-- Returns holidays for years: `2018`, `2019`, `2020`, `2021`, `2022`, `2023`
+- Returns holidays for years: `2018`, `2019`, `2020`, `2021`, `2022`, `2023`, `2024`
 
 Plus(!) check out all these goodies you get for ✨ free ✨:
 
@@ -54,7 +54,7 @@ None of the response object keys ever contain `null` values.
 
 There are 2 query parameters values you can use. Probably not on the root route but on others they will work.
 
-1. `?year=2018|2019|2020|2021|2022|2013`. Defaults to current year.
+1. `?year=2018|2019|2020|2021|2022|2023|2024`. Defaults to current year.
 2. `?federal=true|1|false|0`. `true` or `1` returns only federal holidays; `false` or `0` returns _everything but_ federal holidays.
 
 You can combine them and they will work (eg, `/api/v1/holidays?year=2021&federal=true`).
