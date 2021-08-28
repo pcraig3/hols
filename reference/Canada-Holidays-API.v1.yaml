@@ -1,7 +1,7 @@
 openapi: 3.0.0
 info:
   title: Canada Holidays API
-  version: 1.3.0
+  version: 1.3.1
   description: 'This API lists all 28 public holidays for all 13 provinces and territories in Canada, including federal holidays.'
   contact:
     name: Paul Craig
@@ -186,7 +186,7 @@ paths:
             type: integer
             default: 2021
             minimum: 2018
-            maximum: 2023
+            maximum: 2024
           in: query
           description: A calendar year
           name: year
@@ -282,7 +282,7 @@ paths:
             type: integer
             default: 2021
             minimum: 2018
-            maximum: 2023
+            maximum: 2024
           in: query
           description: A calendar year
           name: year
@@ -354,7 +354,7 @@ paths:
             type: integer
             default: 2021
             minimum: 2018
-            maximum: 2023
+            maximum: 2024
           in: query
           description: A calendar year
           name: year
@@ -451,7 +451,7 @@ paths:
             type: integer
             default: 2021
             minimum: 2018
-            maximum: 2023
+            maximum: 2024
           in: query
           description: A calendar year
           name: year

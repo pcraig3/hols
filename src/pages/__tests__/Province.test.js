@@ -39,27 +39,27 @@ describe('Province page', () => {
     expect($('h1').length).toBe(1)
     expect($('h1 .visible').text()).toEqual('Canada’s next holiday\u00a0isDecember 28Boxing Day')
     expect($('h2').length).toBe(1)
-    expect($('h2').text()).toEqual('Canada statutory holidays in 2020')
+    expect($('h2').text()).toEqual('Canada statutory holidays in 2021')
     // check the data label is lowercasing the province name
     expect($('.h1--lg a time').attr('data-label')).toEqual('next-holidays-row-link-canada')
     // check that the link to next year's holidays is visible
-    expect($('a.link__next-year').text()).toEqual('Canada statutory holidays in 2021')
+    expect($('a.link__next-year').text()).toEqual('Canada statutory holidays in 2022')
   })
 
   test('renders #next-holiday-row id', () => {
     const $ = renderPage()
-    expect($('h2#holidays-table').text()).toBe('Canada statutory holidays in 2020')
+    expect($('h2#holidays-table').text()).toBe('Canada statutory holidays in 2021')
     expect($('#next-holiday-row').text()).toBe(
       'December 26, SundayObserved: December 28, TuesdayBecause Christmas is observed on Monday, Boxing Day is pushed to the following Tuesday.Boxing Day Federal holiday, NL ',
     )
   })
 
   test('does not render next year link', () => {
-    const $ = renderPage(2023)
+    const $ = renderPage(2024)
     expect($('h1').length).toBe(1)
     expect($('h1 .visible').text()).toEqual('Canada’s next holiday\u00a0isDecember 28Boxing Day')
     expect($('h2').length).toBe(1)
-    expect($('h2').text()).toEqual('Canada statutory holidays in 2023')
+    expect($('h2').text()).toEqual('Canada statutory holidays in 2024')
     // check that the link to next year's holidays is NOT visible
     expect($('a.link__next-year').length).toBe(0)
   })

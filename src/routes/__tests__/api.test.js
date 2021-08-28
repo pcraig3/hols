@@ -264,7 +264,7 @@ describe('Test /api responses', () => {
         })
       })
 
-      let badYears = ['2017', '2024', '1', null, undefined, false, 'orange', 'christmas']
+      let badYears = ['2017', '2025', '1', null, undefined, false, 'orange', 'christmas']
       badYears.map((year) => {
         test(`"${year}" it should return 400 with an error message`, async () => {
           const response = await request(app).get(`/api/v1/holidays?year=${year}`)
@@ -272,7 +272,7 @@ describe('Test /api responses', () => {
 
           let { error } = JSON.parse(response.text)
           expect(error.message).toMatch(
-            /^Bad Request: request.query.year should be (integer|>= 2018|<= 2023)/,
+            /^Bad Request: request.query.year should be (integer|>= 2018|<= 2024)/,
           )
         })
       })
@@ -288,7 +288,9 @@ describe('Test /api responses', () => {
 
         let { holidays } = JSON.parse(response.text)
 
-        const h = holidays.find((holiday) => holiday.nameEn === 'National Day for Truth and Reconciliation' )
+        const h = holidays.find(
+          (holiday) => holiday.nameEn === 'National Day for Truth and Reconciliation',
+        )
         expect(h.nameEn).toMatch('National Day for Truth and Reconciliation')
       })
     })
@@ -301,12 +303,13 @@ describe('Test /api responses', () => {
 
         let { holidays } = JSON.parse(response.text)
 
-        const h = holidays.find((holiday) => holiday.nameEn === 'National Day for Truth and Reconciliation' )
+        const h = holidays.find(
+          (holiday) => holiday.nameEn === 'National Day for Truth and Reconciliation',
+        )
         expect(h).toBeUndefined()
       })
     })
   })
-
 
   describe('for /api/v1/holidays/:holidayId path', () => {
     test('it should return a holiday for a good ID', async () => {
@@ -351,7 +354,7 @@ describe('Test /api responses', () => {
         })
       })
 
-      let badYears = ['2017', '2024', '1', null, undefined, false, 'orange', 'christmas']
+      let badYears = ['2017', '2025', '1', null, undefined, false, 'orange', 'christmas']
       badYears.map((year) => {
         test(`"${year}" it should return 400 with an error message`, async () => {
           const response = await request(app).get(`/api/v1/holidays?year=${year}`)
@@ -359,7 +362,7 @@ describe('Test /api responses', () => {
 
           let { error } = JSON.parse(response.text)
           expect(error.message).toMatch(
-            /^Bad Request: request.query.year should be (integer|>= 2018|<= 2023)/,
+            /^Bad Request: request.query.year should be (integer|>= 2018|<= 2024)/,
           )
         })
       })

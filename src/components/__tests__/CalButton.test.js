@@ -13,8 +13,8 @@ test('CalButton renders properly with no properties', () => {
   expect($('a').length).toBe(1)
   expect($('a').text()).toEqual('Add to your calendar')
   expect($('a').attr('data-action')).toEqual('download-holidays')
-  expect($('a').attr('href')).toEqual('/ics/2020')
-  expect($('a').attr('data-label')).toEqual('download-holidays-canada-2020')
+  expect($('a').attr('href')).toEqual('/ics/2021')
+  expect($('a').attr('data-label')).toEqual('download-holidays-canada-2021')
 })
 
 test('CalButton renders properly for federal holidays for 2019', () => {

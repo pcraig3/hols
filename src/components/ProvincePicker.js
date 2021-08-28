@@ -156,7 +156,7 @@ const getProvinceNameFromId = (provinceId) => {
   }
 }
 
-const ProvincePicker = ({ provinceId, federal, year = 2020 }) => {
+const ProvincePicker = ({ provinceId, federal, year = 2021 }) => {
   const provinceIdOrFederal = getProvinceIdOrFederalString({ provinceId, federal })
   let regionName = getProvinceNameFromId(provinceId)
   regionName = regionName || (federal ? 'Federal' : 'Nationwide')

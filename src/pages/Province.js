@@ -194,7 +194,7 @@ const Province = ({
     provinceName = 'Canada',
     provinceId,
     federal = false,
-    year = 2020,
+    year = 2021,
     source = false,
   } = {},
 }) => {
