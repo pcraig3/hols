@@ -7,7 +7,7 @@ This is a fun little [express](https://expressjs.com/) app for Canada's statutor
 
 ## Using the API
 
-Please get in touch if you are using the API, because I can probably make it work better if I have real-life use-cases.
+Please get in touch if you are using the API and you need something, because I can probably make it work better if I have enough real-life use-cases.
 
 [Read the API docs](https://github.com/pcraig3/hols/blob/main/API.md).
 
@@ -19,7 +19,7 @@ There's an OpenAPI spec at [`Canada-Holidays-API.v1.yaml`](https://github.com/pc
 
 `npm` is a javascript package manager. It downloads project dependencies and runs node applications.
 
-You'll need node version `v14` or higher to run the app.
+You'll need node version `v14` or higher to run the app. (If you have an M1 Mac, you'll need `v15` or higher.)
 
 ### [Install `docker`](https://docs.docker.com/install/)
 
@@ -79,7 +79,7 @@ On a Mac, press `Control` + `C` to quit the running docker container.
 
 ### Push to Cloud Run
 
-The [`cloudbuild.yaml`](https://github.com/pcraig3/hols/blob/main/cloudbuild.yaml) file allows the service to be deployed on [Cloud Run](https://cloud.google.com/run).
+The [`main.yaml`](https://github.com/pcraig3/hols/blob/main/.github/workflows/main.yml) file contains instructions to deploy the service to [Cloud Run](https://cloud.google.com/run), or you can use the CLI command below to do it manually.
 
 ```
 gcloud builds submit --tag gcr.io/{PROJECT}/{SERVICE}:{TAG} --build-arg GITHUB_SHA_ARG={TAG}
