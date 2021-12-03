@@ -1,8 +1,9 @@
 # TODO
 
+- update the ics routes, remove the filename
 - different versions of "federal" holidays
 - figure out about optional holidays
-- Add years to dates on years pages?
+- add years to dates on years pages?
 - make API to return CSV format
   - page for CSV downloads
 - sqlite new version?
