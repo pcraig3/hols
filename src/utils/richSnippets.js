@@ -44,7 +44,7 @@ const breadcrumb = ({ region }) => {
 const dataset = ({ region, year, path, title, meta }) => {
   const _getDescription = ({ path, meta }) => {
     if (path === '/') {
-      return 'Returns all 28 Canadian public holidays for all 13 provinces and territories in Canada, including federal holidays.'
+      return 'Returns all 29 Canadian public holidays for all 13 provinces and territories in Canada, including federal holidays.'
     }
 
     return meta.includes('next') ? meta.split('. ').pop() : meta

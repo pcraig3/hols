@@ -1,6 +1,6 @@
 # Canada Holidays API
 
-The <a href="https://canada-holidays.ca/api/v1/" target="_blank">Canada Holidays API</a> lists all 28 public holidays for all 13 provinces and territories in Canada, including federal holidays.
+The <a href="https://canada-holidays.ca/api/v1/" target="_blank">Canada Holidays API</a> lists all 29 public holidays for all 13 provinces and territories in Canada, including federal holidays.
 
 **👉 <a href="https://canada-holidays.ca/api/v1/" target="_blank">https://canada-holidays.ca/api/v1/</a>**
 
