@@ -44,12 +44,12 @@ UPDATE Province SET sourceEn = 'General holidays in Manitoba', sourceLink = 'htt
 UPDATE Province SET sourceEn = '10 prescribed days of rest', sourceLink = 'https://www2.gnb.ca/content/gnb/en/departments/elg/local_government/content/governance/content/days_of_rest_act/faq.html#2' WHERE id = 'NB';
 UPDATE Province SET sourceEn = 'Public holidays in Newfoundland', sourceLink = 'https://gist.github.com/pcraig3/81dff348ddf52777c9f918c3032531bd' WHERE id = 'NL';
 UPDATE Province SET sourceEn = 'Paid holidays in Nova Scotia', sourceLink = 'https://novascotia.ca/lae/employmentrights/holidaychart.asp' WHERE id = 'NS';
-UPDATE Province SET sourceEn = 'Employment Standards, Northwest Territories', sourceLink = 'https://www.ece.gov.nt.ca/en/services/employment-standards/frequently-asked-questions' WHERE id = 'NT';
+UPDATE Province SET sourceEn = 'Employment Standards, Northwest Territories', sourceLink = 'https://www.ece.gov.nt.ca/en/services/employment-standards/frequently-asked-questions#Statutory%20Holidays' WHERE id = 'NT';
 UPDATE Province SET sourceEn = 'Nunavut General Holidays', sourceLink = 'https://nu-lsco.ca/faq-s?tmpl=component&faqid=11' WHERE id = 'NU';
 UPDATE Province SET sourceEn = 'Ontario Public holidays', sourceLink = 'https://www.ontario.ca/document/your-guide-employment-standards-act-0/public-holidays' WHERE id = 'ON';
 UPDATE Province SET sourceEn = 'PEI Paid Holidays', sourceLink = 'https://www.princeedwardisland.ca/en/information/economic-growth-tourism-and-culture/paid-holidays' WHERE id = 'PE';
 UPDATE Province SET sourceEn = 'Jours fériés, chômés et payés', sourceLink = 'https://www2.gouv.qc.ca/entreprises/portail/quebec/ressourcesh?lang=fr&g=ressourcesh&sg=personnel&t=o&e=2318829344:3908165687' WHERE id = 'QC';
-UPDATE Province SET sourceEn = 'Saskatchewan Public Holidays', sourceLink = 'https://www.saskatchewan.ca/business/employment-standards/vacations-holidays-leaves-and-absences/public-statutory-holidays/list-of-saskatchewan-public-holidays' WHERE id = 'SK';
+UPDATE Province SET sourceEn = 'Saskatchewan Public Holidays', sourceLink = 'https://www.saskatchewan.ca/business/employment-standards/public-statutory-holidays/list-of-saskatchewan-public-holidays' WHERE id = 'SK';
 UPDATE Province SET sourceEn = 'Yukon statutory holiday dates', sourceLink = 'https://yukon.ca/en/doing-business/employer-responsibilities/find-yukon-statutory-holiday' WHERE id = 'YT';
 
 INSERT INTO Holiday (date, nameEn, nameFr) VALUES ('January 1', 'New Year’s Day', 'Jour de l’An');
