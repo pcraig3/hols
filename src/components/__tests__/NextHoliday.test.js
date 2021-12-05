@@ -8,10 +8,11 @@ const renderNextHoliday = (props) => {
   return cheerio.load(render(html`<${NextHoliday} ...${props} //>`))
 }
 
-const getNextHoliday = ({ federal } = {}) => {
+const getNextHoliday = ({ federal, observedDate } = {}) => {
   return {
     id: 20,
-    observedDate: '2019-08-16',
+    date: '2019-08-16',
+    observedDate: observedDate || '2019-08-16',
     nameEn: 'Gold Cup Parade Day',
     federal: federal ? 1 : 0,
     provinces: [{ id: 'PE', nameEn: 'Prince Edward Island' }],
@@ -49,10 +50,19 @@ describe('NextHoliday', () => {
 
   // renders for a federal page
   test('renders a federal-specific intro when "federal" is passed in', () => {
-    const nextHoliday = getNextHoliday()
+    const nextHoliday = getNextHoliday({ federal: true })
     const $ = renderNextHoliday({ nextHoliday, federal: true })
 
     expect($('h1').length).toBe(1)
     expect($('.h1--xs').text()).toEqual('Canada’s next federal holiday\u00a0is')
+  })
+
+  //
+  test('renders an asterisks if the observedDate is different than the literal date', () => {
+    const nextHoliday = getNextHoliday({ observedDate: '2019-08-12' })
+    const $ = renderNextHoliday({ nextHoliday })
+
+    expect($('h1').length).toBe(1)
+    expect($('.h1--lg').text()).toEqual(`${sp2nbsp('August 16*')}`)
   })
 })

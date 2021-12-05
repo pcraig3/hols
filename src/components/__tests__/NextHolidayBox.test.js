@@ -15,6 +15,7 @@ const getProvince = () => {
 const getNextHoliday = ({ federal } = {}) => {
   return {
     id: 20,
+    date: '2021-08-16',
     observedDate: '2021-08-16',
     nameEn: 'Gold Cup Parade Day',
     federal: federal ? 1 : 0,
