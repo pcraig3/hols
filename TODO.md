@@ -10,6 +10,7 @@
 
 # DONE
 
+- Use literal date for "next holiday" box
 - add 2024
 - update gcloud github actions to get CD working again
 - add notification shelf for ~annoying~ informative pop-up messages
