@@ -36,6 +36,14 @@ for (var i = 0, len = elements.length; i < len; i++) {
   });
 }
 
+// Open the details element if someone clicks the "next-holiday-link" at the top of the page
+var nextHolidayLink = document.getElementById('next-holiday-link');
+nextHolidayLink.addEventListener('click', function (e) {
+  var nextHolidayDetails = document.querySelector('#next-holiday-row details');
+  if(nextHolidayDetails) {
+    nextHolidayDetails.setAttribute('open', '');
+  }
+});
 //
 
 /*
