@@ -45,7 +45,13 @@ const formatProvinceEvent = (holiday) => {
   }
 }
 
-const downloadICS = ({ req, res, modifier = null, year = getCurrentHolidayYear() }) => {
+const downloadICS = ({
+  req,
+  res,
+  modifier = null,
+  year = getCurrentHolidayYear(),
+  contentDisposition = true,
+}) => {
   return (error, value) => {
     if (error) {
       throw new createError(500, `Error: creating events for route: ${req.path}`)
@@ -53,10 +59,16 @@ const downloadICS = ({ req, res, modifier = null, year = getCurrentHolidayYear()
 
     res.set({
       'Content-Type': 'text/calendar',
-      'Content-disposition': `attachment; filename=canada-holidays-${
-        modifier ? `${modifier}-` : ''
-      }${year}.ics`,
     })
+
+    if (contentDisposition) {
+      res.set({
+        'Content-disposition': `attachment; filename=canada-holidays-${
+          modifier ? `${modifier}-` : ''
+        }${year}.ics`,
+      })
+    }
+
     return res.send(value)
   }
 }
@@ -119,6 +131,28 @@ router.get(
     const holidays = filteredRows.map((h) => formatProvinceEvent(h))
 
     ics.createEvents(holidays, downloadICS({ req, res, modifier: provinceId, year }))
+  },
+)
+
+router.get(
+  '/brendan/ics/:provinceId(\\w{2})/:year(\\d{4})',
+  param2query('year'),
+  dbmw(getHolidaysWithProvinces),
+  (req, res) => {
+    let provinceId = req.params.provinceId
+    let year = ALLOWED_YEARS.find((y) => y === parseInt(req.query.year))
+    if (!isProvinceId(provinceId) || !year) {
+      return res.redirect(`/provinces/${provinceId}`)
+    }
+
+    provinceId = provinceId.toUpperCase()
+    const filteredRows = res.locals.rows.filter((h) => h.provinces.find((p) => p.id === provinceId))
+    const holidays = filteredRows.map((h) => formatProvinceEvent(h))
+
+    ics.createEvents(
+      holidays,
+      downloadICS({ req, res, modifier: provinceId, year, contentDisposition: false }),
+    )
   },
 )
 

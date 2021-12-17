@@ -8,7 +8,7 @@ const { fontStyles, printStyles, ga } = require('../headStyles')
 const document = ({
   title,
   content,
-  docProps: { id, meta, path, region, richSnippets, year, error },
+  docProps: { id, meta, path, region, richSnippets, year, error, ignore },
 }) => {
   return `
     <!DOCTYPE html>
@@ -18,6 +18,9 @@ const document = ({
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta name="description" content="${meta ? meta : 'Upcoming statutory holidays in Canada'}">
+
+        ${ignore ? '<meta name="robots" content="noindex"/>' : ''}
+
         ${
           getCanonical({ error, path, provinceId: id, year })
             ? `<link rel="canonical" href="https://canada-holidays.ca${getCanonical({

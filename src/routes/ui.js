@@ -174,8 +174,7 @@ router.get(
 
 // manually add source for federal holidays — it's not clean but w/e
 const federalSource = {
-  link:
-    'https://www.tpsgc-pwgsc.gc.ca/remuneration-compensation/services-paye-pay-services/paye-information-pay/vie-life/vie-conge-life-leave/conge-paye-holiday-pay-eng.html',
+  link: 'https://www.tpsgc-pwgsc.gc.ca/remuneration-compensation/services-paye-pay-services/paye-information-pay/vie-life/vie-conge-life-leave/conge-paye-holiday-pay-eng.html',
   nameEn: 'Statutory holiday pay, Canada.ca',
 }
 
@@ -338,8 +337,7 @@ router.get('/sources', dbmw(getProvinces), (req, res) => {
       pageComponent: 'Sources',
       title: 'All sources — Canada Holidays',
       docProps: {
-        meta:
-          'Aggregated sources for Canadian statutory holidays. Canada’s holidays vary by region and industry, so here they are collected in one place.',
+        meta: 'Aggregated sources for Canadian statutory holidays. Canada’s holidays vary by region and industry, so here they are collected in one place.',
         path: req.path,
       },
       props: { data: { provinces: res.locals.rows } },
@@ -354,11 +352,24 @@ router.get('/add-holidays-to-calendar', dbmw(getProvinces), (req, res) => {
       pageComponent: 'AddHolidays',
       title: `Add Canada’s ${year} holidays to your calendar — Canada Holidays`,
       docProps: {
-        meta:
-          'Download Canadian holidays and import them to your Outlook, iCal, or Google Calendar. Add all Canadian statutory holidays or just for your region.',
+        meta: 'Download Canadian holidays and import them to your Outlook, iCal, or Google Calendar. Add all Canadian statutory holidays or just for your region.',
         path: req.path,
       },
       props: { data: { provinces: res.locals.rows, year } },
+    }),
+  )
+})
+
+router.get('/ics-for-brendan', dbmw(getProvinces), (req, res) => {
+  return res.send(
+    renderPage({
+      pageComponent: 'ICSforBrendan',
+      title: 'ICS files for Brendan — Canada Holidays',
+      docProps: {
+        meta: 'Just a quick test page before making any big changes.',
+        path: req.path,
+        ignore: true,
+      },
     }),
   )
 })
