@@ -32,7 +32,8 @@ const dbmw = (cb) => {
 
       if (!ALLOWED_YEARS.includes(year)) {
         const region = _parseFederal(req) ? 'federal' : req.params.provinceId
-        return getCurrentHolidayYear(region)
+        res.locals.year = getCurrentHolidayYear(region)
+        return res.locals.year
       }
 
       return year

@@ -73,15 +73,17 @@ const downloadICS = ({
   }
 }
 
-router.get('/ics', (req, res) => res.redirect(301, `/ics/${getCurrentHolidayYear()}`))
+const isBadYear = (year) => {
+  return !ALLOWED_YEARS.find((y) => y === parseInt(year))
+}
 
 router.get(
-  '/ics/:year(\\d{4})',
+  ['/ics', '/ics/:year(\\d{4})'],
   param2query('year'),
   dbmw(getHolidaysWithProvinces),
   (req, res) => {
-    let year = ALLOWED_YEARS.find((y) => y === parseInt(req.query.year))
-    if (!year) return res.redirect('/')
+    let year = req.query.year || res.locals.year
+    if (isBadYear(year)) return res.redirect('/')
 
     const holidays = res.locals.rows.map((h) => formatNationalEvent(h))
 
@@ -89,17 +91,13 @@ router.get(
   },
 )
 
-router.get('/ics/federal', (req, res) => {
-  return res.redirect(301, `/ics/federal/${getCurrentHolidayYear()}`)
-})
-
 router.get(
-  '/ics/federal/:year(\\d{4})',
+  ['/ics/federal', '/ics/federal/:year(\\d{4})'],
   param2query('year'),
   dbmw(getHolidaysWithProvinces),
   (req, res) => {
-    let year = ALLOWED_YEARS.find((y) => y === parseInt(req.query.year))
-    if (!year) return res.redirect('/federal')
+    let year = req.query.year || res.locals.year
+    if (isBadYear(year)) return res.redirect('/federal')
 
     const filteredRows = res.locals.rows.filter((h) => h.federal)
     const holidays = filteredRows.map((h) => formatProvinceEvent(h))
@@ -108,21 +106,14 @@ router.get(
   },
 )
 
-router.get('/ics/:provinceId(\\w{2})', (req, res) => {
-  let provinceId = req.params.provinceId
-  return isProvinceId(provinceId)
-    ? res.redirect(301, `/ics/${provinceId}/${getCurrentHolidayYear(provinceId)}`)
-    : res.redirect(`/provinces/${provinceId}`) // if bad province ID, redirect will be to a 404 page
-})
-
 router.get(
-  '/ics/:provinceId(\\w{2})/:year(\\d{4})',
+  ['/ics/:provinceId(\\w{2})', '/ics/:provinceId(\\w{2})/:year(\\d{4})'],
   param2query('year'),
   dbmw(getHolidaysWithProvinces),
   (req, res) => {
     let provinceId = req.params.provinceId
-    let year = ALLOWED_YEARS.find((y) => y === parseInt(req.query.year))
-    if (!isProvinceId(provinceId) || !year) {
+    let year = req.query.year || res.locals.year
+    if (!isProvinceId(provinceId) || isBadYear(year)) {
       return res.redirect(`/provinces/${provinceId}`)
     }
 
