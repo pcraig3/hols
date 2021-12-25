@@ -58,3 +58,13 @@ test('CalButton renders properly with a custom eventName', () => {
   expect($('a').attr('data-action')).toEqual('public-service')
   expect($('a').attr('data-label')).toEqual('public-service-federal-2022')
 })
+
+test('CalButton renders properly with a query', () => {
+  const $ = renderCalButton({ year: 2021, query: 'cd=true' })
+  expect($('a').length).toBe(1)
+  expect($('a').text()).toEqual('Add to your calendar')
+  expect($('a').attr('href')).toEqual('/ics/2021?cd=true')
+  expect($('a').attr('download')).toBeUndefined()
+  expect($('a').attr('data-action')).toEqual('download-holidays')
+  expect($('a').attr('data-label')).toEqual('download-holidays-canada-2021')
+})

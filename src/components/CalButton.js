@@ -10,6 +10,7 @@ const CalButton = ({
   className = '',
   download = false,
   eventName = 'download-holidays',
+  query = false,
 }) => {
   const provinceIdOrFederal = getProvinceIdOrFederalString({ provinceId, federal })
 
@@ -19,13 +20,15 @@ const CalButton = ({
     }.ics`
   }
 
-  const getUrlString = ({ provinceIdOrFederal, year }) => {
-    return `/ics${provinceIdOrFederal ? `/${provinceIdOrFederal}` : ''}${year ? `/${year}` : ''}`
+  const getUrlString = ({ provinceIdOrFederal, year, query }) => {
+    return `/ics${provinceIdOrFederal ? `/${provinceIdOrFederal}` : ''}${year ? `/${year}` : ''}${
+      query ? `?${query}` : ''
+    }`
   }
 
   return html`
     <${Button}
-      href=${getUrlString({ provinceIdOrFederal, year })}
+      href=${getUrlString({ provinceIdOrFederal, year, query })}
       download=${download ? getDownloadString({ provinceIdOrFederal, year }) : null}
       color=${provinceIdOrFederal ? theme.color[provinceIdOrFederal] : {}}
       className=${className}
