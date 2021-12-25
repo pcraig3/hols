@@ -3,8 +3,8 @@ const { css } = require('@emotion/css')
 const { theme } = require('../styles')
 const Layout = require('../components/Layout.js')
 const Content = require('../components/Content.js')
-const Button = require('../components/Button.js')
 const SummaryTable = require('../components/SummaryTable.js')
+const CalButton = require('../components/CalButton.js')
 const { getCurrentHolidayYear } = require('../dates')
 
 const summaryTableStyles = css`
@@ -21,24 +21,17 @@ const summaryTableStyles = css`
   }
 `
 
-const downloadButton = ({ provinceId, year }) => {
-  return html`
-    <${Button}
-      href=${`/ics${provinceId ? `/${provinceId}` : ''}`}
-      download=${`canada-holidays-${provinceId ? `${provinceId}-` : ''}${year}.ics`}
-      color=${provinceId && theme.color[provinceId]}
-      data-event="true"
-      data-action="page-download-holidays"
-      data-label=${`page-download-holidays-${provinceId || 'canada'}`}
-      >Get ${provinceId || 'all'} holidays<//
-    >
-  `
-}
 const createRows = ({ provinces, year }) => {
   return provinces.map((p) => {
     return {
       key: p.nameEn,
-      value: downloadButton({ provinceId: p.id, year }),
+      value: CalButton({
+        year,
+        provinceId: p.id,
+        text: `Get ${p.id} holidays`,
+        download: true,
+        eventName: 'page-download-holidays',
+      }),
       className: summaryTableStyles,
     }
   })
@@ -61,7 +54,16 @@ const AddHolidays = ({ data: { provinces, year } }) => {
         <${SummaryTable}
           title="Download all Canadian statutory holidays"
           rows=${[
-            { key: 'Canada', value: downloadButton({ year }), className: summaryTableStyles },
+            {
+              key: 'Canada',
+              value: CalButton({
+                year,
+                text: 'Get all holidays',
+                download: true,
+                eventName: 'page-download-holidays',
+              }),
+              className: summaryTableStyles,
+            },
           ]}
         >
           <h2>Download all Canadian <span class="visuallyHidden">statutory</span> holidays</h2>
@@ -73,7 +75,13 @@ const AddHolidays = ({ data: { provinces, year } }) => {
           rows=${[
             {
               key: 'Federal holidays',
-              value: downloadButton({ provinceId: 'federal', year }),
+              value: CalButton({
+                year,
+                text: 'Get federal holidays',
+                federal: true,
+                download: true,
+                eventName: 'page-download-holidays',
+              }),
               className: summaryTableStyles,
             },
           ]}
@@ -101,7 +109,10 @@ const AddHolidays = ({ data: { provinces, year } }) => {
         </p>
         <p>Adding holidays to your calendar is easy.</p>
         <ol>
-          <li>Clicking a button on this page will download an <code>.ics</code> file for ${getCurrentHolidayYear()}</li>
+          <li>
+            Clicking a button on this page will download an <code>.ics</code> file for
+            ${getCurrentHolidayYear()}
+          </li>
           <li>Double-click the file (or drag it into your preferred calendar)</li>
           <li>Confirm you want to import ’em</li>
           <li>Done! <span role="img" aria-label="Happy cowboy">🤠</span></li>
