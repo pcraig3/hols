@@ -360,20 +360,6 @@ router.get('/add-holidays-to-calendar', dbmw(getProvinces), (req, res) => {
   )
 })
 
-router.get('/ics-for-brendan', dbmw(getProvinces), (req, res) => {
-  return res.send(
-    renderPage({
-      pageComponent: 'ICSforBrendan',
-      title: 'ICS files for Brendan — Canada Holidays',
-      docProps: {
-        meta: 'Just a quick test page before making any big changes.',
-        path: req.path,
-        ignore: true,
-      },
-    }),
-  )
-})
-
 router.get('*', (req, res) => {
   res.status(404)
   throw new createError(404, 'Oopsie daisy. Maybe head back to the home page? 👇')
