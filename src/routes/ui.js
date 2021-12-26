@@ -350,26 +350,12 @@ router.get('/add-holidays-to-calendar', dbmw(getProvinces), (req, res) => {
   return res.send(
     renderPage({
       pageComponent: 'AddHolidays',
-      title: `Add Canada’s ${year} holidays to your calendar — Canada Holidays`,
+      title: 'Add Canadian holidays to your calendar — Canada Holidays',
       docProps: {
-        meta: 'Download Canadian holidays and import them to your Outlook, iCal, or Google Calendar. Add all Canadian statutory holidays or just for your region.',
+        meta: 'Stream or download Canadian holidays and import them to your Outlook, iCal, or Google Calendar. Add all Canadian statutory holidays or just for your region.',
         path: req.path,
       },
       props: { data: { provinces: res.locals.rows, year } },
-    }),
-  )
-})
-
-router.get('/ics-for-brendan', dbmw(getProvinces), (req, res) => {
-  return res.send(
-    renderPage({
-      pageComponent: 'ICSforBrendan',
-      title: 'ICS files for Brendan — Canada Holidays',
-      docProps: {
-        meta: 'Just a quick test page before making any big changes.',
-        path: req.path,
-        ignore: true,
-      },
     }),
   )
 })

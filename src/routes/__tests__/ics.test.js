@@ -32,31 +32,26 @@ describe('Test ics responses', () => {
     db.close()
   })
 
-  const noYearURLs = ['/ics', '/ics/federal', '/ics/AB']
-  noYearURLs.map((url) => {
-    describe(`Test "${url}" response`, () => {
-      test('it should return 301 with current year in domain', async () => {
+  const noYearPaths = ['', '/federal', '/AB']
+  noYearPaths.map((path) => {
+    describe(`Test "/ics${path}" response`, () => {
+      test('it should return 200', async () => {
         mockDate(`${currentYear}-01-01`)
-        const response = await request(app).get(url)
-        expect(response.statusCode).toBe(301)
-        expect(response.headers.location).toBe(`${url}/${currentYear}`)
+        const response = await request(app).get(`/ics${path}`)
+        expect(response.statusCode).toBe(200)
+        expect(response.headers['content-disposition']).toBeUndefined()
       })
-    })
-  })
 
-  describe('Test redirect responses before boxing day', () => {
-    test('it should return 301 with next year in domain before boxing day for AB', async () => {
-      mockDate('2020-12-27')
-      const response = await request(app).get('/ics/AB')
-      expect(response.statusCode).toBe(301)
-      expect(response.headers.location).toBe('/ics/AB/2021')
-    })
-
-    test('it should return 301 with current year in domain before boxing day for ON', async () => {
-      mockDate('2020-12-27')
-      const response = await request(app).get('/ics/ON')
-      expect(response.statusCode).toBe(301)
-      expect(response.headers.location).toBe('/ics/ON/2020')
+      test('it should return a content-disposition header', async () => {
+        mockDate(`${currentYear}-01-01`)
+        const response = await request(app).get(`/ics${path}?cd=true`)
+        expect(response.statusCode).toBe(200)
+        expect(response.headers['content-disposition']).toEqual(
+          `attachment; filename=canada-holidays-${
+            path ? `${path.substring(1)}-` : ''
+          }${currentYear}.ics`,
+        )
+      })
     })
   })
 
@@ -82,6 +77,21 @@ describe('Test ics responses', () => {
       test(`it should return 200 for supported year "/ics/${goodYear}"`, async () => {
         const response = await request(app).get(`/ics/${goodYear}`)
         expect(response.statusCode).toBe(200)
+        expect(response.headers['content-disposition']).toBeUndefined()
+      })
+
+      test(`it should return 200 for supported year "/ics/${goodYear}"`, async () => {
+        const response = await request(app).get(`/ics/${goodYear}`)
+        expect(response.statusCode).toBe(200)
+        expect(response.headers['content-disposition']).toBeUndefined()
+      })
+
+      test(`it should return a content-disposition header for "/ics/${goodYear}?cd=true"`, async () => {
+        const response = await request(app).get(`/ics/${goodYear}?cd=true`)
+        expect(response.statusCode).toBe(200)
+        expect(response.headers['content-disposition']).toEqual(
+          `attachment; filename=canada-holidays-${goodYear}.ics`,
+        )
       })
     })
   })
@@ -111,6 +121,15 @@ describe('Test ics responses', () => {
         test(`it should return 200 for supported year "/ics/${path}/${goodYear}"`, async () => {
           const response = await request(app).get(`/ics/${path}/${goodYear}`)
           expect(response.statusCode).toBe(200)
+          expect(response.headers['content-disposition']).toBeUndefined()
+        })
+
+        test(`it should return a content-disposition header for "/ics/${path}/${goodYear}?cd=true"`, async () => {
+          const response = await request(app).get(`/ics/${path}/${goodYear}?cd=true`)
+          expect(response.statusCode).toBe(200)
+          expect(response.headers['content-disposition']).toEqual(
+            `attachment; filename=canada-holidays-${path}-${goodYear}.ics`,
+          )
         })
       })
     })

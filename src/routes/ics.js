@@ -73,75 +73,57 @@ const downloadICS = ({
   }
 }
 
-router.get('/ics', (req, res) => res.redirect(301, `/ics/${getCurrentHolidayYear()}`))
+const _isBadYear = (year) => {
+  return !ALLOWED_YEARS.find((y) => y === parseInt(year))
+}
+
+const _getParams = (req, res) => {
+  return {
+    year: req.query.year || res.locals.year,
+    provinceId: req.params.provinceId,
+    contentDisposition: req.query.cd && req.query.cd !== 'false' ? true : false,
+  }
+}
 
 router.get(
-  '/ics/:year(\\d{4})',
+  ['/ics', '/ics/:year(\\d{4})'],
   param2query('year'),
   dbmw(getHolidaysWithProvinces),
   (req, res) => {
-    let year = ALLOWED_YEARS.find((y) => y === parseInt(req.query.year))
-    if (!year) return res.redirect('/')
+    let { year, contentDisposition } = _getParams(req, res)
+    if (_isBadYear(year)) return res.redirect('/')
 
     const holidays = res.locals.rows.map((h) => formatNationalEvent(h))
 
-    ics.createEvents(holidays, downloadICS({ req, res, year }))
+    ics.createEvents(holidays, downloadICS({ req, res, year, contentDisposition }))
   },
 )
 
-router.get('/ics/federal', (req, res) => {
-  return res.redirect(301, `/ics/federal/${getCurrentHolidayYear()}`)
-})
-
 router.get(
-  '/ics/federal/:year(\\d{4})',
+  ['/ics/federal', '/ics/federal/:year(\\d{4})'],
   param2query('year'),
   dbmw(getHolidaysWithProvinces),
   (req, res) => {
-    let year = ALLOWED_YEARS.find((y) => y === parseInt(req.query.year))
-    if (!year) return res.redirect('/federal')
+    let { year, contentDisposition } = _getParams(req, res)
+    if (_isBadYear(year)) return res.redirect('/federal')
 
     const filteredRows = res.locals.rows.filter((h) => h.federal)
     const holidays = filteredRows.map((h) => formatProvinceEvent(h))
 
-    ics.createEvents(holidays, downloadICS({ req, res, modifier: 'federal', year }))
-  },
-)
-
-router.get('/ics/:provinceId(\\w{2})', (req, res) => {
-  let provinceId = req.params.provinceId
-  return isProvinceId(provinceId)
-    ? res.redirect(301, `/ics/${provinceId}/${getCurrentHolidayYear(provinceId)}`)
-    : res.redirect(`/provinces/${provinceId}`) // if bad province ID, redirect will be to a 404 page
-})
-
-router.get(
-  '/ics/:provinceId(\\w{2})/:year(\\d{4})',
-  param2query('year'),
-  dbmw(getHolidaysWithProvinces),
-  (req, res) => {
-    let provinceId = req.params.provinceId
-    let year = ALLOWED_YEARS.find((y) => y === parseInt(req.query.year))
-    if (!isProvinceId(provinceId) || !year) {
-      return res.redirect(`/provinces/${provinceId}`)
-    }
-
-    provinceId = provinceId.toUpperCase()
-    const filteredRows = res.locals.rows.filter((h) => h.provinces.find((p) => p.id === provinceId))
-    const holidays = filteredRows.map((h) => formatProvinceEvent(h))
-
-    ics.createEvents(holidays, downloadICS({ req, res, modifier: provinceId, year }))
+    ics.createEvents(
+      holidays,
+      downloadICS({ req, res, modifier: 'federal', year, contentDisposition }),
+    )
   },
 )
 
 router.get(
-  '/brendan/ics/:provinceId(\\w{2})/:year(\\d{4})',
+  ['/ics/:provinceId(\\w{2})', '/ics/:provinceId(\\w{2})/:year(\\d{4})'],
   param2query('year'),
   dbmw(getHolidaysWithProvinces),
   (req, res) => {
-    let provinceId = req.params.provinceId
-    let year = ALLOWED_YEARS.find((y) => y === parseInt(req.query.year))
-    if (!isProvinceId(provinceId) || !year) {
+    let { year, provinceId, contentDisposition } = _getParams(req, res)
+    if (!isProvinceId(provinceId) || _isBadYear(year)) {
       return res.redirect(`/provinces/${provinceId}`)
     }
 
@@ -151,7 +133,7 @@ router.get(
 
     ics.createEvents(
       holidays,
-      downloadICS({ req, res, modifier: provinceId, year, contentDisposition: false }),
+      downloadICS({ req, res, modifier: provinceId, year, contentDisposition }),
     )
   },
 )
