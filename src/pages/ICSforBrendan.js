@@ -24,7 +24,7 @@ const ICSforBrendan = () => {
 
   return html`
     <${Layout} route="/ics-for-brendan">
-      <${Content} class=${styles}>
+      <${Content} className=${styles}>
         <h1>ICS links for Brendan</h1>
 
         <p>Hi Brendan, this is just a quick test page so that I can nail it down.</p>

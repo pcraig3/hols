@@ -431,12 +431,12 @@ describe('Test ui responses', () => {
       test('it should return the h1, title, meta tag, and canonical link', async () => {
         const response = await request(app).get('/add-holidays-to-calendar')
         const $ = cheerio.load(response.text)
-        expect($('h1').text()).toEqual(`Add Canada’s ${currentYear} holidays to your calendar`)
+        expect($('h1').text()).toEqual('Add Canadian holidays to your calendar')
         expect($('title').text()).toEqual(
-          `Add Canada’s ${currentYear} holidays to your calendar — Canada Holidays`,
+          'Add Canadian holidays to your calendar — Canada Holidays',
         )
         expect($('meta[name="description"]').attr('content')).toEqual(
-          'Download Canadian holidays and import them to your Outlook, iCal, or Google Calendar. Add all Canadian statutory holidays or just for your region.',
+          'Stream or download Canadian holidays and import them to your Outlook, iCal, or Google Calendar. Add all Canadian statutory holidays or just for your region.',
         )
         expect($('link[rel="canonical"]').attr('href')).toEqual(
           'https://canada-holidays.ca/add-holidays-to-calendar',
