@@ -84,21 +84,21 @@ const AddHolidays = ({ data: { provinces, year } }) => {
           rows=${[
             {
               key: 'Canada',
-              value: html`<a href="canada-holidays.ca/ics?cd=true"
+              value: html`<a href="https://canada-holidays.ca/ics?cd=true"
                 >https://canada-holidays.ca/ics</a
               >`,
               className: summaryTableStylesUrls,
             },
             {
               key: 'Alberta',
-              value: html`<a href="canada-holidays.ca/ics/AB?cd=true"
+              value: html`<a href="https://canada-holidays.ca/ics/AB?cd=true"
                 >https://canada-holidays.ca/ics/AB</a
               >`,
               className: summaryTableStylesUrls,
             },
             {
               key: 'Ontario',
-              value: html`<a href="canada-holidays.ca/ics/ON?cd=true"
+              value: html`<a href="https://canada-holidays.ca/ics/ON?cd=true"
                 >https://canada-holidays.ca/ics/ON</a
               >`,
               className: summaryTableStylesUrls,
