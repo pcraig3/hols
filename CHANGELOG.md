@@ -5,6 +5,23 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.10.0] - 2021-12-05
+
+### Added
+
+- Add instructions on "Add holidays" page for streaming holidays
+- Can use /ics paths without an explicit year
+
+### Updated
+
+- Return /ics paths without "Content-disposition" header by default
+- Don't include "download" attribute on "add to calendar" links
+- Use CalButton on "Add holidays" page instead of custom button  
+
+### Fixed
+
+- Only add event listener to nextHolidayLink if found on page 
+
 ## [3.9.0] - 2021-12-05
 
 ### Updated

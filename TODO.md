@@ -1,6 +1,5 @@
 # TODO
 
-- update the ics routes, remove the filename
 - different versions of "federal" holidays
 - figure out about optional holidays
 - add years to dates on years pages?
@@ -10,6 +9,8 @@
 
 # DONE
 
+- update the ics routes, remove the filename
+  - Update "Add holidays" page to talk about streaming holidays
 - Use literal date for "next holiday" box
 - add 2024
 - update gcloud github actions to get CD working again
