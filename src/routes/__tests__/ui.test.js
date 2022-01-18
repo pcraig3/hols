@@ -1,30 +1,29 @@
 const request = require('supertest')
-const db = require('sqlite')
-const Promise = require('bluebird')
-const app = require('../../server.js')
+const DB = require('better-sqlite3-helper')
 const cheerio = require('cheerio')
+
+const app = require('../../server.js')
 const { ALLOWED_YEARS } = require('../../config/vars.config')
 const { getCurrentHolidayYear } = require('../../dates')
+
+// The first call creates the global instance with your settings
+DB({
+  path: './data/sqlite3.db', // this is the default
+  readonly: false, // read only
+  fileMustExist: false, // throw error if database not exists
+  WAL: true, // automatically enable 'PRAGMA journal_mode = WAL'
+  migrate: {
+    // disable completely by setting `migrate: false`
+    force: 'last', // set to 'last' to automatically reapply the last migration-file
+    table: 'migration', // name of the database table that is used to keep track
+    migrationsPath: './migrations', // path of the migration-files
+  },
+})
 
 describe('Test ui responses', () => {
   const currentYear = getCurrentHolidayYear()
   const nextYear = currentYear + 1
-
   const GOOD_YEARS = ALLOWED_YEARS.filter((y) => y !== currentYear)
-
-  beforeAll(async () => {
-    await Promise.resolve()
-      // First, try to open the database
-      .then(() => db.open('./database.sqlite', { Promise, cached: true })) // <=
-      // Update db schema to the latest version using SQL-based migrations
-      .then(() => db.migrate()) // <=
-      // Display error message if something went wrong
-      .catch((err) => console.error(err.stack)) // eslint-disable-line no-console
-  })
-
-  afterAll(() => {
-    db.close()
-  })
 
   describe('Test / response', () => {
     test('it should return 200', async () => {
