@@ -1,19 +1,30 @@
 const request = require('supertest')
-const DB = require('better-sqlite3-helper')
-const cheerio = require('cheerio')
-
+const db = require('sqlite')
+const Promise = require('bluebird')
 const app = require('../../server.js')
-const DBconfig = require('../../config/better-sqlite3-helper.config')
+const cheerio = require('cheerio')
 const { ALLOWED_YEARS } = require('../../config/vars.config')
 const { getCurrentHolidayYear } = require('../../dates')
-
-// The first call creates the global instance with your settings
-DB(DBconfig)
 
 describe('Test ui responses', () => {
   const currentYear = getCurrentHolidayYear()
   const nextYear = currentYear + 1
+
   const GOOD_YEARS = ALLOWED_YEARS.filter((y) => y !== currentYear)
+
+  beforeAll(async () => {
+    await Promise.resolve()
+      // First, try to open the database
+      .then(() => db.open('./database.sqlite', { Promise, cached: true })) // <=
+      // Update db schema to the latest version using SQL-based migrations
+      .then(() => db.migrate()) // <=
+      // Display error message if something went wrong
+      .catch((err) => console.error(err.stack)) // eslint-disable-line no-console
+  })
+
+  afterAll(() => {
+    db.close()
+  })
 
   describe('Test / response', () => {
     test('it should return 200', async () => {
