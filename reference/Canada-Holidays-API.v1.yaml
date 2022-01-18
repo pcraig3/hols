@@ -184,7 +184,7 @@ paths:
       parameters:
         - schema:
             type: integer
-            default: 2021
+            default: 2022
             minimum: 2018
             maximum: 2024
           in: query
@@ -280,7 +280,7 @@ paths:
       parameters:
         - schema:
             type: integer
-            default: 2021
+            default: 2022
             minimum: 2018
             maximum: 2024
           in: query
@@ -352,7 +352,7 @@ paths:
       parameters:
         - schema:
             type: integer
-            default: 2021
+            default: 2022
             minimum: 2018
             maximum: 2024
           in: query
@@ -449,7 +449,7 @@ paths:
       parameters:
         - schema:
             type: integer
-            default: 2021
+            default: 2022
             minimum: 2018
             maximum: 2024
           in: query

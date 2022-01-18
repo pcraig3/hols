@@ -7,6 +7,8 @@ const { ALLOWED_YEARS } = require('../../config/vars.config')
 const { getCurrentHolidayYear } = require('../../dates')
 
 describe('Test /api responses', () => {
+  const currentYear = getCurrentHolidayYear()
+
   beforeAll(async () => {
     await Promise.resolve()
       // First, try to open the database
@@ -320,11 +322,11 @@ describe('Test /api responses', () => {
 
       expect(holiday).toMatchObject({
         id: 29,
-        date: '2021-12-26',
+        date: `${currentYear}-12-26`,
         nameEn: 'Boxing Day',
         nameFr: 'Lendemain de Noël',
         federal: 1,
-        observedDate: '2021-12-28',
+        observedDate: `${currentYear}-12-27`,
         provinces: expect.any(Array),
       })
     })
