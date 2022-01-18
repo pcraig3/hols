@@ -9,6 +9,7 @@
 
 # DONE
 
+- Update default API year to 2022, the current year
 - update the ics routes, remove the filename
   - Update "Add holidays" page to talk about streaming holidays
 - Use literal date for "next holiday" box
