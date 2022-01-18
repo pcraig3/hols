@@ -72,8 +72,7 @@ apiRouter.get('/', (req, res) => {
       pageComponent: 'API',
       title: 'Canada Holidays API — Canada Holidays',
       docProps: {
-        meta:
-          'A free JSON API for Canada’s statutory holidays. Return all holidays or filter by a specific region.',
+        meta: 'A free JSON API for Canada’s statutory holidays. Return all holidays or filter by a specific region.',
         path: req.path,
       },
     }),

@@ -9,6 +9,7 @@ const SummaryTable = require('../components/SummaryTable.js')
 const CalButton = require('../components/CalButton.js')
 const NextYearLink = require('../components/NextYearLink.js')
 const ObservedDateKey = require('../components/ObservedDateKey')
+const { getCurrentHolidayYear } = require('../dates')
 
 const { External } = require('../components/Svg.js')
 
@@ -194,7 +195,7 @@ const Province = ({
     provinceName = 'Canada',
     provinceId,
     federal = false,
-    year = 2021,
+    year = getCurrentHolidayYear(),
     source = false,
   } = {},
 }) => {
