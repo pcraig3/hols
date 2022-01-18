@@ -1,5 +1,5 @@
 const { h } = require('preact')
-const DB = require('better-sqlite3-helper')
+const db = require('sqlite')
 const htm = require('htm')
 const validator = require('validator')
 const createError = require('http-errors')
@@ -14,7 +14,7 @@ const html = htm.bind(h)
 // this middleware is a convience function so that we don't have to write
 // "try / catch" in all our database query functions
 const dbmw = (cb) => {
-  return (req, res, next) => {
+  return async (req, res, next) => {
     const _parseFederal = (req) => {
       if (req.query.federal !== undefined) {
         return req.query.federal
@@ -48,7 +48,7 @@ const dbmw = (cb) => {
     }
 
     try {
-      res.locals.rows = cb(DB, options)
+      res.locals.rows = await cb(db, options)
     } catch (err) {
       return next(err)
     }

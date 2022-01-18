@@ -5,10 +5,10 @@
 - add years to dates on years pages?
 - make API to return CSV format
   - page for CSV downloads
+- sqlite new version?
 
 # DONE
 
-- Swap out problematic sqlite package for better-sqlite3
 - Update default API year to 2022, the current year
 - update the ics routes, remove the filename
   - Update "Add holidays" page to talk about streaming holidays
