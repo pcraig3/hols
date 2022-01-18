@@ -3,22 +3,12 @@ const DB = require('better-sqlite3-helper')
 const cheerio = require('cheerio')
 
 const app = require('../../server.js')
+const DBconfig = require('../../config/better-sqlite3-helper.config')
 const { ALLOWED_YEARS } = require('../../config/vars.config')
 const { getCurrentHolidayYear } = require('../../dates')
 
 // The first call creates the global instance with your settings
-DB({
-  path: './data/sqlite3.db', // this is the default
-  readonly: false, // read only
-  fileMustExist: false, // throw error if database not exists
-  WAL: true, // automatically enable 'PRAGMA journal_mode = WAL'
-  migrate: {
-    // disable completely by setting `migrate: false`
-    force: 'last', // set to 'last' to automatically reapply the last migration-file
-    table: 'migration', // name of the database table that is used to keep track
-    migrationsPath: './migrations', // path of the migration-files
-  },
-})
+DB(DBconfig)
 
 describe('Test /api responses', () => {
   const currentYear = getCurrentHolidayYear()
