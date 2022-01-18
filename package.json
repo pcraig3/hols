@@ -28,6 +28,7 @@
     "@emotion/css": "^11.5.0",
     "@emotion/server": "^11.4.0",
     "@jsbits/easter-day": "^1.0.1",
+    "better-sqlite3-helper": "^3.1.6",
     "bluebird": "^3.7.2",
     "compression": "^1.7.4",
     "cors": "^2.8.5",

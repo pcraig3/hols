@@ -1,30 +1,28 @@
 const { array2Obj } = require('../utils')
 const { getObservedDate, getLiteralDate } = require('../dates')
 
-const _getProvinces = async (db) => await db.all('SELECT * FROM Province ORDER BY id ASC;')
+const _getProvinces = (db) => db().prepare('SELECT * FROM Province ORDER BY id ASC;').all()
 
-const _getProvinceById = async (db, provinceId) => {
-  return await db.all('SELECT * FROM Province WHERE id = ? ORDER BY id ASC;', [
-    provinceId.toUpperCase(),
-  ])
+const _getProvinceById = (db, provinceId) => {
+  return db().prepare('SELECT * FROM Province WHERE id = ? ORDER BY id ASC;').all(provinceId)
 }
 
-const getProvinces = async (db, { provinceId } = {}) => {
+const getProvinces = (db, { provinceId } = {}) => {
   if (provinceId) {
-    return await _getProvinceById(db, provinceId)
+    return _getProvinceById(db, provinceId)
   }
 
-  return await _getProvinces(db)
+  return _getProvinces(db)
 }
 
-const _getHolidays = async (db) => await db.all('SELECT * FROM Holiday ORDER BY id ASC;')
+const _getHolidays = (db) => db().prepare('SELECT * FROM Holiday ORDER BY id ASC;').all()
 
-const _getHolidayById = async (db, holidayId) => {
-  return await db.all('SELECT * FROM Holiday WHERE id = ? ORDER BY id ASC;', [holidayId])
+const _getHolidayById = (db, holidayId) => {
+  return db().prepare('SELECT * FROM Holiday WHERE id = ? ORDER BY id ASC;').all(holidayId)
 }
 
-const _getFederalHolidays = async (db, federal) => {
-  return await db.all('SELECT * FROM Holiday WHERE federal = ? ORDER BY id ASC;', [federal])
+const _getFederalHolidays = (db, federal) => {
+  return db().prepare('SELECT * FROM Holiday WHERE federal = ? ORDER BY id ASC;').all(federal)
 }
 
 const _parseFederal = (federal) => {
@@ -40,16 +38,16 @@ const _parseFederal = (federal) => {
   return yesFederal.includes(federal) ? 1 : noFederal.includes(federal) ? 0 : null
 }
 
-const getHolidays = async (db, { holidayId, federal, year }) => {
+const getHolidays = (db, { holidayId, federal, year }) => {
   let holidays = []
   federal = _parseFederal(federal)
 
   if (holidayId) {
-    holidays = await _getHolidayById(db, holidayId)
+    holidays = _getHolidayById(db, holidayId)
   } else if (federal !== null) {
-    holidays = await _getFederalHolidays(db, federal)
+    holidays = _getFederalHolidays(db, federal)
   } else {
-    holidays = await _getHolidays(db)
+    holidays = _getHolidays(db)
   }
 
   return holidays
@@ -68,8 +66,8 @@ const getHolidays = async (db, { holidayId, federal, year }) => {
     })
 }
 
-const getProvinceHolidays = async (db) => {
-  return await db.all('SELECT * FROM ProvinceHoliday')
+const _getProvinceHolidays = (db) => {
+  return db().prepare('SELECT * FROM ProvinceHoliday').all()
 }
 
 const getNextHoliday = (provinces) => {
@@ -82,13 +80,13 @@ const getNextHoliday = (provinces) => {
   })
 }
 
-const getProvincesWithHolidays = async (db, { provinceId, year }) => {
-  const provincesObj = array2Obj(await getProvinces(db, { provinceId }))
+const getProvincesWithHolidays = (db, { provinceId, year }) => {
+  const provincesObj = array2Obj(getProvinces(db, { provinceId }))
   Object.values(provincesObj).map((p) => (p.holidays = []))
 
-  const holidaysObj = array2Obj(await getHolidays(db, { year }))
+  const holidaysObj = array2Obj(getHolidays(db, { year }))
 
-  const phs = await getProvinceHolidays(db)
+  const phs = _getProvinceHolidays(db)
 
   phs.map((ph) => {
     if (provincesObj[ph.provinceId]) {
@@ -102,13 +100,13 @@ const getProvincesWithHolidays = async (db, { provinceId, year }) => {
   return Object.values(provincesObj)
 }
 
-const getHolidaysWithProvinces = async (db, { holidayId, federal, year }) => {
-  const holidaysObj = array2Obj(await getHolidays(db, { holidayId, federal, year }))
+const getHolidaysWithProvinces = (db, { holidayId, federal, year }) => {
+  const holidaysObj = array2Obj(getHolidays(db, { holidayId, federal, year }))
   Object.values(holidaysObj).map((h) => (h.provinces = []))
 
-  const provincesObj = array2Obj(await getProvinces(db))
+  const provincesObj = array2Obj(getProvinces(db))
 
-  const phs = await getProvinceHolidays(db)
+  const phs = _getProvinceHolidays(db)
 
   phs.map((ph) => {
     if (holidaysObj[ph.holidayId]) {
