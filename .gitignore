@@ -1,9 +1,11 @@
 # git stuff
 .git
 
+# sql stuff
+data/
+
 # project stuff
 node_modules/
-database.sqlite
 npm-debug.log
 .DS_Store
 *.env
