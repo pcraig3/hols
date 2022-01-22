@@ -1,22 +1,15 @@
 const app = require('./src/server')
-const db = require('sqlite')
-const Promise = require('bluebird')
+const DB = require('better-sqlite3-helper')
+const DBconfig = require('./src/config/better-sqlite3-helper.config')
+
+// The first call creates the global instance with your settings
+DB(DBconfig)
 
 // basic HTTP server via express
 const port = parseInt(process.env.PORT, 10) || 3000
 
-Promise.resolve()
-  // First, try to open the database
-  .then(() => db.open('./database.sqlite', { Promise, cached: true })) // <=
-  // Update db schema to the latest version using SQL-based migrations
-  .then(() => db.migrate({ force: 'true' }))
-  // Display error message if something went wrong
-  .catch((err) => console.error(err.stack)) // eslint-disable-line no-console
-  // Finally, launch the Node.js app
-  .finally(() => {
-    return app.listen(port, (err) => {
-      if (err) throw err
-      // eslint-disable-next-line no-console
-      console.log(`Ready on http://localhost:${port}`)
-    })
-  })
+app.listen(port, (err) => {
+  if (err) throw err
+  // eslint-disable-next-line no-console
+  console.log(`Ready on http://localhost:${port}`)
+})

@@ -1,27 +1,17 @@
 const request = require('supertest')
-const db = require('sqlite')
-const Promise = require('bluebird')
-const app = require('../../server.js')
+const DB = require('better-sqlite3-helper')
 const cheerio = require('cheerio')
+
+const app = require('../../server.js')
+const DBconfig = require('../../config/better-sqlite3-helper.config')
 const { ALLOWED_YEARS } = require('../../config/vars.config')
 const { getCurrentHolidayYear } = require('../../dates')
 
+// The first call creates the global instance with your settings
+DB(DBconfig)
+
 describe('Test /api responses', () => {
   const currentYear = getCurrentHolidayYear()
-
-  beforeAll(async () => {
-    await Promise.resolve()
-      // First, try to open the database
-      .then(() => db.open('./database.sqlite', { Promise, cached: true })) // <=
-      // Update db schema to the latest version using SQL-based migrations
-      .then(() => db.migrate()) // <=
-      // Display error message if something went wrong
-      .catch((err) => console.error(err.stack)) // eslint-disable-line no-console
-  })
-
-  afterAll(() => {
-    db.close()
-  })
 
   const expectProvinceKeys = (withHolidays = true) => {
     const holidays = { holidays: expect.any(Array), nextHoliday: expect.any(Object) }
