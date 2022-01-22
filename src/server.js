@@ -9,8 +9,12 @@ const requestIp = require('request-ip')
 const app = express()
 
 app
-  .use(helmet())
-  .use(helmet.contentSecurityPolicy({ directives: csp }))
+  .use(
+    helmet({
+      crossOriginEmbedderPolicy: false,
+    }),
+  )
+  .use(helmet.contentSecurityPolicy({ useDefaults: false, directives: csp }))
   // both of these are needed to parse post request params
   .use(express.urlencoded({ extended: true }))
   .use(express.json())
