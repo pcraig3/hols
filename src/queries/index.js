@@ -86,7 +86,7 @@ const getNextHoliday = (provinces) => {
   })
 }
 
-const getProvincesWithHolidays = (db, { provinceId, year, optional = false }) => {
+const getProvincesWithHolidays = (db, { provinceId, year, optional }) => {
   const provincesObj = array2Obj(getProvinces(db, { provinceId }))
   Object.values(provincesObj).map((p) => (p.holidays = []))
 
@@ -96,6 +96,9 @@ const getProvincesWithHolidays = (db, { provinceId, year, optional = false }) =>
 
   phs.map((ph) => {
     if (provincesObj[ph.provinceId]) {
+      if (ph.optional) {
+        holidaysObj[ph.holidayId]['optional'] = 1
+      }
       provincesObj[ph.provinceId].holidays.push(holidaysObj[ph.holidayId])
     }
   })
@@ -106,7 +109,7 @@ const getProvincesWithHolidays = (db, { provinceId, year, optional = false }) =>
   return Object.values(provincesObj)
 }
 
-const getHolidaysWithProvinces = (db, { holidayId, federal, year, optional = false }) => {
+const getHolidaysWithProvinces = (db, { holidayId, federal, year, optional }) => {
   const holidaysObj = array2Obj(getHolidays(db, { holidayId, federal, year }))
   Object.values(holidaysObj).map((h) => (h.provinces = []))
 
@@ -116,6 +119,9 @@ const getHolidaysWithProvinces = (db, { holidayId, federal, year, optional = fal
 
   phs.map((ph) => {
     if (holidaysObj[ph.holidayId]) {
+      if (ph.optional) {
+        provincesObj[ph.provinceId]['optional'] = 1
+      }
       holidaysObj[ph.holidayId].provinces.push(provincesObj[ph.provinceId])
     }
   })
