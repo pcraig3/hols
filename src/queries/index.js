@@ -25,22 +25,22 @@ const _getFederalHolidays = (db, federal) => {
   return db().prepare('SELECT * FROM Holiday WHERE federal = ? ORDER BY id ASC;').all(federal)
 }
 
-const _parseFederal = (federal) => {
-  if (!federal) {
+const _parseBoolean = (value) => {
+  if (!value) {
     return null
   }
 
-  const yesFederal = ['1', 'true']
-  const noFederal = ['0', 'false']
+  const yes = ['1', 'true']
+  const no = ['0', 'false']
 
-  federal = federal.toLowerCase()
+  value = value.toLowerCase()
 
-  return yesFederal.includes(federal) ? 1 : noFederal.includes(federal) ? 0 : null
+  return yes.includes(value) ? 1 : no.includes(value) ? 0 : null
 }
 
 const getHolidays = (db, { holidayId, federal, year }) => {
   let holidays = []
-  federal = _parseFederal(federal)
+  federal = _parseBoolean(federal)
 
   if (holidayId) {
     holidays = _getHolidayById(db, holidayId)
@@ -66,8 +66,14 @@ const getHolidays = (db, { holidayId, federal, year }) => {
     })
 }
 
-const _getProvinceHolidays = (db) => {
-  return db().prepare('SELECT * FROM ProvinceHoliday').all()
+const _getProvinceHolidays = (db, { optional }) => {
+  optional = _parseBoolean(optional)
+
+  if (optional) {
+    return db().prepare('SELECT * FROM ProvinceHoliday;').all()
+  }
+
+  return db().prepare('SELECT * FROM ProvinceHoliday WHERE optional = 0;').all()
 }
 
 const getNextHoliday = (provinces) => {
@@ -80,13 +86,13 @@ const getNextHoliday = (provinces) => {
   })
 }
 
-const getProvincesWithHolidays = (db, { provinceId, year }) => {
+const getProvincesWithHolidays = (db, { provinceId, year, optional = false }) => {
   const provincesObj = array2Obj(getProvinces(db, { provinceId }))
   Object.values(provincesObj).map((p) => (p.holidays = []))
 
   const holidaysObj = array2Obj(getHolidays(db, { year }))
 
-  const phs = _getProvinceHolidays(db)
+  const phs = _getProvinceHolidays(db, { optional })
 
   phs.map((ph) => {
     if (provincesObj[ph.provinceId]) {
@@ -100,13 +106,13 @@ const getProvincesWithHolidays = (db, { provinceId, year }) => {
   return Object.values(provincesObj)
 }
 
-const getHolidaysWithProvinces = (db, { holidayId, federal, year }) => {
+const getHolidaysWithProvinces = (db, { holidayId, federal, year, optional = false }) => {
   const holidaysObj = array2Obj(getHolidays(db, { holidayId, federal, year }))
   Object.values(holidaysObj).map((h) => (h.provinces = []))
 
   const provincesObj = array2Obj(getProvinces(db))
 
-  const phs = _getProvinceHolidays(db)
+  const phs = _getProvinceHolidays(db, { optional })
 
   phs.map((ph) => {
     if (holidaysObj[ph.holidayId]) {
@@ -118,7 +124,7 @@ const getHolidaysWithProvinces = (db, { holidayId, federal, year }) => {
 }
 
 module.exports = {
-  _parseFederal,
+  _parseBoolean,
   getProvinces,
   getHolidays,
   getProvincesWithHolidays,
