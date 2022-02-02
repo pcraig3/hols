@@ -1,7 +1,7 @@
 openapi: 3.0.0
 info:
   title: Canada Holidays API
-  version: 1.3.2
+  version: 1.4.0
   description: 'This API lists all 30 public holidays for all 13 provinces and territories in Canada, including federal holidays.'
   contact:
     name: Paul Craig
@@ -29,7 +29,7 @@ paths:
                   message:
                     type: string
                     description: A welcome message
-                    example: 'Hello / Bonjour!'
+                    example: Hello / Bonjour!
                   _links:
                     type: object
                     properties:
@@ -63,7 +63,7 @@ paths:
               examples:
                 /:
                   value:
-                    message: 'Hello / Bonjour! Welcome to the Canada Holidays API / Bienvenue dans l’API canadienne des jours fériés'
+                    message: Hello / Bonjour! Welcome to the Canada Holidays API / Bienvenue dans l’API canadienne des jours fériés
                     _links:
                       self:
                         href: 'https://canada-holidays.ca/api/v1/'
@@ -202,6 +202,18 @@ paths:
           name: federal
           description: 'A boolean parameter. If true or 1, will return only federal holidays. If false or 0, will return no federal holidays.'
           allowEmptyValue: true
+        - schema:
+            type: string
+            enum:
+              - '1'
+              - '0'
+              - 'true'
+              - 'false'
+            default: 'false'
+          in: query
+          name: optional
+          description: 'A boolean parameter. If false or 0 (default), will return only Alberta’s legislated holidays. If true or 1, will return Alberta’s holidays, including optional holidays.'
+          allowEmptyValue: true
       tags:
         - holidays
   /api/v1/provinces:
@@ -287,6 +299,18 @@ paths:
           description: A calendar year
           name: year
           allowEmptyValue: true
+        - schema:
+            type: string
+            enum:
+              - '1'
+              - '0'
+              - 'true'
+              - 'false'
+            default: 'false'
+          in: query
+          name: optional
+          description: 'A boolean parameter. If false or 0 (default), will return only Alberta’s legislated holidays. If true or 1, will return Alberta’s holidays, including optional holidays.'
+          allowEmptyValue: true
       description: Returns provinces and territories in Canada. Each province or territory lists its associated holidays.
   '/api/v1/provinces/{provinceId}':
     get:
@@ -358,6 +382,18 @@ paths:
           in: query
           description: A calendar year
           name: year
+          allowEmptyValue: true
+        - schema:
+            type: string
+            default: 'false'
+            enum:
+              - '1'
+              - '0'
+              - 'true'
+              - 'false'
+          in: query
+          name: optional
+          description: 'A boolean parameter. If false or 0 (default), will return only Alberta’s legislated holidays. If true or 1, will return Alberta’s holidays, including optional holidays.'
           allowEmptyValue: true
       tags:
         - provinces
@@ -456,6 +492,18 @@ paths:
           description: A calendar year
           name: year
           allowEmptyValue: true
+        - schema:
+            type: string
+            default: 'false'
+            enum:
+              - '1'
+              - '0'
+              - 'true'
+              - 'false'
+          in: query
+          name: optional
+          description: 'A boolean parameter. If false or 0 (default), will return provinces for which this is a legislated holiday. If true or 1, will return provinces which optionally celebrate this holiday.'
+          allowEmptyValue: true
       tags:
         - holidays
 components:
@@ -465,25 +513,31 @@ components:
       type: object
       description: 'A Canadian holiday. Includes a name, the literal date of the holiday, the observed date of the holiday (ie, accommodating for weekends), and a list of regions that observe this holiday.'
       x-examples:
-        /holidays/27:
+        /holidays/30?optional=true:
           holiday:
-            id: 27
-            date: '2020-12-26'
+            id: 30
+            date: '2022-12-26'
             nameEn: Boxing Day
             nameFr: Lendemain de Noël
             federal: 1
-            observedDate: '2020-12-28'
+            observedDate: '2022-12-27'
             provinces:
               - id: NL
                 nameEn: Newfoundland and Labrador
                 nameFr: Terre-Neuve-et-Labrador
                 sourceLink: 'https://gist.github.com/pcraig3/81dff348ddf52777c9f918c3032531bd'
-                sourceEn: Clarification on public holidays in Newfoundland
+                sourceEn: Public holidays in Newfoundland
               - id: 'ON'
                 nameEn: Ontario
                 nameFr: Ontario
                 sourceLink: 'https://www.ontario.ca/document/your-guide-employment-standards-act-0/public-holidays'
-                sourceEn: Public holidays
+                sourceEn: Ontario Public holidays
+              - id: AB
+                nameEn: Alberta
+                nameFr: Alberta
+                sourceLink: 'https://www.alberta.ca/alberta-general-holidays.aspx#toc-1'
+                sourceEn: General holidays in Alberta
+                optional: 1
       properties:
         id:
           type: integer
@@ -500,12 +554,12 @@ components:
           type: string
           description: English name
           example: Louis Riel Day
-        name Fr:
+        nameFr:
           type: string
           description: French name
           example: Journée Louis Riel
         federal:
-          type: number
+          type: integer
           description: Whether this holiday is observed by federally-regulated industries.
           enum:
             - 1
@@ -520,6 +574,19 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Province'
+        optional:
+          type: integer
+          format: binary
+          enum:
+            - 1
+          description: 'Whether this is a province-wide statutory holiday, or one that is optional for employers.'
+      required:
+        - id
+        - date
+        - nameEn
+        - nameFr
+        - federal
+        - observedDate
     Province:
       title: Province
       type: object
@@ -631,6 +698,18 @@ components:
           type: string
           description: Name of reference page with public holidays for this region
           example: What are the general holidays in Manitoba?
+        optional:
+          type: integer
+          description: Whether this province optionally observes a given holiday.
+          format: binary
+          enum:
+            - 1
+      required:
+        - id
+        - nameFr
+        - nameEn
+        - sourceLink
+        - sourceEn
     Error:
       title: Error
       type: object
