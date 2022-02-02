@@ -305,13 +305,13 @@ describe('Test /api responses', () => {
 
   describe('for /api/v1/holidays/:holidayId path', () => {
     test('it should return a holiday for a good ID', async () => {
-      const response = await request(app).get('/api/v1/holidays/29')
+      const response = await request(app).get('/api/v1/holidays/30')
       expect(response.statusCode).toBe(200)
 
       let { holiday } = JSON.parse(response.text)
 
       expect(holiday).toMatchObject({
-        id: 29,
+        id: 30,
         date: `${currentYear}-12-26`,
         nameEn: 'Boxing Day',
         nameFr: 'Lendemain de Noël',
@@ -328,7 +328,7 @@ describe('Test /api responses', () => {
       let { error } = JSON.parse(response.text)
 
       expect(error).toMatchObject({
-        message: 'Bad Request: request.params.holidayId should be <= 29',
+        message: 'Bad Request: request.params.holidayId should be <= 30',
         status: response.statusCode,
         timestamp: expect.any(String),
       })
