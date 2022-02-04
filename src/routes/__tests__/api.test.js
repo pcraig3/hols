@@ -198,6 +198,24 @@ describe('Test /api responses', () => {
         })
       })
     })
+
+    describe('with optional holidays', () => {
+      test('it should NOT return optional holidays for a good ID: "AB"', async () => {
+        const response = await request(app).get('/api/v1/provinces/AB?optional=false')
+        expect(response.statusCode).toBe(200)
+
+        let { province } = JSON.parse(response.text)
+        expect(province.holidays.length).toBe(9)
+      })
+
+      test('it should return optional holidays for a good ID: "AB"', async () => {
+        const response = await request(app).get('/api/v1/provinces/AB?optional=true')
+        expect(response.statusCode).toBe(200)
+
+        let { province } = JSON.parse(response.text)
+        expect(province.holidays.length).toBe(12)
+      })
+    })
   })
 
   describe('for /api/v1/holidays path', () => {
@@ -304,7 +322,7 @@ describe('Test /api responses', () => {
   })
 
   describe('for /api/v1/holidays/:holidayId path', () => {
-    test('it should return a holiday for a good ID', async () => {
+    test('it should return a holiday for a good ID: 30', async () => {
       const response = await request(app).get('/api/v1/holidays/30')
       expect(response.statusCode).toBe(200)
 
@@ -318,6 +336,24 @@ describe('Test /api responses', () => {
         federal: 1,
         observedDate: `${currentYear}-12-27`,
         provinces: expect.any(Array),
+      })
+    })
+
+    describe('with optional provinces', () => {
+      test('it should NOT return optional provinces for a good ID: 30', async () => {
+        const response = await request(app).get('/api/v1/holidays/30?optional=false')
+        expect(response.statusCode).toBe(200)
+
+        let { holiday } = JSON.parse(response.text)
+        expect(holiday.provinces.length).toBe(2)
+      })
+
+      test('it should return optional provinces for a good ID: 30', async () => {
+        const response = await request(app).get('/api/v1/holidays/30?optional=true')
+        expect(response.statusCode).toBe(200)
+
+        let { holiday } = JSON.parse(response.text)
+        expect(holiday.provinces.length).toBe(3)
       })
     })
 
