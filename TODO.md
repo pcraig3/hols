@@ -8,6 +8,7 @@
 
 # DONE
 
+- Try out optional holidays for Alberta
 - Swap out problematic sqlite package for better-sqlite3
 - Update default API year to 2022, the current year
 - update the ics routes, remove the filename

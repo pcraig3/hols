@@ -45,6 +45,7 @@ const dbmw = (cb) => {
       provinceId: req.params.provinceId,
       federal: _parseFederal(req),
       year: _parseYear(req),
+      optional: req.query.optional,
     }
 
     try {
