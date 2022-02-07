@@ -6,6 +6,7 @@ const Layout = require('../components/Layout.js')
 const NextHolidayBox = require('../components/NextHolidayBox.js')
 const ProvincePicker = require('../components/ProvincePicker.js')
 const SummaryTable = require('../components/SummaryTable.js')
+const Abbr = require('../components/Abbr.js')
 const CalButton = require('../components/CalButton.js')
 const NextYearLink = require('../components/NextYearLink.js')
 const ObservedDateKey = require('../components/ObservedDateKey')
@@ -158,9 +159,13 @@ const createRows = (holidays, federal, isCurrentYear) => {
 
   return holidays.map((holiday) => {
     const row = {
-      key: html`<${ObservedDateKey} holiday=${holiday} />`,
-      value: holiday.nameEn,
-      className: '',
+      key: html`${holiday.optional
+          ? html`<sup><${Abbr} title="Optional holiday">*<//></sup> `
+          : ''}<${ObservedDateKey} holiday=${holiday} />`,
+      value: holiday.optional
+        ? html`${holiday.nameEn} (<a href="/optional-holidays-in-canada">Optional</a>)`
+        : holiday.nameEn,
+      className: holiday.optional ? 'optional' : '',
     }
 
     if (!federal && holiday.provinces) {
