@@ -93,7 +93,8 @@ const contentPageStyles = css`
     }
   }
 
-  ul {
+  ul,
+  ol {
     padding-left: ${theme.space.md};
 
     @media (${theme.mq.sm}) {
@@ -102,6 +103,16 @@ const contentPageStyles = css`
 
     @media (${theme.mq.md}) {
       padding-left: ${theme.space.xl};
+    }
+
+    li {
+      padding-bottom: ${theme.space.xxs};
+    }
+
+    &.no-space {
+      li {
+        padding-bottom: 0;
+      }
     }
   }
 

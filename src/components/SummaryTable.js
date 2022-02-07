@@ -42,17 +42,16 @@ const summaryRow = css`
   }
 
   .key {
-    font-weight: 700;
     margin-bottom: ${theme.space.xs};
 
-    summary ~ * {
-      font-weight: 400;
+    time {
+      font-weight: 700;
     }
   }
 
   .value {
     white-space: pre-wrap;
-    margin-bottom: ${theme.space.md};
+    padding-bottom: ${theme.space.md};
   }
 
   @media (${theme.mq.lg}) {

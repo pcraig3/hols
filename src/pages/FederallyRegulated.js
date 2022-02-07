@@ -31,7 +31,7 @@ const FederallyRegulated = () =>
         <p>
           Approximately 6% of Canadians work in federally regulated industries. Some examples are:
         </p>
-        <ul>
+        <ul class="no-space">
           <li>banks</li>
           <li>airlines</li>
           <li>post offices</li>

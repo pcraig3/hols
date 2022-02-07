@@ -6,10 +6,6 @@ const Layout = require('../components/Layout.js')
 const Details = require('../components/Details.js')
 
 const styles = css`
-  h1 {
-    margin: ${theme.space.xs} 0 ${theme.space.xl} 0;
-  }
-
   div {
     margin-bottom: ${theme.space.md};
   }

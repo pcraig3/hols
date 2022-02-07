@@ -71,13 +71,15 @@ const AddHolidays = ({ data: { provinces, year } }) => {
       <${Content} className=${headerStyles}>
         <h1>Add Canadian holidays to your calendar</h1>
         <p>There are 2 ways to add holidays to your calendar:</p>
-        <ul>
-          <li>Adding a “remote calendar” URL that will keep itself updated.</li>
-          <li>
-            Downloading the holidays locally and importing them into your preferred calendar
-            program.
-          </li>
-        </ul>
+        <div>
+          <ul>
+            <li>Adding a “remote calendar” URL that will keep itself updated.</li>
+            <li>
+              Downloading the holidays locally and importing them into your preferred calendar
+              program.
+            </li>
+          </ul>
+        </div>
 
         <${SummaryTable}
           title="Stream Canadian statutory holidays"
