@@ -1,14 +1,17 @@
 # TODO
 
+- Add optional holidays for Alberta
+  - To the UI
+  - To ICS downloads
 - different versions of "federal" holidays
-- figure out about optional holidays
 - add years to dates on years pages?
 - make API to return CSV format
   - page for CSV downloads
 
 # DONE
 
-- Try out optional holidays for Alberta
+- Add optional holidays for Alberta
+  - In the API
 - Swap out problematic sqlite package for better-sqlite3
 - Update default API year to 2022, the current year
 - update the ics routes, remove the filename
