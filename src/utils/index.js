@@ -40,7 +40,7 @@ const dbmw = (cb) => {
     }
 
     // allow query parameters or url parameters to be passed in
-    let options = {
+    const options = {
       holidayId: req.params.holidayId,
       provinceId: req.params.provinceId,
       federal: _parseFederal(req),

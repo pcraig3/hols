@@ -122,9 +122,7 @@ const titleStyles = css`
 `
 
 const getTitleString = (provinceName, federal, year) => {
-  return `
-    ${provinceName}${federal ? ' federal' : ''} statutory holidays in ${year}
-  `
+  return `${provinceName}${federal ? ' federal' : ''} statutory holidays in ${year}`
 }
 
 const createRows = (holidays, federal, isCurrentYear) => {
@@ -170,9 +168,9 @@ const createRows = (holidays, federal, isCurrentYear) => {
     }
 
     if (isCurrentYear) {
-      row.className = holiday.observedDate < today ? 'past' : 'upcoming'
+      row.className += holiday.observedDate < today ? ' past' : ' upcoming'
 
-      if (nextFound === false && row.className === 'upcoming') {
+      if (nextFound === false && row.className.includes('upcoming')) {
         // add "next-holiday-row" id to first upcoming holiday
         row.id = 'next-holiday-row'
         nextFound = true
