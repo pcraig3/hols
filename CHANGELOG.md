@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add page explaining Canada's optional holidays
   - Add new page to sitemap
 - Added `Abbr` component with a nicer abbreviation experience
+- Added a little toast notification soliciting feedback
 
 ### Updated
 

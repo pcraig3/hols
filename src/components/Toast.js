@@ -3,14 +3,13 @@ const { css } = require('@emotion/css')
 const { theme, horizontalPadding, insideContainer } = require('../styles')
 const Button = require('./Button')
 
-
 const styles = css`
   ${horizontalPadding};
   position: fixed;
   width: 100%;
   font-size: 90%;
   bottom: -150px;
-  transition: bottom .8s ease;
+  transition: bottom 0.8s ease;
 
   &.show {
     bottom: ${theme.space.sm};
@@ -18,13 +17,13 @@ const styles = css`
 
   > div {
     ${insideContainer};
-    background: #F3E0A4; /* FD0 */
+    background: #f3e0a4; /* FD0 */
     outline: 2px solid black;
     padding: ${theme.space.xs};
     display: flex;
     justify-content: space-between;
     align-items: baseline;
-    box-shadow: 0px 3px 15px rgba(0,0,0,0.2);
+    box-shadow: 0px 3px 15px rgba(0, 0, 0, 0.2);
 
     > button {
       min-width: 65px;
@@ -36,9 +35,12 @@ const styles = css`
 const Toast = () => {
   return html`<div class="${styles}" id="toast">
     <div class="toast">
-      <span class="toast--close">Do you have lots of meetings? <a href="https://forms.gle/7QVwkDKY7136dVn68" target="_blank" data-event="true" data-action="survey-link" data-label="survey-link-meetings">Take a 5 min survey</a> to help me with a research project.</span>
+      <span class="toast--close">New! Added ‘optional holidays’ for Alberta. <a href="https://docs.google.com/forms/d/e/1FAIpQLSc3CkX4r-lVH-Or11vo-jeKJeRkbE84e-cmgKfV6GGHt8N02g/viewform?usp=sf_link" target="_blank" data-event="true" data-action="survey-link" data-label="survey-link-meetings">Let me know</a> if you like them.</span>
 
-      <${Button} color=${{focus: 'black', accent: 'black' }} className="toast--yes" data-event="true" data-action="close-survey-link" data-label="close-survey-link-meetings">
+      <${Button} color=${{
+    focus: 'black',
+    accent: 'black',
+  }} className="toast--yes" data-event="true" data-action="close-survey-link" data-label="close-survey-link-meetings">
           Close
       </button>
     </div>
@@ -46,5 +48,3 @@ const Toast = () => {
 }
 
 module.exports = Toast
-
-
