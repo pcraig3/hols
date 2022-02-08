@@ -453,6 +453,26 @@ describe('Test ui responses', () => {
       })
     })
 
+    describe('Test /optional-holidays-in-canada response', () => {
+      test('it should return 200', async () => {
+        const response = await request(app).get('/optional-holidays-in-canada')
+        expect(response.statusCode).toBe(200)
+      })
+
+      test('it should return the h1, title, meta tag, and canonical link', async () => {
+        const response = await request(app).get('/optional-holidays-in-canada')
+        const $ = cheerio.load(response.text)
+        expect($('h1').text()).toEqual('Optional holidays in Canada')
+        expect($('title').text()).toEqual('Optional holidays in Canada — Canada Holidays')
+        expect($('meta[name="description"]').attr('content')).toEqual(
+          'Optional holidays are commonly observed but not legally mandated. Your workplace may observe optional holidays.',
+        )
+        expect($('link[rel="canonical"]').attr('href')).toEqual(
+          'https://canada-holidays.ca/optional-holidays-in-canada',
+        )
+      })
+    })
+
     describe('for a bad province ID', () => {
       test('it should return 404', async () => {
         const response = await request(app).get('/allosaurus')

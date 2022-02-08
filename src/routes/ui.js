@@ -8,6 +8,7 @@ const {
   checkProvinceIdErr,
   checkYearErr,
   checkRedirectYear,
+  albertaOptionalTrue,
   param2query,
   nextHoliday,
   pe2pei,
@@ -79,6 +80,7 @@ router.get(
   '/provinces/:provinceId',
   checkProvinceIdErr,
   checkRedirectYear,
+  albertaOptionalTrue,
   dbmw(getProvincesWithHolidays),
   (req, res) => {
     const {
@@ -296,6 +298,19 @@ router.get('/do-federal-holidays-apply-to-me', (req, res) => {
       title: 'Do federal holidays apply to me? — Canada Holidays',
       docProps: {
         meta: 'How to tell if you get federal holidays or provincial holidays in Canada.',
+        path: req.path,
+      },
+    }),
+  )
+})
+
+router.get('/optional-holidays-in-canada', (req, res) => {
+  return res.send(
+    renderPage({
+      pageComponent: 'OptionalHolidays',
+      title: 'Optional holidays in Canada — Canada Holidays',
+      docProps: {
+        meta: 'Optional holidays are commonly observed but not legally mandated. Your workplace may observe optional holidays.',
         path: req.path,
       },
     }),

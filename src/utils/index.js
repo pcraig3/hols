@@ -113,6 +113,17 @@ const checkRedirectYear = (req, res, next) => {
   next()
 }
 
+// middleware to add "optional=true" where provinceId is Alberta, if no query param is set
+const albertaOptionalTrue = (req, res, next) => {
+  const provinceId = req.params.provinceId
+
+  if (provinceId === 'AB' && req.query.optional === undefined) {
+    req.query.optional = 'true'
+  }
+
+  next()
+}
+
 /**
  * Middleware to check if this page should have a canonical link
  * If it is an error page, not a canonical link
@@ -255,6 +266,7 @@ module.exports = {
   checkProvinceIdErr,
   checkYearErr,
   checkRedirectYear,
+  albertaOptionalTrue,
   getCanonical,
   param2query,
   nextHoliday,

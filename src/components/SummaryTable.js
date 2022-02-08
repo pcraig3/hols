@@ -35,6 +35,14 @@ const summaryRow = css`
   }
 
   .key,
+  .value,
+  .value2 {
+    a {
+      color: currentColor;
+    }
+  }
+
+  .key,
   .value {
     margin: 0;
     word-wrap: break-word;
@@ -52,6 +60,10 @@ const summaryRow = css`
   .value {
     white-space: pre-wrap;
     padding-bottom: ${theme.space.md};
+  }
+
+  sup {
+    vertical-align: top;
   }
 
   @media (${theme.mq.lg}) {
@@ -83,10 +95,6 @@ const summaryRow = css`
       padding-top: ${theme.space.md};
       padding-bottom: ${theme.space.md};
       border-top: 2px solid ${theme.color.greyLight};
-
-      a {
-        color: ${theme.color.red};
-      }
     }
 
     .key {
@@ -107,10 +115,6 @@ const summaryRow2 = css`
   .value2 {
     margin: 0;
     margin-bottom: ${theme.space.md};
-
-    a {
-      color: inherit;
-    }
   }
 
   @media (${theme.mq.lg}) {

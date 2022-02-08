@@ -65,6 +65,11 @@ const styles = css`
       }
     }
   }
+
+  main sup ~ & {
+    display: inline-block;
+    padding-left: ${theme.space.xxs};
+  }
 `
 
 const Details = ({ summary, id, children, className, ...props }) => {

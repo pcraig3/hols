@@ -1,6 +1,7 @@
 const { html } = require('../utils')
 const Layout = require('../components/Layout.js')
 const Content = require('../components/Content.js')
+const Abbr = require('../components/Abbr.js')
 
 const Feedback = () =>
   html`
@@ -10,7 +11,7 @@ const Feedback = () =>
         <p>
           If you notice any wrong info or weird layouts, please${' '} get in touch. You’ll be
           helping lots of people out b/c of how crazy good my${' '}
-          <abbr title="Search Engine Optimization">SEO</abbr> is.
+          <${Abbr} title="Search Engine Optimization">SEO<//> is.
         </p>
         <p>
           On the other hand, if you <span role="img" aria-label="heart">❤️</span> my site and want
