@@ -47,6 +47,7 @@ const summaryRow = css`
     margin: 0;
     word-wrap: break-word;
     overflow-wrap: break-word;
+    vertical-align: top;
   }
 
   .key {
@@ -63,6 +64,7 @@ const summaryRow = css`
   }
 
   sup {
+    display: inline-block;
     vertical-align: top;
   }
 
