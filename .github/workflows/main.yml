@@ -31,12 +31,11 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Set up Cloud SDK
-        uses: google-github-actions/setup-gcloud@master
+      - id: auth
+        name: Authenticate to Google Cloud
+        uses: google-github-actions/auth@v0
         with:
-          project_id: ${{ env.PROJECT_ID }}
-          service_account_key: ${{ secrets.GCP_SA_KEY_JSON }}
-          export_default_credentials: true
+          credentials_json: ${{ secrets.GCP_SA_KEY_JSON }}
 
       - name: Authorize Docker push
         run: gcloud auth configure-docker
@@ -48,7 +47,7 @@ jobs:
 
       - name: Deploy to Cloud Run
         id: deploy
-        uses: google-github-actions/deploy-cloudrun@v0.4.0
+        uses: google-github-actions/deploy-cloudrun@v0
         with:
           service: ${{ env.SERVICE_NAME }}
           image: gcr.io/${{ env.PROJECT_ID }}/${{ env.SERVICE_NAME }}:${{  github.sha }}
