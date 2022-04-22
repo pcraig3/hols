@@ -9,6 +9,7 @@
 
 # DONE
 
+- Add 2017, 2025, 2026
 - Add optional holidays for Alberta
   - In the API
   - To the UI

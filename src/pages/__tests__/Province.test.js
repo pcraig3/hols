@@ -57,11 +57,11 @@ describe('Province page', () => {
   })
 
   test('does not render next year link', () => {
-    const $ = renderPage(2024)
+    const $ = renderPage(2026)
     expect($('h1').length).toBe(1)
     expect($('h1 .visible').text()).toEqual('Canada’s next holiday\u00a0isDecember 26*Boxing Day')
     expect($('h2').length).toBe(1)
-    expect($('h2').text()).toEqual('Canada statutory holidays in 2024')
+    expect($('h2').text()).toEqual('Canada statutory holidays in 2026')
     // check that the link to next year's holidays is NOT visible
     expect($('a.link__next-year').length).toBe(0)
   })
