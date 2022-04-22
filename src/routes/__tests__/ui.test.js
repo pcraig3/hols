@@ -132,7 +132,7 @@ describe('Test ui responses', () => {
           })
         })
 
-        const BAD_YEARS = ['2016', '2017', '2025', '2026', '1', 'false', 'diplodocus']
+        const BAD_YEARS = ['2016', '2017', '2027', '2028', '1', 'false', 'diplodocus']
         BAD_YEARS.map((badYear) => {
           test(`it should return no year path for an invalid year: "${badYear}`, async () => {
             const response = await request(app).post('/provinces').send({ badYear })
@@ -311,7 +311,7 @@ describe('Test ui responses', () => {
             })
           })
 
-          const INVALID_YEARS = [2016, 2017, 2025, 2026]
+          const INVALID_YEARS = [2015, 2016, 2027, 2028]
           INVALID_YEARS.map((invalidYear) => {
             test(`it should return 400 for url: "${url}" and year: "${invalidYear}"`, async () => {
               const response = await request(app).get(`${url}/${invalidYear}`)
@@ -321,7 +321,7 @@ describe('Test ui responses', () => {
         })
 
         describe('with "year" query params', () => {
-          const INVALID_YEARS = [-1, 0, 1, 2017, 2025, 'pterodactyl']
+          const INVALID_YEARS = [-1, 0, 1, 2016, 2027, 'pterodactyl']
           INVALID_YEARS.map((invalidYear) => {
             test(`it should return 200 for url: "${url}" and a bad query param: "${invalidYear}"`, async () => {
               const response = await request(app).get(`${url}?year=${invalidYear}`)

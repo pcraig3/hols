@@ -14,7 +14,7 @@ describe('<ProvincePicker>', () => {
     const $ = renderProvincePicker()
     expect($('label').text()).toEqual('View by regionView by year')
     expect($('select').length).toBe(2)
-    expect($('select option').length).toBe(23)
+    expect($('select option').length).toBe(26)
     expect($('select option').text()).toEqual(
       `NationwideFederal──────────AlbertaBritish ColumbiaManitobaNew BrunswickNewfoundland and LabradorNova ScotiaNorthwest TerritoriesNunavutOntarioPrince Edward IslandQuebecSaskatchewanYukon${ALLOWED_YEARS.join(
         '',

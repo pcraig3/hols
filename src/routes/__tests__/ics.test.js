@@ -53,7 +53,7 @@ describe('Test ics responses', () => {
       })
     })
 
-    const BAD_YEARS = ['2016', '2017', '2025', '2026']
+    const BAD_YEARS = ['2015', '2016', '2027', '2028']
     BAD_YEARS.map((badYear) => {
       test(`it should return 302 for unsupported year "/ics/${badYear}"`, async () => {
         const response = await request(app).get(`/ics/${badYear}`)
@@ -96,7 +96,7 @@ describe('Test ics responses', () => {
         })
       })
 
-      const BAD_YEARS = ['2016', '2017', '2025', '2026']
+      const BAD_YEARS = ['2015', '2016', '2027', '2028']
       BAD_YEARS.map((badYear) => {
         test(`it should return 302 for unsupported year "/ics/${path}/${badYear}"`, async () => {
           const response = await request(app).get(`/ics/${path}/${badYear}`)

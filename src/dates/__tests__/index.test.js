@@ -1,6 +1,36 @@
 const { getLiteralDate, getObservedDate, getCurrentHolidayYear } = require('../index')
 
 describe('Test getLiteralDate', () => {
+  describe('for 2018', () => {
+    const days2018 = [
+      { str: 'January 1', iso: '2018-01-01' },
+      { str: 'Third Monday in February', iso: '2018-02-19' },
+      { str: 'Monday March 17', iso: '2018-03-17' },
+      { str: 'Friday before Easter Day', iso: '2018-03-30' },
+      { str: 'Monday after Easter Day', iso: '2018-04-02' },
+      { str: 'Monday near April 23', iso: '2018-04-23' },
+      { str: 'Monday before May 25', iso: '2018-05-21' },
+      { str: 'June 21', iso: '2018-06-21' },
+      { str: 'June 24', iso: '2018-06-24' },
+      { str: 'Monday near June 24', iso: '2018-06-24' },
+      { str: 'July 1', iso: '2018-07-01' },
+      { str: 'Monday near July 12', iso: '2018-07-12' },
+      { str: 'First Monday in August', iso: '2018-08-06' },
+      { str: 'Third Monday in August', iso: '2018-08-20' },
+      { str: 'First Monday in September', iso: '2018-09-03' },
+      { str: 'Second Monday in October', iso: '2018-10-08' },
+      { str: 'November 11', iso: '2018-11-11' },
+      { str: 'December 25', iso: '2018-12-25' },
+      { str: 'December 26', iso: '2018-12-26' },
+    ]
+
+    days2018.map((day) => {
+      test(`returns correct 2018 ISO date string for: "${day.str}"`, () => {
+        expect(getLiteralDate(day.str, 2018)).toEqual(day.iso)
+      })
+    })
+  })
+
   describe('for 2019', () => {
     const days2019 = [
       { str: 'January 1', iso: '2019-01-01' },
@@ -126,9 +156,163 @@ describe('Test getLiteralDate', () => {
       })
     })
   })
+
+  describe('for 2023', () => {
+    const days2023 = [
+      { str: 'January 1', iso: '2023-01-01' },
+      { str: 'Third Monday in February', iso: '2023-02-20' },
+      { str: 'Monday March 17', iso: '2023-03-17' },
+      { str: 'Friday before Easter Day', iso: '2023-04-07' },
+      { str: 'Monday after Easter Day', iso: '2023-04-10' },
+      { str: 'Monday near April 23', iso: '2023-04-23' },
+      { str: 'Monday before May 25', iso: '2023-05-22' },
+      { str: 'June 21', iso: '2023-06-21' },
+      { str: 'Monday near June 24', iso: '2023-06-24' },
+      { str: 'June 24', iso: '2023-06-24' },
+      { str: 'July 1', iso: '2023-07-01' },
+      { str: 'Monday near July 12', iso: '2023-07-12' },
+      { str: 'First Monday in August', iso: '2023-08-07' },
+      { str: 'Third Monday in August', iso: '2023-08-21' },
+      { str: 'First Monday in September', iso: '2023-09-04' },
+      { str: 'September 30', iso: '2023-09-30' },
+      { str: 'Second Monday in October', iso: '2023-10-09' },
+      { str: 'November 11', iso: '2023-11-11' },
+      { str: 'December 25', iso: '2023-12-25' },
+      { str: 'December 26', iso: '2023-12-26' },
+    ]
+
+    days2023.map((day) => {
+      test(`returns correct 2023 ISO date string for: "${day.str}"`, () => {
+        expect(getLiteralDate(day.str, 2023)).toEqual(day.iso)
+      })
+    })
+  })
+
+  describe('for 2024', () => {
+    const days2024 = [
+      { str: 'January 1', iso: '2024-01-01' },
+      { str: 'Third Monday in February', iso: '2024-02-19' },
+      { str: 'Monday March 17', iso: '2024-03-17' },
+      { str: 'Friday before Easter Day', iso: '2024-03-29' },
+      { str: 'Monday after Easter Day', iso: '2024-04-01' },
+      { str: 'Monday near April 23', iso: '2024-04-23' },
+      { str: 'Monday before May 25', iso: '2024-05-20' },
+      { str: 'June 21', iso: '2024-06-21' },
+      { str: 'Monday near June 24', iso: '2024-06-24' },
+      { str: 'June 24', iso: '2024-06-24' },
+      { str: 'July 1', iso: '2024-07-01' },
+      { str: 'Monday near July 12', iso: '2024-07-12' },
+      { str: 'First Monday in August', iso: '2024-08-05' },
+      { str: 'Third Monday in August', iso: '2024-08-19' },
+      { str: 'First Monday in September', iso: '2024-09-02' },
+      { str: 'September 30', iso: '2024-09-30' },
+      { str: 'Second Monday in October', iso: '2024-10-14' },
+      { str: 'November 11', iso: '2024-11-11' },
+      { str: 'December 25', iso: '2024-12-25' },
+      { str: 'December 26', iso: '2024-12-26' },
+    ]
+
+    days2024.map((day) => {
+      test(`returns correct 2024 ISO date string for: "${day.str}"`, () => {
+        expect(getLiteralDate(day.str, 2024)).toEqual(day.iso)
+      })
+    })
+  })
+
+  describe('for 2025', () => {
+    const days2025 = [
+      { str: 'January 1', iso: '2025-01-01' },
+      { str: 'Third Monday in February', iso: '2025-02-17' },
+      { str: 'Monday March 17', iso: '2025-03-17' },
+      { str: 'Friday before Easter Day', iso: '2025-04-18' },
+      { str: 'Monday after Easter Day', iso: '2025-04-21' },
+      { str: 'Monday near April 23', iso: '2025-04-23' },
+      { str: 'Monday before May 25', iso: '2025-05-19' },
+      { str: 'June 21', iso: '2025-06-21' },
+      { str: 'Monday near June 24', iso: '2025-06-24' },
+      { str: 'June 24', iso: '2025-06-24' },
+      { str: 'July 1', iso: '2025-07-01' },
+      { str: 'Monday near July 12', iso: '2025-07-12' },
+      { str: 'First Monday in August', iso: '2025-08-04' },
+      { str: 'Third Monday in August', iso: '2025-08-18' },
+      { str: 'First Monday in September', iso: '2025-09-01' },
+      { str: 'September 30', iso: '2025-09-30' },
+      { str: 'Second Monday in October', iso: '2025-10-13' },
+      { str: 'November 11', iso: '2025-11-11' },
+      { str: 'December 25', iso: '2025-12-25' },
+      { str: 'December 26', iso: '2025-12-26' },
+    ]
+
+    days2025.map((day) => {
+      test(`returns correct 2025 ISO date string for: "${day.str}"`, () => {
+        expect(getLiteralDate(day.str, 2025)).toEqual(day.iso)
+      })
+    })
+  })
+
+  describe('for 2026', () => {
+    const days2026 = [
+      { str: 'January 1', iso: '2026-01-01' },
+      { str: 'Third Monday in February', iso: '2026-02-16' },
+      { str: 'Monday March 17', iso: '2026-03-17' },
+      { str: 'Friday before Easter Day', iso: '2026-04-03' },
+      { str: 'Monday after Easter Day', iso: '2026-04-06' },
+      { str: 'Monday near April 23', iso: '2026-04-23' },
+      { str: 'Monday before May 25', iso: '2026-05-18' },
+      { str: 'June 21', iso: '2026-06-21' },
+      { str: 'Monday near June 24', iso: '2026-06-24' },
+      { str: 'June 24', iso: '2026-06-24' },
+      { str: 'July 1', iso: '2026-07-01' },
+      { str: 'Monday near July 12', iso: '2026-07-12' },
+      { str: 'First Monday in August', iso: '2026-08-03' },
+      { str: 'Third Monday in August', iso: '2026-08-17' },
+      { str: 'First Monday in September', iso: '2026-09-07' },
+      { str: 'September 30', iso: '2026-09-30' },
+      { str: 'Second Monday in October', iso: '2026-10-12' },
+      { str: 'November 11', iso: '2026-11-11' },
+      { str: 'December 25', iso: '2026-12-25' },
+      { str: 'December 26', iso: '2026-12-26' },
+    ]
+
+    days2026.map((day) => {
+      test(`returns correct 2026 ISO date string for: "${day.str}"`, () => {
+        expect(getLiteralDate(day.str, 2026)).toEqual(day.iso)
+      })
+    })
+  })
 })
 
 describe('Test getObservedDate', () => {
+  describe('for 2018', () => {
+    const days2018 = [
+      { str: 'January 1', iso: '2018-01-01' },
+      { str: 'Third Monday in February', iso: '2018-02-19' },
+      { str: 'Monday March 17', iso: '2018-03-12' },
+      { str: 'Friday before Easter Day', iso: '2018-03-30' },
+      { str: 'Monday after Easter Day', iso: '2018-04-02' },
+      { str: 'Monday near April 23', iso: '2018-04-23' },
+      { str: 'Monday before May 25', iso: '2018-05-21' },
+      { str: 'June 21', iso: '2018-06-21' },
+      { str: 'June 24', iso: '2018-06-25' },
+      { str: 'Monday near June 24', iso: '2018-06-25' },
+      { str: 'July 1', iso: '2018-07-02' },
+      { str: 'Monday near July 12', iso: '2018-07-09' },
+      { str: 'First Monday in August', iso: '2018-08-06' },
+      { str: 'Third Monday in August', iso: '2018-08-20' },
+      { str: 'First Monday in September', iso: '2018-09-03' },
+      { str: 'Second Monday in October', iso: '2018-10-08' },
+      { str: 'November 11', iso: '2018-11-12' },
+      { str: 'December 25', iso: '2018-12-25' },
+      { str: 'December 26', iso: '2018-12-26' },
+    ]
+
+    days2018.map((day) => {
+      test(`returns correct 2018 ISO date string for: "${day.str}"`, () => {
+        expect(getObservedDate(day.str, 2018)).toEqual(day.iso)
+      })
+    })
+  })
+
   describe('for 2019', () => {
     const days2019 = [
       { str: 'January 1', iso: '2019-01-01' },
@@ -297,7 +481,7 @@ describe('Test getObservedDate', () => {
       { str: 'Monday before May 25', iso: '2024-05-20' },
       { str: 'June 21', iso: '2024-06-21' },
       { str: 'Monday near June 24', iso: '2024-06-24' },
-      { str: 'June 24', iso: '2024-06-24' }, // this one seems wrong
+      { str: 'June 24', iso: '2024-06-24' },
       { str: 'July 1', iso: '2024-07-01' },
       { str: 'Monday near July 12', iso: '2024-07-15' },
       { str: 'First Monday in August', iso: '2024-08-05' },
@@ -313,6 +497,68 @@ describe('Test getObservedDate', () => {
     days2024.map((day) => {
       test(`returns correct 2024 ISO date string for: "${day.str}"`, () => {
         expect(getObservedDate(day.str, 2024)).toEqual(day.iso)
+      })
+    })
+  })
+
+  describe('for 2025', () => {
+    const days2025 = [
+      { str: 'January 1', iso: '2025-01-01' },
+      { str: 'Third Monday in February', iso: '2025-02-17' },
+      { str: 'Monday March 17', iso: '2025-03-17' },
+      { str: 'Friday before Easter Day', iso: '2025-04-18' },
+      { str: 'Monday after Easter Day', iso: '2025-04-21' },
+      { str: 'Monday near April 23', iso: '2025-04-21' },
+      { str: 'Monday before May 25', iso: '2025-05-19' },
+      { str: 'June 21', iso: '2025-06-21' },
+      { str: 'Monday near June 24', iso: '2025-06-23' },
+      { str: 'June 24', iso: '2025-06-24' },
+      { str: 'July 1', iso: '2025-07-01' },
+      { str: 'Monday near July 12', iso: '2025-07-14' },
+      { str: 'First Monday in August', iso: '2025-08-04' },
+      { str: 'Third Monday in August', iso: '2025-08-18' },
+      { str: 'First Monday in September', iso: '2025-09-01' },
+      { str: 'September 30', iso: '2025-09-30' },
+      { str: 'Second Monday in October', iso: '2025-10-13' },
+      { str: 'November 11', iso: '2025-11-11' },
+      { str: 'December 25', iso: '2025-12-25' },
+      { str: 'December 26', iso: '2025-12-26' },
+    ]
+
+    days2025.map((day) => {
+      test(`returns correct 2025 ISO date string for: "${day.str}"`, () => {
+        expect(getObservedDate(day.str, 2025)).toEqual(day.iso)
+      })
+    })
+  })
+
+  describe('for 2026', () => {
+    const days2026 = [
+      { str: 'January 1', iso: '2026-01-01' },
+      { str: 'Third Monday in February', iso: '2026-02-16' },
+      { str: 'Monday March 17', iso: '2026-03-16' },
+      { str: 'Friday before Easter Day', iso: '2026-04-03' },
+      { str: 'Monday after Easter Day', iso: '2026-04-06' },
+      { str: 'Monday near April 23', iso: '2026-04-20' },
+      { str: 'Monday before May 25', iso: '2026-05-18' },
+      { str: 'June 21', iso: '2026-06-21' },
+      { str: 'Monday near June 24', iso: '2026-06-22' },
+      { str: 'June 24', iso: '2026-06-24' },
+      { str: 'July 1', iso: '2026-07-01' },
+      { str: 'Monday near July 12', iso: '2026-07-13' },
+      { str: 'First Monday in August', iso: '2026-08-03' },
+      { str: 'Third Monday in August', iso: '2026-08-17' },
+      { str: 'First Monday in September', iso: '2026-09-07' },
+      { str: 'September 30', iso: '2026-09-30' },
+      { str: 'Second Monday in October', iso: '2026-10-12' },
+      { str: 'November 11', iso: '2026-11-11' },
+      { str: 'December 25', iso: '2026-12-25' },
+      { str: 'December 26', iso: '2026-12-28' },
+    ]
+
+    days2026.map((day) => {
+      test(`returns correct 2026 ISO date string for: "${day.str}"`, () => {
+        expect(getObservedDate(day.str, 2026)).toEqual(day.iso)
       })
     })
   })
