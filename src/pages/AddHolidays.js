@@ -201,7 +201,7 @@ const AddHolidays = ({ data: { provinces, year } }) => {
         <ol>
           <li>
             Clicking a button on this page will download an <code>.ics</code> file for
-            ${getCurrentHolidayYear()}
+            ${' '}${getCurrentHolidayYear()}
           </li>
           <li>Double-click the file (or drag it into your preferred calendar)</li>
           <li>Confirm you want to import ’em</li>
