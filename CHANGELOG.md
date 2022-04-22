@@ -17,6 +17,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Updated
 
 - API spec updated for new years again
+- Added a bunch of tests for the new dates
 - Updated sitemap with new days
 
 ## [3.13.2] - 2022-02-15
