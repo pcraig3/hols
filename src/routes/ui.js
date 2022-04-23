@@ -8,7 +8,7 @@ const {
   checkProvinceIdErr,
   checkYearErr,
   checkRedirectYear,
-  albertaOptionalTrue,
+  optionalTrue,
   param2query,
   nextHoliday,
   pe2pei,
@@ -80,7 +80,7 @@ router.get(
   '/provinces/:provinceId',
   checkProvinceIdErr,
   checkRedirectYear,
-  albertaOptionalTrue,
+  optionalTrue,
   dbmw(getProvincesWithHolidays),
   (req, res) => {
     const {

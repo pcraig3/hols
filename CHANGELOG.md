@@ -12,6 +12,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add optional holidays for BC to the API
   - Again, they don't show up by default unless you request them using a query parameter
 
+### Updated
+
+- Add optional holidays to UI for BC
 
 ## [3.14.0] - 2022-04-22
 

@@ -113,11 +113,11 @@ const checkRedirectYear = (req, res, next) => {
   next()
 }
 
-// middleware to add "optional=true" where provinceId is Alberta, if no query param is set
-const albertaOptionalTrue = (req, res, next) => {
+// middleware to add "optional=true" where provinceId is Alberta or BC, if no query param is set
+const optionalTrue = (req, res, next) => {
   const provinceId = req.params.provinceId
 
-  if (provinceId === 'AB' && req.query.optional === undefined) {
+  if ((provinceId === 'AB' || provinceId === 'BC') && req.query.optional === undefined) {
     req.query.optional = 'true'
   }
 
@@ -266,7 +266,7 @@ module.exports = {
   checkProvinceIdErr,
   checkYearErr,
   checkRedirectYear,
-  albertaOptionalTrue,
+  optionalTrue,
   getCanonical,
   param2query,
   nextHoliday,
