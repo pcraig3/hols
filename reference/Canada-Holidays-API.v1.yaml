@@ -538,6 +538,12 @@ components:
                 sourceLink: 'https://www.alberta.ca/alberta-general-holidays.aspx#toc-1'
                 sourceEn: General holidays in Alberta
                 optional: 1
+              - id: BC
+                nameEn: British Columbia
+                nameFr: Colombie-Britannique
+                sourceLink: 'https://www2.gov.bc.ca/gov/content/health/practitioner-professional-resources/msp/claim-submission-payment/designated-holidays-and-close-off-dates'
+                sourceEn: Government Holidays in British Columbia
+                optional: 1
       properties:
         id:
           type: integer
