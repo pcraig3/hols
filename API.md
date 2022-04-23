@@ -59,11 +59,11 @@ There are 2 query parameters values you can use. Probably not on the root route 
 
 You can combine them and they will work (eg, `/api/v1/holidays?year=2021&federal=true`).
 
-##### Experimental query parameter
+##### 'Optional' query parameter
 
-There is 1 experimental query parameter that currently applies only to Alberta. <a href="https://www.alberta.ca/alberta-general-holidays.aspx#jumplinks-2" target="_blank">Alberta's official holidays page lists "optional" holidays</a>, so I am making them available via the API.
+There is 1 optional query parameter that currently applies only to Alberta and British Columbia. <a href="https://www.alberta.ca/alberta-general-holidays.aspx#jumplinks-2" target="_blank">Alberta's official holidays page lists "optional" holidays</a>, and <a href="https://www2.gov.bc.ca/gov/content/health/practitioner-professional-resources/msp/claim-submission-payment/designated-holidays-and-close-off-dates" target="_blank">British Columbia's</a> is pretty close as well, so I am making them available via the API.
 
-- `?optional=true|1|false|0`. `true` or `1` returns all Alberta holidays, including optional holidays; `false` or `0` returns Alberta holidays as per usual: this is equivalent to not using "optional" at all.
+- `?optional=true|1|false|0`. `true` or `1` returns all Alberta and BC holidays, including optional holidays; `false` or `0` returns Alberta and BC holidays as per usual: this is equivalent to not using "optional" at all.
 
 Optional holidays don't show up by default, so existing calls won’t be affected.
 
