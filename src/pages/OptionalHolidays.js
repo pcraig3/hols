@@ -33,7 +33,11 @@ const OptionalHolidays = () =>
           </ul>
         </aside>
 
-        <p>Back to <a href="/provinces/AB">Alberta holidays</a>.</p>
+        <p>Back to:</p>
+        <ul>
+          <li><a href="/provinces/AB">Alberta holidays</a></li>
+          <li><a href="/provinces/BC">British Columbia holidays</a></li>
+        </ul>
 
         <h2>How are statutory holidays different from optional holidays?</h2>
         <p>

@@ -215,6 +215,22 @@ describe('Test /api responses', () => {
         let { province } = JSON.parse(response.text)
         expect(province.holidays.length).toBe(12)
       })
+
+      test('it should NOT return optional holidays for a good ID: "BC"', async () => {
+        const response = await request(app).get('/api/v1/provinces/BC?optional=false')
+        expect(response.statusCode).toBe(200)
+
+        let { province } = JSON.parse(response.text)
+        expect(province.holidays.length).toBe(10)
+      })
+
+      test('it should return optional holidays for a good ID: "BC"', async () => {
+        const response = await request(app).get('/api/v1/provinces/BC?optional=true')
+        expect(response.statusCode).toBe(200)
+
+        let { province } = JSON.parse(response.text)
+        expect(province.holidays.length).toBe(13)
+      })
     })
   })
 
@@ -353,7 +369,7 @@ describe('Test /api responses', () => {
         expect(response.statusCode).toBe(200)
 
         let { holiday } = JSON.parse(response.text)
-        expect(holiday.provinces.length).toBe(3)
+        expect(holiday.provinces.length).toBe(4)
       })
     })
 
