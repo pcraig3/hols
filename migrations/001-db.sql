@@ -39,7 +39,7 @@ INSERT INTO Province (id, nameEn, nameFr) VALUES ('QC', 'Quebec', 'Québec');
 INSERT INTO Province (id, nameEn, nameFr) VALUES ('SK', 'Saskatchewan', 'Saskatchewan');
 INSERT INTO Province (id, nameEn, nameFr) VALUES ('YT', 'Yukon', 'Yukon');
 
-UPDATE Province SET sourceEn = 'General holidays in Alberta', sourceLink = 'https://www.alberta.ca/alberta-general-holidays.aspx#toc-1' WHERE id = 'AB';
+UPDATE Province SET sourceEn = 'General holidays in Alberta', sourceLink = 'https://www.alberta.ca/alberta-general-holidays.aspx#jumplinks-1' WHERE id = 'AB';
 UPDATE Province SET sourceEn = 'Statutory Holidays in British Columbia', sourceLink = 'https://www2.gov.bc.ca/gov/content/employment-business/employment-standards-advice/employment-standards/statutory-holidays#body' WHERE id = 'BC';
 UPDATE Province SET sourceEn = 'General holidays in Manitoba', sourceLink = 'https://www.gov.mb.ca/labour/standards/doc,gen-holidays-after-april-30-07,factsheet.html#q12' WHERE id = 'MB';
 UPDATE Province SET sourceEn = '10 prescribed days of rest', sourceLink = 'https://www2.gnb.ca/content/gnb/en/departments/elg/local_government/content/governance/content/days_of_rest_act/faq.html#2' WHERE id = 'NB';

@@ -105,7 +105,7 @@ paths:
                           - id: AB
                             nameEn: Alberta
                             nameFr: Alberta
-                            sourceLink: 'https://www.alberta.ca/alberta-general-holidays.aspx#toc-1'
+                            sourceLink: 'https://www.alberta.ca/alberta-general-holidays.aspx#jumplinks-1'
                             sourceEn: General holidays in Alberta
                           - id: BC
                             nameEn: British Columbia
@@ -623,7 +623,7 @@ paths:
                         - id: AB
                           nameEn: Alberta
                           nameFr: Alberta
-                          sourceLink: 'https://www.alberta.ca/alberta-general-holidays.aspx#toc-1'
+                          sourceLink: 'https://www.alberta.ca/alberta-general-holidays.aspx#jumplinks-1'
                           sourceEn: General holidays in Alberta
                           optional: 1
                         - id: BC
@@ -709,7 +709,7 @@ components:
               - id: AB
                 nameEn: Alberta
                 nameFr: Alberta
-                sourceLink: 'https://www.alberta.ca/alberta-general-holidays.aspx#toc-1'
+                sourceLink: 'https://www.alberta.ca/alberta-general-holidays.aspx#jumplinks-1'
                 sourceEn: General holidays in Alberta
                 optional: 1
               - id: BC
