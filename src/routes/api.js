@@ -40,6 +40,11 @@ v1Router.get('/holidays', dbmw(getHolidaysWithProvinces), (req, res) => {
 })
 
 v1Router.get('/holidays/:holidayId', dbmw(getHolidaysWithProvinces), (req, res) => {
+  // optional holidays are not returned by default, so redirect to the "optional=true" param
+  if (!res.locals.rows.length && !req.query.optional) {
+    return res.redirect(301, `/api/v1/holidays/${req.params.holidayId}?optional=true`)
+  }
+
   return res.send({ holiday: res.locals.rows[0] })
 })
 

@@ -126,7 +126,12 @@ const getHolidaysWithProvinces = (db, { holidayId, federal, year, optional }) =>
     }
   })
 
-  return Object.values(holidaysObj)
+  // loop through holidays and remove any with empty provinces that are not federal
+  const holidays = Object.values(holidaysObj).filter((h) => {
+    return h.provinces.length !== 0 || h.federal
+  })
+
+  return holidays
 }
 
 module.exports = {

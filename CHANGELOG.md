@@ -5,6 +5,26 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.16.0] - 2022-04-23
+
+### Added
+
+- Add optional holidays for Manitoba to the API
+- Add optional holidays for Ontario to the API
+
+### Updated
+
+- Add optional holidays to UI for Manitoba
+- Add optional holidays to UI for Ontario
+- No longer return optional holidays with no provinces for the generic /holidays endpoint
+  - This removes them from the home page, where they were just floating
+
+### Fixed
+
+- Corrected spelling for "Civic holiday" (the worst named for sure) in French
+- Same for Heritage day, but that one was just lowercasing a letter
+- Updated link for Alberta's public holidays page, as they've updated it slightly
+
 ## [3.15.0] - 2022-04-23
 
 ### Added
