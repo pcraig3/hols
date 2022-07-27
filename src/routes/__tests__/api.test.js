@@ -200,52 +200,40 @@ describe('Test /api responses', () => {
     })
 
     describe('with optional holidays', () => {
-      test('it should NOT return optional holidays for a good ID: "AB"', async () => {
-        const response = await request(app).get('/api/v1/provinces/AB?optional=false')
-        expect(response.statusCode).toBe(200)
+      const optionalProvinces = [
+        {
+          province: 'AB',
+          statTotal: 9,
+          optionalTotal: 12,
+        },
+        {
+          province: 'BC',
+          statTotal: 10,
+          optionalTotal: 13,
+        },
+        {
+          province: 'ON',
+          statTotal: 9,
+          optionalTotal: 12,
+        },
+      ]
 
-        let { province } = JSON.parse(response.text)
-        expect(province.holidays.length).toBe(9)
-      })
+      optionalProvinces.map((op) => {
+        test(`it should NOT return optional holidays with ?optional=false for a good ID: ${op.province}`, async () => {
+          const response = await request(app).get(`/api/v1/provinces/${op.province}?optional=false`)
+          expect(response.statusCode).toBe(200)
 
-      test('it should return optional holidays for a good ID: "AB"', async () => {
-        const response = await request(app).get('/api/v1/provinces/AB?optional=true')
-        expect(response.statusCode).toBe(200)
+          let { province } = JSON.parse(response.text)
+          expect(province.holidays.length).toBe(op.statTotal)
+        })
 
-        let { province } = JSON.parse(response.text)
-        expect(province.holidays.length).toBe(12)
-      })
+        test(`it should return optional holidays with ?optional=true for a good ID: ${op.province}`, async () => {
+          const response = await request(app).get(`/api/v1/provinces/${op.province}?optional=true`)
+          expect(response.statusCode).toBe(200)
 
-      test('it should NOT return optional holidays for a good ID: "BC"', async () => {
-        const response = await request(app).get('/api/v1/provinces/BC?optional=false')
-        expect(response.statusCode).toBe(200)
-
-        let { province } = JSON.parse(response.text)
-        expect(province.holidays.length).toBe(10)
-      })
-
-      test('it should return optional holidays for a good ID: "BC"', async () => {
-        const response = await request(app).get('/api/v1/provinces/BC?optional=true')
-        expect(response.statusCode).toBe(200)
-
-        let { province } = JSON.parse(response.text)
-        expect(province.holidays.length).toBe(13)
-      })
-
-      test('it should NOT return optional holidays for a good ID: "MB"', async () => {
-        const response = await request(app).get('/api/v1/provinces/MB?optional=false')
-        expect(response.statusCode).toBe(200)
-
-        let { province } = JSON.parse(response.text)
-        expect(province.holidays.length).toBe(8)
-      })
-
-      test('it should return optional holidays for a good ID: "MB"', async () => {
-        const response = await request(app).get('/api/v1/provinces/MB?optional=true')
-        expect(response.statusCode).toBe(200)
-
-        let { province } = JSON.parse(response.text)
-        expect(province.holidays.length).toBe(13)
+          let { province } = JSON.parse(response.text)
+          expect(province.holidays.length).toBe(op.optionalTotal)
+        })
       })
     })
   })
