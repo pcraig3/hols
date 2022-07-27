@@ -117,7 +117,10 @@ const checkRedirectYear = (req, res, next) => {
 const optionalTrue = (req, res, next) => {
   const provinceId = req.params.provinceId
 
-  if ((provinceId === 'AB' || provinceId === 'BC') && req.query.optional === undefined) {
+  if (
+    (provinceId === 'AB' || provinceId === 'BC' || provinceId === 'MB') &&
+    req.query.optional === undefined
+  ) {
     req.query.optional = 'true'
   }
 

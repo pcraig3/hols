@@ -1,6 +1,6 @@
 # Canada Holidays API
 
-The <a href="https://canada-holidays.ca/api/v1/" target="_blank">Canada Holidays API</a> lists all 30 public holidays for all 13 provinces and territories in Canada, including federal holidays.
+The <a href="https://canada-holidays.ca/api/v1/" target="_blank">Canada Holidays API</a> lists all 31 public holidays for all 13 provinces and territories in Canada, including federal holidays.
 
 **👉 <a href="https://canada-holidays.ca/api/v1/" target="_blank">https://canada-holidays.ca/api/v1/</a>**
 
@@ -52,7 +52,7 @@ None of the response object keys ever contain `null` values.
 
 #### Query parameters
 
-There are 2 query parameters values you can use. Probably not on the root route but on others they will work.
+There are 2 (½) query parameters values you can use. Probably not on the root route but on others they will work.
 
 1. `?year=2017|2018|2019|2020|2021|2022|2023|2024|2025|2026`. Defaults to current year.
 2. `?federal=true|1|false|0`. `true` or `1` returns only federal holidays; `false` or `0` returns _everything but_ federal holidays.
@@ -61,9 +61,9 @@ You can combine them and they will work (eg, `/api/v1/holidays?year=2021&federal
 
 ##### 'Optional' query parameter
 
-There is 1 optional query parameter that currently applies only to Alberta and British Columbia. <a href="https://www.alberta.ca/alberta-general-holidays.aspx#jumplinks-2" target="_blank">Alberta's official holidays page lists "optional" holidays</a>, and <a href="https://www2.gov.bc.ca/gov/content/health/practitioner-professional-resources/msp/claim-submission-payment/designated-holidays-and-close-off-dates" target="_blank">British Columbia's</a> is pretty close as well, so I am making them available via the API.
+There is 1 optional query parameter that currently applies only to Alberta, British Columbia, and Manitoba. <a href="https://www.alberta.ca/alberta-general-holidays.aspx#jumplinks-2" target="_blank">Alberta's official holidays page lists "optional" holidays</a>, and <a href="https://www2.gov.bc.ca/gov/content/health/practitioner-professional-resources/msp/claim-submission-payment/designated-holidays-and-close-off-dates" target="_blank">British Columbia</a> and <a href="https://www.gov.mb.ca/labour/standards/doc,gen-holidays-after-april-30-07,factsheet.html#q13" target="_blank">Manitoba</a> both do something similar, so I am making them available via the API.
 
-- `?optional=true|1|false|0`. `true` or `1` returns all Alberta and BC holidays, including optional holidays; `false` or `0` returns Alberta and BC holidays as per usual: this is equivalent to not using "optional" at all.
+- `?optional=true|1|false|0`. `true` or `1` returns all Alberta/BC/MB holidays, including optional holidays; `false` or `0` returns Alberta/BC/MB holidays as per usual: this is equivalent to not using "optional" at all.
 
 Optional holidays don't show up by default, so existing calls won’t be affected.
 
