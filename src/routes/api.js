@@ -2,7 +2,6 @@ const express = require('express')
 const apiRouter = express.Router()
 const v1Router = express.Router()
 
-const cors = require('cors')
 const path = require('path')
 const createError = require('http-errors')
 const renderPage = require('../pages/_document.js')
@@ -12,8 +11,6 @@ const { getProvincesWithHolidays, getHolidaysWithProvinces } = require('../queri
 // Import the express-openapi-validator library
 const OpenApiValidator = require('express-openapi-validator')
 const spec = path.join(__dirname, '../../reference/Canada-Holidays-API.v1.yaml')
-
-v1Router.use(cors())
 
 // Serve the OpenAPI spec
 v1Router.use('/spec', express.static(spec))

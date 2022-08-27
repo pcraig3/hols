@@ -5,6 +5,7 @@ const helmet = require('helmet')
 const compression = require('compression')
 const csp = require('./config/csp.config')
 const requestIp = require('request-ip')
+const cors = require('cors')
 
 const app = express()
 
@@ -14,6 +15,7 @@ app
       crossOriginEmbedderPolicy: false,
     }),
   )
+  .use(cors())
   .use(helmet.contentSecurityPolicy({ useDefaults: false, directives: csp }))
   // both of these are needed to parse post request params
   .use(express.urlencoded({ extended: true }))

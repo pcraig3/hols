@@ -37,9 +37,9 @@ describe('Test ui responses', () => {
       expect($('link[rel="canonical"]').attr('href')).toEqual('https://canada-holidays.ca/')
     })
 
-    test('it should NOT return a CORS header', async () => {
+    test('it should return a CORS header', async () => {
       const response = await request(app).get('/')
-      expect(response.headers['access-control-allow-origin']).toBe(undefined)
+      expect(response.headers['access-control-allow-origin']).toEqual('*')
     })
   })
 

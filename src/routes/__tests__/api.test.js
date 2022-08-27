@@ -47,6 +47,8 @@ describe('Test /api responses', () => {
 
   describe('Verify CORS headers', () => {
     const corsUrls = [
+      '/api',
+      '/api/fake',
       '/api/v1/',
       '/api/v1/spec',
       '/api/v1/provinces',
@@ -58,14 +60,6 @@ describe('Test /api responses', () => {
       test(`"${url}" should return a CORS header`, async () => {
         const response = await request(app).get(url)
         expect(response.headers['access-control-allow-origin']).toEqual('*')
-      })
-    })
-
-    const noCorsUrls = ['/api', '/api/antarctosaurus']
-    noCorsUrls.map((url) => {
-      test(`"${url}" should NOT return a CORS header`, async () => {
-        const response = await request(app).get(url)
-        expect(response.headers['access-control-allow-origin']).toBe(undefined)
       })
     })
   })
