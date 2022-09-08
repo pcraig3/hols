@@ -136,7 +136,7 @@ describe('Test /api responses', () => {
         NT: 10,
         NU: 10,
         ON: 9,
-        PE: 7,
+        PE: 8,
         QC: 8,
         SK: 10,
         YT: 10,
