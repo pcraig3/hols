@@ -13,7 +13,8 @@ CREATE TABLE Holiday (
 	nameEn TEXT,
 	nameFr TEXT,
 	federal BOOLEAN DEFAULT FALSE,
-  firstOccurence TEXT DEFAULT null
+  firstOccurence TEXT DEFAULT null,
+  lastOccurence TEXT DEFAULT null
 );
 
 CREATE TABLE ProvinceHoliday (
@@ -79,6 +80,7 @@ INSERT INTO Holiday (date, nameEn, nameFr) VALUES ('First Monday in August', 'Te
 INSERT INTO Holiday (date, nameEn, nameFr) VALUES ('First Wednesday in August', 'Regatta Day', 'Journée des régates');
 INSERT INTO Holiday (date, nameEn, nameFr) VALUES ('Third Monday in August', 'Discovery Day', 'Jour de la Découverte');
 INSERT INTO Holiday (date, nameEn, nameFr) VALUES ('First Monday in September', 'Labour Day', 'Fête du travail');
+INSERT INTO Holiday (date, nameEn, nameFr, firstOccurence, lastOccurence) VALUES ('September 19', 'Day of Mourning for Queen Elizabeth II', 'Journée de deuil pour la reine Élisabeth II', '2022', '2022');
 INSERT INTO Holiday (date, nameEn, nameFr, firstOccurence) VALUES ('September 30', 'National Day for Truth and Reconciliation', 'Journée nationale de la vérité et de la réconciliation', '2021');
 INSERT INTO Holiday (date, nameEn, nameFr) VALUES ('Second Monday in October', 'Thanksgiving', 'Action de grâce');
 INSERT INTO Holiday (date, nameEn, nameFr) VALUES ('November 11', 'Remembrance Day', 'Jour du Souvenir');
@@ -92,6 +94,7 @@ UPDATE Holiday SET federal = 1 WHERE nameEn = 'Victoria Day';
 UPDATE Holiday SET federal = 1 WHERE nameEn = 'Canada Day';
 UPDATE Holiday SET federal = 1 WHERE nameEn = 'Civic Holiday';
 UPDATE Holiday SET federal = 1 WHERE nameEn = 'Labour Day';
+UPDATE Holiday SET federal = 1 WHERE nameEn = 'Day of Mourning for Queen Elizabeth II';
 UPDATE Holiday SET federal = 1 WHERE nameEn = 'National Day for Truth and Reconciliation';
 UPDATE Holiday SET federal = 1 WHERE nameEn = 'Thanksgiving';
 UPDATE Holiday SET federal = 1 WHERE nameEn = 'Remembrance Day';

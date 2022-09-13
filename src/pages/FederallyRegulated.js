@@ -23,10 +23,9 @@ const FederallyRegulated = () =>
 
         <h2>Who’s federally regulated?</h2>
         <p>
-          All jobs in Canada are regulated by <strong>a provincial</strong> government or
-          ${' '}<strong>the federal</strong>
-          ${' '}government. If your job is regulated by the federal government, you get federal
-          holidays instead of the provincial holidays.
+          All jobs in Canada are regulated by <strong>a provincial government</strong> or
+          ${' '}<strong>the federal government</strong>. If your job is regulated by the federal
+          government, you get federal holidays instead of the provincial holidays.
         </p>
         <p>
           Approximately 6% of Canadians work in federally regulated industries. Some examples are:
