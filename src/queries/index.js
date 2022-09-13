@@ -52,9 +52,14 @@ const getHolidays = (db, { holidayId, federal, year }) => {
 
   return holidays
     .filter((holiday) => {
-      // filter out holidays that didn't used to exist (truth and reconciliation days)
+      // filter out holidays that didn't used to exist (truth and reconciliation day)
       const { firstOccurence } = holiday
       return firstOccurence ? parseInt(firstOccurence) <= year : true
+    })
+    .filter((holiday) => {
+      // filter out holidays that are no longer observed (Day of Mourning)
+      const { lastOccurence } = holiday
+      return lastOccurence ? parseInt(lastOccurence) >= year : true
     })
     .map((holiday) => {
       // format output for API
@@ -62,6 +67,7 @@ const getHolidays = (db, { holidayId, federal, year }) => {
       holiday.date = getLiteralDate(dateString, year)
       holiday.observedDate = getObservedDate(dateString, year)
       delete holiday.firstOccurence
+      delete holiday.lastOccurence
       return holiday
     })
 }

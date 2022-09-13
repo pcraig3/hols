@@ -409,15 +409,47 @@ describe('Test /api responses', () => {
     })
   })
 
+  describe('with lastOccurence ?years=', () => {
+    let validYears = [2022]
+    validYears.map((year) => {
+      test(`it should return Day of Mourning for ${year}`, async () => {
+        const response = await request(app).get(`/api/v1/holidays?year=${year}`)
+        expect(response.statusCode).toBe(200)
+
+        let { holidays } = JSON.parse(response.text)
+
+        const h = holidays.find(
+          (holiday) => holiday.nameEn === 'Day of Mourning for Queen Elizabeth II',
+        )
+        expect(h.nameEn).toMatch('Day of Mourning for Queen Elizabeth II')
+      })
+    })
+
+    let invalidYears = [2021, 2023]
+    invalidYears.map((year) => {
+      test(`it should NOT return Truth and Reconciliation Day for ${year}`, async () => {
+        const response = await request(app).get(`/api/v1/holidays?year=${year}`)
+        expect(response.statusCode).toBe(200)
+
+        let { holidays } = JSON.parse(response.text)
+
+        const h = holidays.find(
+          (holiday) => holiday.nameEn === 'Day of Mourning for Queen Elizabeth II',
+        )
+        expect(h).toBeUndefined()
+      })
+    })
+  })
+
   describe('for /api/v1/holidays/:holidayId path', () => {
-    test('it should return a holiday for a good ID: 31', async () => {
-      const response = await request(app).get('/api/v1/holidays/31')
+    test('it should return a holiday for a good ID: 32', async () => {
+      const response = await request(app).get('/api/v1/holidays/32')
       expect(response.statusCode).toBe(200)
 
       let { holiday } = JSON.parse(response.text)
 
       expect(holiday).toMatchObject({
-        id: 31,
+        id: 32,
         date: `${currentYear}-12-26`,
         nameEn: 'Boxing Day',
         nameFr: 'Lendemain de Noël',
@@ -428,16 +460,16 @@ describe('Test /api responses', () => {
     })
 
     describe('with optional provinces', () => {
-      test('it should NOT return optional provinces for a good ID: 31', async () => {
-        const response = await request(app).get('/api/v1/holidays/31?optional=false')
+      test('it should NOT return optional provinces for a good ID: 32', async () => {
+        const response = await request(app).get('/api/v1/holidays/32?optional=false')
         expect(response.statusCode).toBe(200)
 
         let { holiday } = JSON.parse(response.text)
         expect(holiday.provinces.length).toBe(2)
       })
 
-      test('it should return optional provinces for a good ID: 31', async () => {
-        const response = await request(app).get('/api/v1/holidays/31?optional=true')
+      test('it should return optional provinces for a good ID: 32', async () => {
+        const response = await request(app).get('/api/v1/holidays/32?optional=true')
         expect(response.statusCode).toBe(200)
 
         let { holiday } = JSON.parse(response.text)
@@ -452,7 +484,7 @@ describe('Test /api responses', () => {
       let { error } = JSON.parse(response.text)
 
       expect(error).toMatchObject({
-        message: 'Bad Request: request.params.holidayId should be <= 31',
+        message: 'Bad Request: request.params.holidayId should be <= 32',
         status: response.statusCode,
         timestamp: expect.any(String),
       })

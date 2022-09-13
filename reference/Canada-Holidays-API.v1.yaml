@@ -561,7 +561,7 @@ paths:
           type: integer
           example: 2
           minimum: 1
-          maximum: 31
+          maximum: 32
         name: holidayId
         in: path
         required: true
@@ -580,10 +580,10 @@ paths:
                   holiday:
                     $ref: '#/components/schemas/Holiday'
               examples:
-                /holidays/31:
+                /holidays/32:
                   value:
                     holiday:
-                      id: 31
+                      id: 32
                       date: '2022-12-26'
                       nameEn: Boxing Day
                       nameFr: Lendemain de Noël
@@ -600,10 +600,10 @@ paths:
                           nameFr: Ontario
                           sourceLink: 'https://www.ontario.ca/document/your-guide-employment-standards-act-0/public-holidays'
                           sourceEn: Ontario Public holidays
-                /holidays/31?optional=true:
+                /holidays/32?optional=true:
                   value:
                     holiday:
-                      id: 31
+                      id: 32
                       date: '2022-12-26'
                       nameEn: Boxing Day
                       nameFr: Lendemain de Noël
@@ -687,9 +687,9 @@ components:
       type: object
       description: 'A Canadian holiday. Includes a name, the literal date of the holiday, the observed date of the holiday (ie, accommodating for weekends), and a list of regions that observe this holiday.'
       x-examples:
-        /holidays/31?optional=true:
+        /holidays/32?optional=true:
           holiday:
-            id: 31
+            id: 32
             date: '2022-12-26'
             nameEn: Boxing Day
             nameFr: Lendemain de Noël
@@ -724,7 +724,7 @@ components:
           description: Primary key for a holiday
           example: 2
           minimum: 1
-          maximum: 31
+          maximum: 32
         date:
           type: string
           description: 'ISO date: the literal date of the holiday'
