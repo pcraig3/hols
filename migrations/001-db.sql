@@ -224,6 +224,7 @@ INSERT INTO ProvinceHoliday (holidayId, provinceId) VALUES ((SELECT id FROM Holi
 INSERT INTO ProvinceHoliday (holidayId, provinceId) VALUES ((SELECT id FROM Holiday WHERE (date = 'September 19' AND nameEn = 'Day of Mourning for Queen Elizabeth II')), 'NL');
 INSERT INTO ProvinceHoliday (holidayId, provinceId) VALUES ((SELECT id FROM Holiday WHERE (date = 'September 19' AND nameEn = 'Day of Mourning for Queen Elizabeth II')), 'NS');
 INSERT INTO ProvinceHoliday (holidayId, provinceId) VALUES ((SELECT id FROM Holiday WHERE (date = 'September 19' AND nameEn = 'Day of Mourning for Queen Elizabeth II')), 'PE');
+INSERT INTO ProvinceHoliday (holidayId, provinceId) VALUES ((SELECT id FROM Holiday WHERE (date = 'September 19' AND nameEn = 'Day of Mourning for Queen Elizabeth II')), 'YT');
 
 INSERT INTO ProvinceHoliday (holidayId, provinceId, optional) VALUES ((SELECT id FROM Holiday WHERE (date = 'September 30' AND nameEn = 'National Day for Truth and Reconciliation')), 'BC', 1);
 INSERT INTO ProvinceHoliday (holidayId, provinceId, optional) VALUES ((SELECT id FROM Holiday WHERE (date = 'September 30' AND nameEn = 'National Day for Truth and Reconciliation')), 'MB', 1);

@@ -139,7 +139,7 @@ describe('Test /api responses', () => {
         PE: 9,
         QC: 8,
         SK: 10,
-        YT: 10,
+        YT: 11,
       }
 
       const response = await request(app).get('/api/v1/provinces')

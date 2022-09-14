@@ -5,6 +5,15 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.17.0] - 2022-09-14
+
+### Added
+
+- Day of Mourning to Canadian provinces as a 1-time holiday
+  - Participating provinces: PEI, NS, NL, NB, BC, YT, and the feds
+
+- Also, I missed this yearlier, but PEI is going to observe Truth and Reconciliation Day from now on as a stat holiday.
+
 ## [3.16.0] - 2022-04-23
 
 ### Added
