@@ -42,7 +42,7 @@ jobs:
 
       - name: Build and Push Container
         run: |-
-          docker build -t gcr.io/${{ env.PROJECT_ID }}/${{ env.SERVICE_NAME }}:${{ github.sha }} --build-arg GITHUB_SHA_ARG=${{ github.sha }} .
+          docker build --platform=linux/amd64 -t gcr.io/${{ env.PROJECT_ID }}/${{ env.SERVICE_NAME }}:${{ github.sha }} --build-arg GITHUB_SHA_ARG=${{ github.sha }} .
           docker push gcr.io/${{ env.PROJECT_ID }}/${{ env.SERVICE_NAME }}:${{ github.sha }}
 
       - name: Deploy to Cloud Run
