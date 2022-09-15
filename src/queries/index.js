@@ -105,7 +105,11 @@ const getProvincesWithHolidays = (db, { provinceId, year, optional }) => {
       if (ph.optional) {
         holidaysObj[ph.holidayId]['optional'] = 1
       }
-      provincesObj[ph.provinceId].holidays.push(holidaysObj[ph.holidayId])
+      // if the holiday does not exist in holidaysObj, it was removed (probably it is too early or expired)
+      // In that case, don't add it to the province's list of holidays
+      if (holidaysObj[ph.holidayId]) {
+        provincesObj[ph.provinceId].holidays.push(holidaysObj[ph.holidayId])
+      }
     }
   })
 
