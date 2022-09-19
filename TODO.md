@@ -9,6 +9,8 @@
 
 # DONE
 
+- Add the Day of Mourning to observing provinces
+  - Figure out which ones it's optional for
 - Optional holidays for BC
 - Add 2017, 2025, 2026
 - Add optional holidays for Alberta

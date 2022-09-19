@@ -113,12 +113,18 @@ const checkRedirectYear = (req, res, next) => {
   next()
 }
 
-// middleware to add "optional=true" where provinceId is AB/BC/MB/ON, if no query param is set
+// middleware to add "optional=true" where provinceId is AB/BC/MB/NB/NL/NS/ON, if no query param is set
 const optionalTrue = (req, res, next) => {
   const provinceId = req.params.provinceId
 
   if (
-    (provinceId === 'AB' || provinceId === 'BC' || provinceId === 'MB' || provinceId === 'ON') &&
+    (provinceId === 'AB' ||
+      provinceId === 'BC' ||
+      provinceId === 'MB' ||
+      provinceId === 'NB' ||
+      provinceId === 'NL' ||
+      provinceId === 'NS' ||
+      provinceId === 'ON') &&
     req.query.optional === undefined
   ) {
     req.query.optional = 'true'
