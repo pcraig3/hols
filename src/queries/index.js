@@ -101,15 +101,13 @@ const getProvincesWithHolidays = (db, { provinceId, year, optional }) => {
   const phs = _getProvinceHolidays(db, { optional })
 
   phs.map((ph) => {
-    if (provincesObj[ph.provinceId]) {
+    // if the holiday does not exist in holidaysObj, it was removed (probably it is too early or expired)
+    if (provincesObj[ph.provinceId] && holidaysObj[ph.holidayId]) {
       if (ph.optional) {
         holidaysObj[ph.holidayId]['optional'] = 1
       }
-      // if the holiday does not exist in holidaysObj, it was removed (probably it is too early or expired)
-      // In that case, don't add it to the province's list of holidays
-      if (holidaysObj[ph.holidayId]) {
-        provincesObj[ph.provinceId].holidays.push(holidaysObj[ph.holidayId])
-      }
+
+      provincesObj[ph.provinceId].holidays.push(holidaysObj[ph.holidayId])
     }
   })
 
