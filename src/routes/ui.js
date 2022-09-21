@@ -132,6 +132,7 @@ router.get(
   param2query('year'),
   checkProvinceIdErr,
   checkYearErr,
+  optionalTrue,
   dbmw(getProvincesWithHolidays),
   (req, res) => {
     // if the year value isn't in ALLOWED_YEARS, it will be caught by "checkYearErr"

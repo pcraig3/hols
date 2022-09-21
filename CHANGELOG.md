@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Updated
 
+- Add optional holidays to provinces listing for all years
 - Allow About page to be crawled
 
 ### Fixed
