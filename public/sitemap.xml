@@ -25,6 +25,12 @@
   <priority>1.00</priority>
 </url>
 <url>
+  <loc>https://canada-holidays.ca/about</loc>
+  <lastmod>2022-09-21T17:00:01+00:00</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.80</priority>
+</url>
+<url>
   <loc>https://canada-holidays.ca/add-holidays-to-calendar</loc>
   <lastmod>2021-12-25T17:35:47+00:00</lastmod>
   <changefreq>monthly</changefreq>

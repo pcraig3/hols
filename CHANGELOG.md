@@ -5,6 +5,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.17.3] - 2022-09-21
+
+### Updated
+
+- Allow About page to be crawled
+
+### Fixed
+
+- It was not working to return holidays for a province in another year than this year with optional=true
+  - Now it is working though. 
+  - This is a follow-up on `3.17.1` where I missed this part of the app.
+
 ## [3.17.2] - 2022-09-19
 
 ### Fixed

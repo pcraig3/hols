@@ -26,6 +26,13 @@ const About = ({ data: { nextHoliday } }) =>
         <h2>“[Something] is wrong”</h2>
         <p>Leave me some <a href="/feedback">/feedback</a> and I’ll do my best.</p>
 
+        <h2>“What about Groundhog Day??”</h2>
+        <p>
+          <a href="https://groundhog-day.com" target="_blank">Groundhog Day</a> is arguably the most
+          fun holiday but (regrettably) it is <strong>not</strong> a stat holiday in Canada or the
+          USA.
+        </p>
+
         <h2>Me</h2>
         <p>
           Hello, my name is${' '}
@@ -39,7 +46,7 @@ const About = ({ data: { nextHoliday } }) =>
           >${' '} and I am paying for this site for some reason.${' '}
           <a href="https://github.com/pcraig3/hols" target="_blank" rel="noopener"
             >Code is on GitHub</a
-          >${' '}if you want to “borrow” any of my intellectual property.
+          >${' '}if you want to ‘borrow’ any of my intellectual property.
         </p>
       <//>
     <//>
