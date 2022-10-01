@@ -14,11 +14,21 @@ test('ObservedDateKey displays properly', () => {
   )
 })
 
-test('ObservedDateKey displays properly for Boxing day', () => {
+test('ObservedDateKey displays properly for Boxing Day on Sunday', () => {
   const holiday = { date: '2021-12-26', observedDate: '2021-12-28', nameEn: 'Boxing Day' }
   const $ = cheerio.load(render(html` <${ObservedDateKey} holiday=${holiday} //> `))
   expect($('summary').text()).toEqual('December 26, Sunday')
   expect($('details div p').eq(0).text()).toEqual('Observed: December 28, Tuesday')
+  expect($('details div p').eq(1).text()).toEqual(
+    'Because Christmas is observed on Monday, Boxing Day is pushed to the following Tuesday.',
+  )
+})
+
+test('ObservedDateKey displays properly for Boxing Day on Monday', () => {
+  const holiday = { date: '2022-12-26', observedDate: '2022-12-27', nameEn: 'Boxing Day' }
+  const $ = cheerio.load(render(html` <${ObservedDateKey} holiday=${holiday} //> `))
+  expect($('summary').text()).toEqual('December 26, Monday')
+  expect($('details div p').eq(0).text()).toEqual('Observed: December 27, Tuesday')
   expect($('details div p').eq(1).text()).toEqual(
     'Because Christmas is observed on Monday, Boxing Day is pushed to the following Tuesday.',
   )
