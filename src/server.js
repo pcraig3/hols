@@ -29,7 +29,7 @@ process.env.NODE_ENV !== 'test' && app.use(morgan(morganConfig))
 
 // redirect from the Cloud Run url to the custom one
 app.use((req, res, next) => {
-  if (req.headers.host === 'hols-z2c3yl7mva-ue.a.run.app') {
+  if (req.headers.host === 'hols-2-z2c3yl7mva-ue.a.run.app') {
     res.redirect(301, `https://canada-holidays.ca${req.path}`)
   }
 
