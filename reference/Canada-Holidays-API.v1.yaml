@@ -1,7 +1,7 @@
 openapi: 3.0.0
 info:
   title: Canada Holidays API
-  version: 1.6.0
+  version: 1.7.0
   description: 'This API lists all 31 public holidays for all 13 provinces and territories in Canada, including federal holidays.'
   contact:
     name: Paul Craig
@@ -16,8 +16,6 @@ paths:
   /api/v1:
     get:
       summary: root
-      tags:
-        - root
       responses:
         '200':
           description: OK
@@ -75,6 +73,8 @@ paths:
                         href: 'https://canada-holidays.ca/api/v1/spec'
       operationId: Root
       description: Returns a welcome message.
+      tags:
+        - info
   /api/v1/holidays:
     get:
       summary: Get all holidays
@@ -680,6 +680,21 @@ paths:
           allowEmptyValue: true
       tags:
         - holidays
+  /api/v1/spec:
+    get:
+      summary: Get JSON schema
+      tags:
+        - info
+      responses:
+        '200':
+          description: OK
+          headers:
+            content-type:
+              schema:
+                type: string
+              description: text/yaml; charset=UTF-8
+      operationId: Spec
+      description: Gets the schema for the JSON API as a yaml file.
 components:
   schemas:
     Holiday:
@@ -929,9 +944,9 @@ components:
           description: A UTC ISO timestamp
   securitySchemes: {}
 tags:
+  - name: info
+    description: Get welcome message and links
   - name: holidays
     description: Get holiday(s) with associated provinces
   - name: provinces
     description: Get province(s) with associated holidays
-  - name: root
-    description: Get welcome message and links
