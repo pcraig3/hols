@@ -1,14 +1,15 @@
 # TODO
 
-- Add optional holidays for Alberta
-  - To ICS downloads
 - different versions of "federal" holidays
 - add years to dates on years pages?
 - make API to return CSV format
   - page for CSV downloads
+- Fix the google dataset stuff
+- Fix speakable stuff
 
 # DONE
 
+- Fix the sitemap
 - Add the Day of Mourning to observing provinces
   - Figure out which ones it's optional for
 - Optional holidays for BC
