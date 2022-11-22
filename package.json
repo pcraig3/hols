@@ -25,22 +25,22 @@
     "build": "workbox generateSW workbox-config.js"
   },
   "dependencies": {
-    "@emotion/css": "^11.10.0",
+    "@emotion/css": "^11.10.5",
     "@emotion/server": "^11.10.0",
     "@jsbits/easter-day": "^1.0.1",
     "better-sqlite3-helper": "^3.1.6",
     "compression": "^1.7.4",
     "cors": "^2.8.5",
     "date-fns": "^2.29.3",
-    "express": "^4.17.3",
+    "express": "^4.18.2",
     "express-openapi-validator": "^4.13.8",
     "helmet": "^6.0.0",
     "htm": "^3.1.0",
     "http-errors": "^2.0.0",
-    "ics": "^2.40.0",
+    "ics": "^2.41.0",
     "morgan": "^1.10.0",
-    "preact": "^10.11.0",
-    "preact-render-to-string": "^5.2.4",
+    "preact": "^10.11.3",
+    "preact-render-to-string": "^5.2.6",
     "request-ip": "^3.3.0",
     "sugar-date": "^2.0.6",
     "sweet-scroll": "^4.0.0",
@@ -48,10 +48,10 @@
   },
   "devDependencies": {
     "cheerio": "^1.0.0-rc.12",
-    "eslint": "^8.24.0",
-    "eslint-plugin-jest": "^27.0.4",
-    "jest": "^29.1.2",
+    "eslint": "^8.28.0",
+    "eslint-plugin-jest": "^27.1.5",
+    "jest": "^29.3.1",
     "nodemon": "^2.0.20",
-    "supertest": "^6.2.4"
+    "supertest": "^6.3.1"
   }
 }

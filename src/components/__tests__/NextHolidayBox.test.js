@@ -1,6 +1,7 @@
 const render = require('preact-render-to-string')
 const cheerio = require('cheerio')
 const { html } = require('../../utils')
+const { getCurrentHolidayYear } = require('../../dates')
 
 const NextHolidayBox = require('../NextHolidayBox.js')
 
@@ -9,15 +10,17 @@ const renderNextHolidayBox = (props) => {
 }
 
 const getProvince = () => {
-  return { id: 'PE', nameEn: 'Prince Edward Island' }
+  return { id: 'NU', nameEn: 'Nunavut' }
 }
 
 const getNextHoliday = ({ federal } = {}) => {
+  const currentYear = getCurrentHolidayYear()
+
   return {
-    id: 20,
-    date: '2021-08-16',
-    observedDate: '2021-08-16',
-    nameEn: 'Gold Cup Parade Day',
+    id: 16,
+    date: `${currentYear}-07-09`,
+    observedDate: `${currentYear}-07-11`,
+    nameEn: 'Nunavut Day',
     federal: federal ? 1 : 0,
     provinces: [getProvince()],
   }
@@ -31,10 +34,10 @@ test('NextHolidayBox displays next holiday properly for Canada', () => {
 
   expect($('div h1').length).toBe(1)
   expect($('h1 span.visuallyHidden').text()).toEqual(
-    `Canada’s next statutory holiday is ${nextHoliday.nameEn}, on ${sp2nbsp('August 16')}.`,
+    `Canada’s next statutory holiday is ${nextHoliday.nameEn}, on ${sp2nbsp('July 9')}.`,
   )
   expect($('h1 .visible').text()).toEqual(
-    `Canada’s next holiday\u00a0is${sp2nbsp('August 16')}${sp2nbsp(nextHoliday.nameEn)}`,
+    `Canada’s next holiday\u00a0is${sp2nbsp('July 9')}*${sp2nbsp(nextHoliday.nameEn)}`,
   )
 })
 
@@ -44,10 +47,10 @@ test('NextHolidayBox refers to federal holidays when "federal" variable is passe
 
   expect($('div h1').length).toBe(1)
   expect($('h1 span.visuallyHidden').text()).toEqual(
-    `Canada’s next federal statutory holiday is ${nextHoliday.nameEn}, on ${sp2nbsp('August 16')}.`,
+    `Canada’s next federal statutory holiday is ${nextHoliday.nameEn}, on ${sp2nbsp('July 9')}.`,
   )
   expect($('h1 .visible').text()).toEqual(
-    `Canada’s next federal holiday\u00a0is${sp2nbsp('August 16')}${sp2nbsp(nextHoliday.nameEn)}`,
+    `Canada’s next federal holiday\u00a0is${sp2nbsp('July 9')}*${sp2nbsp(nextHoliday.nameEn)}`,
   )
   expect($('h1 + p').text()).toMatch(/That’s in (about )?\d+ (days|month(s)?|year)/)
   expect($('h1 + p + p').text()).toEqual('Find out who gets federal holidays')
@@ -64,14 +67,10 @@ test('NextHolidayBox displays next holiday properly for a given province', () =>
 
   expect($('div h1').length).toBe(1)
   expect($('h1 span.visuallyHidden').text()).toEqual(
-    `Prince Edward Island’s next statutory holiday is ${nextHoliday.nameEn}, on ${sp2nbsp(
-      'August 16.',
-    )}`,
+    `Nunavut’s next statutory holiday is ${nextHoliday.nameEn}, on ${sp2nbsp('July 9.')}`,
   )
   expect($('h1 .visible').text()).toEqual(
-    `Prince Edward Island’s next holiday\u00a0is${sp2nbsp('August 16')}${sp2nbsp(
-      nextHoliday.nameEn,
-    )}`,
+    `Nunavut’s next holiday\u00a0is${sp2nbsp('July 9')}*${sp2nbsp(nextHoliday.nameEn)}`,
   )
   expect($('h1 + p').text()).toMatch(/That’s in (about )?\d+ (days|month(s)?|year)/)
 })
@@ -85,10 +84,10 @@ test('NextHolidayBox displays provinceName and year and "add to calendar" link',
   })
 
   expect($('div h1').length).toBe(1)
-  expect($('h1').text()).toEqual('Prince Edward Islandstatutory Holidays in 2021')
+  expect($('h1').text()).toEqual('Nunavutstatutory Holidays in 2021')
   expect($('h1 + p').length).toBe(1)
   expect($('h1 ~ p').text()).toEqual('Add to your calendar')
-  expect($('h1 ~ p a').attr('href')).toEqual('/ics/PE/2021')
+  expect($('h1 ~ p a').attr('href')).toEqual('/ics/NU/2021')
 })
 
 test('NextHolidayBox displays provinceName and year and "add to calendar" link for federal holidays when no next holiday', () => {
