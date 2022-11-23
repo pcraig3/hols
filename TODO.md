@@ -4,11 +4,11 @@
 - add years to dates on years pages?
 - make API to return CSV format
   - page for CSV downloads
-- Fix the google dataset stuff
-- Fix speakable stuff
 
 # DONE
 
+- Fix speakable stuff
+- Fix the google dataset stuff
 - Fix the sitemap
 - Add the Day of Mourning to observing provinces
   - Figure out which ones it's optional for

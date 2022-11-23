@@ -5,6 +5,21 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.18.0] - 2022-11-23
+
+### Added
+
+- Added redirect if the URL path uses a lowercase provinceId (eg /provinces/ab redirects to /provinces/AB)
+
+### Updated
+
+- Reworked the h1, added the word "statutory"
+  - Using CSS to reorder elements now instead of a visuallyHidden sentence
+
+### Removed
+
+- Took out the "dataset" rich results markup because someone de-listed me, so I don't think it's helping much.
+
 ## [3.17.5] - 2022-11-22
 
 ### Fixed
