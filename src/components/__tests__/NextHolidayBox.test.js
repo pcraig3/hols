@@ -33,11 +33,10 @@ test('NextHolidayBox displays next holiday properly for Canada', () => {
   const $ = renderNextHolidayBox({ nextHoliday })
 
   expect($('div h1').length).toBe(1)
-  expect($('h1 span.visuallyHidden').text()).toEqual(
-    `Canada’s next statutory holiday is ${nextHoliday.nameEn}, on ${sp2nbsp('July 9')}.`,
-  )
-  expect($('h1 .visible').text()).toEqual(
-    `Canada’s next holiday\u00a0is${sp2nbsp('July 9')}*${sp2nbsp(nextHoliday.nameEn)}`,
+  expect($('h1').text()).toEqual(
+    `Canada’s next statutory holiday\u00a0is${sp2nbsp(nextHoliday.nameEn)}, on${sp2nbsp(
+      'July 9',
+    )}*`,
   )
 })
 
@@ -46,11 +45,10 @@ test('NextHolidayBox refers to federal holidays when "federal" variable is passe
   const $ = renderNextHolidayBox({ nextHoliday, federal: true })
 
   expect($('div h1').length).toBe(1)
-  expect($('h1 span.visuallyHidden').text()).toEqual(
-    `Canada’s next federal statutory holiday is ${nextHoliday.nameEn}, on ${sp2nbsp('July 9')}.`,
-  )
-  expect($('h1 .visible').text()).toEqual(
-    `Canada’s next federal holiday\u00a0is${sp2nbsp('July 9')}*${sp2nbsp(nextHoliday.nameEn)}`,
+  expect($('h1').text()).toEqual(
+    `Canada’s next federal statutory holiday\u00a0is${sp2nbsp(nextHoliday.nameEn)}, on${sp2nbsp(
+      'July 9',
+    )}*`,
   )
   expect($('h1 + p').text()).toMatch(/That’s in (about )?\d+ (days|month(s)?|year)/)
   expect($('h1 + p + p').text()).toEqual('Find out who gets federal holidays')
@@ -66,11 +64,10 @@ test('NextHolidayBox displays next holiday properly for a given province', () =>
   })
 
   expect($('div h1').length).toBe(1)
-  expect($('h1 span.visuallyHidden').text()).toEqual(
-    `Nunavut’s next statutory holiday is ${nextHoliday.nameEn}, on ${sp2nbsp('July 9.')}`,
-  )
-  expect($('h1 .visible').text()).toEqual(
-    `Nunavut’s next holiday\u00a0is${sp2nbsp('July 9')}*${sp2nbsp(nextHoliday.nameEn)}`,
+  expect($('h1').text()).toEqual(
+    `Nunavut’s next statutory holiday\u00a0is${sp2nbsp(nextHoliday.nameEn)}, on${sp2nbsp(
+      'July 9',
+    )}*`,
   )
   expect($('h1 + p').text()).toMatch(/That’s in (about )?\d+ (days|month(s)?|year)/)
 })

@@ -27,7 +27,7 @@ describe('NextHoliday', () => {
     const $ = renderNextHoliday({ nextHoliday })
 
     expect($('h1').length).toBe(1)
-    expect($('.h1--xs').text()).toEqual('Canada’s next holiday\u00a0is')
+    expect($('.h1--xs').text()).toEqual('Canada’s next statutory holiday\u00a0is')
     expect($('.h1--lg').text()).toEqual(`${sp2nbsp('August 16')}`)
     expect($('.h1--md').text()).toEqual(`${sp2nbsp(nextHoliday.nameEn)}`)
   })
@@ -37,7 +37,7 @@ describe('NextHoliday', () => {
     const $ = renderNextHoliday({ nextHoliday, provinceName: 'Prince Edward Island' })
 
     expect($('h1').length).toBe(1)
-    expect($('.h1--xs').text()).toEqual('Prince Edward Island’s next holiday\u00a0is')
+    expect($('.h1--xs').text()).toEqual('Prince Edward Island’s next statutory holiday\u00a0is')
   })
 
   test('renders a province-specific intro without the trailing "s" for NT province page', () => {
@@ -45,7 +45,7 @@ describe('NextHoliday', () => {
     const $ = renderNextHoliday({ nextHoliday, provinceName: 'Northwest Territories' })
 
     expect($('h1').length).toBe(1)
-    expect($('.h1--xs').text()).toEqual('Northwest Territories’ next holiday\u00a0is')
+    expect($('.h1--xs').text()).toEqual('Northwest Territories’ next statutory holiday\u00a0is')
   })
 
   // renders for a federal page
@@ -54,7 +54,7 @@ describe('NextHoliday', () => {
     const $ = renderNextHoliday({ nextHoliday, federal: true })
 
     expect($('h1').length).toBe(1)
-    expect($('.h1--xs').text()).toEqual('Canada’s next federal holiday\u00a0is')
+    expect($('.h1--xs').text()).toEqual('Canada’s next federal statutory holiday\u00a0is')
   })
 
   //

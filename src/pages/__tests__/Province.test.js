@@ -39,7 +39,9 @@ describe('Province page', () => {
   test('renders h1 and h2', () => {
     const $ = renderPage()
     expect($('h1').length).toBe(1)
-    expect($('h1 .visible').text()).toEqual('Canada’s next holiday\u00a0isDecember 26*Boxing Day')
+    expect($('h1').text()).toEqual(
+      'Canada’s next statutory holiday\u00a0isBoxing\u00a0Day, onDecember\u00a026*',
+    )
     expect($('h2').length).toBe(1)
     expect($('h2').text()).toEqual(`Canada statutory holidays in ${currentYear}`)
     // check the data label is lowercasing the province name
@@ -59,7 +61,9 @@ describe('Province page', () => {
   test('does not render next year link', () => {
     const $ = renderPage(2026)
     expect($('h1').length).toBe(1)
-    expect($('h1 .visible').text()).toEqual('Canada’s next holiday\u00a0isDecember 26*Boxing Day')
+    expect($('h1').text()).toEqual(
+      'Canada’s next statutory holiday\u00a0isBoxing\u00a0Day, onDecember\u00a026*',
+    )
     expect($('h2').length).toBe(1)
     expect($('h2').text()).toEqual('Canada statutory holidays in 2026')
     // check that the link to next year's holidays is NOT visible
