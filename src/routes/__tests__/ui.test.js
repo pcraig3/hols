@@ -193,11 +193,23 @@ describe('Test ui responses', () => {
           'https://canada-holidays.ca/provinces/MB',
         )
       })
+
+      test('it should return 302 for a lowercased provinceId', async () => {
+        const response = await request(app).get('/provinces/mb')
+        expect(response.statusCode).toBe(302)
+        expect(response.headers.location).toEqual('/provinces/MB')
+      })
     })
 
     describe('Test /provinces/PEI response', () => {
       test('it should return 301', async () => {
         const response = await request(app).get('/provinces/PEI')
+        expect(response.statusCode).toBe(301)
+        expect(response.headers.location).toEqual('/provinces/PE')
+      })
+
+      test('it should return 301 for lowercased provinceId', async () => {
+        const response = await request(app).get('/provinces/pei')
         expect(response.statusCode).toBe(301)
         expect(response.headers.location).toEqual('/provinces/PE')
       })
@@ -210,8 +222,9 @@ describe('Test ui responses', () => {
     })
 
     describe('Test /provinces/:provinceId/:year responses', () => {
+      const nextYearMB = getCurrentHolidayYear('MB') + 1
+
       test('it should return the h1, title, meta tag, and canonical link for MB next year', async () => {
-        const nextYearMB = getCurrentHolidayYear('MB') + 1
         const response = await request(app).get(`/provinces/MB/${nextYearMB}`)
         const $ = cheerio.load(response.text)
         expect($('h1').text()).toEqual(`Manitobastatutory Holidays in ${nextYearMB}`)
@@ -225,6 +238,12 @@ describe('Test ui responses', () => {
         expect($('link[rel="canonical"]').attr('href')).toEqual(
           `https://canada-holidays.ca/provinces/MB/${nextYearMB}`,
         )
+      })
+
+      test('it should return 302 for a lowercased provinceId', async () => {
+        const response = await request(app).get(`/provinces/mb/${nextYearMB}`)
+        expect(response.statusCode).toBe(302)
+        expect(response.headers.location).toEqual(`/provinces/MB/${nextYearMB}`)
       })
     })
 

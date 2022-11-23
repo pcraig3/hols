@@ -7,6 +7,7 @@ const {
   dbmw,
   checkProvinceIdErr,
   checkYearErr,
+  checkRedirectProvinceId,
   checkRedirectYear,
   optionalTrue,
   param2query,
@@ -79,6 +80,7 @@ router.get('/provinces/PEI/:year', (req, res) =>
 router.get(
   '/provinces/:provinceId',
   checkProvinceIdErr,
+  checkRedirectProvinceId,
   checkRedirectYear,
   optionalTrue,
   dbmw(getProvincesWithHolidays),
@@ -131,6 +133,7 @@ router.get(
   '/provinces/:provinceId/:year(\\d{4})',
   param2query('year'),
   checkProvinceIdErr,
+  checkRedirectProvinceId,
   checkYearErr,
   optionalTrue,
   dbmw(getProvincesWithHolidays),

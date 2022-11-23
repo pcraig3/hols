@@ -101,6 +101,18 @@ const checkProvinceIdErr = (req, res, next) => {
   next()
 }
 
+// middleware to redirect to the uppercase provinceId endpoint
+const checkRedirectProvinceId = (req, res, next) => {
+  const provinceId = req.params.provinceId || ''
+
+  if (provinceId !== provinceId.toUpperCase()) {
+    const pathUppercaseId = req.path.toUpperCase().replace('PROVINCES', 'provinces')
+    return res.redirect(pathUppercaseId)
+  }
+
+  next()
+}
+
 // middleware to redirect to permitted /:year endpoints for whitelisted query strings
 const checkRedirectYear = (req, res, next) => {
   const year = req.query.year && parseInt(req.query.year)
@@ -275,6 +287,7 @@ module.exports = {
   checkProvinceIdErr,
   checkYearErr,
   checkRedirectYear,
+  checkRedirectProvinceId,
   optionalTrue,
   getCanonical,
   param2query,
