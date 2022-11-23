@@ -35,7 +35,7 @@ const breadcrumb = ({ region }) => {
   }
 
   return {
-    '@context': 'https://schema.org',
+    '@context': 'https://schema.org/',
     '@type': 'BreadcrumbList',
     itemListElement: breadcrumbList,
   }
