@@ -226,7 +226,7 @@ const Province = ({
                 </h2>
                 <div>
                   <${CalButton} provinceId=${provinceId} federal=${federal} year=${year}
-                  query=${'cd=true'} className=${'ghost'} //>
+                  query=${'cd=true'} className=${'ghost hidden-print'} //>
                 </div>
               </div>`}
             <//>

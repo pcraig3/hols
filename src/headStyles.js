@@ -99,20 +99,36 @@ module.exports = {
     }
 
     body {
-      font-size: 11px;
+      font-size: 12px;
       line-height: 1.2;
       font-family: sans-serif;
       color: black;
+      padding: 0px 10px;
+    }
+
+    header .links,
+    #next-holiday,
+    .bottom-link,
+    .hidden-print {
+      display: none !important;
     }
 
     header,
-    #next-holiday,
-    .bottom-link {
-      display: none;
-    }
-
     main section {
       padding: 0 !important;
+    }
+
+    header nav {
+      padding-top: 10px;
+      padding-bottom: 16px;
+    }
+
+    header nav > div:first-of-type > a {
+      color: black !important;
+    }
+
+    header nav > div:first-of-type > a > svg > path {
+      fill: black !important;
     }
 
     header nav,
@@ -127,7 +143,7 @@ module.exports = {
     section h2 {
       margin: 0 !important;
       padding-top: 0 !important;
-      padding-bottom: 24px !important;
+      padding-bottom: 16px !important;
     }
 
     section h1 ~ h2 {
@@ -139,12 +155,40 @@ module.exports = {
       margin-bottom: 0 !important;
     }
 
-    dt.key,
-    dd.value,
-    dd.value2 {
+    dl dt.key,
+    dl dd.value,
+    dl dd.value2 {
       width: 33% !important;
       padding: 8px 8px 8px 0 !important;
       border-width: 1px !important;
+    }
+
+    dl > div:not(.optional) dt.key,
+    dl > div:not(.optional) dd.value,
+    dl > div:not(.optional) dd.value2 {
+        opacity: 1 !important;
+    }
+
+    dl > div.optional dt.key,
+    dl > div.optional dd.value,
+    dl > div.optional dd.value2 {
+        opacity: 0.6;
+    }
+
+    #next-holiday-row > dt.key {
+      color: black;
+    }
+
+    details summary {
+      list-style: none;
+    }
+
+    details summary::-webkit-details-marker {
+      display:none;
+    }
+
+    details summary > span {
+      text-decoration: none !important;
     }
   }
 `,

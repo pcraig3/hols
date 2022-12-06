@@ -24,7 +24,7 @@ const getLink = ({ provinceId, year, federal }) => {
 
 const NextYearLink = ({ provinceName, provinceId, year, federal }) => {
   return html`
-    <div class=${styles}>
+    <div class=${`hidden-print ${styles}`}>
       <a
         href=${getLink({ provinceId, year, federal })}
         class="link__next-year right-arrow"
