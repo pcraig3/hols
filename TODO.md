@@ -7,6 +7,7 @@
 
 # DONE
 
+- Improve print styles
 - Fix speakable stuff
 - Fix the google dataset stuff
 - Fix the sitemap

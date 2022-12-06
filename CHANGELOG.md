@@ -5,6 +5,15 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.18.1] - 2022-12-06
+
+### Updated
+
+- Updated print styles for holidays pages
+  - Added back in Holidays logo
+  - Removed accent colours, "details" triangles, underlines, and bottom link
+  - Real holidays are solid black, optiona holidays are grey
+
 ## [3.18.0] - 2022-11-23
 
 ### Added
