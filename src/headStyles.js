@@ -20,6 +20,30 @@ module.exports = {
       })
     }
   }, false);`,
+  ga4: `
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-BHZ9J5CD89');
+
+    document.addEventListener('DOMContentLoaded', function() {
+
+      const eventLinks = document.querySelectorAll('a[data-event="true"]');
+      for (let i = 0; i < eventLinks.length; i++) {
+        eventLinks[i].addEventListener('click', function (event) {
+          // 'this' is the element that the event handler is set on (otherwise, e.target is sometimes the children)
+          gtag('event', 'click', {
+            event_category: this.tagName,
+            event_action: this.dataset.action,
+            event_label: this.dataset.label,
+          });
+        })
+      }
+
+    });
+  `,
+  ga4Id: 'G-BHZ9J5CD89',
   fontStyles: `
   /* generated with https://google-webfonts-helper.herokuapp.com/fonts/gothic-a1?subsets=latin */
   /* gothic-a1-300 - latin */
