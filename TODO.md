@@ -8,6 +8,7 @@
 # DONE
 
 - Update to GA4, otherwise we get cut off
+  - Remove old GA implementation
 - Improve print styles
 - Fix speakable stuff
 - Fix the google dataset stuff
