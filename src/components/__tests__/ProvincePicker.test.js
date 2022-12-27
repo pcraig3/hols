@@ -10,13 +10,14 @@ const renderProvincePicker = ({ provinceId, federal, year } = {}) => {
 }
 
 describe('<ProvincePicker>', () => {
+  const SELECTABLE_YEARS = ALLOWED_YEARS.filter((y) => y >= 2019)
   test(' renders properly', () => {
     const $ = renderProvincePicker()
     expect($('label').text()).toEqual('View by regionView by year')
     expect($('select').length).toBe(2)
-    expect($('select option').length).toBe(26)
+    expect($('select option').length).toBe(27)
     expect($('select option').text()).toEqual(
-      `NationwideFederal──────────AlbertaBritish ColumbiaManitobaNew BrunswickNewfoundland and LabradorNova ScotiaNorthwest TerritoriesNunavutOntarioPrince Edward IslandQuebecSaskatchewanYukon${ALLOWED_YEARS.join(
+      `NationwideFederal──────────AlbertaBritish ColumbiaManitobaNew BrunswickNewfoundland and LabradorNova ScotiaNorthwest TerritoriesNunavutOntarioPrince Edward IslandQuebecSaskatchewanYukon${SELECTABLE_YEARS.join(
         '',
       )}`,
     )
@@ -60,7 +61,8 @@ describe('<ProvincePicker>', () => {
       expect($('select').eq(1).find('option[selected]').text()).toEqual('2021')
     })
 
-    ALLOWED_YEARS.map((year) => {
+    // People want future holidays, not past holidays
+    SELECTABLE_YEARS.map((year) => {
       test(`renders selected year as ${year} when passed in`, () => {
         const $ = renderProvincePicker({ year })
         expect($('select').eq(1).find('option[selected]').text()).toEqual(`${year}`)
