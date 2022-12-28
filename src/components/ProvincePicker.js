@@ -199,7 +199,7 @@ const ProvincePicker = ({ provinceId, federal, year = 2021 }) => {
               data-action="year-select"
               data-label=${`year-select-${provinceIdOrFederal || 'canada'}`}
             >
-              ${ALLOWED_YEARS.map(
+              ${ALLOWED_YEARS.filter((y) => y >= 2019).map(
                 (y) => html` <option value=${y} selected=${year === y}>${y}</option> `,
               )}
             </select>

@@ -1,6 +1,6 @@
 {
   "name": "hols",
-  "version": "3.18.2",
+  "version": "3.19.0",
   "description": "hols for cans: canada holidays api and canada holidays frontend",
   "main": "index.js",
   "author": "pcraig3",
@@ -48,10 +48,10 @@
   },
   "devDependencies": {
     "cheerio": "^1.0.0-rc.12",
-    "eslint": "^8.29.0",
-    "eslint-plugin-jest": "^27.1.6",
+    "eslint": "^8.30.0",
+    "eslint-plugin-jest": "^27.1.7",
     "jest": "^29.3.1",
     "nodemon": "^2.0.20",
-    "supertest": "^6.3.2"
+    "supertest": "^6.3.3"
   }
 }

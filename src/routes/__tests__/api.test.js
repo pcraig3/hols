@@ -136,7 +136,7 @@ describe('Test /api responses', () => {
         NT: 10,
         NU: 10,
         ON: 9,
-        PE: 9,
+        PE: 8,
         QC: 8,
         SK: 10,
         YT: 10,
@@ -203,7 +203,7 @@ describe('Test /api responses', () => {
         {
           province: 'BC',
           statTotal: 10,
-          optionalTotal: 14,
+          optionalTotal: 13,
         },
         {
           province: 'ON',
@@ -287,16 +287,16 @@ describe('Test /api responses', () => {
 
           // Heritage Day
           const heritageDay = holidays.find(
-            (h) => h.nameEn === 'Heritage Day' && h.date === '2022-08-01',
+            (h) => h.nameEn === 'Heritage Day' && h.date === '2023-08-07',
           )
           expect(heritageDay.id).toBe(22)
           expect(heritageDay).toMatchObject({
             id: 22,
-            date: `${currentYear}-08-01`,
+            date: `${currentYear}-08-07`,
             nameEn: 'Heritage Day',
             nameFr: 'Jour d’Héritage',
             federal: 0,
-            observedDate: `${currentYear}-08-01`,
+            observedDate: `${currentYear}-08-07`,
             provinces: expect.any(Array),
           })
 
@@ -306,16 +306,16 @@ describe('Test /api responses', () => {
 
           // Terry Fox Day
           const terryFoxDay = holidays.find(
-            (h) => h.nameEn === 'Terry Fox Day' && h.date === '2022-08-01',
+            (h) => h.nameEn === 'Terry Fox Day' && h.date === '2023-08-07',
           )
           expect(terryFoxDay.id).toBe(23)
           expect(terryFoxDay).toMatchObject({
             id: 23,
-            date: `${currentYear}-08-01`,
+            date: `${currentYear}-08-07`,
             nameEn: 'Terry Fox Day',
             nameFr: 'Journée Terry Fox',
             federal: 0,
-            observedDate: `${currentYear}-08-01`,
+            observedDate: `${currentYear}-08-07`,
             provinces: expect.any(Array),
           })
 
@@ -362,7 +362,7 @@ describe('Test /api responses', () => {
         })
       })
 
-      let badYears = ['2016', '2027', '1', null, undefined, false, 'orange', 'christmas']
+      let badYears = ['2015', '2030', '1', null, undefined, false, 'orange', 'christmas']
       badYears.map((year) => {
         test(`"${year}" it should return 400 with an error message`, async () => {
           const response = await request(app).get(`/api/v1/holidays?year=${year}`)
@@ -370,7 +370,7 @@ describe('Test /api responses', () => {
 
           let { error } = JSON.parse(response.text)
           expect(error.message).toMatch(
-            /^Bad Request: request\/query\/year must be (integer|>= 2017|<= 2026)/,
+            /^Bad Request: request\/query\/year must be (integer|>= 2016|<= 2029)/,
           )
         })
       })
@@ -454,7 +454,7 @@ describe('Test /api responses', () => {
         nameEn: 'Boxing Day',
         nameFr: 'Lendemain de Noël',
         federal: 1,
-        observedDate: `${currentYear}-12-27`,
+        observedDate: `${currentYear}-12-26`,
         provinces: expect.any(Array),
       })
     })
@@ -502,7 +502,7 @@ describe('Test /api responses', () => {
         })
       })
 
-      let badYears = ['2016', '2027', '1', null, undefined, false, 'orange', 'christmas']
+      let badYears = ['2015', '2030', '1', null, undefined, false, 'orange', 'christmas']
       badYears.map((year) => {
         test(`"${year}" it should return 400 with an error message`, async () => {
           const response = await request(app).get(`/api/v1/holidays?year=${year}`)
@@ -510,7 +510,7 @@ describe('Test /api responses', () => {
 
           let { error } = JSON.parse(response.text)
           expect(error.message).toMatch(
-            /^Bad Request: request\/query\/year must be (integer|>= 2017|<= 2026)/,
+            /^Bad Request: request\/query\/year must be (integer|>= 2016|<= 2029)/,
           )
         })
       })

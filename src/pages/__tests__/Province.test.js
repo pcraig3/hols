@@ -54,18 +54,18 @@ describe('Province page', () => {
     const $ = renderPage()
     expect($('h2#holidays-table').text()).toBe(`Canada statutory holidays in ${currentYear}`)
     expect($('#next-holiday-row').text()).toBe(
-      'December 26, MondayObserved: December 28, WednesdayBecause Christmas is observed on Monday, Boxing Day is pushed to the following Tuesday.Boxing Day Federal holiday, NL ',
+      'December 26, TuesdayObserved: December 28, ThursdayBoxing Day is observed on the Monday closest to December 26.Boxing Day Federal holiday, NL ',
     )
   })
 
   test('does not render next year link', () => {
-    const $ = renderPage(2026)
+    const $ = renderPage(2029)
     expect($('h1').length).toBe(1)
     expect($('h1').text()).toEqual(
       'Canada’s next statutory holiday\u00a0isBoxing\u00a0Day, onDecember\u00a026*',
     )
     expect($('h2').length).toBe(1)
-    expect($('h2').text()).toEqual('Canada statutory holidays in 2026')
+    expect($('h2').text()).toEqual('Canada statutory holidays in 2029')
     // check that the link to next year's holidays is NOT visible
     expect($('a.link__next-year').length).toBe(0)
   })

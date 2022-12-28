@@ -3,7 +3,7 @@ const render = require('preact-render-to-string')
 const { html, metaIfSHA, getOgImagePath, getCanonical } = require('../utils')
 const { breadcrumb, speakable } = require('../utils/richSnippets')
 const { theme, visuallyHidden } = require('../styles')
-const { fontStyles, printStyles, ga, ga4, ga4Id } = require('../headStyles')
+const { fontStyles, printStyles, ga4, ga4Id } = require('../headStyles')
 
 const document = ({
   title,
@@ -58,12 +58,6 @@ const document = ({
         })}" />
 
         <title>${title}</title>
-        ${
-          process.env.NODE_ENV === 'production'
-            ? `<script>${ga}</script>
-              <script async src='https://www.google-analytics.com/analytics.js'></script>`
-            : ''
-        }
 
         ${
           process.env.NODE_ENV === 'production'

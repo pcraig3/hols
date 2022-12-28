@@ -1,7 +1,7 @@
 openapi: 3.0.0
 info:
   title: Canada Holidays API
-  version: 1.7.0
+  version: 1.8.0
   description: 'This API lists all 31 public holidays for all 13 provinces and territories in Canada, including federal holidays.'
   contact:
     name: Paul Craig
@@ -96,11 +96,11 @@ paths:
                   value:
                     holidays:
                       - id: 1
-                        date: '2022-01-01'
+                        date: '2023-01-01'
                         nameEn: New Year’s Day
                         nameFr: Jour de l’An
                         federal: 1
-                        observedDate: '2022-01-03'
+                        observedDate: '2023-01-02'
                         provinces:
                           - id: AB
                             nameEn: Alberta
@@ -168,11 +168,11 @@ paths:
                             sourceLink: 'https://yukon.ca/en/doing-business/employer-responsibilities/find-yukon-statutory-holiday'
                             sourceEn: Yukon statutory holiday dates
                       - id: 2
-                        date: '2022-02-21'
+                        date: '2023-02-20'
                         nameEn: Louis Riel Day
                         nameFr: Journée Louis Riel
                         federal: 0
-                        observedDate: '2022-02-21'
+                        observedDate: '2023-02-20'
                         provinces:
                           - id: MB
                             nameEn: Manitoba
@@ -184,9 +184,9 @@ paths:
       parameters:
         - schema:
             type: integer
-            default: 2022
-            minimum: 2017
-            maximum: 2026
+            default: 2023
+            minimum: 2016
+            maximum: 2029
           in: query
           description: A calendar year
           name: year
@@ -242,59 +242,59 @@ paths:
                         nameEn: Alberta
                         nameFr: Alberta
                         sourceLink: 'https://www.alberta.ca/alberta-general-holidays.aspx#jumplinks-1'
-                        sourceEn: Alberta general holidays
+                        sourceEn: General holidays in Alberta
                         holidays:
                           - id: 1
-                            date: '2020-01-01'
+                            date: '2023-01-01'
                             nameEn: New Year’s Day
                             nameFr: Jour de l’An
                             federal: 1
-                            observedDate: '2020-01-01'
+                            observedDate: '2023-01-02'
                           - id: 4
-                            date: '2020-02-17'
+                            date: '2023-02-20'
                             nameEn: Family Day
                             nameFr: Fête de la famille
                             federal: 0
-                            observedDate: '2020-02-17'
+                            observedDate: '2023-02-20'
                         nextHoliday:
-                          id: 11
-                          date: '2020-05-18'
-                          nameEn: Victoria Day
-                          nameFr: Fête de la Reine
+                          id: 1
+                          date: '2023-01-01'
+                          nameEn: New Year’s Day
+                          nameFr: Jour de l’An
                           federal: 1
-                          observedDate: '2020-05-18'
+                          observedDate: '2023-01-02'
                       - id: BC
                         nameEn: British Columbia
                         nameFr: Colombie-Britannique
-                        sourceLink: 'https://www2.gov.bc.ca/gov/content/employment-business/employment-standards-advice/employment-standards/statutory-holidays'
-                        sourceEn: Statutory Holidays
+                        sourceLink: 'https://www2.gov.bc.ca/gov/content/employment-business/employment-standards-advice/employment-standards/statutory-holidays#body'
+                        sourceEn: Statutory Holidays in British Columbia
                         holidays:
                           - id: 1
-                            date: '2020-01-01'
+                            date: '2023-01-01'
                             nameEn: New Year’s Day
                             nameFr: Jour de l’An
                             federal: 1
-                            observedDate: '2020-01-01'
+                            observedDate: '2023-01-02'
                           - id: 4
-                            date: '2020-02-17'
+                            date: '2023-02-20'
                             nameEn: Family Day
                             nameFr: Fête de la famille
                             federal: 0
-                            observedDate: '2020-02-17'
+                            observedDate: '2023-02-20'
                         nextHoliday:
-                          id: 11
-                          date: '2020-05-18'
-                          nameEn: Victoria Day
-                          nameFr: Fête de la Reine
+                          id: 1
+                          date: '2023-01-01'
+                          nameEn: New Year’s Day
+                          nameFr: Jour de l’An
                           federal: 1
-                          observedDate: '2020-05-18'
+                          observedDate: '2023-01-02'
       operationId: Provinces
       parameters:
         - schema:
             type: integer
-            default: 2022
-            minimum: 2017
-            maximum: 2026
+            default: 2023
+            minimum: 2016
+            maximum: 2029
           in: query
           description: A calendar year
           name: year
@@ -337,60 +337,60 @@ paths:
                       sourceEn: General holidays in Manitoba
                       holidays:
                         - id: 1
-                          date: '2022-01-01'
+                          date: '2023-01-01'
                           nameEn: New Year’s Day
                           nameFr: Jour de l’An
                           federal: 1
-                          observedDate: '2022-01-03'
+                          observedDate: '2023-01-02'
                         - id: 2
-                          date: '2022-02-21'
+                          date: '2023-02-20'
                           nameEn: Louis Riel Day
                           nameFr: Journée Louis Riel
                           federal: 0
-                          observedDate: '2022-02-21'
+                          observedDate: '2023-02-20'
                         - id: 7
-                          date: '2022-04-15'
+                          date: '2023-04-07'
                           nameEn: Good Friday
                           nameFr: Vendredi saint
                           federal: 1
-                          observedDate: '2022-04-15'
+                          observedDate: '2023-04-07'
                         - id: 11
-                          date: '2022-05-23'
+                          date: '2023-05-22'
                           nameEn: Victoria Day
                           nameFr: Fête de la Reine
                           federal: 1
-                          observedDate: '2022-05-23'
+                          observedDate: '2023-05-22'
                         - id: 15
-                          date: '2022-07-01'
+                          date: '2023-07-01'
                           nameEn: Canada Day
                           nameFr: Fête du Canada
                           federal: 1
-                          observedDate: '2022-07-01'
+                          observedDate: '2023-07-03'
                         - id: 26
-                          date: '2022-09-05'
+                          date: '2023-09-04'
                           nameEn: Labour Day
                           nameFr: Fête du travail
                           federal: 1
-                          observedDate: '2022-09-05'
-                        - id: 28
-                          date: '2022-10-10'
+                          observedDate: '2023-09-04'
+                        - id: 29
+                          date: '2023-10-09'
                           nameEn: Thanksgiving
                           nameFr: Action de grâce
                           federal: 1
-                          observedDate: '2022-10-10'
-                        - id: 30
-                          date: '2022-12-25'
+                          observedDate: '2023-10-09'
+                        - id: 31
+                          date: '2023-12-25'
                           nameEn: Christmas Day
                           nameFr: Noël
                           federal: 1
-                          observedDate: '2022-12-26'
+                          observedDate: '2023-12-25'
                       nextHoliday:
-                        id: 26
-                        date: '2022-09-05'
-                        nameEn: Labour Day
-                        nameFr: Fête du travail
+                        id: 1
+                        date: '2023-01-01'
+                        nameEn: New Year’s Day
+                        nameFr: Jour de l’An
                         federal: 1
-                        observedDate: '2022-09-05'
+                        observedDate: '2023-01-02'
         '400':
           description: Bad Request
           content:
@@ -412,9 +412,9 @@ paths:
       parameters:
         - schema:
             type: integer
-            default: 2022
-            minimum: 2017
-            maximum: 2026
+            default: 2023
+            minimum: 2016
+            maximum: 2029
           in: query
           description: A calendar year
           name: year
@@ -484,11 +484,11 @@ paths:
                   value:
                     holiday:
                       id: 32
-                      date: '2022-12-26'
+                      date: '2023-12-26'
                       nameEn: Boxing Day
                       nameFr: Lendemain de Noël
                       federal: 1
-                      observedDate: '2022-12-27'
+                      observedDate: '2023-12-26'
                       provinces:
                         - id: NL
                           nameEn: Newfoundland and Labrador
@@ -504,11 +504,11 @@ paths:
                   value:
                     holiday:
                       id: 32
-                      date: '2022-12-26'
+                      date: '2023-12-26'
                       nameEn: Boxing Day
                       nameFr: Lendemain de Noël
                       federal: 1
-                      observedDate: '2022-12-27'
+                      observedDate: '2023-12-26'
                       provinces:
                         - id: NL
                           nameEn: Newfoundland and Labrador
@@ -559,9 +559,9 @@ paths:
       parameters:
         - schema:
             type: integer
-            default: 2022
-            minimum: 2017
-            maximum: 2026
+            default: 2023
+            minimum: 2016
+            maximum: 2029
           in: query
           description: A calendar year
           name: year
@@ -605,11 +605,11 @@ components:
         /holidays/32?optional=true:
           holiday:
             id: 32
-            date: '2022-12-26'
+            date: '2023-12-26'
             nameEn: Boxing Day
             nameFr: Lendemain de Noël
             federal: 1
-            observedDate: '2022-12-27'
+            observedDate: '2023-12-26'
             provinces:
               - id: NL
                 nameEn: Newfoundland and Labrador
@@ -630,8 +630,14 @@ components:
               - id: BC
                 nameEn: British Columbia
                 nameFr: Colombie-Britannique
-                sourceLink: 'https://www2.gov.bc.ca/gov/content/health/practitioner-professional-resources/msp/claim-submission-payment/designated-holidays-and-close-off-dates'
-                sourceEn: Government Holidays in British Columbia
+                sourceLink: 'https://www2.gov.bc.ca/gov/content/employment-business/employment-standards-advice/employment-standards/statutory-holidays#body'
+                sourceEn: Statutory Holidays in British Columbia
+                optional: 1
+              - id: MB
+                nameEn: Manitoba
+                nameFr: Manitoba
+                sourceLink: 'https://www.gov.mb.ca/labour/standards/doc,gen-holidays-after-april-30-07,factsheet.html#q12'
+                sourceEn: General holidays in Manitoba
                 optional: 1
       properties:
         id:
@@ -695,72 +701,72 @@ components:
             sourceEn: Saskatchewan Public Holidays
             holidays:
               - id: 1
-                date: '2022-01-01'
+                date: '2023-01-01'
                 nameEn: New Year’s Day
                 nameFr: Jour de l’An
                 federal: 1
-                observedDate: '2022-01-03'
+                observedDate: '2023-01-02'
               - id: 4
-                date: '2022-02-21'
+                date: '2023-02-20'
                 nameEn: Family Day
                 nameFr: Fête de la famille
                 federal: 0
-                observedDate: '2022-02-21'
+                observedDate: '2023-02-20'
               - id: 7
-                date: '2022-04-15'
+                date: '2023-04-07'
                 nameEn: Good Friday
                 nameFr: Vendredi saint
                 federal: 1
-                observedDate: '2022-04-15'
+                observedDate: '2023-04-07'
               - id: 11
-                date: '2022-05-23'
+                date: '2023-05-22'
                 nameEn: Victoria Day
                 nameFr: Fête de la Reine
                 federal: 1
-                observedDate: '2022-05-23'
+                observedDate: '2023-05-22'
               - id: 15
-                date: '2022-07-01'
+                date: '2023-07-01'
                 nameEn: Canada Day
                 nameFr: Fête du Canada
                 federal: 1
-                observedDate: '2022-07-01'
+                observedDate: '2023-07-03'
               - id: 21
-                date: '2022-08-01'
+                date: '2023-08-07'
                 nameEn: Saskatchewan Day
                 nameFr: Jour de Saskatchewan
                 federal: 0
-                observedDate: '2022-08-01'
+                observedDate: '2023-08-07'
               - id: 26
-                date: '2022-09-05'
+                date: '2023-09-04'
                 nameEn: Labour Day
                 nameFr: Fête du travail
                 federal: 1
-                observedDate: '2022-09-05'
-              - id: 28
-                date: '2022-10-10'
+                observedDate: '2023-09-04'
+              - id: 29
+                date: '2023-10-09'
                 nameEn: Thanksgiving
                 nameFr: Action de grâce
                 federal: 1
-                observedDate: '2022-10-10'
-              - id: 29
-                date: '2022-11-11'
+                observedDate: '2023-10-09'
+              - id: 30
+                date: '2023-11-11'
                 nameEn: Remembrance Day
                 nameFr: Jour du Souvenir
                 federal: 1
-                observedDate: '2022-11-11'
-              - id: 30
-                date: '2022-12-25'
+                observedDate: '2023-11-13'
+              - id: 31
+                date: '2023-12-25'
                 nameEn: Christmas Day
                 nameFr: Noël
                 federal: 1
-                observedDate: '2022-12-26'
+                observedDate: '2023-12-25'
             nextHoliday:
-              id: 21
-              date: '2022-08-01'
-              nameEn: Saskatchewan Day
-              nameFr: Jour de Saskatchewan
-              federal: 0
-              observedDate: '2022-08-01'
+              id: 1
+              date: '2023-01-01'
+              nameEn: New Year’s Day
+              nameFr: Jour de l’An
+              federal: 1
+              observedDate: '2023-01-02'
       description: 'A Canadian province or territory '
       properties:
         id:
@@ -824,8 +830,8 @@ components:
         /holidays/100:
           error:
             status: 400
-            message: 'Bad Request: request.params.holidayId should be <= 31'
-            timestamp: '2020-04-28T03:59:12.427Z'
+            message: 'Bad Request: request/params/holidayId must be <= 32'
+            timestamp: '2022-12-27T05:55:36.552Z'
       properties:
         status:
           type: integer
