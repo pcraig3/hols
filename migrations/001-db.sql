@@ -160,6 +160,7 @@ INSERT INTO ProvinceHoliday (holidayId, provinceId) VALUES ((SELECT id FROM Holi
 INSERT INTO ProvinceHoliday (holidayId, provinceId) VALUES ((SELECT id FROM Holiday WHERE (date = 'Monday before May 25' AND nameEn = 'Victoria Day')), 'ON');
 INSERT INTO ProvinceHoliday (holidayId, provinceId) VALUES ((SELECT id FROM Holiday WHERE (date = 'Monday before May 25' AND nameEn = 'Victoria Day')), 'SK');
 INSERT INTO ProvinceHoliday (holidayId, provinceId) VALUES ((SELECT id FROM Holiday WHERE (date = 'Monday before May 25' AND nameEn = 'Victoria Day')), 'YT');
+INSERT INTO ProvinceHoliday (holidayId, provinceId, optional) VALUES ((SELECT id FROM Holiday WHERE (date = 'Monday before May 25' AND nameEn = 'Victoria Day')), 'NB', 1);
 
 INSERT INTO ProvinceHoliday (holidayId, provinceId) VALUES ((SELECT id FROM Holiday WHERE (date = 'June 21' AND nameEn = 'National Indigenous Peoples Day')), 'NT');
 INSERT INTO ProvinceHoliday (holidayId, provinceId) VALUES ((SELECT id FROM Holiday WHERE (date = 'June 21' AND nameEn = 'National Indigenous Peoples Day')), 'YT');
@@ -239,6 +240,7 @@ INSERT INTO ProvinceHoliday (holidayId, provinceId) VALUES ((SELECT id FROM Holi
 INSERT INTO ProvinceHoliday (holidayId, provinceId) VALUES ((SELECT id FROM Holiday WHERE (date = 'Second Monday in October' AND nameEn = 'Thanksgiving')), 'QC');
 INSERT INTO ProvinceHoliday (holidayId, provinceId) VALUES ((SELECT id FROM Holiday WHERE (date = 'Second Monday in October' AND nameEn = 'Thanksgiving')), 'SK');
 INSERT INTO ProvinceHoliday (holidayId, provinceId) VALUES ((SELECT id FROM Holiday WHERE (date = 'Second Monday in October' AND nameEn = 'Thanksgiving')), 'YT');
+INSERT INTO ProvinceHoliday (holidayId, provinceId, optional) VALUES ((SELECT id FROM Holiday WHERE (date = 'Second Monday in October' AND nameEn = 'Thanksgiving')), 'NB', 1);
 
 INSERT INTO ProvinceHoliday (holidayId, provinceId) VALUES ((SELECT id FROM Holiday WHERE (date = 'November 11' AND nameEn = 'Remembrance Day')), 'AB');
 INSERT INTO ProvinceHoliday (holidayId, provinceId) VALUES ((SELECT id FROM Holiday WHERE (date = 'November 11' AND nameEn = 'Remembrance Day')), 'BC');
@@ -271,6 +273,7 @@ INSERT INTO ProvinceHoliday (holidayId, provinceId) VALUES ((SELECT id FROM Holi
 INSERT INTO ProvinceHoliday (holidayId, provinceId, optional) VALUES ((SELECT id FROM Holiday WHERE (date = 'December 26' AND nameEn = 'Boxing Day')), 'AB', 1);
 INSERT INTO ProvinceHoliday (holidayId, provinceId, optional) VALUES ((SELECT id FROM Holiday WHERE (date = 'December 26' AND nameEn = 'Boxing Day')), 'BC', 1);
 INSERT INTO ProvinceHoliday (holidayId, provinceId, optional) VALUES ((SELECT id FROM Holiday WHERE (date = 'December 26' AND nameEn = 'Boxing Day')), 'MB', 1);
+INSERT INTO ProvinceHoliday (holidayId, provinceId, optional) VALUES ((SELECT id FROM Holiday WHERE (date = 'December 26' AND nameEn = 'Boxing Day')), 'NB', 1);
 
 -- Down
 DROP TABLE ProvinceHoliday;
