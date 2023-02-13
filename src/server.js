@@ -12,10 +12,9 @@ const app = express()
 app
   .use(
     helmet({
-      crossOriginEmbedderPolicy: false,
+      crossOriginResourcePolicy: { policy: 'cross-origin' },
     }),
   )
-  .use(cors())
   .use(helmet.contentSecurityPolicy({ useDefaults: false, directives: csp }))
   // both of these are needed to parse post request params
   .use(express.urlencoded({ extended: true }))
@@ -23,6 +22,7 @@ app
   .use(express.static('public', { maxage: process.env.NODE_ENV === 'production' ? '3d' : '0' }))
   .use(compression())
   .use(requestIp.mw())
+  .use(cors())
 
 // if NODE_ENV does not equal 'test', add a request logger
 process.env.NODE_ENV !== 'test' && app.use(morgan(morganConfig))
