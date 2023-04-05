@@ -128,18 +128,18 @@ describe('Test /api responses', () => {
     test('it should return the right number of holidays per province', async () => {
       const provinceHolidayLength = {
         AB: 9,
-        BC: 10,
+        BC: 11,
         MB: 8,
         NB: 8,
         NL: 12,
         NS: 6,
-        NT: 10,
-        NU: 10,
+        NT: 11,
+        NU: 11,
         ON: 9,
         PE: 8,
         QC: 8,
         SK: 10,
-        YT: 10,
+        YT: 11,
       }
 
       const response = await request(app).get('/api/v1/provinces')
@@ -198,11 +198,11 @@ describe('Test /api responses', () => {
         {
           province: 'AB',
           statTotal: 9,
-          optionalTotal: 12,
+          optionalTotal: 13,
         },
         {
           province: 'BC',
-          statTotal: 10,
+          statTotal: 11,
           optionalTotal: 13,
         },
         {
