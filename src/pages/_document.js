@@ -167,7 +167,7 @@ const document = ({
           }
         </script>
       </head>
-      <body id="body" class='no-js'>
+      <body id="body" class="no-js">
         <script>
           document.body.classList.remove("no-js");
           document.body.classList.add("js");
@@ -175,6 +175,10 @@ const document = ({
         ${content}
         <script src="/js/sweet-scroll.min.js?v=${process.env.npm_package_version}"></script>
         <script src="/js/script.js?v=${process.env.npm_package_version}"></script>
+        ${
+          path === '/feedback' &&
+          `<script src="/js/email.js?v=${process.env.npm_package_version}"></script>`
+        }
       </body>
     </html>
   `
