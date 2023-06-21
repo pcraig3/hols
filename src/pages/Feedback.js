@@ -1,7 +1,15 @@
 const { html } = require('../utils')
+const { css } = require('@emotion/css')
 const Layout = require('../components/Layout.js')
 const Content = require('../components/Content.js')
 const Abbr = require('../components/Abbr.js')
+
+const linkStyle = css`
+  /* for obfuscating emails. Idea comes from https://mauriciorobayo.github.io/react-obfuscate-email/?path=/docs/react-obfuscate-email--mail */
+  a > span.roe::after {
+    content: '@';
+  }
+`
 
 const Feedback = () =>
   html`
@@ -17,12 +25,12 @@ const Feedback = () =>
           On the other hand, if you <span role="img" aria-label="heart">❤️</span> my site and want
           to support me on Patreon, we can figure that out as well.
         </p>
-        <p>
+        <p className=${linkStyle}>
           Email me pls <span aria-hidden="true">👉</span>${' '}
-          <a
-            class="pcraig3"
-            href="mailto:paul@pcraig3.ca?subject=Something is UP with canada-holidays.ca"
-            >paul@pcraig3.ca</a
+          <span
+            class="email--swap"
+            data-email="cGF1bEBwY3JhaWcuY2E/c3ViamVjdD1Tb21ldGhpbmcgaXMgVVAgd2l0aCBjYW5hZGEtaG9saWRheXMuY2E="
+            >“paul [a] pcraig [dot] ca”</span
           >
         </p>
       <//>
