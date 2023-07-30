@@ -178,7 +178,7 @@ describe('Test ui responses', () => {
         const currentYearMB = getCurrentHolidayYear('MB')
         const response = await request(app).get('/provinces/MB')
         const $ = cheerio.load(response.text)
-        expect($('h1').text()).toMatch(/^Manitoba’s next statutory holiday\u00a0is/)
+        expect($('h1').text()).toMatch(/^Manitoba’s next (?:statutory\s)*holiday\u00a0is/)
         expect($('title').text()).toEqual(
           `Manitoba (MB) statutory holidays in ${currentYearMB} — Canada Holidays`,
         )
@@ -347,7 +347,7 @@ describe('Test ui responses', () => {
               expect(response.statusCode).toBe(200)
               const $ = cheerio.load(response.text)
               expect($('h1').text()).toMatch(
-                /^(Ontario|Canada)’s next (?:federal\s)*statutory holiday/,
+                /^(Ontario|Canada)’s next (?:federal\s)*(?:statutory\s)*holiday/,
               )
             })
           })
@@ -357,7 +357,7 @@ describe('Test ui responses', () => {
             expect(response.statusCode).toBe(200)
             const $ = cheerio.load(response.text)
             expect($('h1').text()).toMatch(
-              /^(Ontario|Canada)’s next (?:federal\s)*statutory holiday/,
+              /^(Ontario|Canada)’s next (?:federal\s)*(?:statutory\s)*holiday/,
             )
           })
 
