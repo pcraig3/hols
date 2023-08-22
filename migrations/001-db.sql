@@ -67,7 +67,7 @@ INSERT INTO Holiday (date, nameEn, nameFr) VALUES ('Monday before May 25', 'Nati
 INSERT INTO Holiday (date, nameEn, nameFr) VALUES ('Monday before May 25', 'Victoria Day', 'Fête de la Reine');
 INSERT INTO Holiday (date, nameEn, nameFr) VALUES ('June 21', 'National Indigenous Peoples Day', 'Journée nationale des peuples autochtones');
 INSERT INTO Holiday (date, nameEn, nameFr) VALUES ('June 24', 'Saint-Jean-Baptiste Day', 'Saint-Jean-Baptiste / Fête nationale du Québec');
-INSERT INTO Holiday (date, nameEn, nameFr) VALUES ('Monday after June 24', 'Discovery Day', 'Journée découverte');
+INSERT INTO Holiday (date, nameEn, nameFr) VALUES ('Monday near June 24', 'Discovery Day', 'Journée découverte');
 INSERT INTO Holiday (date, nameEn, nameFr) VALUES ('July 1', 'Canada Day', 'Fête du Canada');
 INSERT INTO Holiday (date, nameEn, nameFr) VALUES ('July 9', 'Nunavut Day', 'Jour de Nunavut');
 INSERT INTO Holiday (date, nameEn, nameFr) VALUES ('Monday near July 12', 'Orangemen’s Day', 'Fête des orangistes');
@@ -165,7 +165,7 @@ INSERT INTO ProvinceHoliday (holidayId, provinceId, optional) VALUES ((SELECT id
 INSERT INTO ProvinceHoliday (holidayId, provinceId) VALUES ((SELECT id FROM Holiday WHERE (date = 'June 21' AND nameEn = 'National Indigenous Peoples Day')), 'NT');
 INSERT INTO ProvinceHoliday (holidayId, provinceId) VALUES ((SELECT id FROM Holiday WHERE (date = 'June 21' AND nameEn = 'National Indigenous Peoples Day')), 'YT');
 
-INSERT INTO ProvinceHoliday (holidayId, provinceId) VALUES ((SELECT id FROM Holiday WHERE (date = 'Monday after June 24' AND nameEn = 'Discovery Day')), 'NL');
+INSERT INTO ProvinceHoliday (holidayId, provinceId) VALUES ((SELECT id FROM Holiday WHERE (date = 'Monday near June 24' AND nameEn = 'Discovery Day')), 'NL');
 
 INSERT INTO ProvinceHoliday (holidayId, provinceId) VALUES ((SELECT id FROM Holiday WHERE (date = 'June 24' AND nameEn = 'Saint-Jean-Baptiste Day')), 'QC');
 

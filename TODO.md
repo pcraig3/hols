@@ -7,6 +7,7 @@
 
 # DONE
 
+- Fix bug where Discovery Day couldn't be on a Monday
 - Hide API routes and ICS routes from search engine crawlers
 - Add 2016, 2027, 2028, 2029
 - Update to GA4, otherwise we get cut off
