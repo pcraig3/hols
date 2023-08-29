@@ -13,6 +13,17 @@ describe('Test server responses', () => {
     expect(response.statusCode).toBe(200)
   })
 
+  const UNEXPECTED_JS_OUTPUT = ['false', 'true', 'undefined']
+
+  UNEXPECTED_JS_OUTPUT.map((badOutput) => {
+    test(`it should not contain "${badOutput}" on the root path`, async () => {
+      const response = await request(app).get('/')
+      var re = new RegExp(`${badOutput}<`, 'g')
+
+      expect(response.text.replace(/\s+/g, '')).not.toMatch(re)
+    })
+  })
+
   test('it should return 404 for a nonexistent path', async () => {
     const response = await request(app).get('/pterosaur')
     expect(response.statusCode).toBe(404)

@@ -176,8 +176,9 @@ const document = ({
         <script src="/js/sweet-scroll.min.js?v=${process.env.npm_package_version}"></script>
         <script src="/js/script.js?v=${process.env.npm_package_version}"></script>
         ${
-          path === '/feedback' &&
-          `<script src="/js/email.js?v=${process.env.npm_package_version}"></script>`
+          path === '/feedback'
+            ? `<script src="/js/email.js?v=${process.env.npm_package_version}"></script>`
+            : ''
         }
       </body>
     </html>
