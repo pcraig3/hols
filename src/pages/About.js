@@ -38,7 +38,7 @@ const About = ({ data: { nextHoliday } }) =>
           Hello, my name is${' '}
           <a
             class="pcraig3"
-            href="https://pcraig3.ca"
+            href="https://pcraig.ca"
             title="Paul Craig"
             target="_blank"
             rel="noopener"

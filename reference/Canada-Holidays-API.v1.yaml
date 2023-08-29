@@ -6,7 +6,7 @@ info:
   contact:
     name: Paul Craig
     url: 'https://canada-holidays.ca/api'
-    email: paul@pcraig3.ca
+    email: paul@pcraig.ca
   license:
     name: MIT
     url: 'https://github.com/pcraig3/hols/blob/main/LICENSE'

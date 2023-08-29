@@ -1,5 +1,5 @@
 FROM node:lts-alpine
-LABEL maintainer="paul@pcraig3.ca"
+LABEL maintainer="paul@pcraig.ca"
 
 ARG GITHUB_SHA_ARG
 ENV GITHUB_SHA=$GITHUB_SHA_ARG
