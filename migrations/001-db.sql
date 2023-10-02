@@ -231,7 +231,7 @@ INSERT INTO ProvinceHoliday (holidayId, provinceId, optional) VALUES ((SELECT id
 INSERT INTO ProvinceHoliday (holidayId, provinceId) VALUES ((SELECT id FROM Holiday WHERE (date = 'September 30' AND nameEn = 'National Day for Truth and Reconciliation')), 'BC');
 INSERT INTO ProvinceHoliday (holidayId, provinceId, optional) VALUES ((SELECT id FROM Holiday WHERE (date = 'September 30' AND nameEn = 'National Day for Truth and Reconciliation')), 'MB', 1);
 INSERT INTO ProvinceHoliday (holidayId, provinceId) VALUES ((SELECT id FROM Holiday WHERE (date = 'September 30' AND nameEn = 'National Day for Truth and Reconciliation')), 'NT');
-INSERT INTO ProvinceHoliday (holidayId, provinceId) VALUES ((SELECT id FROM Holiday WHERE (date = 'September 30' AND nameEn = 'National Day for Truth and Reconciliation')), 'NU');
+INSERT INTO ProvinceHoliday (holidayId, provinceId, optional) VALUES ((SELECT id FROM Holiday WHERE (date = 'September 30' AND nameEn = 'National Day for Truth and Reconciliation')), 'NU', 1);
 INSERT INTO ProvinceHoliday (holidayId, provinceId) VALUES ((SELECT id FROM Holiday WHERE (date = 'September 30' AND nameEn = 'National Day for Truth and Reconciliation')), 'PE');
 INSERT INTO ProvinceHoliday (holidayId, provinceId) VALUES ((SELECT id FROM Holiday WHERE (date = 'September 30' AND nameEn = 'National Day for Truth and Reconciliation')), 'YT');
 

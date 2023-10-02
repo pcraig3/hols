@@ -135,6 +135,7 @@ const optionalTrue = (req, res, next) => {
       provinceId === 'MB' ||
       provinceId === 'NB' ||
       provinceId === 'NL' ||
+      provinceId === 'NU' ||
       provinceId === 'NS' ||
       provinceId === 'ON') &&
     req.query.optional === undefined

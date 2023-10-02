@@ -1,7 +1,7 @@
 openapi: 3.0.0
 info:
   title: Canada Holidays API
-  version: 1.8.0
+  version: 1.8.1
   description: 'This API lists all 31 public holidays for all 13 provinces and territories in Canada, including federal holidays.'
   contact:
     name: Paul Craig
@@ -212,7 +212,7 @@ paths:
             default: 'false'
           in: query
           name: optional
-          description: 'A boolean parameter. If false or 0 (default), will return only legislated holidays. If true or 1, will return optional holidays from Alberta and BC.'
+          description: 'A boolean parameter. If false or 0 (default), will return only legislated holidays. If true or 1, will return optional holidays for that region (if available).'
           allowEmptyValue: true
       tags:
         - holidays
@@ -309,7 +309,7 @@ paths:
             default: 'false'
           in: query
           name: optional
-          description: 'A boolean parameter. If false or 0 (default), will return only legislated holidays. If true or 1, will return optional holidays from Alberta and BC.'
+          description: 'A boolean parameter. If false or 0 (default), will return only legislated holidays. If true or 1, will return optional holidays for that region (if available).'
           allowEmptyValue: true
       description: Returns provinces and territories in Canada. Each province or territory lists its associated holidays.
   '/api/v1/provinces/{provinceId}':
@@ -429,7 +429,7 @@ paths:
               - 'false'
           in: query
           name: optional
-          description: 'A boolean parameter (AB and BC only). If false or 0 (default), will return only legislated holidays. If true or 1, will return optional holidays from Alberta and BC.'
+          description: 'A boolean parameter. If false or 0 (default), will return only legislated holidays. If true or 1, will return optional holidays for that region (if available).'
           allowEmptyValue: true
       tags:
         - provinces

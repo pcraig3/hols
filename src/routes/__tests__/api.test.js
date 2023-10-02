@@ -134,7 +134,7 @@ describe('Test /api responses', () => {
         NL: 12,
         NS: 6,
         NT: 11,
-        NU: 11,
+        NU: 10,
         ON: 9,
         PE: 8,
         QC: 8,
@@ -208,6 +208,11 @@ describe('Test /api responses', () => {
         {
           province: 'NB',
           statTotal: 8,
+          optionalTotal: 11,
+        },
+        {
+          province: 'NU',
+          statTotal: 10,
           optionalTotal: 11,
         },
         {

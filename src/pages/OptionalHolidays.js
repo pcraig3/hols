@@ -39,6 +39,7 @@ const OptionalHolidays = () =>
           <li><a href="/provinces/BC">British Columbia holidays</a></li>
           <li><a href="/provinces/MB">Manitoba holidays</a></li>
           <li><a href="/provinces/NB">New Brunswick holidays</a></li>
+          <li><a href="/provinces/NU">Nunavut holidays</a></li>
           <li><a href="/provinces/ON">Ontario holidays</a></li>
         </ul>
 
