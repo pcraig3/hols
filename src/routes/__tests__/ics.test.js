@@ -1,5 +1,5 @@
 const request = require('supertest')
-const DB = require('better-sqlite3-helper')
+const DB = require('@beenotung/better-sqlite3-helper')
 
 const app = require('../../server.js')
 const DBconfig = require('../../config/better-sqlite3-helper.config')

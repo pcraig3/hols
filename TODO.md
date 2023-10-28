@@ -7,6 +7,7 @@
 
 # DONE
 
+- Update to new LTS version of node
 - Fix bug where Discovery Day couldn't be on a Monday
 - Hide API routes and ICS routes from search engine crawlers
 - Add 2016, 2027, 2028, 2029

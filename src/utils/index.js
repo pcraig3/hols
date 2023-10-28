@@ -1,5 +1,5 @@
 const { h } = require('preact')
-const DB = require('better-sqlite3-helper')
+const DB = require('@beenotung/better-sqlite3-helper')
 const htm = require('htm')
 const validator = require('validator')
 const createError = require('http-errors')

@@ -1,6 +1,6 @@
 {
   "name": "hols",
-  "version": "3.21.2",
+  "version": "3.21.3",
   "description": "hols for cans: canada holidays api and canada holidays frontend",
   "main": "index.js",
   "author": "pcraig3",
@@ -28,7 +28,7 @@
     "@emotion/css": "^11.11.2",
     "@emotion/server": "^11.11.0",
     "@jsbits/easter-day": "^1.0.1",
-    "better-sqlite3-helper": "^3.1.6",
+    "@beenotung/better-sqlite3-helper": "^4.0.2",
     "compression": "^1.7.4",
     "cors": "^2.8.5",
     "date-fns": "^2.30.0",
