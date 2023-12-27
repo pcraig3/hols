@@ -296,17 +296,18 @@ describe('Test /api responses', () => {
           let { holidays } = JSON.parse(response.text)
 
           // Heritage Day
+          // TODO: This breaks when the year changes
           const heritageDay = holidays.find(
-            (h) => h.nameEn === 'Heritage Day' && h.date === '2023-08-07',
+            (h) => h.nameEn === 'Heritage Day' && h.date === '2024-08-05',
           )
           expect(heritageDay.id).toBe(22)
           expect(heritageDay).toMatchObject({
             id: 22,
-            date: `${currentYear}-08-07`,
+            date: `${currentYear}-08-05`,
             nameEn: 'Heritage Day',
             nameFr: 'Jour d’Héritage',
             federal: 0,
-            observedDate: `${currentYear}-08-07`,
+            observedDate: `${currentYear}-08-05`,
             provinces: expect.any(Array),
           })
 
@@ -315,17 +316,18 @@ describe('Test /api responses', () => {
           expect(heritageDay.provinces[0].optional).toBe(1)
 
           // Terry Fox Day
+          // TODO: This breaks when the year changes
           const terryFoxDay = holidays.find(
-            (h) => h.nameEn === 'Terry Fox Day' && h.date === '2023-08-07',
+            (h) => h.nameEn === 'Terry Fox Day' && h.date === '2024-08-05',
           )
           expect(terryFoxDay.id).toBe(23)
           expect(terryFoxDay).toMatchObject({
             id: 23,
-            date: `${currentYear}-08-07`,
+            date: `${currentYear}-08-05`,
             nameEn: 'Terry Fox Day',
             nameFr: 'Journée Terry Fox',
             federal: 0,
-            observedDate: `${currentYear}-08-07`,
+            observedDate: `${currentYear}-08-05`,
             provinces: expect.any(Array),
           })
 
