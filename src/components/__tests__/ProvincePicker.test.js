@@ -10,12 +10,12 @@ const renderProvincePicker = ({ provinceId, federal, year } = {}) => {
 }
 
 describe('<ProvincePicker>', () => {
-  const SELECTABLE_YEARS = ALLOWED_YEARS.filter((y) => y >= 2019)
+  const SELECTABLE_YEARS = ALLOWED_YEARS.filter((y) => y >= 2021 && y <= 2030)
   test(' renders properly', () => {
     const $ = renderProvincePicker()
     expect($('label').text()).toEqual('View by regionView by year')
     expect($('select').length).toBe(2)
-    expect($('select option').length).toBe(27)
+    expect($('select option').length).toBe(26)
     expect($('select option').text()).toEqual(
       `NationwideFederal──────────AlbertaBritish ColumbiaManitobaNew BrunswickNewfoundland and LabradorNova ScotiaNorthwest TerritoriesNunavutOntarioPrince Edward IslandQuebecSaskatchewanYukon${SELECTABLE_YEARS.join(
         '',

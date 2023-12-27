@@ -11,7 +11,7 @@ Features:
 - Returns only federal holidays
 - Returns only national holidays
 - Returns "next" holiday for each region
-- Returns holidays for years: `2016`, `2017`, `2018`, `2019`, `2020`, `2021`, `2022`, `2023`, `2024`, `2025`, `2026`, `2027`, `2028`, `2029`
+- Returns holidays for years: `2015`, `2016`, `2017`, `2018`, `2019`, `2020`, `2021`, `2022`, `2023`, `2024`, `2025`, `2026`, `2027`, `2028`, `2029`, `2030`, `2031`
 
 Plus(!) check out all these goodies you get for ✨ free ✨:
 

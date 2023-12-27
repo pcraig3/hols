@@ -185,8 +185,8 @@ paths:
         - schema:
             type: integer
             default: 2024
-            minimum: 2016
-            maximum: 2029
+            minimum: 2015
+            maximum: 2031
           in: query
           description: A calendar year
           name: year
@@ -293,8 +293,8 @@ paths:
         - schema:
             type: integer
             default: 2024
-            minimum: 2016
-            maximum: 2029
+            minimum: 2015
+            maximum: 2031
           in: query
           description: A calendar year
           name: year
@@ -413,8 +413,8 @@ paths:
         - schema:
             type: integer
             default: 2024
-            minimum: 2016
-            maximum: 2029
+            minimum: 2015
+            maximum: 2031
           in: query
           description: A calendar year
           name: year
@@ -560,8 +560,8 @@ paths:
         - schema:
             type: integer
             default: 2024
-            minimum: 2016
-            maximum: 2029
+            minimum: 2015
+            maximum: 2031
           in: query
           description: A calendar year
           name: year

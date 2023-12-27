@@ -374,7 +374,7 @@ describe('Test /api responses', () => {
         })
       })
 
-      let badYears = ['2015', '2030', '1', null, undefined, false, 'orange', 'christmas']
+      let badYears = ['2014', '2032', '1', null, undefined, false, 'orange', 'christmas']
       badYears.map((year) => {
         test(`"${year}" it should return 400 with an error message`, async () => {
           const response = await request(app).get(`/api/v1/holidays?year=${year}`)
@@ -382,7 +382,7 @@ describe('Test /api responses', () => {
 
           let { error } = JSON.parse(response.text)
           expect(error.message).toMatch(
-            /^Bad Request: request\/query\/year must be (integer|>= 2016|<= 2029)/,
+            /^Bad Request: request\/query\/year must be (integer|>= 2015|<= 2031)/,
           )
         })
       })
@@ -514,7 +514,7 @@ describe('Test /api responses', () => {
         })
       })
 
-      let badYears = ['2015', '2030', '1', null, undefined, false, 'orange', 'christmas']
+      let badYears = ['2014', '2032', '1', null, undefined, false, 'orange', 'christmas']
       badYears.map((year) => {
         test(`"${year}" it should return 400 with an error message`, async () => {
           const response = await request(app).get(`/api/v1/holidays?year=${year}`)
@@ -522,7 +522,7 @@ describe('Test /api responses', () => {
 
           let { error } = JSON.parse(response.text)
           expect(error.message).toMatch(
-            /^Bad Request: request\/query\/year must be (integer|>= 2016|<= 2029)/,
+            /^Bad Request: request\/query\/year must be (integer|>= 2015|<= 2031)/,
           )
         })
       })
