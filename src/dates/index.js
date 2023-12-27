@@ -1,14 +1,13 @@
 const Sugar = require('sugar-date')
 const easterDay = require('@jsbits/easter-day')
-const format = require('date-fns/format')
-const addMinutes = require('date-fns/addMinutes')
-const addDays = require('date-fns/addDays')
-const getISODay = require('date-fns/getISODay')
-const differenceInDays = require('date-fns/differenceInDays')
-const startOfDay = require('date-fns/startOfDay')
-const isAfter = require('date-fns/isAfter')
-
-const formatDistance = require('date-fns/formatDistance')
+const { format } = require('date-fns/format')
+const { addMinutes } = require('date-fns/addMinutes')
+const { addDays } = require('date-fns/addDays')
+const { getISODay } = require('date-fns/getISODay')
+const { differenceInDays } = require('date-fns/differenceInDays')
+const { startOfDay } = require('date-fns/startOfDay')
+const { isAfter } = require('date-fns/isAfter')
+const { formatDistance } = require('date-fns/formatDistance')
 
 const _getISODayInt = (weekday) => {
   if (weekday === 'Monday') {

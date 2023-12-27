@@ -3,8 +3,8 @@ const { html } = require('../utils')
 const { displayDate } = require('../dates')
 const DateHtml = require('./DateHtml.js')
 const Details = require('./Details.js')
-const isSunday = require('date-fns/isSunday')
-const isMonday = require('date-fns/isMonday')
+const { isSunday } = require('date-fns/isSunday')
+const { isMonday } = require('date-fns/isMonday')
 
 const _getContext = ({ nameEn, provinces = [], date }) => {
   if (

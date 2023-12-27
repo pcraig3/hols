@@ -1,4 +1,4 @@
-const addDays = require('date-fns/addDays')
+const { addDays } = require('date-fns/addDays')
 const crypto = require('crypto')
 
 /**
