@@ -5,26 +5,46 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [3.21.3] - 2022-10-28
+## [3.22.0] - 2023-12-26
+
+### Added
+
+- Added new years as options
+  - 2015
+  - 2030
+  - 2031
+
+### Updated
+
+- API spec updated for new years again
+- Updated sitemap with new days
+- New tests for new years
+- ProvincePicker now shows 1 less date
+
+### Fixed
+
+- Fixed a bug that was introduced by updating the ics lib
+
+## [3.21.3] - 2023-10-28
 
 ### Updated
 
 - Minor: updated the node version and my SQLite helper. Not user-facing but worth having a separate revision for this.
 
-## [3.21.2] - 2022-10-02
+## [3.21.2] - 2023-10-02
 
 ### Updated
 
 - Update the status of National Truth and Reconciliation Day for Nunavut
   - It is a public service holiday, not a day everyone gets
 
-## [3.21.1] - 2022-08-22
+## [3.21.1] - 2023-08-22
 
 ### Updated
 
 - NL's Discovery Day, when it falls on a Monday, should be on that Monday
 
-## [3.21.0] - 2022-02-13
+## [3.21.0] - 2023-02-13
 
 ### Updated
 
@@ -33,19 +53,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Yukon, NWT, and Nunavut all made it a provincial holiday
   - Alberta mentions it as an optional holiday now
 
-## [3.20.2] - 2022-02-13
+## [3.20.2] - 2023-02-13
 
 ### Updated
 
 - Change the Cross Origin Resource Policy to allow other origins to load stuff
 
-## [3.20.1] - 2022-02-12
+## [3.20.1] - 2023-02-12
 
 ### Updated
 
 - Remove API routes and ICS routes from google bot
 
-## [3.20.0] - 2022-02-11
+## [3.20.0] - 2023-02-11
 
 ### Added
 
