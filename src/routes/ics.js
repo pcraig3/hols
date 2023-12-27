@@ -8,6 +8,7 @@ const { ALLOWED_YEARS } = require('../config/vars.config')
 const {
   startDate,
   endDate,
+  getCurrentTimestamp,
   getTitle,
   getUid,
   getNationalDescription,
@@ -27,6 +28,7 @@ const formatNationalEvent = (holiday) => {
     description: getNationalDescription(holiday),
     productId: '-//pcraig3//hols//EN',
     uid: `${getUid(holiday)}@hols.ca`,
+    timestamp: getCurrentTimestamp(),
   }
 }
 
@@ -42,6 +44,7 @@ const formatProvinceEvent = (holiday) => {
     description: getProvinceDescription(holiday),
     productId: '-//pcraig3//hols//EN',
     uid: `${getUid(holiday)}@hols.ca`,
+    timestamp: getCurrentTimestamp(),
   }
 }
 

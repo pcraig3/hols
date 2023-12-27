@@ -1,6 +1,7 @@
 const {
   startDate,
   endDate,
+  getCurrentTimestamp,
   getNationalDescription,
   getProvinceDescription,
   getTitle,
@@ -256,5 +257,28 @@ describe('Test getUid', () => {
     }
 
     expect(getUid(holiday1)).toEqual(getUid(holiday2))
+  })
+})
+
+describe('Test getCurrentDate', () => {
+  const RealDate = Date
+
+  afterEach(() => {
+    global.Date = RealDate
+  })
+
+  const mockDate = (dateString) => {
+    global.Date.now = () => new Date(dateString)
+  }
+
+  it('returns an array', () => {
+    const result = getCurrentTimestamp()
+    expect(typeof result === 'number').toBe(true)
+  })
+
+  it('returns the correct a unix timestamp for the given date', () => {
+    mockDate(`1990-10-08`)
+    const result = getCurrentTimestamp()
+    expect(result).toBe(655344000000)
   })
 })

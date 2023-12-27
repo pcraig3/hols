@@ -20,6 +20,14 @@ const endDate = (dateString) =>
     .map((dateSegment) => parseInt(dateSegment, 10))
 
 /**
+ * Returns the current datetime as a unix timestamp
+ * @returns {number} a unix timestamp
+ */
+const getCurrentTimestamp = () => {
+  return new Date(Date.now()).getTime()
+}
+
+/**
  * Returns a title string from a holiday obj to use for .ics files
  * If a national holiday, it returns the title string unmodified
  * If not a national holiday, it returns the title string with the ids of the
@@ -97,6 +105,7 @@ const getUid = (holiday) => {
 module.exports = {
   startDate,
   endDate,
+  getCurrentTimestamp,
   getNationalDescription,
   getProvinceDescription,
   getTitle,
