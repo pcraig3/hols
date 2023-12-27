@@ -277,7 +277,7 @@ describe('Test getCurrentDate', () => {
   })
 
   it('returns the correct a unix timestamp for the given date', () => {
-    mockDate(`1990-10-08`)
+    mockDate('1990-10-08')
     const result = getCurrentTimestamp()
     expect(result).toBe(655344000000)
   })
