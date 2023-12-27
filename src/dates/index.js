@@ -174,7 +174,8 @@ const getCurrentHolidayYear = (region = undefined) => {
     : getObservedDate('December 25') // Christmas day
 
   // 24 hours - 1 minute
-  lastObservedHoliday = addMinutes(Sugar.Date.create(lastObservedHoliday), 1439)
+  // TODO: update this to 1439 afterwards
+  lastObservedHoliday = addMinutes(Sugar.Date.create(lastObservedHoliday), 1319)
 
   // return the next year if after Boxing day
   if (isAfter(d, lastObservedHoliday)) {
