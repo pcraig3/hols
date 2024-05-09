@@ -88,7 +88,6 @@ apiRouter.get('*', (req, res) => {
   throw new createError(404, `Error: Could not find route “${req.path}”`)
 })
 
-// eslint-disable-next-line no-unused-vars
 apiRouter.use(function (err, req, res, next) {
   const status = err.status || res.statusCode
   return res.status(status).send({

@@ -1,7 +1,5 @@
 const morgan = require('morgan')
 
-/* eslint-disable no-unused-vars */
-
 morgan.token('host', function getHost(req, res) {
   if (!req || !req.headers || !req.headers.host) {
     return undefined

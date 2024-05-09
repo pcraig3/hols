@@ -384,7 +384,6 @@ router.get('*', (req, res) => {
   throw new createError(404, 'Oopsie daisy. Maybe head back to the home page? 👇')
 })
 
-// eslint-disable-next-line no-unused-vars
 router.use(function (err, req, res, next) {
   const errObj = {}
 
