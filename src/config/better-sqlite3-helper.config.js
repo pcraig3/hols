@@ -1,4 +1,3 @@
-/* eslint-disable */
 // docs: https://github.com/Kauto/better-sqlite3-helper#one-global-instance
 module.exports = {
   path: './sqlite3.db',
