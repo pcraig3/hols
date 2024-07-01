@@ -12,9 +12,16 @@ steps:
   # Build the container image
   - name: 'gcr.io/cloud-builders/docker'
     id: build-service
-    args: ['build', '-t', 'northamerica-northeast2-docker.pkg.dev/$_JORA_DEV_PROJECT_ID/jora-backend/$_SVC_NAME', '.']
+    args: [ 'build', '-t', 'northamerica-northeast2-docker.pkg.dev/$_JORA_DEV_PROJECT_ID/jora-backend/$_SVC_NAME', '.' ]
 
+  - name: 'gcr.io/cloud-builders/docker'
+    args: [ 'tag',
+            'northamerica-northeast2-docker.pkg.dev/$_JORA_DEV_PROJECT_ID/jora-backend/$_SVC_NAME:latest',
+            'northamerica-northeast2-docker.pkg.dev/$_JORA_DEV_PROJECT_ID/jora-backend/$_SVC_NAME:$SHORT_SHA' ]
 
+  - name: 'gcr.io/cloud-builders/docker'
+    id: push-service
+    args: [ 'push', 'northamerica-northeast2-docker.pkg.dev/$_JORA_DEV_PROJECT_ID/jora-backend/$_SVC_NAME:latest' ]
   # Deploy container image to Cloud Run
   - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
     entrypoint: gcloud
@@ -30,6 +37,5 @@ steps:
 
   - name: 'gcr.io/cloud-builders/gcloud'
     args: [ 'run', 'services', 'update', '$_SVC_NAME-dev', '--region', '$_SVC_ZONE', '--min-instances', '1' ]
-images:
-  - 'northamerica-northeast2-docker.pkg.dev/$_JORA_DEV_PROJECT_ID/jora-backend/$_SVC_NAME:latest'
-  - 'northamerica-northeast2-docker.pkg.dev/$_JORA_DEV_PROJECT_ID/jora-backend/$_SVC_NAME:$SHORT_SHA'
+images: [ 'northamerica-northeast2-docker.pkg.dev/$_JORA_DEV_PROJECT_ID/jora-backend/$_SVC_NAME:latest',
+          'northamerica-northeast2-docker.pkg.dev/$_JORA_DEV_PROJECT_ID/jora-backend/$_SVC_NAME:$SHORT_SHA' ]
