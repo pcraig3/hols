@@ -1,0 +1,72 @@
+options:
+  logging: CLOUD_LOGGING_ONLY
+  pool:
+    name: 'projects/sound-velocity-370109/locations/northamerica-northeast2/workerPools/jora-dev-build-pool'
+
+substitutions:
+  _JORA_DEV_PROJECT_ID: sound-velocity-370109
+  _SVC_NAME: holiday-svc
+  _SVC_ZONE: northamerica-northeast2
+  _M2_CACHE_BUCKET: maven-internal-cache
+  _M2_REPO_DIR: '/workspace/.m2/repository'
+
+steps:
+  # Retrieve the cached .m2 directory from GCS
+  - name: 'gcr.io/cloud-builders/gsutil'
+    id: cache-m2
+    entrypoint: bash
+    args:
+      - '-c'
+      - |
+        mkdir -p .m2/repository/
+        cd .m2/repository/
+        gsutil cp gs://$_M2_CACHE_BUCKET/$REPO_NAME.tar .
+        if [ -f "$REPO_NAME.tar" ]; then
+            echo "Extracting archive"
+            tar -xf $REPO_NAME.tar
+            echo "Extracted"
+            rm $REPO_NAME.tar
+            echo "Removing SNAPSHOTS"
+            shopt -s globstar
+            rm -rf **/*-SNAPSHOT
+            ls
+        fi
+        true
+  # Build the container image
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['build', '-t', 'northamerica-northeast2-docker.pkg.dev/$_JORA_DEV_PROJECT_ID/jora-backend/$_SVC_NAME', '.']
+    waitFor:
+      - cache-m2
+  # Store m2 cache
+  - name: 'gcr.io/cloud-builders/gsutil'
+    id: store-m2
+    entrypoint: bash
+    args:
+      - '-c'
+      - |
+        echo "Creating m2 repository tarball..."
+        shopt -s globstar
+        rm -rf $_M2_REPO_DIR/**/*-SNAPSHOT
+        tar --directory $_M2_REPO_DIR -cf $REPO_NAME.tar .
+        gsutil cp $REPO_NAME.tar gs://$_M2_CACHE_BUCKET/
+    waitFor:
+      - cache-m2
+      - build-service
+  # Deploy container image to Cloud Run
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    entrypoint: gcloud
+    args:
+      - 'run'
+      - 'deploy'
+      - '$_SVC_NAME-dev'
+      - '--image'
+      - 'northamerica-northeast2-docker.pkg.dev/$_JORA_DEV_PROJECT_ID/jora-backend/$_SVC_NAME:latest'
+      - '--region'
+      - '$_SVC_ZONE'
+      - '--service-account=$_SVC_NAME@$_JORA_DEV_PROJECT_ID.iam.gserviceaccount.com'
+
+  - name: 'gcr.io/cloud-builders/gcloud'
+    args: [ 'run', 'services', 'update', '$_SVC_NAME-dev', '--region', '$_SVC_ZONE', '--min-instances', '1' ]
+images:
+  - 'northamerica-northeast2-docker.pkg.dev/$_JORA_DEV_PROJECT_ID/jora-backend/$_SVC_NAME:latest'
+  - 'northamerica-northeast2-docker.pkg.dev/$_JORA_DEV_PROJECT_ID/jora-backend/$_SVC_NAME:$SHORT_SHA'
