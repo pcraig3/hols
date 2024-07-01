@@ -7,31 +7,14 @@ substitutions:
   _JORA_DEV_PROJECT_ID: sound-velocity-370109
   _SVC_NAME: holiday-svc
   _SVC_ZONE: northamerica-northeast2
-  _M2_CACHE_BUCKET: maven-internal-cache
-  _M2_REPO_DIR: '/workspace/.m2/repository'
 
 steps:
   # Build the container image
   - name: 'gcr.io/cloud-builders/docker'
     id: build-service
     args: ['build', '-t', 'northamerica-northeast2-docker.pkg.dev/$_JORA_DEV_PROJECT_ID/jora-backend/$_SVC_NAME', '.']
-    waitFor:
-      - cache-m2
-  # Store m2 cache
-  - name: 'gcr.io/cloud-builders/gsutil'
-    id: store-m2
-    entrypoint: bash
-    args:
-      - '-c'
-      - |
-        echo "Creating m2 repository tarball..."
-        shopt -s globstar
-        rm -rf $_M2_REPO_DIR/**/*-SNAPSHOT
-        tar --directory $_M2_REPO_DIR -cf $REPO_NAME.tar .
-        gsutil cp $REPO_NAME.tar gs://$_M2_CACHE_BUCKET/
-    waitFor:
-      - cache-m2
-      - build-service
+
+
   # Deploy container image to Cloud Run
   - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
     entrypoint: gcloud
