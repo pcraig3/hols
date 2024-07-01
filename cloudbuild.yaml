@@ -11,27 +11,6 @@ substitutions:
   _M2_REPO_DIR: '/workspace/.m2/repository'
 
 steps:
-  # Retrieve the cached .m2 directory from GCS
-  - name: 'gcr.io/cloud-builders/gsutil'
-    id: cache-m2
-    entrypoint: bash
-    args:
-      - '-c'
-      - |
-        mkdir -p .m2/repository/
-        cd .m2/repository/
-        gsutil cp gs://$_M2_CACHE_BUCKET/$REPO_NAME.tar .
-        if [ -f "$REPO_NAME.tar" ]; then
-            echo "Extracting archive"
-            tar -xf $REPO_NAME.tar
-            echo "Extracted"
-            rm $REPO_NAME.tar
-            echo "Removing SNAPSHOTS"
-            shopt -s globstar
-            rm -rf **/*-SNAPSHOT
-            ls
-        fi
-        true
   # Build the container image
   - name: 'gcr.io/cloud-builders/docker'
     id: build-service
