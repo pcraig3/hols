@@ -34,6 +34,7 @@ steps:
         true
   # Build the container image
   - name: 'gcr.io/cloud-builders/docker'
+    id: build-service
     args: ['build', '-t', 'northamerica-northeast2-docker.pkg.dev/$_JORA_DEV_PROJECT_ID/jora-backend/$_SVC_NAME', '.']
     waitFor:
       - cache-m2
