@@ -2,6 +2,7 @@ const Sugar = require('sugar-date')
 const easterDay = require('@jsbits/easter-day')
 const { format } = require('date-fns/format')
 const { addMinutes } = require('date-fns/addMinutes')
+const { addHours } = require('date-fns')
 const { addDays } = require('date-fns/addDays')
 const { getISODay } = require('date-fns/getISODay')
 const { differenceInDays } = require('date-fns/differenceInDays')
@@ -77,9 +78,12 @@ const _parseRelativeDates = (dateString) => {
     anchorDate = easterDay(year)
   } else {
     anchorDate = Sugar.Date.create(anchorDate)
+    // Add 1 hour to account for weird timezone thing where sometimes the date is the day before at 23:00
+    anchorDate = addHours(anchorDate, 1)
   }
 
   const count = _getDayCount({ position, weekday, anchorDate })
+
   return addDays(anchorDate, count)
 }
 
