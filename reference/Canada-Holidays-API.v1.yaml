@@ -1,8 +1,8 @@
 openapi: 3.0.0
 info:
   title: Canada Holidays API
-  version: 1.9.1
-  description: 'This API lists all 31 public holidays for all 13 provinces and territories in Canada, including federal holidays.'
+  version: 1.10.0
+  description: 'This API lists all 32 public holidays for all 13 provinces and territories in Canada, including federal holidays.'
   contact:
     name: Paul Craig
     url: 'https://canada-holidays.ca/api'
@@ -461,7 +461,7 @@ paths:
           type: integer
           example: 2
           minimum: 1
-          maximum: 32
+          maximum: 33
         name: holidayId
         in: path
         required: true
@@ -480,10 +480,10 @@ paths:
                   holiday:
                     $ref: '#/components/schemas/Holiday'
               examples:
-                /holidays/32:
+                /holidays/33:
                   value:
                     holiday:
-                      id: 32
+                      id: 33
                       date: '2023-12-26'
                       nameEn: Boxing Day
                       nameFr: Lendemain de Noël
@@ -500,15 +500,15 @@ paths:
                           nameFr: Ontario
                           sourceLink: 'https://www.ontario.ca/document/your-guide-employment-standards-act-0/public-holidays'
                           sourceEn: Ontario Public holidays
-                /holidays/32?optional=true:
+                /holidays/33?optional=true:
                   value:
                     holiday:
-                      id: 32
-                      date: '2023-12-26'
+                      id: 33
+                      date: '2024-12-26'
                       nameEn: Boxing Day
                       nameFr: Lendemain de Noël
                       federal: 1
-                      observedDate: '2023-12-26'
+                      observedDate: '2024-12-26'
                       provinces:
                         - id: NL
                           nameEn: Newfoundland and Labrador
@@ -537,6 +537,18 @@ paths:
                           nameFr: Manitoba
                           sourceLink: 'https://www.gov.mb.ca/labour/standards/doc,gen-holidays-after-april-30-07,factsheet.html#q12'
                           sourceEn: General holidays in Manitoba
+                          optional: 1
+                        - id: NB
+                          nameEn: New Brunswick
+                          nameFr: Nouveau-Brunswick
+                          sourceLink: 'https://www2.gnb.ca/content/gnb/en/departments/elg/local_government/content/governance/content/days_of_rest_act/faq.html#2'
+                          sourceEn: 10 prescribed days of rest
+                          optional: 1
+                        - id: NS
+                          nameEn: Nova Scotia
+                          nameFr: Nouvelle-Écosse
+                          sourceLink: 'https://novascotia.ca/lae/employmentrights/holidaychart.asp'
+                          sourceEn: Paid holidays in Nova Scotia
                           optional: 1
         '400':
           description: Bad Request
@@ -602,14 +614,14 @@ components:
       type: object
       description: 'A Canadian holiday. Includes a name, the literal date of the holiday, the observed date of the holiday (ie, accommodating for weekends), and a list of regions that observe this holiday.'
       x-examples:
-        /holidays/32?optional=true:
+        /holidays/33?optional=true:
           holiday:
-            id: 32
-            date: '2023-12-26'
+            id: 33
+            date: '2024-12-26'
             nameEn: Boxing Day
             nameFr: Lendemain de Noël
             federal: 1
-            observedDate: '2023-12-26'
+            observedDate: '2024-12-26'
             provinces:
               - id: NL
                 nameEn: Newfoundland and Labrador
@@ -639,13 +651,25 @@ components:
                 sourceLink: 'https://www.gov.mb.ca/labour/standards/doc,gen-holidays-after-april-30-07,factsheet.html#q12'
                 sourceEn: General holidays in Manitoba
                 optional: 1
+              - id: NB
+                nameEn: New Brunswick
+                nameFr: Nouveau-Brunswick
+                sourceLink: 'https://www2.gnb.ca/content/gnb/en/departments/elg/local_government/content/governance/content/days_of_rest_act/faq.html#2'
+                sourceEn: 10 prescribed days of rest
+                optional: 1
+              - id: NS
+                nameEn: Nova Scotia
+                nameFr: Nouvelle-Écosse
+                sourceLink: 'https://novascotia.ca/lae/employmentrights/holidaychart.asp'
+                sourceEn: Paid holidays in Nova Scotia
+                optional: 1
       properties:
         id:
           type: integer
           description: Primary key for a holiday
           example: 2
           minimum: 1
-          maximum: 32
+          maximum: 33
         date:
           type: string
           description: 'ISO date: the literal date of the holiday'
@@ -830,7 +854,7 @@ components:
         /holidays/100:
           error:
             status: 400
-            message: 'Bad Request: request/params/holidayId must be <= 32'
+            message: 'Bad Request: request/params/holidayId must be <= 33'
             timestamp: '2022-12-27T05:55:36.552Z'
       properties:
         status:

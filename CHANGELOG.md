@@ -5,6 +5,22 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.23.0] - 2023-07-12
+
+### Added
+
+- Added optional holidays to Nova Scotia
+
+### Updated
+
+- Manitoba celebrates "orange shirt day", not "Truth and Reconcilitation Day"
+  - Also, it is now required, not optional
+
+### Fixed
+
+- Some relative date conversions were 1 day early, but that is fixed
+
+
 ## [3.22.0] - 2023-12-26
 
 ### Added
