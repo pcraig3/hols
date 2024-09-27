@@ -40,7 +40,7 @@
     "ics": "^3.8.0",
     "morgan": "^1.10.0",
     "preact": "^10.24.1",
-    "preact-render-to-string": "^6.5.8",
+    "preact-render-to-string": "^6.5.11",
     "request-ip": "^3.3.0",
     "sugar-date": "^2.0.6",
     "sweet-scroll": "^4.0.0",
