@@ -37,7 +37,7 @@
     "helmet": "^7.1.0",
     "htm": "^3.1.0",
     "http-errors": "^2.0.0",
-    "ics": "^3.7.6",
+    "ics": "^3.8.0",
     "morgan": "^1.10.0",
     "preact": "^10.23.1",
     "preact-render-to-string": "^6.5.8",
