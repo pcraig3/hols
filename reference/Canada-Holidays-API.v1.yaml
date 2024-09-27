@@ -504,11 +504,11 @@ paths:
                   value:
                     holiday:
                       id: 32
-                      date: '2023-12-26'
+                      date: '2024-12-26'
                       nameEn: Boxing Day
                       nameFr: Lendemain de Noël
                       federal: 1
-                      observedDate: '2023-12-26'
+                      observedDate: '2024-12-26'
                       provinces:
                         - id: NL
                           nameEn: Newfoundland and Labrador
@@ -537,6 +537,18 @@ paths:
                           nameFr: Manitoba
                           sourceLink: 'https://www.gov.mb.ca/labour/standards/doc,gen-holidays-after-april-30-07,factsheet.html#q12'
                           sourceEn: General holidays in Manitoba
+                          optional: 1
+                        - id: NB
+                          nameEn: New Brunswick
+                          nameFr: Nouveau-Brunswick
+                          sourceLink: 'https://www2.gnb.ca/content/gnb/en/departments/elg/local_government/content/governance/content/days_of_rest_act/faq.html#2'
+                          sourceEn: 10 prescribed days of rest
+                          optional: 1
+                        - id: NS
+                          nameEn: Nova Scotia
+                          nameFr: Nouvelle-Écosse
+                          sourceLink: 'https://novascotia.ca/lae/employmentrights/holidaychart.asp'
+                          sourceEn: Paid holidays in Nova Scotia
                           optional: 1
         '400':
           description: Bad Request
@@ -605,11 +617,11 @@ components:
         /holidays/32?optional=true:
           holiday:
             id: 32
-            date: '2023-12-26'
+            date: '2024-12-26'
             nameEn: Boxing Day
             nameFr: Lendemain de Noël
             federal: 1
-            observedDate: '2023-12-26'
+            observedDate: '2024-12-26'
             provinces:
               - id: NL
                 nameEn: Newfoundland and Labrador
@@ -638,6 +650,18 @@ components:
                 nameFr: Manitoba
                 sourceLink: 'https://www.gov.mb.ca/labour/standards/doc,gen-holidays-after-april-30-07,factsheet.html#q12'
                 sourceEn: General holidays in Manitoba
+                optional: 1
+              - id: NB
+                nameEn: New Brunswick
+                nameFr: Nouveau-Brunswick
+                sourceLink: 'https://www2.gnb.ca/content/gnb/en/departments/elg/local_government/content/governance/content/days_of_rest_act/faq.html#2'
+                sourceEn: 10 prescribed days of rest
+                optional: 1
+              - id: NS
+                nameEn: Nova Scotia
+                nameFr: Nouvelle-Écosse
+                sourceLink: 'https://novascotia.ca/lae/employmentrights/holidaychart.asp'
+                sourceEn: Paid holidays in Nova Scotia
                 optional: 1
       properties:
         id:

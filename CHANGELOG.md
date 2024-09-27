@@ -5,6 +5,22 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.23.0] - 2023-07-12
+
+### Added
+
+- Added optional holidays to Nova Scotia
+
+### Updated
+
+- Manitoba celebrates "orange shirt day", not "Truth and Reconcilitation Day"
+  - Also, it is now required, not optional
+
+### Fixed
+
+- Some relative date conversions were 1 day early, but that is fixed
+
+
 ## [3.22.0] - 2023-12-26
 
 ### Added
@@ -149,7 +165,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 - It was not working to return holidays for a province in another year than this year with optional=true
-  - Now it is working though. 
+  - Now it is working though.
   - This is a follow-up on `3.17.1` where I missed this part of the app.
 
 ## [3.17.2] - 2022-09-19
@@ -302,11 +318,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Return /ics paths without "Content-disposition" header by default
 - Don't include "download" attribute on "add to calendar" links
-- Use CalButton on "Add holidays" page instead of custom button  
+- Use CalButton on "Add holidays" page instead of custom button
 
 ### Fixed
 
-- Only add event listener to nextHolidayLink if found on page 
+- Only add event listener to nextHolidayLink if found on page
 
 ## [3.9.0] - 2021-12-05
 

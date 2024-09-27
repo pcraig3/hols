@@ -7,6 +7,8 @@
 
 # DONE
 
+- Optional holidays for NS
+- Orange Shirt Day for Manitoba
 - Add 2015, 2030, 2031
 - Update to new LTS version of node
 - Fix bug where Discovery Day couldn't be on a Monday

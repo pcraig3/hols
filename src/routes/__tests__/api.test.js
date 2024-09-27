@@ -211,6 +211,11 @@ describe('Test /api responses', () => {
           optionalTotal: 11,
         },
         {
+          province: 'NS',
+          statTotal: 6,
+          optionalTotal: 9,
+        },
+        {
           province: 'NU',
           statTotal: 10,
           optionalTotal: 11,
@@ -485,7 +490,7 @@ describe('Test /api responses', () => {
         expect(response.statusCode).toBe(200)
 
         let { holiday } = JSON.parse(response.text)
-        expect(holiday.provinces.length).toBe(6)
+        expect(holiday.provinces.length).toBe(7)
       })
     })
 
