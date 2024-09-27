@@ -1,0 +1,54 @@
+on:
+  push:
+    tags:
+      - '*'
+
+env:
+  PROJECT_NUMBER: 947361858690
+  PROJECT_ID: sound-velocity-370109
+  REGISTRY_HOSTNAME: northamerica-northeast2-docker.pkg.dev
+  REPOSITORY: holiday-svc
+  IMAGE_NAME: holiday-svc
+  REGION: northamerica-northeast2
+
+jobs:
+  docker-release:
+    name: Tagged Docker release to Google Artifact Registry
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags')  # <-- Notice that I'm filtering here to only run when a tagged commit is pushed
+
+    permissions:
+      contents: 'read'
+      id-token: 'write'
+
+    steps:
+      - id: checkout
+        name: Checkout
+        uses: 'actions/checkout@v4'
+      - uses: benjlevesque/short-sha@v3.0
+        id: short-sha
+        with:
+          length: 7
+      - run: echo $SHA
+        env:
+          SHA: ${{ steps.short-sha.outputs.sha }}
+      - run: echo $SHA
+        env:
+          SHA: ${{ env.SHA }}
+
+      - id: auth
+        name: Authenticate with Google Cloud
+        uses: 'google-github-actions/auth@v2'
+        with:
+          token_format: access_token
+          workload_identity_provider: 'projects/${{ env.PROJECT_NUMBER }}/locations/global/workloadIdentityPools/github-pool/providers/github-provider'
+          service_account: 'github-actions@sound-velocity-370109.iam.gserviceaccount.com'
+          access_token_lifetime: 300s
+
+      - name: 'Set up Cloud SDK'
+        uses: 'google-github-actions/setup-gcloud@v2'
+        with:
+          version: '>= 363.0.0'
+
+      - name: 'Use gcloud CLI'
+        run: 'gcloud artifacts docker tags add ${{ env.REGISTRY_HOSTNAME }}/${{ env.PROJECT_ID }}/jora-backend/${{ env.REPOSITORY }}:${{ env.SHA }} ${{ env.REGISTRY_HOSTNAME }}/${{ env.PROJECT_ID }}/jora-backend/${{ env.REPOSITORY }}:${{ github.ref_name }}'
