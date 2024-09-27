@@ -37,6 +37,6 @@ steps:
       - '--service-account=$_SVC_NAME@$_JORA_DEV_PROJECT_ID.iam.gserviceaccount.com'
 
   - name: 'gcr.io/cloud-builders/gcloud'
-    args: [ 'run', 'services', 'update', '$_SVC_NAME-dev', '--region', '$_SVC_ZONE', '--min-instances', '1' ]
+    args: [ 'run', 'services', 'update', '$_SVC_NAME-dev', '--region', '$_SVC_ZONE' ]
 images: [ 'northamerica-northeast2-docker.pkg.dev/$_JORA_DEV_PROJECT_ID/jora-backend/$_SVC_NAME:latest',
           'northamerica-northeast2-docker.pkg.dev/$_JORA_DEV_PROJECT_ID/jora-backend/$_SVC_NAME:$SHORT_SHA' ]
