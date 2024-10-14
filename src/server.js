@@ -19,8 +19,8 @@ app
   // both of these are needed to parse post request params
   .use(express.urlencoded({ extended: true }))
   .use(express.json())
-  .use(express.static('public', { maxage: process.env.NODE_ENV === 'production' ? '3d' : '0' }))
   .use(compression())
+  .use(express.static('public', { maxage: process.env.NODE_ENV === 'production' ? '3d' : '0' }))
   .use(requestIp.mw())
   .use(cors())
 
