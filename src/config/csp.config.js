@@ -6,6 +6,7 @@ module.exports = {
     "'self'",
     'https://*.google-analytics.com',
     'https://*.analytics.google.com',
+    'https://static.cloudflareinsights.com/',
     'https://*.googletagmanager.com',
   ],
   baseUri: ["'none'"],

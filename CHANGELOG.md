@@ -12,6 +12,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Use more efficient compression library
   - Also compress static files
 
+### Fixed
+
+- Add cloudflare to connectSrc to avoid csp error
+
 ## [3.23.1] - 2023-08-14
 
 ### Updated
@@ -33,7 +37,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 - Some relative date conversions were 1 day early, but that is fixed
-
 
 ## [3.22.0] - 2023-12-26
 
