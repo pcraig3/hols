@@ -107,8 +107,8 @@ const _getDate = (dateString, year) => {
     throw new Error(`Date string not parsable: ${dateString}`)
   }
 
-  //https://stackoverflow.com/a/52352512
-  date = new Date(date.valueOf() - date.getTimezoneOffset() * 60 * 1000)
+  // https://stackoverflow.com/a/52352512
+  // const date = new Date(date.valueOf() - date.getTimezoneOffset() * 60 * 1000)
 
   return date
 }
