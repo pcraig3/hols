@@ -7,6 +7,7 @@
 
 # DONE
 
+- Clean up API documentation
 - Optional holidays for NS
 - Orange Shirt Day for Manitoba
 - Add 2015, 2030, 2031

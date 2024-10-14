@@ -50,8 +50,8 @@ const API = () =>
           <li>Get national holidays</li>
           <li>Get upcoming (“next”) holiday for each region</li>
           <li>
-            Get holidays for multiple years: <code>2017</code>, <code>2018</code>,${' '}⋯${' '}
-            <code>2025</code>, <code>2026</code>.
+            Get holidays for past/future years: <code>2015</code>, ${' '}⋯${' '},${' '}
+            <code>2024</code>, ${' '}⋯${' '}, <code>2031</code>.
           </li>
         </ul>
         <${Details}
