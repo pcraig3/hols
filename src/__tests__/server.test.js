@@ -39,7 +39,7 @@ describe('Test server responses', () => {
     expect(response.headers['x-dns-prefetch-control']).toEqual('off')
     expect(response.headers['x-frame-options']).toEqual('SAMEORIGIN')
     expect(response.headers['strict-transport-security']).toEqual(
-      'max-age=15552000; includeSubDomains',
+      'max-age=31536000; includeSubDomains',
     )
     expect(response.headers['x-download-options']).toEqual('noopen')
     expect(response.headers['x-content-type-options']).toEqual('nosniff')
