@@ -7,8 +7,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [3.24.0] - 2024-10-25
 
+### Added
+
+- Added a banner to the site with Adsense
+  - Selling out? Yes.
+
+### Updated
+
+- Cache static files for longer (90 days, not 3 days)
+- Defer body scripts since they are blocking
+
 ### Removed
 
+- Get rid of CSP because it doesn't work with Adsense
 - Get rid of workbox because it always causes weird console errors
 
 ## [3.23.2] - 2024-08-14
