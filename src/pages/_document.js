@@ -158,14 +158,6 @@ const document = ({
             : ''
         }
 
-        <!-- https://developers.google.com/web/fundamentals/primers/service-workers/registration -->
-        <script>
-          if ('serviceWorker' in navigator) {
-            window.addEventListener('load', function() {
-              navigator.serviceWorker.register('/sw.js');
-            });
-          }
-        </script>
       </head>
       <body id="body" class="no-js">
         <script>

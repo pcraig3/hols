@@ -21,8 +21,7 @@
     "dev": "nodemon index.js",
     "lint": "eslint src",
     "start": "NODE_ENV=production node index.js",
-    "test": "jest --testPathIgnorePatterns='skip*'",
-    "build": "workbox generateSW workbox-config.js"
+    "test": "jest --testPathIgnorePatterns='skip*'"
   },
   "dependencies": {
     "@beenotung/better-sqlite3-helper": "^4.1.7",
