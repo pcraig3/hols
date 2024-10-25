@@ -135,7 +135,7 @@ const Button = ({ children, color = {}, ...props }) => {
         <//>
       `
     : html`
-        <${NativeButton} color=${color} ...${props}>
+        <${NativeButton} color=${color} type="button" ...${props}>
           ${props.expand
             ? html`
                 <${Expand} />
