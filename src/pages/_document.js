@@ -59,6 +59,8 @@ const document = ({
 
         <title>${title}</title>
 
+        <link rel="preconnect" href="//googletagmanager.com" crossorigin>
+
         ${
           process.env.NODE_ENV === 'production'
             ? `<script async src="https://www.googletagmanager.com/gtag/js?id=${ga4Id}"></script>
