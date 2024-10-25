@@ -3,7 +3,6 @@ const morgan = require('morgan')
 const morganConfig = require('./config/morgan.config')
 const helmet = require('helmet')
 const compression = require('http-compression')
-const csp = require('./config/csp.config')
 const requestIp = require('request-ip')
 const cors = require('cors')
 
@@ -13,9 +12,9 @@ app
   .use(
     helmet({
       crossOriginResourcePolicy: { policy: 'cross-origin' },
+      contentSecurityPolicy: false,
     }),
   )
-  .use(helmet.contentSecurityPolicy({ useDefaults: false, directives: csp }))
   // both of these are needed to parse post request params
   .use(express.urlencoded({ extended: true }))
   .use(express.json())
