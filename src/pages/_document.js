@@ -160,6 +160,12 @@ const document = ({
             : ''
         }
 
+        <!-- google adsense -->
+        ${
+          process.env.NODE_ENV === 'production'
+            ? '<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3638315231131289" crossorigin="anonymous"></script>'
+            : ''
+        }
       </head>
       <body id="body" class="no-js">
         <script>
