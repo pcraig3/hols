@@ -19,7 +19,7 @@ app
   .use(express.urlencoded({ extended: true }))
   .use(express.json())
   .use(compression({ brotli: 1, gzip: 1 }))
-  .use(express.static('public', { maxage: process.env.NODE_ENV === 'production' ? '3d' : '0' }))
+  .use(express.static('public', { maxage: process.env.NODE_ENV === 'production' ? '90d' : '0' }))
   .use(requestIp.mw())
   .use(cors())
 
