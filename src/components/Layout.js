@@ -67,11 +67,11 @@ const linkStyles = (color) => css`
 `
 const header = css`
   ${horizontalPadding};
-  padding-top: calc(${theme.space.xs} + 3px);
+  padding-top: calc(${theme.space.sm});
   padding-bottom: ${theme.space.xs};
 
   @media (${theme.mq.md}) {
-    padding-top: ${theme.space.sm};
+    padding-top: ${theme.space.sm} + 3px;
     padding-bottom: ${theme.space.sm};
   }
 `
