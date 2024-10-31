@@ -25,6 +25,7 @@
   },
   "dependencies": {
     "@beenotung/better-sqlite3-helper": "^4.1.7",
+    "@builder.io/partytown": "^0.10.2",
     "@emotion/css": "^11.13.4",
     "@emotion/server": "^11.11.0",
     "@jsbits/easter-day": "^1.0.1",

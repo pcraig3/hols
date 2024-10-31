@@ -1,5 +1,6 @@
 const { renderStylesToString } = require('@emotion/server')
 const render = require('preact-render-to-string')
+const { partytownSnippet } = require('@builder.io/partytown/integration')
 const { html, metaIfSHA, getOgImagePath, getCanonical } = require('../utils')
 const { breadcrumb, speakable } = require('../utils/richSnippets')
 const { theme, visuallyHidden } = require('../styles')
@@ -59,12 +60,22 @@ const document = ({
 
         <title>${title}</title>
 
+        <script>
+          partytown = {
+            forward: ['dataLayer.push'],
+          };
+        </script>
+        <!-- partytown snippet -->
+        <script>
+        ${partytownSnippet()}
+        </script>
+
         <link rel="preconnect" href="//googletagmanager.com" crossorigin>
 
         ${
           process.env.NODE_ENV === 'production'
-            ? `<script async src="https://www.googletagmanager.com/gtag/js?id=${ga4Id}"></script>
-              <script>${ga4}</script>`
+            ? `<script type="text/partytown" src="https://www.googletagmanager.com/gtag/js?id=${ga4Id}"></script>
+              <script type="text/partytown">${ga4}</script>`
             : ''
         }
 
