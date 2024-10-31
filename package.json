@@ -31,7 +31,7 @@
     "cors": "^2.8.5",
     "date-fns": "^4.1.0",
     "express": "^4.21.1",
-    "express-openapi-validator": "^5.3.7",
+    "express-openapi-validator": "^5.3.9",
     "helmet": "^8.0.0",
     "htm": "^3.1.0",
     "http-compression": "^1.1.1",
