@@ -4,9 +4,13 @@
 - add years to dates on years pages?
 - make API to return CSV format
   - page for CSV downloads
+- Build + minify js
+- Precompress static files
+- partytown for tag manager
 
 # DONE
 
+- partytown for GTM
 - Clean up API documentation
 - Optional holidays for NS
 - Orange Shirt Day for Manitoba
