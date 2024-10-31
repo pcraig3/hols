@@ -2,7 +2,7 @@ const express = require('express')
 const morgan = require('morgan')
 const morganConfig = require('./config/morgan.config')
 const helmet = require('helmet')
-const compression = require('http-compression')
+const compression = require('compression')
 const requestIp = require('request-ip')
 const cors = require('cors')
 
@@ -20,8 +20,8 @@ app
   // both of these are needed to parse post request params
   .use(express.urlencoded({ extended: true }))
   .use(express.json())
-  .use(compression({ brotli: 1, gzip: 1 }))
-  .use(express.static('public', { maxage: process.env.NODE_ENV === 'production' ? '90d' : '0' }))
+  .use(compression())
+  .use(express.static('public', { maxage: process.env.NODE_ENV === 'production' ? '365d' : '0' }))
   .use(requestIp.mw())
   .use(cors())
 
