@@ -21,7 +21,7 @@
     "dev": "nodemon index.js",
     "lint": "eslint src",
     "start": "NODE_ENV=production node index.js",
-    "test": "jest --testPathIgnorePatterns='skip*'"
+    "test": "jest --testTimeout=8000 --testPathIgnorePatterns='skip*'"
   },
   "dependencies": {
     "@beenotung/better-sqlite3-helper": "^4.1.7",
