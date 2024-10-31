@@ -11,6 +11,8 @@ const app = express()
 app
   .use(
     helmet({
+      crossOriginEmbedderPolicy: { policy: 'credentialless' },
+      crossOriginOpenerPolicy: { policy: 'same-origin' },
       crossOriginResourcePolicy: { policy: 'cross-origin' },
       contentSecurityPolicy: false,
     }),
