@@ -19,7 +19,7 @@
   ],
   "scripts": {
     "build": "sh build-js.sh",
-    "dev": "nodemon index.js",
+    "dev": "nodemon --watch public/js --ignore public/js/min --exec 'npm run build && node index.js'",
     "lint": "eslint src",
     "start": "NODE_ENV=production node index.js",
     "test": "jest --testTimeout=8000 --testPathIgnorePatterns='skip*'"
