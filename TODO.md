@@ -4,6 +4,8 @@
 - add years to dates on years pages?
 - make API to return CSV format
   - page for CSV downloads
+- Update the github workflows for deploying to Cloud Run
+- Move away fromCloud Repositories onto Artifacts
 
 # DONE
 

@@ -60,6 +60,13 @@ const document = ({
 
         <title>${title}</title>
 
+        <!-- preload fonts -->
+        <link rel="preload" href="/fonts/gothic-a1-v8-latin-300.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
+        <link rel="preload" href="/fonts/gothic-a1-v8-latin-regular.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
+        <link rel="preload" href="/fonts/gothic-a1-v8-latin-500.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
+        <link rel="preload" href="/fonts/gothic-a1-v8-latin-600.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
+        <link rel="preload" href="/fonts/gothic-a1-v8-latin-700.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
+
         <script>
           partytown = {
             forward: ['dataLayer.push'],
