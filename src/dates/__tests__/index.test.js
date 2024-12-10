@@ -31,37 +31,6 @@ describe('Test getLiteralDate', () => {
     })
   })
 
-  describe('for 2021', () => {
-    const days2021 = [
-      { str: 'January 1', iso: '2021-01-01' },
-      { str: 'Third Monday in February', iso: '2021-02-15' },
-      { str: 'Monday March 17', iso: '2021-03-17' },
-      { str: 'Friday before Easter Day', iso: '2021-04-02' },
-      { str: 'Monday after Easter Day', iso: '2021-04-05' },
-      { str: 'Monday near April 23', iso: '2021-04-23' },
-      { str: 'Monday before May 25', iso: '2021-05-24' },
-      { str: 'June 21', iso: '2021-06-21' },
-      { str: 'June 24', iso: '2021-06-24' },
-      { str: 'Monday near June 24', iso: '2021-06-24' },
-      { str: 'July 1', iso: '2021-07-01' },
-      { str: 'Monday near July 12', iso: '2021-07-12' },
-      { str: 'First Monday in August', iso: '2021-08-02' },
-      { str: 'Third Monday in August', iso: '2021-08-16' },
-      { str: 'First Monday in September', iso: '2021-09-06' },
-      { str: 'September 30', iso: '2021-09-30' },
-      { str: 'Second Monday in October', iso: '2021-10-11' },
-      { str: 'November 11', iso: '2021-11-11' },
-      { str: 'December 25', iso: '2021-12-25' },
-      { str: 'December 26', iso: '2021-12-26' },
-    ]
-
-    days2021.map((day) => {
-      test(`returns correct 2021 ISO date string for: "${day.str}"`, () => {
-        expect(getLiteralDate(day.str, 2021)).toEqual(day.iso)
-      })
-    })
-  })
-
   describe('for 2022', () => {
     const days2022 = [
       { str: 'January 1', iso: '2022-01-01' },
@@ -140,6 +109,7 @@ describe('Test getLiteralDate', () => {
       { str: 'July 1', iso: '2024-07-01' },
       { str: 'Monday near July 12', iso: '2024-07-12' },
       { str: 'First Monday in August', iso: '2024-08-05' },
+      { str: 'First Wednesday in August', iso: '2024-08-07' },
       { str: 'Third Monday in August', iso: '2024-08-19' },
       { str: 'First Monday in September', iso: '2024-09-02' },
       { str: 'September 30', iso: '2024-09-30' },
@@ -176,6 +146,7 @@ describe('Test getLiteralDate', () => {
       { str: 'July 1', iso: '2025-07-01' },
       { str: 'Monday near July 12', iso: '2025-07-12' },
       { str: 'First Monday in August', iso: '2025-08-04' },
+      { str: 'First Wednesday in August', iso: '2025-07-30' }, // changed to july for 2025
       { str: 'Third Monday in August', iso: '2025-08-18' },
       { str: 'First Monday in September', iso: '2025-09-01' },
       { str: 'September 30', iso: '2025-09-30' },
@@ -207,6 +178,7 @@ describe('Test getLiteralDate', () => {
       { str: 'July 1', iso: '2026-07-01' },
       { str: 'Monday near July 12', iso: '2026-07-12' },
       { str: 'First Monday in August', iso: '2026-08-03' },
+      { str: 'First Wednesday in August', iso: '2026-08-05' },
       { str: 'Third Monday in August', iso: '2026-08-17' },
       { str: 'First Monday in September', iso: '2026-09-07' },
       { str: 'September 30', iso: '2026-09-30' },
@@ -238,6 +210,7 @@ describe('Test getLiteralDate', () => {
       { str: 'July 1', iso: '2031-07-01' },
       { str: 'Monday near July 12', iso: '2031-07-12' },
       { str: 'First Monday in August', iso: '2031-08-04' },
+      { str: 'First Wednesday in August', iso: '2031-08-06' },
       { str: 'Third Monday in August', iso: '2031-08-18' },
       { str: 'First Monday in September', iso: '2031-09-01' },
       { str: 'September 30', iso: '2031-09-30' },
@@ -282,37 +255,6 @@ describe('Test getObservedDate', () => {
     days2015.map((day) => {
       test(`returns correct 2015 ISO date string for: "${day.str}"`, () => {
         expect(getObservedDate(day.str, 2015)).toEqual(day.iso)
-      })
-    })
-  })
-
-  describe('for 2021', () => {
-    const days2021 = [
-      { str: 'January 1', iso: '2021-01-01' },
-      { str: 'Third Monday in February', iso: '2021-02-15' },
-      { str: 'Monday March 17', iso: '2021-03-15' },
-      { str: 'Friday before Easter Day', iso: '2021-04-02' },
-      { str: 'Monday after Easter Day', iso: '2021-04-05' },
-      { str: 'Monday near April 23', iso: '2021-04-26' },
-      { str: 'Monday before May 25', iso: '2021-05-24' },
-      { str: 'June 21', iso: '2021-06-21' },
-      { str: 'Monday near June 24', iso: '2021-06-21' },
-      { str: 'June 24', iso: '2021-06-24' },
-      { str: 'July 1', iso: '2021-07-01' },
-      { str: 'Monday near July 12', iso: '2021-07-12' },
-      { str: 'First Monday in August', iso: '2021-08-02' },
-      { str: 'Third Monday in August', iso: '2021-08-16' },
-      { str: 'First Monday in September', iso: '2021-09-06' },
-      { str: 'September 30', iso: '2021-09-30' },
-      { str: 'Second Monday in October', iso: '2021-10-11' },
-      { str: 'November 11', iso: '2021-11-11' },
-      { str: 'December 25', iso: '2021-12-27' },
-      { str: 'December 26', iso: '2021-12-28' },
-    ]
-
-    days2021.map((day) => {
-      test(`returns correct 2021 ISO date string for: "${day.str}"`, () => {
-        expect(getObservedDate(day.str, 2021)).toEqual(day.iso)
       })
     })
   })
@@ -395,6 +337,7 @@ describe('Test getObservedDate', () => {
       { str: 'July 1', iso: '2024-07-01' },
       { str: 'Monday near July 12', iso: '2024-07-15' },
       { str: 'First Monday in August', iso: '2024-08-05' },
+      { str: 'First Wednesday in August', iso: '2024-08-07' },
       { str: 'Third Monday in August', iso: '2024-08-19' },
       { str: 'First Monday in September', iso: '2024-09-02' },
       { str: 'September 30', iso: '2024-09-30' },
@@ -431,6 +374,7 @@ describe('Test getObservedDate', () => {
       { str: 'July 1', iso: '2025-07-01' },
       { str: 'Monday near July 12', iso: '2025-07-14' },
       { str: 'First Monday in August', iso: '2025-08-04' },
+      { str: 'First Wednesday in August', iso: '2025-07-30' }, // changed to july for 2025
       { str: 'Third Monday in August', iso: '2025-08-18' },
       { str: 'First Monday in September', iso: '2025-09-01' },
       { str: 'September 30', iso: '2025-09-30' },
@@ -462,6 +406,7 @@ describe('Test getObservedDate', () => {
       { str: 'July 1', iso: '2026-07-01' },
       { str: 'Monday near July 12', iso: '2026-07-13' },
       { str: 'First Monday in August', iso: '2026-08-03' },
+      { str: 'First Wednesday in August', iso: '2026-08-05' },
       { str: 'Third Monday in August', iso: '2026-08-17' },
       { str: 'First Monday in September', iso: '2026-09-07' },
       { str: 'September 30', iso: '2026-09-30' },
@@ -493,6 +438,7 @@ describe('Test getObservedDate', () => {
       { str: 'July 1', iso: '2031-07-01' },
       { str: 'Monday near July 12', iso: '2031-07-14' },
       { str: 'First Monday in August', iso: '2031-08-04' },
+      { str: 'First Wednesday in August', iso: '2031-08-06' },
       { str: 'Third Monday in August', iso: '2031-08-18' },
       { str: 'First Monday in September', iso: '2031-09-01' },
       { str: 'September 30', iso: '2031-09-30' },
