@@ -184,13 +184,7 @@ const document = ({
           document.body.classList.add("js");
         </script>
         ${content}
-        <script src="/js/sweet-scroll.min.js?v=${process.env.npm_package_version}" defer></script>
-        <script src="/js/script.js?v=${process.env.npm_package_version}" defer></script>
-        ${
-          path === '/feedback'
-            ? `<script src="/js/email.js?v=${process.env.npm_package_version}" defer></script>`
-            : ''
-        }
+        <script src="/js/min/bundle.min.js?v=${process.env.npm_package_version}" defer></script>
       </body>
     </html>
   `

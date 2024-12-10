@@ -1,10 +1,5 @@
 /* eslint-disable */
 
-// Add a a polyfill for the 'details' HTML5 element for older browsers
-if (typeof Promise !== 'function' && document.querySelector('details') !== null) {
-  document.write('<script src="/js/details-element-polyfill.js"></script>')
-}
-
 // set up sweet scroll ッ
 document.addEventListener('DOMContentLoaded', function () {
   new SweetScroll({

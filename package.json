@@ -18,6 +18,7 @@
     "canada"
   ],
   "scripts": {
+    "build": "sh build-js.sh",
     "dev": "nodemon index.js",
     "lint": "eslint src",
     "start": "NODE_ENV=production node index.js",
@@ -44,6 +45,7 @@
     "request-ip": "^3.3.0",
     "sugar-date": "^2.0.6",
     "sweet-scroll": "^4.0.0",
+    "terser": "^5.37.0",
     "validator": "^13.12.0"
   },
   "devDependencies": {
