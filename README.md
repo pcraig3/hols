@@ -27,7 +27,7 @@ A docker container allows a developer to package up an application and all of it
 
 ## Build and run with npm
 
-Guess what? There is **no build step**. Just install the dependencies and run it.
+Install the dependencies and run it. "npm run dev" runs the JS contact + minify step, and reruns it if anything changes.
 
 Pretty slick. 😎
 
@@ -39,7 +39,10 @@ npm install
 # (ie, the server restarts when you save a file)
 npm run dev
 
-# run application in 'prod' mode
+# manually run build to create /js/min/bundle.min.js file
+npm run build
+
+# run application in 'prod' mode (requires build step)
 npm start
 ```
 

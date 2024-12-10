@@ -5,6 +5,28 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.25.0] - 2024-12-10
+
+### Added
+
+- Add build step that concats and minifies JS files
+  - This is sad but it might make the site faster
+
+### Changed
+
+- Regatta Day is moved up a week because of the 2025 Canada Games! Go team!
+
+## [3.24.1] - 2024-10-25
+
+### Added
+
+- Add partytown to save some pageload time with GTM
+
+### Changed
+
+- Longer cache time for static files (1 year, up from 3 months)
+- Slightly more top padding so that the ads on mobile look better
+
 ## [3.24.0] - 2024-10-25
 
 ### Added
