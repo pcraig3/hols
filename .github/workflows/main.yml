@@ -1,9 +1,16 @@
 name: Run tests and deploy to Cloud Run
-on: [push]
+
+on:
+  push:
+    branches:
+      - 'main'
+      - '**' # Run on any branch
+
 env:
   PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
   RUN_REGION: us-east1
   SERVICE_NAME: ${{ secrets.GCP_SERVICE_NAME }}
+
 jobs:
   test:
     name: Run tests
@@ -23,35 +30,40 @@ jobs:
         run: npm test
       - name: Run JS linter
         run: npm run lint
+
   deploy:
-    name: Deploy to Cloud Run
+    name: Build and deploy to Cloud Run
     runs-on: ubuntu-latest
-    needs: test
-    if: github.ref == 'refs/heads/main'
+    needs: test # Only after "test" passes
+    if: github.ref_name == 'main' # Only on "main" branch
     steps:
       - uses: actions/checkout@v4
 
       - id: auth
         name: Authenticate to Google Cloud
-        uses: google-github-actions/auth@v0
+        uses: google-github-actions/auth@v2
         with:
           credentials_json: ${{ secrets.GCP_SA_KEY_JSON }}
 
-      - name: Authorize Docker push
-        run: gcloud auth configure-docker
+      # Docker auth
+      - name: Docker Auth
+        uses: docker/login-action@v3
+        with:
+          registry: 'gcr.io'
+          username: _json_key
+          password: ${{ secrets.GCP_SA_KEY_JSON }}
 
+      # Docker build & push to GCP
       - name: Build and Push Container
         run: |-
           docker buildx build --platform linux/amd64 -t gcr.io/${{ env.PROJECT_ID }}/${{ env.SERVICE_NAME }}:${{ github.sha }} --build-arg GITHUB_SHA_ARG=${{ github.sha }} .
           docker push gcr.io/${{ env.PROJECT_ID }}/${{ env.SERVICE_NAME }}:${{ github.sha }}
 
+      # Deploy the container that was just pushed
       - name: Deploy to Cloud Run
         id: deploy
-        uses: google-github-actions/deploy-cloudrun@v0
+        uses: google-github-actions/deploy-cloudrun@v2
         with:
           service: ${{ env.SERVICE_NAME }}
-          image: gcr.io/${{ env.PROJECT_ID }}/${{ env.SERVICE_NAME }}:${{  github.sha }}
+          image: gcr.io/${{ env.PROJECT_ID }}/${{ env.SERVICE_NAME }}:${{ github.sha }}
           region: ${{ env.RUN_REGION }}
-
-      - name: Use gcloud CLI
-        run: gcloud info
