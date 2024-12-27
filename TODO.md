@@ -8,6 +8,7 @@
 
 # DONE
 
+- Update sitemap
 - Add 2014, 2032, 2033
 - Redirect /QB to /QC
 - Move away from Cloud Repositories onto Artifacts

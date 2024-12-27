@@ -7,9 +7,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [3.25.3] - 2024-12-27
 
+### Added
+
+- Added new years
+  - 2014
+  - 2032
+  - 2033
+
 ### Changed
 
-- Use 2025 as default year for the API
+- API spec updated
+  - Default year is 2025
+  - New min/max years (2014/2033)
+- Updated sitemap with new year
+- ProvincePicker now shows 2 less dates
 - Redirect "provinces/QB" to "provinces/QC"
 
 ### Fixed
