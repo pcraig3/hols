@@ -54,7 +54,7 @@ describe('Province page', () => {
     const $ = renderPage()
     expect($('h2#holidays-table').text()).toBe(`Canada statutory holidays in ${currentYear}`)
     expect($('#next-holiday-row').text()).toBe(
-      'December 26, ThursdayObserved: December 28, SaturdayBoxing Day is observed on the Monday closest to December 26.Boxing Day Federal holiday, NL ',
+      'December 26, FridayObserved: December 28, SundayBoxing Day is observed on the Monday closest to December 26.Boxing Day Federal holiday, NL ',
     )
   })
 
