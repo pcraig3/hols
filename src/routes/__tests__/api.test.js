@@ -306,40 +306,46 @@ describe('Test /api responses', () => {
           let { holidays } = JSON.parse(response.text)
 
           // Heritage Day
-          // TODO: This breaks when the year changes
+          // Note: there are 2 Heritage Days, but the nameFr of the NS one is "Fête du Patrimoine"
           const heritageDay = holidays.find(
-            (h) => h.nameEn === 'Heritage Day' && h.date === '2024-08-05',
+            (h) => h.nameEn === 'Heritage Day' && h.nameFr === 'Jour d’Héritage',
           )
           expect(heritageDay.id).toBe(22)
           expect(heritageDay).toMatchObject({
             id: 22,
-            date: `${currentYear}-08-05`,
+            date: heritageDay.date,
             nameEn: 'Heritage Day',
             nameFr: 'Jour d’Héritage',
             federal: 0,
-            observedDate: `${currentYear}-08-05`,
+            observedDate: heritageDay.observedDate,
             provinces: expect.any(Array),
           })
+
+          let [heritageDayYear, heritageDayMonth] = heritageDay.date.split('-')
+          expect(`${heritageDayYear}-${heritageDayMonth}`).toBe(`${currentYear}-08`)
 
           expect(heritageDay.provinces.length).toBe(1)
           expect(heritageDay.provinces[0].nameEn).toBe('Alberta')
           expect(heritageDay.provinces[0].optional).toBe(1)
 
           // Terry Fox Day
-          // TODO: This breaks when the year changes
+          // Note: There is only 1 Terry Fox Day, so all good
           const terryFoxDay = holidays.find(
-            (h) => h.nameEn === 'Terry Fox Day' && h.date === '2024-08-05',
+            (h) => h.nameEn === 'Terry Fox Day' && h.nameFr === 'Journée Terry Fox',
           )
           expect(terryFoxDay.id).toBe(23)
           expect(terryFoxDay).toMatchObject({
             id: 23,
-            date: `${currentYear}-08-05`,
+            date: terryFoxDay.date,
             nameEn: 'Terry Fox Day',
             nameFr: 'Journée Terry Fox',
             federal: 0,
-            observedDate: `${currentYear}-08-05`,
+            observedDate: terryFoxDay.observedDate,
             provinces: expect.any(Array),
           })
+
+          let [terryFoxYear, terryFoxMonth] = terryFoxDay.date.split('-')
+          expect(`${terryFoxYear}-${terryFoxMonth}`).toBe(`${currentYear}-08`)
 
           expect(terryFoxDay.provinces.length).toBe(1)
           expect(terryFoxDay.provinces[0].nameEn).toBe('Manitoba')
