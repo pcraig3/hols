@@ -77,6 +77,11 @@ router.get('/provinces/PEI/:year', (req, res) =>
   res.redirect(301, `/provinces/PE/${req.params.year}`),
 )
 
+router.get('/provinces/QB', (req, res) => res.redirect(301, '/provinces/QC'))
+router.get('/provinces/QB/:year', (req, res) =>
+  res.redirect(301, `/provinces/QC/${req.params.year}`),
+)
+
 router.get(
   '/provinces/:provinceId',
   checkProvinceIdErr,
