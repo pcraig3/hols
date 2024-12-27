@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - Use 2025 as default year for the API
+- Redirect "provinces/QB" to "provinces/QC"
 
 ### Fixed
 
