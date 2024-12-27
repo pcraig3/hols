@@ -10,12 +10,12 @@ const renderProvincePicker = ({ provinceId, federal, year } = {}) => {
 }
 
 describe('<ProvincePicker>', () => {
-  const SELECTABLE_YEARS = ALLOWED_YEARS.filter((y) => y >= 2021 && y <= 2030)
+  const SELECTABLE_YEARS = ALLOWED_YEARS.filter((y) => y >= 2022 && y <= 2029)
   test(' renders properly', () => {
     const $ = renderProvincePicker()
     expect($('label').text()).toEqual('View by regionView by year')
     expect($('select').length).toBe(2)
-    expect($('select option').length).toBe(26)
+    expect($('select option').length).toBe(24)
     expect($('select option').text()).toEqual(
       `NationwideFederal──────────AlbertaBritish ColumbiaManitobaNew BrunswickNewfoundland and LabradorNova ScotiaNorthwest TerritoriesNunavutOntarioPrince Edward IslandQuebecSaskatchewanYukon${SELECTABLE_YEARS.join(
         '',
@@ -56,9 +56,9 @@ describe('<ProvincePicker>', () => {
   })
 
   describe('year select', () => {
-    test('renders selected year as "2021" by default', () => {
+    test('renders selected year as "2025" by default', () => {
       const $ = renderProvincePicker()
-      expect($('select').eq(1).find('option[selected]').text()).toEqual('2021')
+      expect($('select').eq(1).find('option[selected]').text()).toEqual('2025')
     })
 
     // People want future holidays, not past holidays

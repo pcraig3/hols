@@ -11,7 +11,7 @@ Features:
 - Returns only federal holidays
 - Returns only national holidays
 - Returns "next" holiday for each region
-- Returns holidays for years: `2015`, …, `2024`, … `2031`
+- Returns holidays for years: `2014`, …, `2025`, … `2033`
 
 Plus(!) check out all these goodies you get for ✨ free ✨:
 
@@ -54,7 +54,7 @@ Response keys never contain `null` values.
 
 There are 2 (½) query parameters values you can use. Probably not on the root route but on others they will work.
 
-1. `year`: Takes a single year from the following: `2015`, `2016`, `2017`, `2018`, `2019`, `2020`, `2021`, `2022`, `2023`, `2024`, `2025`, `2026`, `2027`, `2028`, `2029`, `2030`, `2031`. Defaults to the current year.
+1. `year`: Takes a single year from the following: `2014`, `2015`, `2016`, `2017`, `2018`, `2019`, `2020`, `2021`, `2022`, `2023`, `2024`, `2025`, `2026`, `2027`, `2028`, `2029`, `2030`, `2031`, `2032`, `2033`. Defaults to the current year.
    - Example: `?year=2026`
 2. `federal`. `true` or `1` to return _only_ federal holidays; `false` or `0` to return _everything but_ federal holidays.
    - Example: `?federal=true`
