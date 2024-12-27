@@ -5,10 +5,12 @@
 - make API to return CSV format
   - page for CSV downloads
 - Update the github workflows for deploying to Cloud Run
-- Move away fromCloud Repositories onto Artifacts
 
 # DONE
 
+- Add 2014, 2032, 2033
+- Redirect /QB to /QC
+- Move away from Cloud Repositories onto Artifacts
 - Build + minify js
 - partytown for GTM
 - Clean up API documentation

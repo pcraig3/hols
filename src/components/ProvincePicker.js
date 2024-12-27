@@ -156,7 +156,7 @@ const getProvinceNameFromId = (provinceId) => {
   }
 }
 
-const ProvincePicker = ({ provinceId, federal, year = 2021 }) => {
+const ProvincePicker = ({ provinceId, federal, year = 2025 }) => {
   const provinceIdOrFederal = getProvinceIdOrFederalString({ provinceId, federal })
   let regionName = getProvinceNameFromId(provinceId)
   regionName = regionName || (federal ? 'Federal' : 'Nationwide')
@@ -199,7 +199,7 @@ const ProvincePicker = ({ provinceId, federal, year = 2021 }) => {
               data-action="year-select"
               data-label=${`year-select-${provinceIdOrFederal || 'canada'}`}
             >
-              ${ALLOWED_YEARS.filter((y) => y >= 2021 && y <= 2030).map(
+              ${ALLOWED_YEARS.filter((y) => y >= 2022 && y <= 2029).map(
                 (y) => html` <option value=${y} selected=${year === y}>${y}</option> `,
               )}
             </select>
