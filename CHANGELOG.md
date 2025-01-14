@@ -5,6 +5,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.26.1] - 2024-01-14
+
+### Fixed
+
+- Updated 3 broken/wrong links
+  - NS "legal" link (was wrong)
+  - QC "readable" link (was broken)
+  - QC "legal" link (was wrong)
+- Fixed year selector behaviour
+  - Would display incorrectly if someone manually visited a year after 2029 | before 2022
+- Update year limits on the /api page
+
 ## [3.26.0] - 2024-12-27
 
 ### Added
@@ -26,7 +38,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 - Update tests that relied on year being 2024
-
 
 ## [3.25.2] - 2024-12-20
 
