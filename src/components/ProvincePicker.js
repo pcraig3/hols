@@ -161,6 +161,13 @@ const ProvincePicker = ({ provinceId, federal, year = 2025 }) => {
   let regionName = getProvinceNameFromId(provinceId)
   regionName = regionName || (federal ? 'Federal' : 'Nationwide')
 
+  // Calculate the range of years
+  const startYear = Math.max(Math.min(...ALLOWED_YEARS), year - 2) // 2 years behind
+  const endYear = Math.min(Math.max(...ALLOWED_YEARS), year + 4) // 5 years ahead
+
+  // Filter the allowed years within the range
+  const displayedYears = ALLOWED_YEARS.filter((y) => y >= startYear && y <= endYear)
+
   return html`
     <div class=${provinceIdOrFederal ? styles(theme.color[provinceIdOrFederal]) : styles()}>
       <div id="picker-container" data-hidden="true">
@@ -199,7 +206,7 @@ const ProvincePicker = ({ provinceId, federal, year = 2025 }) => {
               data-action="year-select"
               data-label=${`year-select-${provinceIdOrFederal || 'canada'}`}
             >
-              ${ALLOWED_YEARS.filter((y) => y >= 2022 && y <= 2029).map(
+              ${displayedYears.map(
                 (y) => html` <option value=${y} selected=${year === y}>${y}</option> `,
               )}
             </select>
