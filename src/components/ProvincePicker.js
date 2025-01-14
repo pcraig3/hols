@@ -162,8 +162,18 @@ const ProvincePicker = ({ provinceId, federal, year = 2025 }) => {
   regionName = regionName || (federal ? 'Federal' : 'Nationwide')
 
   // Calculate the range of years
-  const startYear = Math.max(Math.min(...ALLOWED_YEARS), year - 2) // 2 years behind
-  const endYear = Math.min(Math.max(...ALLOWED_YEARS), year + 4) // 5 years ahead
+  const MAX_PAST_YEARS = 2
+  const MAX_FUTURE_YEARS = 4
+
+  let startYear = Math.max(Math.min(...ALLOWED_YEARS), year - MAX_PAST_YEARS) // 2 years behind
+  let endYear = Math.min(Math.max(...ALLOWED_YEARS), year + MAX_FUTURE_YEARS) // 5 years ahead
+
+  const endYearGap = endYear - year
+  const startYearGap = year - startYear
+
+  // Adjust the range to ensure 8 years are displayed
+  startYear -= Math.max(0, MAX_FUTURE_YEARS - endYearGap)
+  endYear += Math.max(0, MAX_PAST_YEARS - startYearGap)
 
   // Filter the allowed years within the range
   const displayedYears = ALLOWED_YEARS.filter((y) => y >= startYear && y <= endYear)

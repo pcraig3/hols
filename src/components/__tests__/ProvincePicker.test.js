@@ -2,6 +2,7 @@ const render = require('preact-render-to-string')
 const cheerio = require('cheerio')
 const { html } = require('../../utils')
 const { ALLOWED_YEARS } = require('../../config/vars.config')
+const { getCurrentHolidayYear } = require('../../dates')
 
 const ProvincePicker = require('../ProvincePicker.js')
 
@@ -10,12 +11,16 @@ const renderProvincePicker = ({ provinceId, federal, year } = {}) => {
 }
 
 describe('<ProvincePicker>', () => {
-  const SELECTABLE_YEARS = ALLOWED_YEARS.filter((y) => y >= 2022 && y <= 2029)
+  const currentYear = getCurrentHolidayYear()
+  const yearMin = currentYear - 2
+  const yearMax = currentYear + 4
+
+  const SELECTABLE_YEARS = ALLOWED_YEARS.filter((y) => y >= yearMin && y <= yearMax)
   test(' renders properly', () => {
     const $ = renderProvincePicker()
     expect($('label').text()).toEqual('View by regionView by year')
     expect($('select').length).toBe(2)
-    expect($('select option').length).toBe(24)
+    expect($('select option').length).toBe(23)
     expect($('select option').text()).toEqual(
       `NationwideFederal──────────AlbertaBritish ColumbiaManitobaNew BrunswickNewfoundland and LabradorNova ScotiaNorthwest TerritoriesNunavutOntarioPrince Edward IslandQuebecSaskatchewanYukon${SELECTABLE_YEARS.join(
         '',
