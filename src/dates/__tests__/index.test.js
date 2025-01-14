@@ -123,11 +123,6 @@ describe('Test getLiteralDate', () => {
       test(`returns correct 2024 ISO date string for: "${day.str}"`, () => {
         expect(getLiteralDate(day.str, 2024)).toEqual(day.iso)
       })
-
-      // TODO: UPDATE THESE on Jan 1st 2025
-      test(`DEFAULT returns correct ISO date string for: "${day.str}"`, () => {
-        expect(getLiteralDate(day.str)).toEqual(day.iso)
-      })
     })
   })
 
@@ -159,6 +154,10 @@ describe('Test getLiteralDate', () => {
     days2025.map((day) => {
       test(`returns correct 2025 ISO date string for: "${day.str}"`, () => {
         expect(getLiteralDate(day.str, 2025)).toEqual(day.iso)
+      })
+
+      test(`DEFAULT returns correct ISO date string for: "${day.str}"`, () => {
+        expect(getLiteralDate(day.str)).toEqual(day.iso)
       })
     })
   })
@@ -383,11 +382,6 @@ describe('Test getObservedDate', () => {
       test(`returns correct 2024 ISO date string for: "${day.str}"`, () => {
         expect(getObservedDate(day.str, 2024)).toEqual(day.iso)
       })
-
-      // TODO: UPDATE THESE IN 2025
-      test(`abc DEFAULT returns correct ISO date string for: "${day.str}"`, () => {
-        expect(getObservedDate(day.str)).toEqual(day.iso)
-      })
     })
   })
 
@@ -419,6 +413,10 @@ describe('Test getObservedDate', () => {
     days2025.map((day) => {
       test(`returns correct 2025 ISO date string for: "${day.str}"`, () => {
         expect(getObservedDate(day.str, 2025)).toEqual(day.iso)
+      })
+
+      test(`DEFAULT returns correct ISO date string for: "${day.str}"`, () => {
+        expect(getObservedDate(day.str)).toEqual(day.iso)
       })
     })
   })
