@@ -50,7 +50,7 @@ UPDATE Province SET sourceEn = 'Employment Standards, Northwest Territories', so
 UPDATE Province SET sourceEn = 'Nunavut General Holidays', sourceLink = 'https://nu-lsco.ca/faq-s?tmpl=component&faqid=11' WHERE id = 'NU';
 UPDATE Province SET sourceEn = 'Ontario Public holidays', sourceLink = 'https://www.ontario.ca/document/your-guide-employment-standards-act-0/public-holidays' WHERE id = 'ON';
 UPDATE Province SET sourceEn = 'PEI Paid Holidays', sourceLink = 'https://www.princeedwardisland.ca/en/information/economic-growth-tourism-and-culture/paid-holidays' WHERE id = 'PE';
-UPDATE Province SET sourceEn = 'Jours fériés, chômés et payés', sourceLink = 'https://www2.gouv.qc.ca/entreprises/portail/quebec/ressourcesh?lang=fr&g=ressourcesh&sg=personnel&t=o&e=2318829344:3908165687' WHERE id = 'QC';
+UPDATE Province SET sourceEn = 'Liste des jours fériés, chômés et payés', sourceLink = 'https://www.cnesst.gouv.qc.ca/fr/conditions-travail/conges/jours-feries/liste-jours-feries' WHERE id = 'QC';
 UPDATE Province SET sourceEn = 'Saskatchewan Public Holidays', sourceLink = 'https://www.saskatchewan.ca/business/employment-standards/public-statutory-holidays/list-of-saskatchewan-public-holidays' WHERE id = 'SK';
 UPDATE Province SET sourceEn = 'Yukon statutory holiday dates', sourceLink = 'https://yukon.ca/en/doing-business/employer-responsibilities/find-yukon-statutory-holiday' WHERE id = 'YT';
 
