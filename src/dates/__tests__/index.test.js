@@ -516,6 +516,38 @@ describe('Test getObservedDate', () => {
       })
     })
   })
+
+  describe('for 2035', () => {
+    const days2035 = [
+      { str: 'January 1', iso: '2035-01-01' },
+      { str: 'Third Monday in February', iso: '2035-02-19' },
+      { str: 'Monday March 17', iso: '2035-03-12' },
+      { str: 'Friday before Easter Day', iso: '2035-03-23' },
+      { str: 'Monday after Easter Day', iso: '2035-03-26' },
+      { str: 'Monday near April 23', iso: '2035-04-23' },
+      { str: 'Monday before May 25', iso: '2035-05-21' },
+      { str: 'June 21', iso: '2035-06-21' },
+      { str: 'Monday near June 24', iso: '2035-06-25' },
+      { str: 'June 24', iso: '2035-06-25' },
+      { str: 'July 1', iso: '2035-07-02' },
+      { str: 'Monday near July 12', iso: '2035-07-09' },
+      { str: 'First Monday in August', iso: '2035-08-06' },
+      { str: 'First Wednesday in August', iso: '2035-08-01' },
+      { str: 'Third Monday in August', iso: '2035-08-20' },
+      { str: 'First Monday in September', iso: '2035-09-03' },
+      { str: 'September 30', iso: '2035-10-01' },
+      { str: 'Second Monday in October', iso: '2035-10-08' },
+      { str: 'November 11', iso: '2035-11-12' },
+      { str: 'December 25', iso: '2035-12-25' },
+      { str: 'December 26', iso: '2035-12-26' },
+    ]
+
+    days2035.map((day) => {
+      test(`returns correct 2035 ISO date string for: "${day.str}"`, () => {
+        expect(getObservedDate(day.str, 2035)).toEqual(day.iso)
+      })
+    })
+  })
 })
 
 describe('Test getCurrentHolidayYear', () => {

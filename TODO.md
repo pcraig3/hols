@@ -8,6 +8,7 @@
 
 # DONE
 
+- Add 2034, 2035
 - Update sitemap
 - Add 2014, 2032, 2033
 - Redirect /QB to /QC
