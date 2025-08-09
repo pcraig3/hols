@@ -16,6 +16,15 @@ const _getContext = ({ nameEn, provinces = [], date }) => {
     </p>`
   }
 
+  if (
+    nameEn === 'Day after New Year’s' &&
+    (isSunday(Sugar.Date.create(date)) || isMonday(Sugar.Date.create(date)))
+  ) {
+    return html`<p>
+      Because New Year’s is observed on Monday, the ${nameEn} is pushed to the following Tuesday.
+    </p>`
+  }
+
   if (provinces.length === 1 && ['NL', 'QC'].includes(provinces[0].id)) {
     return html`<p>${nameEn} is observed on the Monday closest to ${displayDate(date)}.</p>`
   }

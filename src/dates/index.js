@@ -136,6 +136,11 @@ const getObservedDate = (dateString, year = new Date(Date.now()).getUTCFullYear(
     date = _parseRelativeDates(`Tuesday after ${dateString} ${year}`)
   }
 
+  // If the Day after New Year’s is on a Sunday or Monday, move to Tuesday (New Years will be Monday)
+  if ([1, 7].includes(getISODay(date)) && /January 2/i.test(dateString)) {
+    date = _parseRelativeDates(`Tuesday after ${dateString} ${year}`)
+  }
+
   // If it lands on a Saturday or Sunday (and not National Aboriginal Day) move to Monday
   if ([6, 7].includes(getISODay(date)) && !/June 21/i.test(dateString)) {
     date = _parseRelativeDates(`Monday after ${dateString} ${year}`)

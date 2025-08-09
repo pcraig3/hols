@@ -4,10 +4,12 @@
 - add years to dates on years pages?
 - make API to return CSV format
   - page for CSV downloads
-- Update the github workflows for deploying to Cloud Run
+- Show Optional holidays in ICS links by default
 
 # DONE
 
+- Add optional holiday for quebec
+- Update the github workflows for deploying to Cloud Run
 - Add 2034, 2035
 - Update sitemap
 - Add 2014, 2032, 2033

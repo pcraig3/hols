@@ -230,6 +230,11 @@ describe('Test /api responses', () => {
           statTotal: 9,
           optionalTotal: 12,
         },
+        {
+          province: 'QC',
+          statTotal: 8,
+          optionalTotal: 9,
+        },
       ]
 
       optionalProvinces.map((op) => {
@@ -310,9 +315,9 @@ describe('Test /api responses', () => {
           const heritageDay = holidays.find(
             (h) => h.nameEn === 'Heritage Day' && h.nameFr === 'Jour d’Héritage',
           )
-          expect(heritageDay.id).toBe(22)
+          expect(heritageDay.id).toBe(23)
           expect(heritageDay).toMatchObject({
-            id: 22,
+            id: 23,
             date: heritageDay.date,
             nameEn: 'Heritage Day',
             nameFr: 'Jour d’Héritage',
@@ -333,9 +338,9 @@ describe('Test /api responses', () => {
           const terryFoxDay = holidays.find(
             (h) => h.nameEn === 'Terry Fox Day' && h.nameFr === 'Journée Terry Fox',
           )
-          expect(terryFoxDay.id).toBe(23)
+          expect(terryFoxDay.id).toBe(24)
           expect(terryFoxDay).toMatchObject({
-            id: 23,
+            id: 24,
             date: terryFoxDay.date,
             nameEn: 'Terry Fox Day',
             nameFr: 'Journée Terry Fox',
@@ -470,14 +475,14 @@ describe('Test /api responses', () => {
   })
 
   describe('for /api/v1/holidays/:holidayId path', () => {
-    test('it should return a holiday for a good ID: 33', async () => {
-      const response = await request(app).get('/api/v1/holidays/33')
+    test('it should return a holiday for a good ID: 34', async () => {
+      const response = await request(app).get('/api/v1/holidays/34')
       expect(response.statusCode).toBe(200)
 
       let { holiday } = JSON.parse(response.text)
 
       expect(holiday).toMatchObject({
-        id: 33,
+        id: 34,
         date: `${currentYear}-12-26`,
         nameEn: 'Boxing Day',
         nameFr: 'Lendemain de Noël',
@@ -487,17 +492,42 @@ describe('Test /api responses', () => {
       })
     })
 
+    test('it should an empty object for an optional holiday: 2', async () => {
+      const response = await request(app).get('/api/v1/holidays/2')
+      expect(response.statusCode).toBe(200)
+
+      let responseJSON = JSON.parse(response.text)
+      expect(responseJSON).toMatchObject({})
+    })
+
+    test('it should a holiday object for an optional holiday: 2 when ?optional=true', async () => {
+      const response = await request(app).get('/api/v1/holidays/2?optional=true')
+      expect(response.statusCode).toBe(200)
+
+      let { holiday } = JSON.parse(response.text)
+
+      expect(holiday).toMatchObject({
+        id: 2,
+        date: `${currentYear}-01-02`,
+        nameEn: 'Day after New Year’s',
+        nameFr: 'Lendemain du Jour de l’An',
+        federal: 0,
+        observedDate: `${currentYear}-01-02`,
+        provinces: expect.any(Array),
+      })
+    })
+
     describe('with optional provinces', () => {
-      test('it should NOT return optional provinces for a good ID: 33', async () => {
-        const response = await request(app).get('/api/v1/holidays/33?optional=false')
+      test('it should NOT return optional provinces for a good ID: 34', async () => {
+        const response = await request(app).get('/api/v1/holidays/34?optional=false')
         expect(response.statusCode).toBe(200)
 
         let { holiday } = JSON.parse(response.text)
         expect(holiday.provinces.length).toBe(2)
       })
 
-      test('it should return optional provinces for a good ID: 33', async () => {
-        const response = await request(app).get('/api/v1/holidays/33?optional=true')
+      test('it should return optional provinces for a good ID: 34', async () => {
+        const response = await request(app).get('/api/v1/holidays/34?optional=true')
         expect(response.statusCode).toBe(200)
 
         let { holiday } = JSON.parse(response.text)
@@ -512,7 +542,7 @@ describe('Test /api responses', () => {
       let { error } = JSON.parse(response.text)
 
       expect(error).toMatchObject({
-        message: 'Bad Request: request/params/holidayId must be <= 33',
+        message: 'Bad Request: request/params/holidayId must be <= 34',
         status: response.statusCode,
         timestamp: expect.any(String),
       })

@@ -39,8 +39,10 @@ const OptionalHolidays = () =>
           <li><a href="/provinces/BC">British Columbia holidays</a></li>
           <li><a href="/provinces/MB">Manitoba holidays</a></li>
           <li><a href="/provinces/NB">New Brunswick holidays</a></li>
+          <li><a href="/provinces/NL">Newfoundland holidays</a></li>
           <li><a href="/provinces/NU">Nunavut holidays</a></li>
           <li><a href="/provinces/ON">Ontario holidays</a></li>
+          <li><a href="/provinces/QC">Quebec holidays</a></li>
         </ul>
 
         <h2>How are statutory holidays different from optional holidays?</h2>
