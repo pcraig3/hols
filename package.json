@@ -34,13 +34,13 @@
     "cors": "^2.8.5",
     "date-fns": "^4.1.0",
     "express": "^4.21.2",
-    "express-openapi-validator": "^5.5.7",
+    "express-openapi-validator": "^5.5.8",
     "helmet": "^8.1.0",
     "htm": "^3.1.0",
     "http-errors": "^2.0.0",
     "ics": "^3.8.1",
     "morgan": "^1.10.1",
-    "preact": "^10.26.9",
+    "preact": "^10.27.0",
     "preact-render-to-string": "^6.5.13",
     "request-ip": "^3.3.0",
     "sugar-date": "^2.0.6",
@@ -49,11 +49,11 @@
     "validator": "^13.15.15"
   },
   "devDependencies": {
-    "cheerio": "^1.1.0",
-    "eslint": "^9.31.0",
+    "cheerio": "^1.1.2",
+    "eslint": "^9.33.0",
     "globals": "^16.3.0",
-    "jest": "^30.0.4",
+    "jest": "^30.0.5",
     "nodemon": "^3.1.10",
-    "supertest": "^7.1.3"
+    "supertest": "^7.1.4"
   }
 }
