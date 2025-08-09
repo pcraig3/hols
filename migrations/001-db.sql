@@ -55,6 +55,7 @@ UPDATE Province SET sourceEn = 'Saskatchewan Public Holidays', sourceLink = 'htt
 UPDATE Province SET sourceEn = 'Yukon statutory holiday dates', sourceLink = 'https://yukon.ca/en/doing-business/employer-responsibilities/find-yukon-statutory-holiday' WHERE id = 'YT';
 
 INSERT INTO Holiday (date, nameEn, nameFr) VALUES ('January 1', 'New Year’s Day', 'Jour de l’An');
+INSERT INTO Holiday (date, nameEn, nameFr) VALUES ('January 2', 'Day after New Year’s', 'Lendemain du Jour de l’An');
 INSERT INTO Holiday (date, nameEn, nameFr) VALUES ('Third Monday in February', 'Louis Riel Day', 'Journée Louis Riel');
 INSERT INTO Holiday (date, nameEn, nameFr) VALUES ('Third Monday in February', 'Islander Day', 'Fête des Insulaires');
 INSERT INTO Holiday (date, nameEn, nameFr) VALUES ('Third Monday in February', 'Family Day', 'Fête de la famille');
@@ -115,6 +116,8 @@ INSERT INTO ProvinceHoliday (holidayId, provinceId) VALUES ((SELECT id FROM Holi
 INSERT INTO ProvinceHoliday (holidayId, provinceId) VALUES ((SELECT id FROM Holiday WHERE (date = 'January 1' AND nameEn = 'New Year’s Day')), 'QC');
 INSERT INTO ProvinceHoliday (holidayId, provinceId) VALUES ((SELECT id FROM Holiday WHERE (date = 'January 1' AND nameEn = 'New Year’s Day')), 'SK');
 INSERT INTO ProvinceHoliday (holidayId, provinceId) VALUES ((SELECT id FROM Holiday WHERE (date = 'January 1' AND nameEn = 'New Year’s Day')), 'YT');
+
+INSERT INTO ProvinceHoliday (holidayId, provinceId, optional) VALUES ((SELECT id FROM Holiday WHERE (date = 'January 2' AND nameEn = 'Day after New Year’s')), 'QC', 1);
 
 INSERT INTO ProvinceHoliday (holidayId, provinceId) VALUES ((SELECT id FROM Holiday WHERE (date = 'Third Monday in February' AND nameEn = 'Louis Riel Day')), 'MB');
 
