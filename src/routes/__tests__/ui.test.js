@@ -77,6 +77,15 @@ describe('Test ui responses', () => {
 
       expect(response.statusCode).toBe(200)
     })
+
+    test('does not redirect protocol-relative path //@bad.com&sa=U', async () => {
+      const response = await request(app).get('//@bad.com&sa=U')
+
+      // Should not be a redirect
+      expect(response.statusCode).not.toBe(301)
+      expect(response.statusCode).not.toBe(302)
+      expect(response.headers.location).toBeUndefined()
+    })
   })
 
   describe('Test /:year responses', () => {

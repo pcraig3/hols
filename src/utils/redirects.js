@@ -1,3 +1,11 @@
+const _isLocalPath = (target) => {
+  if (typeof target !== 'string') return false
+  // Must start with a single slash and not be protocol-relative
+  if (!target.startsWith('/')) return false
+  if (target.startsWith('//')) return false
+  return true
+}
+
 const redirectSaU = (req, res, next) => {
   // originalUrl preserves the raw incoming path + querystring
   const suffix = '&sa=U'
@@ -10,7 +18,10 @@ const redirectSaU = (req, res, next) => {
     // preserve any real query string
     const qs = req.originalUrl.includes('?') ? `?${req.originalUrl.split('?')[1]}` : ''
 
-    return res.redirect(301, `${cleanPath}${qs}`)
+    const redirectTarget = `${cleanPath}${qs}`
+    if (_isLocalPath(redirectTarget)) {
+      return res.redirect(301, redirectTarget)
+    }
   }
 
   next()
