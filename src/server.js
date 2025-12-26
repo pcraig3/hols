@@ -5,6 +5,7 @@ const helmet = require('helmet')
 const compression = require('compression')
 const requestIp = require('request-ip')
 const cors = require('cors')
+const { redirectSaU, redirectCloudRunHost } = require('./utils/redirects')
 
 const app = express()
 
@@ -28,13 +29,9 @@ app
 process.env.NODE_ENV !== 'test' && app.use(morgan(morganConfig))
 
 // redirect from the Cloud Run url to the custom one
-app.use((req, res, next) => {
-  if (req.headers.host === 'hols-z2c3yl7mva-ue.a.run.app') {
-    res.redirect(301, `https://canada-holidays.ca${req.path}`)
-  }
-
-  next()
-})
+app.use(redirectCloudRunHost)
+// redirect urls ending in &sa=U (no query param)
+app.use(redirectSaU)
 
 const apiRouter = require('./routes/api')
 app.use('/api', apiRouter)

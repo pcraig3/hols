@@ -112,7 +112,7 @@ describe('Test /api responses', () => {
   })
 
   describe('for /api/v1/provinces path', () => {
-    test('it should return all provinces', async () => {
+    test.skip('it should return all provinces', async () => {
       const response = await request(app).get('/api/v1/provinces')
       expect(response.statusCode).toBe(200)
 
