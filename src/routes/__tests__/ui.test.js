@@ -43,6 +43,42 @@ describe('Test ui responses', () => {
     })
   })
 
+  describe('test &sa=U responses', () => {
+    test('redirects /&sa=U → /', async () => {
+      const response = await request(app).get('/&sa=U')
+
+      expect(response.statusCode).toBe(301)
+      expect(response.headers.location).toBe('/')
+    })
+
+    test('redirects /provinces&sa=U → /provinces', async () => {
+      const response = await request(app).get('/provinces&sa=U')
+
+      expect(response.statusCode).toBe(301)
+      expect(response.headers.location).toBe('/provinces')
+    })
+
+    test('redirects /provinces/ON&sa=U → /provinces/ON', async () => {
+      const response = await request(app).get('/provinces/ON&sa=U')
+
+      expect(response.statusCode).toBe(301)
+      expect(response.headers.location).toBe('/provinces/ON')
+    })
+
+    test('redirects /provinces/ON&sa=U?query=string → /provinces/ON?query=string', async () => {
+      const response = await request(app).get('/provinces/ON&sa=U?query=string')
+
+      expect(response.statusCode).toBe(301)
+      expect(response.headers.location).toBe('/provinces/ON?query=string')
+    })
+
+    test('does not redirect /provinces/ON?query=string&sa=U → /provinces/ON?query=string', async () => {
+      const response = await request(app).get('/provinces/ON?query=string&sa=U')
+
+      expect(response.statusCode).toBe(200)
+    })
+  })
+
   describe('Test /:year responses', () => {
     test(`it should return the h1, title, meta tag, and canonical link for ${nextYear}`, async () => {
       const response = await request(app).get(`/${nextYear}`)
