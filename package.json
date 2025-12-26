@@ -1,12 +1,12 @@
 {
   "name": "hols",
-  "version": "3.28.1",
+  "version": "3.29.0",
   "description": "hols for cans: canada holidays api and canada holidays frontend",
   "main": "index.js",
   "author": "pcraig3",
   "license": "MIT",
   "engines": {
-    "node": ">=22"
+    "node": ">=24"
   },
   "repository": {
     "type": "git",
