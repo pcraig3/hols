@@ -19,7 +19,7 @@ There's an OpenAPI spec at [`Canada-Holidays-API.v1.yaml`](https://github.com/pc
 
 `npm` is a javascript package manager. It downloads project dependencies and runs node applications.
 
-You'll need node version `v14` or higher to run the app. (If you have an M1 Mac, you'll need `v15` or higher.)
+You'll need node version `v24` or higher to run the app.
 
 ### [Install `docker`](https://docs.docker.com/install/)
 
