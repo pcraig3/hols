@@ -1,6 +1,6 @@
 # Canada Holidays API
 
-The <a href="https://canada-holidays.ca/api/v1/" target="_blank">Canada Holidays API</a> lists all 31 public holidays for all 13 provinces and territories in Canada, including federal holidays.
+The <a href="https://canada-holidays.ca/api/v1/" target="_blank">Canada Holidays API</a> lists all 32 public holidays for all 13 provinces and territories in Canada, including federal holidays.
 
 **👉 <a href="https://canada-holidays.ca/api/v1/" target="_blank">https://canada-holidays.ca/api/v1/</a>**
 
@@ -11,7 +11,7 @@ Features:
 - Returns only federal holidays
 - Returns only national holidays
 - Returns "next" holiday for each region
-- Returns holidays for years: `2014`, …, `2025`, … `2035`
+- Returns holidays for years: `2013`, …, `2026`, … `2038`
 
 Plus(!) check out all these goodies you get for ✨ free ✨:
 
@@ -54,12 +54,12 @@ Response keys never contain `null` values.
 
 There are 2 (½) query parameters values you can use. Probably not on the root route but on others they will work.
 
-1. `year`: Takes a single year from the following: `2014`, `2015`, `2016`, `2017`, `2018`, `2019`, `2020`, `2021`, `2022`, `2023`, `2024`, `2025`, `2026`, `2027`, `2028`, `2029`, `2030`, `2031`, `2032`, `2033`, `2034`, `2035`. Defaults to the current year.
-   - Example: `?year=2026`
+1. `year`: Takes a single year from the following: `2023`, `2014`, `2015`, `2016`, `2017`, `2018`, `2019`, `2020`, `2021`, `2022`, `2023`, `2024`, `2025`, `2026`, `2027`, `2028`, `2029`, `2030`, `2031`, `2032`, `2033`, `2034`, `2035`, `2036`, `2037`, `2038`. Defaults to the current year.
+   - Example: `?year=2031`
 2. `federal`. `true` or `1` to return _only_ federal holidays; `false` or `0` to return _everything but_ federal holidays.
    - Example: `?federal=true`
 
-You can combine them and they will work (eg, `/api/v1/holidays?year=2021&federal=true`).
+You can combine them and they will work (eg, `/api/v1/holidays?year=2031&federal=true`).
 
 ##### 'Optional' query parameter
 

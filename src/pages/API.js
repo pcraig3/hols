@@ -30,7 +30,7 @@ const API = () =>
         <p>
           The ${' '}<a href="https://canada-holidays.ca/api/v1/" target="_blank"
             >Canada Holidays API</a
-          >${' '}lists all 30 public holidays for all 13 provinces and territories in Canada,
+          >${' '}lists all 32 public holidays for all 13 provinces and territories in Canada,
           including federal holidays.
         </p>
         <p>
@@ -50,8 +50,8 @@ const API = () =>
           <li>Get national holidays</li>
           <li>Get upcoming (“next”) holiday for each region</li>
           <li>
-            Get holidays for past/future years: <code>2014</code>, ${' '}⋯${' '},${' '}
-            <code>2025</code>, ${' '}⋯${' '}, <code>2035</code>.
+            Get holidays for past/future years: <code>2013</code>, ${' '}⋯${' '},${' '}
+            <code>2026</code>, ${' '}⋯${' '}, <code>2038</code>.
           </li>
         </ul>
         <${Details}

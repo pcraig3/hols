@@ -112,7 +112,7 @@ describe('Test /api responses', () => {
   })
 
   describe('for /api/v1/provinces path', () => {
-    test.skip('it should return all provinces', async () => {
+    test('it should return all provinces', async () => {
       const response = await request(app).get('/api/v1/provinces')
       expect(response.statusCode).toBe(200)
 
@@ -395,7 +395,7 @@ describe('Test /api responses', () => {
         })
       })
 
-      let badYears = ['2013', '2036', '1', null, undefined, false, 'orange', 'christmas']
+      let badYears = ['2012', '2039', '1', null, undefined, false, 'orange', 'christmas']
       badYears.map((year) => {
         test(`"${year}" it should return 400 with an error message`, async () => {
           const response = await request(app).get(`/api/v1/holidays?year=${year}`)
@@ -403,7 +403,7 @@ describe('Test /api responses', () => {
 
           let { error } = JSON.parse(response.text)
           expect(error.message).toMatch(
-            /^Bad Request: request\/query\/year must be (integer|>= 2014|<= 2035)/,
+            /^Bad Request: request\/query\/year must be (integer|>= 2013|<= 2038)/,
           )
         })
       })
@@ -487,7 +487,7 @@ describe('Test /api responses', () => {
         nameEn: 'Boxing Day',
         nameFr: 'Lendemain de Noël',
         federal: 1,
-        observedDate: `${currentYear}-12-26`,
+        observedDate: `${currentYear}-12-28`,
         provinces: expect.any(Array),
       })
     })
@@ -560,7 +560,7 @@ describe('Test /api responses', () => {
         })
       })
 
-      let badYears = ['2013', '2036', '1', null, undefined, false, 'orange', 'christmas']
+      let badYears = ['2012', '2039', '1', null, undefined, false, 'orange', 'christmas']
       badYears.map((year) => {
         test(`"${year}" it should return 400 with an error message`, async () => {
           const response = await request(app).get(`/api/v1/holidays?year=${year}`)
@@ -568,7 +568,7 @@ describe('Test /api responses', () => {
 
           let { error } = JSON.parse(response.text)
           expect(error.message).toMatch(
-            /^Bad Request: request\/query\/year must be (integer|>= 2014|<= 2035)/,
+            /^Bad Request: request\/query\/year must be (integer|>= 2013|<= 2038)/,
           )
         })
       })
