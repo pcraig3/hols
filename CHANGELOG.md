@@ -21,11 +21,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Default year is 2026
   - New min/max years (2013/2038)
 - ProvincePicker dates now set in config
+- Updated sitemap with new year
 
 ### Fixed
 
 - Allow malformed query param
-- Update tests that relied on year being 2024
 
 ## [3.28.0] - 2024-01-18
 
