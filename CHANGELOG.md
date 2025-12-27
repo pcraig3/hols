@@ -5,6 +5,27 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.30.0] - 2025-12-27
+
+### Added
+
+- Added new years
+  - 2013
+  - 2036
+  - 2037
+  - 2038
+
+### Changed
+
+- API spec updated
+  - Default year is 2026
+  - New min/max years (2013/2038)
+- ProvincePicker dates now set in config
+
+### Fixed
+
+- Allow malformed query param
+- Update tests that relied on year being 2024
 
 ## [3.28.0] - 2024-01-18
 

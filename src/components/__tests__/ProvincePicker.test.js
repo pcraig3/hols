@@ -1,8 +1,7 @@
 const render = require('preact-render-to-string')
 const cheerio = require('cheerio')
 const { html } = require('../../utils')
-const { ALLOWED_YEARS } = require('../../config/vars.config')
-const { getCurrentHolidayYear } = require('../../dates')
+const { SELECTABLE_YEARS } = require('../../config/vars.config')
 
 const ProvincePicker = require('../ProvincePicker.js')
 
@@ -11,11 +10,6 @@ const renderProvincePicker = ({ provinceId, federal, year } = {}) => {
 }
 
 describe('<ProvincePicker>', () => {
-  const currentYear = getCurrentHolidayYear()
-  const yearMin = currentYear - 2
-  const yearMax = currentYear + 4
-
-  const SELECTABLE_YEARS = ALLOWED_YEARS.filter((y) => y >= yearMin && y <= yearMax)
   test(' renders properly', () => {
     const $ = renderProvincePicker()
     expect($('label').text()).toEqual('View by regionView by year')
@@ -61,9 +55,9 @@ describe('<ProvincePicker>', () => {
   })
 
   describe('year select', () => {
-    test('renders selected year as "2025" by default', () => {
+    test('renders selected year as "2026" by default', () => {
       const $ = renderProvincePicker()
-      expect($('select').eq(1).find('option[selected]').text()).toEqual('2025')
+      expect($('select').eq(1).find('option[selected]').text()).toEqual('2026')
     })
 
     // People want future holidays, not past holidays

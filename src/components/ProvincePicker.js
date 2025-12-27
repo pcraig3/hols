@@ -1,6 +1,6 @@
 const { html, getProvinceIdOrFederalString } = require('../utils')
 const { css } = require('@emotion/css')
-const { ALLOWED_YEARS, PROVINCE_IDS } = require('../config/vars.config')
+const { PROVINCE_IDS, SELECTABLE_YEARS } = require('../config/vars.config')
 const { theme, insideContainer, hiddenOnMobile, horizontalPadding } = require('../styles')
 const Button = require('./Button')
 
@@ -156,27 +156,10 @@ const getProvinceNameFromId = (provinceId) => {
   }
 }
 
-const ProvincePicker = ({ provinceId, federal, year = 2025 }) => {
+const ProvincePicker = ({ provinceId, federal, year = 2026 }) => {
   const provinceIdOrFederal = getProvinceIdOrFederalString({ provinceId, federal })
   let regionName = getProvinceNameFromId(provinceId)
   regionName = regionName || (federal ? 'Federal' : 'Nationwide')
-
-  // Calculate the range of years
-  const MAX_PAST_YEARS = 2
-  const MAX_FUTURE_YEARS = 4
-
-  let startYear = Math.max(Math.min(...ALLOWED_YEARS), year - MAX_PAST_YEARS) // 2 years behind
-  let endYear = Math.min(Math.max(...ALLOWED_YEARS), year + MAX_FUTURE_YEARS) // 5 years ahead
-
-  const endYearGap = endYear - year
-  const startYearGap = year - startYear
-
-  // Adjust the range to ensure 8 years are displayed
-  startYear -= Math.max(0, MAX_FUTURE_YEARS - endYearGap)
-  endYear += Math.max(0, MAX_PAST_YEARS - startYearGap)
-
-  // Filter the allowed years within the range
-  const displayedYears = ALLOWED_YEARS.filter((y) => y >= startYear && y <= endYear)
 
   return html`
     <div class=${provinceIdOrFederal ? styles(theme.color[provinceIdOrFederal]) : styles()}>
@@ -216,7 +199,7 @@ const ProvincePicker = ({ provinceId, federal, year = 2025 }) => {
               data-action="year-select"
               data-label=${`year-select-${provinceIdOrFederal || 'canada'}`}
             >
-              ${displayedYears.map(
+              ${SELECTABLE_YEARS.map(
                 (y) => html` <option value=${y} selected=${year === y}>${y}</option> `,
               )}
             </select>
