@@ -44,7 +44,7 @@ UPDATE Province SET sourceEn = 'General holidays in Alberta', sourceLink = 'http
 UPDATE Province SET sourceEn = 'Statutory Holidays in British Columbia', sourceLink = 'https://www2.gov.bc.ca/gov/content/employment-business/employment-standards-advice/employment-standards/statutory-holidays#body' WHERE id = 'BC';
 UPDATE Province SET sourceEn = 'General holidays in Manitoba', sourceLink = 'https://www.gov.mb.ca/labour/standards/doc,gen-holidays-after-april-30-07,factsheet.html#q12' WHERE id = 'MB';
 UPDATE Province SET sourceEn = '10 prescribed days of rest', sourceLink = 'https://www2.gnb.ca/content/gnb/en/departments/elg/local_government/content/governance/content/days_of_rest_act/faq.html#2' WHERE id = 'NB';
-UPDATE Province SET sourceEn = 'Public holidays in Newfoundland', sourceLink = 'https://gist.github.com/pcraig3/81dff348ddf52777c9f918c3032531bd' WHERE id = 'NL';
+UPDATE Province SET sourceEn = 'Newfoundland 2026 Paid Holidays', sourceLink = 'https://www.gov.nl.ca/exec/tbs/2026-paid-holidays-2/' WHERE id = 'NL';
 UPDATE Province SET sourceEn = 'Paid holidays in Nova Scotia', sourceLink = 'https://novascotia.ca/lae/employmentrights/holidaychart.asp' WHERE id = 'NS';
 UPDATE Province SET sourceEn = 'Employment Standards, Northwest Territories', sourceLink = 'https://www.ece.gov.nt.ca/en/services/employment-standards/frequently-asked-questions#Statutory%20Holidays' WHERE id = 'NT';
 UPDATE Province SET sourceEn = 'Nunavut General Holidays', sourceLink = 'https://nu-lsco.ca/faq-s?tmpl=component&faqid=11' WHERE id = 'NU';
@@ -70,6 +70,7 @@ INSERT INTO Holiday (date, nameEn, nameFr) VALUES ('June 21', 'National Indigeno
 INSERT INTO Holiday (date, nameEn, nameFr) VALUES ('June 24', 'Saint-Jean-Baptiste Day', 'Saint-Jean-Baptiste / Fête nationale du Québec');
 INSERT INTO Holiday (date, nameEn, nameFr) VALUES ('Monday near June 24', 'Discovery Day', 'Journée découverte');
 INSERT INTO Holiday (date, nameEn, nameFr) VALUES ('July 1', 'Canada Day', 'Fête du Canada');
+INSERT INTO Holiday (date, nameEn, nameFr) VALUES ('July 1', 'Memorial Day', 'Jour du Souvenir');
 INSERT INTO Holiday (date, nameEn, nameFr) VALUES ('July 9', 'Nunavut Day', 'Jour de Nunavut');
 INSERT INTO Holiday (date, nameEn, nameFr) VALUES ('Monday near July 12', 'Orangemen’s Day', 'Fête des orangistes');
 INSERT INTO Holiday (date, nameEn, nameFr) VALUES ('First Monday in August', 'Civic Holiday', 'Congé civique');
@@ -83,7 +84,7 @@ INSERT INTO Holiday (date, nameEn, nameFr) VALUES ('Third Monday in August', 'Di
 INSERT INTO Holiday (date, nameEn, nameFr) VALUES ('First Monday in September', 'Labour Day', 'Fête du travail');
 INSERT INTO Holiday (date, nameEn, nameFr, firstOccurence, lastOccurence) VALUES ('September 19', 'Day of Mourning for Queen Elizabeth II', 'Journée de deuil pour la reine Élisabeth II', '2022', '2022');
 INSERT INTO Holiday (date, nameEn, nameFr, firstOccurence) VALUES ('September 30', 'National Day for Truth and Reconciliation', 'Journée nationale de la vérité et de la réconciliation', '2021');
-INSERT INTO Holiday (date, nameEn, nameFr, firstOccurence) VALUES ('September 30', 'Orange Shirt Day', ' Jour du chandail orange', '2021');
+INSERT INTO Holiday (date, nameEn, nameFr, firstOccurence) VALUES ('September 30', 'Orange Shirt Day', 'Jour du chandail orange', '2021');
 INSERT INTO Holiday (date, nameEn, nameFr) VALUES ('Second Monday in October', 'Thanksgiving', 'Action de grâce');
 INSERT INTO Holiday (date, nameEn, nameFr) VALUES ('November 11', 'Remembrance Day', 'Jour du Souvenir');
 INSERT INTO Holiday (date, nameEn, nameFr) VALUES ('December 25', 'Christmas Day', 'Noël');
@@ -178,7 +179,6 @@ INSERT INTO ProvinceHoliday (holidayId, provinceId) VALUES ((SELECT id FROM Holi
 INSERT INTO ProvinceHoliday (holidayId, provinceId) VALUES ((SELECT id FROM Holiday WHERE (date = 'July 1' AND nameEn = 'Canada Day')), 'BC');
 INSERT INTO ProvinceHoliday (holidayId, provinceId) VALUES ((SELECT id FROM Holiday WHERE (date = 'July 1' AND nameEn = 'Canada Day')), 'MB');
 INSERT INTO ProvinceHoliday (holidayId, provinceId) VALUES ((SELECT id FROM Holiday WHERE (date = 'July 1' AND nameEn = 'Canada Day')), 'NB');
-INSERT INTO ProvinceHoliday (holidayId, provinceId) VALUES ((SELECT id FROM Holiday WHERE (date = 'July 1' AND nameEn = 'Canada Day')), 'NL');
 INSERT INTO ProvinceHoliday (holidayId, provinceId) VALUES ((SELECT id FROM Holiday WHERE (date = 'July 1' AND nameEn = 'Canada Day')), 'NT');
 INSERT INTO ProvinceHoliday (holidayId, provinceId) VALUES ((SELECT id FROM Holiday WHERE (date = 'July 1' AND nameEn = 'Canada Day')), 'NS');
 INSERT INTO ProvinceHoliday (holidayId, provinceId) VALUES ((SELECT id FROM Holiday WHERE (date = 'July 1' AND nameEn = 'Canada Day')), 'NU');
@@ -187,6 +187,8 @@ INSERT INTO ProvinceHoliday (holidayId, provinceId) VALUES ((SELECT id FROM Holi
 INSERT INTO ProvinceHoliday (holidayId, provinceId) VALUES ((SELECT id FROM Holiday WHERE (date = 'July 1' AND nameEn = 'Canada Day')), 'QC');
 INSERT INTO ProvinceHoliday (holidayId, provinceId) VALUES ((SELECT id FROM Holiday WHERE (date = 'July 1' AND nameEn = 'Canada Day')), 'SK');
 INSERT INTO ProvinceHoliday (holidayId, provinceId) VALUES ((SELECT id FROM Holiday WHERE (date = 'July 1' AND nameEn = 'Canada Day')), 'YT');
+
+INSERT INTO ProvinceHoliday (holidayId, provinceId) VALUES ((SELECT id FROM Holiday WHERE (date = 'July 1' AND nameEn = 'Memorial Day')), 'NL');
 
 INSERT INTO ProvinceHoliday (holidayId, provinceId) VALUES ((SELECT id FROM Holiday WHERE (date = 'July 9' AND nameEn = 'Nunavut Day')), 'NU');
 

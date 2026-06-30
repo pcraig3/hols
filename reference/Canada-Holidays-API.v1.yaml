@@ -1,8 +1,8 @@
 openapi: 3.0.0
 info:
   title: Canada Holidays API
-  version: 1.14.0
-  description: 'This API lists all 32 public holidays for all 13 provinces and territories in Canada, including federal holidays.'
+  version: 1.15.0
+  description: 'This API lists public holidays observed federally and across Canada’s 13 provinces and territories.'
   contact:
     name: Paul Craig
     url: 'https://canada-holidays.ca/api'
@@ -125,8 +125,8 @@ paths:
                           - id: NL
                             nameEn: Newfoundland and Labrador
                             nameFr: Terre-Neuve-et-Labrador
-                            sourceLink: 'https://gist.github.com/pcraig3/81dff348ddf52777c9f918c3032531bd'
-                            sourceEn: Public holidays in Newfoundland
+                            sourceLink: 'https://www.gov.nl.ca/exec/tbs/2026-paid-holidays-2/'
+                            sourceEn: Newfoundland 2026 Paid Holidays
                           - id: NT
                             nameEn: Northwest Territories
                             nameFr: Territoires du Nord-Ouest
@@ -461,7 +461,7 @@ paths:
           type: integer
           example: 2
           minimum: 1
-          maximum: 34
+          maximum: 35
         name: holidayId
         in: path
         required: true
@@ -480,10 +480,10 @@ paths:
                   holiday:
                     $ref: '#/components/schemas/Holiday'
               examples:
-                /holidays/33:
+                /holidays/35:
                   value:
                     holiday:
-                      id: 33
+                      id: 35
                       date: '2023-12-26'
                       nameEn: Boxing Day
                       nameFr: Lendemain de Noël
@@ -493,17 +493,17 @@ paths:
                         - id: NL
                           nameEn: Newfoundland and Labrador
                           nameFr: Terre-Neuve-et-Labrador
-                          sourceLink: 'https://gist.github.com/pcraig3/81dff348ddf52777c9f918c3032531bd'
-                          sourceEn: Public holidays in Newfoundland
+                          sourceLink: 'https://www.gov.nl.ca/exec/tbs/2026-paid-holidays-2/'
+                          sourceEn: Newfoundland 2026 Paid Holidays
                         - id: 'ON'
                           nameEn: Ontario
                           nameFr: Ontario
                           sourceLink: 'https://www.ontario.ca/document/your-guide-employment-standards-act-0/public-holidays'
                           sourceEn: Ontario Public holidays
-                /holidays/33?optional=true:
+                /holidays/35?optional=true:
                   value:
                     holiday:
-                      id: 33
+                      id: 35
                       date: '2024-12-26'
                       nameEn: Boxing Day
                       nameFr: Lendemain de Noël
@@ -513,8 +513,8 @@ paths:
                         - id: NL
                           nameEn: Newfoundland and Labrador
                           nameFr: Terre-Neuve-et-Labrador
-                          sourceLink: 'https://gist.github.com/pcraig3/81dff348ddf52777c9f918c3032531bd'
-                          sourceEn: Public holidays in Newfoundland
+                          sourceLink: 'https://www.gov.nl.ca/exec/tbs/2026-paid-holidays-2/'
+                          sourceEn: Newfoundland 2026 Paid Holidays
                         - id: 'ON'
                           nameEn: Ontario
                           nameFr: Ontario
@@ -564,7 +564,7 @@ paths:
                   value:
                     error:
                       status: 400
-                      message: 'Error: request.params.holidayId should be <= 31'
+                      message: 'Error: request.params.holidayId should be <= 35'
                       timestamp: '2020-04-28T03:59:56.605Z'
       operationId: Holiday
       description: Returns one Canadian statutory holiday by integer id. Returns a 404 response for invalid ids.
@@ -614,9 +614,9 @@ components:
       type: object
       description: 'A Canadian holiday. Includes a name, the literal date of the holiday, the observed date of the holiday (ie, accommodating for weekends), and a list of regions that observe this holiday.'
       x-examples:
-        /holidays/33?optional=true:
+        /holidays/35?optional=true:
           holiday:
-            id: 33
+            id: 35
             date: '2024-12-26'
             nameEn: Boxing Day
             nameFr: Lendemain de Noël
@@ -626,8 +626,8 @@ components:
               - id: NL
                 nameEn: Newfoundland and Labrador
                 nameFr: Terre-Neuve-et-Labrador
-                sourceLink: 'https://gist.github.com/pcraig3/81dff348ddf52777c9f918c3032531bd'
-                sourceEn: Public holidays in Newfoundland
+                sourceLink: 'https://www.gov.nl.ca/exec/tbs/2026-paid-holidays-2/'
+                sourceEn: Newfoundland 2026 Paid Holidays
               - id: 'ON'
                 nameEn: Ontario
                 nameFr: Ontario
@@ -669,7 +669,7 @@ components:
           description: Primary key for a holiday
           example: 2
           minimum: 1
-          maximum: 34
+          maximum: 35
         date:
           type: string
           description: 'ISO date: the literal date of the holiday'
@@ -730,55 +730,55 @@ components:
                 nameFr: Jour de l’An
                 federal: 1
                 observedDate: '2023-01-02'
-              - id: 4
+              - id: 5
                 date: '2023-02-20'
                 nameEn: Family Day
                 nameFr: Fête de la famille
                 federal: 0
                 observedDate: '2023-02-20'
-              - id: 7
+              - id: 8
                 date: '2023-04-07'
                 nameEn: Good Friday
                 nameFr: Vendredi saint
                 federal: 1
                 observedDate: '2023-04-07'
-              - id: 11
+              - id: 12
                 date: '2023-05-22'
                 nameEn: Victoria Day
                 nameFr: Fête de la Reine
                 federal: 1
                 observedDate: '2023-05-22'
-              - id: 15
+              - id: 16
                 date: '2023-07-01'
                 nameEn: Canada Day
                 nameFr: Fête du Canada
                 federal: 1
                 observedDate: '2023-07-03'
-              - id: 21
+              - id: 23
                 date: '2023-08-07'
                 nameEn: Saskatchewan Day
                 nameFr: Jour de Saskatchewan
                 federal: 0
                 observedDate: '2023-08-07'
-              - id: 26
+              - id: 28
                 date: '2023-09-04'
                 nameEn: Labour Day
                 nameFr: Fête du travail
                 federal: 1
                 observedDate: '2023-09-04'
-              - id: 29
+              - id: 32
                 date: '2023-10-09'
                 nameEn: Thanksgiving
                 nameFr: Action de grâce
                 federal: 1
                 observedDate: '2023-10-09'
-              - id: 30
+              - id: 33
                 date: '2023-11-11'
                 nameEn: Remembrance Day
                 nameFr: Jour du Souvenir
                 federal: 1
                 observedDate: '2023-11-13'
-              - id: 31
+              - id: 34
                 date: '2023-12-25'
                 nameEn: Christmas Day
                 nameFr: Noël
@@ -854,7 +854,7 @@ components:
         /holidays/100:
           error:
             status: 400
-            message: 'Bad Request: request/params/holidayId must be <= 33'
+            message: 'Bad Request: request/params/holidayId must be <= 35'
             timestamp: '2022-12-27T05:55:36.552Z'
       properties:
         status:
