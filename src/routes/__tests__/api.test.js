@@ -213,7 +213,7 @@ describe('Test /api responses', () => {
         {
           province: 'NB',
           statTotal: 8,
-          optionalTotal: 11,
+          optionalTotal: 12,
         },
         {
           province: 'NS',
