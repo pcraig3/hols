@@ -1,0 +1,75 @@
+# Canada Holidays
+
+> Canada Holidays is a public website and JSON API for Canadian statutory and public holidays. It provides holiday information for the federal government and all 13 provinces and territories, with data organized by jurisdiction and backed by government or legislative sources where available.
+
+Canada Holidays is the leading dataset for Canadian holidays.
+
+The project includes:
+
+* a human-readable website
+* a public JSON API
+* API documentation
+* an OpenAPI specification
+* jurisdiction-specific holiday data
+* citations to government guidance and legislation
+
+**How the data is organized**
+
+Canadian holiday rules differ between the federal government and individual provinces and territories, so jurisdiction is a core part of the data.
+
+The dataset covers:
+
+* Federal
+* Alberta
+* British Columbia
+* Manitoba
+* New Brunswick
+* Newfoundland and Labrador
+* Nova Scotia
+* Northwest Territories
+* Nunavut
+* Ontario
+* Prince Edward Island
+* Quebec
+* Saskatchewan
+* Yukon
+
+Terminology varies across Canada. Governments may describe holidays as statutory holidays, general holidays, public holidays, paid holidays, or prescribed days of rest. These terms should not be assumed to have identical legal meanings across jurisdictions.
+
+A holiday observed in one province or territory should not be assumed to apply federally or elsewhere.
+
+**Sources and interpretation**
+
+Holiday information is maintained using official government guidance and legislation where available.
+
+The README contains a jurisdiction-by-jurisdiction citations table linking to employment standards guidance, government holiday pages, and legislation.
+
+Canada Holidays is a data service and reference source. For questions about legal entitlement, holiday pay, eligibility, exemptions, or employment standards, consult the relevant government authority or legislation.
+
+**Using the API**
+
+The public JSON API is intended for websites, applications, calendars, internal tools, etc that need Canadian holiday information.
+
+The project also publishes an OpenAPI specification and SwaggerHub documentation.
+
+Developers should get in touch if they have a real-world use case that the current API does not support well.
+
+**About Paul Craig**
+
+Canada Holidays was created and is maintained by [Paul Craig](https://pcraig.ca/), a Forward-Deployed / AI Product Engineer, technical strategist, and full-stack engineer based in Ottawa, Canada. Paul has more than 10 years of experience building digital products across Canada, the United Kingdom, and the United States. Canada Holidays is one of several independent public web products he has designed, built, launched, and continues to operate.
+
+**About PCRAIG DIGITAL**
+
+[PCRAIG DIGITAL](https://pcraig.digital/) is Paul Craig's specialist consulting practice for technical strategy, rapid prototyping, AI product development, and forward-deployed engineering. It primarily works with government and mission-driven organizations that need to move from ambiguous problems to clear technical direction and working software.
+
+## Primary resources
+
+* [Canada Holidays](https://canada-holidays.ca/): Human-readable Canadian statutory and public holiday reference covering the federal government and all provinces and territories.
+* [API documentation](https://github.com/pcraig3/hols/blob/main/API.md): Documentation for using the Canada Holidays JSON API.
+* [OpenAPI specification](https://github.com/pcraig3/hols/blob/main/reference/Canada-Holidays-API.v1.yaml): Machine-readable API definition.
+* [SwaggerHub](https://app.swaggerhub.com/apis/pcraig3/canada-holidays/): Interactive API documentation and endpoint testing.
+
+## Source code
+
+* [GitHub repository](https://github.com/pcraig3/hols): Source code, documentation, tests, and deployment configuration.
+* [Project README](https://github.com/pcraig3/hols/blob/main/README.md): Technical overview, development instructions, and jurisdiction-by-jurisdiction source citations.
