@@ -13,3 +13,4 @@ coverage/
 .vscode/
 .can-hols*.json
 /public/js/min/*.min.js
+llm-export*
