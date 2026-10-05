@@ -10,6 +10,29 @@ const html = htm.bind(h)
 
 // Middleware
 
+const getRequestYear = (req) => req.params.year ?? req.query.year
+
+// Middleware to only match routes where :year is exactly four digits.
+// This replaces Express 4 route syntax like ":year(\\d{4})".
+const requireFourDigitYear = (req, res, next) => {
+  if (req.params.year === undefined || /^\d{4}$/.test(req.params.year)) {
+    return next()
+  }
+
+  return next('route')
+}
+
+// Middleware to only match routes where :provinceId is exactly two letters.
+// This replaces the old ":provinceId(\\w{2})" constraint, while tightening
+// it so numbers and underscores are not considered province-shaped values.
+const requireTwoLetterProvinceId = (req, res, next) => {
+  if (/^[A-Za-z]{2}$/.test(req.params.provinceId)) {
+    return next()
+  }
+
+  return next('route')
+}
+
 // takes a function that is a database query
 // this middleware is a convience function so that we don't have to write
 // "try / catch" in all our database query functions
@@ -28,7 +51,7 @@ const dbmw = (cb) => {
     }
 
     const _parseYear = (req) => {
-      const year = parseInt(req.query.year)
+      const year = parseInt(getRequestYear(req))
 
       if (!ALLOWED_YEARS.includes(year)) {
         const region = _parseFederal(req) ? 'federal' : req.params.provinceId
@@ -45,7 +68,7 @@ const dbmw = (cb) => {
       provinceId: req.params.provinceId,
       federal: _parseFederal(req),
       year: _parseYear(req),
-      optional: req.query.optional,
+      optional: res.locals.optional ?? req.query.optional,
     }
 
     try {
@@ -65,7 +88,7 @@ const isProvinceId = (provinceId) => {
 
 // middleware for returning "bad year" errors
 const checkYearErr = (req, res, next) => {
-  const year = parseInt(req.query.year)
+  const year = parseInt(getRequestYear(req))
 
   if (!ALLOWED_YEARS.includes(year)) {
     res.status(400)
@@ -141,7 +164,7 @@ const optionalTrue = (req, res, next) => {
       provinceId === 'QC') &&
     req.query.optional === undefined
   ) {
-    req.query.optional = 'true'
+    res.locals.optional = 'true'
   }
 
   next()
@@ -285,6 +308,9 @@ module.exports = {
   getOgImagePath,
   array2Obj,
   dbmw,
+  getRequestYear,
+  requireFourDigitYear,
+  requireTwoLetterProvinceId,
   isProvinceId,
   checkProvinceIdErr,
   checkYearErr,
