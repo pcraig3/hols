@@ -5,12 +5,13 @@ const { ALLOWED_YEARS } = require('../config/vars.config')
 const renderPage = require('../pages/_document.js')
 const {
   dbmw,
+  getRequestYear,
+  requireFourDigitYear,
   checkProvinceIdErr,
   checkYearErr,
   checkRedirectProvinceId,
   checkRedirectYear,
   optionalTrue,
-  param2query,
   nextHoliday,
   pe2pei,
 } = require('../utils')
@@ -24,9 +25,8 @@ router.get('/', checkRedirectYear, dbmw(getHolidaysWithProvinces), (req, res) =>
   const holidays = res.locals.rows
   const nextHol = nextHoliday(holidays)
 
-  const meta = `Canada’s next stat holiday is ${getMeta(nextHol)}. See all ${
-    holidays.length
-  } statutory holidays in Canada in ${year}.`
+  const meta = `Canada’s next stat holiday is ${getMeta(nextHol)}. See all ${holidays.length
+    } statutory holidays in Canada in ${year}.`
 
   return res.send(
     renderPage({
@@ -45,13 +45,13 @@ router.get('/', checkRedirectYear, dbmw(getHolidaysWithProvinces), (req, res) =>
 })
 
 router.get(
-  '/:year(\\d{4})',
-  param2query('year'),
+  '/:year',
+  requireFourDigitYear,
   checkYearErr,
   dbmw(getHolidaysWithProvinces),
   (req, res) => {
     // if the year value isn't in ALLOWED_YEARS, it will be caught by "checkYearErr"
-    const year = ALLOWED_YEARS.find((y) => y === parseInt(req.query.year))
+    const year = ALLOWED_YEARS.find((y) => y === parseInt(getRequestYear(req)))
     const holidays = res.locals.rows
     const meta = `See all ${holidays.length} statutory holidays in Canada in ${year}.`
 
@@ -101,9 +101,8 @@ router.get(
 
     const year = getCurrentHolidayYear(provinceId)
 
-    const meta = `${provinceName}’s next stat holiday is ${getMeta(nextHoliday)}. See all ${
-      holidays.length
-    } statutory holidays in ${provinceName}, Canada in ${year}.`
+    const meta = `${provinceName}’s next stat holiday is ${getMeta(nextHoliday)}. See all ${holidays.length
+      } statutory holidays in ${provinceName}, Canada in ${year}.`
 
     return res.send(
       renderPage({
@@ -135,8 +134,8 @@ router.get(
 )
 
 router.get(
-  '/provinces/:provinceId/:year(\\d{4})',
-  param2query('year'),
+  '/provinces/:provinceId/:year',
+  requireFourDigitYear,
   checkProvinceIdErr,
   checkRedirectProvinceId,
   checkYearErr,
@@ -144,7 +143,7 @@ router.get(
   dbmw(getProvincesWithHolidays),
   (req, res) => {
     // if the year value isn't in ALLOWED_YEARS, it will be caught by "checkYearErr"
-    const year = ALLOWED_YEARS.find((y) => y === parseInt(req.query.year))
+    const year = ALLOWED_YEARS.find((y) => y === parseInt(getRequestYear(req)))
     const {
       holidays,
       nameEn: provinceName,
@@ -152,6 +151,7 @@ router.get(
       sourceLink,
       sourceEn,
     } = res.locals.rows[0]
+
     const meta = `See all ${holidays.length} statutory holidays in ${provinceName}, Canada in ${year}.`
 
     return res.send(
@@ -194,9 +194,8 @@ router.get('/federal', checkRedirectYear, dbmw(getHolidaysWithProvinces), (req, 
   const holidays = res.locals.rows
   const nextHol = nextHoliday(holidays)
 
-  const meta = `Canada’s next federal stat holiday is ${getMeta(nextHol)}. See all ${
-    holidays.length
-  } federal statutory holidays in Canada in ${year}.`
+  const meta = `Canada’s next federal stat holiday is ${getMeta(nextHol)}. See all ${holidays.length
+    } federal statutory holidays in Canada in ${year}.`
 
   return res.send(
     renderPage({
@@ -223,13 +222,13 @@ router.get('/federal', checkRedirectYear, dbmw(getHolidaysWithProvinces), (req, 
 })
 
 router.get(
-  '/federal/:year(\\d{4})',
-  param2query('year'),
+  '/federal/:year',
+  requireFourDigitYear,
   checkYearErr,
   dbmw(getHolidaysWithProvinces),
   (req, res) => {
     // if the year value isn't in ALLOWED_YEARS, it will be caught by "checkYearErr"
-    const year = ALLOWED_YEARS.find((y) => y === parseInt(req.query.year))
+    const year = ALLOWED_YEARS.find((y) => y === parseInt(getRequestYear(req)))
     const holidays = res.locals.rows
     const meta = `See all ${holidays.length} federal statutory holidays in Canada in ${year}.`
 
