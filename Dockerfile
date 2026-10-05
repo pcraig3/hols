@@ -7,7 +7,12 @@ ENV GITHUB_SHA=$GITHUB_SHA_ARG
 WORKDIR /app
 COPY . .
 
-RUN npm install --production --silent
+RUN apk add --no-cache --virtual .build-deps \
+      build-base \
+      python3 \
+      py3-setuptools \
+  && npm ci --omit=dev \
+  && apk del .build-deps
 
 RUN npm run build
 
