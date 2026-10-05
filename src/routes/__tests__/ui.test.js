@@ -565,24 +565,26 @@ describe('Test ui responses', () => {
 
       const yearPaths = ['', '/2021', '/1000']
       yearPaths.map((yearPath) => {
-        test(`${!yearPath
+        const yearDescription = !yearPath
           ? ''
           : yearPath.startsWith('/1')
             ? `and an invalid year ("${yearPath}") `
             : `and a good year ("${yearPath}") `
-          }it should return the h1, title, and meta tag`, async () => {
-            const response = await request(app).get(`/provinces/pangea${yearPath}`)
-            const $ = cheerio.load(response.text)
-            expect($('h1').text()).toEqual('400')
-            expect($('p').text()).toEqual(
-              'Error: No province with id “pangea”. Accepted province IDs are: [AB, BC, MB, NB, NL, NS, NT, NU, ON, PE, QC, SK, YT].',
-            )
-            expect($('title').text()).toEqual('Error: 400 — Canada Holidays')
-            expect($('meta[name="description"]').attr('content')).toEqual(
-              'Error: No province with id “pangea”',
-            )
-            expect($('link[rel="canonical"]').length).toBe(0)
-          })
+
+        test(`${yearDescription}it should return the h1, title, and meta tag`, async () => {
+          const response = await request(app).get(`/provinces/pangea${yearPath}`)
+          const $ = cheerio.load(response.text)
+
+          expect($('h1').text()).toEqual('400')
+          expect($('p').text()).toEqual(
+            'Error: No province with id “pangea”. Accepted province IDs are: [AB, BC, MB, NB, NL, NS, NT, NU, ON, PE, QC, SK, YT].',
+          )
+          expect($('title').text()).toEqual('Error: 400 — Canada Holidays')
+          expect($('meta[name="description"]').attr('content')).toEqual(
+            'Error: No province with id “pangea”',
+          )
+          expect($('link[rel="canonical"]').length).toBe(0)
+        })
       })
       test('it should return the h1, title, and meta tag', async () => {
         const response = await request(app).get('/provinces/pangea')
