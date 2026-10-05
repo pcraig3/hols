@@ -11,6 +11,7 @@ npm-debug.log
 *.env
 coverage/
 .vscode/
+public/~partytown/
 
 # things we don't want in the container
 Dockerfile

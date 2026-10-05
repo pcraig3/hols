@@ -1,6 +1,6 @@
 const { renderStylesToString } = require('@emotion/server')
 const render = require('preact-render-to-string')
-const { partytownSnippet } = require('@builder.io/partytown/integration')
+const { partytownSnippet } = require('@qwik.dev/partytown/integration')
 const { html, metaIfSHA, getOgImagePath, getCanonical } = require('../utils')
 const { breadcrumb, speakable } = require('../utils/richSnippets')
 const { theme, visuallyHidden } = require('../styles')
@@ -22,29 +22,27 @@ const document = ({
 
         ${ignore ? '<meta name="robots" content="noindex"/>' : ''}
 
-        ${
-          getCanonical({ error, path, provinceId: id, year })
-            ? `<link rel="canonical" href="https://canada-holidays.ca${getCanonical({
-                error,
-                path,
-                provinceId: id,
-                year,
-              })}" />`
-            : ''
-        }
+        ${getCanonical({ error, path, provinceId: id, year })
+      ? `<link rel="canonical" href="https://canada-holidays.ca${getCanonical({
+        error,
+        path,
+        provinceId: id,
+        year,
+      })}" />`
+      : ''
+    }
 
         <!-- open graph tags -->
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://canada-holidays.ca${path}" />
         <meta property="og:title" content="${title}" />
-        <meta property="og:description" content="${
-          meta ? `${meta.split('.')[0]}.` : 'Upcoming statutory holidays in Canada'
-        }" />
+        <meta property="og:description" content="${meta ? `${meta.split('.')[0]}.` : 'Upcoming statutory holidays in Canada'
+    }" />
 
         <meta property="og:image"  content="https://canada-holidays.ca${getOgImagePath({
-          id,
-          region,
-        })}" />
+      id,
+      region,
+    })}" />
         <meta property="og:image:type" content="image/png" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="628" />
@@ -54,9 +52,9 @@ const document = ({
         <meta name="twitter:creator" content="@pcraig3" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:image" content="https://canada-holidays.ca${getOgImagePath({
-          id,
-          region,
-        })}" />
+      id,
+      region,
+    })}" />
 
         <title>${title}</title>
 
@@ -79,12 +77,11 @@ const document = ({
 
         <link rel="preconnect" href="//googletagmanager.com" crossorigin>
 
-        ${
-          process.env.NODE_ENV === 'production'
-            ? `<script type="text/partytown" src="https://www.googletagmanager.com/gtag/js?id=${ga4Id}"></script>
+        ${process.env.NODE_ENV === 'production'
+      ? `<script type="text/partytown" src="https://www.googletagmanager.com/gtag/js?id=${ga4Id}"></script>
               <script type="text/partytown">${ga4}</script>`
-            : ''
-        }
+      : ''
+    }
 
         <meta name="application-name" content="${title}" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -162,28 +159,25 @@ const document = ({
 
           ${printStyles}
         </style>
-        ${
-          richSnippets
-            ? `<!-- rich snippets 💰✂️ -->
+        ${richSnippets
+      ? `<!-- rich snippets 💰✂️ -->
               <script type="application/ld+json">
                 [
                   ${JSON.stringify(breadcrumb({ region }))}${richSnippets.length === 3 ? ',' : ''}
-                  ${
-                    richSnippets.length === 3
-                      ? `${JSON.stringify(speakable({ region, path }))}`
-                      : ''
-                  }
+                  ${richSnippets.length === 3
+        ? `${JSON.stringify(speakable({ region, path }))}`
+        : ''
+      }
                 ]
               </script>`
-            : ''
-        }
+      : ''
+    }
 
         <!-- google adsense -->
-        ${
-          process.env.NODE_ENV === 'production'
-            ? '<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3638315231131289" crossorigin="anonymous"></script>'
-            : ''
-        }
+        ${process.env.NODE_ENV === 'production'
+      ? '<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3638315231131289" crossorigin="anonymous"></script>'
+      : ''
+    }
       </head>
       <body id="body" class="no-js">
         <script>
