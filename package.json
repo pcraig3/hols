@@ -33,7 +33,7 @@
     "compression": "^1.8.2",
     "cors": "^2.8.5",
     "date-fns": "^4.1.0",
-    "express": "^4.22.3",
+    "express": "^5.2.1",
     "express-openapi-validator": "^5.6.0",
     "helmet": "^8.3.0",
     "htm": "^3.1.0",

@@ -192,14 +192,6 @@ const getCanonical = ({ error, path, provinceId, year }) => {
   return path
 }
 
-// middleware to copy a request parameter into req.query
-const param2query = (param) => {
-  return (req, res, next) => {
-    req.query[param] = req.params[param]
-    next()
-  }
-}
-
 // return a meta tag if a GITHUB_SHA environment variable exists
 const metaIfSHA = () =>
   process.env.GITHUB_SHA &&
@@ -318,7 +310,6 @@ module.exports = {
   checkRedirectProvinceId,
   optionalTrue,
   getCanonical,
-  param2query,
   nextHoliday,
   upcomingHolidays,
   pe2pei,

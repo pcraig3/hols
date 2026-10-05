@@ -267,8 +267,9 @@ router.get('/provinces', dbmw(getProvinces), (req, res) => {
 
 router.post('/provinces', (req, res) => {
   let url = '/'
-  const region = req.body.region || ''
-  const year = parseInt(req.body.year)
+  const body = req.body || {}
+  const region = body.region || ''
+  const year = parseInt(body.year)
   const GOOD_YEARS = ALLOWED_YEARS.filter((y) => y !== getCurrentHolidayYear())
 
   switch (region) {
@@ -383,7 +384,7 @@ router.get('/add-holidays-to-calendar', dbmw(getProvinces), (req, res) => {
   )
 })
 
-router.get('*', (req, res) => {
+router.get('/*splat', (req, res) => {
   res.status(404)
   throw new createError(404, 'Oopsie daisy. Maybe head back to the home page? 👇')
 })

@@ -68,7 +68,7 @@ describe('Test /api responses', () => {
     test('it should return 200', async () => {
       const response = await request(app).get('/api/v1/spec')
       expect(response.statusCode).toBe(200)
-      expect(response.headers['content-type']).toEqual('text/yaml; charset=UTF-8')
+      expect(response.headers['content-type']).toEqual('text/yaml; charset=utf-8')
       expect(response.text).toMatch(/openapi: 3.0.0/)
     })
   })
