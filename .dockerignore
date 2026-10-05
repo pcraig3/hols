@@ -12,6 +12,7 @@ npm-debug.log
 coverage/
 .vscode/
 public/~partytown/
+gha-creds-*.json
 
 # things we don't want in the container
 Dockerfile
