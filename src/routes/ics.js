@@ -2,7 +2,13 @@ const express = require('express')
 const router = express.Router()
 const ics = require('ics')
 const createError = require('http-errors')
-const { dbmw, isProvinceId, param2query } = require('../utils/index')
+const {
+  dbmw,
+  getRequestYear,
+  isProvinceId,
+  requireFourDigitYear,
+  requireTwoLetterProvinceId,
+} = require('../utils/index')
 const { getCurrentHolidayYear } = require('../dates/index')
 const { ALLOWED_YEARS } = require('../config/vars.config')
 const {
@@ -66,9 +72,8 @@ const downloadICS = ({
 
     if (contentDisposition) {
       res.set({
-        'Content-disposition': `attachment; filename=canada-holidays-${
-          modifier ? `${modifier}-` : ''
-        }${year}.ics`,
+        'Content-disposition': `attachment; filename=canada-holidays-${modifier ? `${modifier}-` : ''
+          }${year}.ics`,
       })
     }
 
@@ -82,15 +87,15 @@ const _isBadYear = (year) => {
 
 const _getParams = (req, res) => {
   return {
-    year: req.query.year || res.locals.year,
+    year: getRequestYear(req) || res.locals.year,
     provinceId: req.params.provinceId,
     contentDisposition: req.query.cd && req.query.cd !== 'false' ? true : false,
   }
 }
 
 router.get(
-  ['/ics', '/ics/:year(\\d{4})'],
-  param2query('year'),
+  ['/ics', '/ics/:year'],
+  requireFourDigitYear,
   dbmw(getHolidaysWithProvinces),
   (req, res) => {
     let { year, contentDisposition } = _getParams(req, res)
@@ -103,8 +108,8 @@ router.get(
 )
 
 router.get(
-  ['/ics/federal', '/ics/federal/:year(\\d{4})'],
-  param2query('year'),
+  ['/ics/federal', '/ics/federal/:year'],
+  requireFourDigitYear,
   dbmw(getHolidaysWithProvinces),
   (req, res) => {
     let { year, contentDisposition } = _getParams(req, res)
@@ -121,8 +126,9 @@ router.get(
 )
 
 router.get(
-  ['/ics/:provinceId(\\w{2})', '/ics/:provinceId(\\w{2})/:year(\\d{4})'],
-  param2query('year'),
+  ['/ics/:provinceId', '/ics/:provinceId/:year'],
+  requireTwoLetterProvinceId,
+  requireFourDigitYear,
   dbmw(getHolidaysWithProvinces),
   (req, res) => {
     let { year, provinceId, contentDisposition } = _getParams(req, res)

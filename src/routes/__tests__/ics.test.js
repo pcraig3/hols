@@ -36,8 +36,7 @@ describe('Test ics responses', () => {
         const response = await request(app).get(`/ics${path}?cd=true`)
         expect(response.statusCode).toBe(200)
         expect(response.headers['content-disposition']).toEqual(
-          `attachment; filename=canada-holidays-${
-            path ? `${path.substring(1)}-` : ''
+          `attachment; filename=canada-holidays-${path ? `${path.substring(1)}-` : ''
           }${currentYear}.ics`,
         )
       })
@@ -63,12 +62,6 @@ describe('Test ics responses', () => {
     })
 
     ALLOWED_YEARS.map((goodYear) => {
-      test(`it should return 200 for supported year "/ics/${goodYear}"`, async () => {
-        const response = await request(app).get(`/ics/${goodYear}`)
-        expect(response.statusCode).toBe(200)
-        expect(response.headers['content-disposition']).toBeUndefined()
-      })
-
       test(`it should return 200 for supported year "/ics/${goodYear}"`, async () => {
         const response = await request(app).get(`/ics/${goodYear}`)
         expect(response.statusCode).toBe(200)
@@ -122,6 +115,33 @@ describe('Test ics responses', () => {
         })
       })
     })
+  })
+
+  describe('Test /ics/:provinceId response', () => {
+    test('it should accept lowercase province IDs', async () => {
+      const response = await request(app).get('/ics/ab')
+      expect(response.statusCode).toBe(200)
+    })
+
+    test('it should redirect an unsupported two-letter province ID', async () => {
+      const response = await request(app).get('/ics/BA')
+      expect(response.statusCode).toBe(302)
+      expect(response.headers.location).toBe('/provinces/BA')
+    })
+
+    const INVALID_PROVINCE_IDS = ['A1', 'A_']
+
+    INVALID_PROVINCE_IDS.map((provinceId) => {
+      test(`it should return 404 for badly formatted province ID "/ics/${provinceId}"`, async () => {
+        const response = await request(app).get(`/ics/${provinceId}`)
+        expect(response.statusCode).toBe(404)
+      })
+    })
+  })
+
+  test('it should return 404 for a badly formatted province ID with a year', async () => {
+    const response = await request(app).get(`/ics/A1/${ALLOWED_YEARS[0]}`)
+    expect(response.statusCode).toBe(404)
   })
 
   describe('Test /ics/fake response', () => {
