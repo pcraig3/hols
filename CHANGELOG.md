@@ -5,6 +5,21 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.31.2] - 2026-10-05
+
+### Changed
+
+- Updated to Express 5, which is a breaking change
+  - Note that there are no functional changes for users
+- Add python deps to Dockerfile after updating the better-sqlite3 library
+  - Similarly, no functional changes for users
+
+## [3.31.1] - 2026-09-23
+
+### Added
+
+- Added an llms.txt
+
 ## [3.31.0] - 2026-06-30
 
 ### Changed
