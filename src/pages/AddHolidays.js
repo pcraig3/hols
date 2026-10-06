@@ -5,7 +5,6 @@ const Layout = require('../components/Layout.js')
 const Content = require('../components/Content.js')
 const SummaryTable = require('../components/SummaryTable.js')
 const CalButton = require('../components/CalButton.js')
-const { getCurrentHolidayYear } = require('../dates')
 
 const headerStyles = css`
   h2 {
@@ -49,15 +48,14 @@ const summaryTableStylesButtons = css`
   }
 `
 
-const createRows = ({ provinces, year }) => {
+const createRows = ({ provinces }) => {
   return provinces.map((p) => {
     return {
       key: p.nameEn,
       value: CalButton({
-        year,
         provinceId: p.id,
         text: `Get ${p.id} holidays`,
-        download: true,
+        query: 'cd=true',
         eventName: 'page-download-holidays',
       }),
       className: summaryTableStylesButtons,
@@ -84,40 +82,40 @@ const AddHolidays = ({ data: { provinces, year } }) => {
         <${SummaryTable}
           title="Stream Canadian statutory holidays"
           rows=${[
-            {
-              key: 'Canada',
-              value: html`<a href="https://canada-holidays.ca/ics?cd=true"
+      {
+        key: 'Canada',
+        value: html`<a href="https://canada-holidays.ca/ics"
                 >https://canada-holidays.ca/ics</a
               >`,
-              className: summaryTableStylesUrls,
-            },
-            {
-              key: 'Alberta',
-              value: html`<a href="https://canada-holidays.ca/ics/AB?cd=true"
+        className: summaryTableStylesUrls,
+      },
+      {
+        key: 'Alberta',
+        value: html`<a href="https://canada-holidays.ca/ics/AB"
                 >https://canada-holidays.ca/ics/AB</a
               >`,
-              className: summaryTableStylesUrls,
-            },
-            {
-              key: 'Ontario',
-              value: html`<a href="https://canada-holidays.ca/ics/ON?cd=true"
+        className: summaryTableStylesUrls,
+      },
+      {
+        key: 'Ontario',
+        value: html`<a href="https://canada-holidays.ca/ics/ON"
                 >https://canada-holidays.ca/ics/ON</a
               >`,
-              className: summaryTableStylesUrls,
-            },
-            {
-              key: 'etc.',
-              value: html`https://canada-holidays.ca/ics/<code>[regionID]</code>`,
-              className: summaryTableStylesUrls,
-            },
-          ]}
+        className: summaryTableStylesUrls,
+      },
+      {
+        key: 'etc.',
+        value: html`https://canada-holidays.ca/ics/<code>[regionID]</code>`,
+        className: summaryTableStylesUrls,
+      },
+    ]}
         >
           <h2>Import holidays with “remote calendar” URL</h2>
 
           <p>
             If you use Outlook, iCal, or Google Calendar, you can import holidays directly from a
-            URL. Holidays for ${year} will be added immediately and ${year + 1}’s will be added
-            automatically before the end of the year.
+            URL. Holidays for ${year}—${year + 1} will be added immediately. Holidays for ${year + 2}
+will be added automatically toward the end of ${year}.
           </p>
 
           <p>
@@ -144,17 +142,16 @@ const AddHolidays = ({ data: { provinces, year } }) => {
         <${SummaryTable}
           title="Download all Canadian statutory holidays"
           rows=${[
-            {
-              key: 'Canada',
-              value: CalButton({
-                year,
-                text: 'Get all holidays',
-                download: true,
-                eventName: 'page-download-holidays',
-              }),
-              className: summaryTableStylesButtons,
-            },
-          ]}
+      {
+        key: 'Canada',
+        value: CalButton({
+          text: 'Get all holidays',
+          query: 'cd=true',
+          eventName: 'page-download-holidays',
+        }),
+        className: summaryTableStylesButtons,
+      },
+    ]}
         >
           <h3>Download all Canadian <span class="visuallyHidden">statutory</span> holidays</h3>
           <p>For the Canadian completist.</p>
@@ -163,18 +160,17 @@ const AddHolidays = ({ data: { provinces, year } }) => {
         <${SummaryTable}
           title="Download federally-regulated statutory holidays"
           rows=${[
-            {
-              key: 'Federal holidays',
-              value: CalButton({
-                year,
-                text: 'Get federal holidays',
-                federal: true,
-                download: true,
-                eventName: 'page-download-holidays',
-              }),
-              className: summaryTableStylesButtons,
-            },
-          ]}
+      {
+        key: 'Federal holidays',
+        value: CalButton({
+          text: 'Get federal holidays',
+          federal: true,
+          query: 'cd=true',
+          eventName: 'page-download-holidays',
+        }),
+        className: summaryTableStylesButtons,
+      },
+    ]}
         >
           <h3>
             Download federally-regulated <span class="visuallyHidden">statutory</span> holidays
@@ -186,7 +182,7 @@ const AddHolidays = ({ data: { provinces, year } }) => {
           </p>
         <//>
 
-        <${SummaryTable} title="Regional holidays" rows=${createRows({ provinces, year })}>
+        <${SummaryTable} title="Regional holidays" rows=${createRows({ provinces })}>
           <h3>Download regional <span class="visuallyHidden">statutory</span> holidays</h3>
           <p>For regular folks or secessionists.</p>
         <//>
@@ -200,8 +196,8 @@ const AddHolidays = ({ data: { provinces, year } }) => {
         <p>Adding holidays to your calendar is easy.</p>
         <ol>
           <li>
-            Clicking a button on this page will download an <code>.ics</code> file for
-            ${' '}${getCurrentHolidayYear()}
+              Clicking a button on this page will download an <code>.ics</code> file with all holidays in
+              ${' '}${year} and ${year + 1}
           </li>
           <li>Double-click the file (or drag it into your preferred calendar)</li>
           <li>Confirm you want to import ’em</li>
