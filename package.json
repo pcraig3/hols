@@ -30,7 +30,7 @@
     "@emotion/css": "^11.13.5",
     "@emotion/server": "^11.11.0",
     "@jsbits/easter-day": "^1.0.1",
-    "@qwik.dev/partytown": "^1.0.2",
+    "@qwik.dev/partytown": "^1.0.3",
     "compression": "^1.8.2",
     "cors": "^2.8.5",
     "date-fns": "^4.1.0",
@@ -51,7 +51,7 @@
   },
   "devDependencies": {
     "cheerio": "^1.1.2",
-    "eslint": "^10.13.0",
+    "eslint": "^10.14.0",
     "globals": "^17.13.0",
     "jest": "^30.5.2",
     "nodemon": "^3.1.11",
