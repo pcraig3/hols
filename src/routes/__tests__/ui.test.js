@@ -453,6 +453,29 @@ describe('Test ui responses', () => {
         )
         expect($('link[rel="canonical"]').attr('href')).toEqual('https://canada-holidays.ca/about')
       })
+
+      test.each(['/en/about', '/fr/a-propos'])(
+        'it should return 200 for %s',
+        async (path) => {
+          const response = await request(app).get(path)
+          const $ = cheerio.load(response.text)
+
+          expect(response.statusCode).toBe(200)
+          expect($('h1').text()).toEqual('About')
+        },
+      )
+
+      test.each([
+        '/fr/about',
+        '/en/a-propos',
+        '/fr/provinces',
+        '/en/provinces',
+        '/fr/feedback',
+      ])('it should return 404 for untranslated route %s', async (path) => {
+        const response = await request(app).get(path)
+
+        expect(response.statusCode).toBe(404)
+      })
     })
 
     describe('Test /feedback response', () => {

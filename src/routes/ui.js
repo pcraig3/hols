@@ -326,7 +326,7 @@ router.get('/optional-holidays-in-canada', (req, res) => {
   )
 })
 
-router.get('/about', dbmw(getHolidaysWithProvinces), (req, res) => {
+const renderAbout = (locale) => (req, res) => {
   const nextHol = nextHoliday(res.locals.rows)
 
   return res.send(
@@ -337,10 +337,13 @@ router.get('/about', dbmw(getHolidaysWithProvinces), (req, res) => {
         meta: 'Check my sources, use the API, get in touch, etc.',
         path: req.path,
       },
-      props: { data: { nextHoliday: nextHol } },
+      props: { data: { nextHoliday: nextHol, locale } },
     }),
   )
-})
+}
+
+router.get(['/about', '/en/about'], dbmw(getHolidaysWithProvinces), renderAbout('en'))
+router.get('/fr/a-propos', dbmw(getHolidaysWithProvinces), renderAbout('fr'))
 
 router.get('/feedback', (req, res) => {
   return res.send(
