@@ -10,7 +10,7 @@ npm-debug.log
 .DS_Store
 *.env
 coverage/
-.vscode/
+.vscode/*
 .can-hols*.json
 /public/js/min/*.min.js
 llm-export*
