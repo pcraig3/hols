@@ -15,5 +15,14 @@ module.exports = {
       meTitle: 'Me',
       me: 'Hello, my name is <a class="pcraig3" href="{{authorUrl}}" title="Paul Craig" target="_blank" rel="noopener">Paul</a> and I am paying for this site for some reason. <a href="{{githubUrl}}" target="_blank" rel="noopener">Code is on GitHub</a> if you want to ‘borrow’ any of my intellectual property.',
     },
+    feedback: {
+      title: 'Feedback',
+      documentTitle: 'Feedback — Canada Holidays',
+      metaDescription: 'Reprt a problem, tell me I’m cool, or let’s just chat even.',
+      intro: 'If you notice any wrong info or weird layouts, please get in touch. You’ll be helping lots of people out b/c of how crazy good my <abbr title="Search Engine Optimization">SEO</abbr> is.',
+      support: 'On the other hand, if you <span role="img" aria-label="heart">❤️</span> my site and want to support me on Patreon, we can figure that out as well.',
+      emailPrompt: 'Email me pls',
+    },
+
   },
 }
