@@ -9,11 +9,25 @@ const { fontStyles, printStyles, ga4, ga4Id } = require('../headStyles')
 const document = ({
   title,
   content,
-  docProps: { id, meta, path, region, richSnippets, year, error, ignore },
+  docProps: {
+    id,
+    meta,
+    path,
+    region,
+    richSnippets,
+    year,
+    error,
+    ignore,
+    locale = 'en',
+    canonicalPath,
+    alternatePaths,
+  },
 }) => {
+  const canonical = canonicalPath ?? getCanonical({ error, path, provinceId: id, year })
+
   return `
     <!DOCTYPE html>
-    <html lang="en" id="html">
+    <html lang="${locale}" id="html">
       <head>
         ${metaIfSHA() || ''}
         <meta charset="utf-8" />
@@ -22,19 +36,24 @@ const document = ({
 
         ${ignore ? '<meta name="robots" content="noindex"/>' : ''}
 
-        ${getCanonical({ error, path, provinceId: id, year })
-      ? `<link rel="canonical" href="https://canada-holidays.ca${getCanonical({
-        error,
-        path,
-        provinceId: id,
-        year,
-      })}" />`
-      : ''
-    }
+        ${canonical
+          ? `<link rel="canonical" href="https://canada-holidays.ca${canonical}" />`
+          : ''
+        }
+
+        ${alternatePaths
+          ? Object.entries(alternatePaths)
+              .map(
+                ([lang, url]) =>
+                  `<link rel="alternate" hreflang="${lang}" href="https://canada-holidays.ca${url}" />`,
+              )
+              .join('\n        ')
+          : ''
+        }
 
         <!-- open graph tags -->
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://canada-holidays.ca${path}" />
+        <meta property="og:url" content="https://canada-holidays.ca${canonicalPath ?? path}" />
         <meta property="og:title" content="${title}" />
         <meta property="og:description" content="${meta ? `${meta.split('.')[0]}.` : 'Upcoming statutory holidays in Canada'
     }" />
