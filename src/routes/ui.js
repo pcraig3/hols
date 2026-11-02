@@ -2,6 +2,7 @@ const express = require('express')
 const router = express.Router()
 const createError = require('http-errors')
 const { ALLOWED_YEARS } = require('../config/vars.config')
+const { pathFor, alternatePathsFor } = require('../config/routes.config')
 const renderPage = require('../pages/_document.js')
 const {
   dbmw,
@@ -327,12 +328,6 @@ router.get('/optional-holidays-in-canada', (req, res) => {
   )
 })
 
-const aboutAlternatePaths = {
-  'en-CA': '/about',
-  'fr-CA': '/fr/a-propos',
-  'x-default': '/about',
-}
-
 const renderAbout = (locale) => (req, res) => {
   const nextHol = nextHoliday(res.locals.rows)
   const t = getTranslator(locale)
@@ -345,29 +340,55 @@ const renderAbout = (locale) => (req, res) => {
         meta: t('pages.about.metaDescription'),
         path: req.path,
         locale,
-        canonicalPath: locale === 'fr' ? '/fr/a-propos' : '/about',
-        alternatePaths: aboutAlternatePaths,
+        canonicalPath: pathFor('about', { locale }),
+        alternatePaths: alternatePathsFor('about'),
       },
       props: { data: { nextHoliday: nextHol, locale } },
     }),
   )
 }
 
-router.get(['/about', '/en/about'], dbmw(getHolidaysWithProvinces), renderAbout('en'))
-router.get('/fr/a-propos', dbmw(getHolidaysWithProvinces), renderAbout('fr'))
+router.get(
+  [pathFor('about'), `/en${pathFor('about')}`],
+  dbmw(getHolidaysWithProvinces),
+  renderAbout('en'),
+)
 
-router.get('/feedback', (req, res) => {
+router.get(
+  pathFor('about', { locale: 'fr' }),
+  dbmw(getHolidaysWithProvinces),
+  renderAbout('fr'),
+)
+
+
+const renderFeedback = (locale) => (req, res) => {
+  const t = getTranslator(locale)
+
   return res.send(
     renderPage({
       pageComponent: 'Feedback',
-      title: 'Feedback — Canada Holidays',
+      title: t('pages.feedback.documentTitle'),
       docProps: {
-        meta: 'Reprt a problem, tell me I’m cool, or let’s just chat even.',
+        meta: t('pages.feedback.metaDescription'),
         path: req.path,
+        locale,
+        canonicalPath: pathFor('feedback', { locale }),
+        alternatePaths: alternatePathsFor('feedback'),
       },
+      props: { data: { locale } },
     }),
   )
-})
+}
+
+router.get(
+  [pathFor('feedback'), `/en${pathFor('feedback')}`],
+  renderFeedback('en'),
+)
+
+router.get(
+  pathFor('feedback', { locale: 'fr' }),
+  renderFeedback('fr'),
+)
 
 router.get('/sources', dbmw(getProvinces), (req, res) => {
   return res.send(

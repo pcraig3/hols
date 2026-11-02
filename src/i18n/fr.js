@@ -15,5 +15,13 @@ module.exports = {
       meTitle: 'Moi',
       me: 'Bonjour, je m’appelle <a class="pcraig3" href="{{authorUrl}}" title="Paul Craig" target="_blank" rel="noopener">Paul</a> et, pour une raison que j’ignore, je paie pour ce site. <a href="{{githubUrl}}" target="_blank" rel="noopener">Le code est sur GitHub</a> si vous voulez « emprunter » un peu de ma propriété intellectuelle.',
     },
+    feedback: {
+      title: 'Commentaires',
+      documentTitle: 'Commentaires — Canada Holidays',
+      metaDescription: 'Signlez une erreur, faites-moi un compliment ou envoyez-moi simplement un message.',
+      intro: 'Si vous remarquez des informations erronées ou une mise en page bizarre, faites-moi signe. Vous aiderez plein de monde, tellement mon <abbr title="Optimisation pour les moteurs de recherche">SEO</abbr> est incroyablement bon.',
+      support: 'D’un autre côté, si vous <span role="img" aria-label="aimez">❤️</span> mon site et souhaitez me soutenir sur Patreon, on peut aussi s’arranger.',
+      emailPrompt: 'Envoyez-moi un courriel, svp',
+    },
   },
 }

@@ -531,16 +531,37 @@ describe('Test ui responses', () => {
         expect(response.statusCode).toBe(200)
       })
 
-      test('it should return the h1, title, meta tag, and canonical link', async () => {
-        const response = await request(app).get('/feedback')
+      test.each([
+        ['/feedback', 'en', 'Feedback', '/feedback'],
+        ['/en/feedback', 'en', 'Feedback', '/feedback'],
+        ['/fr/commentaires', 'fr', 'Commentaires', '/fr/commentaires'],
+      ])('renders localized Feedback at %s', async (path, locale, heading, canonical) => {
+        const response = await request(app).get(path)
         const $ = cheerio.load(response.text)
-        expect($('h1').text()).toEqual('Feedback')
-        expect($('title').text()).toEqual('Feedback — Canada Holidays')
-        expect($('meta[name="description"]').attr('content')).toEqual(
-          'Reprt a problem, tell me I’m cool, or let’s just chat even.',
+
+        expect(response.statusCode).toBe(200)
+        expect($('html').attr('lang')).toBe(locale)
+        expect($('h1').text()).toBe(heading)
+
+        expect($('link[rel="canonical"]').attr('href')).toBe(
+          `https://canada-holidays.ca${canonical}`,
         )
-        expect($('link[rel="canonical"]').attr('href')).toEqual(
+
+        expect($('link[hreflang="en-CA"]').attr('href')).toBe(
           'https://canada-holidays.ca/feedback',
+        )
+
+        expect($('link[hreflang="fr-CA"]').attr('href')).toBe(
+          'https://canada-holidays.ca/fr/commentaires',
+        )
+
+        expect($('link[hreflang="x-default"]').attr('href')).toBe(
+          'https://canada-holidays.ca/feedback',
+        )
+
+        // The email-obfuscation markup must remain intact.
+        expect($('.email--swap').attr('data-email')).toBe(
+          'cGF1bEBwY3JhaWcuY2E/c3ViamVjdD1Tb21ldGhpbmcgaXMgVVAgd2l0aCBjYW5hZGEtaG9saWRheXMuY2E=',
         )
       })
     })
