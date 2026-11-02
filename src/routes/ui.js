@@ -17,6 +17,7 @@ const {
 } = require('../utils')
 const { getProvinces, getHolidaysWithProvinces, getProvincesWithHolidays } = require('../queries')
 const { displayDate, getCurrentHolidayYear } = require('../dates')
+const { getTranslator } = require('../i18n')
 
 const getMeta = (holiday) => `${holiday.nameEn} on ${displayDate(holiday.observedDate)}`
 
@@ -326,16 +327,26 @@ router.get('/optional-holidays-in-canada', (req, res) => {
   )
 })
 
+const aboutAlternatePaths = {
+  'en-CA': '/about',
+  'fr-CA': '/fr/a-propos',
+  'x-default': '/about',
+}
+
 const renderAbout = (locale) => (req, res) => {
   const nextHol = nextHoliday(res.locals.rows)
+  const t = getTranslator(locale)
 
   return res.send(
     renderPage({
       pageComponent: 'About',
-      title: 'About — Canada Holidays',
+      title: t('pages.about.documentTitle'),
       docProps: {
-        meta: 'Check my sources, use the API, get in touch, etc.',
+        meta: t('pages.about.metaDescription'),
         path: req.path,
+        locale,
+        canonicalPath: locale === 'fr' ? '/fr/a-propos' : '/about',
+        alternatePaths: aboutAlternatePaths,
       },
       props: { data: { nextHoliday: nextHol, locale } },
     }),

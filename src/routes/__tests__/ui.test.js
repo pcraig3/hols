@@ -477,6 +477,52 @@ describe('Test ui responses', () => {
 
         expect(response.statusCode).toBe(404)
       })
+
+      test.each([
+        [
+          '/about',
+          'en',
+          'About — Canada Holidays',
+          'Check my sources, use the API, get in touch, etc.',
+          '/about',
+        ],
+        [
+          '/en/about',
+          'en',
+          'About — Canada Holidays',
+          'Check my sources, use the API, get in touch, etc.',
+          '/about',
+        ],
+        [
+          '/fr/a-propos',
+          'fr',
+          'À propos — Canada Holidays',
+          'Consultez mes sources, utilisez l’API ou contactez-moi pour en savoir plus.',
+          '/fr/a-propos',
+        ],
+      ])('renders correct metadata for %s', async (path, locale, title, description, canonical) => {
+        const response = await request(app).get(path)
+        const $ = cheerio.load(response.text)
+        const origin = 'https://canada-holidays.ca'
+
+        expect(response.statusCode).toBe(200)
+        expect($('html').attr('lang')).toBe(locale)
+
+        expect($('title').text()).toBe(title)
+        expect($('meta[name="description"]').attr('content')).toBe(description)
+
+        expect($('link[rel="canonical"]').attr('href')).toBe(`${origin}${canonical}`)
+
+        expect($('meta[property="og:url"]').attr('content')).toBe(`${origin}${canonical}`)
+        expect($('meta[property="og:title"]').attr('content')).toBe(title)
+        expect($('meta[property="og:description"]').attr('content')).toBe(description)
+
+        expect($('link[rel="alternate"]')).toHaveLength(3)
+
+        expect($('link[hreflang="en-CA"]').attr('href')).toBe(`${origin}/about`)
+        expect($('link[hreflang="fr-CA"]').attr('href')).toBe(`${origin}/fr/a-propos`)
+        expect($('link[hreflang="x-default"]').attr('href')).toBe(`${origin}/about`)
+      })
     })
 
     describe('Test /feedback response', () => {
