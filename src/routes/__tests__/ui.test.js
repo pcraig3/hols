@@ -454,16 +454,17 @@ describe('Test ui responses', () => {
         expect($('link[rel="canonical"]').attr('href')).toEqual('https://canada-holidays.ca/about')
       })
 
-      test.each(['/en/about', '/fr/a-propos'])(
-        'it should return 200 for %s',
-        async (path) => {
-          const response = await request(app).get(path)
-          const $ = cheerio.load(response.text)
+      test.each([
+        ['/about', 'About'],
+        ['/en/about', 'About'],
+        ['/fr/a-propos', 'À propos'],
+      ])('it should render %s with the correct language', async (path, heading) => {
+        const response = await request(app).get(path)
+        const $ = cheerio.load(response.text)
 
-          expect(response.statusCode).toBe(200)
-          expect($('h1').text()).toEqual('About')
-        },
-      )
+        expect(response.statusCode).toBe(200)
+        expect($('h1').text()).toEqual(heading)
+      })
 
       test.each([
         '/fr/about',

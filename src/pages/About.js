@@ -1,55 +1,59 @@
+
 const { html } = require('../utils')
-const Layout = require('../components/Layout.js')
-const Content = require('../components/Content.js')
+const { getTranslator, getRichTranslator, localizedName } = require('../i18n')
 const { getCurrentHolidayYear } = require('../dates')
 
-const About = ({ data: { nextHoliday } }) =>
-  html`
+const Layout = require('../components/Layout.js')
+const Content = require('../components/Content.js')
+
+const About = ({ data: { nextHoliday, locale = 'en' } }) => {
+  const t = getTranslator(locale)
+  const rich = getRichTranslator(locale)
+
+  return html`
     <${Layout} route="/about">
       <${Content}>
-        <h1>About</h1>
-        <p>
-          Work sucks, I know. But until we get the post-work future we all deserve,${' '}
-          <a href="/">${nextHoliday.nameEn}</a> is what we have to look forward to.
-        </p>
+        <h1>${t('pages.about.title')}</h1>
 
-        <h2>“I want to add holidays to my calendar”</h2>
-        <p>
-          Heck yes you do! And${' '}
-          <a
-            href="/add-holidays-to-calendar"
-            title="you can add Canada’s ${getCurrentHolidayYear()} holidays to your calendar"
-            >you can</a
-          >!
-        </p>
+        <p
+          dangerouslySetInnerHTML=${rich('pages.about.intro', {
+            holidayName: localizedName(nextHoliday, locale),
+            homeUrl: '/',
+          })}
+        />
 
-        <h2>“[Something] is wrong”</h2>
-        <p>Leave me some <a href="/feedback">/feedback</a> and I’ll do my best.</p>
+        <h2>${t('pages.about.calendarTitle')}</h2>
+        <p
+          dangerouslySetInnerHTML=${rich('pages.about.calendar', {
+            calendarUrl: '/add-holidays-to-calendar',
+            year: getCurrentHolidayYear(),
+          })}
+        />
 
-        <h2>“What about Groundhog Day??”</h2>
-        <p>
-          <a href="https://groundhog-day.com" target="_blank">Groundhog Day</a> is arguably the most
-          fun holiday but (regrettably) it is <strong>not</strong> a stat holiday in Canada or the
-          USA.
-        </p>
+        <h2>${t('pages.about.feedbackTitle')}</h2>
+        <p
+          dangerouslySetInnerHTML=${rich('pages.about.feedback', {
+            feedbackUrl: '/feedback',
+          })}
+        />
 
-        <h2>Me</h2>
-        <p>
-          Hello, my name is${' '}
-          <a
-            class="pcraig3"
-            href="https://pcraig.ca"
-            title="Paul Craig"
-            target="_blank"
-            rel="noopener"
-            >Paul</a
-          >${' '} and I am paying for this site for some reason.${' '}
-          <a href="https://github.com/pcraig3/hols" target="_blank" rel="noopener"
-            >Code is on GitHub</a
-          >${' '}if you want to ‘borrow’ any of my intellectual property.
-        </p>
+        <h2>${t('pages.about.groundhogTitle')}</h2>
+        <p
+          dangerouslySetInnerHTML=${rich('pages.about.groundhog', {
+            groundhogUrl: 'https://groundhog-day.com',
+          })}
+        />
+
+        <h2>${t('pages.about.meTitle')}</h2>
+        <p
+          dangerouslySetInnerHTML=${rich('pages.about.me', {
+            authorUrl: 'https://pcraig.ca',
+            githubUrl: 'https://github.com/pcraig3/hols',
+          })}
+        />
       <//>
     <//>
   `
+}
 
 module.exports = About
