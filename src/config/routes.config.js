@@ -8,6 +8,10 @@ const routes = {
     en: '/feedback',
     fr: '/commentaires',
   },
+  sources: {
+    en: '/sources',
+    fr: '/sources',
+  },
 }
 
 const pathFor = (page, { locale = 'en' } = {}) => {
