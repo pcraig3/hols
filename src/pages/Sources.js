@@ -1,6 +1,8 @@
 const { html } = require('../utils')
 const { css } = require('@emotion/css')
 const { theme } = require('../styles')
+const { getTranslator, getRichTranslator, localizedName } = require('../i18n')
+
 const Layout = require('../components/Layout.js')
 const Content = require('../components/Content.js')
 const SummaryTable = require('../components/SummaryTable.js')
@@ -10,6 +12,10 @@ const summaryTableStyles = css`
   .key a {
     color: ${theme.color.grey};
     font-weight: 600;
+  }
+
+  .value a svg {
+    fill: ${theme.color.grey};
   }
 
   @media (${theme.mq.lg}) {
@@ -25,36 +31,42 @@ const summaryTableStyles = css`
   }
 `
 
-const createRows = ({ provinces }) => {
+const createRows = ({ provinces, locale }) => {
   return provinces.map((p) => {
     return {
-      key: html`<a href="/provinces/${p.id}">${p.nameEn}</a>`,
+      key: html`<a href="/provinces/${p.id}">${localizedName(p, locale)}</a>`,
       value: html`<span class="external-link"
-        ><a href="${p.sourceLink}" target="_blank" rel="noopener">${p.sourceEn}<${External} /></a
-      ></span>`,
+        ><a href="${p.sourceLink}" target="_blank" rel="noopener"
+          >${p.sourceEn}<${External} /></a
+        ></span
+      >`,
       className: summaryTableStyles,
     }
   })
 }
 
-const AddHolidays = ({ data: { provinces } }) => {
+const Sources = ({ data: { provinces, locale = 'en' } }) => {
+  const t = getTranslator(locale)
+  const rich = getRichTranslator(locale)
+
   return html`
     <${Layout}>
       <${Content}>
-        <h1>All sources</h1>
-        <p>
-          Canada’s holidays vary by region and industry, so here they are in reasonably friendly
-          formats.
-        </p>
-        <p>
-          (I can also offer <a href="#legislation">unfriendly formats</a> for the holiday scholar.)
-        </p>
+        <h1>${t('pages.sources.title')}</h1>
+
+        <p>${t('pages.sources.intro')}</p>
+
+        <p
+          dangerouslySetInnerHTML=${rich('pages.sources.formatsAside', {
+            legislationAnchorUrl: '#legislation',
+          })}
+        />
 
         <${SummaryTable}
-          title="Federally-regulated industries"
+          title=${t('pages.sources.federalTitle')}
           rows=${[
             {
-              key: html`<a href="/federal">Federal holidays</a>`,
+              key: html`<a href="/federal">${t('pages.sources.federalHolidays')}</a>`,
               value: html`<span class="external-link"
                 ><a
                   href="https://www.tpsgc-pwgsc.gc.ca/remuneration-compensation/services-paye-pay-services/paye-information-pay/vie-life/vie-conge-life-leave/conge-paye-holiday-pay-eng.html"
@@ -66,36 +78,36 @@ const AddHolidays = ({ data: { provinces } }) => {
             },
           ]}
         >
-          <h2>Federally-regulated industries</h2>
-          <p>12 holidays a year, plus Friday afternoons.</p>
+          <h2>${t('pages.sources.federalTitle')}</h2>
+          <p>${t('pages.sources.federalDescription')}</p>
         <//>
 
-        <${SummaryTable} title="Provinces and territories" rows=${createRows({ provinces })}>
-          <h2>Provinces and territories</h2>
-          <p>Made in Canada, assembled by hand in Ottawa.</p>
+        <${SummaryTable}
+          title=${t('pages.sources.provincesTitle')}
+          rows=${createRows({ provinces, locale })}
+        >
+          <h2>${t('pages.sources.provincesTitle')}</h2>
+          <p>${t('pages.sources.provincesDescription')}</p>
         <//>
 
-        <h2 id="legislation" tabindex="-1">Public holiday legislation</h2>
-        <p>
-          If you’re a legal eagle, I’ve collected${' '}
-          <a
-            href="https://github.com/pcraig3/hols#citations"
-            title="Sources (including legislation) on Github"
-            target="_blank"
-            rel="noopener"
-            data-event="true"
-            data-action="all-sources-link"
-            data-label="all-sources-link-canada"
-            >links to the relevant legislation per region</a
-          >. Fill yer boots, as they say.
-        </p>
+        <h2 id="legislation" tabindex="-1">${t('pages.sources.legislationTitle')}</h2>
+
+        <p
+          dangerouslySetInnerHTML=${rich('pages.sources.legislationBody', {
+            legislationUrl: 'https://github.com/pcraig3/hols#citations',
+            legislationLinkTitle: t('pages.sources.legislationLinkTitle'),
+          })}
+        />
 
         <br />
         <br />
-        <span class="bottom-link"><a href="#html" class="up-arrow">Back to top</a></span>
+
+        <span class="bottom-link">
+          <a href="#html" class="up-arrow">${t('pages.sources.backToTop')}</a>
+        </span>
       <//>
     <//>
   `
 }
 
-module.exports = AddHolidays
+module.exports = Sources

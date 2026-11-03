@@ -23,6 +23,21 @@ module.exports = {
       support: 'On the other hand, if you <span role="img" aria-label="heart">❤️</span> my site and want to support me on Patreon, we can figure that out as well.',
       emailPrompt: 'Email me pls',
     },
-
+    sources: {
+      title: 'All sources',
+      documentTitle: 'All sources — Canada Holidays',
+      metaDescription: 'Aggregated sources for Canadian statutory holidays. Canada’s holidays vary by region and industry, so here they are collected in one place.',
+      intro: 'Canada’s holidays vary by region and industry, so here they are in reasonably friendly formats.',
+      formatsAside: '(I can also offer <a href="{{legislationAnchorUrl}}">unfriendly formats</a> for the holiday scholar.)',
+      federalTitle: 'Federally-regulated industries',
+      federalHolidays: 'Federal holidays',
+      federalDescription: '12 holidays a year, plus Friday afternoons.',
+      provincesTitle: 'Provinces and territories',
+      provincesDescription: 'Made in Canada, assembled by hand in Ottawa.',
+      legislationTitle: 'Public holiday legislation',
+      legislationLinkTitle: 'Sources (including legislation) on Github',
+      legislationBody: 'If you’re a legal eagle, I’ve collected <a href="{{legislationUrl}}" title="{{legislationLinkTitle}}" target="_blank" rel="noopener" data-event="true" data-action="all-sources-link" data-label="all-sources-link-canada">links to the relevant legislation per region</a>. Fill yer boots, as they say.',
+      backToTop: 'Back to top',
+    },
   },
 }

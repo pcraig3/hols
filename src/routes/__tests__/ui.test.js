@@ -584,6 +584,49 @@ describe('Test ui responses', () => {
           'https://canada-holidays.ca/sources',
         )
       })
+
+      test.each([
+        ['/en/sources', 'en', 'All sources', 'All sources — Canada Holidays', '/sources'],
+        [
+          '/fr/sources',
+          'fr',
+          'Toutes les sources',
+          'Toutes les sources — Canada Holidays',
+          '/fr/sources',
+        ],
+      ])('renders localized Sources at %s', async (path, locale, heading, title, canonical) => {
+        const response = await request(app).get(path)
+        const $ = cheerio.load(response.text)
+        const origin = 'https://canada-holidays.ca'
+
+        expect(response.statusCode).toBe(200)
+        expect($('html').attr('lang')).toBe(locale)
+        expect($('h1').text()).toBe(heading)
+        expect($('title').text()).toBe(title)
+
+        expect($('link[rel="canonical"]').attr('href')).toBe(`${origin}${canonical}`)
+
+        expect($('link[hreflang="en-CA"]').attr('href')).toBe(`${origin}/sources`)
+        expect($('link[hreflang="fr-CA"]').attr('href')).toBe(`${origin}/fr/sources`)
+        expect($('link[hreflang="x-default"]').attr('href')).toBe(`${origin}/sources`)
+      })
+
+      test('French Sources page preserves legislation link tracking', async () => {
+        const response = await request(app).get('/fr/sources')
+        const $ = cheerio.load(response.text)
+
+        const legislationLink = $('a[data-action="all-sources-link"]')
+
+        expect(legislationLink.length).toBe(1)
+        expect(legislationLink.attr('href')).toBe(
+          'https://github.com/pcraig3/hols#citations',
+        )
+        expect(legislationLink.attr('data-event')).toBe('true')
+        expect(legislationLink.attr('data-label')).toBe('all-sources-link-canada')
+        expect(legislationLink.attr('title')).toBe(
+          'Sources (y compris les lois) sur GitHub',
+        )
+      })
     })
 
     describe('Test /add-holidays-to-calendar response', () => {

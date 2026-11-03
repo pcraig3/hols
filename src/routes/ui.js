@@ -390,19 +390,43 @@ router.get(
   renderFeedback('fr'),
 )
 
-router.get('/sources', dbmw(getProvinces), (req, res) => {
+
+const renderSources = (locale) => (req, res) => {
+  const t = getTranslator(locale)
+
   return res.send(
     renderPage({
       pageComponent: 'Sources',
-      title: 'All sources — Canada Holidays',
+      title: t('pages.sources.documentTitle'),
       docProps: {
-        meta: 'Aggregated sources for Canadian statutory holidays. Canada’s holidays vary by region and industry, so here they are collected in one place.',
+        meta: t('pages.sources.metaDescription'),
         path: req.path,
+        locale,
+        canonicalPath: pathFor('sources', { locale }),
+        alternatePaths: alternatePathsFor('sources'),
       },
-      props: { data: { provinces: res.locals.rows } },
+      props: {
+        data: {
+          provinces: res.locals.rows,
+          locale,
+        },
+      },
     }),
   )
-})
+}
+
+router.get(
+  [pathFor('sources'), `/en${pathFor('sources')}`],
+  dbmw(getProvinces),
+  renderSources('en'),
+)
+
+router.get(
+  pathFor('sources', { locale: 'fr' }),
+  dbmw(getProvinces),
+  renderSources('fr'),
+)
+
 
 router.get('/add-holidays-to-calendar', dbmw(getProvinces), (req, res) => {
   const year = getCurrentHolidayYear()
