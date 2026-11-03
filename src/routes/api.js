@@ -4,9 +4,9 @@ const v1Router = express.Router()
 
 const path = require('path')
 const createError = require('http-errors')
-const renderPage = require('../pages/_document.js')
 const { dbmw } = require('../utils')
 const { getProvincesWithHolidays, getHolidaysWithProvinces } = require('../queries')
+const renderApiPage = require('./api-page')
 
 // Import the express-openapi-validator library
 const OpenApiValidator = require('express-openapi-validator')
@@ -68,18 +68,7 @@ v1Router.get('/', (req, res) => {
   })
 })
 
-apiRouter.get('/', (req, res) => {
-  return res.send(
-    renderPage({
-      pageComponent: 'API',
-      title: 'Canada Holidays API — Canada Holidays',
-      docProps: {
-        meta: 'A free JSON API for Canada’s statutory holidays. Return all holidays or filter by a specific region.',
-        path: req.path,
-      },
-    }),
-  )
-})
+apiRouter.get('/', renderApiPage('en'))
 
 apiRouter.use('/v1', v1Router)
 

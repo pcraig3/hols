@@ -19,6 +19,7 @@ const {
 const { getProvinces, getHolidaysWithProvinces, getProvincesWithHolidays } = require('../queries')
 const { displayDate, getCurrentHolidayYear } = require('../dates')
 const { getTranslator } = require('../i18n')
+const renderApiPage = require('./api-page')
 
 const getMeta = (holiday) => `${holiday.nameEn} on ${displayDate(holiday.observedDate)}`
 
@@ -442,6 +443,10 @@ router.get('/add-holidays-to-calendar', dbmw(getProvinces), (req, res) => {
     }),
   )
 })
+
+router.get(`/en${pathFor('api')}`, renderApiPage('en'))
+
+router.get(pathFor('api', { locale: 'fr' }), renderApiPage('fr'))
 
 router.get('/*splat', (req, res) => {
   res.status(404)
