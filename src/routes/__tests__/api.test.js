@@ -88,6 +88,71 @@ describe('Test /api responses', () => {
         'A free JSON API for Canada’s statutory holidays. Return all holidays or filter by a specific region.',
       )
     })
+
+    test.each([
+      [
+        '/api',
+        'en',
+        'Canada Holidays API',
+        'Canada Holidays API — Canada Holidays',
+        'A free JSON API for Canada’s statutory holidays. Return all holidays or filter by a specific region.',
+        '/api',
+      ],
+      [
+        '/en/api',
+        'en',
+        'Canada Holidays API',
+        'Canada Holidays API — Canada Holidays',
+        'A free JSON API for Canada’s statutory holidays. Return all holidays or filter by a specific region.',
+        '/api',
+      ],
+      [
+        '/fr/api',
+        'fr',
+        'API de Canada Holidays',
+        'API de Canada Holidays — Canada Holidays',
+        'Une API JSON gratuite sur les jours fériés au Canada. Consultez tous les jours fériés ou filtrez-les par région.',
+        '/fr/api',
+      ],
+    ])(
+      'renders localized API documentation at %s',
+      async (path, locale, heading, title, description, canonical) => {
+        const response = await request(app).get(path)
+        const $ = cheerio.load(response.text)
+        const origin = 'https://canada-holidays.ca'
+
+        expect(response.statusCode).toBe(200)
+        expect($('html').attr('lang')).toBe(locale)
+        expect($('h1').text()).toBe(heading)
+        expect($('title').text()).toBe(title)
+
+        expect($('meta[name="description"]').attr('content')).toBe(description)
+        expect($('meta[property="og:title"]').attr('content')).toBe(title)
+        expect($('meta[property="og:url"]').attr('content')).toBe(
+          `${origin}${canonical}`,
+        )
+
+        expect($('link[rel="canonical"]').attr('href')).toBe(
+          `${origin}${canonical}`,
+        )
+
+        expect($('link[hreflang="en-CA"]').attr('href')).toBe(`${origin}/api`)
+        expect($('link[hreflang="fr-CA"]').attr('href')).toBe(`${origin}/fr/api`)
+        expect($('link[hreflang="x-default"]').attr('href')).toBe(`${origin}/api`)
+      },
+    )
+  })
+
+  test.each([
+    '/fr/api/v1/',
+    '/fr/api/v1/holidays',
+    '/fr/api/v1/provinces',
+    '/fr/api/v1/spec',
+    '/en/api/v1/holidays',
+  ])('does not expose a localized JSON API at %s', async (path) => {
+    const response = await request(app).get(path)
+
+    expect(response.statusCode).toBe(404)
   })
 
   test('for /api/v1/* not found path a 404 status', async () => {

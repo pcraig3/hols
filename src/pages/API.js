@@ -1,6 +1,9 @@
 const { html } = require('../utils')
 const { css } = require('@emotion/css')
 const { theme } = require('../styles')
+const { getTranslator, getRichTranslator } = require('../i18n')
+const { pathFor } = require('../config/routes.config')
+
 const Layout = require('../components/Layout.js')
 const Content = require('../components/Content.js')
 const Details = require('../components/Details.js')
@@ -22,114 +25,123 @@ const detailsStyle = css`
   }
 `
 
-const API = () =>
-  html`
+const API = ({ data: { locale = 'en' } = {} }) => {
+  const t = getTranslator(locale)
+  const rich = getRichTranslator(locale)
+
+  const apiUrl = 'https://canada-holidays.ca/api/v1/'
+  const githubUrl = 'https://github.com/pcraig3/hols'
+  const specUrl = `${githubUrl}/blob/main/reference/Canada-Holidays-API.v1.yaml`
+
+  return html`
     <${Layout} route="/api">
       <${Content}>
-        <h1>Canada Holidays API</h1>
-        <p>
-          The ${' '}<a href="https://canada-holidays.ca/api/v1/" target="_blank"
-            >Canada Holidays API</a
-          >${' '}lists all 32 public holidays for all 13 provinces and territories in Canada,
-          including federal holidays.
-        </p>
+        <h1>${t('pages.api.title')}</h1>
+
+        <p
+          dangerouslySetInnerHTML=${rich('pages.api.intro', {
+            apiUrl,
+          })}
+        />
+
         <p>
           <span aria-hidden="true">👉</span>${' '}
-          <strong
-            ><a class=${linkStyle} href="https://canada-holidays.ca/api/v1/" target="_blank"
-              >https://canada-holidays.ca/api/v1/</a
-            ></strong
-          >
-          ${' '}
+          <strong>
+            <a class=${linkStyle} href=${apiUrl} target="_blank" rel="noopener">
+              ${apiUrl}
+            </a>
+          </strong>
         </p>
-        <h2>Features</h2>
+
+        <h2>${t('pages.api.featuresTitle')}</h2>
+
         <ul>
-          <li>Get all holidays with associated regions</li>
-          <li>Get all regions with associated holidays</li>
-          <li>Get federal holidays</li>
-          <li>Get national holidays</li>
-          <li>Get upcoming (“next”) holiday for each region</li>
-          <li>
-            Get holidays for past/future years: <code>2013</code>, ${' '}⋯${' '},${' '}
-            <code>2026</code>, ${' '}⋯${' '}, <code>2038</code>.
-          </li>
+          <li>${t('pages.api.allHolidays')}</li>
+          <li>${t('pages.api.allRegions')}</li>
+          <li>${t('pages.api.federalHolidays')}</li>
+          <li>${t('pages.api.nationalHolidays')}</li>
+          <li>${t('pages.api.nextHoliday')}</li>
+          <li dangerouslySetInnerHTML=${rich('pages.api.years')} />
         </ul>
+
         <${Details}
-          summary="Plus(!!!) check out all the goodies you get for free"
+          summary=${t('pages.api.extraFeaturesTitle')}
           className=${detailsStyle}
           data-event="true"
           data-label="api-features"
         >
           <ul>
-            <li>It’s free (<span aria-hidden="true">✨</span>)</li>
-            <li>
-              <a href="https://twitter.com/pcraig3" target="_blank" rel="noopener"
-                >Dedicated support channel</a
-              >
-            </li>
-            <li>Kind of bilingual (EN & FR)</li>
-            <li>
-              Basically compliant with the${' '}
-              <a
-                href="https://www.canada.ca/en/government/system/digital-government/modern-emerging-technologies/government-canada-standards-apis.html"
-                target="_blank"
-                >Government of Canada Standards on APIs</a
-              >${' '} (<span aria-hidden="true">🤙</span>)
-            </li>
-            <li>
-              <a href="https://github.com/pcraig3/hols" target="_blank" rel="noopener"
-                >Open source</a
-              >${' '}which is cool if you’re a nerd
-            </li>
-            <li>
-              <a
-                href="https://github.com/pcraig3/hols/blob/main/reference/Canada-Holidays-API.v1.yaml"
-                target="_blank"
-                rel="noopener"
-                >Documented with an OpenAPI spec</a
-              >${' '}which is <em>even more</em> cool for <em>even nerdier</em> nerds
-            </li>
+            <li dangerouslySetInnerHTML=${rich('pages.api.free')} />
+
+            <li
+              dangerouslySetInnerHTML=${rich('pages.api.support', {
+                supportUrl: 'https://twitter.com/pcraig3',
+              })}
+            />
+
+            <li>${t('pages.api.bilingual')}</li>
+
+            <li
+              dangerouslySetInnerHTML=${rich('pages.api.standards', {
+                standardsUrl:
+                  'https://www.canada.ca/en/government/system/digital-government/modern-emerging-technologies/government-canada-standards-apis.html',
+              })}
+            />
+
+            <li
+              dangerouslySetInnerHTML=${rich('pages.api.openSource', {
+                githubUrl,
+              })}
+            />
+
+            <li
+              dangerouslySetInnerHTML=${rich('pages.api.openApi', {
+                specUrl,
+              })}
+            />
           </ul>
         <//>
-        <p>Definitely use it for your billions of dollars mission-critical system.</p>
 
-        <h2>Documentation</h2>
-        <p>
-          There's an OpenAPI spec at${' '}<a
-            href="https://github.com/pcraig3/hols/blob/main/reference/Canada-Holidays-API.v1.yaml"
-            target="_blank"
-            rel="noopener"
-            ><code>Canada-Holidays-API.v1.yaml</code></a
-          >${' '}and a${' '}<a
-            href="https://app.swaggerhub.com/apis/pcraig3/canada-holidays/"
-            target="_blank"
-            rel="noopener"
-            >SwaggerHub</a
-          >${' '}page where you can test the endpoints.
-        </p>
-        <p>
-          There’s also a ${' '}<a
-            title="API documentation"
-            href="https://github.com/pcraig3/hols/blob/main/API.md"
-            target="_blank"
-            rel="noopener"
-            >basic overview on GitHub</a
-          >
-          ${' '}if you’re a “read-the-first-and-last-chapter” kind of person.
-        </p>
+        <p>${t('pages.api.missionCritical')}</p>
 
-        <h2>Citations</h2>
-        <p>
-          I’ve collected references to${' '}<a href="/sources">all the sources</a>${' '}I’m using
-          for each region in Canada, so data returned from the API should all be accurate.
-        </p>
-        <p>Mistaeks do happen, however — <a href="/feedback">lemme know</a> if you spot any.<//>
+        <h2>${t('pages.api.documentationTitle')}</h2>
+
+        <p
+          dangerouslySetInnerHTML=${rich('pages.api.documentation', {
+            specUrl,
+            swaggerUrl: 'https://app.swaggerhub.com/apis/pcraig3/canada-holidays/',
+          })}
+        />
+
+        <p
+          dangerouslySetInnerHTML=${rich('pages.api.githubOverview', {
+            overviewUrl: `${githubUrl}/blob/main/API.md`,
+          })}
+        />
+
+        <h2>${t('pages.api.citationsTitle')}</h2>
+
+        <p
+          dangerouslySetInnerHTML=${rich('pages.api.citations', {
+            sourcesUrl: pathFor('sources', { locale }),
+          })}
+        />
+
+        <p
+          dangerouslySetInnerHTML=${rich('pages.api.mistakes', {
+            feedbackUrl: pathFor('feedback', { locale }),
+          })}
+        />
 
         <br />
         <br />
-        <span class="bottom-link"><a href="#html" class="up-arrow">Back to top</a></span>
+
+        <span class="bottom-link">
+          <a href="#html" class="up-arrow">${t('pages.api.backToTop')}</a>
+        </span>
       <//>
     <//>
   `
+}
 
 module.exports = API

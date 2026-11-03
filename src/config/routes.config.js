@@ -4,6 +4,10 @@ const routes = {
     en: '/about',
     fr: '/a-propos',
   },
+  api: {
+    en: '/api',
+    fr: '/api',
+  },
   feedback: {
     en: '/feedback',
     fr: '/commentaires',
