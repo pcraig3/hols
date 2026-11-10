@@ -8,6 +8,10 @@ const routes = {
     en: '/api',
     fr: '/api',
   },
+  federallyRegulated: {
+    en: '/do-federal-holidays-apply-to-me',
+    fr: '/les-jours-feries-federaux-sappliquent-ils-a-moi',
+  },
   feedback: {
     en: '/feedback',
     fr: '/commentaires',

@@ -1,86 +1,97 @@
+
 const { html } = require('../utils')
+const { getTranslator, getRichTranslator } = require('../i18n')
+
 const Layout = require('../components/Layout.js')
 const Content = require('../components/Content.js')
 
-const FederallyRegulated = () =>
-  html`
+const FederallyRegulated = ({ data: { locale = 'en' } = {} }) => {
+  const t = getTranslator(locale)
+  const rich = getRichTranslator(locale)
+
+  const industriesUrl =
+    locale === 'fr'
+      ? 'https://www.canada.ca/fr/services/emplois/milieu-travail/milieux-reglementation-federale.html'
+      : 'https://www.canada.ca/en/services/jobs/workplace/federally-regulated-industries.html'
+
+  return html`
     <${Layout}>
       <${Content}>
-        <h1>Do federal holidays apply to me?</h1>
+        <h1>${t('pages.federallyRegulated.title')}</h1>
 
-        <p>
-          Probably not, but it depends on your job. Most Canadian workers get provincial holidays
-          off, not federal ones.
-        </p>
+        <p>${t('pages.federallyRegulated.intro')}</p>
+
         <aside>
           <ul>
-            <li>
-              <a href="/provinces">Pick your province or territory</a> to see your next holiday
-            </li>
-            <li>See <a href="/federal">upcoming federal holidays</a></li>
+            <li
+              dangerouslySetInnerHTML=${rich('pages.federallyRegulated.provincesLink', {
+                provincesUrl: '/provinces',
+              })}
+            />
+            <li
+              dangerouslySetInnerHTML=${rich('pages.federallyRegulated.federalLink', {
+                federalUrl: '/federal',
+              })}
+            />
           </ul>
         </aside>
 
-        <h2>Who’s federally regulated?</h2>
-        <p>
-          All jobs in Canada are regulated by <strong>a provincial government</strong> or
-          ${' '}<strong>the federal government</strong>. If your job is regulated by the federal
-          government, you get federal holidays instead of the provincial holidays.
-        </p>
-        <p>
-          Approximately 6% of Canadians work in federally regulated industries. Some examples are:
-        </p>
+        <h2>${t('pages.federallyRegulated.regulatedTitle')}</h2>
+
+        <p
+          dangerouslySetInnerHTML=${rich('pages.federallyRegulated.regulatedIntro')}
+        />
+
+        <p>${t('pages.federallyRegulated.regulatedExamples')}</p>
+
         <ul class="no-space">
-          <li>banks</li>
-          <li>airlines</li>
-          <li>post offices</li>
-          <li>the federal civil service</li>
+          <li>${t('pages.federallyRegulated.banks')}</li>
+          <li>${t('pages.federallyRegulated.airlines')}</li>
+          <li>${t('pages.federallyRegulated.postOffices')}</li>
+          <li>${t('pages.federallyRegulated.civilService')}</li>
         </ul>
-        <p>
-          You can check with the Government of Canada for${' '}
-          <a
-            href="https://www.canada.ca/en/employment-social-development/programs/employment-equity/regulated-industries.html"
-            title="the list of Federally Regulated Businesses and Industries"
-            target="_blank"
-            rel="noopener"
-            >the full list</a
-          >.
-        </p>
 
-        <h2>What’s the difference?</h2>
-        <p>
-          Sometimes, provincial holidays are the same as federal holidays — like Christmas, or New
-          Year’s — but not always.
-        </p>
-        <p>For example, the province of Ontario doesn’t observe Remembrance Day, which means</p>
+        <p
+          dangerouslySetInnerHTML=${rich('pages.federallyRegulated.fullList', {
+            industriesUrl,
+          })}
+        />
+
+        <h2>${t('pages.federallyRegulated.differenceTitle')}</h2>
+
+        <p>${t('pages.federallyRegulated.differenceIntro')}</p>
+
+        <p>${t('pages.federallyRegulated.remembranceIntro')}</p>
+
         <ul>
-          <li>on November 11, post offices are closed but schools are open</li>
+          <li>${t('pages.federallyRegulated.remembranceExample')}</li>
         </ul>
 
-        <p>
-          However, Ontario observes Family Day but the federal government doesn’t. So that means
-        </p>
+        <p>${t('pages.federallyRegulated.familyIntro')}</p>
+
         <ul>
-          <li>on the third Monday in February, schools are closed but post offices will be open</li>
+          <li>${t('pages.federallyRegulated.familyExample')}</li>
         </ul>
 
-        <h2>How can I tell which holidays apply to me?</h2>
-        <p>
-          Most likely you get provincial holidays, but if you’re not sure, you can ask someone you
-          work with or check out${' '}
-          <a
-            href="https://www.canada.ca/en/employment-social-development/programs/employment-equity/regulated-industries.html"
-            target="_blank"
-            rel="noopener"
-            >the list of federally regulated industries</a
-          >.
-        </p>
+        <h2>${t('pages.federallyRegulated.howTitle')}</h2>
+
+        <p
+          dangerouslySetInnerHTML=${rich('pages.federallyRegulated.howIntro', {
+            industriesUrl,
+          })}
+        />
 
         <br />
         <br />
-        <span class="bottom-link"><a href="#html" class="up-arrow">Back to top</a></span>
+
+        <span class="bottom-link">
+          <a href="#html" class="up-arrow">
+            ${t('pages.federallyRegulated.backToTop')}
+          </a>
+        </span>
       <//>
     <//>
   `
+}
 
 module.exports = FederallyRegulated

@@ -303,18 +303,38 @@ router.get('/province/:provinceId/:year', (req, res) => {
   return res.redirect(301, `/provinces/${req.params.provinceId}/${req.params.year}`)
 })
 
-router.get('/do-federal-holidays-apply-to-me', (req, res) => {
+const renderFederallyRegulated = (locale) => (req, res) => {
+  const t = getTranslator(locale)
+
   return res.send(
     renderPage({
       pageComponent: 'FederallyRegulated',
-      title: 'Do federal holidays apply to me? — Canada Holidays',
+      title: t('pages.federallyRegulated.documentTitle'),
       docProps: {
-        meta: 'How to tell if you get federal holidays or provincial holidays in Canada.',
+        meta: t('pages.federallyRegulated.metaDescription'),
         path: req.path,
+        locale,
+        canonicalPath: pathFor('federallyRegulated', { locale }),
+        alternatePaths: alternatePathsFor('federallyRegulated'),
       },
+      props: { data: { locale } },
     }),
   )
-})
+}
+
+router.get(
+  [
+    pathFor('federallyRegulated'),
+    `/en${pathFor('federallyRegulated')}`,
+  ],
+  renderFederallyRegulated('en'),
+)
+
+router.get(
+  pathFor('federallyRegulated', { locale: 'fr' }),
+  renderFederallyRegulated('fr'),
+)
+
 
 router.get('/optional-holidays-in-canada', (req, res) => {
   return res.send(

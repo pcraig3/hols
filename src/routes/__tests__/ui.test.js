@@ -669,6 +669,62 @@ describe('Test ui responses', () => {
           'https://canada-holidays.ca/do-federal-holidays-apply-to-me',
         )
       })
+
+      test.each([
+        [
+          '/do-federal-holidays-apply-to-me',
+          'en',
+          'Do federal holidays apply to me?',
+          'Do federal holidays apply to me? — Canada Holidays',
+          '/do-federal-holidays-apply-to-me',
+        ],
+        [
+          '/en/do-federal-holidays-apply-to-me',
+          'en',
+          'Do federal holidays apply to me?',
+          'Do federal holidays apply to me? — Canada Holidays',
+          '/do-federal-holidays-apply-to-me',
+        ],
+        [
+          '/fr/les-jours-feries-federaux-sappliquent-ils-a-moi',
+          'fr',
+          'Les jours fériés fédéraux s’appliquent-ils à moi ?',
+          'Les jours fériés fédéraux s’appliquent-ils à moi ? — Canada Holidays',
+          '/fr/les-jours-feries-federaux-sappliquent-ils-a-moi',
+        ],
+      ])(
+        'renders localized Federally Regulated page at %s',
+        async (path, locale, heading, title, canonical) => {
+          const response = await request(app).get(path)
+          const $ = cheerio.load(response.text)
+          const origin = 'https://canada-holidays.ca'
+
+          expect(response.statusCode).toBe(200)
+          expect($('html').attr('lang')).toBe(locale)
+          expect($('h1').text()).toBe(heading)
+          expect($('title').text()).toBe(title)
+
+          expect($('link[rel="canonical"]').attr('href')).toBe(
+            `${origin}${canonical}`,
+          )
+
+          expect($('meta[property="og:url"]').attr('content')).toBe(
+            `${origin}${canonical}`,
+          )
+
+          expect($('link[hreflang="en-CA"]').attr('href')).toBe(
+            `${origin}/do-federal-holidays-apply-to-me`,
+          )
+
+          expect($('link[hreflang="fr-CA"]').attr('href')).toBe(
+            `${origin}/fr/les-jours-feries-federaux-sappliquent-ils-a-moi`,
+          )
+
+          expect($('link[hreflang="x-default"]').attr('href')).toBe(
+            `${origin}/do-federal-holidays-apply-to-me`,
+          )
+        },
+      )
     })
 
     describe('Test /optional-holidays-in-canada response', () => {
