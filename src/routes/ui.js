@@ -336,18 +336,39 @@ router.get(
 )
 
 
-router.get('/optional-holidays-in-canada', (req, res) => {
+
+const renderOptionalHolidays = (locale) => (req, res) => {
+  const t = getTranslator(locale)
+
   return res.send(
     renderPage({
       pageComponent: 'OptionalHolidays',
-      title: 'Optional holidays in Canada — Canada Holidays',
+      title: t('pages.optionalHolidays.documentTitle'),
       docProps: {
-        meta: 'Optional holidays are commonly observed but not legally mandated. Your workplace may observe optional holidays.',
+        meta: t('pages.optionalHolidays.metaDescription'),
         path: req.path,
+        locale,
+        canonicalPath: pathFor('optionalHolidays', { locale }),
+        alternatePaths: alternatePathsFor('optionalHolidays'),
       },
+      props: { data: { locale } },
     }),
   )
-})
+}
+
+router.get(
+  [
+    pathFor('optionalHolidays'),
+    `/en${pathFor('optionalHolidays')}`,
+  ],
+  renderOptionalHolidays('en'),
+)
+
+router.get(
+  pathFor('optionalHolidays', { locale: 'fr' }),
+  renderOptionalHolidays('fr'),
+)
+
 
 const renderAbout = (locale) => (req, res) => {
   const nextHol = nextHoliday(res.locals.rows)
