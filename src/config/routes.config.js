@@ -16,6 +16,10 @@ const routes = {
     en: '/feedback',
     fr: '/commentaires',
   },
+  optionalHolidays: {
+    en: '/optional-holidays-in-canada',
+    fr: '/jours-feries-facultatifs-au-canada',
+  },
   sources: {
     en: '/sources',
     fr: '/sources',

@@ -745,6 +745,62 @@ describe('Test ui responses', () => {
           'https://canada-holidays.ca/optional-holidays-in-canada',
         )
       })
+
+      test.each([
+        [
+          '/optional-holidays-in-canada',
+          'en',
+          'Optional holidays in Canada',
+          'Optional holidays in Canada — Canada Holidays',
+          '/optional-holidays-in-canada',
+        ],
+        [
+          '/en/optional-holidays-in-canada',
+          'en',
+          'Optional holidays in Canada',
+          'Optional holidays in Canada — Canada Holidays',
+          '/optional-holidays-in-canada',
+        ],
+        [
+          '/fr/jours-feries-facultatifs-au-canada',
+          'fr',
+          'Jours fériés facultatifs au Canada',
+          'Jours fériés facultatifs au Canada — Canada Holidays',
+          '/fr/jours-feries-facultatifs-au-canada',
+        ],
+      ])(
+        'renders localized Optional Holidays page at %s',
+        async (path, locale, heading, title, canonical) => {
+          const response = await request(app).get(path)
+          const $ = cheerio.load(response.text)
+          const origin = 'https://canada-holidays.ca'
+
+          expect(response.statusCode).toBe(200)
+          expect($('html').attr('lang')).toBe(locale)
+          expect($('h1').text()).toBe(heading)
+          expect($('title').text()).toBe(title)
+
+          expect($('link[rel="canonical"]').attr('href')).toBe(
+            `${origin}${canonical}`,
+          )
+
+          expect($('meta[property="og:url"]').attr('content')).toBe(
+            `${origin}${canonical}`,
+          )
+
+          expect($('link[hreflang="en-CA"]').attr('href')).toBe(
+            `${origin}/optional-holidays-in-canada`,
+          )
+
+          expect($('link[hreflang="fr-CA"]').attr('href')).toBe(
+            `${origin}/fr/jours-feries-facultatifs-au-canada`,
+          )
+
+          expect($('link[hreflang="x-default"]').attr('href')).toBe(
+            `${origin}/optional-holidays-in-canada`,
+          )
+        },
+      )
     })
 
     describe('for a bad province ID', () => {
