@@ -1,5 +1,6 @@
 
 const { html } = require('../utils')
+const { pathFor } = require('../config/routes.config')
 const { getTranslator, getRichTranslator, localizedName } = require('../i18n')
 const { getCurrentHolidayYear } = require('../dates')
 
@@ -25,7 +26,7 @@ const About = ({ data: { nextHoliday, locale = 'en' } }) => {
         <h2>${t('pages.about.calendarTitle')}</h2>
         <p
           dangerouslySetInnerHTML=${rich('pages.about.calendar', {
-            calendarUrl: '/add-holidays-to-calendar',
+            calendarUrl: pathFor('addHolidays', { locale }),
             year: getCurrentHolidayYear(),
           })}
         />
@@ -33,7 +34,7 @@ const About = ({ data: { nextHoliday, locale = 'en' } }) => {
         <h2>${t('pages.about.feedbackTitle')}</h2>
         <p
           dangerouslySetInnerHTML=${rich('pages.about.feedback', {
-            feedbackUrl: '/feedback',
+            feedbackUrl: pathFor('feedback', { locale }),
           })}
         />
 

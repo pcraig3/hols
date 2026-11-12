@@ -483,20 +483,43 @@ router.get(
 )
 
 
-router.get('/add-holidays-to-calendar', dbmw(getProvinces), (req, res) => {
+const renderAddHolidays = (locale) => (req, res) => {
+  const t = getTranslator(locale)
   const year = getCurrentHolidayYear()
+
   return res.send(
     renderPage({
       pageComponent: 'AddHolidays',
-      title: 'Add Canadian holidays to your calendar — Canada Holidays',
+      title: t('pages.addHolidays.documentTitle'),
       docProps: {
-        meta: 'Stream or download Canadian holidays and import them to your Outlook, iCal, or Google Calendar. Add all Canadian statutory holidays or just for your region.',
+        meta: t('pages.addHolidays.metaDescription'),
         path: req.path,
+        locale,
+        canonicalPath: pathFor('addHolidays', { locale }),
+        alternatePaths: alternatePathsFor('addHolidays'),
       },
-      props: { data: { provinces: res.locals.rows, year } },
+      props: {
+        data: {
+          provinces: res.locals.rows,
+          year,
+          locale,
+        },
+      },
     }),
   )
-})
+}
+
+router.get(
+  [pathFor('addHolidays'), `/en${pathFor('addHolidays')}`],
+  dbmw(getProvinces),
+  renderAddHolidays('en'),
+)
+
+router.get(
+  pathFor('addHolidays', { locale: 'fr' }),
+  dbmw(getProvinces),
+  renderAddHolidays('fr'),
+)
 
 router.get(`/en${pathFor('api')}`, renderApiPage('en'))
 

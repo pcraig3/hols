@@ -649,6 +649,117 @@ describe('Test ui responses', () => {
           'https://canada-holidays.ca/add-holidays-to-calendar',
         )
       })
+
+      describe('Test AddHolidays localization', () => {
+        const origin = 'https://canada-holidays.ca'
+        const englishPath = '/add-holidays-to-calendar'
+        const frenchPath = '/fr/ajouter-des-jours-feries-au-calendrier'
+
+        test.each([
+          [englishPath, 'en', 'Add Canadian holidays to your calendar', englishPath],
+          [
+            `/en${englishPath}`,
+            'en',
+            'Add Canadian holidays to your calendar',
+            englishPath,
+          ],
+          [
+            frenchPath,
+            'fr',
+            'Ajouter les jours fériés canadiens à votre calendrier',
+            frenchPath,
+          ],
+        ])('renders localized content and metadata at %s', async (path, locale, heading, canonical) => {
+          const response = await request(app).get(path)
+          const $ = cheerio.load(response.text)
+
+          expect(response.statusCode).toBe(200)
+          expect($('html').attr('lang')).toBe(locale)
+          expect($('h1').text()).toBe(heading)
+          expect($('title').text()).toContain(heading)
+          expect($('meta[name="description"]').attr('content')).toBeTruthy()
+
+          expect($('link[rel="canonical"]').attr('href')).toBe(
+            `${origin}${canonical}`,
+          )
+
+          expect($('link[hreflang="en-CA"]').attr('href')).toBe(
+            `${origin}${englishPath}`,
+          )
+          expect($('link[hreflang="fr-CA"]').attr('href')).toBe(
+            `${origin}${frenchPath}`,
+          )
+          expect($('link[hreflang="x-default"]').attr('href')).toBe(
+            `${origin}${englishPath}`,
+          )
+        })
+
+        test('renders French instructions and interpolated years', async () => {
+          const response = await request(app).get(frenchPath)
+          const $ = cheerio.load(response.text)
+          const year = getCurrentHolidayYear()
+
+          expect($('main').text()).toContain(
+            'Il existe deux façons d’ajouter les jours fériés',
+          )
+          expect($('main').text()).toContain(
+            `Les jours fériés de ${year} et ${year + 1}`,
+          )
+          expect($('main').text()).toContain(
+            `Ceux de ${year + 2} seront ajoutés automatiquement`,
+          )
+        })
+
+        test('uses French province names and button labels', async () => {
+          const response = await request(app).get(frenchPath)
+          const $ = cheerio.load(response.text)
+
+          expect($('.key').text()).toContain('Colombie-Britannique')
+
+          expect($('a[href="/fr/ics/BC?cd=true"]').text()).toContain(
+            'Jours fériés (BC)',
+          )
+        })
+
+        test('uses French calendar URLs and the French federal information page', async () => {
+          const response = await request(app).get(frenchPath)
+          const $ = cheerio.load(response.text)
+
+          expect($('a[href="/fr/ics?cd=true"]')).toHaveLength(1)
+          expect($('a[href="/fr/ics/federal?cd=true"]')).toHaveLength(1)
+          expect($('a[href="/fr/ics/ON?cd=true"]')).toHaveLength(1)
+
+          expect($(`a[href="${origin}/fr/ics"]`)).toHaveLength(1)
+
+          expect(
+            $('a[href="/fr/les-jours-feries-federaux-sappliquent-ils-a-moi"]'),
+          ).toHaveLength(1)
+        })
+
+        test('preserves English calendar URLs', async () => {
+          const response = await request(app).get(englishPath)
+          const $ = cheerio.load(response.text)
+
+          expect($('a[href="/ics?cd=true"]')).toHaveLength(1)
+          expect($('a[href="/ics/federal?cd=true"]')).toHaveLength(1)
+          expect($('a[href="/ics/ON?cd=true"]')).toHaveLength(1)
+          expect($(`a[href="${origin}/ics"]`)).toHaveLength(1)
+        })
+
+        test('preserves the import instructions and accessibility markup', async () => {
+          const response = await request(app).get(frenchPath)
+          const $ = cheerio.load(response.text)
+
+          expect($('a[href="#import-holidays"]')).toHaveLength(1)
+          expect($('a[href="#import-holidays"]').attr('aria-label')).toContain(
+            'instructions',
+          )
+          expect($('#import-holidays')).toHaveLength(1)
+          expect($('.visuallyHidden').length).toBeGreaterThan(0)
+          expect($('ol li')).toHaveLength(4)
+          expect($('ol code').text()).toBe('.ics')
+        })
+      })
     })
 
     describe('Test /do-federal-holidays-apply-to-me response', () => {

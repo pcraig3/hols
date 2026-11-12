@@ -4,6 +4,10 @@ const routes = {
     en: '/about',
     fr: '/a-propos',
   },
+  addHolidays: {
+    en: '/add-holidays-to-calendar',
+    fr: '/ajouter-des-jours-feries-au-calendrier',
+  },
   api: {
     en: '/api',
     fr: '/api',

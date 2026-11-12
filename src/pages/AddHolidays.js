@@ -1,6 +1,9 @@
 const { html } = require('../utils')
 const { css } = require('@emotion/css')
 const { theme } = require('../styles')
+const { getTranslator, getRichTranslator, localizedName } = require('../i18n')
+const { pathFor } = require('../config/routes.config')
+
 const Layout = require('../components/Layout.js')
 const Content = require('../components/Content.js')
 const SummaryTable = require('../components/SummaryTable.js')
@@ -49,42 +52,41 @@ const summaryTableStylesButtons = css`
 `
 
 const createRows = ({ provinces, locale = 'en' }) => {
-  return provinces.map((p) => {
-    return {
-      key: p.nameEn,
-      value: CalButton({
-        provinceId: p.id,
-        text: `Get ${p.id} holidays`,
-        query: 'cd=true',
-        eventName: 'page-download-holidays',
-        locale,
-      }),
-      className: summaryTableStylesButtons,
-    }
-  })
+  const t = getTranslator(locale)
+
+  return provinces.map((p) => ({
+    key: localizedName(p, locale),
+    value: CalButton({
+      provinceId: p.id,
+      text: t('pages.addHolidays.getRegional', { id: p.id }),
+      query: 'cd=true',
+      eventName: 'page-download-holidays',
+      locale,
+    }),
+    className: summaryTableStylesButtons,
+  }))
 }
 
-
 const AddHolidays = ({ data: { provinces, year, locale = 'en' } }) => {
+  const t = getTranslator(locale)
+  const rich = getRichTranslator(locale)
   const icsBaseUrl = `https://canada-holidays.ca${locale === 'fr' ? '/fr' : ''}/ics`
 
   return html`
     <${Layout}>
       <${Content} className=${headerStyles}>
-        <h1>Add Canadian holidays to your calendar</h1>
-        <p>There are 2 ways to add holidays to your calendar:</p>
+        <h1>${t('pages.addHolidays.title')}</h1>
+        <p>${t('pages.addHolidays.intro')}</p>
+
         <div>
           <ul>
-            <li>Adding a “remote calendar” URL that will keep itself updated.</li>
-            <li>
-              Downloading the holidays locally and importing them into your preferred calendar
-              program.
-            </li>
+            <li>${t('pages.addHolidays.remoteOption')}</li>
+            <li>${t('pages.addHolidays.downloadOption')}</li>
           </ul>
         </div>
 
         <${SummaryTable}
-          title="Stream Canadian statutory holidays"          
+          title=${t('pages.addHolidays.streamTitle')}
           rows=${[
             {
               key: 'Canada',
@@ -108,105 +110,110 @@ const AddHolidays = ({ data: { provinces, year, locale = 'en' } }) => {
             },
           ]}
         >
-          <h2>Import holidays with “remote calendar” URL</h2>
+          <h2>${t('pages.addHolidays.remoteTitle')}</h2>
 
           <p>
-            If you use Outlook, iCal, or Google Calendar, you can import holidays directly from a
-            URL. Holidays for ${year}—${year + 1} will be added immediately. Holidays for ${year + 2}
-will be added automatically toward the end of ${year}.
+            ${t('pages.addHolidays.remoteDescription', {
+              year,
+              nextYear: year + 1,
+              followingYear: year + 2,
+            })}
           </p>
 
-          <p>
-            If you only want holidays for your region, replace${' '}
-            <a
-              href="https://www.canada.ca/en/revenue-agency/services/tax/businesses/topics/completing-slips-summaries/financial-slips-summaries/return-investment-income-t5/provincial-territorial-codes.html"
-              target="_blank"
-              rel="noopener"
-              >your two-character regional code</a
-            >${' '} (eg, “AB”, “ON”) with your province or territory.
-          </p>
+          <p
+            dangerouslySetInnerHTML=${rich('pages.addHolidays.regionalCodeHelp', {
+              codesUrl: 'https://www.canada.ca/en/revenue-agency/services/tax/businesses/topics/completing-slips-summaries/financial-slips-summaries/return-investment-income-t5/provincial-territorial-codes.html',
+            })}
+          />
         <//>
 
-        <h2>Download holidays</h2>
-        <p class="push-down">
-          If you’re not sure how to import them after downloading,${' '}
-          <a
-            href="#import-holidays"
-            aria-label="On-page link: import statutory holidays into your calendar"
-            >there’s a little "how-to" further down</a
-          >.
-        </p>
+        <h2>${t('pages.addHolidays.downloadTitle')}</h2>
+
+        <p
+          class="push-down"
+          dangerouslySetInnerHTML=${rich('pages.addHolidays.downloadHelp', {
+            importAriaLabel: t('pages.addHolidays.importAriaLabel'),
+          })}
+        />
 
         <${SummaryTable}
-          title="Download all Canadian statutory holidays"
+          title=${t('pages.addHolidays.allTitle')}
           rows=${[
-      {
-        key: 'Canada',
-        value: CalButton({
-          text: 'Get all holidays',
-          query: 'cd=true',
-          eventName: 'page-download-holidays',
-          locale,
-        }),
-        className: summaryTableStylesButtons,
-      },
-    ]}
+            {
+              key: 'Canada',
+              value: CalButton({
+                text: t('pages.addHolidays.getAll'),
+                query: 'cd=true',
+                eventName: 'page-download-holidays',
+                locale,
+              }),
+              className: summaryTableStylesButtons,
+            },
+          ]}
         >
-          <h3>Download all Canadian <span class="visuallyHidden">statutory</span> holidays</h3>
-          <p>For the Canadian completist.</p>
+          <h3 dangerouslySetInnerHTML=${rich('pages.addHolidays.allHeading')} />
+          <p>${t('pages.addHolidays.allDescription')}</p>
         <//>
 
         <${SummaryTable}
-          title="Download federally-regulated statutory holidays"
+          title=${t('pages.addHolidays.federalTitle')}
           rows=${[
-      {
-        key: 'Federal holidays',
-        value: CalButton({
-          text: 'Get federal holidays',
-          federal: true,
-          query: 'cd=true',
-          eventName: 'page-download-holidays',
-          locale,
-        }),
-        className: summaryTableStylesButtons,
-      },
-    ]}
+            {
+              key: t('pages.addHolidays.federalRow'),
+              value: CalButton({
+                text: t('pages.addHolidays.getFederal'),
+                federal: true,
+                query: 'cd=true',
+                eventName: 'page-download-holidays',
+                locale,
+              }),
+              className: summaryTableStylesButtons,
+            },
+          ]}
         >
-          <h3>
-            Download federally-regulated <span class="visuallyHidden">statutory</span> holidays
-          </h3>
-          <p>
-            For airline pilots, federal policy wonks, etc.${' '}
-            <a href="/do-federal-holidays-apply-to-me">Find out if federal holidays apply to you</a
-            >.
-          </p>
+          <h3 dangerouslySetInnerHTML=${rich('pages.addHolidays.federalHeading')} />
+
+          <p
+            dangerouslySetInnerHTML=${rich('pages.addHolidays.federalDescription', {
+              federalUrl: pathFor('federallyRegulated', { locale }),
+            })}
+          />
         <//>
 
-        <${SummaryTable} title="Regional holidays" rows=${createRows({ provinces, locale })}>
-          <h3>Download regional <span class="visuallyHidden">statutory</span> holidays</h3>
-          <p>For regular folks or secessionists.</p>
+        <${SummaryTable}
+          title=${t('pages.addHolidays.regionalTitle')}
+          rows=${createRows({ provinces, locale })}
+        >
+          <h3 dangerouslySetInnerHTML=${rich('pages.addHolidays.regionalHeading')} />
+          <p>${t('pages.addHolidays.regionalDescription')}</p>
         <//>
 
-        <h3 id="import-holidays">
-          Import <span class="visuallyHidden">statutory</span> holidays into your calendar
-        </h3>
-        <p>
-          Download Canadian holidays and then import them to your Outlook, iCal, or Google Calendar.
-        </p>
-        <p>Adding holidays to your calendar is easy.</p>
+        <h3
+          id="import-holidays"
+          dangerouslySetInnerHTML=${rich('pages.addHolidays.importHeading')}
+        />
+
+        <p>${t('pages.addHolidays.importDescription')}</p>
+        <p>${t('pages.addHolidays.importEasy')}</p>
+
         <ol>
-          <li>
-              Clicking a button on this page will download an <code>.ics</code> file with all holidays in
-              ${' '}${year} and ${year + 1}
-          </li>
-          <li>Double-click the file (or drag it into your preferred calendar)</li>
-          <li>Confirm you want to import ’em</li>
-          <li>Done! <span role="img" aria-label="Happy cowboy">🤠</span></li>
+          <li
+            dangerouslySetInnerHTML=${rich('pages.addHolidays.importStep1', {
+              year,
+              nextYear: year + 1,
+            })}
+          />
+          <li>${t('pages.addHolidays.importStep2')}</li>
+          <li>${t('pages.addHolidays.importStep3')}</li>
+          <li dangerouslySetInnerHTML=${rich('pages.addHolidays.importStep4')} />
         </ol>
 
         <br />
         <br />
-        <span class="bottom-link"><a href="#html" class="up-arrow">Back to top</a></span>
+
+        <span class="bottom-link">
+          <a href="#html" class="up-arrow">${t('pages.addHolidays.backToTop')}</a>
+        </span>
       <//>
     <//>
   `
