@@ -135,6 +135,7 @@ module.exports = {
     observedFederally: 'Observé dans les secteurs sous réglementation fédérale.',
     observedInOneAndFederal: 'Observé dans la région suivante : {{regions}}, ainsi que dans les secteurs sous réglementation fédérale.',
     observedInRegionsAndFederal: 'Observé dans les régions suivantes : {{regions}}, ainsi que dans les secteurs sous réglementation fédérale.',
+    observedOn: 'Observé le {{date}}.',
     and: 'et',
   },
 }

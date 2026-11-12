@@ -131,6 +131,7 @@ module.exports = {
     nationalHoliday: 'National holiday',
     notNationalHoliday: 'This is not a national holiday; it may not be observed in your region',
     observedBy: 'Observed by {{regions}}.',
+    observedOn: 'Observed: {{date}}',
     and: 'and',
   },
 }
