@@ -166,6 +166,35 @@ describe('Test ics responses', () => {
     expect(response.statusCode).toBe(404)
   })
 
+  describe.each(['/en', '/fr'])('Test ICS routes mounted at %s', (prefix) => {
+    const paths = ['', '/ON', '/federal', '/2027', '/ON/2027', '/federal/2027']
+
+    // Generated timestamps change between requests; everything else should match exactly.
+    const stableICS = (icsText) => icsText.replace(/^DTSTAMP:.*\r?\n/gm, '')
+
+    test.each(paths)('returns the existing English ICS content for /ics%s', async (path) => {
+      const legacy = await request(app).get(`/ics${path}`)
+      const localized = await request(app).get(`${prefix}/ics${path}`)
+
+      expect(legacy.statusCode).toBe(200)
+      expect(localized.statusCode).toBe(200)
+      expect(localized.headers['content-type']).toMatch(/^text\/calendar/)
+      expect(localized.headers['content-disposition']).toBeUndefined()
+      expect(stableICS(localized.text)).toEqual(stableICS(legacy.text))
+      expect(getICSYears(localized.text)).toEqual(getICSYears(legacy.text))
+    })
+
+    test('preserves the existing download filename for now', async () => {
+      const legacy = await request(app).get('/ics/ON/2027?cd=true')
+      const localized = await request(app).get(`${prefix}/ics/ON/2027?cd=true`)
+
+      expect(localized.statusCode).toBe(200)
+      expect(localized.headers['content-disposition']).toBe(
+        legacy.headers['content-disposition'],
+      )
+    })
+  })
+
   describe('Test /ics/fake response', () => {
     test('it should return 404', async () => {
       const response = await request(app).get('/ics/fake')
