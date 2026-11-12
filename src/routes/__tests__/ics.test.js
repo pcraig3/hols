@@ -52,13 +52,6 @@ describe('Test ics responses', () => {
           }${currentYear}-${currentYear + 1}.ics`,
         )
       })
-
-      test('it should return only one year when year is provided as a query parameter', async () => {
-        const response = await request(app).get(`/ics?year=${currentYear}`)
-
-        expect(response.statusCode).toBe(200)
-        expect(getICSYears(response.text)).toEqual([currentYear])
-      })
     })
   })
 
@@ -136,6 +129,55 @@ describe('Test ics responses', () => {
           `attachment; filename=canada-holidays-${path}-${goodYear}.ics`,
         )
       })
+    })
+  })
+
+  describe('Test ICS year query parameter', () => {
+    const year = 2027
+    const prefixes = ['', '/en', '/fr']
+    const paths = ['', '/ON', '/federal']
+
+    // Ignore timestamps generated separately for each request.
+    const stableICS = (text) => text.replace(/^DTSTAMP:.*\r?\n/gm, '')
+
+    const routes = prefixes.flatMap((prefix) =>
+      paths.map((path) => `${prefix}/ics${path}`),
+    )
+
+    test.each(routes)('%s?year=2027 matches the explicit-year route', async (route) => {
+      const queryResponse = await request(app).get(`${route}?year=${year}`)
+      const pathResponse = await request(app).get(`${route}/${year}`)
+
+      expect(queryResponse.statusCode).toBe(200)
+      expect(pathResponse.statusCode).toBe(200)
+
+      // The query parameter returns one year, not the default two.
+      expect(getICSYears(queryResponse.text)).toEqual([year])
+
+      // Events, translations, dates, and UIDs must match exactly.
+      expect(stableICS(queryResponse.text)).toBe(stableICS(pathResponse.text))
+    })
+
+    test.each(prefixes)('explicit year takes precedence over query year under "%s"', async (prefix) => {
+      const response = await request(app).get(`${prefix}/ics/ON/2027?year=2026`)
+
+      expect(response.statusCode).toBe(200)
+      expect(getICSYears(response.text)).toEqual([2027])
+    })
+
+    test.each(prefixes)('year query produces the correct download filename under "%s"', async (prefix) => {
+      const queryResponse = await request(app).get(
+        `${prefix}/ics/ON?year=2027&cd=true`,
+      )
+      const pathResponse = await request(app).get(
+        `${prefix}/ics/ON/2027?cd=true`,
+      )
+
+      expect(queryResponse.statusCode).toBe(200)
+      expect(pathResponse.statusCode).toBe(200)
+      expect(queryResponse.headers['content-disposition']).toBe(
+        pathResponse.headers['content-disposition'],
+      )
     })
   })
 
