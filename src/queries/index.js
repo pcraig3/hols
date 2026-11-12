@@ -1,18 +1,48 @@
 const { array2Obj } = require('../utils')
 const { getObservedDate, getLiteralDate } = require('../dates')
 
-const _getProvinces = (db) => db().prepare('SELECT * FROM Province ORDER BY id ASC;').all()
+const provinceWithSourcesSql = `
+  SELECT
+    p.*,
+    s.sourceEn,
+    s.sourceFr,
+    s.sourceLinkEn,
+    s.sourceLinkFr,
+    s.sourceLinkEn AS sourceLink
+  FROM Province p
+  JOIN Source s ON s.regionId = p.id
+`
+
+const _getProvinces = (db) => {
+  return db()
+    .prepare(`${provinceWithSourcesSql} ORDER BY p.id ASC;`)
+    .all()
+}
 
 const _getProvinceById = (db, provinceId) => {
-  return db().prepare('SELECT * FROM Province WHERE id = ? ORDER BY id ASC;').all(provinceId)
+  return db()
+    .prepare(`${provinceWithSourcesSql} WHERE p.id = ? ORDER BY p.id ASC;`)
+    .all(provinceId)
 }
 
 const getProvinces = (db, { provinceId } = {}) => {
-  if (provinceId) {
-    return _getProvinceById(db, provinceId)
-  }
+  const provinces = provinceId
+    ? _getProvinceById(db, provinceId)
+    : _getProvinces(db)
 
-  return _getProvinces(db)
+  return provinces.map((province) => {
+    // Omit unavailable French translations
+    if (province.sourceFr === null) delete province.sourceFr
+    if (province.sourceLinkFr === null) delete province.sourceLinkFr
+
+    return province
+  })
+}
+
+const getSource = (db, regionId) => {
+  return db()
+    .prepare('SELECT * FROM Source WHERE regionId = ?;')
+    .get(regionId)
 }
 
 const _getHolidays = (db) => db().prepare('SELECT * FROM Holiday ORDER BY id ASC;').all()
@@ -144,6 +174,7 @@ const getHolidaysWithProvinces = (db, { holidayId, federal, year, optional }) =>
 
 module.exports = {
   _parseBoolean,
+  getSource,
   getProvinces,
   getHolidays,
   getProvincesWithHolidays,

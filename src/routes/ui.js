@@ -1,6 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const createError = require('http-errors')
+const DB = require('@beenotung/better-sqlite3-helper')
 const { ALLOWED_YEARS } = require('../config/vars.config')
 const { pathFor, alternatePathsFor } = require('../config/routes.config')
 const renderPage = require('../pages/_document.js')
@@ -16,7 +17,12 @@ const {
   nextHoliday,
   pe2pei,
 } = require('../utils')
-const { getProvinces, getHolidaysWithProvinces, getProvincesWithHolidays } = require('../queries')
+const {
+  getSource,
+  getProvinces,
+  getHolidaysWithProvinces,
+  getProvincesWithHolidays,
+} = require('../queries')
 const { displayDate, getCurrentHolidayYear } = require('../dates')
 const { getTranslator } = require('../i18n')
 const renderApiPage = require('./api-page')
@@ -186,10 +192,13 @@ router.get(
   },
 )
 
-// manually add source for federal holidays — it's not clean but w/e
-const federalSource = {
-  link: 'https://www.tpsgc-pwgsc.gc.ca/remuneration-compensation/services-paye-pay-services/paye-information-pay/vie-life/vie-conge-life-leave/conge-paye-holiday-pay-eng.html',
-  nameEn: 'Statutory holiday pay, Canada.ca',
+const getFederalSourceForPage = () => {
+  const { sourceEn, sourceLinkEn } = getSource(DB, 'federal')
+
+  return {
+    link: sourceLinkEn,
+    nameEn: sourceEn,
+  }
 }
 
 router.get('/federal', checkRedirectYear, dbmw(getHolidaysWithProvinces), (req, res) => {
@@ -217,7 +226,7 @@ router.get('/federal', checkRedirectYear, dbmw(getHolidaysWithProvinces), (req, 
           nextHoliday: nextHol,
           federal: true,
           year,
-          source: federalSource,
+          source: getFederalSourceForPage(),
         },
       },
     }),
@@ -247,7 +256,7 @@ router.get(
           richSnippets: ['breadcrumb', 'dataset'],
         },
         props: {
-          data: { holidays, nextHoliday: undefined, federal: true, year, source: federalSource },
+          data: { holidays, nextHoliday: undefined, federal: true, year, source: getFederalSourceForPage() },
         },
       }),
     )
@@ -263,7 +272,12 @@ router.get('/provinces', dbmw(getProvinces), (req, res) => {
         meta: 'Upcoming stat holidays for all regions in Canada.',
         path: req.path,
       },
-      props: { data: { provinces: res.locals.rows } },
+      props: {
+        data: {
+          provinces: res.locals.rows,
+          federalSource: getSource(DB, 'federal'),
+        },
+      },
     }),
   )
 })
@@ -334,8 +348,6 @@ router.get(
   pathFor('federallyRegulated', { locale: 'fr' }),
   renderFederallyRegulated('fr'),
 )
-
-
 
 const renderOptionalHolidays = (locale) => (req, res) => {
   const t = getTranslator(locale)
@@ -450,6 +462,7 @@ const renderSources = (locale) => (req, res) => {
       props: {
         data: {
           provinces: res.locals.rows,
+          federalSource: getSource(DB, 'federal'),
           locale,
         },
       },

@@ -2,9 +2,15 @@
 CREATE TABLE Province (
   id CHAR(2) PRIMARY KEY,
   nameEn TEXT,
-  nameFr TEXT,
-  sourceLink TEXT DEFAULT null,
-  sourceEn TEXT DEFAULT null
+  nameFr TEXT
+);
+
+CREATE TABLE Source (
+  regionId TEXT PRIMARY KEY,
+  sourceEn TEXT NOT NULL,
+  sourceFr TEXT DEFAULT NULL,
+  sourceLinkEn TEXT NOT NULL,
+  sourceLinkFr TEXT DEFAULT NULL
 );
 
 CREATE TABLE Holiday (
@@ -26,6 +32,7 @@ CREATE TABLE ProvinceHoliday (
   FOREIGN KEY(holidayId) REFERENCES Holiday(id)
 );
 
+-- ADD PROVINCES
 INSERT INTO Province (id, nameEn, nameFr) VALUES ('AB', 'Alberta', 'Alberta');
 INSERT INTO Province (id, nameEn, nameFr) VALUES ('BC', 'British Columbia', 'Colombie-Britannique');
 INSERT INTO Province (id, nameEn, nameFr) VALUES ('MB', 'Manitoba', 'Manitoba');
@@ -40,19 +47,139 @@ INSERT INTO Province (id, nameEn, nameFr) VALUES ('QC', 'Quebec', 'Québec');
 INSERT INTO Province (id, nameEn, nameFr) VALUES ('SK', 'Saskatchewan', 'Saskatchewan');
 INSERT INTO Province (id, nameEn, nameFr) VALUES ('YT', 'Yukon', 'Yukon');
 
-UPDATE Province SET sourceEn = 'General holidays in Alberta', sourceLink = 'https://www.alberta.ca/alberta-general-holidays.aspx#jumplinks-1' WHERE id = 'AB';
-UPDATE Province SET sourceEn = 'Statutory Holidays in British Columbia', sourceLink = 'https://www2.gov.bc.ca/gov/content/employment-business/employment-standards-advice/employment-standards/statutory-holidays#body' WHERE id = 'BC';
-UPDATE Province SET sourceEn = 'General holidays in Manitoba', sourceLink = 'https://www.gov.mb.ca/labour/standards/doc,gen-holidays-after-april-30-07,factsheet.html#q12' WHERE id = 'MB';
-UPDATE Province SET sourceEn = '10 prescribed days of rest', sourceLink = 'https://www2.gnb.ca/content/gnb/en/departments/elg/local_government/content/governance/content/days_of_rest_act/faq.html#2' WHERE id = 'NB';
-UPDATE Province SET sourceEn = 'Newfoundland 2026 Paid Holidays', sourceLink = 'https://www.gov.nl.ca/exec/tbs/2026-paid-holidays-2/' WHERE id = 'NL';
-UPDATE Province SET sourceEn = 'Paid holidays in Nova Scotia', sourceLink = 'https://novascotia.ca/lae/employmentrights/holidaychart.asp' WHERE id = 'NS';
-UPDATE Province SET sourceEn = 'Employment Standards, Northwest Territories', sourceLink = 'https://www.ece.gov.nt.ca/en/services/employment-standards/frequently-asked-questions#Statutory%20Holidays' WHERE id = 'NT';
-UPDATE Province SET sourceEn = 'Nunavut General Holidays', sourceLink = 'https://nu-lsco.ca/faq-s?tmpl=component&faqid=11' WHERE id = 'NU';
-UPDATE Province SET sourceEn = 'Ontario Public holidays', sourceLink = 'https://www.ontario.ca/document/your-guide-employment-standards-act-0/public-holidays' WHERE id = 'ON';
-UPDATE Province SET sourceEn = 'PEI Paid Holidays', sourceLink = 'https://www.princeedwardisland.ca/en/information/economic-growth-tourism-and-culture/paid-holidays' WHERE id = 'PE';
-UPDATE Province SET sourceEn = 'Liste des jours fériés, chômés et payés', sourceLink = 'https://www.cnesst.gouv.qc.ca/fr/conditions-travail/conges/jours-feries/liste-jours-feries' WHERE id = 'QC';
-UPDATE Province SET sourceEn = 'Saskatchewan Public Holidays', sourceLink = 'https://www.saskatchewan.ca/business/employment-standards/public-statutory-holidays/list-of-saskatchewan-public-holidays' WHERE id = 'SK';
-UPDATE Province SET sourceEn = 'Yukon statutory holiday dates', sourceLink = 'https://yukon.ca/en/doing-business/employer-responsibilities/find-yukon-statutory-holiday' WHERE id = 'YT';
+-- ADD SOURCES
+INSERT INTO Source (regionId, sourceEn, sourceFr, sourceLinkEn, sourceLinkFr)
+VALUES (
+  'federal',
+  'Statutory holiday pay',
+  'Jours fériés payés',
+  'https://www.canada.ca/en/public-services-procurement/services/pay-pension/pay-administration/access-update-pay-details/pay-changes-in-your-life/taking-leave/statutory-holiday-pay.html',
+  'https://www.canada.ca/fr/services-publics-approvisionnement/services/paye-pension/administration-paye/acces-mise-a-jour-renseignements-paye/votre-paye-changements-dans-votre-vie/demandes-conge/jours-feries-payes.html'
+);
+
+-- Alberta
+INSERT INTO Source (regionId, sourceEn, sourceLinkEn)
+VALUES (
+  'AB',
+  'General holidays in Alberta',
+  'https://www.alberta.ca/alberta-general-holidays#jumplinks-2'
+);
+
+-- British Columbia
+INSERT INTO Source (regionId, sourceEn, sourceLinkEn)
+VALUES (
+  'BC',
+  'Statutory holidays in British Columbia',
+  'https://www2.gov.bc.ca/gov/content/employment-business/employment-standards-advice/employment-standards/statutory-holidays'
+);
+
+-- Manitoba
+INSERT INTO Source (regionId, sourceEn, sourceFr, sourceLinkEn, sourceLinkFr)
+VALUES (
+  'MB',
+  'What are the general holidays in Manitoba?',
+  'Quels sont les jours fériés au Manitoba?',
+  'https://www.gov.mb.ca/labour/standards/doc,gen-holidays-after-april-30-07,factsheet.html#q12',
+  'https://www.gov.mb.ca/labour/standards/doc,gen-holidays-after-april-30-07,factsheet.fr.html#q12'
+);
+
+-- New Brunswick
+INSERT INTO Source (regionId, sourceEn, sourceFr, sourceLinkEn, sourceLinkFr)
+VALUES (
+  'NB',
+  'What are the 11 prescribed days of rest?',
+  'Quels sont les 11 jours prescrits de repos?',
+  'https://www2.gnb.ca/content/gnb/en/departments/elg/local_government/content/governance/content/days_of_rest_act/faq.html#2',
+  'https://www2.gnb.ca/content/gnb/fr/ministeres/egl/gouvernements_locaux/content/gouvernance/content/loi_su_les_jours_de_repos/faq.html#2'
+);
+
+-- Newfoundland and Labrador
+INSERT INTO Source (regionId, sourceEn, sourceLinkEn)
+VALUES (
+  'NL',
+  '2026 Paid Holidays',
+  'https://www.gov.nl.ca/exec/tbs/2026-paid-holidays-2/'
+);
+
+-- Nova Scotia
+INSERT INTO Source (regionId, sourceEn, sourceFr, sourceLinkEn, sourceLinkFr)
+VALUES (
+  'NS',
+  'Paid holidays in Nova Scotia',
+  'Jours fériés payés en Nouvelle-Écosse',
+  'https://novascotia.ca/lae/employmentrights/holidaychart.asp',
+  'https://novascotia.ca/lae/employmentrights/holidaychart-fr.asp'
+);
+
+-- Northwest Territories
+INSERT INTO Source (regionId, sourceEn, sourceFr, sourceLinkEn, sourceLinkFr)
+VALUES (
+  'NT',
+  'Statutory Holidays and Holiday Pay',
+  'Jours fériés et rémunération des jours fériés',
+  'https://www.ece.gov.nt.ca/en/services/employment-standards/frequently-asked-questions#Statutory%20Holidays',
+  'https://www.ece.gov.nt.ca/fr/services/employment-standards/foires-aux-questions#jours-f-ri-s-et-r-mun-ration-des-jours-f-ri-s'
+);
+
+-- Nunavut
+INSERT INTO Source (regionId, sourceEn, sourceFr, sourceLinkEn, sourceLinkFr)
+VALUES (
+  'NU',
+  'General Holidays',
+  'Jours fériés',
+  'https://www.gov.nu.ca/en/employment-training-and-career-development/labour-and-employment-standards-nunavut#general-holidays',
+  'https://www.gov.nu.ca/fr/emploi-formation-et-perfectionnement-professionnel/normes-du-travail-du-nunavut#general-holidays'
+);
+
+-- Ontario
+INSERT INTO Source (regionId, sourceEn, sourceFr, sourceLinkEn, sourceLinkFr)
+VALUES (
+  'ON',
+  'Public holidays',
+  'Jours fériés',
+  'https://www.ontario.ca/document/your-guide-employment-standards-act-0/public-holidays',
+  'https://www.ontario.ca/fr/document/votre-guide-de-la-loi-sur-les-normes-demploi-0/jours-feries'
+);
+
+-- Prince Edward Island
+INSERT INTO Source (regionId, sourceEn, sourceLinkEn)
+VALUES (
+  'PE',
+  'Paid Holidays',
+  'https://www.princeedwardisland.ca/en/information/workforce-and-advanced-learning/paid-holidays'
+);
+
+-- Quebec
+INSERT INTO Source (regionId, sourceEn, sourceFr, sourceLinkEn, sourceLinkFr)
+VALUES (
+  'QC',
+  'Statutory holidays in Quebec',
+  'Jours fériés au Québec',
+  'https://www.cnesst.gouv.qc.ca/en/working-conditions/leave/statutory-holidays/statutory-holidays',
+  'https://www.cnesst.gouv.qc.ca/fr/conditions-travail/conges/jours-feries/liste-jours-feries'
+);
+
+-- Saskatchewan
+INSERT INTO Source (regionId, sourceEn, sourceFr, sourceLinkEn, sourceLinkFr)
+VALUES (
+  'SK',
+  'List of Saskatchewan Public Holidays',
+  'Liste des jours fériés en Saskatchewan',
+  'https://www.saskatchewan.ca/business/employment-standards/public-statutory-holidays/list-of-saskatchewan-public-holidays',
+  'https://www.saskatchewan.ca/bonjour/working-jobs-and-pensions/employment-standards/vacations-holidays-leaves-and-absences/public-statutory-holidays'
+);
+
+-- Yukon
+INSERT INTO Source (regionId, sourceEn, sourceFr, sourceLinkEn, sourceLinkFr)
+VALUES (
+  'YT',
+  'Find a Yukon statutory holiday',
+  'Jours fériés au Yukon',
+  'https://yukon.ca/en/doing-business/employer-responsibilities/find-yukon-statutory-holiday',
+  'https://yukon.ca/fr/entreprises/obligations-de-lemployeur/jours-feries-au-yukon'
+);
+
+-- ADD HOLIDAYS
 
 INSERT INTO Holiday (date, nameEn, nameFr) VALUES ('January 1', 'New Year’s Day', 'Jour de l’An');
 INSERT INTO Holiday (date, nameEn, nameFr) VALUES ('January 2', 'Day after New Year’s', 'Lendemain du Jour de l’An');
@@ -90,6 +217,8 @@ INSERT INTO Holiday (date, nameEn, nameFr) VALUES ('November 11', 'Remembrance D
 INSERT INTO Holiday (date, nameEn, nameFr) VALUES ('December 25', 'Christmas Day', 'Noël');
 INSERT INTO Holiday (date, nameEn, nameFr) VALUES ('December 26', 'Boxing Day', 'Lendemain de Noël');
 
+-- DEMARCATE FEDERAL HOLIDAYS
+
 UPDATE Holiday SET federal = 1 WHERE nameEn = 'New Year’s Day';
 UPDATE Holiday SET federal = 1 WHERE nameEn = 'Good Friday';
 UPDATE Holiday SET federal = 1 WHERE nameEn = 'Easter Monday';
@@ -103,6 +232,8 @@ UPDATE Holiday SET federal = 1 WHERE nameEn = 'Thanksgiving';
 UPDATE Holiday SET federal = 1 WHERE nameEn = 'Remembrance Day';
 UPDATE Holiday SET federal = 1 WHERE nameEn = 'Christmas Day';
 UPDATE Holiday SET federal = 1 WHERE nameEn = 'Boxing Day';
+
+-- ASSOCIATE HOLIDAYS WITH PROVINCES
 
 INSERT INTO ProvinceHoliday (holidayId, provinceId) VALUES ((SELECT id FROM Holiday WHERE (date = 'January 1' AND nameEn = 'New Year’s Day')), 'AB');
 INSERT INTO ProvinceHoliday (holidayId, provinceId) VALUES ((SELECT id FROM Holiday WHERE (date = 'January 1' AND nameEn = 'New Year’s Day')), 'BC');
@@ -294,3 +425,4 @@ INSERT INTO ProvinceHoliday (holidayId, provinceId, optional) VALUES ((SELECT id
 DROP TABLE ProvinceHoliday;
 DROP TABLE Holiday;
 DROP TABLE Province;
+DROP TABLE Source;

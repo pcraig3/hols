@@ -105,7 +105,7 @@ module.exports = {
       collectiveAgreement: 'If you are unionized, your collective agreement may include optional holidays not legislated by your province',
       businessClosure: 'Some businesses shut down on days that schools and post offices are closed',
       tradition: 'Businesses may have traditionally observed an optional holiday, and it is now an expectation',
-      closing: "Optional holidays aren't automatically guaranteed by law, but they sometimes apply to your specific workplace. Always check with your employer to make sure if optional holidays apply to you.",
+      closing: 'Optional holidays aren’t automatically guaranteed by law, but they sometimes apply to your specific workplace. Always check with your employer to make sure if optional holidays apply to you.',
       backToTop: 'Back to top',
     },
     sources: {

@@ -45,7 +45,7 @@ const createRows = ({ provinces, locale }) => {
   })
 }
 
-const Sources = ({ data: { provinces, locale = 'en' } }) => {
+const Sources = ({ data: { provinces, federalSource, locale = 'en' } }) => {
   const t = getTranslator(locale)
   const rich = getRichTranslator(locale)
 
@@ -69,11 +69,11 @@ const Sources = ({ data: { provinces, locale = 'en' } }) => {
               key: html`<a href="/federal">${t('pages.sources.federalHolidays')}</a>`,
               value: html`<span class="external-link"
                 ><a
-                  href="https://www.tpsgc-pwgsc.gc.ca/remuneration-compensation/services-paye-pay-services/paye-information-pay/vie-life/vie-conge-life-leave/conge-paye-holiday-pay-eng.html"
+                  href="${federalSource.sourceLinkEn}"
                   target="_blank"
                   rel="noopener"
-                  >Statutory holiday pay, Canada.ca<${External} /></a
-              ></span>`,
+                  >${federalSource.sourceEn}<${External} /></a
+                ></span>`,
               className: summaryTableStyles,
             },
           ]}
