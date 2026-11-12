@@ -1,16 +1,24 @@
 const { addDays } = require('date-fns/addDays')
 const crypto = require('crypto')
 
+const { getTranslator, localizedName } = require('../i18n')
+
+const frenchListFormatter = new Intl.ListFormat('fr-CA', {
+  type: 'conjunction',
+})
+
 /**
- * Takes an ISO-formatted date string (1990-10-08), and returns an array with [year, month, day] as integers
- * @param {string} dateString an ISO-formatted date string (1990-10-08)
+ * Converts an ISO date string (YYYY-MM-DD) into [year, month, day] integers.
+ * @param {string} dateString
+ * @returns {number[]}
  */
 const startDate = (dateString) =>
   dateString.split('-').map((dateSegment) => parseInt(dateSegment, 10))
 
 /**
- * Takes an ISO-formatted date string (1990-10-08), and returns an array with the [year, month, day] of the NEXT day as integers
- * @param {*} dateString an ISO-formatted date string (1990-10-08)
+ * Returns [year, month, day] integers for the day after the given ISO date.
+ * @param {string} dateString
+ * @returns {number[]}
  */
 const endDate = (dateString) =>
   addDays(new Date(dateString), 1)
@@ -28,77 +36,113 @@ const getCurrentTimestamp = () => {
 }
 
 /**
- * Returns a title string from a holiday obj to use for .ics files
- * If a national holiday, it returns the title string unmodified
- * If not a national holiday, it returns the title string with the ids of the
- * observing holidays (including "Federal") in brackets
- *
- * ie, "Boxing Day (ON, Federal)"
- *
- * @param {obj} holiday a holiday object containing 'provinces' and 'nameEn' keys
+ * Returns a localized ICS event title, including observing region codes
+ * and/or "Federal" unless the holiday is nationwide and federal.
+ * @param {Object} holiday
+ * @param {'en'|'fr'} [locale='en']
+ * @returns {string}
  */
-const getTitle = (holiday) => {
+const getTitle = (holiday, locale = 'en') => {
+  const t = getTranslator(locale)
+  const name = localizedName(holiday, locale)
+
   if (
-    // all provinces AND federal holidays
     holiday.provinces &&
     holiday.provinces.length === 13 &&
     holiday.federal
   ) {
-    return holiday.nameEn
+    return name
   }
 
-  let provinceIds = []
-  holiday.provinces && holiday.provinces.map((p) => provinceIds.push(p.id))
-  holiday.federal && provinceIds.push('Federal')
+  const provinceIds = holiday.provinces?.map((p) => p.id) ?? []
 
-  return `${holiday.nameEn} (${provinceIds.join(', ')})`
+  if (holiday.federal) {
+    provinceIds.push(t('ics.federal'))
+  }
+
+  return `${name} (${provinceIds.join(', ')})`
 }
 
 /**
- * Returns a description string to use for .ics files
- * If a national holiday, returns "National holiday" else a warning that the holiday isn't observed everywhere
- * @param {obj} holiday a holiday object containing a 'provinces' key
+ * Returns a localized ICS description indicating whether a holiday is national.
+ * @param {Object} holiday
+ * @param {'en'|'fr'} [locale='en']
+ * @returns {string}
  */
-const getNationalDescription = (holiday) =>
-  holiday.provinces && holiday.provinces.length === 13
-    ? 'National holiday'
-    : 'This is not a national holiday; it may not be observed in your region'
+const getNationalDescription = (holiday, locale = 'en') => {
+  const t = getTranslator(locale)
+
+  return holiday.provinces?.length === 13
+    ? t('ics.nationalHoliday')
+    : t('ics.notNationalHoliday')
+}
 
 /**
- * Returns a description string to use for .ics files
- * If a national holiday, returns "National holiday" else a warning that the holiday isn't observed everywhere
- * @param {obj} holiday a holiday object containing a 'provinces' key
+ * Returns a localized ICS description of the regions observing a holiday,
+ * including federally regulated industries where applicable.
+ * Returns a national holiday label when all 13 provinces/territories are included.
+ * @param {Object} holiday
+ * @param {'en'|'fr'} [locale='en']
+ * @returns {string}
  */
-const getProvinceDescription = (holiday) => {
+const getProvinceDescription = (holiday, locale = 'en') => {
+  const t = getTranslator(locale)
+
   if (!holiday.provinces || holiday.provinces.length === 13) {
-    return 'National holiday'
+    return t('ics.nationalHoliday')
   }
 
-  let provinceIds = []
-  holiday.provinces.length === 1
-    ? holiday.provinces.map((p) => provinceIds.push(p.nameEn))
-    : holiday.provinces.map((p) => provinceIds.push(p.id))
+  const regions = holiday.provinces.map((p) =>
+    holiday.provinces.length === 1 ? localizedName(p, locale) : p.id,
+  )
 
-  holiday.federal && provinceIds.push('federal industries')
-  if (provinceIds.length > 1) {
-    provinceIds[provinceIds.length - 1] = `and ${provinceIds[provinceIds.length - 1]}`
+  // French uses its own list formatting and sentence structure.
+  if (locale === 'fr') {
+    const count = holiday.provinces.length
+    const regionsText = frenchListFormatter.format(regions)
+
+    if (count === 0 && holiday.federal) {
+      return t('ics.observedFederally')
+    }
+
+    if (holiday.federal) {
+      return t(
+        count === 1 ? 'ics.observedInOneAndFederal' : 'ics.observedInRegionsAndFederal',
+        { regions: regionsText },
+      )
+    }
+
+    return t(count === 1 ? 'ics.observedInOne' : 'ics.observedInMany', {
+      regions: regionsText,
+    })
   }
 
-  return `Observed by ${provinceIds.length === 2 ? provinceIds.join(' ') : provinceIds.join(', ')}.`
+  // Preserve the original English formatting.
+  if (holiday.federal) {
+    regions.push(t('ics.federalIndustries'))
+  }
+
+  if (regions.length > 1) {
+    regions[regions.length - 1] = `${t('ics.and')} ${regions[regions.length - 1]}`
+  }
+
+  return t('ics.observedBy', {
+    regions: regions.length === 2 ? regions.join(' ') : regions.join(', '),
+  })
 }
 
 /**
- * Return a unique identifier per holiday.
- * A unique identifier can be found by hashing the date + the title
- * This means events with the same title across multiple years can be added
+ * Generates a stable ICS event UID by hashing the observed date and English title.
+ * This means events with the same title across multiple years can be added.
  * Also events on the same date with different titles
- *
- * @param {Object} holiday a hols holiday object
+ * Uses English regardless of locale so both FR and EN translated events retain the same UID.
+ * @param {Object} holiday
+ * @returns {string}
  */
 const getUid = (holiday) => {
   return crypto
     .createHash('sha1')
-    .update(new Date(holiday.observedDate).getTime() + getTitle(holiday))
+    .update(new Date(holiday.observedDate).getTime() + getTitle(holiday, 'en'))
     .digest('base64')
 }
 

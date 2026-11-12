@@ -125,4 +125,16 @@ module.exports = {
       backToTop: 'Retour en haut',
     },
   },
+  ics: {
+    federal: 'Fédéral',
+    federalIndustries: 'les secteurs sous réglementation fédérale',
+    nationalHoliday: 'Jour férié national',
+    notNationalHoliday: 'Ce jour férié n’est pas national; il pourrait ne pas être observé dans votre région',
+    observedInOne: 'Observé dans la région suivante : {{regions}}.',
+    observedInMany: 'Observé dans les régions suivantes : {{regions}}.',
+    observedFederally: 'Observé dans les secteurs sous réglementation fédérale.',
+    observedInOneAndFederal: 'Observé dans la région suivante : {{regions}}, ainsi que dans les secteurs sous réglementation fédérale.',
+    observedInRegionsAndFederal: 'Observé dans les régions suivantes : {{regions}}, ainsi que dans les secteurs sous réglementation fédérale.',
+    and: 'et',
+  },
 }

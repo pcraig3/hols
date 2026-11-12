@@ -260,6 +260,122 @@ describe('Test getUid', () => {
   })
 })
 
+
+describe('Test ICS localization', () => {
+  const holiday = {
+    nameEn: 'Family Day',
+    nameFr: 'Fête de la famille',
+    observedDate: '2022-02-21',
+    provinces: [
+      {
+        id: 'AB',
+        nameEn: 'Alberta',
+        nameFr: 'Alberta',
+      },
+    ],
+    federal: 1,
+  }
+
+  test('English remains the default', () => {
+    expect(getTitle(holiday)).toBe('Family Day (AB, Federal)')
+    expect(getProvinceDescription(holiday)).toBe(
+      'Observed by Alberta and federal industries.',
+    )
+  })
+
+  test('returns French holiday titles', () => {
+    expect(getTitle(holiday, 'fr')).toBe('Fête de la famille (AB, Fédéral)')
+  })
+
+  test('returns French description for one province', () => {
+    const provincialHoliday = { ...holiday, federal: 0 }
+
+    expect(getProvinceDescription(provincialHoliday, 'fr')).toBe(
+      'Observé dans la région suivante : Alberta.',
+    )
+  })
+
+  test('returns French description for two provinces', () => {
+    const multiProvinceHoliday = {
+      ...holiday,
+      federal: 0,
+      provinces: [{ id: 'AB' }, { id: 'BC' }],
+    }
+
+    expect(getProvinceDescription(multiProvinceHoliday, 'fr')).toBe(
+      'Observé dans les régions suivantes : AB et BC.',
+    )
+  })
+
+  test('returns French description for three provinces', () => {
+    const multiProvinceHoliday = {
+      ...holiday,
+      federal: 0,
+      provinces: [{ id: 'AB' }, { id: 'BC' }, { id: 'MB' }],
+    }
+
+    expect(getProvinceDescription(multiProvinceHoliday, 'fr')).toBe(
+      'Observé dans les régions suivantes : AB, BC et MB.',
+    )
+  })
+
+  test('returns French description for federal-only holidays', () => {
+    const federalHoliday = {
+      ...holiday,
+      provinces: [],
+    }
+
+    expect(getProvinceDescription(federalHoliday, 'fr')).toBe(
+      'Observé dans les secteurs sous réglementation fédérale.',
+    )
+  })
+
+  test('returns French description for one province and federal', () => {
+    expect(getProvinceDescription(holiday, 'fr')).toBe(
+      'Observé dans la région suivante : Alberta, ainsi que dans les secteurs sous réglementation fédérale.',
+    )
+  })
+
+  test('returns French description for multiple provinces and federal', () => {
+    const multiProvinceHoliday = {
+      ...holiday,
+      provinces: [{ id: 'AB' }, { id: 'BC' }],
+    }
+
+    expect(getProvinceDescription(multiProvinceHoliday, 'fr')).toBe(
+      'Observé dans les régions suivantes : AB et BC, ainsi que dans les secteurs sous réglementation fédérale.',
+    )
+  })
+
+  test('returns French national holiday descriptions', () => {
+    const nationalHoliday = {
+      ...holiday,
+      provinces: Array(13).fill({}),
+    }
+
+    expect(getNationalDescription(nationalHoliday, 'fr')).toBe(
+      'Jour férié national',
+    )
+
+    expect(getTitle(nationalHoliday, 'fr')).toBe('Fête de la famille')
+  })
+
+  test('returns French non-national holiday warnings', () => {
+    expect(getNationalDescription(holiday, 'fr')).toBe(
+      'Ce jour férié n’est pas national; il pourrait ne pas être observé dans votre région',
+    )
+  })
+
+  test('UID does not change when the French name changes', () => {
+    const differentTranslation = {
+      ...holiday,
+      nameFr: 'Autre nom français',
+    }
+
+    expect(getUid(holiday)).toBe(getUid(differentTranslation))
+  })
+})
+
 describe('Test getCurrentDate', () => {
   const RealDate = Date
 
