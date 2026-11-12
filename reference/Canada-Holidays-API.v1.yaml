@@ -1,7 +1,7 @@
 openapi: 3.0.0
 info:
   title: Canada Holidays API
-  version: 1.15.0
+  version: 1.16.0
   description: 'This API lists public holidays observed federally and across Canada’s 13 provinces and territories.'
   contact:
     name: Paul Craig
@@ -61,16 +61,17 @@ paths:
               examples:
                 /:
                   value:
-                    message: Hello / Bonjour! Welcome to the Canada Holidays API / Bienvenue dans l’API canadienne des jours fériés
+                    message: Hello / Bonjour! Welcome to the Canada Holidays API / Bienvenue dans
+                      l’API canadienne des jours fériés
                     _links:
                       self:
-                        href: 'https://canada-holidays.ca/api/v1/'
+                        href: https://canada-holidays.ca/api/v1/
                       holidays:
-                        href: 'https://canada-holidays.ca/api/v1/holidays'
+                        href: https://canada-holidays.ca/api/v1/holidays
                       provinces:
-                        href: 'https://canada-holidays.ca/api/v1/provinces'
+                        href: https://canada-holidays.ca/api/v1/provinces
                       spec:
-                        href: 'https://canada-holidays.ca/api/v1/spec'
+                        href: https://canada-holidays.ca/api/v1/spec
       operationId: Root
       description: Returns a welcome message.
       tags:
@@ -96,89 +97,123 @@ paths:
                   value:
                     holidays:
                       - id: 1
-                        date: '2023-01-01'
+                        date: '2026-01-01'
                         nameEn: New Year’s Day
                         nameFr: Jour de l’An
                         federal: 1
-                        observedDate: '2023-01-02'
+                        observedDate: '2026-01-01'
                         provinces:
                           - id: AB
                             nameEn: Alberta
                             nameFr: Alberta
-                            sourceLink: 'https://www.alberta.ca/alberta-general-holidays.aspx#jumplinks-1'
                             sourceEn: General holidays in Alberta
+                            sourceLinkEn: https://www.alberta.ca/alberta-general-holidays#jumplinks-2
+                            sourceLink: https://www.alberta.ca/alberta-general-holidays#jumplinks-2
                           - id: BC
                             nameEn: British Columbia
                             nameFr: Colombie-Britannique
-                            sourceLink: 'https://www2.gov.bc.ca/gov/content/employment-business/employment-standards-advice/employment-standards/statutory-holidays#body'
-                            sourceEn: Statutory Holidays in British Columbia
+                            sourceEn: Statutory holidays in British Columbia
+                            sourceLinkEn: https://www2.gov.bc.ca/gov/content/employment-business/employment-standards-advice/employment-standards/statutory-holidays
+                            sourceLink: https://www2.gov.bc.ca/gov/content/employment-business/employment-standards-advice/employment-standards/statutory-holidays
                           - id: MB
                             nameEn: Manitoba
                             nameFr: Manitoba
-                            sourceLink: 'https://www.gov.mb.ca/labour/standards/doc,gen-holidays-after-april-30-07,factsheet.html#q12'
-                            sourceEn: General holidays in Manitoba
+                            sourceEn: What are the general holidays in Manitoba?
+                            sourceFr: Quels sont les jours fériés au Manitoba?
+                            sourceLinkEn: https://www.gov.mb.ca/labour/standards/doc,gen-holidays-after-april-30-07,factsheet.html#q12
+                            sourceLinkFr: https://www.gov.mb.ca/labour/standards/doc,gen-holidays-after-april-30-07,factsheet.fr.html#q12
+                            sourceLink: https://www.gov.mb.ca/labour/standards/doc,gen-holidays-after-april-30-07,factsheet.html#q12
                           - id: NB
                             nameEn: New Brunswick
                             nameFr: Nouveau-Brunswick
-                            sourceLink: 'https://www2.gnb.ca/content/gnb/en/departments/elg/local_government/content/governance/content/days_of_rest_act/faq.html#2'
-                            sourceEn: 10 prescribed days of rest
+                            sourceEn: What are the 11 prescribed days of rest?
+                            sourceFr: Quels sont les 11 jours prescrits de repos?
+                            sourceLinkEn: https://www2.gnb.ca/content/gnb/en/departments/elg/local_government/content/governance/content/days_of_rest_act/faq.html#2
+                            sourceLinkFr: https://www2.gnb.ca/content/gnb/fr/ministeres/egl/gouvernements_locaux/content/gouvernance/content/loi_su_les_jours_de_repos/faq.html#2
+                            sourceLink: https://www2.gnb.ca/content/gnb/en/departments/elg/local_government/content/governance/content/days_of_rest_act/faq.html#2
                           - id: NL
                             nameEn: Newfoundland and Labrador
                             nameFr: Terre-Neuve-et-Labrador
-                            sourceLink: 'https://www.gov.nl.ca/exec/tbs/2026-paid-holidays-2/'
-                            sourceEn: Newfoundland 2026 Paid Holidays
+                            sourceEn: 2026 Paid Holidays
+                            sourceLinkEn: https://www.gov.nl.ca/exec/tbs/2026-paid-holidays-2/
+                            sourceLink: https://www.gov.nl.ca/exec/tbs/2026-paid-holidays-2/
                           - id: NT
                             nameEn: Northwest Territories
                             nameFr: Territoires du Nord-Ouest
-                            sourceLink: 'https://www.ece.gov.nt.ca/en/services/employment-standards/frequently-asked-questions#Statutory%20Holidays'
-                            sourceEn: 'Employment Standards, Northwest Territories'
+                            sourceEn: Statutory Holidays and Holiday Pay
+                            sourceFr: Jours fériés et rémunération des jours fériés
+                            sourceLinkEn: https://www.ece.gov.nt.ca/en/services/employment-standards/frequently-asked-questions#Statutory%20Holidays
+                            sourceLinkFr: https://www.ece.gov.nt.ca/fr/services/employment-standards/foires-aux-questions#jours-f-ri-s-et-r-mun-ration-des-jours-f-ri-s
+                            sourceLink: https://www.ece.gov.nt.ca/en/services/employment-standards/frequently-asked-questions#Statutory%20Holidays
                           - id: NS
                             nameEn: Nova Scotia
                             nameFr: Nouvelle-Écosse
-                            sourceLink: 'https://novascotia.ca/lae/employmentrights/holidaychart.asp'
                             sourceEn: Paid holidays in Nova Scotia
+                            sourceFr: Jours fériés payés en Nouvelle-Écosse
+                            sourceLinkEn: https://novascotia.ca/lae/employmentrights/holidaychart.asp
+                            sourceLinkFr: https://novascotia.ca/lae/employmentrights/holidaychart-fr.asp
+                            sourceLink: https://novascotia.ca/lae/employmentrights/holidaychart.asp
                           - id: NU
                             nameEn: Nunavut
                             nameFr: Nunavut
-                            sourceLink: 'https://nu-lsco.ca/faq-s?tmpl=component&faqid=11'
-                            sourceEn: Nunavut General Holidays
-                          - id: 'ON'
+                            sourceEn: General Holidays
+                            sourceFr: Jours fériés
+                            sourceLinkEn: https://www.gov.nu.ca/en/employment-training-and-career-development/labour-and-employment-standards-nunavut#general-holidays
+                            sourceLinkFr: https://www.gov.nu.ca/fr/emploi-formation-et-perfectionnement-professionnel/normes-du-travail-du-nunavut#general-holidays
+                            sourceLink: https://www.gov.nu.ca/en/employment-training-and-career-development/labour-and-employment-standards-nunavut#general-holidays
+                          - id: ON
                             nameEn: Ontario
                             nameFr: Ontario
-                            sourceLink: 'https://www.ontario.ca/document/your-guide-employment-standards-act-0/public-holidays'
-                            sourceEn: Ontario Public holidays
+                            sourceEn: Public holidays
+                            sourceFr: Jours fériés
+                            sourceLinkEn: https://www.ontario.ca/document/your-guide-employment-standards-act-0/public-holidays
+                            sourceLinkFr: https://www.ontario.ca/fr/document/votre-guide-de-la-loi-sur-les-normes-demploi-0/jours-feries
+                            sourceLink: https://www.ontario.ca/document/your-guide-employment-standards-act-0/public-holidays
                           - id: PE
                             nameEn: Prince Edward Island
                             nameFr: Île-du-Prince-Édouard
-                            sourceLink: 'https://www.princeedwardisland.ca/en/information/economic-growth-tourism-and-culture/paid-holidays'
-                            sourceEn: PEI Paid Holidays
+                            sourceEn: Paid Holidays
+                            sourceLinkEn: https://www.princeedwardisland.ca/en/information/workforce-and-advanced-learning/paid-holidays
+                            sourceLink: https://www.princeedwardisland.ca/en/information/workforce-and-advanced-learning/paid-holidays
                           - id: QC
                             nameEn: Quebec
                             nameFr: Québec
-                            sourceLink: 'https://www2.gouv.qc.ca/entreprises/portail/quebec/ressourcesh?lang=fr&g=ressourcesh&sg=personnel&t=o&e=2318829344:3908165687'
-                            sourceEn: 'Jours fériés, chômés et payés'
+                            sourceEn: Statutory holidays in Quebec
+                            sourceFr: Jours fériés au Québec
+                            sourceLinkEn: https://www.cnesst.gouv.qc.ca/en/working-conditions/leave/statutory-holidays/statutory-holidays
+                            sourceLinkFr: https://www.cnesst.gouv.qc.ca/fr/conditions-travail/conges/jours-feries/liste-jours-feries
+                            sourceLink: https://www.cnesst.gouv.qc.ca/en/working-conditions/leave/statutory-holidays/statutory-holidays
                           - id: SK
                             nameEn: Saskatchewan
                             nameFr: Saskatchewan
-                            sourceLink: 'https://www.saskatchewan.ca/business/employment-standards/public-statutory-holidays/list-of-saskatchewan-public-holidays'
-                            sourceEn: Saskatchewan Public Holidays
+                            sourceEn: List of Saskatchewan Public Holidays
+                            sourceFr: Liste des jours fériés en Saskatchewan
+                            sourceLinkEn: https://www.saskatchewan.ca/business/employment-standards/public-statutory-holidays/list-of-saskatchewan-public-holidays
+                            sourceLinkFr: https://www.saskatchewan.ca/bonjour/working-jobs-and-pensions/employment-standards/vacations-holidays-leaves-and-absences/public-statutory-holidays
+                            sourceLink: https://www.saskatchewan.ca/business/employment-standards/public-statutory-holidays/list-of-saskatchewan-public-holidays
                           - id: YT
                             nameEn: Yukon
                             nameFr: Yukon
-                            sourceLink: 'https://yukon.ca/en/doing-business/employer-responsibilities/find-yukon-statutory-holiday'
-                            sourceEn: Yukon statutory holiday dates
-                      - id: 2
-                        date: '2023-02-20'
+                            sourceEn: Find a Yukon statutory holiday
+                            sourceFr: Jours fériés au Yukon
+                            sourceLinkEn: https://yukon.ca/en/doing-business/employer-responsibilities/find-yukon-statutory-holiday
+                            sourceLinkFr: https://yukon.ca/fr/entreprises/obligations-de-lemployeur/jours-feries-au-yukon
+                            sourceLink: https://yukon.ca/en/doing-business/employer-responsibilities/find-yukon-statutory-holiday
+                      - id: 3
+                        date: '2026-02-16'
                         nameEn: Louis Riel Day
                         nameFr: Journée Louis Riel
                         federal: 0
-                        observedDate: '2023-02-20'
+                        observedDate: '2026-02-16'
                         provinces:
                           - id: MB
                             nameEn: Manitoba
                             nameFr: Manitoba
-                            sourceLink: 'https://www.gov.mb.ca/labour/standards/doc,gen-holidays-after-april-30-07,factsheet.html#q12'
-                            sourceEn: General holidays in Manitoba
+                            sourceEn: What are the general holidays in Manitoba?
+                            sourceFr: Quels sont les jours fériés au Manitoba?
+                            sourceLinkEn: https://www.gov.mb.ca/labour/standards/doc,gen-holidays-after-april-30-07,factsheet.html#q12
+                            sourceLinkFr: https://www.gov.mb.ca/labour/standards/doc,gen-holidays-after-april-30-07,factsheet.fr.html#q12
+                            sourceLink: https://www.gov.mb.ca/labour/standards/doc,gen-holidays-after-april-30-07,factsheet.html#q12
       operationId: Holidays
       description: Returns Canadian public holidays. Each holiday lists the regions that observe it.
       parameters:
@@ -241,53 +276,55 @@ paths:
                       - id: AB
                         nameEn: Alberta
                         nameFr: Alberta
-                        sourceLink: 'https://www.alberta.ca/alberta-general-holidays.aspx#jumplinks-1'
                         sourceEn: General holidays in Alberta
+                        sourceLinkEn: https://www.alberta.ca/alberta-general-holidays#jumplinks-2
+                        sourceLink: https://www.alberta.ca/alberta-general-holidays#jumplinks-2
                         holidays:
                           - id: 1
-                            date: '2023-01-01'
+                            date: '2026-01-01'
                             nameEn: New Year’s Day
                             nameFr: Jour de l’An
                             federal: 1
-                            observedDate: '2023-01-02'
-                          - id: 4
-                            date: '2023-02-20'
+                            observedDate: '2026-01-01'
+                          - id: 5
+                            date: '2026-02-16'
                             nameEn: Family Day
                             nameFr: Fête de la famille
                             federal: 0
-                            observedDate: '2023-02-20'
+                            observedDate: '2026-02-16'
                         nextHoliday:
-                          id: 1
-                          date: '2023-01-01'
-                          nameEn: New Year’s Day
-                          nameFr: Jour de l’An
+                          id: 34
+                          date: '2026-12-25'
+                          nameEn: Christmas Day
+                          nameFr: Noël
                           federal: 1
-                          observedDate: '2023-01-02'
+                          observedDate: '2026-12-25'
                       - id: BC
                         nameEn: British Columbia
                         nameFr: Colombie-Britannique
-                        sourceLink: 'https://www2.gov.bc.ca/gov/content/employment-business/employment-standards-advice/employment-standards/statutory-holidays#body'
-                        sourceEn: Statutory Holidays in British Columbia
+                        sourceEn: Statutory holidays in British Columbia
+                        sourceLinkEn: https://www2.gov.bc.ca/gov/content/employment-business/employment-standards-advice/employment-standards/statutory-holidays
+                        sourceLink: https://www2.gov.bc.ca/gov/content/employment-business/employment-standards-advice/employment-standards/statutory-holidays
                         holidays:
                           - id: 1
-                            date: '2023-01-01'
+                            date: '2026-01-01'
                             nameEn: New Year’s Day
                             nameFr: Jour de l’An
                             federal: 1
-                            observedDate: '2023-01-02'
-                          - id: 4
-                            date: '2023-02-20'
+                            observedDate: '2026-01-01'
+                          - id: 5
+                            date: '2026-02-16'
                             nameEn: Family Day
                             nameFr: Fête de la famille
                             federal: 0
-                            observedDate: '2023-02-20'
+                            observedDate: '2026-02-16'
                         nextHoliday:
-                          id: 1
-                          date: '2023-01-01'
-                          nameEn: New Year’s Day
-                          nameFr: Jour de l’An
+                          id: 34
+                          date: '2026-12-25'
+                          nameEn: Christmas Day
+                          nameFr: Noël
                           federal: 1
-                          observedDate: '2023-01-02'
+                          observedDate: '2026-12-25'
       operationId: Provinces
       parameters:
         - schema:
@@ -333,64 +370,73 @@ paths:
                       id: MB
                       nameEn: Manitoba
                       nameFr: Manitoba
-                      sourceLink: 'https://www.gov.mb.ca/labour/standards/doc,gen-holidays-after-april-30-07,factsheet.html#q12'
-                      sourceEn: General holidays in Manitoba
+                      sourceEn: What are the general holidays in Manitoba?
+                      sourceFr: Quels sont les jours fériés au Manitoba?
+                      sourceLinkEn: https://www.gov.mb.ca/labour/standards/doc,gen-holidays-after-april-30-07,factsheet.html#q12
+                      sourceLinkFr: https://www.gov.mb.ca/labour/standards/doc,gen-holidays-after-april-30-07,factsheet.fr.html#q12
+                      sourceLink: https://www.gov.mb.ca/labour/standards/doc,gen-holidays-after-april-30-07,factsheet.html#q12
                       holidays:
                         - id: 1
-                          date: '2023-01-01'
+                          date: '2026-01-01'
                           nameEn: New Year’s Day
                           nameFr: Jour de l’An
                           federal: 1
-                          observedDate: '2023-01-02'
-                        - id: 2
-                          date: '2023-02-20'
+                          observedDate: '2026-01-01'
+                        - id: 3
+                          date: '2026-02-16'
                           nameEn: Louis Riel Day
                           nameFr: Journée Louis Riel
                           federal: 0
-                          observedDate: '2023-02-20'
-                        - id: 7
-                          date: '2023-04-07'
+                          observedDate: '2026-02-16'
+                        - id: 8
+                          date: '2026-04-03'
                           nameEn: Good Friday
                           nameFr: Vendredi saint
                           federal: 1
-                          observedDate: '2023-04-07'
-                        - id: 11
-                          date: '2023-05-22'
+                          observedDate: '2026-04-03'
+                        - id: 12
+                          date: '2026-05-18'
                           nameEn: Victoria Day
                           nameFr: Fête de la Reine
                           federal: 1
-                          observedDate: '2023-05-22'
-                        - id: 15
-                          date: '2023-07-01'
+                          observedDate: '2026-05-18'
+                        - id: 16
+                          date: '2026-07-01'
                           nameEn: Canada Day
                           nameFr: Fête du Canada
                           federal: 1
-                          observedDate: '2023-07-03'
-                        - id: 26
-                          date: '2023-09-04'
+                          observedDate: '2026-07-01'
+                        - id: 28
+                          date: '2026-09-07'
                           nameEn: Labour Day
                           nameFr: Fête du travail
                           federal: 1
-                          observedDate: '2023-09-04'
-                        - id: 29
-                          date: '2023-10-09'
+                          observedDate: '2026-09-07'
+                        - id: 31
+                          date: '2026-09-30'
+                          nameEn: Orange Shirt Day
+                          nameFr: Jour du chandail orange
+                          federal: 0
+                          observedDate: '2026-09-30'
+                        - id: 32
+                          date: '2026-10-12'
                           nameEn: Thanksgiving
                           nameFr: Action de grâce
                           federal: 1
-                          observedDate: '2023-10-09'
-                        - id: 31
-                          date: '2023-12-25'
+                          observedDate: '2026-10-12'
+                        - id: 34
+                          date: '2026-12-25'
                           nameEn: Christmas Day
                           nameFr: Noël
                           federal: 1
-                          observedDate: '2023-12-25'
+                          observedDate: '2026-12-25'
                       nextHoliday:
-                        id: 1
-                        date: '2023-01-01'
-                        nameEn: New Year’s Day
-                        nameFr: Jour de l’An
+                        id: 34
+                        date: '2026-12-25'
+                        nameEn: Christmas Day
+                        nameFr: Noël
                         federal: 1
-                        observedDate: '2023-01-02'
+                        observedDate: '2026-12-25'
         '400':
           description: Bad Request
           content:
@@ -405,8 +451,9 @@ paths:
                   value:
                     error:
                       status: 400
-                      message: 'Error: request.params.provinceId should be equal to one of the allowed values: AB, BC, MB, NB, NL, NS, NT, NU, ON, PE, QC, SK, YT'
-                      timestamp: '2020-04-28T04:02:38.813Z'
+                      message: "Bad Request: request/params/provinceId must be equal to one of the
+                        allowed values: AB, BC, MB, NB, NL, NS, NT, NU, ON, PE, QC, SK, YT"
+                      timestamp: '2026-11-12T01:13:51.461Z'
       operationId: Province
       description: Returns a Canadian province or territory with its associated holidays. Returns a 404 response for invalid abbreviations.
       parameters:
@@ -484,71 +531,90 @@ paths:
                   value:
                     holiday:
                       id: 35
-                      date: '2023-12-26'
+                      date: '2026-12-26'
                       nameEn: Boxing Day
                       nameFr: Lendemain de Noël
                       federal: 1
-                      observedDate: '2023-12-26'
+                      observedDate: '2026-12-28'
                       provinces:
                         - id: NL
                           nameEn: Newfoundland and Labrador
                           nameFr: Terre-Neuve-et-Labrador
-                          sourceLink: 'https://www.gov.nl.ca/exec/tbs/2026-paid-holidays-2/'
-                          sourceEn: Newfoundland 2026 Paid Holidays
-                        - id: 'ON'
+                          sourceEn: 2026 Paid Holidays
+                          sourceLinkEn: https://www.gov.nl.ca/exec/tbs/2026-paid-holidays-2/
+                          sourceLink: https://www.gov.nl.ca/exec/tbs/2026-paid-holidays-2/
+                        - id: ON
                           nameEn: Ontario
                           nameFr: Ontario
-                          sourceLink: 'https://www.ontario.ca/document/your-guide-employment-standards-act-0/public-holidays'
-                          sourceEn: Ontario Public holidays
+                          sourceEn: Public holidays
+                          sourceFr: Jours fériés
+                          sourceLinkEn: https://www.ontario.ca/document/your-guide-employment-standards-act-0/public-holidays
+                          sourceLinkFr: https://www.ontario.ca/fr/document/votre-guide-de-la-loi-sur-les-normes-demploi-0/jours-feries
+                          sourceLink: https://www.ontario.ca/document/your-guide-employment-standards-act-0/public-holidays
                 /holidays/35?optional=true:
                   value:
                     holiday:
                       id: 35
-                      date: '2024-12-26'
+                      date: '2026-12-26'
                       nameEn: Boxing Day
                       nameFr: Lendemain de Noël
                       federal: 1
-                      observedDate: '2024-12-26'
+                      observedDate: '2026-12-28'
                       provinces:
                         - id: NL
                           nameEn: Newfoundland and Labrador
                           nameFr: Terre-Neuve-et-Labrador
-                          sourceLink: 'https://www.gov.nl.ca/exec/tbs/2026-paid-holidays-2/'
-                          sourceEn: Newfoundland 2026 Paid Holidays
-                        - id: 'ON'
+                          sourceEn: 2026 Paid Holidays
+                          sourceLinkEn: https://www.gov.nl.ca/exec/tbs/2026-paid-holidays-2/
+                          sourceLink: https://www.gov.nl.ca/exec/tbs/2026-paid-holidays-2/
+                        - id: ON
                           nameEn: Ontario
                           nameFr: Ontario
-                          sourceLink: 'https://www.ontario.ca/document/your-guide-employment-standards-act-0/public-holidays'
-                          sourceEn: Ontario Public holidays
+                          sourceEn: Public holidays
+                          sourceFr: Jours fériés
+                          sourceLinkEn: https://www.ontario.ca/document/your-guide-employment-standards-act-0/public-holidays
+                          sourceLinkFr: https://www.ontario.ca/fr/document/votre-guide-de-la-loi-sur-les-normes-demploi-0/jours-feries
+                          sourceLink: https://www.ontario.ca/document/your-guide-employment-standards-act-0/public-holidays
                         - id: AB
                           nameEn: Alberta
                           nameFr: Alberta
-                          sourceLink: 'https://www.alberta.ca/alberta-general-holidays.aspx#jumplinks-1'
                           sourceEn: General holidays in Alberta
+                          sourceLinkEn: https://www.alberta.ca/alberta-general-holidays#jumplinks-2
+                          sourceLink: https://www.alberta.ca/alberta-general-holidays#jumplinks-2
                           optional: 1
                         - id: BC
                           nameEn: British Columbia
                           nameFr: Colombie-Britannique
-                          sourceLink: 'https://www2.gov.bc.ca/gov/content/employment-business/employment-standards-advice/employment-standards/statutory-holidays#body'
-                          sourceEn: Statutory Holidays in British Columbia
+                          sourceEn: Statutory holidays in British Columbia
+                          sourceLinkEn: https://www2.gov.bc.ca/gov/content/employment-business/employment-standards-advice/employment-standards/statutory-holidays
+                          sourceLink: https://www2.gov.bc.ca/gov/content/employment-business/employment-standards-advice/employment-standards/statutory-holidays
                           optional: 1
                         - id: MB
                           nameEn: Manitoba
                           nameFr: Manitoba
-                          sourceLink: 'https://www.gov.mb.ca/labour/standards/doc,gen-holidays-after-april-30-07,factsheet.html#q12'
-                          sourceEn: General holidays in Manitoba
+                          sourceEn: What are the general holidays in Manitoba?
+                          sourceFr: Quels sont les jours fériés au Manitoba?
+                          sourceLinkEn: https://www.gov.mb.ca/labour/standards/doc,gen-holidays-after-april-30-07,factsheet.html#q12
+                          sourceLinkFr: https://www.gov.mb.ca/labour/standards/doc,gen-holidays-after-april-30-07,factsheet.fr.html#q12
+                          sourceLink: https://www.gov.mb.ca/labour/standards/doc,gen-holidays-after-april-30-07,factsheet.html#q12
                           optional: 1
                         - id: NB
                           nameEn: New Brunswick
                           nameFr: Nouveau-Brunswick
-                          sourceLink: 'https://www2.gnb.ca/content/gnb/en/departments/elg/local_government/content/governance/content/days_of_rest_act/faq.html#2'
-                          sourceEn: 10 prescribed days of rest
+                          sourceEn: What are the 11 prescribed days of rest?
+                          sourceFr: Quels sont les 11 jours prescrits de repos?
+                          sourceLinkEn: https://www2.gnb.ca/content/gnb/en/departments/elg/local_government/content/governance/content/days_of_rest_act/faq.html#2
+                          sourceLinkFr: https://www2.gnb.ca/content/gnb/fr/ministeres/egl/gouvernements_locaux/content/gouvernance/content/loi_su_les_jours_de_repos/faq.html#2
+                          sourceLink: https://www2.gnb.ca/content/gnb/en/departments/elg/local_government/content/governance/content/days_of_rest_act/faq.html#2
                           optional: 1
                         - id: NS
                           nameEn: Nova Scotia
                           nameFr: Nouvelle-Écosse
-                          sourceLink: 'https://novascotia.ca/lae/employmentrights/holidaychart.asp'
                           sourceEn: Paid holidays in Nova Scotia
+                          sourceFr: Jours fériés payés en Nouvelle-Écosse
+                          sourceLinkEn: https://novascotia.ca/lae/employmentrights/holidaychart.asp
+                          sourceLinkFr: https://novascotia.ca/lae/employmentrights/holidaychart-fr.asp
+                          sourceLink: https://novascotia.ca/lae/employmentrights/holidaychart.asp
                           optional: 1
         '400':
           description: Bad Request
@@ -564,8 +630,8 @@ paths:
                   value:
                     error:
                       status: 400
-                      message: 'Error: request.params.holidayId should be <= 35'
-                      timestamp: '2020-04-28T03:59:56.605Z'
+                      message: "Bad Request: request/params/holidayId must be <= 35"
+                      timestamp: '2026-11-12T01:13:51.464Z'
       operationId: Holiday
       description: Returns one Canadian statutory holiday by integer id. Returns a 404 response for invalid ids.
       parameters:
@@ -617,51 +683,66 @@ components:
         /holidays/35?optional=true:
           holiday:
             id: 35
-            date: '2024-12-26'
+            date: '2026-12-26'
             nameEn: Boxing Day
             nameFr: Lendemain de Noël
             federal: 1
-            observedDate: '2024-12-26'
+            observedDate: '2026-12-28'
             provinces:
               - id: NL
                 nameEn: Newfoundland and Labrador
                 nameFr: Terre-Neuve-et-Labrador
-                sourceLink: 'https://www.gov.nl.ca/exec/tbs/2026-paid-holidays-2/'
-                sourceEn: Newfoundland 2026 Paid Holidays
-              - id: 'ON'
+                sourceEn: 2026 Paid Holidays
+                sourceLinkEn: https://www.gov.nl.ca/exec/tbs/2026-paid-holidays-2/
+                sourceLink: https://www.gov.nl.ca/exec/tbs/2026-paid-holidays-2/
+              - id: ON
                 nameEn: Ontario
                 nameFr: Ontario
-                sourceLink: 'https://www.ontario.ca/document/your-guide-employment-standards-act-0/public-holidays'
-                sourceEn: Ontario Public holidays
+                sourceEn: Public holidays
+                sourceFr: Jours fériés
+                sourceLinkEn: https://www.ontario.ca/document/your-guide-employment-standards-act-0/public-holidays
+                sourceLinkFr: https://www.ontario.ca/fr/document/votre-guide-de-la-loi-sur-les-normes-demploi-0/jours-feries
+                sourceLink: https://www.ontario.ca/document/your-guide-employment-standards-act-0/public-holidays
               - id: AB
                 nameEn: Alberta
                 nameFr: Alberta
-                sourceLink: 'https://www.alberta.ca/alberta-general-holidays.aspx#jumplinks-1'
                 sourceEn: General holidays in Alberta
+                sourceLinkEn: https://www.alberta.ca/alberta-general-holidays#jumplinks-2
+                sourceLink: https://www.alberta.ca/alberta-general-holidays#jumplinks-2
                 optional: 1
               - id: BC
                 nameEn: British Columbia
                 nameFr: Colombie-Britannique
-                sourceLink: 'https://www2.gov.bc.ca/gov/content/employment-business/employment-standards-advice/employment-standards/statutory-holidays#body'
-                sourceEn: Statutory Holidays in British Columbia
+                sourceEn: Statutory holidays in British Columbia
+                sourceLinkEn: https://www2.gov.bc.ca/gov/content/employment-business/employment-standards-advice/employment-standards/statutory-holidays
+                sourceLink: https://www2.gov.bc.ca/gov/content/employment-business/employment-standards-advice/employment-standards/statutory-holidays
                 optional: 1
               - id: MB
                 nameEn: Manitoba
                 nameFr: Manitoba
-                sourceLink: 'https://www.gov.mb.ca/labour/standards/doc,gen-holidays-after-april-30-07,factsheet.html#q12'
-                sourceEn: General holidays in Manitoba
+                sourceEn: What are the general holidays in Manitoba?
+                sourceFr: Quels sont les jours fériés au Manitoba?
+                sourceLinkEn: https://www.gov.mb.ca/labour/standards/doc,gen-holidays-after-april-30-07,factsheet.html#q12
+                sourceLinkFr: https://www.gov.mb.ca/labour/standards/doc,gen-holidays-after-april-30-07,factsheet.fr.html#q12
+                sourceLink: https://www.gov.mb.ca/labour/standards/doc,gen-holidays-after-april-30-07,factsheet.html#q12
                 optional: 1
               - id: NB
                 nameEn: New Brunswick
                 nameFr: Nouveau-Brunswick
-                sourceLink: 'https://www2.gnb.ca/content/gnb/en/departments/elg/local_government/content/governance/content/days_of_rest_act/faq.html#2'
-                sourceEn: 10 prescribed days of rest
+                sourceEn: What are the 11 prescribed days of rest?
+                sourceFr: Quels sont les 11 jours prescrits de repos?
+                sourceLinkEn: https://www2.gnb.ca/content/gnb/en/departments/elg/local_government/content/governance/content/days_of_rest_act/faq.html#2
+                sourceLinkFr: https://www2.gnb.ca/content/gnb/fr/ministeres/egl/gouvernements_locaux/content/gouvernance/content/loi_su_les_jours_de_repos/faq.html#2
+                sourceLink: https://www2.gnb.ca/content/gnb/en/departments/elg/local_government/content/governance/content/days_of_rest_act/faq.html#2
                 optional: 1
               - id: NS
                 nameEn: Nova Scotia
                 nameFr: Nouvelle-Écosse
-                sourceLink: 'https://novascotia.ca/lae/employmentrights/holidaychart.asp'
                 sourceEn: Paid holidays in Nova Scotia
+                sourceFr: Jours fériés payés en Nouvelle-Écosse
+                sourceLinkEn: https://novascotia.ca/lae/employmentrights/holidaychart.asp
+                sourceLinkFr: https://novascotia.ca/lae/employmentrights/holidaychart-fr.asp
+                sourceLink: https://novascotia.ca/lae/employmentrights/holidaychart.asp
                 optional: 1
       properties:
         id:
@@ -674,7 +755,8 @@ components:
           type: string
           description: 'ISO date: the literal date of the holiday'
           format: date
-          example: '2020-12-26'
+          example: '2026-12-26'
+
         nameEn:
           type: string
           description: English name
@@ -694,7 +776,8 @@ components:
           type: string
           description: 'ISO date: when this holiday is observed'
           format: date
-          example: '2020-12-28'
+          example: '2026-12-28'
+
         provinces:
           type: array
           items:
@@ -721,76 +804,79 @@ components:
             id: SK
             nameEn: Saskatchewan
             nameFr: Saskatchewan
-            sourceLink: 'https://www.saskatchewan.ca/business/employment-standards/public-statutory-holidays/list-of-saskatchewan-public-holidays'
-            sourceEn: Saskatchewan Public Holidays
+            sourceEn: List of Saskatchewan Public Holidays
+            sourceFr: Liste des jours fériés en Saskatchewan
+            sourceLinkEn: https://www.saskatchewan.ca/business/employment-standards/public-statutory-holidays/list-of-saskatchewan-public-holidays
+            sourceLinkFr: https://www.saskatchewan.ca/bonjour/working-jobs-and-pensions/employment-standards/vacations-holidays-leaves-and-absences/public-statutory-holidays
+            sourceLink: https://www.saskatchewan.ca/business/employment-standards/public-statutory-holidays/list-of-saskatchewan-public-holidays
             holidays:
               - id: 1
-                date: '2023-01-01'
+                date: '2026-01-01'
                 nameEn: New Year’s Day
                 nameFr: Jour de l’An
                 federal: 1
-                observedDate: '2023-01-02'
+                observedDate: '2026-01-01'
               - id: 5
-                date: '2023-02-20'
+                date: '2026-02-16'
                 nameEn: Family Day
                 nameFr: Fête de la famille
                 federal: 0
-                observedDate: '2023-02-20'
+                observedDate: '2026-02-16'
               - id: 8
-                date: '2023-04-07'
+                date: '2026-04-03'
                 nameEn: Good Friday
                 nameFr: Vendredi saint
                 federal: 1
-                observedDate: '2023-04-07'
+                observedDate: '2026-04-03'
               - id: 12
-                date: '2023-05-22'
+                date: '2026-05-18'
                 nameEn: Victoria Day
                 nameFr: Fête de la Reine
                 federal: 1
-                observedDate: '2023-05-22'
+                observedDate: '2026-05-18'
               - id: 16
-                date: '2023-07-01'
+                date: '2026-07-01'
                 nameEn: Canada Day
                 nameFr: Fête du Canada
                 federal: 1
-                observedDate: '2023-07-03'
+                observedDate: '2026-07-01'
               - id: 23
-                date: '2023-08-07'
+                date: '2026-08-03'
                 nameEn: Saskatchewan Day
                 nameFr: Jour de Saskatchewan
                 federal: 0
-                observedDate: '2023-08-07'
+                observedDate: '2026-08-03'
               - id: 28
-                date: '2023-09-04'
+                date: '2026-09-07'
                 nameEn: Labour Day
                 nameFr: Fête du travail
                 federal: 1
-                observedDate: '2023-09-04'
+                observedDate: '2026-09-07'
               - id: 32
-                date: '2023-10-09'
+                date: '2026-10-12'
                 nameEn: Thanksgiving
                 nameFr: Action de grâce
                 federal: 1
-                observedDate: '2023-10-09'
+                observedDate: '2026-10-12'
               - id: 33
-                date: '2023-11-11'
+                date: '2026-11-11'
                 nameEn: Remembrance Day
                 nameFr: Jour du Souvenir
                 federal: 1
-                observedDate: '2023-11-13'
+                observedDate: '2026-11-11'
               - id: 34
-                date: '2023-12-25'
+                date: '2026-12-25'
                 nameEn: Christmas Day
                 nameFr: Noël
                 federal: 1
-                observedDate: '2023-12-25'
+                observedDate: '2026-12-25'
             nextHoliday:
-              id: 1
-              date: '2023-01-01'
-              nameEn: New Year’s Day
-              nameFr: Jour de l’An
+              id: 34
+              date: '2026-12-25'
+              nameEn: Christmas Day
+              nameFr: Noël
               federal: 1
-              observedDate: '2023-01-02'
+              observedDate: '2026-12-25'
       description: 'A Canadian province or territory '
       properties:
         id:
@@ -830,11 +916,25 @@ components:
           example: 'https://www.gov.mb.ca/labour/standards/doc,gen-holidays-after-april-30-07,factsheet.html#q12'
           format: uri
           pattern: https+
-          description: URL to public holidays reference for this region
+          description: English-language source URL. Preserved for backward compatibility and always equal to sourceLinkEn.
+        sourceLinkEn:
+          type: string
+          example: 'https://www.gov.mb.ca/labour/standards/doc,gen-holidays-after-april-30-07,factsheet.html#q12'
+          format: uri
+          description: URL of the English-language official source page for this region.
+        sourceLinkFr:
+          type: string
+          example: 'https://www.gov.mb.ca/labour/standards/doc,gen-holidays-after-april-30-07,factsheet.fr.html#q12'
+          format: uri
+          description: URL of the French-language official source page, when available. Omitted otherwise.
         sourceEn:
           type: string
-          description: Name of reference page with public holidays for this region
+          description: English title of the official source page for this region.
           example: What are the general holidays in Manitoba?
+        sourceFr:
+          type: string
+          description: French title of the official source page, when available. Omitted otherwise.
+          example: Quels sont les jours fériés au Manitoba?
         optional:
           type: integer
           description: Whether this province optionally observes a given holiday.
@@ -847,6 +947,7 @@ components:
         - nameEn
         - sourceLink
         - sourceEn
+        - sourceLinkEn
     Error:
       title: Error
       type: object
@@ -854,23 +955,26 @@ components:
         /holidays/100:
           error:
             status: 400
-            message: 'Bad Request: request/params/holidayId must be <= 35'
-            timestamp: '2022-12-27T05:55:36.552Z'
+            message: "Bad Request: request/params/holidayId must be <= 35"
+            timestamp: '2026-11-12T01:13:51.464Z'
       properties:
         status:
           type: integer
-          example: 404
+          example: 400
+
           minimum: 100
           maximum: 599
           description: An HTTP status code
         message:
           type: string
-          example: 'Error: No holiday with id “100”'
+          example: "Bad Request: request/params/holidayId must be <= 35"
+
           description: An error message
         timestamp:
           type: string
           format: date-time
-          example: '2020-04-27T05:41:10.710Z'
+          example: '2026-11-12T01:13:51.464Z'
+
           description: A UTC ISO timestamp
   securitySchemes: {}
 tags:
