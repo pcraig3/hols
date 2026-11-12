@@ -48,7 +48,7 @@ const summaryTableStylesButtons = css`
   }
 `
 
-const createRows = ({ provinces }) => {
+const createRows = ({ provinces, locale = 'en' }) => {
   return provinces.map((p) => {
     return {
       key: p.nameEn,
@@ -57,13 +57,17 @@ const createRows = ({ provinces }) => {
         text: `Get ${p.id} holidays`,
         query: 'cd=true',
         eventName: 'page-download-holidays',
+        locale,
       }),
       className: summaryTableStylesButtons,
     }
   })
 }
 
-const AddHolidays = ({ data: { provinces, year } }) => {
+
+const AddHolidays = ({ data: { provinces, year, locale = 'en' } }) => {
+  const icsBaseUrl = `https://canada-holidays.ca${locale === 'fr' ? '/fr' : ''}/ics`
+
   return html`
     <${Layout}>
       <${Content} className=${headerStyles}>
@@ -80,35 +84,29 @@ const AddHolidays = ({ data: { provinces, year } }) => {
         </div>
 
         <${SummaryTable}
-          title="Stream Canadian statutory holidays"
+          title="Stream Canadian statutory holidays"          
           rows=${[
-      {
-        key: 'Canada',
-        value: html`<a href="https://canada-holidays.ca/ics"
-                >https://canada-holidays.ca/ics</a
-              >`,
-        className: summaryTableStylesUrls,
-      },
-      {
-        key: 'Alberta',
-        value: html`<a href="https://canada-holidays.ca/ics/AB"
-                >https://canada-holidays.ca/ics/AB</a
-              >`,
-        className: summaryTableStylesUrls,
-      },
-      {
-        key: 'Ontario',
-        value: html`<a href="https://canada-holidays.ca/ics/ON"
-                >https://canada-holidays.ca/ics/ON</a
-              >`,
-        className: summaryTableStylesUrls,
-      },
-      {
-        key: 'etc.',
-        value: html`https://canada-holidays.ca/ics/<code>[regionID]</code>`,
-        className: summaryTableStylesUrls,
-      },
-    ]}
+            {
+              key: 'Canada',
+              value: html`<a href="${icsBaseUrl}">${icsBaseUrl}</a>`,
+              className: summaryTableStylesUrls,
+            },
+            {
+              key: 'Alberta',
+              value: html`<a href="${icsBaseUrl}/AB">${icsBaseUrl}/AB</a>`,
+              className: summaryTableStylesUrls,
+            },
+            {
+              key: 'Ontario',
+              value: html`<a href="${icsBaseUrl}/ON">${icsBaseUrl}/ON</a>`,
+              className: summaryTableStylesUrls,
+            },
+            {
+              key: 'etc.',
+              value: html`${icsBaseUrl}/<code>[regionID]</code>`,
+              className: summaryTableStylesUrls,
+            },
+          ]}
         >
           <h2>Import holidays with “remote calendar” URL</h2>
 
@@ -148,6 +146,7 @@ will be added automatically toward the end of ${year}.
           text: 'Get all holidays',
           query: 'cd=true',
           eventName: 'page-download-holidays',
+          locale,
         }),
         className: summaryTableStylesButtons,
       },
@@ -167,6 +166,7 @@ will be added automatically toward the end of ${year}.
           federal: true,
           query: 'cd=true',
           eventName: 'page-download-holidays',
+          locale,
         }),
         className: summaryTableStylesButtons,
       },
@@ -182,7 +182,7 @@ will be added automatically toward the end of ${year}.
           </p>
         <//>
 
-        <${SummaryTable} title="Regional holidays" rows=${createRows({ provinces })}>
+        <${SummaryTable} title="Regional holidays" rows=${createRows({ provinces, locale })}>
           <h3>Download regional <span class="visuallyHidden">statutory</span> holidays</h3>
           <p>For regular folks or secessionists.</p>
         <//>
