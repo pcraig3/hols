@@ -30,7 +30,7 @@
     "@emotion/css": "^11.13.5",
     "@emotion/server": "^11.11.0",
     "@jsbits/easter-day": "^1.0.1",
-    "@qwik.dev/partytown": "^1.0.3",
+    "@qwik.dev/partytown": "^1.0.5",
     "compression": "^1.8.2",
     "cors": "^2.8.5",
     "date-fns": "^4.1.0",
@@ -42,7 +42,7 @@
     "ics": "^3.12.1",
     "morgan": "^1.12.1",
     "preact": "^10.29.8",
-    "preact-render-to-string": "^6.8.2",
+    "preact-render-to-string": "^6.8.3",
     "request-ip": "^3.3.0",
     "rosetta": "^1.1.0",
     "sugar-date": "^2.0.6",
@@ -53,9 +53,9 @@
   "devDependencies": {
     "cheerio": "^1.1.2",
     "eslint": "^10.14.0",
-    "globals": "^17.13.0",
+    "globals": "^17.14.0",
     "jest": "^30.5.2",
     "nodemon": "^3.1.11",
-    "supertest": "^7.3.1"
+    "supertest": "^7.3.2"
   }
 }
