@@ -4,6 +4,7 @@ const {
   getCurrentTimestamp,
   getNationalDescription,
   getProvinceDescription,
+  getObservedDateNote,
   getTitle,
   getUid,
 } = require('../ics')
@@ -396,5 +397,49 @@ describe('Test getCurrentDate', () => {
     mockDate('1990-10-08')
     const result = getCurrentTimestamp()
     expect(result).toBe(655344000000)
+  })
+})
+
+describe('Test getObservedDateNote', () => {
+  const holiday = {
+    date: '2020-12-26',
+    observedDate: '2020-12-28',
+  }
+
+  test('returns the observed date in English by default', () => {
+    expect(getObservedDateNote(holiday)).toBe(
+      'Observed: Monday, December 28, 2020',
+    )
+  })
+
+  test('returns the observed date in French', () => {
+    expect(getObservedDateNote(holiday, 'fr')).toBe(
+      'Observé le lundi 28 décembre 2020.',
+    )
+  })
+
+  test('returns nothing when the dates match', () => {
+    const sameDayHoliday = {
+      date: '2020-07-01',
+      observedDate: '2020-07-01',
+    }
+
+    expect(getObservedDateNote(sameDayHoliday)).toBe('')
+    expect(getObservedDateNote(sameDayHoliday, 'fr')).toBe('')
+  })
+
+  test('returns nothing when observedDate is missing', () => {
+    expect(getObservedDateNote({ date: '2020-12-26' })).toBe('')
+  })
+
+  test('handles observed dates in the following year', () => {
+    const newYearHoliday = {
+      date: '2022-12-31',
+      observedDate: '2023-01-02',
+    }
+
+    expect(getObservedDateNote(newYearHoliday, 'fr')).toBe(
+      'Observé le lundi 2 janvier 2023.',
+    )
   })
 })

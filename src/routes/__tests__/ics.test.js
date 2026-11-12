@@ -272,6 +272,29 @@ describe('Test ics responses', () => {
     )
   })
 
+  describe('Test ICS observed-date descriptions', () => {
+    // Remove ICS line folding before checking event text.
+    const unfoldICS = (text) => text.replace(/\r?\n[ \t]/g, '')
+
+    test.each([
+      ['/ics/ON/2020', 'Boxing Day', 'Observed: Monday\\, December 28\\, 2020'],
+      ['/en/ics/ON/2020', 'Boxing Day', 'Observed: Monday\\, December 28\\, 2020'],
+      ['/fr/ics/ON/2020', 'Lendemain de Noël', 'Observé le lundi 28 décembre 2020.'],
+    ])('includes the observed date in %s', async (path, title, note) => {
+      const response = await request(app).get(path)
+
+      expect(response.statusCode).toBe(200)
+
+      const event = unfoldICS(response.text)
+        .split('BEGIN:VEVENT')
+        .find((section) => section.includes(`SUMMARY:${title}`))
+
+      expect(event).toBeDefined()
+      expect(event).toContain(note)
+      expect(event).toContain('DESCRIPTION:')
+    })
+  })
+
   describe('Test /ics/fake response', () => {
     test('it should return 404', async () => {
       const response = await request(app).get('/ics/fake')

@@ -19,6 +19,7 @@ const {
   getUid,
   getNationalDescription,
   getProvinceDescription,
+  getObservedDateNote,
 } = require('../utils/ics')
 const { localizedName } = require('../i18n')
 const { getHolidaysWithProvinces } = require('../queries')
@@ -40,7 +41,10 @@ const formatNationalEvent = (holiday, locale = 'en') => {
     start: startDate(holiday.date),
     end: endDate(holiday.date),
     title: getTitle(holiday, locale),
-    description: getNationalDescription(holiday, locale),
+    description: [
+      getObservedDateNote(holiday, locale),
+      getNationalDescription(holiday, locale),
+    ].filter(Boolean).join('\n\n'),
     productId: `-//pcraig3//hols//${locale.toUpperCase()}`,
     uid: `${getUid(holiday)}@hols.ca`,
     timestamp: getCurrentTimestamp(),
@@ -58,7 +62,10 @@ const formatProvinceEvent = (holiday, locale = 'en') => {
     start: startDate(holiday.date),
     end: endDate(holiday.date),
     title: localizedName(holiday, locale),
-    description: getProvinceDescription(holiday, locale),
+    description: [
+      getObservedDateNote(holiday, locale),
+      getProvinceDescription(holiday, locale),
+    ].filter(Boolean).join('\n\n'),
     productId: `-//pcraig3//hols//${locale.toUpperCase()}`,
     uid: `${getUid(holiday)}@hols.ca`,
     timestamp: getCurrentTimestamp(),

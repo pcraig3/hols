@@ -131,6 +131,38 @@ const getProvinceDescription = (holiday, locale = 'en') => {
   })
 }
 
+const observedDateOptions = {
+  weekday: 'long',
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+  timeZone: 'UTC',
+}
+
+const observedDateFormatters = {
+  en: new Intl.DateTimeFormat('en-CA', observedDateOptions),
+  fr: new Intl.DateTimeFormat('fr-CA', observedDateOptions),
+}
+
+
+/**
+ * Returns a localized observed-date note when a holiday's dates differ.
+ * @param {Object} holiday
+ * @param {'en'|'fr'} [locale='en']
+ * @returns {string}
+ */
+const getObservedDateNote = (holiday, locale = 'en') => {
+  if (!holiday.observedDate || holiday.date === holiday.observedDate) {
+    return ''
+  }
+
+  const date = observedDateFormatters[locale].format(
+    new Date(`${holiday.observedDate}T12:00:00Z`),
+  )
+
+  return getTranslator(locale)('ics.observedOn', { date })
+}
+
 /**
  * Generates a stable ICS event UID by hashing the observed date and English title.
  * This means events with the same title across multiple years can be added.
@@ -151,6 +183,7 @@ module.exports = {
   endDate,
   getCurrentTimestamp,
   getNationalDescription,
+  getObservedDateNote,
   getProvinceDescription,
   getTitle,
   getUid,
