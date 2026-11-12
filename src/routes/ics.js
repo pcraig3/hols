@@ -65,12 +65,14 @@ const formatProvinceEvent = (holiday, locale = 'en') => {
   }
 }
 
+
 const downloadICS = ({
   req,
   res,
   modifier = null,
   year = getCurrentHolidayYear(),
   contentDisposition = true,
+  locale = 'en',
 }) => {
   return (error, value) => {
     if (error) {
@@ -82,9 +84,10 @@ const downloadICS = ({
     })
 
     if (contentDisposition) {
+      const filename = `canada-holidays-${modifier ? `${modifier}-` : ''}${year}${locale === 'fr' ? '-fr' : ''}.ics`
+
       res.set({
-        'Content-disposition': `attachment; filename=canada-holidays-${modifier ? `${modifier}-` : ''
-          }${year}.ics`,
+        'Content-disposition': `attachment; filename=${filename}`,
       })
     }
 
@@ -136,7 +139,7 @@ router.get(
 
     const holidays = res.locals.rows.map((h) => formatNationalEvent(h, res.locals.icsLocale))
 
-    ics.createEvents(holidays, downloadICS({ req, res, year: filenameYear, contentDisposition }))
+    ics.createEvents(holidays, downloadICS({ req, res, year: filenameYear, contentDisposition, locale: res.locals.icsLocale }))
   },
 )
 
@@ -153,7 +156,7 @@ router.get(
 
     ics.createEvents(
       holidays,
-      downloadICS({ req, res, modifier: 'federal', year: filenameYear, contentDisposition }),
+      downloadICS({ req, res, modifier: 'federal', year: filenameYear, contentDisposition, locale: res.locals.icsLocale }),
     )
   },
 )
@@ -175,7 +178,7 @@ router.get(
 
     ics.createEvents(
       holidays,
-      downloadICS({ req, res, modifier: provinceId, year: filenameYear, contentDisposition }),
+      downloadICS({ req, res, modifier: provinceId, year: filenameYear, contentDisposition, locale: res.locals.icsLocale }),
     )
   },
 )
