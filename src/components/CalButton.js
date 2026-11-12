@@ -11,19 +11,21 @@ const CalButton = ({
   download = false,
   eventName = 'download-holidays',
   query = false,
+  locale = 'en',
 }) => {
   const provinceIdOrFederal = getProvinceIdOrFederalString({ provinceId, federal })
+  const icsPrefix = locale === 'fr' ? '/fr' : ''
 
   const getDownloadString = ({ provinceIdOrFederal, year }) => {
     return `canada-holidays${provinceIdOrFederal ? `-${provinceIdOrFederal}` : ''}${
       year ? `-${year}` : ''
-    }.ics`
+    }${locale === 'fr' ? '-fr' : ''}.ics`
   }
 
   const getUrlString = ({ provinceIdOrFederal, year, query }) => {
-    return `/ics${provinceIdOrFederal ? `/${provinceIdOrFederal}` : ''}${year ? `/${year}` : ''}${
-      query ? `?${query}` : ''
-    }`
+    return `${icsPrefix}/ics${provinceIdOrFederal ? `/${provinceIdOrFederal}` : ''}${
+      year ? `/${year}` : ''
+    }${query ? `?${query}` : ''}`
   }
 
   return html`

@@ -68,3 +68,42 @@ test('CalButton renders properly with a query', () => {
   expect($('a').attr('data-action')).toEqual('download-holidays')
   expect($('a').attr('data-label')).toEqual('download-holidays-canada-2021')
 })
+
+
+describe('CalButton localization', () => {
+  test.each([
+    [{}, '/ics'],
+    [{ locale: 'en' }, '/ics'],
+    [{ locale: 'fr' }, '/fr/ics'],
+    [{ locale: 'fr', provinceId: 'ON' }, '/fr/ics/ON'],
+    [{ locale: 'fr', federal: true }, '/fr/ics/federal'],
+    [{ locale: 'fr', provinceId: 'ON', year: 2027 }, '/fr/ics/ON/2027'],
+    [
+      { locale: 'fr', provinceId: 'ON', query: 'cd=true' },
+      '/fr/ics/ON?cd=true',
+    ],
+  ])('generates the correct ICS URL for %j', (props, expectedUrl) => {
+    const $ = renderCalButton(props)
+
+    expect($('a').attr('href')).toBe(expectedUrl)
+  })
+
+  test('preserves English download filenames', () => {
+    const $ = renderCalButton({
+      provinceId: 'ON',
+      download: true,
+    })
+
+    expect($('a').attr('download')).toBe('canada-holidays-ON.ics')
+  })
+
+  test('uses French download filenames', () => {
+    const $ = renderCalButton({
+      provinceId: 'ON',
+      locale: 'fr',
+      download: true,
+    })
+
+    expect($('a').attr('download')).toBe('canada-holidays-ON-fr.ics')
+  })
+})
