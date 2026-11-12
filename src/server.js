@@ -37,6 +37,8 @@ const apiRouter = require('./routes/api')
 app.use('/api', apiRouter)
 
 const icsRouter = require('./routes/ics')
+app.use('/en', icsRouter)
+app.use('/fr', icsRouter)
 app.use(icsRouter)
 
 const uiRouter = require('./routes/ui')

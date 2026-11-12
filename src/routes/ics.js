@@ -22,6 +22,12 @@ const {
 } = require('../utils/ics')
 const { getHolidaysWithProvinces } = require('../queries')
 
+// Read the mount prefix, not the URL path, so legacy /ics stays English.
+router.use((req, res, next) => {
+  res.locals.icsLocale = req.baseUrl === '/fr' ? 'fr' : 'en'
+  next()
+})
+
 /**
  * Returns a NATIONAL event formatted in a way the ICS library understands
  * @param {obj} holiday a holiday object
