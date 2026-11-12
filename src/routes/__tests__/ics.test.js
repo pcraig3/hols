@@ -231,16 +231,45 @@ describe('Test ics responses', () => {
       expect(response.text).toContain('SUMMARY:Jour de Colombie-Britannique')
       expect(response.text).toContain('DESCRIPTION:Observé')
     })
+    
+    test.each([
+      '',
+      '/ON',
+      '/federal',
+      '/2027',
+      '/ON/2027',
+      '/federal/2027',
+    ])('adds -fr to French download filenames for /ics%s', async (path) => {
+      const english = await request(app).get(`/ics${path}?cd=true`)
+      const englishAlias = await request(app).get(`/en/ics${path}?cd=true`)
+      const french = await request(app).get(`/fr/ics${path}?cd=true`)
 
-    test('preserves the existing download filename until Phase 4', async () => {
-      const english = await request(app).get('/ics/ON/2027?cd=true')
-      const french = await request(app).get('/fr/ics/ON/2027?cd=true')
-
+      expect(english.statusCode).toBe(200)
+      expect(englishAlias.statusCode).toBe(200)
       expect(french.statusCode).toBe(200)
+
+      const englishFilename = english.headers['content-disposition']
+
+      // Existing English filenames must remain unchanged.
+      expect(englishAlias.headers['content-disposition']).toBe(englishFilename)
+
+      // French filenames get a suffix immediately before .ics.
       expect(french.headers['content-disposition']).toBe(
-        english.headers['content-disposition'],
+        englishFilename.replace(/\.ics$/, '-fr.ics'),
       )
     })
+
+    test.each(['', '/ON', '/federal'])(
+      'does not add a download header to subscription feeds for /ics%s',
+      async (path) => {
+        for (const prefix of ['', '/en', '/fr']) {
+          const response = await request(app).get(`${prefix}/ics${path}`)
+
+          expect(response.statusCode).toBe(200)
+          expect(response.headers['content-disposition']).toBeUndefined()
+        }
+      },
+    )
   })
 
   describe('Test /ics/fake response', () => {
