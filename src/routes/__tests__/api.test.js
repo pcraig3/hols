@@ -475,6 +475,56 @@ describe('Test /api responses', () => {
     })
   })
 
+  describe('Bilingual source metadata', () => {
+    test('Quebec returns English and French sources', async () => {
+      const response = await request(app).get('/api/v1/provinces/QC')
+      expect(response.statusCode).toBe(200)
+
+      const { province } = response.body
+
+      expect(province.sourceEn).toBe('Statutory holidays in Quebec')
+      expect(province.sourceFr).toBe('Jours fériés au Québec')
+      expect(province.sourceLink).toBe(province.sourceLinkEn)
+      expect(province.sourceLinkEn).toContain('/en/')
+      expect(province.sourceLinkFr).toContain('/fr/')
+    })
+
+    test('English-only provinces omit French fields', async () => {
+      const response = await request(app).get('/api/v1/provinces/AB')
+      expect(response.statusCode).toBe(200)
+
+      const { province } = response.body
+
+      expect(province.sourceEn).toBe('General holidays in Alberta')
+      expect(province.sourceLink).toBe(province.sourceLinkEn)
+      expect(province).not.toHaveProperty('sourceFr')
+      expect(province).not.toHaveProperty('sourceLinkFr')
+    })
+
+    test('Nested provinces include bilingual source metadata', async () => {
+      const response = await request(app).get('/api/v1/holidays/1')
+      expect(response.statusCode).toBe(200)
+
+      const qc = response.body.holiday.provinces.find(
+        (province) => province.id === 'QC',
+      )
+
+      expect(qc.sourceFr).toBe('Jours fériés au Québec')
+      expect(qc.sourceLink).toBe(qc.sourceLinkEn)
+      expect(qc.sourceLinkFr).toBeDefined()
+    })
+
+    test('Federal holiday responses retain their existing structure', async () => {
+      const response = await request(app).get('/api/v1/holidays?federal=true')
+      expect(response.statusCode).toBe(200)
+
+      expect(Object.keys(response.body)).toEqual(['holidays'])
+      expect(response.body.holidays.length).toBeGreaterThan(0)
+      expect(response.body.holidays[0]).not.toHaveProperty('sourceEn')
+      expect(response.body.holidays[0]).not.toHaveProperty('sourceLink')
+    })
+  })
+
   describe('with firstOccurence ?years=', () => {
     let validYears = [2021, 2022]
     validYears.map((year) => {
