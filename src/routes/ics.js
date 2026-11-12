@@ -20,6 +20,7 @@ const {
   getNationalDescription,
   getProvinceDescription,
 } = require('../utils/ics')
+const { localizedName } = require('../i18n')
 const { getHolidaysWithProvinces } = require('../queries')
 
 // Read the mount prefix, not the URL path, so legacy /ics stays English.
@@ -29,32 +30,36 @@ router.use((req, res, next) => {
 })
 
 /**
- * Returns a NATIONAL event formatted in a way the ICS library understands
- * @param {obj} holiday a holiday object
+ * Formats a national ICS event with localized text.
+ * @param {Object} holiday
+ * @param {'en'|'fr'} [locale='en']
+ * @returns {Object}
  */
-const formatNationalEvent = (holiday) => {
+const formatNationalEvent = (holiday, locale = 'en') => {
   return {
     start: startDate(holiday.date),
     end: endDate(holiday.date),
-    title: getTitle(holiday),
-    description: getNationalDescription(holiday),
-    productId: '-//pcraig3//hols//EN',
+    title: getTitle(holiday, locale),
+    description: getNationalDescription(holiday, locale),
+    productId: `-//pcraig3//hols//${locale.toUpperCase()}`,
     uid: `${getUid(holiday)}@hols.ca`,
     timestamp: getCurrentTimestamp(),
   }
 }
 
 /**
- * Returns a PROVINCIAL or FEDERAL event formatted in a way the ICS library understands
- * @param {obj} holiday a holiday object
+ * Formats a provincial or federal ICS event with localized text.
+ * @param {Object} holiday
+ * @param {'en'|'fr'} [locale='en']
+ * @returns {Object}
  */
-const formatProvinceEvent = (holiday) => {
+const formatProvinceEvent = (holiday, locale = 'en') => {
   return {
     start: startDate(holiday.date),
     end: endDate(holiday.date),
-    title: holiday.nameEn,
-    description: getProvinceDescription(holiday),
-    productId: '-//pcraig3//hols//EN',
+    title: localizedName(holiday, locale),
+    description: getProvinceDescription(holiday, locale),
+    productId: `-//pcraig3//hols//${locale.toUpperCase()}`,
     uid: `${getUid(holiday)}@hols.ca`,
     timestamp: getCurrentTimestamp(),
   }
@@ -129,7 +134,7 @@ router.get(
     let { year, filenameYear, contentDisposition } = _getParams(req, res)
     if (_isBadYear(year)) return res.redirect('/')
 
-    const holidays = res.locals.rows.map((h) => formatNationalEvent(h))
+    const holidays = res.locals.rows.map((h) => formatNationalEvent(h, res.locals.icsLocale))
 
     ics.createEvents(holidays, downloadICS({ req, res, year: filenameYear, contentDisposition }))
   },
@@ -144,7 +149,7 @@ router.get(
     if (_isBadYear(year)) return res.redirect('/federal')
 
     const filteredRows = res.locals.rows.filter((h) => h.federal)
-    const holidays = filteredRows.map((h) => formatProvinceEvent(h))
+    const holidays = filteredRows.map((h) => formatProvinceEvent(h, res.locals.icsLocale))
 
     ics.createEvents(
       holidays,
@@ -166,7 +171,7 @@ router.get(
 
     provinceId = provinceId.toUpperCase()
     const filteredRows = res.locals.rows.filter((h) => h.provinces.find((p) => p.id === provinceId))
-    const holidays = filteredRows.map((h) => formatProvinceEvent(h))
+    const holidays = filteredRows.map((h) => formatProvinceEvent(h, res.locals.icsLocale))
 
     ics.createEvents(
       holidays,

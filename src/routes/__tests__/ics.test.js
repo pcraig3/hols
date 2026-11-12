@@ -166,31 +166,79 @@ describe('Test ics responses', () => {
     expect(response.statusCode).toBe(404)
   })
 
-  describe.each(['/en', '/fr'])('Test ICS routes mounted at %s', (prefix) => {
+  describe('Test English ICS alias', () => {
     const paths = ['', '/ON', '/federal', '/2027', '/ON/2027', '/federal/2027']
 
-    // Generated timestamps change between requests; everything else should match exactly.
+    // Generated timestamps may differ between requests.
     const stableICS = (icsText) => icsText.replace(/^DTSTAMP:.*\r?\n/gm, '')
 
-    test.each(paths)('returns the existing English ICS content for /ics%s', async (path) => {
+    test.each(paths)('/en/ics%s matches the existing English route', async (path) => {
       const legacy = await request(app).get(`/ics${path}`)
-      const localized = await request(app).get(`${prefix}/ics${path}`)
+      const english = await request(app).get(`/en/ics${path}`)
 
       expect(legacy.statusCode).toBe(200)
-      expect(localized.statusCode).toBe(200)
-      expect(localized.headers['content-type']).toMatch(/^text\/calendar/)
-      expect(localized.headers['content-disposition']).toBeUndefined()
-      expect(stableICS(localized.text)).toEqual(stableICS(legacy.text))
-      expect(getICSYears(localized.text)).toEqual(getICSYears(legacy.text))
+      expect(english.statusCode).toBe(200)
+      expect(stableICS(english.text)).toEqual(stableICS(legacy.text))
+    })
+  })
+
+  describe('Test French ICS routes', () => {
+    const paths = ['', '/ON', '/federal', '/2027', '/ON/2027', '/federal/2027']
+
+    const getICSField = (text, field) =>
+      text.split(/\r?\n/).filter((line) => line.startsWith(`${field}:`))
+
+    test.each(paths)('/fr/ics%s preserves event identities and dates', async (path) => {
+      const english = await request(app).get(`/ics${path}`)
+      const french = await request(app).get(`/fr/ics${path}`)
+
+      expect(english.statusCode).toBe(200)
+      expect(french.statusCode).toBe(200)
+      expect(french.headers['content-type']).toMatch(/^text\/calendar/)
+      expect(french.headers['content-disposition']).toBeUndefined()
+
+      expect(french.text).toContain('PRODID:-//pcraig3//hols//FR')
+
+      // Translations must never change event identity or dates.
+      for (const field of ['UID', 'DTSTART;VALUE=DATE', 'DTEND;VALUE=DATE']) {
+        expect(getICSField(french.text, field)).toEqual(
+          getICSField(english.text, field),
+        )
+      }
+
+      expect(getICSYears(french.text)).toEqual(getICSYears(english.text))
     })
 
-    test('preserves the existing download filename for now', async () => {
-      const legacy = await request(app).get('/ics/ON/2027?cd=true')
-      const localized = await request(app).get(`${prefix}/ics/ON/2027?cd=true`)
+    test('Canada-wide calendar contains French holiday names', async () => {
+      const response = await request(app).get('/fr/ics/2027')
 
-      expect(localized.statusCode).toBe(200)
-      expect(localized.headers['content-disposition']).toBe(
-        legacy.headers['content-disposition'],
+      expect(response.statusCode).toBe(200)
+      expect(response.text).toContain('SUMMARY:Jour de l’An')
+      expect(response.text).toContain('DESCRIPTION:Jour férié national')
+    })
+
+    test('Federal calendar contains French holiday names', async () => {
+      const response = await request(app).get('/fr/ics/federal/2027')
+
+      expect(response.statusCode).toBe(200)
+      expect(response.text).toContain('SUMMARY:Noël')
+    })
+
+    test('Provincial calendar contains French holiday names', async () => {
+      const response = await request(app).get('/fr/ics/BC/2027')
+
+      expect(response.statusCode).toBe(200)
+      expect(response.text).toContain('SUMMARY:Jour de Colombie-Britannique')
+      expect(response.text).toContain('DESCRIPTION:Observé')
+    })
+
+    test('preserves the existing download filename until Phase 4', async () => {
+      const english = await request(app).get('/ics/ON/2027?cd=true')
+      const french = await request(app).get('/fr/ics/ON/2027?cd=true')
+
+      expect(french.statusCode).toBe(200)
+      expect(french.headers['content-disposition']).toBe(
+        english.headers['content-disposition'],
       )
     })
   })
