@@ -14,7 +14,13 @@ const summaryTableStyles = css`
     font-weight: 600;
   }
 
-  .value a svg {
+  .value a .last-word {
+    display: inline-block;
+    white-space: nowrap;
+    text-decoration: underline;
+  }
+
+  .value a .last-word svg {
     fill: ${theme.color.grey};
   }
 
@@ -31,13 +37,23 @@ const summaryTableStyles = css`
   }
 `
 
+const sourceTitleWithIcon = (title) => {
+  const lastSpace = title.lastIndexOf(' ')
+  const prefix = title.slice(0, lastSpace + 1)
+  const lastWord = title.slice(lastSpace + 1)
+
+  return html`
+    ${prefix}<span class="last-word">${lastWord}<${External} /></span>
+  `
+}
+
 const createRows = ({ provinces, locale }) => {
   return provinces.map((p) => {
     return {
       key: html`<a href="/provinces/${p.id}">${localizedName(p, locale)}</a>`,
       value: html`<span class="external-link"
         ><a href="${p.sourceLink}" target="_blank" rel="noopener"
-          >${p.sourceEn}<${External} /></a
+          >${sourceTitleWithIcon(p.sourceEn)}</a
         ></span
       >`,
       className: summaryTableStyles,
@@ -72,7 +88,7 @@ const Sources = ({ data: { provinces, federalSource, locale = 'en' } }) => {
                   href="${federalSource.sourceLinkEn}"
                   target="_blank"
                   rel="noopener"
-                  >${federalSource.sourceEn}<${External} /></a
+                  >${sourceTitleWithIcon(federalSource.sourceEn)}</a
                 ></span>`,
               className: summaryTableStyles,
             },
