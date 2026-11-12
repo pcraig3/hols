@@ -24,6 +24,11 @@ const summaryTableStyles = css`
     fill: ${theme.color.grey};
   }
 
+  .value .source-language {
+    margin-left: 0.4em;
+    color: ${theme.color.grey};
+  }
+
   @media (${theme.mq.lg}) {
     .key {
       width: 50%;
@@ -37,6 +42,17 @@ const summaryTableStyles = css`
   }
 `
 
+const localizedSource = (source, locale) => {
+  const useFrench = locale === 'fr' && source.sourceFr && source.sourceLinkFr
+
+  return {
+    name: useFrench ? source.sourceFr : source.sourceEn,
+    link: useFrench ? source.sourceLinkFr : source.sourceLinkEn,
+    lang: useFrench ? 'fr' : 'en',
+    isEnglishFallback: locale === 'fr' && !useFrench,
+  }
+}
+
 const sourceTitleWithIcon = (title) => {
   const lastSpace = title.lastIndexOf(' ')
   const prefix = title.slice(0, lastSpace + 1)
@@ -49,12 +65,21 @@ const sourceTitleWithIcon = (title) => {
 
 const createRows = ({ provinces, locale }) => {
   return provinces.map((p) => {
+    const source = localizedSource(p, locale)
+
     return {
       key: html`<a href="/provinces/${p.id}">${localizedName(p, locale)}</a>`,
       value: html`<span class="external-link"
-        ><a href="${p.sourceLink}" target="_blank" rel="noopener"
-          >${sourceTitleWithIcon(p.sourceEn)}</a
-        ></span
+        ><a
+          href="${source.link}"
+          lang="${source.lang}"
+          hreflang="${source.lang}"
+          target="_blank"
+          rel="noopener"
+          >${sourceTitleWithIcon(source.name)}</a
+        >${source.isEnglishFallback
+          ? html`<small class="source-language">(en${'\u00A0'}anglais)</small>`
+          : null}</span
       >`,
       className: summaryTableStyles,
     }
@@ -64,6 +89,7 @@ const createRows = ({ provinces, locale }) => {
 const Sources = ({ data: { provinces, federalSource, locale = 'en' } }) => {
   const t = getTranslator(locale)
   const rich = getRichTranslator(locale)
+  const source = localizedSource(federalSource, locale)
 
   return html`
     <${Layout}>
@@ -85,10 +111,12 @@ const Sources = ({ data: { provinces, federalSource, locale = 'en' } }) => {
               key: html`<a href="/federal">${t('pages.sources.federalHolidays')}</a>`,
               value: html`<span class="external-link"
                 ><a
-                  href="${federalSource.sourceLinkEn}"
+                  href="${source.link}"
+                  lang="${source.lang}"
+                  hreflang="${source.lang}"
                   target="_blank"
                   rel="noopener"
-                  >${sourceTitleWithIcon(federalSource.sourceEn)}</a
+                  >${sourceTitleWithIcon(source.name)}</a
                 ></span>`,
               className: summaryTableStyles,
             },
