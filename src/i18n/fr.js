@@ -161,6 +161,13 @@ module.exports = {
       backToTop: 'Retour en haut',
     },
   },
+  dates: {
+    relative: {
+      today: 'C’est aujourd’hui !',
+      tomorrow: 'C’est demain !',
+      future: 'C’est dans {{distance}}',
+    },
+  },
   ics: {
     federal: 'Fédéral',
     federalIndustries: 'les secteurs sous réglementation fédérale',

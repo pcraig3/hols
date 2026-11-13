@@ -9,6 +9,8 @@ const { differenceInDays } = require('date-fns/differenceInDays')
 const { startOfDay } = require('date-fns/startOfDay')
 const { isAfter } = require('date-fns/isAfter')
 const { formatDistance } = require('date-fns/formatDistance')
+const { fr } = require('date-fns/locale')
+const { getTranslator } = require('../i18n')
 
 const _getISODayInt = (weekday) => {
   if (weekday === 'Monday') {
@@ -151,14 +153,20 @@ const getObservedDate = (dateString, year = new Date(Date.now()).getUTCFullYear(
 
 const space2Nbsp = (str) => str.replace(/ /g, ' ')
 
-const displayDate = (dateString, weekday = false) => {
+const displayDate = (dateString, { weekday = false, locale = 'en' } = {}) => {
   dateString = Sugar.Date.create(dateString)
-  let msg = space2Nbsp(format(dateString, 'MMMM d'))
 
-  return weekday ? `${msg}, ${format(dateString, 'EEEE')}` : msg
+  const options = locale === 'fr' ? { locale: fr } : {}
+  const dateFormat = locale === 'fr' ? 'd MMMM' : 'MMMM d'
+  const msg = space2Nbsp(format(dateString, dateFormat, options))
+
+  return weekday ? `${msg}, ${format(dateString, 'EEEE', options)}` : msg
 }
 
-const relativeDate = (dateString) => {
+const relativeDate = (dateString, locale = 'en') => {
+  const t = getTranslator(locale)
+  const options = locale === 'fr' ? { locale: fr } : {}
+
   const daysOffset = differenceInDays(
     Sugar.Date.create(dateString),
     startOfDay(new Date(Date.now())),
@@ -166,14 +174,17 @@ const relativeDate = (dateString) => {
 
   switch (daysOffset) {
     case 0:
-      return 'That’s today!'
+      return t('dates.relative.today')
     case 1:
-      return 'That’s tomorrow!'
+      return t('dates.relative.tomorrow')
     default:
-      return `That’s in ${formatDistance(
-        Sugar.Date.create(dateString),
-        startOfDay(new Date(Date.now())),
-      )}`
+      return t('dates.relative.future', {
+        distance: formatDistance(
+          Sugar.Date.create(dateString),
+          startOfDay(new Date(Date.now())),
+          options,
+        ),
+      })
   }
 }
 
