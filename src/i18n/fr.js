@@ -144,6 +144,15 @@ module.exports = {
       closing: 'Les jours fériés facultatifs ne sont pas automatiquement garantis par la loi, mais ils peuvent s’appliquer à votre milieu de travail. Vérifiez toujours auprès de votre employeur si vous y avez droit.',
       backToTop: 'Retour en haut',
     },
+    provinces: {
+      title: 'Toutes les régions du Canada',
+      documentTitle: 'Toutes les régions du Canada — Canada Holidays',
+      metaDescription: 'Prochains jours fériés dans toutes les régions du Canada.',
+      allHolidays: 'Tous les jours fériés au Canada',
+      federalHolidays: 'Jours fériés fédéraux',
+      federalDescription: 'Le gouvernement fédéral et les <a href="{{industriesUrl}}" target="_blank" rel="noopener">secteurs sous réglementation fédérale</a> observent les jours fériés fédéraux plutôt que les jours fériés provinciaux.',
+      federalMore: 'Découvrez si les jours fériés fédéraux s’appliquent à vous',
+    },
     sources: {
       title: 'Toutes les sources',
       documentTitle: 'Toutes les sources — Canada Holidays',

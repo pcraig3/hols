@@ -144,6 +144,15 @@ module.exports = {
       closing: 'Optional holidays aren’t automatically guaranteed by law, but they sometimes apply to your specific workplace. Always check with your employer to make sure if optional holidays apply to you.',
       backToTop: 'Back to top',
     },
+    provinces: {
+      title: 'All regions in Canada',
+      documentTitle: 'All regions in Canada — Canada Holidays',
+      metaDescription: 'Upcoming stat holidays for all regions in Canada.',
+      allHolidays: 'All Canadian holidays',
+      federalHolidays: 'Federal statutory holidays',
+      federalDescription: 'The federal government and <a href="{{industriesUrl}}" target="_blank" rel="noopener">federally-regulated industries</a> observe federal holidays instead of provincial holidays.',
+      federalMore: 'Find out if federal holidays apply to you',
+    },
     sources: {
       title: 'All sources',
       documentTitle: 'All sources — Canada Holidays',

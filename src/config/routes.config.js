@@ -24,6 +24,10 @@ const routes = {
     en: '/optional-holidays-in-canada',
     fr: '/jours-feries-facultatifs-au-canada',
   },
+  provinces: {
+    en: '/provinces',
+    fr: '/provinces',
+  },
   sources: {
     en: '/sources',
     fr: '/sources',
