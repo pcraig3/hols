@@ -1,9 +1,8 @@
-
 const renderPage = require('../pages/_document.js')
 const { getTranslator } = require('../i18n')
 const { pathFor, alternatePathsFor } = require('../config/routes.config')
 
-const renderApiPage = (locale) => (req, res) => {
+const renderApiPage = (locale) => (_req, res) => {
   const t = getTranslator(locale)
 
   return res.send(
@@ -12,7 +11,6 @@ const renderApiPage = (locale) => (req, res) => {
       title: t('pages.api.documentTitle'),
       docProps: {
         meta: t('pages.api.metaDescription'),
-        path: req.originalUrl.split('?')[0],
         locale,
         canonicalPath: pathFor('api', { locale }),
         alternatePaths: alternatePathsFor('api'),
