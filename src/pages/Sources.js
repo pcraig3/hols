@@ -1,7 +1,12 @@
 const { html } = require('../utils')
 const { css } = require('@emotion/css')
 const { theme } = require('../styles')
-const { getTranslator, getRichTranslator, localizedName } = require('../i18n')
+const {
+  getTranslator,
+  getRichTranslator,
+  localizedName,
+  localizedSource,
+} = require('../i18n')
 
 const Layout = require('../components/Layout.js')
 const Content = require('../components/Content.js')
@@ -41,17 +46,6 @@ const summaryTableStyles = css`
     }
   }
 `
-
-const localizedSource = (source, locale) => {
-  const useFrench = locale === 'fr' && source.sourceFr && source.sourceLinkFr
-
-  return {
-    name: useFrench ? source.sourceFr : source.sourceEn,
-    link: useFrench ? source.sourceLinkFr : source.sourceLinkEn,
-    lang: useFrench ? 'fr' : 'en',
-    isEnglishFallback: locale === 'fr' && !useFrench,
-  }
-}
 
 const sourceTitleWithIcon = (title) => {
   const lastSpace = title.lastIndexOf(' ')
