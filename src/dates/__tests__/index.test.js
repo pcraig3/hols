@@ -1,4 +1,10 @@
-const { getLiteralDate, getObservedDate, getCurrentHolidayYear } = require('../index')
+const {
+  getLiteralDate,
+  getObservedDate,
+  getCurrentHolidayYear,
+  displayDate,
+  relativeDate,
+} = require('../index')
 
 describe('Test getLiteralDate', () => {
   describe('for 2013', () => {
@@ -671,6 +677,72 @@ describe('Test getObservedDate', () => {
         expect(getObservedDate(day.str, 2038)).toEqual(day.iso)
       })
     })
+  })
+})
+
+describe('Test displayDate', () => {
+  test('defaults to English', () => {
+    expect(displayDate('2019-01-01')).toEqual('January\u00a01')
+  })
+
+  test('formats dates in French', () => {
+    expect(displayDate('2019-01-01', { locale: 'fr' })).toEqual('1\u00a0janvier')
+  })
+
+  test('formats weekdays in English', () => {
+    expect(displayDate('2019-01-01', { weekday: true })).toEqual('January\u00a01, Tuesday')
+  })
+
+  test('formats weekdays in French', () => {
+    expect(displayDate('2019-01-01', { weekday: true, locale: 'fr' })).toEqual('1\u00a0janvier, mardi')
+  })
+})
+
+describe('Test relativeDate', () => {
+  afterEach(() => {
+    jest.restoreAllMocks()
+  })
+
+  const mockToday = () => {
+    jest.spyOn(Date, 'now').mockReturnValue(
+      new Date(2026, 0, 1, 12).getTime(),
+    )
+  }
+
+  test('defaults to English for today', () => {
+    mockToday()
+
+    expect(relativeDate('2026-01-01')).toEqual('That’s today!')
+  })
+
+  test('formats today in French', () => {
+    mockToday()
+
+    expect(relativeDate('2026-01-01', 'fr')).toEqual('C’est aujourd’hui !')
+  })
+
+  test('formats tomorrow in English', () => {
+    mockToday()
+
+    expect(relativeDate('2026-01-02')).toEqual('That’s tomorrow!')
+  })
+
+  test('formats tomorrow in French', () => {
+    mockToday()
+
+    expect(relativeDate('2026-01-02', 'fr')).toEqual('C’est demain !')
+  })
+
+  test('formats future distances in English', () => {
+    mockToday()
+
+    expect(relativeDate('2026-01-08')).toEqual('That’s in 7 days')
+  })
+
+  test('formats future distances in French', () => {
+    mockToday()
+
+    expect(relativeDate('2026-01-08', 'fr')).toEqual('C’est dans 7 jours')
   })
 })
 

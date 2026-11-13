@@ -161,6 +161,13 @@ module.exports = {
       backToTop: 'Back to top',
     },
   },
+  dates: {
+    relative: {
+      today: 'That’s today!',
+      tomorrow: 'That’s tomorrow!',
+      future: 'That’s in {{distance}}',
+    },
+  },
   ics: {
     federal: 'Federal',
     federalIndustries: 'federal industries',
