@@ -263,24 +263,41 @@ router.get(
   },
 )
 
-router.get('/provinces', dbmw(getProvinces), (req, res) => {
+const renderProvinces = (locale) => (req, res) => {
+  const t = getTranslator(locale)
+
   return res.send(
     renderPage({
       pageComponent: 'Provinces',
-      title: 'All regions in Canada — Canada Holidays',
+      title: t('pages.provinces.documentTitle'),
       docProps: {
-        meta: 'Upcoming stat holidays for all regions in Canada.',
+        meta: t('pages.provinces.metaDescription'),
         path: req.path,
+        locale,
+        canonicalPath: pathFor('provinces', { locale }),
+        alternatePaths: alternatePathsFor('provinces'),
       },
       props: {
         data: {
           provinces: res.locals.rows,
-          federalSource: getSource(DB, 'federal'),
+          locale,
         },
       },
     }),
   )
-})
+}
+
+router.get(
+  [pathFor('provinces'), `/en${pathFor('provinces')}`],
+  dbmw(getProvinces),
+  renderProvinces('en'),
+)
+
+router.get(
+  pathFor('provinces', { locale: 'fr' }),
+  dbmw(getProvinces),
+  renderProvinces('fr'),
+)
 
 router.post('/provinces', (req, res) => {
   let url = '/'

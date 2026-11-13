@@ -104,23 +104,60 @@ describe('Test ui responses', () => {
 
   describe('Test /provinces responses', () => {
     describe('Test /provinces GET response', () => {
-      test('it should return 200', async () => {
-        const response = await request(app).get('/provinces')
-        expect(response.statusCode).toBe(200)
-      })
-
-      test('it should return the h1, title, meta tag, and canonical link', async () => {
-        const response = await request(app).get('/provinces')
-        const $ = cheerio.load(response.text)
-        expect($('h1').text()).toEqual('All regions in Canada')
-        expect($('title').text()).toEqual('All regions in Canada — Canada Holidays')
-        expect($('meta[name="description"]').attr('content')).toEqual(
+      test.each([
+        [
+          '/provinces',
+          'en',
+          'All regions in Canada',
+          'All regions in Canada — Canada Holidays',
           'Upcoming stat holidays for all regions in Canada.',
-        )
-        expect($('link[rel="canonical"]').attr('href')).toEqual(
-          'https://canada-holidays.ca/provinces',
-        )
-      })
+          '/provinces',
+        ],
+        [
+          '/en/provinces',
+          'en',
+          'All regions in Canada',
+          'All regions in Canada — Canada Holidays',
+          'Upcoming stat holidays for all regions in Canada.',
+          '/provinces',
+        ],
+        [
+          '/fr/provinces',
+          'fr',
+          'Toutes les régions du Canada',
+          'Toutes les régions du Canada — Canada Holidays',
+          'Prochains jours fériés dans toutes les régions du Canada.',
+          '/fr/provinces',
+        ],
+      ])(
+        'renders localized Provinces page at %s',
+        async (path, locale, heading, title, description, canonical) => {
+          const response = await request(app).get(path)
+          const $ = cheerio.load(response.text)
+          const origin = 'https://canada-holidays.ca'
+
+          expect(response.statusCode).toBe(200)
+          expect($('html').attr('lang')).toBe(locale)
+
+          expect($('h1').text()).toEqual(heading)
+          expect($('title').text()).toEqual(title)
+          expect($('meta[name="description"]').attr('content')).toEqual(description)
+
+          expect($('link[rel="canonical"]').attr('href')).toEqual(
+            `${origin}${canonical}`,
+          )
+
+          expect($('link[hreflang="en-CA"]').attr('href')).toBe(
+            `${origin}/provinces`,
+          )
+          expect($('link[hreflang="fr-CA"]').attr('href')).toBe(
+            `${origin}/fr/provinces`,
+          )
+          expect($('link[hreflang="x-default"]').attr('href')).toBe(
+            `${origin}/provinces`,
+          )
+        },
+      )
     })
 
     describe('Test /provinces POST response', () => {
@@ -469,8 +506,6 @@ describe('Test ui responses', () => {
       test.each([
         '/fr/about',
         '/en/a-propos',
-        '/fr/provinces',
-        '/en/provinces',
         '/fr/feedback',
       ])('it should return 404 for untranslated route %s', async (path) => {
         const response = await request(app).get(path)

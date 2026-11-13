@@ -1,6 +1,9 @@
 const { css } = require('@emotion/css')
 const { html } = require('../utils')
 const { theme } = require('../styles')
+const { getTranslator, getRichTranslator, localizedName } = require('../i18n')
+const { pathFor } = require('../config/routes.config')
+
 const Content = require('../components/Content.js')
 const Layout = require('../components/Layout.js')
 const Details = require('../components/Details.js')
@@ -32,50 +35,62 @@ const styles = css`
   }
 `
 
-const Provinces = ({ data }) =>
-  html`
-    <${Layout} route="/provinces">
+const Provinces = ({ data: { provinces, locale = 'en' } }) => {
+  const t = getTranslator(locale)
+  const rich = getRichTranslator(locale)
+
+  const industriesUrl =
+    locale === 'fr'
+      ? 'https://www.canada.ca/fr/services/emplois/milieu-travail/milieux-reglementation-federale.html'
+      : 'https://www.canada.ca/en/employment-social-development/programs/employment-equity/regulated-industries.html'
+
+  return html`
+    <${Layout} route=${pathFor('provinces')}>
       <${Content} className=${styles}>
-        <h1>All regions in Canada</h1>
+        <h1>${t('pages.provinces.title')}</h1>
 
         <div>
-          <p><a href="/">All Canadian holidays</a></p>
+          <p><a href="/">${t('pages.provinces.allHolidays')}</a></p>
         </div>
+
         <div>
-          <a href="/federal">Federal statutory holidays</a>
+          <a href="/federal">${t('pages.provinces.federalHolidays')}</a>
+
           <${Details}
-            summary="Do federal holidays apply to me?"
+            summary=${t('pages.federallyRegulated.title')}
             data-event="true"
             data-label="federal-holidays"
           >
             <div>
+              <p
+                dangerouslySetInnerHTML=${rich('pages.provinces.federalDescription', {
+                  industriesUrl,
+                })}
+              />
+
               <p>
-                The federal government and${' '}
-                <a
-                  href="https://www.canada.ca/en/employment-social-development/programs/employment-equity/regulated-industries.html"
-                  target="_blank"
-                  rel="noopener"
-                  >federally-regulated industries</a
-                >
-                ${' '}observe federal holidays instead of provincial holidays.
-              </p>
-              <p>
-                <a href="/do-federal-holidays-apply-to-me"
-                  >Find out if federal holidays apply to you</a
-                >.
+                <a href=${pathFor('federallyRegulated', { locale })}>
+                  ${t('pages.provinces.federalMore')}
+                </a>.
               </p>
             </div>
           <//>
         </div>
+
         <ul>
-          ${data.provinces.map(
+          ${provinces.map(
             (province) => html`
-              <li><a href=${`/provinces/${province.id}`}>${province.nameEn}</a></li>
+              <li>
+                <a href=${`/provinces/${province.id}`}>
+                  ${localizedName(province, locale)}
+                </a>
+              </li>
             `,
           )}
         </ul>
       <//>
     <//>
   `
+}
 
 module.exports = Provinces
