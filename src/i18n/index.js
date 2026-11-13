@@ -38,8 +38,20 @@ const localizedName = (object, locale = 'en') => {
   return locale === 'fr' ? object.nameFr : object.nameEn
 }
 
+const localizedSource = (source, locale = 'en') => {
+  const useFrench = locale === 'fr' && source.sourceFr && source.sourceLinkFr
+
+  return {
+    name: useFrench ? source.sourceFr : source.sourceEn,
+    link: useFrench ? source.sourceLinkFr : source.sourceLinkEn,
+    lang: useFrench ? 'fr' : 'en',
+    isEnglishFallback: locale === 'fr' && !useFrench,
+  }
+}
+
 module.exports = {
   getTranslator,
   getRichTranslator,
   localizedName,
+  localizedSource,
 }

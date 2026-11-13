@@ -1,6 +1,7 @@
 const { css } = require('@emotion/css')
 const { html, pe2pei, getProvinceIdOrFederalString } = require('../utils')
 const { theme, horizontalPadding, insideContainer } = require('../styles')
+const { pathFor } = require('../config/routes.config')
 const { ALLOWED_YEARS } = require('../config/vars.config')
 const Layout = require('../components/Layout.js')
 const NextHolidayBox = require('../components/NextHolidayBox.js')
@@ -11,6 +12,11 @@ const CalButton = require('../components/CalButton.js')
 const NextYearLink = require('../components/NextYearLink.js')
 const ObservedDateKey = require('../components/ObservedDateKey')
 const { getCurrentHolidayYear } = require('../dates')
+const {
+  getTranslator,
+  localizedName,
+  localizedSource,
+} = require('../i18n')
 
 const { External } = require('../components/Svg.js')
 
@@ -122,34 +128,62 @@ const titleStyles = css`
   }
 `
 
-const getTitleString = (provinceName, federal, year) => {
-  return `${provinceName}${federal ? ' federal' : ''} statutory holidays in ${year}`
+const getTitleString = ({ provinceName, federal, year, locale }) => {
+  const t = getTranslator(locale)
+
+  return t(
+    federal
+      ? 'pages.province.tableTitleFederal'
+      : 'pages.province.tableTitle',
+    { provinceName, year },
+  )
 }
 
-const createRows = (holidays, federal, isCurrentYear) => {
+const getHeadingString = ({ provinceName, federal, year, locale }) => {
+  const t = getTranslator(locale)
+
+  return t(
+    federal
+      ? 'pages.province.tableHeadingFederal'
+      : 'pages.province.tableHeading',
+    { provinceName, year },
+  )
+}
+
+const createRows = ({ holidays, federal, isCurrentYear, locale }) => {
+  const t = getTranslator(locale)
+  const localePrefix = locale === 'fr' ? '/fr' : ''
+
   const _provinces = (holiday) => {
     if (holiday.provinces.length === 13) {
-      return 'National holiday'
+      return t('pages.province.nationalHoliday')
     }
 
     let provincesHTML = holiday.provinces.map(
       (p, i) =>
         html`
-          <a href="/provinces/${p.id}" title="Holidays for ${p.nameEn}">${pe2pei(p.id)}</a>${i +
-            1 ===
-          holiday.provinces.length
-            ? ''
-            : ', '}
+          <a
+            href=${`${localePrefix}/provinces/${p.id}`}
+            title=${t('pages.province.provinceHolidaysTitle', {
+              provinceName: localizedName(p, locale),
+            })}
+          >
+            ${pe2pei(p.id)}
+          </a>${i + 1 === holiday.provinces.length ? '' : ', '}
         `,
     )
 
     if (holiday.federal) {
       provincesHTML = html`
-        <a href="/federal" title="Federal holidays">Federal holiday</a>${provincesHTML.length
-          ? ', '
-          : ''}${provincesHTML}
+        <a
+          href=${`${localePrefix}/federal`}
+          title=${t('pages.province.federalHolidaysTitle')}
+        >
+          ${t('pages.province.federalHoliday')}
+        </a>${provincesHTML.length ? ', ' : ''}${provincesHTML}
       `
     }
+
     return provincesHTML
   }
 
@@ -159,12 +193,28 @@ const createRows = (holidays, federal, isCurrentYear) => {
 
   return holidays.map((holiday) => {
     const row = {
-      key: html`${holiday.optional
-          ? html`<sup><${Abbr} title="Optional holiday">*<//></sup> `
-          : ''}<${ObservedDateKey} holiday=${holiday} />`,
+      key: html`
+        ${holiday.optional
+          ? html`
+              <sup>
+                <${Abbr} title=${t('pages.province.optionalHoliday')}>*<//>
+              </sup>
+              ${' '}
+            `
+          : ''}
+        <${ObservedDateKey}
+          holiday=${holiday}
+          locale=${locale}
+        />
+      `,
       value: holiday.optional
-        ? html`${holiday.nameEn} (<a href="/optional-holidays-in-canada">Optional</a>)`
-        : holiday.nameEn,
+        ? html`
+            ${localizedName(holiday, locale)}
+            (<a href=${pathFor('optionalHolidays', { locale })}>
+              ${t('pages.province.optional')}
+            </a>)
+          `
+        : localizedName(holiday, locale),
       className: holiday.optional ? 'optional' : '',
     }
 
@@ -176,7 +226,6 @@ const createRows = (holidays, federal, isCurrentYear) => {
       row.className += holiday.observedDate < today ? ' past' : ' upcoming'
 
       if (nextFound === false && row.className.includes('upcoming')) {
-        // add "next-holiday-row" id to first upcoming holiday
         row.id = 'next-holiday-row'
         nextFound = true
       }
@@ -200,10 +249,13 @@ const Province = ({
     federal = false,
     year = getCurrentHolidayYear(),
     source = false,
+    locale = 'en',
   } = {},
 }) => {
+  const t = getTranslator(locale)
   const provinceIdOrFederal = getProvinceIdOrFederalString({ provinceId, federal })
-  const isCurrentYear = !!nextHoliday
+  const isCurrentYear = !!nextHoliday  
+  const localizedPageSource = source ? localizedSource(source, locale) : null
   return html`
     <${Layout} color=${federal ? 'federal' : provinceId}>
       <div class=${provinceIdOrFederal ? styles(theme.color[provinceIdOrFederal]) : styles()}>
@@ -215,14 +267,13 @@ const Province = ({
         <section class=${horizontalPadding}>
           <div class=${insideContainer}>
             <${SummaryTable}
-              title=${getTitleString(provinceName, federal, year)}
-              rows=${createRows(holidays, federal, isCurrentYear)}
+              title=${getTitleString({ provinceName, federal, year, locale })}
+              rows=${createRows({ holidays, federal, isCurrentYear, locale })}
             >
               ${nextHoliday &&
               html` <div class=${titleStyles}>
                 <h2 id="holidays-table">
-                  ${provinceName}${federal ? ' federal' : ''}
-                  <span class="visuallyHidden"> statutory</span> holidays in ${year}
+                  ${getHeadingString({ provinceName, federal, year, locale })}
                 </h2>
                 <div>
                   <${CalButton} provinceId=${provinceId} federal=${federal} year=${year}
@@ -238,27 +289,41 @@ const Province = ({
               year=${year}
             />`}
             <div class="bottom-link__container with-source">
-              ${source
-                ? html`<span class="bottom-link external-link"
-                    >Source:${' '}<a
-                      href=${source.link}
-                      target="_blank"
-                      rel="noopener"
-                      data-event="true"
-                      data-action="source-link"
-                      data-label=${`source-link-${provinceIdOrFederal || 'canada'}`}
-                      >${source.nameEn}<${External} /></a
-                  ></span>`
-                : html`<span class="bottom-link external-link"
-                    ><a
-                      href="/sources"
-                      data-event="true"
-                      data-action="source-link"
-                      data-label="source-link-canada"
-                      >All sources</a
-                    ></span
-                  >`}
-              <span class="bottom-link"><a href="#html" class="up-arrow">Back to top</a></span>
+              ${localizedPageSource
+                ? html`
+                    <span class="bottom-link external-link">
+                      ${t('pages.province.source')}:${' '}
+                      <a
+                        href=${localizedPageSource.link}
+                        lang=${localizedPageSource.lang}
+                        hreflang=${localizedPageSource.lang}
+                        target="_blank"
+                        rel="noopener"
+                        data-event="true"
+                        data-action="source-link"
+                        data-label=${`source-link-${provinceIdOrFederal || 'canada'}`}
+                      >
+                        ${localizedPageSource.name}<${External} />
+                      </a>
+                      ${localizedPageSource.isEnglishFallback
+                        ? html` <small>(en${'\u00a0'}anglais)</small>`
+                        : null}
+                    </span>
+                  `
+                : html`
+                    <span class="bottom-link external-link">
+                      <a
+                        href=${pathFor('sources', { locale })}
+                        data-event="true"
+                        data-action="source-link"
+                        data-label="source-link-canada"
+                      >
+                        ${t('pages.province.allSources')}
+                      </a>
+                    </span>
+                  `}
+              <span class="bottom-link">
+              <a href="#html" class="up-arrow">${t('pages.province.backToTop')}</a></span>
             </div>
           </div>
         </section>

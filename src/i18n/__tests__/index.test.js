@@ -1,5 +1,10 @@
 
-const { getTranslator, getRichTranslator, localizedName } = require('../')
+const {
+  getTranslator,
+  getRichTranslator,
+  localizedName,
+  localizedSource,
+} = require('../')
 const en = require('../en')
 const fr = require('../fr')
 
@@ -93,5 +98,49 @@ describe('i18n', () => {
     expect(Object.keys(en.pages.about).sort()).toEqual(
       Object.keys(fr.pages.about).sort(),
     )
+  })
+})
+
+describe('localizedSource', () => {
+  const source = {
+    sourceEn: 'Public holidays',
+    sourceFr: 'Jours fériés',
+    sourceLinkEn: 'https://example.com/en',
+    sourceLinkFr: 'https://example.com/fr',
+  }
+
+  test('returns English by default', () => {
+    expect(localizedSource(source)).toEqual({
+      name: 'Public holidays',
+      link: 'https://example.com/en',
+      lang: 'en',
+      isEnglishFallback: false,
+    })
+  })
+
+  test('returns French when available', () => {
+    expect(localizedSource(source, 'fr')).toEqual({
+      name: 'Jours fériés',
+      link: 'https://example.com/fr',
+      lang: 'fr',
+      isEnglishFallback: false,
+    })
+  })
+
+  test('falls back to English when French is unavailable', () => {
+    expect(
+      localizedSource(
+        {
+          sourceEn: 'Paid Holidays',
+          sourceLinkEn: 'https://example.com/en',
+        },
+        'fr',
+      ),
+    ).toEqual({
+      name: 'Paid Holidays',
+      link: 'https://example.com/en',
+      lang: 'en',
+      isEnglishFallback: true,
+    })
   })
 })

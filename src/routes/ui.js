@@ -104,8 +104,10 @@ router.get(
       nextHoliday,
       nameEn: provinceName,
       id: provinceId,
-      sourceLink,
       sourceEn,
+      sourceFr,
+      sourceLinkEn,
+      sourceLinkFr,
     } = res.locals.rows[0]
 
     const year = getCurrentHolidayYear(provinceId)
@@ -134,7 +136,7 @@ router.get(
             provinceName,
             provinceId,
             year,
-            source: { link: sourceLink, nameEn: sourceEn },
+            source: { sourceEn, sourceFr, sourceLinkEn, sourceLinkFr },
           },
         },
       }),
@@ -155,10 +157,13 @@ router.get(
     const year = ALLOWED_YEARS.find((y) => y === parseInt(getRequestYear(req)))
     const {
       holidays,
+      nextHoliday,
       nameEn: provinceName,
       id: provinceId,
-      sourceLink,
       sourceEn,
+      sourceFr,
+      sourceLinkEn,
+      sourceLinkFr,
     } = res.locals.rows[0]
 
     const meta = `See all ${holidays.length} statutory holidays in ${provinceName}, Canada in ${year}.`
@@ -184,7 +189,7 @@ router.get(
             provinceName,
             provinceId,
             year,
-            source: { link: sourceLink, nameEn: sourceEn },
+            source: { sourceEn, sourceFr, sourceLinkEn, sourceLinkFr },
           },
         },
       }),
@@ -192,14 +197,7 @@ router.get(
   },
 )
 
-const getFederalSourceForPage = () => {
-  const { sourceEn, sourceLinkEn } = getSource(DB, 'federal')
-
-  return {
-    link: sourceLinkEn,
-    nameEn: sourceEn,
-  }
-}
+const getFederalSourceForPage = () => getSource(DB, 'federal')
 
 router.get('/federal', checkRedirectYear, dbmw(getHolidaysWithProvinces), (req, res) => {
   const year = getCurrentHolidayYear('federal')

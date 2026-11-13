@@ -5,7 +5,7 @@ const { html } = require('../../utils')
 const ObservedDateKey = require('../ObservedDateKey.js')
 
 test('ObservedDateKey displays properly', () => {
-  const holiday = { date: '2021-12-25', observedDate: '2021-12-27', nameEn: 'Christmas Day' }
+  const holiday = { date: '2021-12-25', observedDate: '2021-12-27', nameEn: 'Christmas Day', nameFr: 'Noël' }
   const $ = cheerio.load(render(html` <${ObservedDateKey} holiday=${holiday} //> `))
   expect($('summary').text()).toEqual('December 25, Saturday')
   expect($('details div p').eq(0).text()).toEqual('Observed: December 27, Monday')
@@ -15,7 +15,7 @@ test('ObservedDateKey displays properly', () => {
 })
 
 test('ObservedDateKey displays properly for Boxing Day on Sunday', () => {
-  const holiday = { date: '2021-12-26', observedDate: '2021-12-28', nameEn: 'Boxing Day' }
+  const holiday = { date: '2021-12-26', observedDate: '2021-12-28', nameEn: 'Boxing Day', nameFr: 'Lendemain de Noël' }
   const $ = cheerio.load(render(html` <${ObservedDateKey} holiday=${holiday} //> `))
   expect($('summary').text()).toEqual('December 26, Sunday')
   expect($('details div p').eq(0).text()).toEqual('Observed: December 28, Tuesday')
@@ -25,7 +25,7 @@ test('ObservedDateKey displays properly for Boxing Day on Sunday', () => {
 })
 
 test('ObservedDateKey displays properly for Boxing Day on Monday', () => {
-  const holiday = { date: '2022-12-26', observedDate: '2022-12-27', nameEn: 'Boxing Day' }
+  const holiday = { date: '2022-12-26', observedDate: '2022-12-27', nameEn: 'Boxing Day', nameFr: 'Lendemain de Noël' }
   const $ = cheerio.load(render(html` <${ObservedDateKey} holiday=${holiday} //> `))
   expect($('summary').text()).toEqual('December 26, Monday')
   expect($('details div p').eq(0).text()).toEqual('Observed: December 27, Tuesday')
@@ -35,7 +35,7 @@ test('ObservedDateKey displays properly for Boxing Day on Monday', () => {
 })
 
 test('ObservedDateKey displays properly for Saint George’s Day', () => {
-  const holiday = { date: '2021-04-23', observedDate: '2021-04-26', nameEn: 'Saint George’s Day' }
+  const holiday = { date: '2021-04-23', observedDate: '2021-04-26', nameEn: 'Saint George’s Day', nameFr: 'Jour de St. George' }
   const $ = cheerio.load(render(html` <${ObservedDateKey} holiday=${holiday} //> `))
   expect($('summary').text()).toEqual('April 23, Friday')
   expect($('details div p').eq(0).text()).toEqual('Observed: April 26, Monday')
@@ -45,8 +45,24 @@ test('ObservedDateKey displays properly for Saint George’s Day', () => {
 })
 
 test('ObservedDateKey displays no details element if the observed date is the same as the calendar date', () => {
-  const holiday = { date: '2021-07-01', observedDate: '2021-07-01', nameEn: 'Canada Day' }
+  const holiday = { date: '2021-07-01', observedDate: '2021-07-01', nameEn: 'Canada Day', nameFr: 'Fête du Canada' }
   const $ = cheerio.load(render(html` <${ObservedDateKey} holiday=${holiday} //> `))
   expect($('time').text()).toEqual('July 1, Thursday')
   expect($('details').length).toBe(0)
+})
+
+test('ObservedDateKey displays properly in French', () => {
+  const holiday = { date: '2021-12-25', observedDate: '2021-12-27', nameEn: 'Christmas Day', nameFr: 'Noël' }
+
+  const $ = cheerio.load(render(html`<${ObservedDateKey} holiday=${holiday} locale="fr" />`))
+
+  expect($('summary').text()).toEqual('25\u00a0décembre, samedi')
+
+  expect($('details div p').eq(0).text()).toEqual(
+    'Observé : 27\u00a0décembre, lundi',
+  )
+
+  expect($('details div p').eq(1).text()).toEqual(
+    'Lorsque Noël tombe une fin de semaine, ce jour férié est observé le lundi suivant.',
+  )
 })
