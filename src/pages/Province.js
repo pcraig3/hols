@@ -260,8 +260,8 @@ const Province = ({
     <${Layout} color=${federal ? 'federal' : provinceId}>
       <div class=${provinceIdOrFederal ? styles(theme.color[provinceIdOrFederal]) : styles()}>
         <section id="next-holiday">
-          <${NextHolidayBox} ...${{ nextHoliday, provinceName, provinceId, federal, year }} />
-          <${ProvincePicker} ...${{ provinceId, federal, year }}=/>
+          <${NextHolidayBox} ...${{ nextHoliday, provinceName, provinceId, federal, year, locale }} />
+          <${ProvincePicker} ...${{ provinceId, federal, year, locale }}=/>
         </section>
 
         <section class=${horizontalPadding}>
@@ -283,6 +283,7 @@ const Province = ({
             <//>
             ${year < ALLOWED_YEARS[ALLOWED_YEARS.length - 1] &&
             html`<${NextYearLink}
+              locale=${locale}
               provinceName=${provinceName}
               provinceId=${provinceId}
               federal=${federal}

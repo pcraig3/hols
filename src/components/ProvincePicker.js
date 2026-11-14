@@ -2,6 +2,7 @@ const { html, getProvinceIdOrFederalString } = require('../utils')
 const { css } = require('@emotion/css')
 const { PROVINCE_IDS, SELECTABLE_YEARS } = require('../config/vars.config')
 const { theme, insideContainer, hiddenOnMobile, horizontalPadding } = require('../styles')
+const { getTranslator } = require('../i18n')
 const Button = require('./Button')
 
 const styles = ({ accent = theme.color.red, focus = theme.color.focus } = {}) => css`
@@ -123,43 +124,12 @@ const styles = ({ accent = theme.color.red, focus = theme.color.focus } = {}) =>
   }
 `
 
-const getProvinceNameFromId = (provinceId) => {
-  switch (provinceId) {
-    case 'AB':
-      return 'Alberta'
-    case 'BC':
-      return 'British Columbia'
-    case 'MB':
-      return 'Manitoba'
-    case 'NB':
-      return 'New Brunswick'
-    case 'NL':
-      return 'Newfoundland and Labrador'
-    case 'NS':
-      return 'Nova Scotia'
-    case 'NT':
-      return 'Northwest Territories'
-    case 'NU':
-      return 'Nunavut'
-    case 'ON':
-      return 'Ontario'
-    case 'PE':
-      return 'Prince Edward Island'
-    case 'QC':
-      return 'Quebec'
-    case 'SK':
-      return 'Saskatchewan'
-    case 'YT':
-      return 'Yukon'
-    default:
-      return
-  }
-}
-
-const ProvincePicker = ({ provinceId, federal, year = 2026 }) => {
+const ProvincePicker = ({ provinceId, federal, year = 2026, locale = 'en' }) => {
+  const t = getTranslator(locale)
+  const getProvinceNameFromId = (id) => id ? t(`components.provincePicker.regions.${id}`) : ''
   const provinceIdOrFederal = getProvinceIdOrFederalString({ provinceId, federal })
   let regionName = getProvinceNameFromId(provinceId)
-  regionName = regionName || (federal ? 'Federal' : 'Nationwide')
+  regionName = regionName || t(`components.provincePicker.${federal ? 'federal' : 'nationwide'}`)
 
   return html`
     <div class=${provinceIdOrFederal ? styles(theme.color[provinceIdOrFederal]) : styles()}>
@@ -168,8 +138,8 @@ const ProvincePicker = ({ provinceId, federal, year = 2026 }) => {
           <div>
             <div id="region-select-width" aria-hidden="true">${regionName}</div>
 
-            <label for="region-select" class="visuallyHidden">View by region</label>
-            <span class=${hiddenOnMobile} aria-hidden="true">See</span>
+            <label for="region-select" class="visuallyHidden">${t('components.provincePicker.viewByRegion')}</label>
+            <span class=${hiddenOnMobile} aria-hidden="true">${t('components.provincePicker.see')}</span>
             <select
               name="region"
               id="region-select"
@@ -177,8 +147,8 @@ const ProvincePicker = ({ provinceId, federal, year = 2026 }) => {
               data-action="region-select"
               data-label=${`region-select-${provinceIdOrFederal || 'canada'}`}
             >
-              <option value="" selected=${!provinceId && !federal}>Nationwide</option>
-              <option value="federal" selected=${!provinceId && federal}>Federal</option>
+              <option value="" selected=${!provinceId && !federal}>${t('components.provincePicker.nationwide')}</option>
+              <option value="federal" selected=${!provinceId && federal}>${t('components.provincePicker.federal')}</option>
               <option disabled>──────────</option>
               ${PROVINCE_IDS.map(
                 (pid) =>
@@ -190,8 +160,8 @@ const ProvincePicker = ({ provinceId, federal, year = 2026 }) => {
           </div>
 
           <div>
-            <label for="year-select" class="visuallyHidden">View by year</label>
-            <span aria-hidden="true">holidays for</span>
+            <label for="year-select" class="visuallyHidden">${t('components.provincePicker.viewByYear')}</label>
+            <span aria-hidden="true">${t('components.provincePicker.holidaysFor')}</span>
             <select
               name="year"
               id="year-select"
@@ -212,7 +182,7 @@ const ProvincePicker = ({ provinceId, federal, year = 2026 }) => {
               className=${'hover-color'}
               style="padding: 6.5px 9px 3.5px 9px; font-weight: 500;"
               color="${provinceIdOrFederal ? theme.color[provinceIdOrFederal] : {}}"
-              ><span class="">Submit</span> →<//
+              ><span class="">${t('components.provincePicker.submit')}</span> →<//
             >
           </div>
         </form>

@@ -1,4 +1,5 @@
 const { html } = require('../utils')
+const { getTranslator } = require('../i18n')
 const { css } = require('@emotion/css')
 const { theme } = require('../styles')
 
@@ -22,17 +23,17 @@ const getLink = ({ provinceId, year, federal }) => {
   return `/${nextYear}`
 }
 
-const NextYearLink = ({ provinceName, provinceId, year, federal }) => {
+const NextYearLink = ({ provinceName, provinceId, year, federal, locale = 'en' }) => {
+  const t = getTranslator(locale)
   return html`
     <div class=${`hidden-print ${styles}`}>
       <a
-        href=${getLink({ provinceId, year, federal })}
+        href=${`${locale === 'fr' ? '/fr' : ''}${getLink({ provinceId, year, federal })}`}
         class="link__next-year right-arrow"
         data-event="true"
         data-action="next-year-link"
         data-label=${`next-year-${provinceId ? provinceId : federal ? 'federal' : 'canada'}`}
-        >${federal ? 'Federal' : provinceName}${' '}
-        <span class="visuallyHidden">statutory</span>${' '}holidays in ${year + 1}</a
+        >${t(`components.nextYearLink.${federal ? 'federal' : 'province'}`, { provinceName, year: year + 1 })}</a
       >
     </div>
   `

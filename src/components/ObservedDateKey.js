@@ -16,20 +16,20 @@ const _getContext = ({ holiday, locale }) => {
     nameEn === 'Boxing Day' &&
     (isSunday(Sugar.Date.create(date)) || isMonday(Sugar.Date.create(date)))
   ) {
-    return html`<p>${t('observedDate.boxingDay', { holidayName: name })}</p>`
+    return html`<p>${t('components.observedDateKey.boxingDay', { holidayName: name })}</p>`
   }
 
   if (
     nameEn === 'Day after New Year’s' &&
     (isSunday(Sugar.Date.create(date)) || isMonday(Sugar.Date.create(date)))
   ) {
-    return html`<p>${t('observedDate.afterNewYears', { holidayName: name })}</p>`
+    return html`<p>${t('components.observedDateKey.afterNewYears', { holidayName: name })}</p>`
   }
 
   if (provinces.length === 1 && ['NL', 'QC'].includes(provinces[0].id)) {
     return html`
       <p>
-        ${t('observedDate.closestMonday', {
+        ${t('components.observedDateKey.closestMonday', {
           holidayName: name,
           date: displayDate(date, { locale }),
         })}
@@ -37,7 +37,7 @@ const _getContext = ({ holiday, locale }) => {
     `
   }
 
-  return html`<p>${t('observedDate.weekend', { holidayName: name })}</p>`
+  return html`<p>${t('components.observedDateKey.weekend', { holidayName: name })}</p>`
 }
 
 const ObservedDateKey = ({ holiday, locale = 'en' }) => {
@@ -58,7 +58,7 @@ const ObservedDateKey = ({ holiday, locale = 'en' }) => {
       >
         <div>
           <p>
-            <em>${t('observedDate.observed')}</em>
+            <em>${t('components.observedDateKey.observed')}</em>
             ${' '}
             <${DateHtml}
               dateString=${observedDate}

@@ -1,16 +1,13 @@
 const { html } = require('../utils')
 
-const ProvinceTitle = ({ provinceName = 'Canada', federal, year }) => {
-  return html`
-    <h1>
-      <div class="h1--lg">${provinceName}</div>
-      <div class="h1--md">
-        ${federal ? 'Federal ' : ''}<span class="visuallyHidden">statutory</span>${federal
-          ? ' h'
-          : ' H'}olidays${` in ${year}`}
-      </div>
-    </h1>
-  `
+const { getTranslator } = require('../i18n')
+
+const ProvinceTitle = ({ provinceName = 'Canada', federal, year, locale = 'en' }) => {
+  const t = getTranslator(locale)
+  return html`<h1>
+    <span class="h1--lg">${provinceName}</span>
+    <span class="h1--md">${t(`components.provinceTitle.${federal ? 'federalTitle' : 'title'}`, { year })}</span>
+  </h1>`
 }
 
 module.exports = ProvinceTitle
