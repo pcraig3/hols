@@ -17,7 +17,7 @@ describe('ProvinceTitle renders', () => {
     expect($('h1').length).toBe(1)
     expect($('.h1--xs').length).toBe(0)
     expect($('.h1--lg').text()).toEqual('Canada')
-    expect($('.h1--md').text()).toEqual('statutory Holidays in 2022')
+    expect($('.h1--md').text()).toEqual('Holidays in 2022')
   })
 
   test('for Federal Canadian holidays in 2022', () => {
@@ -25,7 +25,7 @@ describe('ProvinceTitle renders', () => {
 
     expect($('h1').length).toBe(1)
     expect($('.h1--lg').text()).toEqual('Canada')
-    expect($('.h1--md').text()).toEqual('Federal statutory holidays in 2022')
+    expect($('.h1--md').text()).toEqual('Federal holidays in 2022')
   })
 
   test('for PEI holidays in 2022', () => {
@@ -33,7 +33,7 @@ describe('ProvinceTitle renders', () => {
 
     expect($('h1').length).toBe(1)
     expect($('.h1--lg').text()).toEqual('Prince Edward Island')
-    expect($('.h1--md').text()).toEqual('statutory Holidays in 2022')
+    expect($('.h1--md').text()).toEqual('Holidays in 2022')
   })
 
   test('for PEI holidays in 2025', () => {
@@ -41,6 +41,6 @@ describe('ProvinceTitle renders', () => {
 
     expect($('h1').length).toBe(1)
     expect($('.h1--lg').text()).toEqual('Prince Edward Island')
-    expect($('.h1--md').text()).toEqual('statutory Holidays in 2025')
+    expect($('.h1--md').text()).toEqual('Holidays in 2025')
   })
 })

@@ -1,4 +1,5 @@
 const { html, getProvinceIdOrFederalString } = require('../utils')
+const { getTranslator } = require('../i18n')
 const Button = require('../components/Button.js')
 const { theme } = require('../styles')
 
@@ -6,7 +7,7 @@ const CalButton = ({
   federal,
   provinceId,
   year,
-  text = 'Add to your calendar',
+  text,
   className = '',
   download = false,
   eventName = 'download-holidays',
@@ -39,7 +40,7 @@ const CalButton = ({
       data-label=${eventName
         ? `${eventName}-${provinceIdOrFederal || 'canada'}${year ? `-${year}` : ''}`
         : null}
-      >${text}<//
+      >${text === undefined ? getTranslator(locale)('components.calButton.addToCalendar') : text}<//
     >
   `
 }

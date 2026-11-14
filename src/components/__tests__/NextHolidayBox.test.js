@@ -81,7 +81,7 @@ test('NextHolidayBox displays provinceName and year and "add to calendar" link',
   })
 
   expect($('div h1').length).toBe(1)
-  expect($('h1').text()).toEqual('Nunavutstatutory Holidays in 2021')
+  expect($('h1').text()).toEqual('NunavutHolidays in 2021')
   expect($('h1 + p').length).toBe(1)
   expect($('h1 ~ p').text()).toEqual('Add to your calendar')
   expect($('h1 ~ p a').attr('href')).toEqual('/ics/NU/2021')
@@ -95,7 +95,7 @@ test('NextHolidayBox displays provinceName and year and "add to calendar" link f
   })
 
   expect($('div h1').length).toBe(1)
-  expect($('h1').text()).toEqual('CanadaFederal statutory holidays in 2022')
+  expect($('h1').text()).toEqual('CanadaFederal holidays in 2022')
   expect($('h1 ~ p').text()).toEqual('Add to your calendar')
   expect($('h1 ~ p a').attr('href')).toEqual('/ics/federal/2022')
 })
@@ -107,7 +107,7 @@ test('NextHolidayBox displays provinceName and year and "add to calendar" link f
   })
 
   expect($('div h1').length).toBe(1)
-  expect($('h1').text()).toEqual('Canadastatutory Holidays in 2019')
+  expect($('h1').text()).toEqual('CanadaHolidays in 2019')
   expect($('h1 ~ p').text()).toEqual('Add to your calendar')
   expect($('h1 ~ p a').attr('href')).toEqual('/ics/2019')
 })

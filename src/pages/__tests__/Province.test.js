@@ -59,7 +59,7 @@ describe('Province page', () => {
     // check the data label is lowercasing the province name
     expect($('.h1--lg a time').attr('data-label')).toEqual('next-holidays-row-link-canada')
     // check that the link to next year's holidays is visible
-    expect($('a.link__next-year').text()).toEqual(`Canada statutory holidays in ${currentYear + 1}`)
+    expect($('a.link__next-year').text()).toEqual(`Canada holidays in ${currentYear + 1}`)
   })
 
   test('renders #next-holiday-row id', () => {

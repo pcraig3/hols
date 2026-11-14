@@ -1,4 +1,3 @@
-
 module.exports = {
   pages: {
     about: {
@@ -185,6 +184,70 @@ module.exports = {
       backToTop: 'Retour en haut',
     },
   },
+  components: {
+    calButton: {
+      addToCalendar: 'Ajouter à votre calendrier',
+    },
+    nextHoliday: {
+      canada: 'Le prochain jour férié au Canada est',
+      federal: 'Le prochain jour férié fédéral au Canada est',
+      province: 'Prochain jour férié — {{regionLabel}}',
+      on: ', le',
+    },
+    nextHolidayBox: {
+      federalWho: 'Découvrez à qui s’appliquent les jours fériés fédéraux',
+    },
+    nextYearLink: {
+      province: 'Jours fériés en {{year}} — {{provinceName}}',
+      federal: 'Jours fériés fédéraux en {{year}}',
+    },
+    observedDateKey: {
+      observed: 'Observé :',
+      boxingDay: 'Comme Noël est observé le lundi, {{holidayName}} est reporté au mardi suivant.',
+      afterNewYears: 'Comme le jour de l’An est observé le lundi, {{holidayName}} est reporté au mardi suivant.',
+      closestMonday: '{{holidayName}} est observé le lundi le plus près du {{date}}.',
+      weekend: 'Lorsque {{holidayName}} tombe une fin de semaine, ce jour férié est observé le lundi suivant.',
+    },
+    observingProvinces: {
+      observedInOne: 'Observé dans la région suivante :',
+      observedInMany: 'Observé dans les régions suivantes :',
+      observedFederally: 'Observé dans',
+      federalIndustries: 'les secteurs sous réglementation fédérale',
+      listMiddleSeparator: ', ',
+      listLastSeparator: ' et ',
+      andFederalOne: ', ainsi que dans',
+      andFederalMany: ', ainsi que dans',
+    },
+    provincePicker: {
+      viewByRegion: 'Afficher par région',
+      see: 'Voir',
+      nationwide: 'Canada',
+      federal: 'Fédéral',
+      viewByYear: 'Afficher par année',
+      holidaysFor: 'jours fériés en',
+      submit: 'Afficher',
+      regions: {
+        AB: 'Alberta',
+        BC: 'Colombie-Britannique',
+        MB: 'Manitoba',
+        NB: 'Nouveau-Brunswick',
+        NL: 'Terre-Neuve-et-Labrador',
+        NS: 'Nouvelle-Écosse',
+        NT: 'Territoires du Nord-Ouest',
+        NU: 'Nunavut',
+        ON: 'Ontario',
+        PE: 'Île-du-Prince-Édouard',
+        QC: 'Québec',
+        SK: 'Saskatchewan',
+        YT: 'Yukon',
+      },
+    },
+    provinceTitle: {
+      title: 'Jours fériés en {{year}}',
+      federalTitle: 'Jours fériés fédéraux en {{year}}',
+    },
+
+  },
   dates: {
     relative: {
       today: 'C’est aujourd’hui !',
@@ -204,12 +267,5 @@ module.exports = {
     observedInRegionsAndFederal: 'Observé dans les régions suivantes : {{regions}}, ainsi que dans les secteurs sous réglementation fédérale.',
     observedOn: 'Observé le {{date}}.',
     and: 'et',
-  },
-  observedDate: {
-    observed: 'Observé :',
-    boxingDay: 'Comme Noël est observé le lundi, {{holidayName}} est reporté au mardi suivant.',
-    afterNewYears: 'Comme le jour de l’An est observé le lundi, {{holidayName}} est reporté au mardi suivant.',
-    closestMonday: '{{holidayName}} est observé le lundi le plus près du {{date}}.',
-    weekend: 'Lorsque {{holidayName}} tombe une fin de semaine, ce jour férié est observé le lundi suivant.',
   },
 }

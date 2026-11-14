@@ -92,7 +92,7 @@ describe('Test ui responses', () => {
     test(`it should return the h1, title, meta tag, and canonical link for ${nextYear}`, async () => {
       const response = await request(app).get(`/${nextYear}`)
       const $ = cheerio.load(response.text)
-      expect($('h1').text()).toEqual(`Canadastatutory Holidays in ${nextYear}`)
+      expect($('h1').text()).toEqual(`CanadaHolidays in ${nextYear}`)
       expect($('title').text()).toEqual(`Canadian statutory holidays in ${nextYear}`)
       const regex = new RegExp(`See all \\d{1,2} statutory holidays in Canada in ${nextYear}`)
       expect($('meta[name="description"]').attr('content')).toMatch(regex)
@@ -329,7 +329,7 @@ describe('Test ui responses', () => {
       test('it should return the h1, title, meta tag, and canonical link for MB next year', async () => {
         const response = await request(app).get(`/provinces/MB/${nextYearMB}`)
         const $ = cheerio.load(response.text)
-        expect($('h1').text()).toEqual(`Manitobastatutory Holidays in ${nextYearMB}`)
+        expect($('h1').text()).toEqual(`ManitobaHolidays in ${nextYearMB}`)
         expect($('title').text()).toEqual(
           `Manitoba (MB) statutory holidays in ${nextYearMB} — Canada Holidays`,
         )
@@ -373,7 +373,7 @@ describe('Test ui responses', () => {
       test('it should return the h1, title, meta tag, and canonical link for federal hols in 2021', async () => {
         const response = await request(app).get(`/federal/${nextYear}`)
         const $ = cheerio.load(response.text)
-        expect($('h1').text()).toEqual(`CanadaFederal statutory holidays in ${nextYear}`)
+        expect($('h1').text()).toEqual(`CanadaFederal holidays in ${nextYear}`)
         expect($('title').text()).toEqual(`Federal statutory holidays in Canada in ${nextYear}`)
         const regex = new RegExp(
           `See all \\d{1,2} federal statutory holidays in Canada in ${nextYear}`,

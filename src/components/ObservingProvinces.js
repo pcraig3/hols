@@ -1,85 +1,30 @@
 const { html, pe2pei } = require('../utils')
+const { getTranslator, localizedName } = require('../i18n')
 
-const ObservingProvinces = ({ provinces = [], federal = false }) => {
+const ObservingProvinces = ({ provinces = [], federal = false, locale = 'en' }) => {
+  const t = getTranslator(locale)
+  const prefix = locale === 'fr' ? '/fr' : ''
+  const label = (key) => t(`components.observingProvinces.${key}`)
+
   if (provinces.length === 13) {
-    return html`<p>National holiday</p>`
+    return html`<p>${t('pages.province.nationalHoliday')}</p>`
   }
+  if (!provinces.length && !federal) return ''
 
-  if (provinces.length === 0) {
-    return federal
-      ? html`<p>
-          Observed by${' '}<a href="/federal">federal industries</a
-          ><span class="visuallyHidden">.</span>
-        </p>`
-      : ''
-  }
+  const many = provinces.length > 1
+  const links = provinces.map((province, index) => {
+    const name = localizedName(province, locale)
+    const separator = index === 0 ? '' : index === provinces.length - 1 && !federal
+      ? (provinces.length === 2 && locale === 'en' ? ' and ' : label('listLastSeparator'))
+      : label('listMiddleSeparator')
+    return html`${separator}<a href=${`${prefix}/provinces/${province.id}`}
+      aria-label=${provinces.length > 2 ? name : null}
+      >${provinces.length > 2 ? pe2pei(province.id) : name}</a>`
+  })
 
-  if (provinces.length === 1) {
-    return federal
-      ? html`
-          <p>
-            Observed in${' '}<a href=${`/provinces/${provinces[0].id}`}>${provinces[0].nameEn}</a>
-            ${' '}and by${' '}<a href="/federal">federal industries</a>
-            <span class="visuallyHidden">.</span>
-          </p>
-        `
-      : html`
-          <p>
-            Observed in${' '}<a href=${`/provinces/${provinces[0].id}`}>${provinces[0].nameEn}</a>
-            <span class="visuallyHidden">.</span>
-          </p>
-        `
-  }
-
-  if (provinces.length === 2) {
-    return federal
-      ? html`
-          <p>
-            Observed in${' '}<a href=${`/provinces/${provinces[0].id}`}>${provinces[0].nameEn}</a>,
-            ${' '}<a href=${`/provinces/${provinces[1].id}`}>${provinces[1].nameEn},</a>${' '}and
-            ${' '}by${' '}<a href="/federal">federal industries</a>
-            <span class="visuallyHidden">.</span>
-          </p>
-        `
-      : html`
-          <p>
-            Observed in${' '}<a href=${`/provinces/${provinces[0].id}`}>${provinces[0].nameEn}</a>
-            ${' '}and${' '}<a href=${`/provinces/${provinces[1].id}`}>${provinces[1].nameEn}</a>
-            <span class="visuallyHidden">.</span>
-          </p>
-        `
-  }
-
-  const isLastProvince = (province) => province.id === provinces[provinces.length - 1].id
-
-  if (federal) {
-    return html`
-      <p>
-        Observed in
-        ${provinces.map(
-          (p) =>
-            html`${' '}<a href=${`/provinces/${p.id}`} aria-label=${p.nameEn}>${pe2pei(p.id)}</a
-              >${','}`,
-        )}
-        ${' '}and by${' '}<a href="/federal">federal industries</a>
-        <span class="visuallyHidden">.</span>
-      </p>
-    `
-  }
-
-  return html`
-    <p>
-      Observed in
-      ${provinces.map(
-        (p) => html`
-          ${isLastProvince(p) ? ' and ' : ' '}<a href=${`/provinces/${p.id}`} aria-label=${p.nameEn}
-            >${pe2pei(p.id)}</a
-          >${isLastProvince(p) ? '' : ','}
-        `,
-      )}
-      <span class="visuallyHidden">.</span>
-    </p>
-  `
+  return html`<p>
+    ${label(provinces.length ? (many ? 'observedInMany' : 'observedInOne') : 'observedFederally')}${' '}${links}${federal && html`${provinces.length ? label(many ? 'andFederalMany' : 'andFederalOne') + ' ' : ''}<a href=${`${prefix}/federal`}>${label('federalIndustries')}</a>`}<span class="visuallyHidden">.</span>
+  </p>`
 }
 
 module.exports = ObservingProvinces

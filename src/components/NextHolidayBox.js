@@ -1,6 +1,8 @@
 const { css } = require('@emotion/css')
 const { html, getProvinceIdOrFederalString } = require('../utils')
 const { theme, insideContainer, horizontalPadding } = require('../styles')
+const { pathFor } = require('../config/routes.config')
+const { getTranslator } = require('../i18n')
 const NextHoliday = require('./NextHoliday.js')
 const ObservingProvinces = require('./ObservingProvinces.js')
 const ProvinceTitle = require('./ProvinceTitle.js')
@@ -33,6 +35,11 @@ const styles = ({
   }
 
   h1 {
+  
+    span[class^="h1"] {
+      display: block;
+    }
+
     .h1--xs {
       font-size: 0.533em;
       font-weight: 400;
@@ -89,24 +96,24 @@ const styles = ({
   }
 `
 
-const renderNextHolidayTitle = ({ nextHoliday, provinceName, federal }) => {
-  return html`<${NextHoliday} ...${{ nextHoliday, provinceName, federal }} //>
-    <p>${relativeDate(nextHoliday.observedDate)}<span class="visuallyHidden">.</span></p>
+const renderNextHolidayTitle = ({ nextHoliday, provinceName, federal, locale }) => {
+  return html`<${NextHoliday} ...${{ nextHoliday, provinceName, federal, locale }} //>
+    <p>${relativeDate(nextHoliday.observedDate, locale)}<span class="visuallyHidden">.</span></p>
     ${provinceName == 'Canada' &&
     !federal &&
-    html`<${ObservingProvinces} provinces=${nextHoliday.provinces} federal=${nextHoliday.federal}
+    html`<${ObservingProvinces} locale=${locale} provinces=${nextHoliday.provinces} federal=${nextHoliday.federal}
     //>`}`
 }
 
-const renderYearPageTitle = ({ provinceName, provinceId, federal, year }) => {
-  return html`<${ProvinceTitle} ...${{ provinceName, federal, year }} //>
+const renderYearPageTitle = ({ provinceName, provinceId, federal, year, locale }) => {
+  return html`<${ProvinceTitle} ...${{ provinceName, federal, year, locale }} //>
     <p>
-      <${CalButton} provinceId=${provinceId} federal=${federal} year=${year}
+      <${CalButton} locale=${locale} provinceId=${provinceId} federal=${federal} year=${year}
       className=${'hover-color ghost'} //>
     </p>`
 }
 
-const NextHolidayBox = ({ nextHoliday, provinceName = 'Canada', provinceId, federal, year }) => {
+const NextHolidayBox = ({ nextHoliday, provinceName = 'Canada', provinceId, federal, year, locale = 'en' }) => {
   let bg = {
     angle: randomInt(63, 66),
     width: randomInt(61, 64),
@@ -123,13 +130,13 @@ const NextHolidayBox = ({ nextHoliday, provinceName = 'Canada', provinceId, fede
     <div class=${styles({ ...color, bg })}>
       <div>
         ${nextHoliday
-          ? renderNextHolidayTitle({ nextHoliday, provinceName, federal })
-          : renderYearPageTitle({ provinceName, provinceId, federal, year })}
+          ? renderNextHolidayTitle({ nextHoliday, provinceName, federal, locale })
+          : renderYearPageTitle({ provinceName, provinceId, federal, year, locale })}
         ${nextHoliday &&
         federal &&
         html`
           <p>
-            <a href="/do-federal-holidays-apply-to-me">Find out who gets federal holidays</a>
+            <a href=${pathFor('federallyRegulated', { locale })}>${getTranslator(locale)('components.nextHolidayBox.federalWho')}</a>
           </p>
         `}
       </div>

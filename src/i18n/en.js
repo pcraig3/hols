@@ -1,4 +1,3 @@
-
 module.exports = {
   pages: {
     about: {
@@ -185,6 +184,70 @@ module.exports = {
       backToTop: 'Back to top',
     },
   },
+  components: {
+    calButton: {
+      addToCalendar: 'Add to your calendar',
+    },
+    nextHoliday: {
+      canada: 'Canada’s next {{holidayType}}holiday is',
+      federal: 'Canada’s next federal {{holidayType}}holiday is',
+      province: '{{regionLabel}} next {{holidayType}}holiday is',
+      on: ', on',
+    },
+    nextHolidayBox: {
+      federalWho: 'Find out who gets federal holidays',
+    },
+    nextYearLink: {
+      province: '{{provinceName}} holidays in {{year}}',
+      federal: 'Federal holidays in {{year}}',
+    },
+    observedDateKey: {
+      observed: 'Observed:',
+      boxingDay: 'Because Christmas is observed on Monday, {{holidayName}} is pushed to the following Tuesday.',
+      afterNewYears: 'Because New Year’s is observed on Monday, the {{holidayName}} is pushed to the following Tuesday.',
+      closestMonday: '{{holidayName}} is observed on the Monday closest to {{date}}.',
+      weekend: 'When {{holidayName}} falls on a weekend, it is observed the following Monday.',
+    },
+    observingProvinces: {
+      observedInOne: 'Observed in',
+      observedInMany: 'Observed in',
+      observedFederally: 'Observed by',
+      federalIndustries: 'federal industries',
+      listMiddleSeparator: ', ',
+      listLastSeparator: ', and ',
+      andFederalOne: ' and by',
+      andFederalMany: ', and by',
+    },
+    provincePicker: {
+      viewByRegion: 'View by region',
+      see: 'See',
+      nationwide: 'Nationwide',
+      federal: 'Federal',
+      viewByYear: 'View by year',
+      holidaysFor: 'holidays for',
+      submit: 'Submit',
+      regions: {
+        AB: 'Alberta',
+        BC: 'British Columbia',
+        MB: 'Manitoba',
+        NB: 'New Brunswick',
+        NL: 'Newfoundland and Labrador',
+        NS: 'Nova Scotia',
+        NT: 'Northwest Territories',
+        NU: 'Nunavut',
+        ON: 'Ontario',
+        PE: 'Prince Edward Island',
+        QC: 'Quebec',
+        SK: 'Saskatchewan',
+        YT: 'Yukon',
+      },
+    },
+    provinceTitle: {
+      title: 'Holidays in {{year}}',
+      federalTitle: 'Federal holidays in {{year}}',
+    },
+
+  },
   dates: {
     relative: {
       today: 'That’s today!',
@@ -200,12 +263,5 @@ module.exports = {
     observedBy: 'Observed by {{regions}}.',
     observedOn: 'Observed: {{date}}',
     and: 'and',
-  },
-  observedDate: {
-    observed: 'Observed:',
-    boxingDay: 'Because Christmas is observed on Monday, {{holidayName}} is pushed to the following Tuesday.',
-    afterNewYears: 'Because New Year’s is observed on Monday, the {{holidayName}} is pushed to the following Tuesday.',
-    closestMonday: '{{holidayName}} is observed on the Monday closest to {{date}}.',
-    weekend: 'When {{holidayName}} falls on a weekend, it is observed the following Monday.',
   },
 }
