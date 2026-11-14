@@ -16,24 +16,30 @@ const styles = css`
   }
 `
 
-const getLink = ({ provinceId, year, federal }) => {
+const getLink = ({ provinceId, year, federal, locale }) => {
   const nextYear = year + 1
-  if (provinceId) return `/provinces/${provinceId}/${nextYear}`
-  if (federal) return `/federal/${nextYear}`
-  return `/${nextYear}`
+  const localePrefix = locale === 'fr' ? '/fr' : ''
+
+  if (provinceId) { return `${localePrefix}/provinces/${provinceId}/${nextYear}` }
+
+  if (federal) { return `${localePrefix}/federal/${nextYear}` }
+
+  return `${localePrefix}/${nextYear}`
 }
 
 const NextYearLink = ({ provinceName, provinceId, year, federal, locale = 'en' }) => {
   const t = getTranslator(locale)
+  const nextYear = year + 1
+
   return html`
     <div class=${`hidden-print ${styles}`}>
       <a
-        href=${`${locale === 'fr' ? '/fr' : ''}${getLink({ provinceId, year, federal })}`}
+        href=${getLink({ provinceId, year, federal, locale })}
         class="link__next-year right-arrow"
         data-event="true"
         data-action="next-year-link"
         data-label=${`next-year-${provinceId ? provinceId : federal ? 'federal' : 'canada'}`}
-        >${t(`components.nextYearLink.${federal ? 'federal' : 'province'}`, { provinceName, year: year + 1 })}</a
+        >${t(`components.nextYearLink.${federal ? 'federal' : 'province'}`, { provinceName, year: nextYear })}</a
       >
     </div>
   `

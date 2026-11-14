@@ -10,9 +10,9 @@ const renderObservingProvinces = (props) => {
 
 const getProvinces = (count) => {
   const _provinces = [
-    { id: 'PE', nameEn: 'Prince Edward Island' },
-    { id: 'QC', nameEn: 'Quebec' },
-    { id: 'SK', nameEn: 'Saskatchewan' },
+    { id: 'PE', nameEn: 'Prince Edward Island', nameFr: 'Île-du-Prince-Édouard' },
+    { id: 'QC', nameEn: 'Quebec', nameFr: 'Québec' },
+    { id: 'SK', nameEn: 'Saskatchewan', nameFr: 'Saskatchewan' },
   ]
 
   if (![1, 2, 3].includes(count)) {
@@ -89,5 +89,29 @@ describe('ObservingProvinces', () => {
 
     const $ = renderObservingProvinces({ provinces })
     expect($('p').text()).toEqual('National holiday')
+  })
+
+  test('renders two provinces in French', () => {
+    const provinces = [
+      {
+        id: 'PE',
+        nameEn: 'Prince Edward Island',
+        nameFr: 'Île-du-Prince-Édouard',
+      },
+      {
+        id: 'QC',
+        nameEn: 'Quebec',
+        nameFr: 'Québec',
+      },
+    ]
+
+    const $ = renderObservingProvinces({
+      provinces,
+      locale: 'fr',
+    })
+
+    expect($('p').text()).toBe(
+      'Observé dans les régions suivantes : Île-du-Prince-Édouard et Québec.',
+    )
   })
 })

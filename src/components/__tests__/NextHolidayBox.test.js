@@ -10,7 +10,7 @@ const renderNextHolidayBox = (props) => {
 }
 
 const getProvince = () => {
-  return { id: 'NU', nameEn: 'Nunavut' }
+  return { id: 'NU', nameEn: 'Nunavut', nameFr: 'Nunavut' }
 }
 
 const getNextHoliday = ({ federal } = {}) => {
@@ -21,6 +21,7 @@ const getNextHoliday = ({ federal } = {}) => {
     date: `${currentYear}-07-09`,
     observedDate: `${currentYear}-07-11`,
     nameEn: 'Nunavut Day',
+    nameFr: 'Jour du Nunavut',
     federal: federal ? 1 : 0,
     provinces: [getProvince()],
   }
@@ -110,4 +111,12 @@ test('NextHolidayBox displays provinceName and year and "add to calendar" link f
   expect($('h1').text()).toEqual('CanadaHolidays in 2019')
   expect($('h1 ~ p').text()).toEqual('Add to your calendar')
   expect($('h1 ~ p a').attr('href')).toEqual('/ics/2019')
+})
+
+test('NextHolidayBox displays next holiday in French', () => {
+  const nextHoliday = getNextHoliday()
+  const $ = renderNextHolidayBox({ nextHoliday, locale: 'fr' })
+
+  expect($('.h1--xs').text()).toBe('Le prochain jour férié au Canada est')
+  expect($('.h1--md').text()).toContain('Jour du Nunavut')
 })

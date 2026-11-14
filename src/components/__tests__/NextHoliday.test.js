@@ -14,8 +14,9 @@ const getNextHoliday = ({ federal, observedDate } = {}) => {
     date: '2019-08-16',
     observedDate: observedDate || '2019-08-16',
     nameEn: 'Gold Cup Parade Day',
+    nameFr: 'Défilé de la Coupe d’or',
     federal: federal ? 1 : 0,
-    provinces: [{ id: 'PE', nameEn: 'Prince Edward Island' }],
+    provinces: [{ id: 'PE', nameEn: 'Prince Edward Island', nameFr: 'Île-du-Prince-Édouard' }],
   }
 }
 
@@ -64,5 +65,22 @@ describe('NextHoliday', () => {
 
     expect($('h1').length).toBe(1)
     expect($('.h1--lg').text()).toEqual(`${sp2nbsp('August 16*')}`)
+  })
+
+  test('renders next holiday in French', () => {
+    const nextHoliday = getNextHoliday()
+
+    const $ = renderNextHoliday({
+      nextHoliday,
+      provinceName: 'Île-du-Prince-Édouard',
+      locale: 'fr',
+    })
+
+    expect($('.h1--xs').text()).toEqual(
+      'Prochain jour férié — Île-du-Prince-Édouard',
+    )
+
+    expect($('.h1--md').text()).toContain('Défilé')
+    expect($('.h1--lg').text()).toContain('16\u00a0août')
   })
 })
