@@ -43,4 +43,15 @@ describe('ProvinceTitle renders', () => {
     expect($('.h1--lg').text()).toEqual('Prince Edward Island')
     expect($('.h1--md').text()).toEqual('Holidays in 2025')
   })
+
+  test('for Quebec in French', () => {
+    const $ = renderProvinceTitle({
+      provinceName: 'Québec',
+      year: 2022,
+      locale: 'fr',
+    })
+
+    expect($('.h1--lg').text()).toEqual('Québec')
+    expect($('.h1--md').text()).toEqual('Jours fériés en 2022')
+  })
 })

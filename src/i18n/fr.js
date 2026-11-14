@@ -192,6 +192,7 @@ module.exports = {
       canada: 'Le prochain jour férié au Canada est',
       federal: 'Le prochain jour férié fédéral au Canada est',
       province: 'Prochain jour férié — {{regionLabel}}',
+      observed: 'Observé :',
       on: ', le',
     },
     nextHolidayBox: {
@@ -209,11 +210,13 @@ module.exports = {
       weekend: 'Lorsque {{holidayName}} tombe une fin de semaine, ce jour férié est observé le lundi suivant.',
     },
     observingProvinces: {
+      nationalHoliday: 'Jour férié national',
       observedInOne: 'Observé dans la région suivante :',
       observedInMany: 'Observé dans les régions suivantes :',
       observedFederally: 'Observé dans',
       federalIndustries: 'les secteurs sous réglementation fédérale',
       listMiddleSeparator: ', ',
+      listTwoSeparator: ' et ',
       listLastSeparator: ' et ',
       andFederalOne: ', ainsi que dans',
       andFederalMany: ', ainsi que dans',

@@ -35,21 +35,32 @@ const styles = css`
 `
 
 const getTitle = (nextHoliday, locale) => {
-  return `${displayDate(nextHoliday.date, { locale })} (${getTranslator(locale)('components.observedDateKey.observed')} ${displayDate(nextHoliday.observedDate, { locale })})`
+  const t = getTranslator(locale)
+
+  return `${displayDate(nextHoliday.date, { locale })} (${t('components.nextHoliday.observed')} ${displayDate(nextHoliday.observedDate, { locale })})`
 }
 
 const NextHoliday = ({ nextHoliday, provinceName = 'Canada', federal, locale = 'en' }) => {
   const t = getTranslator(locale)
   const regionLabel = locale === 'fr' ? provinceName : `${provinceName}’${provinceName.endsWith('s') ? '' : 's'}`
   const isOffset = nextHoliday.date !== nextHoliday.observedDate
+  const holidayType = nextHoliday.optional ? '' : 'statutory '
+
+  const introKey = federal
+    ? 'components.nextHoliday.federal'
+    : provinceName === 'Canada'
+      ? 'components.nextHoliday.canada'
+      : 'components.nextHoliday.province'
+
+  const holidayName = localizedName(nextHoliday, locale)
 
   return html`
     <h1 class="${styles}">
       <span class="h1--xs">
-        ${t(`components.nextHoliday.${federal ? 'federal' : provinceName === 'Canada' ? 'canada' : 'province'}`, { regionLabel, holidayType: nextHoliday.optional ? '' : 'statutory ' })}
+        ${t(introKey, { regionLabel, holidayType })}
       </span>
       <span class="h1--md">
-        ${localizedName(nextHoliday, locale).replace(/ /, '\u00a0').replace(/Peoples Day/, 'Peoples\u00a0Day')}
+        ${holidayName.replace(/ /, '\u00a0').replace(/Peoples Day/, 'Peoples\u00a0Day')}
       </span>
       <span class="visuallyHidden">${t('components.nextHoliday.on')}</span>
       <span class="h1--lg">

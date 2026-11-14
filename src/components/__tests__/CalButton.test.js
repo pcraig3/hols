@@ -107,3 +107,9 @@ describe('CalButton localization', () => {
     expect($('a').attr('download')).toBe('canada-holidays-ON-fr.ics')
   })
 })
+
+test('CalButton uses French default text', () => {
+  const $ = renderCalButton({ locale: 'fr' })
+
+  expect($('a').text()).toBe('Ajouter à votre calendrier')
+})

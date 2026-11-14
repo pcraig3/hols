@@ -192,6 +192,7 @@ module.exports = {
       canada: 'Canada’s next {{holidayType}}holiday is',
       federal: 'Canada’s next federal {{holidayType}}holiday is',
       province: '{{regionLabel}} next {{holidayType}}holiday is',
+      observed: 'Observed:',
       on: ', on',
     },
     nextHolidayBox: {
@@ -209,11 +210,13 @@ module.exports = {
       weekend: 'When {{holidayName}} falls on a weekend, it is observed the following Monday.',
     },
     observingProvinces: {
+      nationalHoliday: 'National holiday',
       observedInOne: 'Observed in',
       observedInMany: 'Observed in',
       observedFederally: 'Observed by',
       federalIndustries: 'federal industries',
       listMiddleSeparator: ', ',
+      listTwoSeparator: ' and ',
       listLastSeparator: ', and ',
       andFederalOne: ' and by',
       andFederalMany: ', and by',

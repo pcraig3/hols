@@ -56,3 +56,9 @@ test('NextYearLink displays VERY future link and text properly', () => {
   expect($('a').attr('href')).toEqual('/provinces/NS/5001')
   expect($('a').attr('data-label')).toEqual('next-year-NS')
 })
+
+test('NextYearLink displays French provincial text and URL', () => {
+  const $ = renderNextYearLink({ provinceName: 'Québec', provinceId: 'QC', year: 2027, locale: 'fr' })
+  expect($('a').text()).toBe('Jours fériés en 2028 — Québec')
+  expect($('a').attr('href')).toBe('/fr/provinces/QC/2028')
+})

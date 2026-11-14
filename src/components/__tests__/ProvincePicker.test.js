@@ -5,8 +5,8 @@ const { SELECTABLE_YEARS } = require('../../config/vars.config')
 
 const ProvincePicker = require('../ProvincePicker.js')
 
-const renderProvincePicker = ({ provinceId, federal, year } = {}) => {
-  return cheerio.load(render(html` <${ProvincePicker} ...${{ provinceId, federal, year }}//> `))
+const renderProvincePicker = ({ provinceId, federal, year, locale } = {}) => {
+  return cheerio.load(render(html` <${ProvincePicker} ...${{ provinceId, federal, year, locale }}//> `))
 }
 
 describe('<ProvincePicker>', () => {
@@ -72,5 +72,32 @@ describe('<ProvincePicker>', () => {
       const $ = renderProvincePicker({ year: '1999' })
       expect($('select').eq(1).find('option[selected]').length).toBe(0)
     })
+  })
+
+  test('renders French labels and province names', () => {
+    const $ = renderProvincePicker({
+      provinceId: 'QC',
+      locale: 'fr',
+    })
+
+    expect($('label').text()).toBe(
+      'Afficher par régionAfficher par année',
+    )
+
+    expect(
+      $('#region-select option[selected]').text(),
+    ).toBe('Québec')
+
+    expect($('#region-select').text()).toContain(
+      'Colombie-Britannique',
+    )
+
+    expect($('#region-select').text()).toContain(
+      'Île-du-Prince-Édouard',
+    )
+
+    expect($('#region-select__button').text()).toContain(
+      'Afficher',
+    )
   })
 })

@@ -111,10 +111,14 @@ describe('Province page', () => {
       },
     })
 
+    expect($('.h1--xs').text()).toBe('Le prochain jour férié au Canada est')
+    expect($('.h1--md').text()).toContain('Lendemain de Noël')
+
     const sourceLink = $('a[data-action="source-link"]')
 
     expect(sourceLink.text()).toContain('Jours fériés')
     expect(sourceLink.attr('href')).toBe('https://example.com/fr')
     expect(sourceLink.attr('lang')).toBe('fr')
+    
   })
 })

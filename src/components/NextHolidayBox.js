@@ -114,6 +114,7 @@ const renderYearPageTitle = ({ provinceName, provinceId, federal, year, locale }
 }
 
 const NextHolidayBox = ({ nextHoliday, provinceName = 'Canada', provinceId, federal, year, locale = 'en' }) => {
+  const t = getTranslator(locale)
   let bg = {
     angle: randomInt(63, 66),
     width: randomInt(61, 64),
@@ -136,7 +137,7 @@ const NextHolidayBox = ({ nextHoliday, provinceName = 'Canada', provinceId, fede
         federal &&
         html`
           <p>
-            <a href=${pathFor('federallyRegulated', { locale })}>${getTranslator(locale)('components.nextHolidayBox.federalWho')}</a>
+            <a href=${pathFor('federallyRegulated', { locale })}>${t('components.nextHolidayBox.federalWho')}</a>
           </p>
         `}
       </div>
