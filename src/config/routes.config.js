@@ -44,4 +44,41 @@ const alternatePathsFor = (page) => ({
   'x-default': pathFor(page),
 })
 
-module.exports = { pathFor, alternatePathsFor }
+const holidayPathFor = ({
+  locale = 'en',
+  provinceId,
+  federal = false,
+  year,
+} = {}) => {
+  const prefix = locale === 'fr' ? '/fr' : ''
+  let path = '/'
+
+  if (provinceId) {
+    path = `/provinces/${provinceId}`
+  } else if (federal) {
+    path = '/federal'
+  }
+
+  if (year) {
+    path = path === '/' ? `/${year}` : `${path}/${year}`
+  }
+
+  return `${prefix}${path}`
+}
+
+const alternateHolidayPathsFor = ({
+  provinceId,
+  federal = false,
+  year,
+} = {}) => ({
+  'en-CA': holidayPathFor({ provinceId, federal, year }),
+  'fr-CA': holidayPathFor({
+    locale: 'fr',
+    provinceId,
+    federal,
+    year,
+  }),
+  'x-default': holidayPathFor({ provinceId, federal, year }),
+})
+
+module.exports = { pathFor, alternatePathsFor, holidayPathFor, alternateHolidayPathsFor }
