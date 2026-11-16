@@ -100,4 +100,17 @@ describe('<ProvincePicker>', () => {
       'Afficher',
     )
   })
+
+  test.each([
+    ['en', '/provinces'],
+    ['fr', '/fr/provinces'],
+  ])(
+    'posts the %s picker to the correct endpoint',
+    (locale, action) => {
+      const $ = renderProvincePicker({ locale })
+
+      expect($('form').attr('action')).toBe(action)
+      expect($('form').attr('method')).toBe('post')
+    },
+  )
 })

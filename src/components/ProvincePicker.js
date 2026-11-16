@@ -1,6 +1,7 @@
 const { html, getProvinceIdOrFederalString } = require('../utils')
 const { css } = require('@emotion/css')
 const { PROVINCE_IDS, SELECTABLE_YEARS } = require('../config/vars.config')
+const { pathFor } = require('../config/routes.config')
 const { theme, insideContainer, hiddenOnMobile, horizontalPadding } = require('../styles')
 const { getTranslator } = require('../i18n')
 const Button = require('./Button')
@@ -134,7 +135,7 @@ const ProvincePicker = ({ provinceId, federal, year = 2026, locale = 'en' }) => 
   return html`
     <div class=${provinceIdOrFederal ? styles(theme.color[provinceIdOrFederal]) : styles()}>
       <div id="picker-container" data-hidden="true">
-        <form action="/provinces" method="post">
+        <form action=${pathFor('provinces', { locale })} method="post">
           <div>
             <div id="region-select-width" aria-hidden="true">${regionName}</div>
 

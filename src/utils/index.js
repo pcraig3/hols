@@ -4,6 +4,7 @@ const htm = require('htm')
 const validator = require('validator')
 const createError = require('http-errors')
 const { ALLOWED_YEARS, PROVINCE_IDS } = require('../config/vars.config')
+const { holidayPathFor } = require('../config/routes.config')
 const { getCurrentHolidayYear } = require('../dates')
 
 const html = htm.bind(h)
@@ -124,13 +125,25 @@ const checkProvinceIdErr = (req, res, next) => {
   next()
 }
 
+// middleware to check the locale of the url path
+const getRequestLocale = (req) => {
+  return req.path === '/fr' || req.path.startsWith('/fr/')
+    ? 'fr'
+    : 'en'
+}
+
 // middleware to redirect to the uppercase provinceId endpoint
 const checkRedirectProvinceId = (req, res, next) => {
   const provinceId = req.params.provinceId || ''
 
   if (provinceId !== provinceId.toUpperCase()) {
-    const pathUppercaseId = req.path.toUpperCase().replace('PROVINCES', 'provinces')
-    return res.redirect(pathUppercaseId)
+    return res.redirect(
+      holidayPathFor({
+        locale: getRequestLocale(req),
+        provinceId: provinceId.toUpperCase(),
+        year: req.params.year,
+      }),
+    )
   }
 
   next()
@@ -139,10 +152,16 @@ const checkRedirectProvinceId = (req, res, next) => {
 // middleware to redirect to permitted /:year endpoints for whitelisted query strings
 const checkRedirectYear = (req, res, next) => {
   const year = req.query.year && parseInt(req.query.year)
-  const GOOD_YEARS = ALLOWED_YEARS.filter((y) => y !== getCurrentHolidayYear(req.params.provinceId))
+  const provinceId = req.params.provinceId ? req.params.provinceId.toUpperCase() : undefined
 
-  if (year && GOOD_YEARS.includes(year)) {
-    return res.redirect(`${req.path === '/' ? '' : req.path}/${req.query.year}`)
+  const federal = req.path.endsWith('/federal')
+  const region = provinceId || (federal ? 'federal' : undefined)
+  const currentYear = getCurrentHolidayYear(region)
+
+  if (year && ALLOWED_YEARS.includes(year) && year !== currentYear) {
+    return res.redirect(
+      holidayPathFor({ locale: getRequestLocale(req), provinceId, federal, year }),
+    )
   }
 
   next()

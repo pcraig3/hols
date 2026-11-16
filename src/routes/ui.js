@@ -127,14 +127,58 @@ router.get(
   renderCanada('fr'),
 )
 
-router.get('/provinces/PEI', (req, res) => res.redirect(301, '/provinces/PE'))
-router.get('/provinces/PEI/:year', (req, res) =>
-  res.redirect(301, `/provinces/PE/${req.params.year}`),
+const redirectProvinceAlias = ({ locale = 'en', provinceId }) => (req, res) => {
+  return res.redirect(
+    301,
+    holidayPathFor({ locale, provinceId, year: req.params.year }),
+  )
+}
+
+/* Redirect commonly mistyped PEI ids */
+router.get(
+  ['/provinces/PEI', '/en/provinces/PEI'],
+  redirectProvinceAlias({ provinceId: 'PE' }),
 )
 
-router.get('/provinces/QB', (req, res) => res.redirect(301, '/provinces/QC'))
-router.get('/provinces/QB/:year', (req, res) =>
-  res.redirect(301, `/provinces/QC/${req.params.year}`),
+router.get(
+  ['/provinces/PEI/:year', '/en/provinces/PEI/:year'],
+  requireFourDigitYear,
+  redirectProvinceAlias({ provinceId: 'PE' }),
+)
+
+router.get(
+  '/fr/provinces/PEI',
+  redirectProvinceAlias({ locale: 'fr',provinceId: 'PE' }),
+
+)
+
+router.get(
+  '/fr/provinces/PEI/:year',
+  requireFourDigitYear,
+  redirectProvinceAlias({ locale: 'fr', provinceId: 'PE' }),
+)
+
+/* Redirect commonly mistyped Quebec ids */
+router.get(
+  ['/provinces/QB', '/en/provinces/QB'],
+  redirectProvinceAlias({ provinceId: 'QC' }),
+)
+
+router.get(
+  ['/provinces/QB/:year', '/en/provinces/QB/:year'],
+  requireFourDigitYear,
+  redirectProvinceAlias({ provinceId: 'QC' }),
+)
+
+router.get(
+  '/fr/provinces/QB',
+  redirectProvinceAlias({ locale: 'fr', provinceId: 'QC' }),
+)
+
+router.get(
+  '/fr/provinces/QB/:year',
+  requireFourDigitYear,
+  redirectProvinceAlias({ locale: 'fr', provinceId: 'QC' }),
 )
 
 const renderProvince = (locale) => (req, res) => {
@@ -225,8 +269,8 @@ const provincePath = holidayPathFor({ provinceId: ':provinceId' })
 router.get(
   [provincePath, `/en${provincePath}`],
   checkProvinceIdErr,
-  checkRedirectProvinceId,
   checkRedirectYear,
+  checkRedirectProvinceId,
   optionalTrue,
   dbmw(getProvincesWithHolidays),
   renderProvince('en'),
@@ -238,8 +282,8 @@ router.get(
     provinceId: ':provinceId',
   }),
   checkProvinceIdErr,
-  checkRedirectProvinceId,
   checkRedirectYear,
+  checkRedirectProvinceId,
   optionalTrue,
   dbmw(getProvincesWithHolidays),
   renderProvince('fr'),
@@ -406,30 +450,33 @@ router.get(
   renderProvinces('fr'),
 )
 
-router.post('/provinces', (req, res) => {
-  let url = '/'
+const handleProvincePicker = (locale) => (req, res) => {
   const body = req.body || {}
   const region = body.region || ''
+  const federal = region === 'federal'
+
+  const provinceId =
+    region && !federal
+      ? encodeURIComponent(region.substring(0, 2).toUpperCase())
+      : undefined
+
   const year = parseInt(body.year)
-  const GOOD_YEARS = ALLOWED_YEARS.filter((y) => y !== getCurrentHolidayYear())
+  const currentYear = getCurrentHolidayYear(federal ? 'federal' : provinceId)
 
-  switch (region) {
-    case '':
-      break
-    case 'federal':
-      url = '/federal'
-      break
-    default:
-      url = `/provinces/${encodeURIComponent(region.substring(0, 2).toUpperCase())}`
-  }
+  const routeYear = ALLOWED_YEARS.includes(year) && year !== currentYear ? year : undefined
 
-  // if year is a truthy value and is whitelisted, add it to the path
-  if (year && GOOD_YEARS.includes(year)) {
-    url = url.endsWith('/') ? `${url}${year}` : `${url}/${year}`
-  }
+  return res.redirect(
+    holidayPathFor({
+      locale,
+      provinceId,
+      federal,
+      year: routeYear,
+    }),
+  )
+}
 
-  return res.redirect(url)
-})
+router.post('/provinces', handleProvincePicker('en'))
+router.post('/fr/provinces', handleProvincePicker('fr'))
 
 router.get('/province', (req, res) => res.redirect(301, '/provinces'))
 
