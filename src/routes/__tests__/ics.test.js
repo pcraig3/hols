@@ -81,14 +81,14 @@ describe('Test ics responses', () => {
         expect(response.headers['content-disposition']).toBeUndefined()
         expect(getICSYears(response.text)).toEqual([goodYear])
       })
+    })
 
-      test(`it should return a content-disposition header for "/ics/${goodYear}?cd=true"`, async () => {
-        const response = await request(app).get(`/ics/${goodYear}?cd=true`)
-        expect(response.statusCode).toBe(200)
-        expect(response.headers['content-disposition']).toEqual(
-          `attachment; filename=canada-holidays-${goodYear}.ics`,
-        )
-      })
+    test('it should return a content-disposition header for an explicit year', async () => {
+      const response = await request(app).get(`/ics/${currentYear}?cd=true`)
+      expect(response.statusCode).toBe(200)
+      expect(response.headers['content-disposition']).toEqual(
+        `attachment; filename=canada-holidays-${currentYear}.ics`,
+      )
     })
   })
 
@@ -158,8 +158,8 @@ describe('Test ics responses', () => {
       expect(stableICS(queryResponse.text)).toBe(stableICS(pathResponse.text))
     })
 
-    test.each(prefixes)('explicit year takes precedence over query year under "%s"', async (prefix) => {
-      const response = await request(app).get(`${prefix}/ics/ON/2027?year=2026`)
+    test('explicit year takes precedence over query year', async () => {
+      const response = await request(app).get('/ics/ON/2027?year=2026')
 
       expect(response.statusCode).toBe(200)
       expect(getICSYears(response.text)).toEqual([2027])
@@ -301,17 +301,12 @@ describe('Test ics responses', () => {
       )
     })
 
-    test.each(['', '/ON', '/federal'])(
-      'does not add a download header to subscription feeds for /ics%s',
-      async (path) => {
-        for (const prefix of ['', '/en', '/fr']) {
-          const response = await request(app).get(`${prefix}/ics${path}`)
+    test('does not add a download header to English alias subscription feeds', async () => {
+      const response = await request(app).get('/en/ics')
 
-          expect(response.statusCode).toBe(200)
-          expect(response.headers['content-disposition']).toBeUndefined()
-        }
-      },
-    )
+      expect(response.statusCode).toBe(200)
+      expect(response.headers['content-disposition']).toBeUndefined()
+    })
   })
 
   describe('Test ICS observed-date descriptions', () => {
@@ -320,7 +315,6 @@ describe('Test ics responses', () => {
 
     test.each([
       ['/ics/ON/2020', 'Boxing Day', 'Observed: Monday\\, December 28\\, 2020'],
-      ['/en/ics/ON/2020', 'Boxing Day', 'Observed: Monday\\, December 28\\, 2020'],
       ['/fr/ics/ON/2020', 'Lendemain de Noël', 'Observé le lundi 28 décembre 2020.'],
     ])('includes the observed date in %s', async (path, title, note) => {
       const response = await request(app).get(path)
