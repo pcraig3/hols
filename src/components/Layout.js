@@ -90,11 +90,13 @@ const main = css`
   }
 `
 
-const Layout = ({ color, route, children }) =>
+const Layout = ({ color, route, locale = 'en', children }) =>
   html`
     <div class=${linkStyles(color)}>
-      <${SkipLink} />
-      <header class=${header}><${Nav} color=${color} route=${route} //></header>
+      <${SkipLink} locale=${locale} />
+      <header class=${header}>
+        <${Nav} color=${color} route=${route} locale=${locale} />
+      </header>
       <main id="content" tabindex="-1" class=${main}>${children}</main>
     </div>
   `

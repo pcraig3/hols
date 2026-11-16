@@ -1,6 +1,7 @@
 const { html } = require('../utils')
 const { css } = require('@emotion/css')
 const { theme, insideContainer, horizontalPadding } = require('../styles')
+const { getTranslator } = require('../i18n')
 
 const styles = css`
   ${insideContainer};
@@ -47,10 +48,12 @@ const styles = css`
   }
 `
 
-const SkipLink = () => {
+const SkipLink = ({ locale = 'en' }) => {
+  const t = getTranslator(locale)
+
   return html`
     <div class=${styles}>
-      <a href="#content">Skip to main content</a>
+      <a href="#content">${t('components.skipLink.main')}</a>
     </div>
   `
 }

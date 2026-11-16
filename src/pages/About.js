@@ -1,6 +1,6 @@
 
 const { html } = require('../utils')
-const { pathFor } = require('../config/routes.config')
+const { pathFor, holidayPathFor } = require('../config/routes.config')
 const { getTranslator, getRichTranslator, localizedName } = require('../i18n')
 const { getCurrentHolidayYear } = require('../dates')
 
@@ -12,14 +12,14 @@ const About = ({ data: { nextHoliday, locale = 'en' } }) => {
   const rich = getRichTranslator(locale)
 
   return html`
-    <${Layout} route="/about">
+    <${Layout} route="/about" locale=${locale}>
       <${Content}>
         <h1>${t('pages.about.title')}</h1>
 
         <p
           dangerouslySetInnerHTML=${rich('pages.about.intro', {
             holidayName: localizedName(nextHoliday, locale),
-            homeUrl: '/',
+            homeUrl: holidayPathFor({ locale }),
           })}
         />
 

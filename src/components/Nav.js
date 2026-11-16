@@ -1,6 +1,9 @@
 const { css } = require('@emotion/css')
 const { html } = require('../utils')
 const { theme, insideContainer } = require('../styles')
+const { getTranslator } = require('../i18n')
+const { pathFor } = require('../config/routes.config')
+
 const Logo = require('./Logo')
 const Details = require('./Details')
 
@@ -86,31 +89,54 @@ const linkStyles = css`
   }
 `
 
-const NavLinks = ({ route }) => {
+const NavLinks = ({ route, locale = 'en' }) => {
+  const t = getTranslator(locale)
+
   return html`
     <ul class=${linkStyles}>
-      <li><a class=${route === '/provinces' ? 'active' : ''} href="/provinces">All regions</a></li>
-      <li><a class=${route === '/about' ? 'active' : ''} href="/about">About</a></li>
-      <li><a class=${route === '/api' ? 'active' : ''} href="/api">API</a></li>
       <li>
-        <a class=${route === '/feedback' ? 'active' : ''} href="/feedback">Feedback</a>
+        <a class=${route === pathFor('provinces') ? 'active' : ''} href=${pathFor('provinces', { locale })}>
+          ${t('components.nav.allRegions')}
+        </a>
+      </li>
+
+      <li>
+        <a class=${route === pathFor('about') ? 'active' : ''} href=${pathFor('about', { locale })}>
+          ${t('components.nav.about')}
+        </a>
+      </li>
+
+      <li>
+        <a class=${route === pathFor('api') ? 'active' : ''} href=${pathFor('api', { locale })}>
+          ${t('components.nav.api')}
+        </a>
+      </li>
+
+      <li>
+        <a class=${route === pathFor('feedback') ? 'active' : ''} href=${pathFor('feedback', { locale })}>
+          ${t('components.nav.feedback')}
+        </a>
       </li>
     </ul>
   `
 }
 
-const Nav = ({ color, route }) => {
+const Nav = ({ color, route, locale = 'en' }) => {
+  const t = getTranslator(locale)
+
   return html`
     <nav class=${styles}>
-      <${Logo} color=${color} />
+      <${Logo} color=${color} locale=${locale} />
+
       <div class="links">
         <div class="links--sm">
-          <${Details} summary="Menu">
-            <${NavLinks} route=${route} />
+          <${Details} summary=${t('components.nav.menu')}>
+            <${NavLinks} route=${route} locale=${locale} />
           <//>
         </div>
+
         <div class="links--md">
-          <${NavLinks} route=${route} />
+          <${NavLinks} route=${route} locale=${locale} />
         </div>
       </div>
     </nav>

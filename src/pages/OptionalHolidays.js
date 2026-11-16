@@ -10,7 +10,7 @@ const OptionalHolidays = ({ data: { locale = 'en' } = {} }) => {
   const rich = getRichTranslator(locale)
 
   return html`
-    <${Layout}>
+    <${Layout} locale=${locale}>
       <${Content}>
         <h1>${t('pages.optionalHolidays.title')}</h1>
 

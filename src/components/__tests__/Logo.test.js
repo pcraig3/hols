@@ -17,3 +17,10 @@ test('Logo renders link and spans properly', () => {
   expect($('svg').attr('aria-hidden')).toEqual('true')
   expect($('a').text()).toEqual('Canada Holidays')
 })
+
+test('Logo links to French home', () => {
+  const $ = cheerio.load(render( html`<${Logo} locale="fr" />`))
+
+  expect($('a').attr('href')).toEqual('/fr/')
+  expect($('a').text()).toEqual('Canada Holidays')
+})

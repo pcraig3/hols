@@ -73,7 +73,7 @@ const AddHolidays = ({ data: { provinces, year, locale = 'en' } }) => {
   const icsBaseUrl = `https://canada-holidays.ca${locale === 'fr' ? '/fr' : ''}/ics`
 
   return html`
-    <${Layout}>
+    <${Layout} locale=${locale}>
       <${Content} className=${headerStyles}>
         <h1>${t('pages.addHolidays.title')}</h1>
         <p>${t('pages.addHolidays.intro')}</p>

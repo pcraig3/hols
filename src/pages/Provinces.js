@@ -45,7 +45,7 @@ const Provinces = ({ data: { provinces, locale = 'en' } }) => {
       : 'https://www.canada.ca/en/employment-social-development/programs/employment-equity/regulated-industries.html'
 
   return html`
-    <${Layout} route=${pathFor('provinces')}>
+    <${Layout} route=${pathFor('provinces')} locale=${locale}>
       <${Content} className=${styles}>
         <h1>${t('pages.provinces.title')}</h1>
 

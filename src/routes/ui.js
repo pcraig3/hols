@@ -705,6 +705,8 @@ router.use(function (err, req, res, next) {
   const errObj = {}
 
   const status = err.status || err.statusCode || 500
+  const locale = req.path === '/fr' || req.path.startsWith('/fr/') ? 'fr' : 'en'
+
   res.statusCode = status
 
   errObj.status = status
@@ -723,11 +725,12 @@ router.use(function (err, req, res, next) {
     renderPage({
       pageComponent: 'Error',
       title: `Error: ${res.statusCode} — Canada Holidays`,
-      docProps: { meta: err.message.split('.')[0], path: req.path, error: true },
+      docProps: { meta: err.message.split('.')[0], path: req.path, error: true, locale },
       props: {
         data: {
           status: res.statusCode,
           message: err.message,
+          locale,
         },
       },
     }),

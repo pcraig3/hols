@@ -4,11 +4,11 @@ const { html } = require('../../utils')
 
 const Error = require('../Error.js')
 
-const renderPage = ({ status, message }) => {
+const renderPage = ({ status, message, locale }) => {
   return cheerio.load(
     render(
       html`
-        <${Error} ...${{ data: { status, message } }} />
+        <${Error} ...${{ data: { status, message, locale } }} />
       `,
     ),
   )
@@ -25,4 +25,29 @@ describe('Error page', () => {
     expect($('main a').text()).toEqual('← Canada’s next public holiday')
     expect($('main a').attr('href')).toEqual('/')
   })
+})
+
+test('Error page renders French shared error navigation', () => {
+  const $ = renderPage({
+    status: 404,
+    message: 'Something went wrong',
+    locale: 'fr',
+  })
+
+  expect($('h1').text()).toEqual('404')
+
+  // We deliberately are not translating raw error messages.
+  expect($('p').text()).toEqual(
+    'Something went wrong',
+  )
+
+  expect($('main a').text()).toEqual(
+    '← Prochain jour férié au Canada',
+  )
+
+  expect($('main a').attr('href')).toEqual('/fr/')
+
+  expect(
+    $('a[href="#content"]').text(),
+  ).toEqual('Aller au contenu principal')
 })
