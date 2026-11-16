@@ -213,7 +213,7 @@ module.exports = {
       addToCalendar: 'Add to your calendar',
     },
     nav: {
-      allRegions: 'All regions',
+      allRegions: 'Regions',
       about: 'About',
       api: 'API',
       feedback: 'Feedback',

@@ -6,7 +6,7 @@ const { pathFor, holidayPathFor } = require('../config/routes.config')
 const Layout = require('../components/Layout.js')
 const Content = require('../components/Content.js')
 
-const FederallyRegulated = ({ data: { locale = 'en' } = {} }) => {
+const FederallyRegulated = ({ data: { locale = 'en' } = {}, alternatePaths }) => {
   const t = getTranslator(locale)
   const rich = getRichTranslator(locale)
 
@@ -16,7 +16,7 @@ const FederallyRegulated = ({ data: { locale = 'en' } = {} }) => {
       : 'https://www.canada.ca/en/services/jobs/workplace/federally-regulated-industries.html'
 
   return html`
-    <${Layout} locale=${locale}>
+    <${Layout} locale=${locale} alternatePaths=${alternatePaths}>
       <${Content}>
         <h1>${t('pages.federallyRegulated.title')}</h1>
 
@@ -77,9 +77,7 @@ const FederallyRegulated = ({ data: { locale = 'en' } = {} }) => {
         <h2>${t('pages.federallyRegulated.howTitle')}</h2>
 
         <p
-          dangerouslySetInnerHTML=${rich('pages.federallyRegulated.howIntro', {
-            industriesUrl,
-          })}
+          dangerouslySetInnerHTML=${rich('pages.federallyRegulated.howIntro', {industriesUrl})}
         />
 
         <br />

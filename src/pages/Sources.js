@@ -81,13 +81,13 @@ const createRows = ({ provinces, locale }) => {
   })
 }
 
-const Sources = ({ data: { provinces, federalSource, locale = 'en' } }) => {
+const Sources = ({ data: { provinces, federalSource, locale = 'en' }, alternatePaths }) => {
   const t = getTranslator(locale)
   const rich = getRichTranslator(locale)
   const source = localizedSource(federalSource, locale)
 
   return html`
-    <${Layout} locale=${locale}>
+    <${Layout} locale=${locale} alternatePaths=${alternatePaths}>
       <${Content}>
         <h1>${t('pages.sources.title')}</h1>
 

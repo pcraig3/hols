@@ -7,12 +7,12 @@ const { getCurrentHolidayYear } = require('../dates')
 const Layout = require('../components/Layout.js')
 const Content = require('../components/Content.js')
 
-const About = ({ data: { nextHoliday, locale = 'en' } }) => {
+const About = ({ data: { nextHoliday, locale = 'en' }, alternatePaths }) => {
   const t = getTranslator(locale)
   const rich = getRichTranslator(locale)
 
   return html`
-    <${Layout} route="/about" locale=${locale}>
+    <${Layout} route="/about" locale=${locale} alternatePaths=${alternatePaths}>
       <${Content}>
         <h1>${t('pages.about.title')}</h1>
 

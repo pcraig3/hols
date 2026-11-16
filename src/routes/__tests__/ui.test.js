@@ -1498,15 +1498,96 @@ describe('Test /province responses', () => {
   })
 })
 
-test('French error pages preserve French shared chrome', async () => {
-  const response = await request(app).get('/fr/this-route-does-not-exist')
 
-  const $ = cheerio.load(response.text)
-  expect(response.statusCode).toBe(404)
+describe('Language switcher routes', () => {
+  test.each([
+    // Static pages
+    ['/about', '/fr/a-propos', 'fr', 'Français'],
+    ['/en/about', '/fr/a-propos', 'fr', 'Français'],
+    ['/fr/a-propos', '/about', 'en', 'English'],
 
-  expect($('html').attr('lang')).toBe('fr')
-  expect($('a[href="#content"]').text()).toBe('Aller au contenu principal')
-  expect($('nav a').first().attr('href')).toBe('/fr/')
+    // Province listing
+    ['/provinces', '/fr/provinces', 'fr', 'Français'],
+    ['/fr/provinces', '/provinces', 'en', 'English'],
 
-  expect($('main a[href="/fr/"]').text()).toBe('← Prochain jour férié au Canada')
+    // Province pages
+    ['/provinces/QC', '/fr/provinces/QC', 'fr', 'Français'],
+    ['/fr/provinces/QC', '/provinces/QC', 'en', 'English'],
+    [
+      '/provinces/QC/2027',
+      '/fr/provinces/QC/2027',
+      'fr',
+      'Français',
+    ],
+    [
+      '/fr/provinces/QC/2027',
+      '/provinces/QC/2027',
+      'en',
+      'English',
+    ],
+
+    // Federal pages
+    ['/federal/2027', '/fr/federal/2027', 'fr', 'Français'],
+    ['/fr/federal/2027', '/federal/2027', 'en', 'English'],
+
+    // Home pages
+    ['/', '/fr/', 'fr', 'Français'],
+    ['/en/', '/fr/', 'fr', 'Français'],
+    ['/fr/', '/', 'en', 'English'],
+  ])(
+    '%s links to %s',
+    async (path, destination, targetLang, name) => {
+      const response = await request(app).get(path)
+      const $ = cheerio.load(response.text)
+
+      expect(response.statusCode).toBe(200)
+
+      const switcher = $('.language-switcher a')
+
+      expect(switcher).toHaveLength(1)
+      expect(switcher.attr('href')).toBe(destination)
+      expect(switcher.attr('lang')).toBe(targetLang)
+      expect(switcher.attr('aria-label')).toBe(name)
+
+      // Never intentionally link to a /en alias.
+      expect(switcher.attr('href')).not.toMatch(/^\/en(?:\/|$)/)
+    },
+  )
+
+  test('current-year URL switches to the canonical equivalent', async () => {
+    const year = getCurrentHolidayYear('QC')
+    const response = await request(app).get(`/fr/provinces/QC/${year}`)
+
+    const $ = cheerio.load(response.text)
+
+    expect(response.statusCode).toBe(200)
+    expect($('.language-switcher a').attr('href')).toBe('/provinces/QC')
+  })
+})
+
+describe('French error page tests', () => {
+  test('French 404 has French chrome but no language switcher', async () => {
+    const response = await request(app).get('/fr/this-page-does-not-exist')
+
+    const $ = cheerio.load(response.text)
+
+    expect(response.statusCode).toBe(404)
+    expect($('html').attr('lang')).toBe('fr')
+    expect($('.language-switcher')).toHaveLength(0)
+    expect($('a[href="#content"]').text()).toBe('Aller au contenu principal')
+    expect($('nav a').first().attr('href')).toBe('/fr/')
+  })
+
+  test('French error pages preserve French shared chrome', async () => {
+    const response = await request(app).get('/fr/this-route-does-not-exist')
+
+    const $ = cheerio.load(response.text)
+    expect(response.statusCode).toBe(404)
+
+    expect($('html').attr('lang')).toBe('fr')
+    expect($('a[href="#content"]').text()).toBe('Aller au contenu principal')
+    expect($('nav a').first().attr('href')).toBe('/fr/')
+
+    expect($('main a[href="/fr/"]').text()).toBe('← Prochain jour férié au Canada')
+  })
 })
