@@ -1,5 +1,6 @@
 const { html } = require('../utils')
 const { css } = require('@emotion/css')
+const { holidayPathFor } = require('../config/routes.config')
 const { theme } = require('../styles')
 const {
   getTranslator,
@@ -62,7 +63,7 @@ const createRows = ({ provinces, locale }) => {
     const source = localizedSource(p, locale)
 
     return {
-      key: html`<a href="/provinces/${p.id}">${localizedName(p, locale)}</a>`,
+      key: html`<a href=${holidayPathFor({ locale, provinceId: p.id })}>${localizedName(p, locale)}</a>`,
       value: html`<span class="external-link"
         ><a
           href="${source.link}"
@@ -102,7 +103,7 @@ const Sources = ({ data: { provinces, federalSource, locale = 'en' } }) => {
           title=${t('pages.sources.federalTitle')}
           rows=${[
             {
-              key: html`<a href="/federal">${t('pages.sources.federalHolidays')}</a>`,
+              key: html`<a href=${holidayPathFor({ locale, federal: true })}>${t('pages.sources.federalHolidays')}</a>`,
               value: html`<span class="external-link"
                 ><a
                   href="${source.link}"

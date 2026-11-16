@@ -2,7 +2,7 @@ const { css } = require('@emotion/css')
 const { html } = require('../utils')
 const { theme } = require('../styles')
 const { getTranslator, getRichTranslator, localizedName } = require('../i18n')
-const { pathFor } = require('../config/routes.config')
+const { pathFor, holidayPathFor } = require('../config/routes.config')
 
 const Content = require('../components/Content.js')
 const Layout = require('../components/Layout.js')
@@ -50,11 +50,17 @@ const Provinces = ({ data: { provinces, locale = 'en' } }) => {
         <h1>${t('pages.provinces.title')}</h1>
 
         <div>
-          <p><a href="/">${t('pages.provinces.allHolidays')}</a></p>
+          <p>
+            <a href=${holidayPathFor({ locale })}>
+              ${t('pages.provinces.allHolidays')}
+            </a>
+          </p>
         </div>
 
         <div>
-          <a href="/federal">${t('pages.provinces.federalHolidays')}</a>
+          <a href=${holidayPathFor({ locale, federal: true })}>
+            ${t('pages.provinces.federalHolidays')}
+          </a>
 
           <${Details}
             summary=${t('pages.federallyRegulated.title')}
@@ -81,7 +87,7 @@ const Provinces = ({ data: { provinces, locale = 'en' } }) => {
           ${provinces.map(
             (province) => html`
               <li>
-                <a href=${`/provinces/${province.id}`}>
+                <a href=${holidayPathFor({ locale, provinceId: province.id })}>
                   ${localizedName(province, locale)}
                 </a>
               </li>

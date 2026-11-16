@@ -210,6 +210,7 @@ const createRows = ({ holidays, federal, isCurrentYear, locale }) => {
       value: holiday.optional
         ? html`
             ${localizedName(holiday, locale)}
+            ${' '}
             (<a href=${pathFor('optionalHolidays', { locale })}>
               ${t('pages.province.optional')}
             </a>)

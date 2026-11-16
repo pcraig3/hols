@@ -3,7 +3,7 @@ const router = express.Router()
 const createError = require('http-errors')
 const DB = require('@beenotung/better-sqlite3-helper')
 const { ALLOWED_YEARS } = require('../config/vars.config')
-const { pathFor, alternatePathsFor } = require('../config/routes.config')
+const { pathFor, alternatePathsFor, holidayPathFor, alternateHolidayPathsFor } = require('../config/routes.config')
 const renderPage = require('../pages/_document.js')
 const {
   dbmw,
@@ -24,61 +24,107 @@ const {
   getProvincesWithHolidays,
 } = require('../queries')
 const { displayDate, getCurrentHolidayYear } = require('../dates')
-const { getTranslator } = require('../i18n')
+const { getTranslator, localizedName } = require('../i18n')
 const renderApiPage = require('./api-page')
 
-const getMeta = (holiday) => `${holiday.nameEn} on ${displayDate(holiday.observedDate)}`
+const getHolidayDocPaths = ({ locale, provinceId, federal = false, year }) => {
+  const region = provinceId || (federal ? 'federal' : undefined)
+  const canonicalYear = year === getCurrentHolidayYear(region) ? undefined : year
+  const options = { provinceId, federal, year: canonicalYear }
 
-router.get('/', checkRedirectYear, dbmw(getHolidaysWithProvinces), (req, res) => {
-  const year = getCurrentHolidayYear()
+  return {
+    canonicalPath: holidayPathFor({ ...options, locale }),
+    alternatePaths: alternateHolidayPathsFor(options),
+  }
+}
+
+const renderCanada = (locale) => (req, res) => {
+  const t = getTranslator(locale)
+  const hasYear = req.params.year !== undefined
+
+  const year = hasYear
+    ? ALLOWED_YEARS.find((y) => y === parseInt(getRequestYear(req)))
+    : getCurrentHolidayYear()
+
   const holidays = res.locals.rows
-  const nextHol = nextHoliday(holidays)
+  const nextHol = hasYear ? undefined : nextHoliday(holidays)
 
-  const meta = `Canada’s next stat holiday is ${getMeta(nextHol)}. See all ${holidays.length
-    } statutory holidays in Canada in ${year}.`
+  const meta = nextHol
+    ? t('routes.ui.canada.metaCurrent', 
+      {
+        holidayName: localizedName(nextHol, locale),
+        date: displayDate(nextHol.observedDate, { locale }),
+        count: holidays.length,
+        year,
+      })
+    : t('routes.ui.canada.metaYear', 
+      {
+        count: holidays.length,
+        year,
+      })
 
   return res.send(
     renderPage({
       pageComponent: 'Province',
-      title: `Canadian statutory holidays in ${year}`,
+      title: t('routes.ui.canada.documentTitle', { year }),
       docProps: {
         meta,
         path: req.path,
-        region: 'Canada',
+        region: t('routes.ui.canada.region'),
         year,
-        richSnippets: ['breadcrumb', 'dataset', 'speakable'],
+        locale,
+        ...getHolidayDocPaths({
+          locale,
+          year,
+        }),
+        richSnippets: hasYear
+          ? ['breadcrumb', 'dataset']
+          : ['breadcrumb', 'dataset', 'speakable'],
       },
-      props: { data: { holidays, nextHoliday: nextHol, year } },
+      props: {
+        data: {
+          holidays,
+          nextHoliday: nextHol,
+          year,
+          locale,
+        },
+      },
     }),
   )
-})
+}
+
+const canadaRootPath = holidayPathFor()
 
 router.get(
-  '/:year',
+  [canadaRootPath, `/en${canadaRootPath}`],
+  checkRedirectYear,
+  dbmw(getHolidaysWithProvinces),
+  renderCanada('en'),
+)
+
+router.get(
+  holidayPathFor({ locale: 'fr' }),
+  checkRedirectYear,
+  dbmw(getHolidaysWithProvinces),
+  renderCanada('fr'),
+)
+
+const canadaYearPath = holidayPathFor({ year: ':year' })
+
+router.get(
+  [canadaYearPath, `/en${canadaYearPath}`],
   requireFourDigitYear,
   checkYearErr,
   dbmw(getHolidaysWithProvinces),
-  (req, res) => {
-    // if the year value isn't in ALLOWED_YEARS, it will be caught by "checkYearErr"
-    const year = ALLOWED_YEARS.find((y) => y === parseInt(getRequestYear(req)))
-    const holidays = res.locals.rows
-    const meta = `See all ${holidays.length} statutory holidays in Canada in ${year}.`
+  renderCanada('en'),
+)
 
-    return res.send(
-      renderPage({
-        pageComponent: 'Province',
-        title: `Canadian statutory holidays in ${year}`,
-        docProps: {
-          meta,
-          path: req.path,
-          region: 'Canada',
-          year,
-          richSnippets: ['breadcrumb', 'dataset'],
-        },
-        props: { data: { holidays, nextHoliday: undefined, year } },
-      }),
-    )
-  },
+router.get(
+  holidayPathFor({ locale: 'fr', year: ':year' }),
+  requireFourDigitYear,
+  checkYearErr,
+  dbmw(getHolidaysWithProvinces),
+  renderCanada('fr'),
 )
 
 router.get('/provinces/PEI', (req, res) => res.redirect(301, '/provinces/PE'))
@@ -91,132 +137,185 @@ router.get('/provinces/QB/:year', (req, res) =>
   res.redirect(301, `/provinces/QC/${req.params.year}`),
 )
 
+const renderProvince = (locale) => (req, res) => {
+  const t = getTranslator(locale)
+  const hasYear = req.params.year !== undefined
+
+  const province = res.locals.rows[0]
+
+  const {
+    holidays,
+    id: provinceId,
+    sourceEn,
+    sourceFr,
+    sourceLinkEn,
+    sourceLinkFr,
+  } = province
+
+  const provinceName = localizedName(province, locale)
+
+  const year = hasYear
+    ? ALLOWED_YEARS.find((y) => y === parseInt(getRequestYear(req)))
+    : getCurrentHolidayYear(provinceId)
+
+  const nextHol = hasYear ? undefined : province.nextHoliday
+
+  const meta = nextHol
+    ? t('routes.ui.province.metaCurrent', 
+      {
+        provinceName,
+        holidayName: localizedName(nextHol, locale),
+        date: displayDate(nextHol.observedDate, { locale }),
+        count: holidays.length,
+        year,
+      })
+    : t('routes.ui.province.metaYear', 
+      {
+        provinceName,
+        count: holidays.length,
+        year,
+      })
+
+  return res.send(
+    renderPage({
+      pageComponent: 'Province',
+      title: t('routes.ui.province.documentTitle', {
+        provinceName,
+        provinceCode: pe2pei(provinceId),
+        year,
+      }),
+      docProps: {
+        meta,
+        path: req.path,
+        region: provinceName,
+        year,
+        id: provinceId,
+        locale,
+        ...getHolidayDocPaths({
+          locale,
+          provinceId,
+          year,
+        }),
+        richSnippets: hasYear
+          ? ['breadcrumb', 'dataset']
+          : ['breadcrumb', 'dataset', 'speakable'],
+      },
+      props: {
+        data: {
+          holidays,
+          nextHoliday: nextHol,
+          provinceName,
+          provinceId,
+          year,
+          locale,
+          source: {
+            sourceEn,
+            sourceFr,
+            sourceLinkEn,
+            sourceLinkFr,
+          },
+        },
+      },
+    }),
+  )
+}
+
+const provincePath = holidayPathFor({ provinceId: ':provinceId' })
+
 router.get(
-  '/provinces/:provinceId',
+  [provincePath, `/en${provincePath}`],
   checkProvinceIdErr,
   checkRedirectProvinceId,
   checkRedirectYear,
   optionalTrue,
   dbmw(getProvincesWithHolidays),
-  (req, res) => {
-    const {
-      holidays,
-      nextHoliday,
-      nameEn: provinceName,
-      id: provinceId,
-      sourceEn,
-      sourceFr,
-      sourceLinkEn,
-      sourceLinkFr,
-    } = res.locals.rows[0]
-
-    const year = getCurrentHolidayYear(provinceId)
-
-    const meta = `${provinceName}’s next stat holiday is ${getMeta(nextHoliday)}. See all ${holidays.length
-      } statutory holidays in ${provinceName}, Canada in ${year}.`
-
-    return res.send(
-      renderPage({
-        pageComponent: 'Province',
-        title: `${provinceName} (${pe2pei(
-          provinceId,
-        )}) statutory holidays in ${year} — Canada Holidays`,
-        docProps: {
-          meta,
-          path: req.path,
-          region: provinceName,
-          year,
-          id: provinceId,
-          richSnippets: ['breadcrumb', 'dataset', 'speakable'],
-        },
-        props: {
-          data: {
-            holidays,
-            nextHoliday,
-            provinceName,
-            provinceId,
-            year,
-            source: { sourceEn, sourceFr, sourceLinkEn, sourceLinkFr },
-          },
-        },
-      }),
-    )
-  },
+  renderProvince('en'),
 )
 
 router.get(
-  '/provinces/:provinceId/:year',
+  holidayPathFor({
+    locale: 'fr',
+    provinceId: ':provinceId',
+  }),
+  checkProvinceIdErr,
+  checkRedirectProvinceId,
+  checkRedirectYear,
+  optionalTrue,
+  dbmw(getProvincesWithHolidays),
+  renderProvince('fr'),
+)
+
+const provinceYearPath = holidayPathFor({ provinceId: ':provinceId', year: ':year' })
+
+router.get(
+  [provinceYearPath, `/en${provinceYearPath}`],
   requireFourDigitYear,
   checkProvinceIdErr,
   checkRedirectProvinceId,
   checkYearErr,
   optionalTrue,
   dbmw(getProvincesWithHolidays),
-  (req, res) => {
-    // if the year value isn't in ALLOWED_YEARS, it will be caught by "checkYearErr"
-    const year = ALLOWED_YEARS.find((y) => y === parseInt(getRequestYear(req)))
-    const {
-      holidays,
-      nextHoliday,
-      nameEn: provinceName,
-      id: provinceId,
-      sourceEn,
-      sourceFr,
-      sourceLinkEn,
-      sourceLinkFr,
-    } = res.locals.rows[0]
+  renderProvince('en'),
+)
 
-    const meta = `See all ${holidays.length} statutory holidays in ${provinceName}, Canada in ${year}.`
-
-    return res.send(
-      renderPage({
-        pageComponent: 'Province',
-        title: `${provinceName} (${pe2pei(
-          provinceId,
-        )}) statutory holidays in ${year} — Canada Holidays`,
-        docProps: {
-          meta,
-          path: req.path,
-          region: provinceName,
-          year,
-          id: provinceId,
-          richSnippets: ['breadcrumb', 'dataset'],
-        },
-        props: {
-          data: {
-            holidays,
-            nextHoliday: undefined,
-            provinceName,
-            provinceId,
-            year,
-            source: { sourceEn, sourceFr, sourceLinkEn, sourceLinkFr },
-          },
-        },
-      }),
-    )
-  },
+router.get(
+  holidayPathFor({ locale: 'fr', provinceId: ':provinceId', year: ':year' }),
+  requireFourDigitYear,
+  checkProvinceIdErr,
+  checkRedirectProvinceId,
+  checkYearErr,
+  optionalTrue,
+  dbmw(getProvincesWithHolidays),
+  renderProvince('fr'),
 )
 
 const getFederalSourceForPage = () => getSource(DB, 'federal')
 
-router.get('/federal', checkRedirectYear, dbmw(getHolidaysWithProvinces), (req, res) => {
-  const year = getCurrentHolidayYear('federal')
-  const holidays = res.locals.rows
-  const nextHol = nextHoliday(holidays)
+const renderFederal = (locale) => (req, res) => {
+  const t = getTranslator(locale)
+  const hasYear = req.params.year !== undefined
 
-  const meta = `Canada’s next federal stat holiday is ${getMeta(nextHol)}. See all ${holidays.length
-    } federal statutory holidays in Canada in ${year}.`
+  const year = hasYear
+    ? ALLOWED_YEARS.find((y) => y === parseInt(getRequestYear(req)))
+    : getCurrentHolidayYear('federal')
+
+  const holidays = res.locals.rows
+  const nextHol = hasYear ? undefined : nextHoliday(holidays)
+
+  const meta = nextHol
+    ? t('routes.ui.federal.metaCurrent',
+      {
+        holidayName: localizedName(nextHol, locale),
+        date: displayDate(nextHol.observedDate, { locale }),
+        count: holidays.length,
+        year,
+      })
+    : t('routes.ui.federal.metaYear',
+      {
+        count: holidays.length,
+        year,
+      })
 
   return res.send(
     renderPage({
       pageComponent: 'Province',
-      title: `Federal statutory holidays in Canada in ${year}`,
+      title: t('routes.ui.federal.documentTitle', {
+        year,
+      }),
       docProps: {
         meta,
         path: req.path,
-        region: 'Federal',
+        region: t('routes.ui.federal.region'),
         year,
-        richSnippets: ['breadcrumb', 'dataset', 'speakable'],
+        locale,
+        ...getHolidayDocPaths({
+          locale,
+          federal: true,
+          year,
+        }),
+        richSnippets: hasYear
+          ? ['breadcrumb', 'dataset']
+          : ['breadcrumb', 'dataset', 'speakable'],
       },
       props: {
         data: {
@@ -224,41 +323,51 @@ router.get('/federal', checkRedirectYear, dbmw(getHolidaysWithProvinces), (req, 
           nextHoliday: nextHol,
           federal: true,
           year,
+          locale,
           source: getFederalSourceForPage(),
         },
       },
     }),
   )
+}
+
+const federalPath = holidayPathFor({
+  federal: true,
 })
 
 router.get(
-  '/federal/:year',
+  [federalPath, `/en${federalPath}`],
+  checkRedirectYear,
+  dbmw(getHolidaysWithProvinces),
+  renderFederal('en'),
+)
+
+router.get(
+  holidayPathFor({
+    locale: 'fr',
+    federal: true,
+  }),
+  checkRedirectYear,
+  dbmw(getHolidaysWithProvinces),
+  renderFederal('fr'),
+)
+
+const federalYearPath = holidayPathFor({ federal: true, year: ':year' })
+
+router.get(
+  [federalYearPath, `/en${federalYearPath}`],
   requireFourDigitYear,
   checkYearErr,
   dbmw(getHolidaysWithProvinces),
-  (req, res) => {
-    // if the year value isn't in ALLOWED_YEARS, it will be caught by "checkYearErr"
-    const year = ALLOWED_YEARS.find((y) => y === parseInt(getRequestYear(req)))
-    const holidays = res.locals.rows
-    const meta = `See all ${holidays.length} federal statutory holidays in Canada in ${year}.`
+  renderFederal('en'),
+)
 
-    return res.send(
-      renderPage({
-        pageComponent: 'Province',
-        title: `Federal statutory holidays in Canada in ${year}`,
-        docProps: {
-          meta,
-          path: req.path,
-          region: 'Federal',
-          year,
-          richSnippets: ['breadcrumb', 'dataset'],
-        },
-        props: {
-          data: { holidays, nextHoliday: undefined, federal: true, year, source: getFederalSourceForPage() },
-        },
-      }),
-    )
-  },
+router.get(
+  holidayPathFor({ locale: 'fr', federal: true, year: ':year'}),
+  requireFourDigitYear,
+  checkYearErr,
+  dbmw(getHolidaysWithProvinces),
+  renderFederal('fr'),
 )
 
 const renderProvinces = (locale) => (req, res) => {
