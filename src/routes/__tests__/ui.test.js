@@ -217,7 +217,7 @@ describe('Test ui responses', () => {
         const BAD_YEARS = ['2011', '2012', '2039', '2040', '1', 'false', 'diplodocus']
         BAD_YEARS.map((badYear) => {
           test(`it should return no year path for an invalid year: "${badYear}`, async () => {
-            const response = await request(app).post('/provinces').send({ badYear })
+            const response = await request(app).post('/provinces').send({ year: badYear })
             expect(response.statusCode).toBe(302)
             expect(response.headers.location).toBe('/')
           })
@@ -231,9 +231,9 @@ describe('Test ui responses', () => {
             { region: 'AB', year: nextYear, url: `/provinces/AB/${nextYear}` },
             { region: 'federal', year: nextYear, url: `/federal/${nextYear}` },
             { region: '', year: nextYear, url: `/${nextYear}` },
-            { region: 'AB', year: currentYear, url: '/provinces/AB' },
-            { region: 'federal', year: currentYear, url: '/federal' },
-            { region: '', year: currentYear, url: '/' },
+            { region: 'AB', year: getCurrentHolidayYear('AB'), url: '/provinces/AB' },
+            { region: 'federal', year: getCurrentHolidayYear('federal'), url: '/federal' },
+            { region: '', year: getCurrentHolidayYear(), url: '/' },
           ]
           params.map((p) => {
             test(`it should return 302 to ${p.url} for params: region:'${p.region}' year:'${p.year}'`, async () => {
@@ -244,6 +244,77 @@ describe('Test ui responses', () => {
               expect(response.headers.location).toBe(p.url)
             })
           })
+        })
+      })
+
+      describe('French ProvincePicker POST response', () => {
+        test('redirects no params to /fr/', async () => {
+          const response = await request(app)
+            .post('/fr/provinces')
+
+          expect(response.statusCode).toBe(302)
+          expect(response.headers.location).toBe('/fr/')
+        })
+
+        test.each([
+          [
+            { region: 'QC' },
+            '/fr/provinces/QC',
+          ],
+          [
+            { region: 'federal' },
+            '/fr/federal',
+          ],
+          [
+            {
+              region: 'QC',
+              year: getCurrentHolidayYear('QC') + 1,
+            },
+            `/fr/provinces/QC/${getCurrentHolidayYear('QC') + 1}`,
+          ],
+          [
+            {
+              region: 'federal',
+              year: getCurrentHolidayYear('federal') + 1,
+            },
+            `/fr/federal/${getCurrentHolidayYear('federal') + 1}`,
+          ],
+          [
+            {
+              region: '',
+              year: getCurrentHolidayYear() + 1,
+            },
+            `/fr/${getCurrentHolidayYear() + 1}`,
+          ],
+          [
+            {
+              region: 'QC',
+              year: getCurrentHolidayYear('QC'),
+            },
+            '/fr/provinces/QC',
+          ],
+        ])(
+          'redirects $body to $destination',
+          async (body, destination) => {
+            const response = await request(app)
+              .post('/fr/provinces')
+              .send(body)
+
+            expect(response.statusCode).toBe(302)
+            expect(response.headers.location).toBe(destination)
+          },
+        )
+
+        test('ignores an invalid year', async () => {
+          const response = await request(app)
+            .post('/fr/provinces')
+            .send({
+              region: 'QC',
+              year: 1000,
+            })
+
+          expect(response.statusCode).toBe(302)
+          expect(response.headers.location).toBe('/fr/provinces/QC')
         })
       })
     })
@@ -275,52 +346,273 @@ describe('Test ui responses', () => {
           'https://canada-holidays.ca/provinces/MB',
         )
       })
-
-      test('it should return 302 for a lowercased provinceId', async () => {
-        const response = await request(app).get('/provinces/mb')
-        expect(response.statusCode).toBe(302)
-        expect(response.headers.location).toEqual('/provinces/MB')
-      })
     })
 
-    describe('Test /provinces/PEI response', () => {
-      test('it should return 301', async () => {
-        const response = await request(app).get('/provinces/PEI')
-        expect(response.statusCode).toBe(301)
-        expect(response.headers.location).toEqual('/provinces/PE')
-      })
+    describe('lowercase to uppercase province ID redirects', () => {
+      const qcNextYear = getCurrentHolidayYear('QC') + 1
 
-      test('it should return 301 for lowercased provinceId', async () => {
-        const response = await request(app).get('/provinces/pei')
-        expect(response.statusCode).toBe(301)
-        expect(response.headers.location).toEqual('/provinces/PE')
-      })
+      test.each([
+        [
+          '/provinces/qc',
+          '/provinces/QC',
+        ],
+        [
+          '/en/provinces/qc',
+          '/provinces/QC',
+        ],
+        [
+          '/fr/provinces/qc',
+          '/fr/provinces/QC',
+        ],
+        [
+          `/provinces/qc/${qcNextYear}`,
+          `/provinces/QC/${qcNextYear}`,
+        ],
+        [
+          `/en/provinces/qc/${qcNextYear}`,
+          `/provinces/QC/${qcNextYear}`,
+        ],
+        [
+          `/fr/provinces/qc/${qcNextYear}`,
+          `/fr/provinces/QC/${qcNextYear}`,
+        ],
+      ])(
+        '%s redirects to %s',
+        async (path, destination) => {
+          const response = await request(app).get(path)
 
-      test('it should return 301 with the year included', async () => {
-        const response = await request(app).get('/provinces/PEI/2022')
-        expect(response.statusCode).toBe(301)
-        expect(response.headers.location).toEqual('/provinces/PE/2022')
-      })
+          expect(response.statusCode).toBe(302)
+          expect(response.headers.location).toBe(destination)
+        },
+      )
     })
 
-    describe('Test /provinces/QB response', () => {
-      test('it should return 301', async () => {
-        const response = await request(app).get('/provinces/QB')
-        expect(response.statusCode).toBe(301)
-        expect(response.headers.location).toEqual('/provinces/QC')
-      })
+    describe('mistyped PEI/QB province aliases', () => {
+      const aliasYear = 2027
 
-      test('it should return 301 for lowercased provinceId', async () => {
-        const response = await request(app).get('/provinces/qb')
-        expect(response.statusCode).toBe(301)
-        expect(response.headers.location).toEqual('/provinces/QC')
-      })
+      test.each([
+        ['/provinces/PEI', '/provinces/PE'],
+        ['/en/provinces/PEI', '/provinces/PE'],
+        ['/fr/provinces/PEI', '/fr/provinces/PE'],
 
-      test('it should return 301 with the year included', async () => {
-        const response = await request(app).get('/provinces/QB/2022')
-        expect(response.statusCode).toBe(301)
-        expect(response.headers.location).toEqual('/provinces/QC/2022')
-      })
+        ['/provinces/pei', '/provinces/PE'],
+        ['/fr/provinces/pei', '/fr/provinces/PE'],
+
+        [
+          `/provinces/PEI/${aliasYear}`,
+          `/provinces/PE/${aliasYear}`,
+        ],
+        [
+          `/en/provinces/PEI/${aliasYear}`,
+          `/provinces/PE/${aliasYear}`,
+        ],
+        [
+          `/fr/provinces/PEI/${aliasYear}`,
+          `/fr/provinces/PE/${aliasYear}`,
+        ],
+
+        ['/provinces/QB', '/provinces/QC'],
+        ['/en/provinces/QB', '/provinces/QC'],
+        ['/fr/provinces/QB', '/fr/provinces/QC'],
+
+        ['/provinces/qb', '/provinces/QC'],
+        ['/fr/provinces/qb', '/fr/provinces/QC'],
+
+        [
+          `/provinces/QB/${aliasYear}`,
+          `/provinces/QC/${aliasYear}`,
+        ],
+        [
+          `/en/provinces/QB/${aliasYear}`,
+          `/provinces/QC/${aliasYear}`,
+        ],
+        [
+          `/fr/provinces/QB/${aliasYear}`,
+          `/fr/provinces/QC/${aliasYear}`,
+        ],
+      ])(
+        '%s permanently redirects to %s',
+        async (path, destination) => {
+          const response = await request(app).get(path)
+
+          expect(response.statusCode).toBe(301)
+          expect(response.headers.location).toBe(destination)
+        },
+      )
+    })
+
+    describe('localized year query redirects', () => {
+      const canadaYear = getCurrentHolidayYear() + 1
+      const qcYear = getCurrentHolidayYear('QC') + 1
+      const federalYear = getCurrentHolidayYear('federal') + 1
+
+      test.each([
+        [
+          `/?year=${canadaYear}`,
+          `/${canadaYear}`,
+        ],
+        [
+          `/en/?year=${canadaYear}`,
+          `/${canadaYear}`,
+        ],
+        [
+          `/fr/?year=${canadaYear}`,
+          `/fr/${canadaYear}`,
+        ],
+
+        [
+          `/provinces/QC?year=${qcYear}`,
+          `/provinces/QC/${qcYear}`,
+        ],
+        [
+          `/en/provinces/QC?year=${qcYear}`,
+          `/provinces/QC/${qcYear}`,
+        ],
+        [
+          `/fr/provinces/QC?year=${qcYear}`,
+          `/fr/provinces/QC/${qcYear}`,
+        ],
+
+        // Also proves lowercase + query is handled in one redirect.
+        [
+          `/fr/provinces/qc?year=${qcYear}`,
+          `/fr/provinces/QC/${qcYear}`,
+        ],
+
+        [
+          `/federal?year=${federalYear}`,
+          `/federal/${federalYear}`,
+        ],
+        [
+          `/en/federal?year=${federalYear}`,
+          `/federal/${federalYear}`,
+        ],
+        [
+          `/fr/federal?year=${federalYear}`,
+          `/fr/federal/${federalYear}`,
+        ],
+      ])(
+        '%s redirects to %s',
+        async (path, destination) => {
+          const response = await request(app).get(path)
+
+          expect(response.statusCode).toBe(302)
+          expect(response.headers.location).toBe(destination)
+        },
+      )
+    })
+
+    describe('localized current-year canonicalization', () => {
+      const origin = 'https://canada-holidays.ca'
+
+      test.each([
+        [
+          `/${getCurrentHolidayYear()}`,
+          '/',
+        ],
+        [
+          `/en/${getCurrentHolidayYear()}`,
+          '/',
+        ],
+        [
+          `/fr/${getCurrentHolidayYear()}`,
+          '/fr/',
+        ],
+
+        [
+          `/provinces/QC/${getCurrentHolidayYear('QC')}`,
+          '/provinces/QC',
+        ],
+        [
+          `/en/provinces/QC/${getCurrentHolidayYear('QC')}`,
+          '/provinces/QC',
+        ],
+        [
+          `/fr/provinces/QC/${getCurrentHolidayYear('QC')}`,
+          '/fr/provinces/QC',
+        ],
+
+        [
+          `/federal/${getCurrentHolidayYear('federal')}`,
+          '/federal',
+        ],
+        [
+          `/en/federal/${getCurrentHolidayYear('federal')}`,
+          '/federal',
+        ],
+        [
+          `/fr/federal/${getCurrentHolidayYear('federal')}`,
+          '/fr/federal',
+        ],
+      ])(
+        '%s canonicalizes to %s',
+        async (path, canonical) => {
+          const response = await request(app).get(path)
+          const $ = cheerio.load(response.text)
+
+          expect(response.statusCode).toBe(200)
+
+          expect($('link[rel="canonical"]').attr('href')).toBe(`${origin}${canonical}`)
+        },
+      )
+    })
+
+    describe('localized invalid dynamic parameters', () => {
+      test.each([
+        '/?year=1000',
+        '/en/?year=1000',
+        '/fr/?year=1000',
+
+        '/provinces/QC?year=1000',
+        '/en/provinces/QC?year=1000',
+        '/fr/provinces/QC?year=1000',
+
+        '/federal?year=1000',
+        '/en/federal?year=1000',
+        '/fr/federal?year=1000',
+      ])(
+        'ignores invalid year query on %s',
+        async (path) => {
+          const response = await request(app).get(path)
+
+          expect(response.statusCode).toBe(200)
+          expect(response.headers.location).toBeUndefined()
+        },
+      )
+
+      test.each([
+        '/1000',
+        '/en/1000',
+        '/fr/1000',
+
+        '/provinces/QC/1000',
+        '/en/provinces/QC/1000',
+        '/fr/provinces/QC/1000',
+
+        '/federal/1000',
+        '/en/federal/1000',
+        '/fr/federal/1000',
+      ])(
+        'returns 400 for invalid year path %s',
+        async (path) => {
+          const response = await request(app).get(path)
+
+          expect(response.statusCode).toBe(400)
+        },
+      )
+
+      test.each([
+        '/provinces/ZZ',
+        '/en/provinces/ZZ',
+        '/fr/provinces/ZZ',
+      ])(
+        'returns 400 for invalid province %s',
+        async (path) => {
+          const response = await request(app).get(path)
+
+          expect(response.statusCode).toBe(400)
+        },
+      )
     })
 
     describe('Test /provinces/:provinceId/:year responses', () => {
