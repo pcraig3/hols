@@ -133,7 +133,7 @@ const Sources = ({ data: { provinces, federalSource, locale = 'en' }, alternateP
 
         <p
           dangerouslySetInnerHTML=${rich('pages.sources.legislationBody', {
-            legislationUrl: 'https://github.com/pcraig3/hols#citations',
+            legislationUrl: t('pages.sources.links.legislation'),
             legislationLinkTitle: t('pages.sources.legislationLinkTitle'),
           })}
         />

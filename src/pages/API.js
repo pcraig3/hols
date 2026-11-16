@@ -30,8 +30,8 @@ const API = ({ data: { locale = 'en' } = {}, alternatePaths }) => {
   const rich = getRichTranslator(locale)
 
   const apiUrl = 'https://canada-holidays.ca/api/v1/'
-  const githubUrl = 'https://github.com/pcraig3/hols'
-  const specUrl = `${githubUrl}/blob/main/reference/Canada-Holidays-API.v1.yaml`
+  const githubUrl = t('pages.api.links.github')
+  const specUrl = t('pages.api.links.spec')
 
   return html`
     <${Layout} route="/api" locale=${locale} alternatePaths=${alternatePaths}>
@@ -75,7 +75,7 @@ const API = ({ data: { locale = 'en' } = {}, alternatePaths }) => {
 
             <li
               dangerouslySetInnerHTML=${rich('pages.api.support', {
-                supportUrl: 'https://twitter.com/pcraig3',
+                supportUrl: t('pages.api.links.support'),
               })}
             />
 
@@ -83,8 +83,7 @@ const API = ({ data: { locale = 'en' } = {}, alternatePaths }) => {
 
             <li
               dangerouslySetInnerHTML=${rich('pages.api.standards', {
-                standardsUrl:
-                  'https://www.canada.ca/en/government/system/digital-government/modern-emerging-technologies/government-canada-standards-apis.html',
+                standardsUrl: t('pages.api.links.standards'),
               })}
             />
 
@@ -109,13 +108,13 @@ const API = ({ data: { locale = 'en' } = {}, alternatePaths }) => {
         <p
           dangerouslySetInnerHTML=${rich('pages.api.documentation', {
             specUrl,
-            swaggerUrl: 'https://app.swaggerhub.com/apis/pcraig3/canada-holidays/',
+            swaggerUrl: t('pages.api.links.swagger'),
           })}
         />
 
         <p
           dangerouslySetInnerHTML=${rich('pages.api.githubOverview', {
-            overviewUrl: `${githubUrl}/blob/main/API.md`,
+            overviewUrl: t('pages.api.links.overview'),
           })}
         />
 
