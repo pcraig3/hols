@@ -87,7 +87,7 @@ const Sources = ({ data: { provinces, federalSource, locale = 'en' } }) => {
   const source = localizedSource(federalSource, locale)
 
   return html`
-    <${Layout}>
+    <${Layout} locale=${locale}>
       <${Content}>
         <h1>${t('pages.sources.title')}</h1>
 

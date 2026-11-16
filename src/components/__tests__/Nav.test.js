@@ -4,11 +4,11 @@ const { html } = require('../../utils')
 
 const Nav = require('../Nav.js')
 
-const renderNav = ({ route } = {}) => {
+const renderNav = ({ route, locale } = {}) => {
   return cheerio.load(
     render(
       html`
-        <${Nav} route=${route} //>
+        <${Nav} route=${route} locale=${locale} //>
       `,
     ),
   )
@@ -36,4 +36,19 @@ describe('Nav', () => {
     expect($('nav').length).toBe(1)
     expect($('nav .links .active').length).toBe(0)
   })
+})
+
+test('renders French labels and links', () => {
+  const $ = renderNav({ locale: 'fr' })
+
+  expect($('summary').text()).toEqual('Menu')
+
+  expect($('nav .links').text()).toEqual(
+    'MenuToutes les régionsÀ proposAPICommentaires' +
+    'Toutes les régionsÀ proposAPICommentaires',
+  )
+  expect($('a[href="/fr/provinces"]')).toHaveLength(2)
+  expect($('a[href="/fr/a-propos"]')).toHaveLength(2)
+  expect($('a[href="/fr/api"]')).toHaveLength(2)
+  expect($('a[href="/fr/commentaires"]')).toHaveLength(2)
 })

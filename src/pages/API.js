@@ -34,7 +34,7 @@ const API = ({ data: { locale = 'en' } = {} }) => {
   const specUrl = `${githubUrl}/blob/main/reference/Canada-Holidays-API.v1.yaml`
 
   return html`
-    <${Layout} route="/api">
+    <${Layout} route="/api" locale=${locale}>
       <${Content}>
         <h1>${t('pages.api.title')}</h1>
 

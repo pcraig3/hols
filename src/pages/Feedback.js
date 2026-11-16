@@ -16,7 +16,7 @@ const Feedback = ({ data: { locale = 'en' } }) => {
   const rich = getRichTranslator(locale)
 
   return html`
-    <${Layout} route="/feedback">
+    <${Layout} route="/feedback" locale=${locale}>
       <${Content}>
         <h1>${t('pages.feedback.title')}</h1>
 

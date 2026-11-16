@@ -78,6 +78,9 @@ module.exports = {
       mistakes: 'Des erreres peuvent quand même se glisser — <a href="{{feedbackUrl}}">faites-moi signe</a> si vous en trouvez.',
       backToTop: 'Retour en haut',
     },
+    error: {
+      backHome: 'Prochain jour férié au Canada',
+    },
     federallyRegulated: {
       title: 'Les jours fériés fédéraux s’appliquent-ils à moi ?',
       documentTitle: 'Les jours fériés fédéraux s’appliquent-ils à moi ? — Canada Holidays',
@@ -209,6 +212,13 @@ module.exports = {
     calButton: {
       addToCalendar: 'Ajouter à votre calendrier',
     },
+    nav: {
+      allRegions: 'Toutes les régions',
+      about: 'À propos',
+      api: 'API',
+      feedback: 'Commentaires',
+      menu: 'Menu',
+    },
     nextHoliday: {
       canada: 'Le prochain jour férié au Canada est',
       federal: 'Le prochain jour férié fédéral au Canada est',
@@ -270,7 +280,9 @@ module.exports = {
       title: 'Jours fériés en {{year}}',
       federalTitle: 'Jours fériés fédéraux en {{year}}',
     },
-
+    skipLink: {
+      main: 'Aller au contenu principal',
+    },
   },
   dates: {
     relative: {

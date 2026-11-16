@@ -78,6 +78,9 @@ module.exports = {
       mistakes: 'Mistaeks do happen, however — <a href="{{feedbackUrl}}">lemme know</a> if you spot any.',
       backToTop: 'Back to top',
     },
+    error: {
+      backHome: 'Canada’s next public holiday',
+    },
     federallyRegulated: {
       title: 'Do federal holidays apply to me?',
       documentTitle: 'Do federal holidays apply to me? — Canada Holidays',
@@ -209,6 +212,13 @@ module.exports = {
     calButton: {
       addToCalendar: 'Add to your calendar',
     },
+    nav: {
+      allRegions: 'All regions',
+      about: 'About',
+      api: 'API',
+      feedback: 'Feedback',
+      menu: 'Menu',
+    },
     nextHoliday: {
       canada: 'Canada’s next {{holidayType}}holiday is',
       federal: 'Canada’s next federal {{holidayType}}holiday is',
@@ -270,7 +280,9 @@ module.exports = {
       title: 'Holidays in {{year}}',
       federalTitle: 'Federal holidays in {{year}}',
     },
-
+    skipLink: {
+      main: 'Skip to main content',
+    },
   },
   dates: {
     relative: {

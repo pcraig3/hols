@@ -1497,3 +1497,16 @@ describe('Test /province responses', () => {
     })
   })
 })
+
+test('French error pages preserve French shared chrome', async () => {
+  const response = await request(app).get('/fr/this-route-does-not-exist')
+
+  const $ = cheerio.load(response.text)
+  expect(response.statusCode).toBe(404)
+
+  expect($('html').attr('lang')).toBe('fr')
+  expect($('a[href="#content"]').text()).toBe('Aller au contenu principal')
+  expect($('nav a').first().attr('href')).toBe('/fr/')
+
+  expect($('main a[href="/fr/"]').text()).toBe('← Prochain jour férié au Canada')
+})

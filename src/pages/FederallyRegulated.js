@@ -16,7 +16,7 @@ const FederallyRegulated = ({ data: { locale = 'en' } = {} }) => {
       : 'https://www.canada.ca/en/services/jobs/workplace/federally-regulated-industries.html'
 
   return html`
-    <${Layout}>
+    <${Layout} locale=${locale}>
       <${Content}>
         <h1>${t('pages.federallyRegulated.title')}</h1>
 

@@ -1,6 +1,7 @@
 const { html } = require('../utils')
 const { css } = require('@emotion/css')
 const { theme } = require('../styles')
+const { holidayPathFor } = require('../config/routes.config')
 
 const MapleLeaf = ({ fill = '#DD2E44' }) => {
   return html`
@@ -72,14 +73,13 @@ const div = (color) => css`
   }
 `
 
-const Logo = ({ color }) => {
+const Logo = ({ color, locale = 'en' }) => {
   return html`
     <div class=${div(color)}>
-      <a href="/">
-        <${MapleLeaf}
-          fill=${color ? theme.color[color].accent : theme.color.red}
-        />${'Canada Holidays'}</a
-      >
+      <a href=${holidayPathFor({ locale })}>
+        <${MapleLeaf} fill=${color ? theme.color[color].accent : theme.color.red}/>
+        ${'Canada Holidays'}
+      </a>
     </div>
   `
 }

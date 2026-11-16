@@ -258,7 +258,7 @@ const Province = ({
   const isCurrentYear = !!nextHoliday  
   const localizedPageSource = source ? localizedSource(source, locale) : null
   return html`
-    <${Layout} color=${federal ? 'federal' : provinceId}>
+    <${Layout} color=${federal ? 'federal' : provinceId} locale=${locale}>
       <div class=${provinceIdOrFederal ? styles(theme.color[provinceIdOrFederal]) : styles()}>
         <section id="next-holiday">
           <${NextHolidayBox} ...${{ nextHoliday, provinceName, provinceId, federal, year, locale }} />
