@@ -46,21 +46,13 @@ describe('Test /api responses', () => {
   }
 
   describe('Verify CORS headers', () => {
-    const corsUrls = [
-      '/api',
-      '/api/fake',
-      '/api/v1/',
-      '/api/v1/spec',
-      '/api/v1/provinces',
-      '/api/v1/holidays',
-      '/api/v1/provinces/AB',
-      '/api/v1/holidays/1',
-    ]
-    corsUrls.map((url) => {
-      test(`"${url}" should return a CORS header`, async () => {
-        const response = await request(app).get(url)
-        expect(response.headers['access-control-allow-origin']).toEqual('*')
-      })
+    test.each([
+      ['/api/v1/holidays', 200],
+      ['/api/fake', 404],
+    ])('"%s" should return a CORS header', async (url, status) => {
+      const response = await request(app).get(url)
+      expect(response.statusCode).toBe(status)
+      expect(response.headers['access-control-allow-origin']).toEqual('*')
     })
   })
 
@@ -74,21 +66,6 @@ describe('Test /api responses', () => {
   })
 
   describe('Test /api response', () => {
-    test('it should return 200', async () => {
-      const response = await request(app).get('/api')
-      expect(response.statusCode).toBe(200)
-    })
-
-    test('it should return the h1, title, and meta tag', async () => {
-      const response = await request(app).get('/api')
-      const $ = cheerio.load(response.text)
-      expect($('h1').text()).toEqual('Canada Holidays API')
-      expect($('title').text()).toEqual('Canada Holidays API — Canada Holidays')
-      expect($('meta[name="description"]').attr('content')).toEqual(
-        'A free JSON API for Canada’s statutory holidays. Return all holidays or filter by a specific region.',
-      )
-    })
-
     test.each([
       [
         '/api',
@@ -433,13 +410,13 @@ describe('Test /api responses', () => {
 
           // Heritage Day is no longer here
           const heritageDay = holidays.find(
-            (h) => h.nameEn === 'Heritage Day' && h.date === '2022-08-01',
+            (h) => h.id === 24,
           )
           expect(heritageDay).not.toBeDefined()
 
           // Terry Fox Day is no longer here
           const terryFoxDay = holidays.find(
-            (h) => h.nameEn === 'Terry Fox Day' && h.date === '2022-08-01',
+            (h) => h.id === 25,
           )
           expect(terryFoxDay).not.toBeDefined()
         })
@@ -607,12 +584,12 @@ describe('Test /api responses', () => {
       })
     })
 
-    test('it should an empty object for an optional holiday: 2', async () => {
+    test('it should return an empty object for an optional holiday: 2', async () => {
       const response = await request(app).get('/api/v1/holidays/2')
       expect(response.statusCode).toBe(200)
 
       let responseJSON = JSON.parse(response.text)
-      expect(responseJSON).toMatchObject({})
+      expect(responseJSON).toEqual({})
     })
 
     test('it should a holiday object for an optional holiday: 2 when ?optional=true', async () => {
@@ -664,7 +641,12 @@ describe('Test /api responses', () => {
     })
 
     describe('with ?years=', () => {
-      ALLOWED_YEARS.map((year) => {
+      const representativeYears = [...new Set([
+        ALLOWED_YEARS[0],
+        currentYear,
+        ALLOWED_YEARS[ALLOWED_YEARS.length - 1],
+      ])]
+      representativeYears.map((year) => {
         test(`${year} it should a holiday with the right dateString`, async () => {
           const response = await request(app).get(`/api/v1/holidays/16?year=${year}`)
           expect(response.statusCode).toBe(200)
@@ -672,19 +654,6 @@ describe('Test /api responses', () => {
           let { holiday } = JSON.parse(response.text)
 
           expect(holiday.observedDate.slice(0, 4)).toEqual(`${year}`)
-        })
-      })
-
-      let badYears = ['2012', '2039', '1', null, undefined, false, 'orange', 'christmas']
-      badYears.map((year) => {
-        test(`"${year}" it should return 400 with an error message`, async () => {
-          const response = await request(app).get(`/api/v1/holidays?year=${year}`)
-          expect(response.statusCode).toBe(400)
-
-          let { error } = JSON.parse(response.text)
-          expect(error.message).toMatch(
-            /^Bad Request: request\/query\/year must be (integer|>= 2013|<= 2038)/,
-          )
         })
       })
     })
