@@ -25,7 +25,7 @@ const detailsStyle = css`
   }
 `
 
-const API = ({ data: { locale = 'en' } = {} }) => {
+const API = ({ data: { locale = 'en' } = {}, alternatePaths }) => {
   const t = getTranslator(locale)
   const rich = getRichTranslator(locale)
 
@@ -34,7 +34,7 @@ const API = ({ data: { locale = 'en' } = {} }) => {
   const specUrl = `${githubUrl}/blob/main/reference/Canada-Holidays-API.v1.yaml`
 
   return html`
-    <${Layout} route="/api" locale=${locale}>
+    <${Layout} route="/api" locale=${locale} alternatePaths=${alternatePaths}>
       <${Content}>
         <h1>${t('pages.api.title')}</h1>
 

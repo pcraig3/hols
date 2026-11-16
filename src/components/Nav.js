@@ -4,8 +4,9 @@ const { theme, insideContainer } = require('../styles')
 const { getTranslator } = require('../i18n')
 const { pathFor } = require('../config/routes.config')
 
-const Logo = require('./Logo')
 const Details = require('./Details')
+const LanguageSwitcher = require('./LanguageSwitcher')
+const Logo = require('./Logo')
 
 const styles = css`
   display: flex;
@@ -18,13 +19,30 @@ const styles = css`
 
   ${insideContainer};
 
+  .nav-actions {
+    display: flex;
+    align-items: baseline;
+    margin-left: auto;
+    gap: ${theme.space.sm};
+  }
+
   .links {
-    flex: auto;
+    order: 2;
+    flex: none;
     text-align: right;
 
     .links--sm {
-      display: initial;
+      display: block;
+      width: 3.65em;
+      margin-left: ${theme.space.xs};
       font-size: 0.86em;
+
+      details > ul {
+        position: relative;
+        left: 100%;
+        transform: translateX(-100%);
+        width: max-content;
+      }
     }
 
     .links--md {
@@ -33,6 +51,8 @@ const styles = css`
     }
 
     @media (${theme.mq.md}) {
+      order: 1;
+
       .links--sm {
         display: none;
       }
@@ -40,6 +60,14 @@ const styles = css`
       .links--md {
         display: initial;
       }
+    }
+  }
+
+  .language-switcher {
+    order: 1;
+
+    @media (${theme.mq.md}) {
+      order: 2;
     }
   }
 `
@@ -79,6 +107,10 @@ const linkStyles = css`
       &:last-of-type {
         margin-top: 0;
         margin-bottom: 0;
+      }
+
+      &:first-of-type {
+        margin-left: 0;
       }
 
       a.active {
@@ -121,23 +153,28 @@ const NavLinks = ({ route, locale = 'en' }) => {
   `
 }
 
-const Nav = ({ color, route, locale = 'en' }) => {
+
+const Nav = ({ color, route, locale = 'en', alternatePaths }) => {
   const t = getTranslator(locale)
 
   return html`
     <nav class=${styles}>
       <${Logo} color=${color} locale=${locale} />
 
-      <div class="links">
-        <div class="links--sm">
-          <${Details} summary=${t('components.nav.menu')}>
+      <div class="nav-actions">
+        <div class="links">
+          <div class="links--sm">
+            <${Details} summary=${t('components.nav.menu')}>
+              <${NavLinks} route=${route} locale=${locale} />
+            <//>
+          </div>
+
+          <div class="links--md">
             <${NavLinks} route=${route} locale=${locale} />
-          <//>
+          </div>
         </div>
 
-        <div class="links--md">
-          <${NavLinks} route=${route} locale=${locale} />
-        </div>
+        <${LanguageSwitcher} locale=${locale} alternatePaths=${alternatePaths} color=${color} />
       </div>
     </nav>
   `

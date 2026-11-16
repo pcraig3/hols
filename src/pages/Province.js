@@ -252,13 +252,14 @@ const Province = ({
     source = false,
     locale = 'en',
   } = {},
+  alternatePaths,
 }) => {
   const t = getTranslator(locale)
   const provinceIdOrFederal = getProvinceIdOrFederalString({ provinceId, federal })
   const isCurrentYear = !!nextHoliday  
   const localizedPageSource = source ? localizedSource(source, locale) : null
   return html`
-    <${Layout} color=${federal ? 'federal' : provinceId} locale=${locale}>
+    <${Layout} color=${federal ? 'federal' : provinceId} locale=${locale} alternatePaths=${alternatePaths}>
       <div class=${provinceIdOrFederal ? styles(theme.color[provinceIdOrFederal]) : styles()}>
         <section id="next-holiday">
           <${NextHolidayBox} ...${{ nextHoliday, provinceName, provinceId, federal, year, locale }} />

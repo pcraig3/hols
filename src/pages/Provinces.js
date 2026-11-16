@@ -35,7 +35,7 @@ const styles = css`
   }
 `
 
-const Provinces = ({ data: { provinces, locale = 'en' } }) => {
+const Provinces = ({ data: { provinces, locale = 'en' }, alternatePaths }) => {
   const t = getTranslator(locale)
   const rich = getRichTranslator(locale)
 
@@ -45,7 +45,7 @@ const Provinces = ({ data: { provinces, locale = 'en' } }) => {
       : 'https://www.canada.ca/en/employment-social-development/programs/employment-equity/regulated-industries.html'
 
   return html`
-    <${Layout} route=${pathFor('provinces')} locale=${locale}>
+    <${Layout} route=${pathFor('provinces')} locale=${locale} alternatePaths=${alternatePaths}>
       <${Content} className=${styles}>
         <h1>${t('pages.provinces.title')}</h1>
 

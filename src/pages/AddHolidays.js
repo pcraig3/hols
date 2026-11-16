@@ -67,13 +67,13 @@ const createRows = ({ provinces, locale = 'en' }) => {
   }))
 }
 
-const AddHolidays = ({ data: { provinces, year, locale = 'en' } }) => {
+const AddHolidays = ({ data: { provinces, year, locale = 'en' }, alternatePaths }) => {
   const t = getTranslator(locale)
   const rich = getRichTranslator(locale)
   const icsBaseUrl = `https://canada-holidays.ca${locale === 'fr' ? '/fr' : ''}/ics`
 
   return html`
-    <${Layout} locale=${locale}>
+    <${Layout} locale=${locale} alternatePaths=${alternatePaths}>
       <${Content} className=${headerStyles}>
         <h1>${t('pages.addHolidays.title')}</h1>
         <p>${t('pages.addHolidays.intro')}</p>

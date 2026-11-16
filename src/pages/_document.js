@@ -213,7 +213,7 @@ const document = ({
 const renderPage = ({ pageComponent, title = '', props, docProps }) => {
   const Page = require(`./${pageComponent}.js`)
 
-  const content = render(html` <${Page} ...${props} /> `)
+  const content = render(html` <${Page} ...${props} alternatePaths=${docProps.alternatePaths} /> `)
 
   // if title is not explicitly passed in, use the name of the page component
   title = title || pageComponent

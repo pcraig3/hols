@@ -5,12 +5,12 @@ const { holidayPathFor } = require('../config/routes.config')
 const Layout = require('../components/Layout.js')
 const Content = require('../components/Content.js')
 
-const OptionalHolidays = ({ data: { locale = 'en' } = {} }) => {
+const OptionalHolidays = ({ data: { locale = 'en' } = {}, alternatePaths }) => {
   const t = getTranslator(locale)
   const rich = getRichTranslator(locale)
 
   return html`
-    <${Layout} locale=${locale}>
+    <${Layout} locale=${locale} alternatePaths=${alternatePaths}>
       <${Content}>
         <h1>${t('pages.optionalHolidays.title')}</h1>
 

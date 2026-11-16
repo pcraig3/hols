@@ -11,12 +11,12 @@ const linkStyle = css`
   }
 `
 
-const Feedback = ({ data: { locale = 'en' } }) => {
+const Feedback = ({ data: { locale = 'en' }, alternatePaths }) => {
   const t = getTranslator(locale)
   const rich = getRichTranslator(locale)
 
   return html`
-    <${Layout} route="/feedback" locale=${locale}>
+    <${Layout} route="/feedback" locale=${locale} alternatePaths=${alternatePaths}>
       <${Content}>
         <h1>${t('pages.feedback.title')}</h1>
 

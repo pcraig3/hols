@@ -23,15 +23,27 @@ test('Layout passes locale to shared chrome', () => {
     ),
   )
 
-  expect(
-    $('a[href="#content"]').text(),
-  ).toBe('Aller au contenu principal')
+  expect($('a[href="#content"]').text()).toBe('Aller au contenu principal')
+  expect($('nav a').first().attr('href')).toBe('/fr/')
+  expect($('nav').text()).toContain('Régions')
+})
 
-  expect(
-    $('nav a').first().attr('href'),
-  ).toBe('/fr/')
+test('Layout passes alternate paths to the language switcher', () => {
+  const $ = cheerio.load(
+    render(html`
+      <${Layout}
+        locale="fr"
+        alternatePaths=${{
+          'en-CA': '/federal/2027',
+          'fr-CA': '/fr/federal/2027',
+        }}
+      >
+        <p>Bonjour</p>
+      <//>
+    `),
+  )
 
-  expect(
-    $('nav').text(),
-  ).toContain('Toutes les régions')
+  expect($('.language-switcher a').attr('href')).toBe('/federal/2027')
+  expect($('.language-switcher a').attr('lang')).toBe('en')
+  expect($('main').text()).toBe('Bonjour')
 })
