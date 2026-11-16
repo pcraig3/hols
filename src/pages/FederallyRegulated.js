@@ -1,6 +1,7 @@
 
 const { html } = require('../utils')
 const { getTranslator, getRichTranslator } = require('../i18n')
+const { pathFor, holidayPathFor } = require('../config/routes.config')
 
 const Layout = require('../components/Layout.js')
 const Content = require('../components/Content.js')
@@ -25,12 +26,12 @@ const FederallyRegulated = ({ data: { locale = 'en' } = {} }) => {
           <ul>
             <li
               dangerouslySetInnerHTML=${rich('pages.federallyRegulated.provincesLink', {
-                provincesUrl: '/provinces',
+                provincesUrl: pathFor('provinces', { locale }),
               })}
             />
             <li
               dangerouslySetInnerHTML=${rich('pages.federallyRegulated.federalLink', {
-                federalUrl: '/federal',
+                federalUrl: holidayPathFor({ locale, federal: true }),
               })}
             />
           </ul>

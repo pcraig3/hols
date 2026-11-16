@@ -43,11 +43,7 @@ describe('Provinces component', () => {
 
     expect($('main li').length).toBe(1)
     expect($('main li').text().trim()).toBe('Colombie-Britannique')
-
-    // Province detail pages are not localized yet.
-    expect($('main a[href="/provinces/BC"]').length).toBe(1)
-
-    // This supporting page is already localized.
+    expect($('main a[href="/fr/provinces/BC"]').length).toBe(1)
     expect(
       $('main a[href="/fr/les-jours-feries-federaux-sappliquent-ils-a-moi"]').length,
     ).toBe(1)

@@ -184,6 +184,27 @@ module.exports = {
       backToTop: 'Back to top',
     },
   },
+  routes: {
+    ui: {
+      canada: {
+        documentTitle: 'Canadian statutory holidays in {{year}}',
+        metaCurrent: 'Canada’s next stat holiday is {{holidayName}} on {{date}}. See all {{count}} statutory holidays in Canada in {{year}}.',
+        metaYear: 'See all {{count}} statutory holidays in Canada in {{year}}.',
+        region: 'Canada',
+      },
+      province: {
+        documentTitle: '{{provinceName}} ({{provinceCode}}) statutory holidays in {{year}} — Canada Holidays',
+        metaCurrent: '{{provinceName}}’s next stat holiday is {{holidayName}} on {{date}}. See all {{count}} statutory holidays in {{provinceName}}, Canada in {{year}}.',
+        metaYear: 'See all {{count}} statutory holidays in {{provinceName}}, Canada in {{year}}.',
+      },
+      federal: {
+        documentTitle: 'Federal statutory holidays in Canada in {{year}}',
+        metaCurrent: 'Canada’s next federal stat holiday is {{holidayName}} on {{date}}. See all {{count}} federal statutory holidays in Canada in {{year}}.',
+        metaYear: 'See all {{count}} federal statutory holidays in Canada in {{year}}.',
+        region: 'Federal',
+      },
+    },
+  },
   components: {
     calButton: {
       addToCalendar: 'Add to your calendar',

@@ -1,5 +1,6 @@
 const { html } = require('../utils')
 const { getTranslator, getRichTranslator } = require('../i18n')
+const { holidayPathFor } = require('../config/routes.config')
 
 const Layout = require('../components/Layout.js')
 const Content = require('../components/Content.js')
@@ -35,14 +36,14 @@ const OptionalHolidays = ({ data: { locale = 'en' } = {} }) => {
         <p>${t('pages.optionalHolidays.backTo')}</p>
 
         <ul>
-          <li><a href="/provinces/AB">${t('pages.optionalHolidays.alberta')}</a></li>
-          <li><a href="/provinces/BC">${t('pages.optionalHolidays.britishColumbia')}</a></li>
-          <li><a href="/provinces/MB">${t('pages.optionalHolidays.manitoba')}</a></li>
-          <li><a href="/provinces/NB">${t('pages.optionalHolidays.newBrunswick')}</a></li>
-          <li><a href="/provinces/NL">${t('pages.optionalHolidays.newfoundland')}</a></li>
-          <li><a href="/provinces/NU">${t('pages.optionalHolidays.nunavut')}</a></li>
-          <li><a href="/provinces/ON">${t('pages.optionalHolidays.ontario')}</a></li>
-          <li><a href="/provinces/QC">${t('pages.optionalHolidays.quebec')}</a></li>
+          <li><a href=${holidayPathFor({ locale, provinceId: 'AB' })}>${t('pages.optionalHolidays.alberta')}</a></li>
+          <li><a href=${holidayPathFor({ locale, provinceId: 'BC' })}>${t('pages.optionalHolidays.britishColumbia')}</a></li>
+          <li><a href=${holidayPathFor({ locale, provinceId: 'MB' })}>${t('pages.optionalHolidays.manitoba')}</a></li>
+          <li><a href=${holidayPathFor({ locale, provinceId: 'NB' })}>${t('pages.optionalHolidays.newBrunswick')}</a></li>
+          <li><a href=${holidayPathFor({ locale, provinceId: 'NL' })}>${t('pages.optionalHolidays.newfoundland')}</a></li>
+          <li><a href=${holidayPathFor({ locale, provinceId: 'NU' })}>${t('pages.optionalHolidays.nunavut')}</a></li>
+          <li><a href=${holidayPathFor({ locale, provinceId: 'ON' })}>${t('pages.optionalHolidays.ontario')}</a></li>
+          <li><a href=${holidayPathFor({ locale, provinceId: 'QC' })}>${t('pages.optionalHolidays.quebec')}</a></li>
         </ul>
 
         <h2>${t('pages.optionalHolidays.differenceTitle')}</h2>

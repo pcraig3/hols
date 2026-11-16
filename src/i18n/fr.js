@@ -184,6 +184,27 @@ module.exports = {
       backToTop: 'Retour en haut',
     },
   },
+  routes: {
+    ui: {
+      canada: {
+        documentTitle: 'Jours fériés au Canada en {{year}}',
+        metaCurrent: 'Le prochain jour férié au Canada est {{holidayName}}, le {{date}}. Consultez les {{count}} jours fériés au Canada en {{year}}.',
+        metaYear: 'Consultez les {{count}} jours fériés au Canada en {{year}}.',
+        region: 'Canada',
+      },
+      province: {
+        documentTitle: 'Jours fériés en {{year}} — {{provinceName}} ({{provinceCode}}) — Canada Holidays',
+        metaCurrent: 'Prochain jour férié — {{provinceName}} : {{holidayName}}, le {{date}}. Consultez les {{count}} jours fériés en {{year}} — {{provinceName}}.',
+        metaYear: 'Consultez les {{count}} jours fériés en {{year}} — {{provinceName}}.',
+      },
+      federal: {
+        documentTitle: 'Jours fériés fédéraux au Canada en {{year}}',
+        metaCurrent: 'Le prochain jour férié fédéral au Canada est {{holidayName}}, le {{date}}. Consultez les {{count}} jours fériés fédéraux au Canada en {{year}}.',
+        metaYear: 'Consultez les {{count}} jours fériés fédéraux au Canada en {{year}}.',
+        region: 'Fédéral',
+      },
+    },
+  },
   components: {
     calButton: {
       addToCalendar: 'Ajouter à votre calendrier',

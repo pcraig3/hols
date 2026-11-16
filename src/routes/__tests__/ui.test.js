@@ -472,6 +472,261 @@ describe('Test ui responses', () => {
           })
         })
       })
+
+      describe('Localized dynamic holiday routes', () => {
+        const origin = 'https://canada-holidays.ca'
+        const year = nextYear
+
+        const expectSeo = ({
+          $,
+          locale,
+          canonical,
+          englishPath,
+          frenchPath,
+        }) => {
+          expect($('html').attr('lang')).toBe(locale)
+
+          expect($('link[rel="canonical"]').attr('href')).toBe(
+            `${origin}${canonical}`,
+          )
+
+          expect($('meta[property="og:url"]').attr('content')).toBe(
+            `${origin}${canonical}`,
+          )
+
+          expect($('link[hreflang="en-CA"]').attr('href')).toBe(
+            `${origin}${englishPath}`,
+          )
+
+          expect($('link[hreflang="fr-CA"]').attr('href')).toBe(
+            `${origin}${frenchPath}`,
+          )
+
+          expect($('link[hreflang="x-default"]').attr('href')).toBe(
+            `${origin}${englishPath}`,
+          )
+        }
+
+        test.each([
+          ['/', 'en', '/'],
+          ['/en/', 'en', '/'],
+          ['/fr/', 'fr', '/fr/'],
+        ])('renders localized current Canada page at %s', async (
+          path,
+          locale,
+          canonical,
+        ) => {
+          const response = await request(app).get(path)
+          const $ = cheerio.load(response.text)
+
+          expect(response.statusCode).toBe(200)
+
+          if (locale === 'fr') {
+            expect($('.h1--xs').text()).toBe(
+              'Le prochain jour férié au Canada est',
+            )
+            expect($('title').text()).toBe(
+              `Jours fériés au Canada en ${currentYear}`,
+            )
+            expect(
+              $('meta[name="description"]').attr('content'),
+            ).toMatch(/^Le prochain jour férié au Canada est/)
+          } else {
+            expect($('.h1--xs').text()).toMatch(
+              /^Canada’s next statutory holiday/,
+            )
+            expect($('title').text()).toBe(
+              `Canadian statutory holidays in ${currentYear}`,
+            )
+          }
+
+          expectSeo({
+            $,
+            locale,
+            canonical,
+            englishPath: '/',
+            frenchPath: '/fr/',
+          })
+        })
+
+        test.each([
+          [`/${year}`, 'en', `/${year}`],
+          [`/en/${year}`, 'en', `/${year}`],
+          [`/fr/${year}`, 'fr', `/fr/${year}`],
+        ])('renders localized Canada year page at %s', async (
+          path,
+          locale,
+          canonical,
+        ) => {
+          const response = await request(app).get(path)
+          const $ = cheerio.load(response.text)
+
+          expect(response.statusCode).toBe(200)
+
+          if (locale === 'fr') {
+            expect($('.h1--md').text()).toBe(
+              `Jours fériés en ${year}`,
+            )
+            expect($('title').text()).toBe(
+              `Jours fériés au Canada en ${year}`,
+            )
+
+            // Stable proof that holiday data itself is localized.
+            expect($('main').text()).toContain('Jour de l’An')
+          } else {
+            expect($('.h1--md').text()).toBe(
+              `Holidays in ${year}`,
+            )
+          }
+
+          expectSeo({
+            $,
+            locale,
+            canonical,
+            englishPath: `/${year}`,
+            frenchPath: `/fr/${year}`,
+          })
+        })
+
+        test.each([
+          ['/provinces/QC', 'en', '/provinces/QC'],
+          ['/en/provinces/QC', 'en', '/provinces/QC'],
+          ['/fr/provinces/QC', 'fr', '/fr/provinces/QC'],
+        ])('renders localized province page at %s', async (
+          path,
+          locale,
+          canonical,
+        ) => {
+          const response = await request(app).get(path)
+          const $ = cheerio.load(response.text)
+
+          expect(response.statusCode).toBe(200)
+
+          const currentYearQC = getCurrentHolidayYear('QC')
+
+          if (locale === 'fr') {
+            expect($('.h1--xs').text()).toBe(
+              'Prochain jour férié — Québec',
+            )
+
+            expect($('title').text()).toBe(
+              `Jours fériés en ${currentYearQC} — Québec (QC) — Canada Holidays`,
+            )
+
+            expect(
+              $('meta[name="description"]').attr('content'),
+            ).toMatch(/^Prochain jour férié — Québec/)
+          } else {
+            expect($('.h1--xs').text()).toMatch(
+              /^Quebec’s next statutory holiday/,
+            )
+          }
+
+          expectSeo({
+            $,
+            locale,
+            canonical,
+            englishPath: '/provinces/QC',
+            frenchPath: '/fr/provinces/QC',
+          })
+        })
+
+        test.each([
+          [`/provinces/QC/${year}`, 'en', `/provinces/QC/${year}`],
+          [`/en/provinces/QC/${year}`, 'en', `/provinces/QC/${year}`],
+          [`/fr/provinces/QC/${year}`, 'fr', `/fr/provinces/QC/${year}`],
+        ])('renders localized province year page at %s', async (
+          path,
+          locale,
+          canonical,
+        ) => {
+          const response = await request(app).get(path)
+          const $ = cheerio.load(response.text)
+
+          expect(response.statusCode).toBe(200)
+
+          if (locale === 'fr') {
+            expect($('.h1--lg').text()).toBe('Québec')
+            expect($('.h1--md').text()).toBe(
+              `Jours fériés en ${year}`,
+            )
+            expect($('main').text()).toContain('Jour de l’An')
+          }
+
+          expectSeo({
+            $,
+            locale,
+            canonical,
+            englishPath: `/provinces/QC/${year}`,
+            frenchPath: `/fr/provinces/QC/${year}`,
+          })
+        })
+
+        test.each([
+          ['/federal', 'en', '/federal'],
+          ['/en/federal', 'en', '/federal'],
+          ['/fr/federal', 'fr', '/fr/federal'],
+        ])('renders localized federal page at %s', async (
+          path,
+          locale,
+          canonical,
+        ) => {
+          const response = await request(app).get(path)
+          const $ = cheerio.load(response.text)
+
+          expect(response.statusCode).toBe(200)
+
+          const currentFederalYear = getCurrentHolidayYear('federal')
+
+          if (locale === 'fr') {
+            expect($('.h1--xs').text()).toBe(
+              'Le prochain jour férié fédéral au Canada est',
+            )
+
+            expect($('title').text()).toBe(
+              `Jours fériés fédéraux au Canada en ${currentFederalYear}`,
+            )
+          }
+
+          expectSeo({
+            $,
+            locale,
+            canonical,
+            englishPath: '/federal',
+            frenchPath: '/fr/federal',
+          })
+        })
+
+        test.each([
+          [`/federal/${year}`, 'en', `/federal/${year}`],
+          [`/en/federal/${year}`, 'en', `/federal/${year}`],
+          [`/fr/federal/${year}`, 'fr', `/fr/federal/${year}`],
+        ])('renders localized federal year page at %s', async (
+          path,
+          locale,
+          canonical,
+        ) => {
+          const response = await request(app).get(path)
+          const $ = cheerio.load(response.text)
+
+          expect(response.statusCode).toBe(200)
+
+          if (locale === 'fr') {
+            expect($('.h1--md').text()).toBe(
+              `Jours fériés fédéraux en ${year}`,
+            )
+            expect($('main').text()).toContain('Jour de l’An')
+          }
+
+          expectSeo({
+            $,
+            locale,
+            canonical,
+            englishPath: `/federal/${year}`,
+            frenchPath: `/fr/federal/${year}`,
+          })
+        })
+      })
     })
 
     describe('Test /about response', () => {
