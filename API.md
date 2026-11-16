@@ -1,6 +1,6 @@
 # Canada Holidays API
 
-The <a href="https://canada-holidays.ca/api/v1/" target="_blank">Canada Holidays API</a> lists all 32 public holidays for all 13 provinces and territories in Canada, including federal holidays.
+The <a href="https://canada-holidays.ca/api/v1/" target="_blank">Canada Holidays API</a> lists public holidays for all 13 provinces and territories in Canada, including federal holidays.
 
 **👉 <a href="https://canada-holidays.ca/api/v1/" target="_blank">https://canada-holidays.ca/api/v1/</a>**
 
@@ -17,8 +17,8 @@ Plus(!) check out all these goodies you get for ✨ free ✨:
 
 - It’s free (✨)
 - <a href="https://twitter.com/pcraig3" target="_blank">Dedicated support channel</a>
-- Kind of bilingual (EN & FR)
-- Pretty much compliant with <a href="https://www.canada.ca/en/government/system/digital-government/modern-emerging-technologies/government-canada-standards-apis.html" target="_blank">the Government of Canada Standards on APIs</a> (heck yes 🤙)
+- It’s bilingual (EN & FR)
+- Pretty much compliant with <a href="https://www.canada.ca/en/government/system/digital-government/digital-government-innovations/government-canada-standards-apis.html" target="_blank">the Government of Canada Standards on APIs</a> (heck yes 🤙)
 - Open source which is cool if you’re a nerd
 - Documented with an OpenAPI spec which is _even more_ cool for _even nerdier_ nerds
 

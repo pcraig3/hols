@@ -10,10 +10,7 @@ const FederallyRegulated = ({ data: { locale = 'en' } = {}, alternatePaths }) =>
   const t = getTranslator(locale)
   const rich = getRichTranslator(locale)
 
-  const industriesUrl =
-    locale === 'fr'
-      ? 'https://www.canada.ca/fr/services/emplois/milieu-travail/milieux-reglementation-federale.html'
-      : 'https://www.canada.ca/en/services/jobs/workplace/federally-regulated-industries.html'
+  const industriesUrl = t('pages.federallyRegulated.links.industries')
 
   return html`
     <${Layout} locale=${locale} alternatePaths=${alternatePaths}>

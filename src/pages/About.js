@@ -41,15 +41,15 @@ const About = ({ data: { nextHoliday, locale = 'en' }, alternatePaths }) => {
         <h2>${t('pages.about.groundhogTitle')}</h2>
         <p
           dangerouslySetInnerHTML=${rich('pages.about.groundhog', {
-            groundhogUrl: 'https://groundhog-day.com',
+            groundhogUrl: t('pages.about.links.groundhog'),
           })}
         />
 
         <h2>${t('pages.about.meTitle')}</h2>
         <p
           dangerouslySetInnerHTML=${rich('pages.about.me', {
-            authorUrl: 'https://pcraig.ca',
-            githubUrl: 'https://github.com/pcraig3/hols',
+            authorUrl: t('pages.about.links.author'),
+            githubUrl: t('pages.about.links.github'),
           })}
         />
       <//>

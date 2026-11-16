@@ -13,6 +13,11 @@ module.exports = {
       groundhog: 'Le <a href="{{groundhogUrl}}" target="_blank" rel="noopener noreferrer">jour de la marmotte</a> est sans doute la fête la plus amusante, mais ce n’est <strong>pas</strong> un jour férié au Canada ni aux États-Unis.',
       meTitle: 'Moi',
       me: 'Bonjour, je m’appelle <a class="pcraig3" href="{{authorUrl}}" title="Paul Craig" target="_blank" rel="noopener">Paul</a> et, pour une raison que j’ignore, je paie pour ce site. <a href="{{githubUrl}}" target="_blank" rel="noopener">Le code est sur GitHub</a> si vous voulez « emprunter » un peu de ma propriété intellectuelle.',
+      links: {
+        groundhog: 'https://groundhog-day.com',
+        author: 'https://pcraig.ca',
+        github: 'https://github.com/pcraig3/hols',
+      },
     },
     addHolidays: {
       title: 'Ajouter les jours fériés canadiens à votre calendrier',
@@ -49,12 +54,16 @@ module.exports = {
       importStep3: 'Confirmez l’importation',
       importStep4: 'Terminé ! <span role="img" aria-label="Cow-boy heureux">🤠</span>',
       backToTop: 'Retour en haut',
+      links: {
+        regionalCodes:
+          'https://www.canada.ca/fr/agence-revenu/services/impot/entreprises/sujets/remplir-feuillets-sommaires/feuillets-sommaires-financiers/declaration-revenus-placements-t5/codes-provinces-territoires.html',
+      },
     },
     api: {
       title: 'API de Canada Holidays',
       documentTitle: 'API de Canada Holidays — Canada Holidays',
       metaDescription: 'Une API JSON gratuite sur les jours fériés au Canada. Consultez tous les jours fériés ou filtrez-les par région.',
-      intro: 'L’<a href="{{apiUrl}}" target="_blank" rel="noopener">API de Canada Holidays</a> répertorie les 32 jours fériés dans les 13 provinces et territoires du Canada, y compris les jours fériés fédéraux.',
+      intro: 'L’<a href="{{apiUrl}}" target="_blank" rel="noopener">API de Canada Holidays</a> répertorie les jours fériés des 13 provinces et territoires du Canada, y compris les jours fériés fédéraux.',
       featuresTitle: 'Fonctionnalités',
       allHolidays: 'Obtenir tous les jours fériés avec leurs régions',
       allRegions: 'Obtenir toutes les régions avec leurs jours fériés',
@@ -65,18 +74,27 @@ module.exports = {
       extraFeaturesTitle: 'Et en plus (!!!), plein d’autres trucs gratuits',
       free: 'C’est gratuit (<span aria-hidden="true">✨</span>)',
       support: '<a href="{{supportUrl}}" target="_blank" rel="noopener">Un canal d’assistance dédié</a>',
-      bilingual: 'Noms des jours fériés et des provinces en français et en anglais',
-      standards: 'À peu près conforme aux <a href="{{standardsUrl}}" target="_blank" rel="noopener">normes du gouvernement du Canada sur les API</a> (<span aria-hidden="true">🤙</span>)',
+      bilingual: 'Le site et l’API sont tous deux bilingues (français et anglais)',
+      standards: 'Alignée, plus ou moins, sur les <a href="{{standardsUrl}}" target="_blank" rel="noopener">normes du gouvernement du Canada sur les API</a> (<span aria-hidden="true">🤙</span>)',
       openSource: '<a href="{{githubUrl}}" target="_blank" rel="noopener">Code source ouvert</a>, ce qui est chouette si vous êtes un peu geek',
-      openApi: '<a href="{{specUrl}}" target="_blank" rel="noopener">Une spécification OpenAPI</a>, ce qui est <em>encore plus</em> chouette pour les geeks <em>encore plus passionnés</em>',
+      openApi: '<a href="{{specUrl}}" target="_blank" rel="noopener">Une spécification OpenAPI</a>, ce qui est <em>encore plus chouette</em> pour les geeks <em>encore plus passionnés</em>',
       missionCritical: 'N’hésitez surtout pas à l’utiliser pour votre système critique à plusieurs milliards de dollars.',
       documentationTitle: 'Documentation',
       documentation: 'Vous trouverez une spécification OpenAPI dans le fichier <a href="{{specUrl}}" target="_blank" rel="noopener"><code>Canada-Holidays-API.v1.yaml</code></a>, ainsi qu’une page <a href="{{swaggerUrl}}" target="_blank" rel="noopener">SwaggerHub</a> où vous pouvez tester les points de terminaison.',
-      githubOverview: 'Il y a aussi un <a href="{{overviewUrl}}" title="Documentation de l’API" target="_blank" rel="noopener">aperçu général sur GitHub</a>, si vous êtes du genre à ne lire que le premier et le dernier chapitre.',
+      githubOverview: 'Il y a aussi un <a href="{{overviewUrl}}" title="Documentation de l’API" target="_blank" rel="noopener">aperçu général sur GitHub (en anglais)</a>, si vous êtes du genre à ne lire que le premier et le dernier chapitre.',
       citationsTitle: 'Sources',
       citations: 'J’ai rassemblé des liens vers <a href="{{sourcesUrl}}">toutes les sources</a> utilisées pour chaque région du Canada. Les données renvoyées par l’API devraient donc être exactes.',
       mistakes: 'Des erreres peuvent quand même se glisser — <a href="{{feedbackUrl}}">faites-moi signe</a> si vous en trouvez.',
       backToTop: 'Retour en haut',
+      links: {
+        support: 'https://twitter.com/pcraig3',
+        standards:
+          'https://www.canada.ca/fr/gouvernement/systeme/gouvernement-numerique/innovations-gouvernementales-numeriques/normes-gouvernement-canada-api.html',
+        github: 'https://github.com/pcraig3/hols',
+        spec: 'https://github.com/pcraig3/hols/blob/main/reference/Canada-Holidays-API.v1.yaml',
+        swagger: 'https://app.swaggerhub.com/apis/pcraig3/canada-holidays/',
+        overview: 'https://github.com/pcraig3/hols/blob/main/API.md',
+      },
     },
     error: {
       backHome: 'Prochain jour férié au Canada',
@@ -105,6 +123,10 @@ module.exports = {
       howTitle: 'Comment savoir quels jours fériés s’appliquent à moi ?',
       howIntro: 'Vous avez probablement congé les jours fériés provinciaux. En cas de doute, demandez à un collègue ou consultez <a href="{{industriesUrl}}" target="_blank" rel="noopener">la liste des secteurs sous réglementation fédérale</a>.',
       backToTop: 'Retour en haut',
+      links: {
+        industries:
+          'https://www.canada.ca/fr/services/emplois/milieu-travail/milieux-reglementation-federale.html',
+      },
     },
     feedback: {
       title: 'Commentaires',
@@ -169,6 +191,10 @@ module.exports = {
       federalHolidays: 'Jours fériés fédéraux',
       federalDescription: 'Le gouvernement fédéral et les <a href="{{industriesUrl}}" target="_blank" rel="noopener">secteurs sous réglementation fédérale</a> observent les jours fériés fédéraux plutôt que les jours fériés provinciaux.',
       federalMore: 'Découvrez si les jours fériés fédéraux s’appliquent à vous',
+      links: {
+        industries:
+          'https://www.canada.ca/fr/services/emplois/milieu-travail/milieux-reglementation-federale.html',
+      },
     },
     sources: {
       title: 'Toutes les sources',
@@ -185,6 +211,9 @@ module.exports = {
       legislationLinkTitle: 'Sources (y compris les lois) sur GitHub',
       legislationBody: 'Si vous aimez le droit, j’ai rassemblé des <a href="{{legislationUrl}}" title="{{legislationLinkTitle}}" target="_blank" rel="noopener" data-event="true" data-action="all-sources-link" data-label="all-sources-link-canada">liens vers les lois pertinentes pour chaque région</a>. Servez-vous sans gêne !',
       backToTop: 'Retour en haut',
+      links: {
+        legislation: 'https://github.com/pcraig3/hols#citations',
+      },
     },
   },
   routes: {

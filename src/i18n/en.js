@@ -13,6 +13,11 @@ module.exports = {
       groundhog: '<a href="{{groundhogUrl}}" target="_blank" rel="noopener noreferrer">Groundhog Day</a> is arguably the most fun holiday but (regrettably) it is <strong>not</strong> a stat holiday in Canada or the USA.',
       meTitle: 'Me',
       me: 'Hello, my name is <a class="pcraig3" href="{{authorUrl}}" title="Paul Craig" target="_blank" rel="noopener">Paul</a> and I am paying for this site for some reason. <a href="{{githubUrl}}" target="_blank" rel="noopener">Code is on GitHub</a> if you want to ‘borrow’ any of my intellectual property.',
+      links: {
+        groundhog: 'https://groundhog-day.com',
+        author: 'https://pcraig.ca',
+        github: 'https://github.com/pcraig3/hols',
+      },
     },
     addHolidays: {
       title: 'Add Canadian holidays to your calendar',
@@ -49,12 +54,16 @@ module.exports = {
       importStep3: 'Confirm you want to import ’em',
       importStep4: 'Done! <span role="img" aria-label="Happy cowboy">🤠</span>',
       backToTop: 'Back to top',
+      links: {
+        regionalCodes:
+          'https://www.canada.ca/en/revenue-agency/services/tax/businesses/topics/completing-slips-summaries/financial-slips-summaries/return-investment-income-t5/provincial-territorial-codes.html',
+      },
     },
     api: {
       title: 'Canada Holidays API',
       documentTitle: 'Canada Holidays API — Canada Holidays',
       metaDescription: 'A free JSON API for Canada’s statutory holidays. Return all holidays or filter by a specific region.',
-      intro: 'The <a href="{{apiUrl}}" target="_blank" rel="noopener">Canada Holidays API</a> lists all 32 public holidays for all 13 provinces and territories in Canada, including federal holidays.',
+      intro: 'The <a href="{{apiUrl}}" target="_blank" rel="noopener">Canada Holidays API</a> lists public holidays for all 13 provinces and territories in Canada, including federal holidays.',
       featuresTitle: 'Features',
       allHolidays: 'Get all holidays with associated regions',
       allRegions: 'Get all regions with associated holidays',
@@ -65,10 +74,10 @@ module.exports = {
       extraFeaturesTitle: 'Plus(!!!) check out all the goodies you get for free',
       free: 'It’s free (<span aria-hidden="true">✨</span>)',
       support: '<a href="{{supportUrl}}" target="_blank" rel="noopener">Dedicated support channel</a>',
-      bilingual: 'Holiday and province names in English and French',
-      standards: 'Basically compliant with the <a href="{{standardsUrl}}" target="_blank" rel="noopener">Government of Canada Standards on APIs</a> (<span aria-hidden="true">🤙</span>)',
+      bilingual: 'The site and the API are both bilingual (English and French)',
+      standards: 'Basically compliant with <a href="{{standardsUrl}}" target="_blank" rel="noopener">Government of Canada Standards on APIs</a> (<span aria-hidden="true">🤙</span>)',
       openSource: '<a href="{{githubUrl}}" target="_blank" rel="noopener">Open source</a> which is cool if you’re a nerd',
-      openApi: '<a href="{{specUrl}}" target="_blank" rel="noopener">Documented with an OpenAPI spec</a> which is <em>even more</em> cool for <em>even nerdier</em> nerds',
+      openApi: '<a href="{{specUrl}}" target="_blank" rel="noopener">Documented with an OpenAPI spec</a> which is <em>even cooler</em> for <em>even nerdier</em> nerds',
       missionCritical: 'Definitely use it for your billions of dollars mission-critical system.',
       documentationTitle: 'Documentation',
       documentation: 'There’s an OpenAPI spec at <a href="{{specUrl}}" target="_blank" rel="noopener"><code>Canada-Holidays-API.v1.yaml</code></a> and a <a href="{{swaggerUrl}}" target="_blank" rel="noopener">SwaggerHub</a> page where you can test the endpoints.',
@@ -77,6 +86,15 @@ module.exports = {
       citations: 'I’ve collected references to <a href="{{sourcesUrl}}">all the sources</a> I’m using for each region in Canada, so data returned from the API should all be accurate.',
       mistakes: 'Mistaeks do happen, however — <a href="{{feedbackUrl}}">lemme know</a> if you spot any.',
       backToTop: 'Back to top',
+      links: {
+        support: 'https://twitter.com/pcraig3',
+        standards:
+          'https://www.canada.ca/en/government/system/digital-government/digital-government-innovations/government-canada-standards-apis.html',
+        github: 'https://github.com/pcraig3/hols',
+        spec: 'https://github.com/pcraig3/hols/blob/main/reference/Canada-Holidays-API.v1.yaml',
+        swagger: 'https://app.swaggerhub.com/apis/pcraig3/canada-holidays/',
+        overview: 'https://github.com/pcraig3/hols/blob/main/API.md',
+      },
     },
     error: {
       backHome: 'Canada’s next public holiday',
@@ -105,6 +123,10 @@ module.exports = {
       howTitle: 'How can I tell which holidays apply to me?',
       howIntro: 'Most likely you get provincial holidays, but if you’re not sure, you can ask someone you work with or check out <a href="{{industriesUrl}}" target="_blank" rel="noopener">the list of federally regulated industries</a>.',
       backToTop: 'Back to top',
+      links: {
+        industries:
+          'https://www.canada.ca/en/services/jobs/workplace/federally-regulated-industries.html',
+      },
     },
     feedback: {
       title: 'Feedback',
@@ -169,6 +191,10 @@ module.exports = {
       federalHolidays: 'Federal statutory holidays',
       federalDescription: 'The federal government and <a href="{{industriesUrl}}" target="_blank" rel="noopener">federally-regulated industries</a> observe federal holidays instead of provincial holidays.',
       federalMore: 'Find out if federal holidays apply to you',
+      links: {
+        industries:
+          'https://www.canada.ca/en/services/jobs/workplace/federally-regulated-industries.html',
+      },
     },
     sources: {
       title: 'All sources',
@@ -185,6 +211,9 @@ module.exports = {
       legislationLinkTitle: 'Sources (including legislation) on Github',
       legislationBody: 'If you’re a legal eagle, I’ve collected <a href="{{legislationUrl}}" title="{{legislationLinkTitle}}" target="_blank" rel="noopener" data-event="true" data-action="all-sources-link" data-label="all-sources-link-canada">links to the relevant legislation per region</a>. Fill yer boots, as they say.',
       backToTop: 'Back to top',
+      links: {
+        legislation: 'https://github.com/pcraig3/hols#citations',
+      },
     },
   },
   routes: {

@@ -122,7 +122,7 @@ const AddHolidays = ({ data: { provinces, year, locale = 'en' }, alternatePaths 
 
           <p
             dangerouslySetInnerHTML=${rich('pages.addHolidays.regionalCodeHelp', {
-              codesUrl: 'https://www.canada.ca/en/revenue-agency/services/tax/businesses/topics/completing-slips-summaries/financial-slips-summaries/return-investment-income-t5/provincial-territorial-codes.html',
+              codesUrl: t('pages.addHolidays.links.regionalCodes'),
             })}
           />
         <//>
