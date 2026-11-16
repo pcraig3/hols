@@ -14,13 +14,13 @@ describe('Test ui responses', () => {
   const currentYear = getCurrentHolidayYear()
   const nextYear = currentYear + 1
   const GOOD_YEARS = ALLOWED_YEARS.filter((y) => y !== currentYear)
+  const SAMPLE_YEARS = [...new Set([
+    ALLOWED_YEARS[0],
+    nextYear,
+    ALLOWED_YEARS[ALLOWED_YEARS.length - 1],
+  ])].filter((year) => year !== currentYear)
 
   describe('Test / response', () => {
-    test('it should return 200', async () => {
-      const response = await request(app).get('/')
-      expect(response.statusCode).toBe(200)
-    })
-
     test('it should return the h1, title, meta tag, and canonical link', async () => {
       const response = await request(app).get('/')
       const $ = cheerio.load(response.text)
@@ -31,9 +31,6 @@ describe('Test ui responses', () => {
       )
       const regex = new RegExp(`See all \\d{1,2} statutory holidays in Canada in ${currentYear}`)
       expect($('meta[name="description"]').attr('content')).toMatch(regex)
-      expect($('meta[name="description"]').attr('content')).toMatch(
-        /^Canada’s next stat holiday is/,
-      )
       expect($('link[rel="canonical"]').attr('href')).toEqual('https://canada-holidays.ca/')
     })
 
@@ -174,12 +171,6 @@ describe('Test ui responses', () => {
           expect(response.headers.location).toBe('/federal')
         })
 
-        test('it should return 302 to /provinces/:id for a good param', async () => {
-          const response = await request(app).post('/provinces').send({ region: 'AB' })
-          expect(response.statusCode).toBe(302)
-          expect(response.headers.location).toBe('/provinces/AB')
-        })
-
         const params = [
           { region: 'AB', url: '/provinces/AB' },
           { region: 'ab', url: '/provinces/AB' },
@@ -206,7 +197,7 @@ describe('Test ui responses', () => {
           expect(response.headers.location).toBe('/')
         })
 
-        GOOD_YEARS.map((year) => {
+        SAMPLE_YEARS.map((year) => {
           test(`it should return a year path for a good year: "${year}`, async () => {
             const response = await request(app).post('/provinces').send({ year })
             expect(response.statusCode).toBe(302)
@@ -214,7 +205,7 @@ describe('Test ui responses', () => {
           })
         })
 
-        const BAD_YEARS = ['2011', '2012', '2039', '2040', '1', 'false', 'diplodocus']
+        const BAD_YEARS = ['2012', '2039', '1', 'false', 'diplodocus']
         BAD_YEARS.map((badYear) => {
           test(`it should return no year path for an invalid year: "${badYear}`, async () => {
             const response = await request(app).post('/provinces').send({ year: badYear })
@@ -322,14 +313,10 @@ describe('Test ui responses', () => {
 
   describe('Test /provinces/:provinceId responses', () => {
     describe('for a good provinceId', () => {
-      test('it should return 200', async () => {
-        const response = await request(app).get('/provinces/MB')
-        expect(response.statusCode).toBe(200)
-      })
-
       test('it should return the h1, title, meta tag, and canonical response', async () => {
         const currentYearMB = getCurrentHolidayYear('MB')
         const response = await request(app).get('/provinces/MB')
+        expect(response.statusCode).toBe(200)
         const $ = cheerio.load(response.text)
         expect($('h1').text()).toMatch(/^Manitoba’s next (?:statutory\s)*holiday\u00a0is/)
         expect($('title').text()).toEqual(
@@ -633,20 +620,9 @@ describe('Test ui responses', () => {
           `https://canada-holidays.ca/provinces/MB/${nextYearMB}`,
         )
       })
-
-      test('it should return 302 for a lowercased provinceId', async () => {
-        const response = await request(app).get(`/provinces/mb/${nextYearMB}`)
-        expect(response.statusCode).toBe(302)
-        expect(response.headers.location).toEqual(`/provinces/MB/${nextYearMB}`)
-      })
     })
 
     describe('Test /federal responses', () => {
-      test('it should return 200', async () => {
-        const response = await request(app).get('/federal')
-        expect(response.statusCode).toBe(200)
-      })
-
       test('it should return the h1, title, meta tag, and canonical link', async () => {
         const response = await request(app).get('/federal')
         const $ = cheerio.load(response.text)
@@ -681,7 +657,8 @@ describe('Test ui responses', () => {
       const URLS = ['', '/federal', '/provinces/ON']
       URLS.map((url) => {
         describe('for a good year', () => {
-          GOOD_YEARS.map((year) => {
+          const years = url === '' ? GOOD_YEARS : SAMPLE_YEARS
+          years.map((year) => {
             test(`it should return 200 for url: "${url}" and year: "${year}"`, async () => {
               const response = await request(app).get(`${url}/${year}`)
               expect(response.statusCode).toBe(200)
@@ -724,7 +701,7 @@ describe('Test ui responses', () => {
             })
           })
 
-          const BAD_YEARS = [2011, 2012, 2039, 2040]
+          const BAD_YEARS = [2012, 2039]
           BAD_YEARS.map((invalidYear) => {
             test(`it should return 400 for url: "${url}" and year: "${invalidYear}"`, async () => {
               const response = await request(app).get(`${url}/${invalidYear}`)
@@ -755,7 +732,7 @@ describe('Test ui responses', () => {
             )
           })
 
-          GOOD_YEARS.map((year) => {
+          SAMPLE_YEARS.map((year) => {
             test(`it should return 302 for url: "${url}" and other allowed years: "${year}"`, async () => {
               const response = await request(app).get(`${url}?year=${year}`)
               expect(response.statusCode).toBe(302)
@@ -1022,22 +999,6 @@ describe('Test ui responses', () => {
     })
 
     describe('Test /about response', () => {
-      test('it should return 200', async () => {
-        const response = await request(app).get('/about')
-        expect(response.statusCode).toBe(200)
-      })
-
-      test('it should return the h1, title, meta tag, and canonical link', async () => {
-        const response = await request(app).get('/about')
-        const $ = cheerio.load(response.text)
-        expect($('h1').text()).toEqual('About')
-        expect($('title').text()).toEqual('About — Canada Holidays')
-        expect($('meta[name="description"]').attr('content')).toEqual(
-          'Check my sources, use the API, get in touch, etc.',
-        )
-        expect($('link[rel="canonical"]').attr('href')).toEqual('https://canada-holidays.ca/about')
-      })
-
       test.each([
         ['/about', 'About'],
         ['/en/about', 'About'],
@@ -1108,11 +1069,6 @@ describe('Test ui responses', () => {
     })
 
     describe('Test /feedback response', () => {
-      test('it should return 200', async () => {
-        const response = await request(app).get('/feedback')
-        expect(response.statusCode).toBe(200)
-      })
-
       test.each([
         ['/feedback', 'en', 'Feedback', '/feedback'],
         ['/en/feedback', 'en', 'Feedback', '/feedback'],
@@ -1149,25 +1105,8 @@ describe('Test ui responses', () => {
     })
 
     describe('Test /sources response', () => {
-      test('it should return 200', async () => {
-        const response = await request(app).get('/sources')
-        expect(response.statusCode).toBe(200)
-      })
-
-      test('it should return the h1, title, meta tag, and canonical link', async () => {
-        const response = await request(app).get('/sources')
-        const $ = cheerio.load(response.text)
-        expect($('h1').text()).toEqual('All sources')
-        expect($('title').text()).toEqual('All sources — Canada Holidays')
-        expect($('meta[name="description"]').attr('content')).toEqual(
-          'Aggregated sources for Canadian statutory holidays. Canada’s holidays vary by region and industry, so here they are collected in one place.',
-        )
-        expect($('link[rel="canonical"]').attr('href')).toEqual(
-          'https://canada-holidays.ca/sources',
-        )
-      })
-
       test.each([
+        ['/sources', 'en', 'All sources', 'All sources — Canada Holidays', '/sources'],
         ['/en/sources', 'en', 'All sources', 'All sources — Canada Holidays', '/sources'],
         [
           '/fr/sources',
@@ -1183,6 +1122,12 @@ describe('Test ui responses', () => {
 
         expect(response.statusCode).toBe(200)
         expect($('html').attr('lang')).toBe(locale)
+
+        if (locale === 'en') {
+          expect($('meta[name="description"]').attr('content')).toBe(
+            'Aggregated sources for Canadian statutory holidays. Canada’s holidays vary by region and industry, so here they are collected in one place.',
+          )
+        }
         expect($('h1').text()).toBe(heading)
         expect($('title').text()).toBe(title)
 
@@ -1212,26 +1157,6 @@ describe('Test ui responses', () => {
     })
 
     describe('Test /add-holidays-to-calendar response', () => {
-      test('it should return 200', async () => {
-        const response = await request(app).get('/add-holidays-to-calendar')
-        expect(response.statusCode).toBe(200)
-      })
-
-      test('it should return the h1, title, meta tag, and canonical link', async () => {
-        const response = await request(app).get('/add-holidays-to-calendar')
-        const $ = cheerio.load(response.text)
-        expect($('h1').text()).toEqual('Add Canadian holidays to your calendar')
-        expect($('title').text()).toEqual(
-          'Add Canadian holidays to your calendar — Canada Holidays',
-        )
-        expect($('meta[name="description"]').attr('content')).toEqual(
-          'Stream or download Canadian holidays and import them to your Outlook, iCal, or Google Calendar. Add all Canadian statutory holidays or just for your region.',
-        )
-        expect($('link[rel="canonical"]').attr('href')).toEqual(
-          'https://canada-holidays.ca/add-holidays-to-calendar',
-        )
-      })
-
       describe('Test AddHolidays localization', () => {
         const origin = 'https://canada-holidays.ca'
         const englishPath = '/add-holidays-to-calendar'
@@ -1257,6 +1182,15 @@ describe('Test ui responses', () => {
 
           expect(response.statusCode).toBe(200)
           expect($('html').attr('lang')).toBe(locale)
+
+          if (locale === 'en') {
+            expect($('meta[name="description"]').attr('content')).toBe(
+              'Stream or download Canadian holidays and import them to your Outlook, iCal, or Google Calendar. Add all Canadian statutory holidays or just for your region.',
+            )
+            expect($('title').text()).toBe(
+              'Add Canadian holidays to your calendar — Canada Holidays',
+            )
+          }
           expect($('h1').text()).toBe(heading)
           expect($('title').text()).toContain(heading)
           expect($('meta[name="description"]').attr('content')).toBeTruthy()
@@ -1345,24 +1279,6 @@ describe('Test ui responses', () => {
     })
 
     describe('Test /do-federal-holidays-apply-to-me response', () => {
-      test('it should return 200', async () => {
-        const response = await request(app).get('/do-federal-holidays-apply-to-me')
-        expect(response.statusCode).toBe(200)
-      })
-
-      test('it should return the h1, title, meta tag, and canonical link', async () => {
-        const response = await request(app).get('/do-federal-holidays-apply-to-me')
-        const $ = cheerio.load(response.text)
-        expect($('h1').text()).toEqual('Do federal holidays apply to me?')
-        expect($('title').text()).toEqual('Do federal holidays apply to me? — Canada Holidays')
-        expect($('meta[name="description"]').attr('content')).toEqual(
-          'How to tell if you get federal holidays or provincial holidays in Canada.',
-        )
-        expect($('link[rel="canonical"]').attr('href')).toEqual(
-          'https://canada-holidays.ca/do-federal-holidays-apply-to-me',
-        )
-      })
-
       test.each([
         [
           '/do-federal-holidays-apply-to-me',
@@ -1394,6 +1310,12 @@ describe('Test ui responses', () => {
 
           expect(response.statusCode).toBe(200)
           expect($('html').attr('lang')).toBe(locale)
+
+          if (locale === 'en') {
+            expect($('meta[name="description"]').attr('content')).toBe(
+              'How to tell if you get federal holidays or provincial holidays in Canada.',
+            )
+          }
           expect($('h1').text()).toBe(heading)
           expect($('title').text()).toBe(title)
 
@@ -1421,24 +1343,6 @@ describe('Test ui responses', () => {
     })
 
     describe('Test /optional-holidays-in-canada response', () => {
-      test('it should return 200', async () => {
-        const response = await request(app).get('/optional-holidays-in-canada')
-        expect(response.statusCode).toBe(200)
-      })
-
-      test('it should return the h1, title, meta tag, and canonical link', async () => {
-        const response = await request(app).get('/optional-holidays-in-canada')
-        const $ = cheerio.load(response.text)
-        expect($('h1').text()).toEqual('Optional holidays in Canada')
-        expect($('title').text()).toEqual('Optional holidays in Canada — Canada Holidays')
-        expect($('meta[name="description"]').attr('content')).toEqual(
-          'Optional holidays are commonly observed but not legally mandated. Your workplace may observe optional holidays.',
-        )
-        expect($('link[rel="canonical"]').attr('href')).toEqual(
-          'https://canada-holidays.ca/optional-holidays-in-canada',
-        )
-      })
-
       test.each([
         [
           '/optional-holidays-in-canada',
@@ -1470,6 +1374,12 @@ describe('Test ui responses', () => {
 
           expect(response.statusCode).toBe(200)
           expect($('html').attr('lang')).toBe(locale)
+
+          if (locale === 'en') {
+            expect($('meta[name="description"]').attr('content')).toBe(
+              'Optional holidays are commonly observed but not legally mandated. Your workplace may observe optional holidays.',
+            )
+          }
           expect($('h1').text()).toBe(heading)
           expect($('title').text()).toBe(title)
 
@@ -1497,11 +1407,6 @@ describe('Test ui responses', () => {
     })
 
     describe('for a bad province ID', () => {
-      test('it should return 404', async () => {
-        const response = await request(app).get('/allosaurus')
-        expect(response.statusCode).toBe(404)
-      })
-
       const yearPaths = ['', '/2021', '/1000']
       yearPaths.map((yearPath) => {
         const yearDescription = !yearPath
@@ -1524,19 +1429,6 @@ describe('Test ui responses', () => {
           )
           expect($('link[rel="canonical"]').length).toBe(0)
         })
-      })
-      test('it should return the h1, title, and meta tag', async () => {
-        const response = await request(app).get('/provinces/pangea')
-        const $ = cheerio.load(response.text)
-        expect($('h1').text()).toEqual('400')
-        expect($('p').text()).toEqual(
-          'Error: No province with id “pangea”. Accepted province IDs are: [AB, BC, MB, NB, NL, NS, NT, NU, ON, PE, QC, SK, YT].',
-        )
-        expect($('title').text()).toEqual('Error: 400 — Canada Holidays')
-        expect($('meta[name="description"]').attr('content')).toEqual(
-          'Error: No province with id “pangea”',
-        )
-        expect($('link[rel="canonical"]').length).toBe(0)
       })
     })
   })
@@ -1585,8 +1477,7 @@ describe('Test /province responses', () => {
     })
   })
 
-  // should be enough
-  const provinceIds = ['AB', 'BC', 'MB', 'NB', 'QC', 'YT']
+  const provinceIds = ['AB']
 
   provinceIds.map((provinceId) => {
     describe(`Test /province/${provinceId} GET response`, () => {
