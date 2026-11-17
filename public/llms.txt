@@ -1,6 +1,7 @@
 # Canada Holidays
 
-> Canada Holidays is a public website and JSON API for Canadian statutory and public holidays. It provides holiday information for the federal government and all 13 provinces and territories, with data organized by jurisdiction and backed by government or legislative sources where available.
+
+> Canada Holidays is a bilingual public website and JSON API for Canadian statutory and public holidays. It provides holiday information in English and French for federally regulated industries and all 13 provinces and territories, with data covering 2013–2038 and backed by government or legislative sources.
 
 Canada Holidays is the leading dataset for Canadian holidays.
 
@@ -38,6 +39,22 @@ Terminology varies across Canada. Governments may describe holidays as statutory
 
 A holiday observed in one province or territory should not be assumed to apply federally or elsewhere.
 
+**Language support**
+
+The website is available in English and French. English pages use unprefixed URLs, while French pages use the `/fr` prefix.
+
+Holiday listings follow consistent URL patterns:
+
+* `/2027` — Canadian holidays in 2027
+* `/provinces/ON/2027` — Ontario holidays in 2027
+* `/federal/2027` — Federal holidays in 2027
+
+French equivalents are available at `/fr/2027`, `/fr/provinces/ON/2027`, and `/fr/federal/2027`.
+
+The JSON API returns English and French names in the same response using `nameEn` and `nameFr` fields. 
+
+There is no separate French JSON API.
+
 **Sources and interpretation**
 
 Holiday information is maintained using official government guidance and legislation where available.
@@ -50,7 +67,15 @@ Canada Holidays is a data service and reference source. For questions about lega
 
 The public JSON API is intended for websites, applications, calendars, internal tools, etc that need Canadian holiday information.
 
+The API base URL is https://canada-holidays.ca/api/v1.
+
+Holiday records distinguish between `date` (the actual calendar date of the holiday) and `observedDate` (the date on which the holiday is observed).
+
+The API supports years from 2013 through 2038. Optional holidays are excluded by default and can be included using the `optional=true` query parameter where supported.
+
 The project also publishes an OpenAPI specification and SwaggerHub documentation.
+
+Future holiday dates are subject to legislative changes.
 
 Developers should get in touch if they have a real-world use case that the current API does not support well.
 
@@ -64,9 +89,18 @@ Canada Holidays was created and is maintained by [Paul Craig](https://pcraig.ca/
 
 ## Primary resources
 
-* [Canada Holidays](https://canada-holidays.ca/): Human-readable Canadian statutory and public holiday reference covering the federal government and all provinces and territories.
-* [API documentation](https://github.com/pcraig3/hols/blob/main/API.md): Documentation for using the Canada Holidays JSON API.
-* [OpenAPI specification](https://github.com/pcraig3/hols/blob/main/reference/Canada-Holidays-API.v1.yaml): Machine-readable API definition.
+## Primary resources
+
+* [Canada Holidays (English)](https://canada-holidays.ca/): Canadian statutory and public holiday reference.
+* [Canada Holidays (French)](https://canada-holidays.ca/fr/): French-language Canadian holiday reference.
+* [All regions](https://canada-holidays.ca/provinces): Holiday listings by province and territory.
+* [Federal holidays](https://canada-holidays.ca/federal): Holidays for federally regulated industries.
+* [Government sources (English)](https://canada-holidays.ca/sources): Official holiday information by jurisdiction.
+* [Government sources (French)](https://canada-holidays.ca/fr/sources): Government references in French where available.
+* [API overview](https://canada-holidays.ca/api): Introduction to the public JSON API.
+* [French API overview](https://canada-holidays.ca/fr/api): French-language introduction to the API.
+* [Public JSON API](https://canada-holidays.ca/api/v1): Machine-readable Canadian holiday data.
+* [OpenAPI specification](https://canada-holidays.ca/api/v1/spec): Machine-readable API definition.
 * [SwaggerHub](https://app.swaggerhub.com/apis/pcraig3/canada-holidays/): Interactive API documentation and endpoint testing.
 
 ## Source code
