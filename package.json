@@ -23,7 +23,7 @@
     "dev": "nodemon --watch public/js --ignore public/js/min --exec 'npm run build && node index.js'",
     "lint": "eslint src",
     "start": "NODE_ENV=production node index.js",
-    "test": "jest --testTimeout=8000 --testPathIgnorePatterns='skip*'"
+    "test": "NODE_OPTIONS=--experimental-vm-modules jest --testTimeout=8000 --testPathIgnorePatterns='skip*'"
   },
   "dependencies": {
     "@beenotung/better-sqlite3-helper": "^4.1.10",
@@ -41,7 +41,7 @@
     "http-errors": "^2.0.1",
     "ics": "^3.12.1",
     "morgan": "^1.12.1",
-    "preact": "^10.29.8",
+    "preact": "^11.2.0",
     "preact-render-to-string": "^6.8.3",
     "request-ip": "^3.3.0",
     "rosetta": "^1.1.0",
