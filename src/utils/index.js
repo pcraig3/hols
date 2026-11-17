@@ -217,14 +217,16 @@ const metaIfSHA = () =>
   `<meta name="keywords" content="GITHUB_SHA=${validator.escape(process.env.GITHUB_SHA)}" />`
 
 /**
- * Function that returns the path to the opengraph image to use
- * If it is a province or a "federal" page, use those images. Otherwise, show the generic Canada image
- * @param {String} redion a proper name string like "Prince Edward Island"
- * @param {String} id an acronym ID like "PE"
+ * Returns the path to the OpenGraph image for a province,
+ * territory, or federal page. Defaults to the generic Canada image.
+ * @param {Object} options
+ * @param {String} [options.id] A province or territory ID, e.g. "PE"
+ * @param {Boolean} [options.federal=false] Whether this is a federal page
+ * @returns {String}
  */
-const getOgImagePath = ({ region, id }) => {
+const getOgImagePath = ({ id, federal = false }) => {
   if (id) return `/img/og-${id.toLowerCase()}.png`
-  if (region === 'Federal') return '/img/og-federal.png'
+  if (federal) return '/img/og-federal.png'
   return '/img/og-canada.png'
 }
 
