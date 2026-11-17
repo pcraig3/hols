@@ -125,11 +125,16 @@ const checkProvinceIdErr = (req, res, next) => {
   next()
 }
 
-// middleware to check the locale of the url path
+/**
+ * Determines the locale from the request path.
+ * Matches the /fr prefix case-insensitively to align with Express's
+ * default routing behaviour. Defaults to English for all other paths.
+ *
+ * @param {import('express').Request} req - The incoming request.
+ * @returns {'en' | 'fr'} The request locale.
+ */
 const getRequestLocale = (req) => {
-  return req.path === '/fr' || req.path.startsWith('/fr/')
-    ? 'fr'
-    : 'en'
+  return /^\/fr(?:\/|$)/i.test(req.path) ? 'fr' : 'en'
 }
 
 // middleware to redirect to the uppercase provinceId endpoint
@@ -322,6 +327,7 @@ module.exports = {
   array2Obj,
   dbmw,
   getRequestYear,
+  getRequestLocale,
   requireFourDigitYear,
   requireTwoLetterProvinceId,
   isProvinceId,
