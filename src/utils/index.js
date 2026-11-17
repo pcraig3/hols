@@ -44,7 +44,7 @@ const dbmw = (cb) => {
         return req.query.federal
       }
 
-      if (req.path && req.path.startsWith('/federal')) {
+      if (req.path && req.path.includes('/federal')) {
         return 'true'
       }
 
