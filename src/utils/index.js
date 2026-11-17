@@ -4,6 +4,7 @@ const createError = require('http-errors')
 const { h } = require('preact')
 const validator = require('validator')
 
+const { getTranslator } = require('../i18n')
 const { holidayPathFor } = require('../config/routes.config')
 const { ALLOWED_YEARS, PROVINCE_IDS } = require('../config/vars.config')
 const { getCurrentHolidayYear } = require('../dates')
@@ -93,13 +94,15 @@ const checkYearErr = (req, res, next) => {
   const year = parseInt(getRequestYear(req))
 
   if (!ALLOWED_YEARS.includes(year)) {
-    res.status(400)
-    next(
+    const t = getTranslator(getRequestLocale(req))
+
+    return next(
       createError(
         400,
-        `Error: No holidays for the year “${year}”. Accepted years are: [${ALLOWED_YEARS.join(
-          ', ',
-        )}].`,
+        t('pages.error.invalidYear', {
+          year,
+          years: ALLOWED_YEARS.join(', '),
+        }),
       ),
     )
   }
@@ -112,13 +115,15 @@ const checkProvinceIdErr = (req, res, next) => {
   const provinceId = req.params.provinceId
 
   if (!isProvinceId(provinceId)) {
-    res.status(400)
-    next(
+    const t = getTranslator(getRequestLocale(req))
+
+    return next(
       createError(
         400,
-        `Error: No province with id “${provinceId}”. Accepted province IDs are: [${PROVINCE_IDS.join(
-          ', ',
-        )}].`,
+        t('pages.error.invalidProvince', {
+          provinceId,
+          provinceIds: PROVINCE_IDS.join(', '),
+        }),
       ),
     )
   }

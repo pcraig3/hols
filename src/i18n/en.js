@@ -97,10 +97,11 @@ module.exports = {
       },
     },
     error: {
-      documentTitle: 'Error: {{status}} — Canada Holidays',
-      notFound: 'Oopsie daisy. Maybe head back to the home page? 👇',
-      notFoundMeta: 'Oopsie daisy',
       backHome: 'Canada’s next public holiday',
+      documentTitle: 'Error: {{status}} — Canada Holidays',
+      invalidYear: 'Error: No holidays for the year “{{year}}”. Accepted years are: [{{years}}].',
+      invalidProvince: 'Error: No province with id “{{provinceId}}”. Accepted province IDs are: [{{provinceIds}}].',
+      notFound: 'Oopsie daisy. Maybe head back to the home page? 👇',
     },
     federallyRegulated: {
       title: 'Do federal holidays apply to me?',
