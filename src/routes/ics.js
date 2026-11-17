@@ -11,6 +11,7 @@ const {
 } = require('../utils/index')
 const { getCurrentHolidayYear } = require('../dates/index')
 const { ALLOWED_YEARS } = require('../config/vars.config')
+const { holidayPathFor } = require('../config/routes.config')
 const {
   startDate,
   endDate,
@@ -142,7 +143,9 @@ router.get(
   getICSHolidays,
   (req, res) => {
     let { year, filenameYear, contentDisposition } = _getParams(req, res)
-    if (_isBadYear(year)) return res.redirect('/')
+    if (_isBadYear(year)) {
+      return res.redirect(holidayPathFor({ locale: res.locals.icsLocale }))
+    }
 
     const holidays = res.locals.rows.map((h) => formatNationalEvent(h, res.locals.icsLocale))
 
@@ -156,7 +159,9 @@ router.get(
   getICSHolidays,
   (req, res) => {
     let { year, filenameYear, contentDisposition } = _getParams(req, res)
-    if (_isBadYear(year)) return res.redirect('/federal')
+    if (_isBadYear(year)) {
+      return res.redirect(holidayPathFor({ locale: res.locals.icsLocale, federal: true }))
+    }
 
     const filteredRows = res.locals.rows.filter((h) => h.federal)
     const holidays = filteredRows.map((h) => formatProvinceEvent(h, res.locals.icsLocale))
@@ -176,7 +181,7 @@ router.get(
   (req, res) => {
     let { year, filenameYear, provinceId, contentDisposition } = _getParams(req, res)
     if (!isProvinceId(provinceId) || _isBadYear(year)) {
-      return res.redirect(`/provinces/${provinceId}`)
+      return res.redirect(holidayPathFor({ locale: res.locals.icsLocale, provinceId }))
     }
 
     provinceId = provinceId.toUpperCase()
