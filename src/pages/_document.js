@@ -1,6 +1,7 @@
 const { renderStylesToString } = require('@emotion/server')
 const { partytownSnippet } = require('@qwik.dev/partytown/integration')
 const render = require('preact-render-to-string')
+const { escape } = require('validator')
 
 const { fontStyles, ga4, ga4Id, printStyles } = require('../headStyles')
 const { theme, visuallyHidden } = require('../styles')
@@ -30,17 +31,17 @@ const document = ({
 
   return `
     <!DOCTYPE html>
-    <html lang="${locale}" id="html">
+    <html lang="${escape(locale)}" id="html">
       <head>
         ${metaIfSHA() || ''}
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta name="description" content="${meta ? meta : 'Upcoming statutory holidays in Canada'}">
+        <meta name="description" content="${escape(meta || 'Upcoming statutory holidays in Canada')}">
 
         ${ignore ? '<meta name="robots" content="noindex"/>' : ''}
 
         ${canonical
-          ? `<link rel="canonical" href="https://canada-holidays.ca${canonical}" />`
+          ? `<link rel="canonical" href="https://canada-holidays.ca${escape(canonical)}" />`
           : ''
         }
 
@@ -48,7 +49,7 @@ const document = ({
           ? Object.entries(alternatePaths)
               .map(
                 ([lang, url]) =>
-                  `<link rel="alternate" hreflang="${lang}" href="https://canada-holidays.ca${url}" />`,
+                  `<link rel="alternate" hreflang="${escape(lang)}" href="https://canada-holidays.ca${escape(url)}" />`,
               )
               .join('\n        ')
           : ''
@@ -56,12 +57,11 @@ const document = ({
 
         <!-- open graph tags -->
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://canada-holidays.ca${canonicalPath ?? path}" />
-        <meta property="og:title" content="${title}" />
-        <meta property="og:description" content="${meta ? `${meta.split('.')[0]}.` : 'Upcoming statutory holidays in Canada'
-    }" />
+        <meta property="og:url" content="https://canada-holidays.ca${escape(canonicalPath ?? path ?? '/')}" />
+        <meta property="og:title" content="${escape(title)}" />
+        <meta property="og:description" content="${escape(meta ? `${meta.split('.')[0]}.` : 'Upcoming statutory holidays in Canada')}" />
 
-        <meta property="og:image" content="https://canada-holidays.ca${ogImagePath}" />
+        <meta property="og:image" content="https://canada-holidays.ca${escape(ogImagePath)}" />
         <meta property="og:image:type" content="image/png" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="628" />
@@ -70,9 +70,9 @@ const document = ({
         <meta name="twitter:card" content="summary" />
         <meta name="twitter:creator" content="@pcraig3" />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:image" content="https://canada-holidays.ca${ogImagePath}" />
+        <meta name="twitter:image" content="https://canada-holidays.ca${escape(ogImagePath)}" />
 
-        <title>${title}</title>
+        <title>${escape(title)}</title>
 
         <!-- preload fonts -->
         <link rel="preload" href="/fonts/gothic-a1-v8-latin-300.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
@@ -99,7 +99,7 @@ const document = ({
       : ''
     }
 
-        <meta name="application-name" content="${title}" />
+        <meta name="application-name" content="${escape(title)}" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="default" />
         <meta name="apple-mobile-web-app-title" content="Canada Holidays" />
