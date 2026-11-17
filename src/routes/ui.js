@@ -35,6 +35,38 @@ const { displayDate, getCurrentHolidayYear } = require('../dates')
 const { getTranslator, localizedName } = require('../i18n')
 const renderApiPage = require('./api-page')
 
+/**
+ * Returns the requested holiday year, or the current holiday year
+ * for the given region if no year is specified in the path.
+ */
+const getHolidayPageYear = (req, region) => {
+  return req.params.year !== undefined
+    ? ALLOWED_YEARS.find((y) => y === parseInt(getRequestYear(req)))
+    : getCurrentHolidayYear(region)
+}
+
+/**
+ * Generates the localized meta description for a holiday page.
+ * Includes the next holiday's name and date when available;
+ * otherwise, describes the holidays for the given year.
+ */
+const getHolidayMeta = (page, { locale, holidays, nextHol, year, provinceName }) => {
+  const t = getTranslator(locale)
+  const key = `routes.ui.${page}`
+
+  const params = { count: holidays.length, year, provinceName }
+
+  if (nextHol) {
+    return t(`${key}.metaCurrent`, {
+      ...params,
+      holidayName: localizedName(nextHol, locale),
+      date: displayDate(nextHol.observedDate, { locale }),
+    })
+  }
+
+  return t(`${key}.metaYear`, params)
+}
+
 const getHolidayDocPaths = ({ locale, provinceId, federal = false, year }) => {
   const region = provinceId || (federal ? 'federal' : undefined)
   const canonicalYear = year === getCurrentHolidayYear(region) ? undefined : year
@@ -51,26 +83,10 @@ const renderCanada = (req, res) => {
   const t = getTranslator(locale)
   const hasYear = req.params.year !== undefined
 
-  const year = hasYear
-    ? ALLOWED_YEARS.find((y) => y === parseInt(getRequestYear(req)))
-    : getCurrentHolidayYear()
-
+  const year = getHolidayPageYear(req)
   const holidays = res.locals.rows
   const nextHol = hasYear ? undefined : nextHoliday(holidays)
-
-  const meta = nextHol
-    ? t('routes.ui.canada.metaCurrent', 
-      {
-        holidayName: localizedName(nextHol, locale),
-        date: displayDate(nextHol.observedDate, { locale }),
-        count: holidays.length,
-        year,
-      })
-    : t('routes.ui.canada.metaYear', 
-      {
-        count: holidays.length,
-        year,
-      })
+  const meta = getHolidayMeta('canada', { locale, holidays, nextHol, year })
 
   return res.send(
     renderPage({
@@ -188,28 +204,9 @@ const renderProvince = (req, res) => {
   } = province
 
   const provinceName = localizedName(province, locale)
-
-  const year = hasYear
-    ? ALLOWED_YEARS.find((y) => y === parseInt(getRequestYear(req)))
-    : getCurrentHolidayYear(provinceId)
-
+  const year = getHolidayPageYear(req, provinceId)
   const nextHol = hasYear ? undefined : province.nextHoliday
-
-  const meta = nextHol
-    ? t('routes.ui.province.metaCurrent', 
-      {
-        provinceName,
-        holidayName: localizedName(nextHol, locale),
-        date: displayDate(nextHol.observedDate, { locale }),
-        count: holidays.length,
-        year,
-      })
-    : t('routes.ui.province.metaYear', 
-      {
-        provinceName,
-        count: holidays.length,
-        year,
-      })
+  const meta = getHolidayMeta('province', { locale, holidays, nextHol, year, provinceName })
 
   return res.send(
     renderPage({
@@ -283,26 +280,10 @@ const renderFederal = (req, res) => {
   const t = getTranslator(locale)
   const hasYear = req.params.year !== undefined
 
-  const year = hasYear
-    ? ALLOWED_YEARS.find((y) => y === parseInt(getRequestYear(req)))
-    : getCurrentHolidayYear('federal')
-
+  const year = getHolidayPageYear(req, 'federal')
   const holidays = res.locals.rows
   const nextHol = hasYear ? undefined : nextHoliday(holidays)
-
-  const meta = nextHol
-    ? t('routes.ui.federal.metaCurrent',
-      {
-        holidayName: localizedName(nextHol, locale),
-        date: displayDate(nextHol.observedDate, { locale }),
-        count: holidays.length,
-        year,
-      })
-    : t('routes.ui.federal.metaYear',
-      {
-        count: holidays.length,
-        year,
-      })
+  const meta = getHolidayMeta('federal', { locale, holidays, nextHol, year })
 
   return res.send(
     renderPage({
