@@ -20,7 +20,7 @@
   "scripts": {
     "build": "npm run partytown && sh build-js.sh",
     "partytown": "partytown copylib 'public/~partytown'",
-    "dev": "nodemon --watch public/js --ignore public/js/min --exec 'npm run build && node index.js'",
+    "dev": "nodemon --watch src --watch public/js --watch index.js --ignore public/js/min --exec 'npm run build && node index.js'",
     "lint": "eslint src",
     "start": "NODE_ENV=production node index.js",
     "test": "NODE_OPTIONS=--experimental-vm-modules jest --testTimeout=8000 --testPathIgnorePatterns='skip*'"

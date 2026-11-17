@@ -8,6 +8,7 @@
 
 # DONE
 
+- Translate the whole damn thing
 - Add optional holiday for quebec
 - Update the github workflows for deploying to Cloud Run
 - Add 2034, 2035
