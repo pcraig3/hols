@@ -5,6 +5,55 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.35.0] - 2026-11-17
+
+### Added
+
+- Added a bilingual English/French UI across holiday listings, province and territory pages, informational pages, API documentation, and error messages.
+- Added a language switcher that opens the equivalent page in the other language, preserving the selected region and year on holiday pages.
+- Added French routes under `/fr`, including translated URLs for informational pages, and explicit `/en` routes alongside existing English URLs.
+- Added localized dates, navigation, calendar links, page titles, descriptions, structured data, and social sharing images.
+
+### Changed
+
+- Source and reference links now use the page's language where a translated source is available.
+- Region and year navigation, province alias redirects, and invalid calendar URL redirects now preserve the selected language.
+- Consolidated route registration, page metadata, and informational page rendering to support both languages consistently.
+- Standardized imports with ESLint and updated the development server to restart when application source files change.
+- Updated project documentation for bilingual routes, calendar feeds, and local development.
+
+### Fixed
+
+- Fixed the year picker showing the wrong year when visiting a supported year outside the default dropdown range.
+- Corrected several French holiday names, including Nunavut Day, British Columbia Day, New Brunswick Day, Saskatchewan Day, Labour Day, and Thanksgiving.
+
+## [3.34.0] - 2026-11-12
+
+### Added
+
+- Added English and French ICS calendar feeds for national, federal, provincial, and territorial holidays, with localized event names and descriptions.
+- Added `/en/ics` and `/fr/ics` routes while keeping existing `/ics` feeds in English.
+- Added an observed-date note to calendar event descriptions when a holiday is observed on a different day from its calendar date.
+- Added a `-fr` suffix to French calendar download filenames.
+
+## [3.33.0] - 2026-11-11
+
+### Added
+
+- Added bilingual source information to API province responses: `sourceLinkEn`, plus `sourceFr` and `sourceLinkFr` where French sources are available. The existing `sourceLink` field remains an alias for the English link.
+- Added French versions of informational pages, including About, Feedback, Sources, API documentation, optional holidays, and federally regulated holidays.
+
+### Changed
+
+- Refreshed government source URLs and labels, and moved source data into a shared database table.
+- Updated the OpenAPI reference and README examples to reflect bilingual sources and the current year.
+- Added a shared translation system and updated dependencies.
+
+### Fixed
+
+- Corrected Quebec's English source label and link to use the English government page.
+- Fixed source link icons wrapping onto separate lines.
+
 ## [3.32.0] - 2026-10-06
 
 ### Changed
