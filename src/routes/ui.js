@@ -698,8 +698,7 @@ router.get(`/en${pathFor('api')}`, renderApiPage('en'))
 router.get(pathFor('api', { locale: 'fr' }), renderApiPage('fr'))
 
 router.get('/*splat', (req, res) => {
-  res.status(404)
-  throw new createError(404, 'Oopsie daisy. Maybe head back to the home page? 👇')
+  throw new createError(404)
 })
 
 router.use(function (err, req, res, next) {
@@ -707,6 +706,7 @@ router.use(function (err, req, res, next) {
 
   const status = err.status || err.statusCode || 500
   const locale = req.path === '/fr' || req.path.startsWith('/fr/') ? 'fr' : 'en'
+  const t = getTranslator(locale)
 
   res.statusCode = status
 
@@ -722,15 +722,18 @@ router.use(function (err, req, res, next) {
   // eslint-disable-next-line no-console
   process.env.NODE_ENV === 'development' && console.error(errObj)
 
+  const message = status === 404 ? t('pages.error.notFound') : err.message
+  const meta = status === 404 ? t('pages.error.notFoundMeta') : err.message.split('.')[0]
+
   return res.send(
     renderPage({
       pageComponent: 'Error',
-      title: `Error: ${res.statusCode} — Canada Holidays`,
-      docProps: { meta: err.message.split('.')[0], path: req.path, error: true, locale },
+      title: t('pages.error.documentTitle', { status }),
+      docProps: { meta, path: req.path, error: true, locale },
       props: {
         data: {
-          status: res.statusCode,
-          message: err.message,
+          status,
+          message,
           locale,
         },
       },

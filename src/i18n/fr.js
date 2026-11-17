@@ -97,6 +97,9 @@ module.exports = {
       },
     },
     error: {
+      documentTitle: 'Erreur : {{status}} — Canada Holidays',
+      notFound: 'Oups ! Cette page n’existe pas. Et si vous retourniez à l’accueil ? 👇',
+      notFoundMeta: 'Oups ! Cette page n’existe pas.',
       backHome: 'Prochain jour férié au Canada',
     },
     federallyRegulated: {
