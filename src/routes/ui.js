@@ -158,58 +158,43 @@ router.get(
   renderCanada,
 )
 
-const redirectProvinceAlias = ({ locale = 'en', provinceId }) => (req, res) => {
+/**
+ * Permanently redirects a province alias to its correct province ID,
+ * preserving the request locale and any explicitly requested year.
+ */
+const redirectProvinceAlias = (provinceId) => (req, res) => {
   return res.redirect(
     301,
-    holidayPathFor({ locale, provinceId, year: req.params.year }),
+    holidayPathFor({
+      locale: getRequestLocale(req),
+      provinceId,
+      year: req.params.year,
+    }),
   )
 }
 
 /* Redirect commonly mistyped PEI ids */
 router.get(
-  ['/provinces/PEI', '/en/provinces/PEI'],
-  redirectProvinceAlias({ provinceId: 'PE' }),
+  holidayPathsFor({ provinceId: 'PEI' }),
+  redirectProvinceAlias('PE'),
 )
 
 router.get(
-  ['/provinces/PEI/:year', '/en/provinces/PEI/:year'],
+  holidayPathsFor({ provinceId: 'PEI', year: ':year' }),
   requireFourDigitYear,
-  redirectProvinceAlias({ provinceId: 'PE' }),
-)
-
-router.get(
-  '/fr/provinces/PEI',
-  redirectProvinceAlias({ locale: 'fr',provinceId: 'PE' }),
-
-)
-
-router.get(
-  '/fr/provinces/PEI/:year',
-  requireFourDigitYear,
-  redirectProvinceAlias({ locale: 'fr', provinceId: 'PE' }),
+  redirectProvinceAlias('PE'),
 )
 
 /* Redirect commonly mistyped Quebec ids */
 router.get(
-  ['/provinces/QB', '/en/provinces/QB'],
-  redirectProvinceAlias({ provinceId: 'QC' }),
+  holidayPathsFor({ provinceId: 'QB' }),
+  redirectProvinceAlias('QC'),
 )
 
 router.get(
-  ['/provinces/QB/:year', '/en/provinces/QB/:year'],
+  holidayPathsFor({ provinceId: 'QB', year: ':year' }),
   requireFourDigitYear,
-  redirectProvinceAlias({ provinceId: 'QC' }),
-)
-
-router.get(
-  '/fr/provinces/QB',
-  redirectProvinceAlias({ locale: 'fr', provinceId: 'QC' }),
-)
-
-router.get(
-  '/fr/provinces/QB/:year',
-  requireFourDigitYear,
-  redirectProvinceAlias({ locale: 'fr', provinceId: 'QC' }),
+  redirectProvinceAlias('QC'),
 )
 
 const renderProvince = (req, res) => {
