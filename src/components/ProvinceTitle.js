@@ -1,6 +1,6 @@
+const { getTranslator } = require('../i18n')
 const { html } = require('../utils')
 
-const { getTranslator } = require('../i18n')
 
 const ProvinceTitle = ({ provinceName = 'Canada', federal, year, locale = 'en' }) => {
   const t = getTranslator(locale)

@@ -1,7 +1,7 @@
-const render = require('preact-render-to-string')
 const cheerio = require('cheerio')
-const { html } = require('../../utils')
+const render = require('preact-render-to-string')
 
+const { html } = require('../../utils')
 const Logo = require('../Logo.js')
 
 test('Logo renders link and spans properly', () => {

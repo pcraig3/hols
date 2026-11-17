@@ -1,6 +1,6 @@
-const renderPage = require('../pages/_document.js')
+const { alternatePathsFor, pathFor } = require('../config/routes.config')
 const { getTranslator } = require('../i18n')
-const { pathFor, alternatePathsFor } = require('../config/routes.config')
+const renderPage = require('../pages/_document.js')
 
 const renderApiPage = (locale) => (_req, res) => {
   const t = getTranslator(locale)

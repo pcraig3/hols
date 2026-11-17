@@ -1,6 +1,7 @@
-const { html } = require('../utils')
 const { css } = require('@emotion/css')
+
 const { theme } = require('../styles')
+const { html } = require('../utils')
 
 const styles = css`
   position: fixed;

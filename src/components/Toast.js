@@ -1,6 +1,7 @@
-const { html } = require('../utils')
 const { css } = require('@emotion/css')
-const { theme, horizontalPadding, insideContainer } = require('../styles')
+
+const { horizontalPadding, insideContainer, theme } = require('../styles')
+const { html } = require('../utils')
 const Button = require('./Button')
 
 const styles = css`

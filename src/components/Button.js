@@ -1,7 +1,8 @@
-const { html } = require('../utils')
 const { css } = require('@emotion/css')
+
 const { theme } = require('../styles')
-const { Expand, Collapse, CalendarDownload } = require('./Svg')
+const { html } = require('../utils')
+const { CalendarDownload, Collapse, Expand } = require('./Svg')
 
 const styles = ({ accent = theme.color.red, focus = theme.color.focus } = {}) => css`
   margin: 0;

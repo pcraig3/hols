@@ -1,11 +1,11 @@
 
-const { html } = require('../utils')
-const { pathFor, holidayPathFor } = require('../config/routes.config')
-const { getTranslator, getRichTranslator, localizedName } = require('../i18n')
-const { getCurrentHolidayYear } = require('../dates')
-
-const Layout = require('../components/Layout.js')
 const Content = require('../components/Content.js')
+const Layout = require('../components/Layout.js')
+const { holidayPathFor, pathFor } = require('../config/routes.config')
+const { getCurrentHolidayYear } = require('../dates')
+const { getRichTranslator, getTranslator, localizedName } = require('../i18n')
+const { html } = require('../utils')
+
 
 const About = ({ data: { nextHoliday, locale = 'en' }, alternatePaths }) => {
   const t = getTranslator(locale)

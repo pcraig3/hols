@@ -1,5 +1,5 @@
+const { holidayPathFor, pathFor } = require('../config/routes.config')
 const { getTranslator } = require('../i18n')
-const { pathFor, holidayPathFor } = require('../config/routes.config')
 
 
 const breadcrumb = ({

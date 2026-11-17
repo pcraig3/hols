@@ -1,12 +1,12 @@
 const {
   array2Obj,
-  nextHoliday,
-  getOgImagePath,
-  upcomingHolidays,
   getCanonical,
-  isProvinceId,
-  pe2pei,
+  getOgImagePath,
   getProvinceIdOrFederalString,
+  isProvinceId,
+  nextHoliday,
+  pe2pei,
+  upcomingHolidays,
 } = require('../index')
 const holidays = require('./data.skip')
 

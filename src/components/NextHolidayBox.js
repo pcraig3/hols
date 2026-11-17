@@ -1,14 +1,15 @@
 const { css } = require('@emotion/css')
-const { html, getProvinceIdOrFederalString } = require('../utils')
-const { theme, insideContainer, horizontalPadding } = require('../styles')
+
+const CalButton = require('../components/CalButton.js')
 const { pathFor } = require('../config/routes.config')
+const { relativeDate } = require('../dates')
 const { getTranslator } = require('../i18n')
+const { horizontalPadding, insideContainer, theme } = require('../styles')
+const { getProvinceIdOrFederalString, html } = require('../utils')
+const { randomInt, shade } = require('../utils/so.js')
 const NextHoliday = require('./NextHoliday.js')
 const ObservingProvinces = require('./ObservingProvinces.js')
 const ProvinceTitle = require('./ProvinceTitle.js')
-const CalButton = require('../components/CalButton.js')
-const { relativeDate } = require('../dates')
-const { shade, randomInt } = require('../utils/so.js')
 
 const styles = ({
   accent = theme.color.red,

@@ -1,8 +1,9 @@
 const { css } = require('@emotion/css')
-const { html } = require('../utils')
-const { getTranslator, localizedName } = require('../i18n')
-const DateHtml = require('./DateHtml.js')
+
 const { displayDate } = require('../dates')
+const { getTranslator, localizedName } = require('../i18n')
+const { html } = require('../utils')
+const DateHtml = require('./DateHtml.js')
 
 const styles = css`
   display: flex;

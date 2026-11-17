@@ -1,8 +1,8 @@
 const {
+  displayDate,
+  getCurrentHolidayYear,
   getLiteralDate,
   getObservedDate,
-  getCurrentHolidayYear,
-  displayDate,
   relativeDate,
 } = require('../index')
 

@@ -1,24 +1,24 @@
 const { css } = require('@emotion/css')
-const { html, pe2pei, getProvinceIdOrFederalString } = require('../utils')
-const { theme, horizontalPadding, insideContainer } = require('../styles')
-const { pathFor } = require('../config/routes.config')
-const { ALLOWED_YEARS } = require('../config/vars.config')
-const Layout = require('../components/Layout.js')
-const NextHolidayBox = require('../components/NextHolidayBox.js')
-const ProvincePicker = require('../components/ProvincePicker.js')
-const SummaryTable = require('../components/SummaryTable.js')
+
 const Abbr = require('../components/Abbr.js')
 const CalButton = require('../components/CalButton.js')
+const Layout = require('../components/Layout.js')
+const NextHolidayBox = require('../components/NextHolidayBox.js')
 const NextYearLink = require('../components/NextYearLink.js')
 const ObservedDateKey = require('../components/ObservedDateKey')
+const ProvincePicker = require('../components/ProvincePicker.js')
+const SummaryTable = require('../components/SummaryTable.js')
+const { External } = require('../components/Svg.js')
+const { pathFor } = require('../config/routes.config')
+const { ALLOWED_YEARS } = require('../config/vars.config')
 const { getCurrentHolidayYear } = require('../dates')
 const {
   getTranslator,
   localizedName,
   localizedSource,
 } = require('../i18n')
-
-const { External } = require('../components/Svg.js')
+const { horizontalPadding, insideContainer, theme } = require('../styles')
+const { getProvinceIdOrFederalString, html, pe2pei } = require('../utils')
 
 const styles = ({ accent = theme.color.red } = {}) => css`
   div.past {

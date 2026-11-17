@@ -1,12 +1,12 @@
-const { html } = require('../utils')
 const { css } = require('@emotion/css')
-const { theme } = require('../styles')
-const { getTranslator, getRichTranslator } = require('../i18n')
-const { pathFor } = require('../config/routes.config')
 
-const Layout = require('../components/Layout.js')
 const Content = require('../components/Content.js')
 const Details = require('../components/Details.js')
+const Layout = require('../components/Layout.js')
+const { pathFor } = require('../config/routes.config')
+const { getRichTranslator, getTranslator } = require('../i18n')
+const { theme } = require('../styles')
+const { html } = require('../utils')
 
 const linkStyle = css`
   text-decoration: none;

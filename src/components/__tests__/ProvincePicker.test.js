@@ -1,8 +1,8 @@
-const render = require('preact-render-to-string')
 const cheerio = require('cheerio')
-const { html } = require('../../utils')
-const { SELECTABLE_YEARS } = require('../../config/vars.config')
+const render = require('preact-render-to-string')
 
+const { SELECTABLE_YEARS } = require('../../config/vars.config')
+const { html } = require('../../utils')
 const ProvincePicker = require('../ProvincePicker.js')
 
 const renderProvincePicker = ({ provinceId, federal, year, locale } = {}) => {

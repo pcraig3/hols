@@ -1,5 +1,5 @@
+const { getLiteralDate, getObservedDate } = require('../dates')
 const { array2Obj } = require('../utils')
-const { getObservedDate, getLiteralDate } = require('../dates')
 
 const provinceWithSourcesSql = `
   SELECT

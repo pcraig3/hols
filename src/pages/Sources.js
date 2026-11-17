@@ -1,18 +1,18 @@
-const { html } = require('../utils')
 const { css } = require('@emotion/css')
+
+const Content = require('../components/Content.js')
+const Layout = require('../components/Layout.js')
+const SummaryTable = require('../components/SummaryTable.js')
+const { External } = require('../components/Svg.js')
 const { holidayPathFor } = require('../config/routes.config')
-const { theme } = require('../styles')
 const {
-  getTranslator,
   getRichTranslator,
+  getTranslator,
   localizedName,
   localizedSource,
 } = require('../i18n')
-
-const Layout = require('../components/Layout.js')
-const Content = require('../components/Content.js')
-const SummaryTable = require('../components/SummaryTable.js')
-const { External } = require('../components/Svg.js')
+const { theme } = require('../styles')
+const { html } = require('../utils')
 
 const summaryTableStyles = css`
   .key a {

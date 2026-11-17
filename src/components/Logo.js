@@ -1,7 +1,8 @@
-const { html } = require('../utils')
 const { css } = require('@emotion/css')
-const { theme } = require('../styles')
+
 const { holidayPathFor } = require('../config/routes.config')
+const { theme } = require('../styles')
+const { html } = require('../utils')
 
 const MapleLeaf = ({ fill = '#DD2E44' }) => {
   return html`

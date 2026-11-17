@@ -1,7 +1,7 @@
-const render = require('preact-render-to-string')
 const cheerio = require('cheerio')
-const { html } = require('../../utils')
+const render = require('preact-render-to-string')
 
+const { html } = require('../../utils')
 const SkipLink = require('../SkipLink.js')
 
 test('SkipLink displays link properly', () => {

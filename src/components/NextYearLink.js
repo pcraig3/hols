@@ -1,7 +1,8 @@
-const { html } = require('../utils')
-const { getTranslator } = require('../i18n')
 const { css } = require('@emotion/css')
+
+const { getTranslator } = require('../i18n')
 const { theme } = require('../styles')
+const { html } = require('../utils')
 
 const styles = css`
   font-weight: 700;

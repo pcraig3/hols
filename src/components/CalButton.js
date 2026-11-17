@@ -1,7 +1,7 @@
-const { html, getProvinceIdOrFederalString } = require('../utils')
-const { getTranslator } = require('../i18n')
 const Button = require('../components/Button.js')
+const { getTranslator } = require('../i18n')
 const { theme } = require('../styles')
+const { getProvinceIdOrFederalString, html } = require('../utils')
 
 const CalButton = ({
   federal,
