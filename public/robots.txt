@@ -1,6 +1,7 @@
 User-agent: *
 Allow: /
 Disallow: /feedback
+Disallow: /fr/commentaires
 Disallow: /api/v1/
 Disallow: /ics/
 
