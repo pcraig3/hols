@@ -1,7 +1,7 @@
 const { css } = require('@emotion/css')
 
 const { pathFor } = require('../config/routes.config')
-const { PROVINCE_IDS, SELECTABLE_YEARS } = require('../config/vars.config')
+const { ALLOWED_YEARS, PROVINCE_IDS, SELECTABLE_YEARS } = require('../config/vars.config')
 const { getTranslator } = require('../i18n')
 const { hiddenOnMobile, horizontalPadding, insideContainer, theme } = require('../styles')
 const { getProvinceIdOrFederalString, html } = require('../utils')
@@ -133,6 +133,11 @@ const ProvincePicker = ({ provinceId, federal, year = 2026, locale = 'en' }) => 
   let regionName = getProvinceNameFromId(provinceId)
   regionName = regionName || t(`components.provincePicker.${federal ? 'federal' : 'nationwide'}`)
 
+  const selectableYears =
+    ALLOWED_YEARS.includes(year) && !SELECTABLE_YEARS.includes(year)
+      ? [...SELECTABLE_YEARS, year].sort((a, b) => a - b)
+      : SELECTABLE_YEARS
+
   return html`
     <div class=${provinceIdOrFederal ? styles(theme.color[provinceIdOrFederal]) : styles()}>
       <div id="picker-container" data-hidden="true">
@@ -171,7 +176,7 @@ const ProvincePicker = ({ provinceId, federal, year = 2026, locale = 'en' }) => 
               data-action="year-select"
               data-label=${`year-select-${provinceIdOrFederal || 'canada'}`}
             >
-              ${SELECTABLE_YEARS.map(
+              ${selectableYears.map(
                 (y) => html` <option value=${y} selected=${year === y}>${y}</option> `,
               )}
             </select>
