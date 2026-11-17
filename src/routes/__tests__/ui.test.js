@@ -635,6 +635,35 @@ describe('Test ui responses', () => {
           'https://canada-holidays.ca/federal',
         )
       })
+
+      test('all federal pages return the same holidays', async () => {
+        const year = 2027
+        const paths = [
+          `/federal/${year}`,
+          `/en/federal/${year}`,
+          `/fr/federal/${year}`,
+        ]
+
+        const apiResponse = await request(app).get(
+          `/api/v1/holidays?year=${year}&federal=true`,
+        )
+        expect(apiResponse.statusCode).toBe(200)
+
+        const expectedCount = apiResponse.body.holidays.length
+        expect(expectedCount).toBeGreaterThan(0)
+
+        for (const path of paths) {
+          const response = await request(app).get(path)
+          const $ = cheerio.load(response.text)
+
+          expect(response.statusCode).toBe(200)
+
+          // Each holiday is a direct div inside the SummaryTable's dl.
+          const holidayCount = $('main dl[title] > div').length
+
+          expect(holidayCount).toBe(expectedCount)
+        }
+      })
     })
 
     describe('Test /federal/:year responses', () => {
