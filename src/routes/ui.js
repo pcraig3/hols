@@ -24,6 +24,7 @@ const {
   optionalTrue,
   nextHoliday,
   pe2pei,
+  getProvinceIdOrFederalString,
 } = require('../utils')
 const {
   getSource,
@@ -68,7 +69,7 @@ const getHolidayMeta = (page, { locale, holidays, nextHol, year, provinceName })
 }
 
 const getHolidayDocPaths = ({ locale, provinceId, federal = false, year }) => {
-  const region = provinceId || (federal ? 'federal' : undefined)
+  const region = getProvinceIdOrFederalString({ provinceId, federal })
   const canonicalYear = year === getCurrentHolidayYear(region) ? undefined : year
   const options = { provinceId, federal, year: canonicalYear }
 
@@ -76,6 +77,30 @@ const getHolidayDocPaths = ({ locale, provinceId, federal = false, year }) => {
     canonicalPath: holidayPathFor({ ...options, locale }),
     alternatePaths: alternateHolidayPathsFor(options),
   }
+}
+
+/**
+ * Renders an informational page with localized metadata,
+ * canonical and alternate paths, and optional page data.
+ */
+const renderInfoPage = (req, page, pageComponent, data = {}) => {
+  const locale = getRequestLocale(req)
+  const t = getTranslator(locale)
+
+  return renderPage({
+    pageComponent,
+    title: t(`pages.${page}.documentTitle`),
+    docProps: {
+      meta: t(`pages.${page}.metaDescription`),
+      path: req.path,
+      locale,
+      canonicalPath: pathFor(page, { locale }),
+      alternatePaths: alternatePathsFor(page),
+    },
+    props: {
+      data: { ...data, locale },
+    },
+  })
 }
 
 const renderCanada = (req, res) => {
@@ -336,35 +361,17 @@ router.get(
   renderFederal,
 )
 
-const renderProvinces = (req, res) => {
-  const locale = getRequestLocale(req)
-  const t = getTranslator(locale)
-
-  return res.send(
-    renderPage({
-      pageComponent: 'Provinces',
-      title: t('pages.provinces.documentTitle'),
-      docProps: {
-        meta: t('pages.provinces.metaDescription'),
-        path: req.path,
-        locale,
-        canonicalPath: pathFor('provinces', { locale }),
-        alternatePaths: alternatePathsFor('provinces'),
-      },
-      props: {
-        data: {
-          provinces: res.locals.rows,
-          locale,
-        },
-      },
-    }),
-  )
-}
 
 router.get(
   pagePathsFor('provinces'),
   dbmw(getProvinces),
-  renderProvinces,
+  (req, res) => {
+    const data = {
+      provinces: res.locals.rows,
+    }
+
+    return res.send(renderInfoPage(req, 'provinces', 'Provinces', data))
+  },
 )
 
 const handleProvincePicker = (locale) => (req, res) => {
@@ -378,8 +385,7 @@ const handleProvincePicker = (locale) => (req, res) => {
       : undefined
 
   const year = parseInt(body.year)
-  const currentYear = getCurrentHolidayYear(federal ? 'federal' : provinceId)
-
+  const currentYear = getCurrentHolidayYear(getProvinceIdOrFederalString({ provinceId, federal }))
   const routeYear = ALLOWED_YEARS.includes(year) && year !== currentYear ? year : undefined
 
   return res.redirect(
@@ -405,162 +411,63 @@ router.get('/province/:provinceId/:year', (req, res) => {
   return res.redirect(301, `/provinces/${req.params.provinceId}/${req.params.year}`)
 })
 
-const renderFederallyRegulated = (req, res) => {
-  const locale = getRequestLocale(req)
-  const t = getTranslator(locale)
+router.get(
+  pagePathsFor('federallyRegulated'),
+  (req, res) => {
+    return res.send(renderInfoPage(req, 'federallyRegulated', 'FederallyRegulated'))
+  },
+)
 
-  return res.send(
-    renderPage({
-      pageComponent: 'FederallyRegulated',
-      title: t('pages.federallyRegulated.documentTitle'),
-      docProps: {
-        meta: t('pages.federallyRegulated.metaDescription'),
-        path: req.path,
-        locale,
-        canonicalPath: pathFor('federallyRegulated', { locale }),
-        alternatePaths: alternatePathsFor('federallyRegulated'),
-      },
-      props: { data: { locale } },
-    }),
-  )
-}
-
-router.get(pagePathsFor('federallyRegulated'), renderFederallyRegulated)
-
-const renderOptionalHolidays = (req, res) => {
-  const locale = getRequestLocale(req)
-  const t = getTranslator(locale)
-
-  return res.send(
-    renderPage({
-      pageComponent: 'OptionalHolidays',
-      title: t('pages.optionalHolidays.documentTitle'),
-      docProps: {
-        meta: t('pages.optionalHolidays.metaDescription'),
-        path: req.path,
-        locale,
-        canonicalPath: pathFor('optionalHolidays', { locale }),
-        alternatePaths: alternatePathsFor('optionalHolidays'),
-      },
-      props: { data: { locale } },
-    }),
-  )
-}
-
-router.get(pagePathsFor('optionalHolidays'), renderOptionalHolidays)
-
-const renderAbout = (req, res) => {
-  const locale = getRequestLocale(req)
-  const nextHol = nextHoliday(res.locals.rows)
-  const t = getTranslator(locale)
-
-  return res.send(
-    renderPage({
-      pageComponent: 'About',
-      title: t('pages.about.documentTitle'),
-      docProps: {
-        meta: t('pages.about.metaDescription'),
-        path: req.path,
-        locale,
-        canonicalPath: pathFor('about', { locale }),
-        alternatePaths: alternatePathsFor('about'),
-      },
-      props: { data: { nextHoliday: nextHol, locale } },
-    }),
-  )
-}
+router.get(
+  pagePathsFor('optionalHolidays'),
+  (req, res) => {
+    return res.send(renderInfoPage(req, 'optionalHolidays', 'OptionalHolidays'))
+  },
+)
 
 router.get(
   pagePathsFor('about'),
   dbmw(getHolidaysWithProvinces),
-  renderAbout,
+  (req, res) => {
+    const data = {
+      nextHoliday: nextHoliday(res.locals.rows),
+    }
+
+    return res.send(renderInfoPage(req, 'about', 'About', data))
+  },
 )
 
-const renderFeedback = (req, res) => {
-  const locale = getRequestLocale(req)
-  const t = getTranslator(locale)
-
-  return res.send(
-    renderPage({
-      pageComponent: 'Feedback',
-      title: t('pages.feedback.documentTitle'),
-      docProps: {
-        meta: t('pages.feedback.metaDescription'),
-        path: req.path,
-        locale,
-        canonicalPath: pathFor('feedback', { locale }),
-        alternatePaths: alternatePathsFor('feedback'),
-      },
-      props: { data: { locale } },
-    }),
-  )
-}
-
-router.get(pagePathsFor('feedback'), renderFeedback)
-
-const renderSources = (req, res) => {
-  const locale = getRequestLocale(req)
-  const t = getTranslator(locale)
-
-  return res.send(
-    renderPage({
-      pageComponent: 'Sources',
-      title: t('pages.sources.documentTitle'),
-      docProps: {
-        meta: t('pages.sources.metaDescription'),
-        path: req.path,
-        locale,
-        canonicalPath: pathFor('sources', { locale }),
-        alternatePaths: alternatePathsFor('sources'),
-      },
-      props: {
-        data: {
-          provinces: res.locals.rows,
-          federalSource: getSource(DB, 'federal'),
-          locale,
-        },
-      },
-    }),
-  )
-}
+router.get(
+  pagePathsFor('feedback'),
+  (req, res) => { 
+    return res.send(renderInfoPage(req, 'feedback', 'Feedback'))
+  },
+)
 
 router.get(
   pagePathsFor('sources'),
   dbmw(getProvinces),
-  renderSources,
+  (req, res) => {
+    const data = {
+      provinces: res.locals.rows,
+      federalSource: getSource(DB, 'federal'),
+    }
+
+    return res.send(renderInfoPage(req, 'sources', 'Sources', data))
+  },
 )
-
-const renderAddHolidays = (req, res) => {
-  const locale = getRequestLocale(req)
-  const t = getTranslator(locale)
-  const year = getCurrentHolidayYear()
-
-  return res.send(
-    renderPage({
-      pageComponent: 'AddHolidays',
-      title: t('pages.addHolidays.documentTitle'),
-      docProps: {
-        meta: t('pages.addHolidays.metaDescription'),
-        path: req.path,
-        locale,
-        canonicalPath: pathFor('addHolidays', { locale }),
-        alternatePaths: alternatePathsFor('addHolidays'),
-      },
-      props: {
-        data: {
-          provinces: res.locals.rows,
-          year,
-          locale,
-        },
-      },
-    }),
-  )
-}
 
 router.get(
   pagePathsFor('addHolidays'),
   dbmw(getProvinces),
-  renderAddHolidays,
+  (req, res) => {
+    const data = {
+      provinces: res.locals.rows,
+      year: getCurrentHolidayYear(),
+    }
+
+    return res.send(renderInfoPage(req, 'addHolidays', 'AddHolidays', data))
+  },
 )
 
 router.get(`/en${pathFor('api')}`, renderApiPage('en'))
@@ -575,7 +482,7 @@ router.use(function (err, req, res, next) {
   const errObj = {}
 
   const status = err.status || err.statusCode || 500
-  const locale = req.path === '/fr' || req.path.startsWith('/fr/') ? 'fr' : 'en'
+  const locale = getRequestLocale(req)
   const t = getTranslator(locale)
 
   res.statusCode = status
