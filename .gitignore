@@ -16,3 +16,4 @@ coverage/
 llm-export*
 /public/~partytown/
 gha-creds-*.json
+audit

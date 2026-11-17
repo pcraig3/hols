@@ -270,7 +270,7 @@ describe('Test ics responses', () => {
       const response = await request(app).get('/fr/ics/BC/2027')
 
       expect(response.statusCode).toBe(200)
-      expect(response.text).toContain('SUMMARY:Jour de Colombie-Britannique')
+      expect(response.text).toContain('SUMMARY:Fête de la Colombie-Britannique')
       expect(response.text).toContain('DESCRIPTION:Observé')
     })
     
