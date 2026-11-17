@@ -128,8 +128,8 @@ const renderCanada = (req, res) => {
           year,
         }),
         richSnippets: hasYear
-          ? ['breadcrumb', 'dataset']
-          : ['breadcrumb', 'dataset', 'speakable'],
+          ? ['breadcrumb']
+          : ['breadcrumb', 'speakable'],
       },
       props: {
         data: {
@@ -239,8 +239,8 @@ const renderProvince = (req, res) => {
           year,
         }),
         richSnippets: hasYear
-          ? ['breadcrumb', 'dataset']
-          : ['breadcrumb', 'dataset', 'speakable'],
+          ? ['breadcrumb']
+          : ['breadcrumb', 'speakable'],
       },
       props: {
         data: {
@@ -314,8 +314,8 @@ const renderFederal = (req, res) => {
           year,
         }),
         richSnippets: hasYear
-          ? ['breadcrumb', 'dataset']
-          : ['breadcrumb', 'dataset', 'speakable'],
+          ? ['breadcrumb']
+          : ['breadcrumb', 'speakable'],
       },
       props: {
         data: {

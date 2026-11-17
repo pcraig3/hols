@@ -179,8 +179,8 @@ const document = ({
               <script type="application/ld+json">
                 [
               ${JSON.stringify(breadcrumb({ region, locale, provinceId: id, federal }))}
-              ${richSnippets.length === 3 ? ',' : ''}
-              ${richSnippets.length === 3 
+              ${richSnippets.includes('speakable') ? ',' : ''}
+              ${richSnippets.includes('speakable')
                 ? JSON.stringify(speakable({ region, path: canonical, locale, provinceId: id, federal }))
                 : ''
               }
