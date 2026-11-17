@@ -1,11 +1,11 @@
-const request = require('supertest')
 const DB = require('@beenotung/better-sqlite3-helper')
 const cheerio = require('cheerio')
+const request = require('supertest')
 
-const app = require('../../server.js')
 const DBconfig = require('../../config/better-sqlite3-helper.config')
 const { ALLOWED_YEARS } = require('../../config/vars.config')
 const { getCurrentHolidayYear } = require('../../dates')
+const app = require('../../server.js')
 
 // The first call creates the global instance with your settings
 DB(DBconfig)

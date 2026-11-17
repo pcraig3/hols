@@ -1,9 +1,10 @@
-const { html, getProvinceIdOrFederalString } = require('../utils')
 const { css } = require('@emotion/css')
-const { PROVINCE_IDS, SELECTABLE_YEARS } = require('../config/vars.config')
+
 const { pathFor } = require('../config/routes.config')
-const { theme, insideContainer, hiddenOnMobile, horizontalPadding } = require('../styles')
+const { PROVINCE_IDS, SELECTABLE_YEARS } = require('../config/vars.config')
 const { getTranslator } = require('../i18n')
+const { hiddenOnMobile, horizontalPadding, insideContainer, theme } = require('../styles')
+const { getProvinceIdOrFederalString, html } = require('../utils')
 const Button = require('./Button')
 
 const styles = ({ accent = theme.color.red, focus = theme.color.focus } = {}) => css`

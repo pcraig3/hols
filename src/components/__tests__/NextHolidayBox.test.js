@@ -1,8 +1,8 @@
-const render = require('preact-render-to-string')
 const cheerio = require('cheerio')
-const { html } = require('../../utils')
-const { getCurrentHolidayYear } = require('../../dates')
+const render = require('preact-render-to-string')
 
+const { getCurrentHolidayYear } = require('../../dates')
+const { html } = require('../../utils')
 const NextHolidayBox = require('../NextHolidayBox.js')
 
 const renderNextHolidayBox = (props) => {

@@ -1,9 +1,9 @@
-const { html } = require('../utils')
-const { getTranslator } = require('../i18n')
-const { holidayPathFor } = require('../config/routes.config')
-
-const Layout = require('../components/Layout.js')
 const Content = require('../components/Content.js')
+const Layout = require('../components/Layout.js')
+const { holidayPathFor } = require('../config/routes.config')
+const { getTranslator } = require('../i18n')
+const { html } = require('../utils')
+
 
 const Error = ({
   data: { status, message, locale = 'en' } = {},

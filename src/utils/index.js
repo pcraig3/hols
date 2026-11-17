@@ -1,10 +1,11 @@
-const { h } = require('preact')
 const DB = require('@beenotung/better-sqlite3-helper')
 const htm = require('htm')
-const validator = require('validator')
 const createError = require('http-errors')
-const { ALLOWED_YEARS, PROVINCE_IDS } = require('../config/vars.config')
+const { h } = require('preact')
+const validator = require('validator')
+
 const { holidayPathFor } = require('../config/routes.config')
+const { ALLOWED_YEARS, PROVINCE_IDS } = require('../config/vars.config')
 const { getCurrentHolidayYear } = require('../dates')
 
 const html = htm.bind(h)

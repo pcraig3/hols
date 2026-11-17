@@ -1,7 +1,23 @@
 const express = require('express')
 const router = express.Router()
-const ics = require('ics')
 const createError = require('http-errors')
+const ics = require('ics')
+
+const { holidayPathFor } = require('../config/routes.config')
+const { ALLOWED_YEARS } = require('../config/vars.config')
+const { getCurrentHolidayYear } = require('../dates/index')
+const { localizedName } = require('../i18n')
+const { getHolidaysWithProvinces } = require('../queries')
+const {
+  endDate,
+  getCurrentTimestamp,
+  getNationalDescription,
+  getObservedDateNote,
+  getProvinceDescription,
+  getTitle,
+  getUid,
+  startDate,
+} = require('../utils/ics')
 const {
   dbmw,
   getRequestYear,
@@ -9,21 +25,6 @@ const {
   requireFourDigitYear,
   requireTwoLetterProvinceId,
 } = require('../utils/index')
-const { getCurrentHolidayYear } = require('../dates/index')
-const { ALLOWED_YEARS } = require('../config/vars.config')
-const { holidayPathFor } = require('../config/routes.config')
-const {
-  startDate,
-  endDate,
-  getCurrentTimestamp,
-  getTitle,
-  getUid,
-  getNationalDescription,
-  getProvinceDescription,
-  getObservedDateNote,
-} = require('../utils/ics')
-const { localizedName } = require('../i18n')
-const { getHolidaysWithProvinces } = require('../queries')
 
 // Read the mount prefix, not the URL path, so legacy /ics stays English.
 router.use((req, res, next) => {

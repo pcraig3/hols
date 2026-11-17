@@ -1,7 +1,7 @@
 
 const {
-  getTranslator,
   getRichTranslator,
+  getTranslator,
   localizedName,
   localizedSource,
 } = require('../')

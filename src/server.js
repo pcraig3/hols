@@ -1,11 +1,15 @@
-const express = require('express')
-const morgan = require('morgan')
-const morganConfig = require('./config/morgan.config')
-const helmet = require('helmet')
 const compression = require('compression')
-const requestIp = require('request-ip')
 const cors = require('cors')
-const { redirectSaU, redirectCloudRunHost } = require('./utils/redirects')
+const express = require('express')
+const helmet = require('helmet')
+const morgan = require('morgan')
+const requestIp = require('request-ip')
+
+const morganConfig = require('./config/morgan.config')
+const apiRouter = require('./routes/api')
+const icsRouter = require('./routes/ics')
+const uiRouter = require('./routes/ui')
+const { redirectCloudRunHost, redirectSaU } = require('./utils/redirects')
 
 const app = express()
 
@@ -33,15 +37,10 @@ app.use(redirectCloudRunHost)
 // redirect urls ending in &sa=U (no query param)
 app.use(redirectSaU)
 
-const apiRouter = require('./routes/api')
 app.use('/api', apiRouter)
-
-const icsRouter = require('./routes/ics')
 app.use('/en', icsRouter)
 app.use('/fr', icsRouter)
 app.use(icsRouter)
-
-const uiRouter = require('./routes/ui')
 app.use(uiRouter)
 
 module.exports = app

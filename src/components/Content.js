@@ -1,5 +1,5 @@
+const { contentPageStyles, horizontalPadding, insideContainer } = require('../styles')
 const { html } = require('../utils')
-const { contentPageStyles, insideContainer, horizontalPadding } = require('../styles')
 
 const Content = ({ children, className, ...props }) => {
   return html`

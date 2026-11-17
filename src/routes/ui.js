@@ -1,39 +1,40 @@
-const express = require('express')
-const router = express.Router()
-const createError = require('http-errors')
 const DB = require('@beenotung/better-sqlite3-helper')
-const { ALLOWED_YEARS } = require('../config/vars.config')
+const express = require('express')
+const createError = require('http-errors')
+const router = express.Router()
+
 const {
-  pathFor,
+  alternateHolidayPathsFor,
   alternatePathsFor,
   holidayPathFor,
-  alternateHolidayPathsFor,
-  pagePathsFor,
   holidayPathsFor,
+  pagePathsFor,
+  pathFor,
 } = require('../config/routes.config')
-const renderPage = require('../pages/_document.js')
-const {
-  dbmw,
-  getRequestYear,
-  getRequestLocale,
-  requireFourDigitYear,
-  checkProvinceIdErr,
-  checkYearErr,
-  checkRedirectProvinceId,
-  checkRedirectYear,
-  optionalTrue,
-  nextHoliday,
-  pe2pei,
-  getProvinceIdOrFederalString,
-} = require('../utils')
-const {
-  getSource,
-  getProvinces,
-  getHolidaysWithProvinces,
-  getProvincesWithHolidays,
-} = require('../queries')
+const { ALLOWED_YEARS } = require('../config/vars.config')
 const { displayDate, getCurrentHolidayYear } = require('../dates')
 const { getTranslator, localizedName } = require('../i18n')
+const renderPage = require('../pages/_document.js')
+const {
+  getHolidaysWithProvinces,
+  getProvinces,
+  getProvincesWithHolidays,
+  getSource,
+} = require('../queries')
+const {
+  checkProvinceIdErr,
+  checkRedirectProvinceId,
+  checkRedirectYear,
+  checkYearErr,
+  dbmw,
+  getProvinceIdOrFederalString,
+  getRequestLocale,
+  getRequestYear,
+  nextHoliday,
+  optionalTrue,
+  pe2pei,
+  requireFourDigitYear,
+} = require('../utils')
 const renderApiPage = require('./api-page')
 
 /**

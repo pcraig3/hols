@@ -1,7 +1,8 @@
-const { html } = require('../utils')
 const { css } = require('@emotion/css')
-const { theme, insideContainer, horizontalPadding } = require('../styles')
+
 const { getTranslator } = require('../i18n')
+const { horizontalPadding, insideContainer, theme } = require('../styles')
+const { html } = require('../utils')
 
 const styles = css`
   ${insideContainer};

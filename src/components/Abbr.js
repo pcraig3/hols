@@ -1,5 +1,6 @@
-const { html } = require('../utils')
 const { css } = require('@emotion/css')
+
+const { html } = require('../utils')
 
 const styles = css`
   &[title] {

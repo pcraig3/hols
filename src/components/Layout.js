@@ -1,6 +1,7 @@
 const { css } = require('@emotion/css')
+
+const { horizontalPadding, theme } = require('../styles')
 const { html } = require('../utils')
-const { theme, horizontalPadding } = require('../styles')
 const Nav = require('./Nav')
 const SkipLink = require('./SkipLink')
 

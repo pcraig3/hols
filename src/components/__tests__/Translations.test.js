@@ -1,5 +1,6 @@
-const render = require('preact-render-to-string')
 const cheerio = require('cheerio')
+const render = require('preact-render-to-string')
+
 const { html } = require('../../utils')
 const CalButton = require('../CalButton')
 const NextHoliday = require('../NextHoliday')

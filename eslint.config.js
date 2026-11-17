@@ -1,8 +1,12 @@
 const { defineConfig } = require('eslint/config')
+const { importX } = require('eslint-plugin-import-x')
 const globals = require('globals')
 
 module.exports = defineConfig([
   {
+    plugins: {
+      'import-x': importX,
+    },
     languageOptions: {
       ecmaVersion: 2022,
       sourceType: 'module',
@@ -18,6 +22,27 @@ module.exports = defineConfig([
       'comma-dangle': ['error', 'always-multiline'],
       semi: ['error', 'never'],
       'no-console': 'error',
+      'import-x/order': [
+      'error',
+      {
+        groups: [
+          'builtin',
+          'external',
+          'internal',
+          ['parent', 'sibling', 'index'],
+        ],
+        'newlines-between': 'always',
+        alphabetize: {
+          order: 'asc',
+          caseInsensitive: true,
+        },
+        named: {
+          enabled: true,
+          export: false,
+          cjsExports: false,
+        },
+      },
+    ],
     },
   },
 ])

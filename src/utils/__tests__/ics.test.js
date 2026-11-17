@@ -1,12 +1,12 @@
 const {
-  startDate,
   endDate,
   getCurrentTimestamp,
   getNationalDescription,
-  getProvinceDescription,
   getObservedDateNote,
+  getProvinceDescription,
   getTitle,
   getUid,
+  startDate,
 } = require('../ics')
 
 describe('Test startDate', () => {

@@ -1,9 +1,9 @@
 const { css } = require('@emotion/css')
-const { html } = require('../utils')
-const { theme, insideContainer } = require('../styles')
-const { getTranslator } = require('../i18n')
-const { pathFor } = require('../config/routes.config')
 
+const { pathFor } = require('../config/routes.config')
+const { getTranslator } = require('../i18n')
+const { insideContainer, theme } = require('../styles')
+const { html } = require('../utils')
 const Details = require('./Details')
 const LanguageSwitcher = require('./LanguageSwitcher')
 const Logo = require('./Logo')

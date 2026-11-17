@@ -1,5 +1,5 @@
-const { html, pe2pei } = require('../utils')
 const { getTranslator, localizedName } = require('../i18n')
+const { html, pe2pei } = require('../utils')
 
 const ObservingProvinces = ({
   provinces = [],

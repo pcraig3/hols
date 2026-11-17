@@ -1,10 +1,11 @@
 const { renderStylesToString } = require('@emotion/server')
-const render = require('preact-render-to-string')
 const { partytownSnippet } = require('@qwik.dev/partytown/integration')
-const { html, metaIfSHA, getOgImagePath, getCanonical } = require('../utils')
-const { breadcrumb, speakable } = require('../utils/richSnippets')
+const render = require('preact-render-to-string')
+
+const { fontStyles, ga4, ga4Id, printStyles } = require('../headStyles')
 const { theme, visuallyHidden } = require('../styles')
-const { fontStyles, printStyles, ga4, ga4Id } = require('../headStyles')
+const { getCanonical, getOgImagePath, html, metaIfSHA } = require('../utils')
+const { breadcrumb, speakable } = require('../utils/richSnippets')
 
 const document = ({
   title,

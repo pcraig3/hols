@@ -1,13 +1,13 @@
-const { html } = require('../utils')
 const { css } = require('@emotion/css')
-const { theme } = require('../styles')
-const { getTranslator, getRichTranslator, localizedName } = require('../i18n')
-const { pathFor } = require('../config/routes.config')
 
-const Layout = require('../components/Layout.js')
-const Content = require('../components/Content.js')
-const SummaryTable = require('../components/SummaryTable.js')
 const CalButton = require('../components/CalButton.js')
+const Content = require('../components/Content.js')
+const Layout = require('../components/Layout.js')
+const SummaryTable = require('../components/SummaryTable.js')
+const { pathFor } = require('../config/routes.config')
+const { getRichTranslator, getTranslator, localizedName } = require('../i18n')
+const { theme } = require('../styles')
+const { html } = require('../utils')
 
 const headerStyles = css`
   h2 {

@@ -1,7 +1,7 @@
 const {
-  pathFor,
-  holidayPathFor,
   alternateHolidayPathsFor,
+  holidayPathFor,
+  pathFor,
 } = require('../../config/routes.config')
 
 test('pathFor always generates canonical English URLs', () => {

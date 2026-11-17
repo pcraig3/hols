@@ -1,8 +1,9 @@
-const { html } = require('../utils')
 const { css } = require('@emotion/css')
-const { getTranslator, getRichTranslator } = require('../i18n')
-const Layout = require('../components/Layout.js')
+
 const Content = require('../components/Content.js')
+const Layout = require('../components/Layout.js')
+const { getRichTranslator, getTranslator } = require('../i18n')
+const { html } = require('../utils')
 
 const linkStyle = css`
   /* for obfuscating emails. Idea comes from https://mauriciorobayo.github.io/react-obfuscate-email/?path=/docs/react-obfuscate-email--mail */

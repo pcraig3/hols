@@ -1,6 +1,7 @@
-const { html } = require('../utils')
 const { css } = require('@emotion/css')
+
 const { theme, visuallyHidden } = require('../styles')
+const { html } = require('../utils')
 
 const summaryRow = css`
   padding-top: ${theme.space.md};

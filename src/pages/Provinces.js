@@ -1,12 +1,13 @@
 const { css } = require('@emotion/css')
-const { html } = require('../utils')
-const { theme } = require('../styles')
-const { getTranslator, getRichTranslator, localizedName } = require('../i18n')
-const { pathFor, holidayPathFor } = require('../config/routes.config')
+
 
 const Content = require('../components/Content.js')
-const Layout = require('../components/Layout.js')
 const Details = require('../components/Details.js')
+const Layout = require('../components/Layout.js')
+const { holidayPathFor, pathFor } = require('../config/routes.config')
+const { getRichTranslator, getTranslator, localizedName } = require('../i18n')
+const { theme } = require('../styles')
+const { html } = require('../utils')
 
 const styles = css`
   div {
