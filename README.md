@@ -1,9 +1,10 @@
 # Canada Holidays
 
-This is a fun little [express](https://expressjs.com/) app for Canada's statutory holidays. There's a frontend you can look at and an API you can use.
+This is a fun little [express](https://expressjs.com/) app for Canada's statutory holidays. There's [a website](https://canada-holidays.ca) you can both look at and [regarde](https://canada-holidays.ca/fr), an API you can use, and calendars you can (should!) subscribe to.
 
 - The frontend is using [htm](https://github.com/developit/htm) server-rendered components. Very amusing.
 - The backend API is pretty bare-metal: it's using an initial SQLite migration file stored in memory and then it does "db reads" and spits out JSON.
+- Translations are managed with [Rosetta](https://github.com/lukeed/rosetta), a tiny internationalization library.
 
 ## Using the API
 
@@ -12,6 +13,38 @@ Please get in touch if you are using the API and you need something, because I c
 [Read the API docs](https://github.com/pcraig3/hols/blob/main/API.md).
 
 There's an OpenAPI spec at [`Canada-Holidays-API.v1.yaml`](https://github.com/pcraig3/hols/blob/main/reference/Canada-Holidays-API.v1.yaml) and a <a href="https://app.swaggerhub.com/apis/pcraig3/canada-holidays/" target="_blank">SwaggerHub</a> page where you can test the endpoints.
+
+## Adding holidays to your calendar
+
+You can download or subscribe to holiday calendars in `.ics` format for Canada, the federal government, or individual provinces and territories.
+
+Calendars are available in both English and French and can be used with Google Calendar, Apple Calendar, Outlook, and other applications that support the iCalendar format.
+
+- [Add holidays to your calendar (English)](https://canada-holidays.ca/add-holidays-to-calendar)
+- [Ajouter des jours fériés à votre calendrier (French)](https://canada-holidays.ca/fr/ajouter-des-jours-feries-au-calendrier)
+
+Calendars without an explicit year include holidays for the current and following year.
+
+## Internationalization (i18n)
+
+The website supports English (`en`) and Canadian French (`fr`). English is the default language.
+
+### Localized routes
+
+Every regular page is accessible in three ways:
+
+| English (default) | English (explicit) | French |
+| --- | --- | --- |
+| `/` | `/en/` | `/fr/` |
+| `/federal` | `/en/federal` | `/fr/federal` |
+| `/provinces/QC` | `/en/provinces/QC` | `/fr/provinces/QC` |
+| `/about` | `/en/about` | `/fr/a-propos` |
+
+English URLs without the `/en` prefix are canonical. French URLs always have a `/fr` prefix, and informational pages have translated URL paths.
+
+### API
+
+The JSON API is language-independent and returns both English and French holiday and province names. Its endpoints do not use language prefixes.
 
 ## Getting started
 
@@ -27,7 +60,7 @@ A docker container allows a developer to package up an application and all of it
 
 ## Build and run with npm
 
-Install the dependencies and run it. "npm run dev" runs the JS contact + minify step, and reruns it if anything changes.
+Install the dependencies and run it. "npm run dev" runs the JS concat + minify step, and reruns it if anything changes.
 
 Pretty slick. 😎
 
@@ -60,9 +93,9 @@ npm test
 npm run lint
 ```
 
-#### unit tests
+#### Unit tests
 
-Since we are still using components as interface, this makes testing really easily. On the server, we render out our components as strings that we send to the browser, but when we run tests, we want to do a bit more than that. Looking for values in big strings is pretty ugly.
+Since we are still using components as interface, this makes testing really easy. On the server, we render out our components as strings that we send to the browser, but when we run tests, we want to do a bit more than that. Looking for values in big strings is pretty ugly.
 
 Instead, using [`cheerio`](https://cheerio.js.org/), we can load in a string like `"<main><p>hello</p></main>"` and then traverse it using jQuery selector syntax. So we can write assertions against stuff like `$('main > p').text()`, which is far better than string testing.
 
@@ -82,7 +115,7 @@ On a Mac, press `Control` + `C` to quit the running docker container.
 
 ### Push to Cloud Run
 
-The [`main.yaml`](https://github.com/pcraig3/hols/blob/main/.github/workflows/main.yml) file contains instructions to deploy the service to [Cloud Run](https://cloud.google.com/run), or you can use the CLI command below to do it manually.
+The [`main.yml`](https://github.com/pcraig3/hols/blob/main/.github/workflows/main.yml) file contains instructions to deploy the service to [Cloud Run](https://cloud.google.com/run), or you can use the CLI command below to do it manually.
 
 ```
 gcloud builds submit --tag gcr.io/{PROJECT}/{SERVICE}:{TAG} --build-arg GITHUB_SHA_ARG={TAG}
