@@ -1623,13 +1623,17 @@ describe('Language switcher routes', () => {
 })
 
 describe('French error page tests', () => {
-  test('French 404 has French chrome but no language switcher', async () => {
+  test('French 404 has French content and chrome but no language switcher', async () => {
     const response = await request(app).get('/fr/this-page-does-not-exist')
-
     const $ = cheerio.load(response.text)
 
     expect(response.statusCode).toBe(404)
     expect($('html').attr('lang')).toBe('fr')
+    expect($('h1').text()).toBe('404')
+    expect($('title').text()).toBe('Erreur : 404 — Canada Holidays')
+    expect($('main p').text()).toBe('Oups ! Cette page n’existe pas. Et si vous retourniez à l’accueil ? 👇')
+    expect($('meta[name="description"]').attr('content')).toBe('Oups ! Cette page n’existe pas.')
+    expect($('link[rel="canonical"]')).toHaveLength(0)
     expect($('.language-switcher')).toHaveLength(0)
     expect($('a[href="#content"]').text()).toBe('Aller au contenu principal')
     expect($('nav a').first().attr('href')).toBe('/fr/')

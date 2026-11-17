@@ -97,6 +97,9 @@ module.exports = {
       },
     },
     error: {
+      documentTitle: 'Error: {{status}} — Canada Holidays',
+      notFound: 'Oopsie daisy. Maybe head back to the home page? 👇',
+      notFoundMeta: 'Oopsie daisy',
       backHome: 'Canada’s next public holiday',
     },
     federallyRegulated: {
