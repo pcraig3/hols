@@ -101,7 +101,8 @@ module.exports = {
       documentTitle: 'Erreur : {{status}} — Canada Holidays',
       invalidYear: 'Erreur : Aucun jour férié pour l’année « {{year}} ». Années acceptées : [{{years}}].',
       invalidProvince: 'Erreur : Aucune province ni aucun territoire avec le code « {{provinceId}} ». Codes acceptés : [{{provinceIds}}].',
-      notFound: 'Oups ! Vous pouvez retourner à la page d’accueil. 👇',
+      notFound: 'Oups ! Cette page n’existe pas. Et si vous retourniez à l’accueil ? 👇',
+      notFoundMeta: 'Oups ! Cette page n’existe pas.',
     },
     federallyRegulated: {
       title: 'Les jours fériés fédéraux s’appliquent-ils à moi ?',

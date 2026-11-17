@@ -4,10 +4,10 @@ const createError = require('http-errors')
 const { h } = require('preact')
 const validator = require('validator')
 
-const { getTranslator } = require('../i18n')
 const { holidayPathFor } = require('../config/routes.config')
 const { ALLOWED_YEARS, PROVINCE_IDS } = require('../config/vars.config')
 const { getCurrentHolidayYear } = require('../dates')
+const { getTranslator } = require('../i18n')
 
 const html = htm.bind(h)
 

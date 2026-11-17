@@ -1,7 +1,6 @@
 const DB = require('@beenotung/better-sqlite3-helper')
 const express = require('express')
 const createError = require('http-errors')
-const router = express.Router()
 
 const {
   alternateHolidayPathsFor,
@@ -36,6 +35,13 @@ const {
   requireFourDigitYear,
 } = require('../utils')
 const renderApiPage = require('./api-page')
+
+const router = express.Router()
+
+/* ============================================================================
+ * Shared page helpers
+ * Resolve holiday years, localized metadata, and canonical and alternate URLs.
+ * ========================================================================== */
 
 /**
  * Returns the requested holiday year, or the current holiday year
@@ -104,6 +110,50 @@ const renderInfoPage = (req, page, pageComponent, data = {}) => {
   })
 }
 
+/**
+ * Permanently redirects a province alias to its correct province ID,
+ * preserving the request locale and any explicitly requested year.
+ */
+const redirectProvinceAlias = (provinceId) => (req, res) => {
+  return res.redirect(
+    301,
+    holidayPathFor({
+      locale: getRequestLocale(req),
+      provinceId,
+      year: req.params.year,
+    }),
+  )
+}
+
+const handleProvincePicker = (locale) => (req, res) => {
+  const body = req.body || {}
+  const region = body.region || ''
+  const federal = region === 'federal'
+
+  const provinceId =
+    region && !federal
+      ? encodeURIComponent(region.substring(0, 2).toUpperCase())
+      : undefined
+
+  const year = parseInt(body.year)
+  const currentYear = getCurrentHolidayYear(getProvinceIdOrFederalString({ provinceId, federal }))
+  const routeYear = ALLOWED_YEARS.includes(year) && year !== currentYear ? year : undefined
+
+  return res.redirect(
+    holidayPathFor({
+      locale,
+      provinceId,
+      federal,
+      year: routeYear,
+    }),
+  )
+}
+
+/* ============================================================================
+ * Holiday page renderers
+ * Build the national, provincial, and federal holiday pages from query results.
+ * ========================================================================== */
+
 const renderCanada = (req, res) => {
   const locale = getRequestLocale(req)
   const t = getTranslator(locale)
@@ -143,60 +193,6 @@ const renderCanada = (req, res) => {
     }),
   )
 }
-
-router.get(
-  holidayPathsFor(),
-  checkRedirectYear,
-  dbmw(getHolidaysWithProvinces),
-  renderCanada,
-)
-
-router.get(
-  holidayPathsFor({ year: ':year' }),
-  requireFourDigitYear,
-  checkYearErr,
-  dbmw(getHolidaysWithProvinces),
-  renderCanada,
-)
-
-/**
- * Permanently redirects a province alias to its correct province ID,
- * preserving the request locale and any explicitly requested year.
- */
-const redirectProvinceAlias = (provinceId) => (req, res) => {
-  return res.redirect(
-    301,
-    holidayPathFor({
-      locale: getRequestLocale(req),
-      provinceId,
-      year: req.params.year,
-    }),
-  )
-}
-
-/* Redirect commonly mistyped PEI ids */
-router.get(
-  holidayPathsFor({ provinceId: 'PEI' }),
-  redirectProvinceAlias('PE'),
-)
-
-router.get(
-  holidayPathsFor({ provinceId: 'PEI', year: ':year' }),
-  requireFourDigitYear,
-  redirectProvinceAlias('PE'),
-)
-
-/* Redirect commonly mistyped Quebec ids */
-router.get(
-  holidayPathsFor({ provinceId: 'QB' }),
-  redirectProvinceAlias('QC'),
-)
-
-router.get(
-  holidayPathsFor({ provinceId: 'QB', year: ':year' }),
-  requireFourDigitYear,
-  redirectProvinceAlias('QC'),
-)
 
 const renderProvince = (req, res) => {
   const locale = getRequestLocale(req)
@@ -263,27 +259,6 @@ const renderProvince = (req, res) => {
   )
 }
 
-router.get(
-  holidayPathsFor({ provinceId: ':provinceId' }),
-  checkProvinceIdErr,
-  checkRedirectYear,
-  checkRedirectProvinceId,
-  optionalTrue,
-  dbmw(getProvincesWithHolidays),
-  renderProvince,
-)
-
-router.get(
-  holidayPathsFor({ provinceId: ':provinceId', year: ':year' }),
-  requireFourDigitYear,
-  checkProvinceIdErr,
-  checkRedirectProvinceId,
-  checkYearErr,
-  optionalTrue,
-  dbmw(getProvincesWithHolidays),
-  renderProvince,
-)
-
 const getFederalSourceForPage = () => getSource(DB, 'federal')
 
 const renderFederal = (req, res) => {
@@ -332,6 +307,72 @@ const renderFederal = (req, res) => {
   )
 }
 
+/* ============================================================================
+ * Holiday route registration
+ * Register national routes, province aliases, provincial routes, and federal routes.
+ * Keep aliases ahead of parameterized province routes so they redirect correctly.
+ * ========================================================================== */
+
+router.get(
+  holidayPathsFor(),
+  checkRedirectYear,
+  dbmw(getHolidaysWithProvinces),
+  renderCanada,
+)
+
+router.get(
+  holidayPathsFor({ year: ':year' }),
+  requireFourDigitYear,
+  checkYearErr,
+  dbmw(getHolidaysWithProvinces),
+  renderCanada,
+)
+
+/* Redirect commonly mistyped PEI ids */
+router.get(
+  holidayPathsFor({ provinceId: 'PEI' }),
+  redirectProvinceAlias('PE'),
+)
+
+router.get(
+  holidayPathsFor({ provinceId: 'PEI', year: ':year' }),
+  requireFourDigitYear,
+  redirectProvinceAlias('PE'),
+)
+
+/* Redirect commonly mistyped Quebec ids */
+router.get(
+  holidayPathsFor({ provinceId: 'QB' }),
+  redirectProvinceAlias('QC'),
+)
+
+router.get(
+  holidayPathsFor({ provinceId: 'QB', year: ':year' }),
+  requireFourDigitYear,
+  redirectProvinceAlias('QC'),
+)
+
+router.get(
+  holidayPathsFor({ provinceId: ':provinceId' }),
+  checkProvinceIdErr,
+  checkRedirectYear,
+  checkRedirectProvinceId,
+  optionalTrue,
+  dbmw(getProvincesWithHolidays),
+  renderProvince,
+)
+
+router.get(
+  holidayPathsFor({ provinceId: ':provinceId', year: ':year' }),
+  requireFourDigitYear,
+  checkProvinceIdErr,
+  checkRedirectProvinceId,
+  checkYearErr,
+  optionalTrue,
+  dbmw(getProvincesWithHolidays),
+  renderProvince,
+)
+
 router.get(
   holidayPathsFor({ federal: true }),
   checkRedirectYear,
@@ -347,6 +388,10 @@ router.get(
   renderFederal,
 )
 
+/* ============================================================================
+ * Province selection and legacy redirects
+ * Show the province picker, handle selections, and redirect old singular URLs.
+ * ========================================================================== */
 
 router.get(
   pagePathsFor('provinces'),
@@ -360,30 +405,6 @@ router.get(
   },
 )
 
-const handleProvincePicker = (locale) => (req, res) => {
-  const body = req.body || {}
-  const region = body.region || ''
-  const federal = region === 'federal'
-
-  const provinceId =
-    region && !federal
-      ? encodeURIComponent(region.substring(0, 2).toUpperCase())
-      : undefined
-
-  const year = parseInt(body.year)
-  const currentYear = getCurrentHolidayYear(getProvinceIdOrFederalString({ provinceId, federal }))
-  const routeYear = ALLOWED_YEARS.includes(year) && year !== currentYear ? year : undefined
-
-  return res.redirect(
-    holidayPathFor({
-      locale,
-      provinceId,
-      federal,
-      year: routeYear,
-    }),
-  )
-}
-
 router.post('/provinces', handleProvincePicker('en'))
 router.post('/fr/provinces', handleProvincePicker('fr'))
 
@@ -396,6 +417,11 @@ router.get('/province/:provinceId', (req, res) => {
 router.get('/province/:provinceId/:year', (req, res) => {
   return res.redirect(301, `/provinces/${req.params.provinceId}/${req.params.year}`)
 })
+
+/* ============================================================================
+ * Informational and API documentation routes
+ * Render localized informational pages and the English and French API reference.
+ * ========================================================================== */
 
 router.get(
   pagePathsFor('federallyRegulated'),
@@ -425,7 +451,7 @@ router.get(
 
 router.get(
   pagePathsFor('feedback'),
-  (req, res) => { 
+  (req, res) => {
     return res.send(renderInfoPage(req, 'feedback', 'Feedback'))
   },
 )
@@ -459,6 +485,11 @@ router.get(
 router.get(`/en${pathFor('api')}`, renderApiPage('en'))
 
 router.get(pathFor('api', { locale: 'fr' }), renderApiPage('fr'))
+
+/* ============================================================================
+ * Not-found and error handling
+ * Keep these handlers last so unmatched URLs and route errors render an error page.
+ * ========================================================================== */
 
 router.get('/*splat', (req, res) => {
   throw new createError(404)
