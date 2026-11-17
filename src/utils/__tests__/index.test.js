@@ -1,6 +1,7 @@
 const {
   array2Obj,
   nextHoliday,
+  getOgImagePath,
   upcomingHolidays,
   getCanonical,
   isProvinceId,
@@ -183,5 +184,18 @@ describe('Test getCanonical', () => {
   test('returns path with NO year for next year for province WITHOUT Boxing Day', () => {
     mockDate('2020-12-28')
     expect(getCanonical({ year: 2021, path: '/2021', provinceId: 'AB' })).toBe('/')
+  })
+})
+
+describe('getOgImagePath', () => {
+  test.each([
+    [{}, '/img/og-canada.png'],
+    [{ federal: false }, '/img/og-canada.png'],
+    [{ federal: true }, '/img/og-federal.png'],
+    [{ id: 'PE' }, '/img/og-pe.png'],
+    [{ id: 'QC' }, '/img/og-qc.png'],
+    [{ id: 'NT' }, '/img/og-nt.png'],
+  ])('returns the correct image for %j', (props, expected) => {
+    expect(getOgImagePath(props)).toBe(expected)
   })
 })

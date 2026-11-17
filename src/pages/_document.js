@@ -25,6 +25,7 @@ const document = ({
   },
 }) => {
   const canonical = canonicalPath ?? getCanonical({ error, path, provinceId: id, year })
+  const ogImagePath = getOgImagePath({ id, federal })
 
   return `
     <!DOCTYPE html>
@@ -59,10 +60,7 @@ const document = ({
         <meta property="og:description" content="${meta ? `${meta.split('.')[0]}.` : 'Upcoming statutory holidays in Canada'
     }" />
 
-        <meta property="og:image"  content="https://canada-holidays.ca${getOgImagePath({
-      id,
-      region,
-    })}" />
+        <meta property="og:image" content="https://canada-holidays.ca${ogImagePath}" />
         <meta property="og:image:type" content="image/png" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="628" />
@@ -71,10 +69,7 @@ const document = ({
         <meta name="twitter:card" content="summary" />
         <meta name="twitter:creator" content="@pcraig3" />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:image" content="https://canada-holidays.ca${getOgImagePath({
-      id,
-      region,
-    })}" />
+        <meta name="twitter:image" content="https://canada-holidays.ca${ogImagePath}" />
 
         <title>${title}</title>
 
