@@ -1,37 +1,45 @@
-const breadcrumb = ({ region }) => {
-  const provinceBreadcrumb = {
-    '@type': 'ListItem',
-    position: 2,
-    name: 'Regions',
-    item: 'https://canada-holidays.ca/provinces',
-  }
+const { getTranslator } = require('../i18n')
+const { pathFor, holidayPathFor } = require('../config/routes.config')
 
-  let breadcrumbList = [
+
+const breadcrumb = ({
+  region,
+  locale = 'en',
+  provinceId,
+  federal = false,
+}) => {
+  const t = getTranslator(locale)
+  const baseUrl = 'https://canada-holidays.ca'
+
+  const breadcrumbList = [
     {
       '@type': 'ListItem',
       position: 1,
       name: 'Canada',
-      item: 'https://canada-holidays.ca/',
+      item: `${baseUrl}${holidayPathFor({ locale })}`,
     },
   ]
 
-  if (region === 'Federal') {
-    breadcrumbList = breadcrumbList.concat([
+  if (federal) {
+    breadcrumbList.push({
+      '@type': 'ListItem',
+      position: 2,
+      name: region,
+    })
+  } else if (provinceId) {
+    breadcrumbList.push(
       {
         '@type': 'ListItem',
         position: 2,
-        name: region,
+        name: t('components.nav.allRegions'),
+        item: `${baseUrl}${pathFor('provinces', { locale })}`,
       },
-    ])
-  } else if (region !== 'Canada') {
-    breadcrumbList = breadcrumbList.concat([
-      provinceBreadcrumb,
       {
         '@type': 'ListItem',
         position: 3,
         name: region,
       },
-    ])
+    )
   }
 
   return {
@@ -111,11 +119,22 @@ const dataset = ({ region, year, path, title, meta }) => {
   }
 }
 
-const speakable = ({ region, path }) => {
-  const name =
-    region === 'Federal'
-      ? 'Canada’s next federal holiday'
-      : `${region}’${region.slice(-1) === 's' ? '' : 's'} next holiday`
+const speakable = ({
+  region,
+  path,
+  locale = 'en',
+  provinceId,
+  federal = false,
+}) => {
+  const t = getTranslator(locale)
+
+  let name = t('utils.richSnippets.canada')
+
+  if (federal) {
+    name = t('utils.richSnippets.federal')
+  } else if (provinceId) {
+    name = t('utils.richSnippets.province', { region })
+  }
 
   return {
     '@context': 'https://schema.org/',

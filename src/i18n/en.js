@@ -329,4 +329,11 @@ module.exports = {
     observedOn: 'Observed: {{date}}',
     and: 'and',
   },
+  utils: {
+    richSnippets: {
+      canada: 'Canada’s next holiday',
+      federal: 'Canada’s next federal holiday',
+      province: 'Next holiday in {{region}}',
+    },
+  },
 }

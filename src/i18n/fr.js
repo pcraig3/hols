@@ -333,4 +333,11 @@ module.exports = {
     observedOn: 'Observé le {{date}}.',
     and: 'et',
   },
+  utils: {
+    richSnippets: {
+      canada: 'Prochain jour férié au Canada',
+      federal: 'Prochain jour férié fédéral au Canada',
+      province: 'Prochain jour férié : {{region}}',
+    },
+  },
 }
