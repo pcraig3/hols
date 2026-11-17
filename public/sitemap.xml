@@ -4,417 +4,995 @@
       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
       xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
             http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
-<!-- created with Free Online Sitemap Generator www.xml-sitemaps.com -->
-
 
 <url>
   <loc>https://canada-holidays.ca/</loc>
-  <lastmod>2026-09-22T02:21:53+00:00</lastmod>
+  <lastmod>2026-11-17T12:28:21+00:00</lastmod>
   <priority>1.00</priority>
 </url>
 <url>
   <loc>https://canada-holidays.ca/provinces</loc>
-  <lastmod>2025-12-27T12:33:21+00:00</lastmod>
+  <lastmod>2026-11-17T12:28:21+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
   <loc>https://canada-holidays.ca/about</loc>
-  <lastmod>2025-12-27T12:33:21+00:00</lastmod>
+  <lastmod>2026-11-17T12:28:21+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
   <loc>https://canada-holidays.ca/api</loc>
-  <lastmod>2025-12-27T12:33:21+00:00</lastmod>
+  <lastmod>2026-11-17T12:28:21+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
   <loc>https://canada-holidays.ca/provinces/MB</loc>
-  <lastmod>2025-12-27T12:33:21+00:00</lastmod>
+  <lastmod>2026-11-17T12:28:21+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
   <loc>https://canada-holidays.ca/provinces/PE</loc>
-  <lastmod>2025-12-27T12:33:21+00:00</lastmod>
+  <lastmod>2026-11-17T12:28:21+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
   <loc>https://canada-holidays.ca/provinces/AB</loc>
-  <lastmod>2026-09-22T02:21:53+00:00</lastmod>
+  <lastmod>2026-11-17T12:28:21+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
   <loc>https://canada-holidays.ca/provinces/BC</loc>
-  <lastmod>2026-09-22T02:21:53+00:00</lastmod>
+  <lastmod>2026-11-17T12:28:21+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
   <loc>https://canada-holidays.ca/provinces/NB</loc>
-  <lastmod>2026-09-22T02:21:53+00:00</lastmod>
+  <lastmod>2026-11-17T12:28:21+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
   <loc>https://canada-holidays.ca/provinces/ON</loc>
-  <lastmod>2026-09-22T02:21:53+00:00</lastmod>
+  <lastmod>2026-11-17T12:28:21+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
   <loc>https://canada-holidays.ca/provinces/SK</loc>
-  <lastmod>2026-09-22T02:21:53+00:00</lastmod>
+  <lastmod>2026-11-17T12:28:21+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
   <loc>https://canada-holidays.ca/provinces/NS</loc>
-  <lastmod>2026-09-22T02:21:53+00:00</lastmod>
+  <lastmod>2026-11-17T12:28:21+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
   <loc>https://canada-holidays.ca/provinces/NL</loc>
-  <lastmod>2026-09-22T02:21:53+00:00</lastmod>
+  <lastmod>2026-11-17T12:28:21+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
   <loc>https://canada-holidays.ca/federal</loc>
-  <lastmod>2026-09-22T02:21:53+00:00</lastmod>
+  <lastmod>2026-11-17T12:28:21+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
   <loc>https://canada-holidays.ca/provinces/QC</loc>
-  <lastmod>2026-09-22T02:21:53+00:00</lastmod>
+  <lastmod>2026-11-17T12:28:21+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
   <loc>https://canada-holidays.ca/provinces/NT</loc>
-  <lastmod>2026-09-22T02:21:53+00:00</lastmod>
+  <lastmod>2026-11-17T12:28:21+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
   <loc>https://canada-holidays.ca/provinces/NU</loc>
-  <lastmod>2026-09-22T02:21:53+00:00</lastmod>
+  <lastmod>2026-11-17T12:28:21+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
   <loc>https://canada-holidays.ca/provinces/YT</loc>
-  <lastmod>2026-09-22T02:21:53+00:00</lastmod>
+  <lastmod>2026-11-17T12:28:21+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
   <loc>https://canada-holidays.ca/2023</loc>
-  <lastmod>2025-12-27T12:33:21+00:00</lastmod>
+  <lastmod>2026-11-17T12:28:21+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
   <loc>https://canada-holidays.ca/sources</loc>
-  <lastmod>2025-12-27T12:33:21+00:00</lastmod>
+  <lastmod>2026-11-17T12:28:21+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
   <loc>https://canada-holidays.ca/do-federal-holidays-apply-to-me</loc>
-  <lastmod>2025-12-27T12:33:21+00:00</lastmod>
+  <lastmod>2026-11-17T12:28:21+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
   <loc>https://canada-holidays.ca/add-holidays-to-calendar</loc>
-  <lastmod>2025-12-27T12:33:21+00:00</lastmod>
+  <lastmod>2026-11-17T12:28:21+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
   <loc>https://canada-holidays.ca/optional-holidays-in-canada</loc>
-  <lastmod>2025-12-27T12:33:21+00:00</lastmod>
+  <lastmod>2026-11-17T12:28:21+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
   <loc>https://canada-holidays.ca/2025</loc>
-  <lastmod>2025-12-27T12:33:21+00:00</lastmod>
+  <lastmod>2026-11-17T12:28:21+00:00</lastmod>
   <priority>0.64</priority>
 </url>
-
 <url>
   <loc>https://canada-holidays.ca/2027</loc>
-  <lastmod>2025-12-27T12:33:21+00:00</lastmod>
+  <lastmod>2026-11-17T12:28:21+00:00</lastmod>
   <priority>0.73</priority>
 </url>
-
 <url>
   <loc>https://canada-holidays.ca/provinces/MB/2027</loc>
-  <lastmod>2025-12-27T12:33:21+00:00</lastmod>
+  <lastmod>2026-11-17T12:28:21+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
   <loc>https://canada-holidays.ca/provinces/PE/2027</loc>
-  <lastmod>2025-12-27T12:33:21+00:00</lastmod>
+  <lastmod>2026-11-17T12:28:21+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
   <loc>https://canada-holidays.ca/provinces/AB/2027</loc>
-  <lastmod>2025-12-27T12:33:21+00:00</lastmod>
+  <lastmod>2026-11-17T12:28:21+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
   <loc>https://canada-holidays.ca/provinces/BC/2027</loc>
-  <lastmod>2025-12-27T12:33:21+00:00</lastmod>
+  <lastmod>2026-11-17T12:28:21+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
   <loc>https://canada-holidays.ca/provinces/NB/2027</loc>
-  <lastmod>2025-12-27T12:33:21+00:00</lastmod>
+  <lastmod>2026-11-17T12:28:21+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
   <loc>https://canada-holidays.ca/provinces/ON/2027</loc>
-  <lastmod>2025-12-27T12:33:21+00:00</lastmod>
+  <lastmod>2026-11-17T12:28:21+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
   <loc>https://canada-holidays.ca/provinces/SK/2027</loc>
-  <lastmod>2025-12-27T12:33:21+00:00</lastmod>
+  <lastmod>2026-11-17T12:28:21+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
   <loc>https://canada-holidays.ca/provinces/NS/2027</loc>
-  <lastmod>2025-12-27T12:33:21+00:00</lastmod>
+  <lastmod>2026-11-17T12:28:21+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
   <loc>https://canada-holidays.ca/provinces/NL/2027</loc>
-  <lastmod>2025-12-27T12:33:21+00:00</lastmod>
+  <lastmod>2026-11-17T12:28:21+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
   <loc>https://canada-holidays.ca/federal/2027</loc>
-  <lastmod>2025-12-27T12:33:21+00:00</lastmod>
+  <lastmod>2026-11-17T12:28:21+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
   <loc>https://canada-holidays.ca/provinces/QC/2027</loc>
-  <lastmod>2025-12-27T12:33:21+00:00</lastmod>
+  <lastmod>2026-11-17T12:28:21+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
   <loc>https://canada-holidays.ca/provinces/NT/2027</loc>
-  <lastmod>2025-12-27T12:33:21+00:00</lastmod>
+  <lastmod>2026-11-17T12:28:21+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
   <loc>https://canada-holidays.ca/provinces/NU/2027</loc>
-  <lastmod>2025-12-27T12:33:21+00:00</lastmod>
+  <lastmod>2026-11-17T12:28:21+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
   <loc>https://canada-holidays.ca/provinces/YT/2027</loc>
-  <lastmod>2025-12-27T12:33:21+00:00</lastmod>
+  <lastmod>2026-11-17T12:28:21+00:00</lastmod>
   <priority>0.64</priority>
 </url>
-
 <url>
   <loc>https://canada-holidays.ca/provinces/MB/2028</loc>
-  <lastmod>2025-12-27T12:33:21+00:00</lastmod>
+  <lastmod>2026-11-17T12:28:21+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
   <loc>https://canada-holidays.ca/provinces/PE/2028</loc>
-  <lastmod>2025-12-27T12:33:21+00:00</lastmod>
+  <lastmod>2026-11-17T12:28:21+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
   <loc>https://canada-holidays.ca/provinces/AB/2028</loc>
-  <lastmod>2025-12-27T12:33:21+00:00</lastmod>
+  <lastmod>2026-11-17T12:28:21+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
   <loc>https://canada-holidays.ca/provinces/BC/2028</loc>
-  <lastmod>2025-12-27T12:33:21+00:00</lastmod>
+  <lastmod>2026-11-17T12:28:21+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
   <loc>https://canada-holidays.ca/provinces/NB/2028</loc>
-  <lastmod>2025-12-27T12:33:21+00:00</lastmod>
+  <lastmod>2026-11-17T12:28:21+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
   <loc>https://canada-holidays.ca/provinces/ON/2028</loc>
-  <lastmod>2025-12-27T12:33:21+00:00</lastmod>
+  <lastmod>2026-11-17T12:28:21+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
   <loc>https://canada-holidays.ca/provinces/SK/2028</loc>
-  <lastmod>2025-12-27T12:33:21+00:00</lastmod>
+  <lastmod>2026-11-17T12:28:21+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
   <loc>https://canada-holidays.ca/provinces/NS/2028</loc>
-  <lastmod>2025-12-27T12:33:21+00:00</lastmod>
+  <lastmod>2026-11-17T12:28:21+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
   <loc>https://canada-holidays.ca/provinces/NL/2028</loc>
-  <lastmod>2025-12-27T12:33:21+00:00</lastmod>
+  <lastmod>2026-11-17T12:28:21+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
   <loc>https://canada-holidays.ca/federal/2028</loc>
-  <lastmod>2025-12-27T12:33:21+00:00</lastmod>
+  <lastmod>2026-11-17T12:28:21+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
   <loc>https://canada-holidays.ca/provinces/QC/2028</loc>
-  <lastmod>2025-12-27T12:33:21+00:00</lastmod>
+  <lastmod>2026-11-17T12:28:21+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
   <loc>https://canada-holidays.ca/provinces/NT/2028</loc>
-  <lastmod>2025-12-27T12:33:21+00:00</lastmod>
+  <lastmod>2026-11-17T12:28:21+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
   <loc>https://canada-holidays.ca/provinces/NU/2028</loc>
-  <lastmod>2025-12-27T12:33:21+00:00</lastmod>
+  <lastmod>2026-11-17T12:28:21+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
   <loc>https://canada-holidays.ca/provinces/YT/2028</loc>
-  <lastmod>2025-12-27T12:33:21+00:00</lastmod>
+  <lastmod>2026-11-17T12:28:21+00:00</lastmod>
   <priority>0.64</priority>
 </url>
-
 <url>
   <loc>https://canada-holidays.ca/provinces/MB/2029</loc>
-  <lastmod>2025-12-27T12:33:21+00:00</lastmod>
+  <lastmod>2026-11-17T12:28:21+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
   <loc>https://canada-holidays.ca/provinces/PE/2029</loc>
-  <lastmod>2025-12-27T12:33:21+00:00</lastmod>
+  <lastmod>2026-11-17T12:28:21+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
   <loc>https://canada-holidays.ca/provinces/AB/2029</loc>
-  <lastmod>2025-12-27T12:33:21+00:00</lastmod>
+  <lastmod>2026-11-17T12:28:21+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
   <loc>https://canada-holidays.ca/provinces/BC/2029</loc>
-  <lastmod>2025-12-27T12:33:21+00:00</lastmod>
+  <lastmod>2026-11-17T12:28:21+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
   <loc>https://canada-holidays.ca/provinces/NB/2029</loc>
-  <lastmod>2025-12-27T12:33:21+00:00</lastmod>
+  <lastmod>2026-11-17T12:28:21+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
   <loc>https://canada-holidays.ca/provinces/ON/2029</loc>
-  <lastmod>2025-12-27T12:33:21+00:00</lastmod>
+  <lastmod>2026-11-17T12:28:21+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
   <loc>https://canada-holidays.ca/provinces/SK/2029</loc>
-  <lastmod>2025-12-27T12:33:21+00:00</lastmod>
+  <lastmod>2026-11-17T12:28:21+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
   <loc>https://canada-holidays.ca/provinces/NS/2029</loc>
-  <lastmod>2025-12-27T12:33:21+00:00</lastmod>
+  <lastmod>2026-11-17T12:28:21+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
   <loc>https://canada-holidays.ca/provinces/NL/2029</loc>
-  <lastmod>2025-12-27T12:33:21+00:00</lastmod>
+  <lastmod>2026-11-17T12:28:21+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
   <loc>https://canada-holidays.ca/federal/2029</loc>
-  <lastmod>2025-12-27T12:33:21+00:00</lastmod>
+  <lastmod>2026-11-17T12:28:21+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
   <loc>https://canada-holidays.ca/provinces/QC/2029</loc>
-  <lastmod>2025-12-27T12:33:21+00:00</lastmod>
+  <lastmod>2026-11-17T12:28:21+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
   <loc>https://canada-holidays.ca/provinces/NT/2029</loc>
-  <lastmod>2025-12-27T12:33:21+00:00</lastmod>
+  <lastmod>2026-11-17T12:28:21+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
   <loc>https://canada-holidays.ca/provinces/NU/2029</loc>
-  <lastmod>2025-12-27T12:33:21+00:00</lastmod>
+  <lastmod>2026-11-17T12:28:21+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
   <loc>https://canada-holidays.ca/provinces/YT/2029</loc>
-  <lastmod>2025-12-27T12:33:21+00:00</lastmod>
+  <lastmod>2026-11-17T12:28:21+00:00</lastmod>
   <priority>0.64</priority>
 </url>
-
 <url>
   <loc>https://canada-holidays.ca/provinces/MB/2030</loc>
-  <lastmod>2025-12-27T12:33:21+00:00</lastmod>
+  <lastmod>2026-11-17T12:28:21+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
   <loc>https://canada-holidays.ca/provinces/PE/2030</loc>
-  <lastmod>2025-12-27T12:33:21+00:00</lastmod>
+  <lastmod>2026-11-17T12:28:21+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
   <loc>https://canada-holidays.ca/provinces/AB/2030</loc>
-  <lastmod>2025-12-27T12:33:21+00:00</lastmod>
+  <lastmod>2026-11-17T12:28:21+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
   <loc>https://canada-holidays.ca/provinces/BC/2030</loc>
-  <lastmod>2025-12-27T12:33:21+00:00</lastmod>
+  <lastmod>2026-11-17T12:28:21+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
   <loc>https://canada-holidays.ca/provinces/NB/2030</loc>
-  <lastmod>2025-12-27T12:33:21+00:00</lastmod>
+  <lastmod>2026-11-17T12:28:21+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
   <loc>https://canada-holidays.ca/provinces/ON/2030</loc>
-  <lastmod>2025-12-27T12:33:21+00:00</lastmod>
+  <lastmod>2026-11-17T12:28:21+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
   <loc>https://canada-holidays.ca/provinces/SK/2030</loc>
-  <lastmod>2025-12-27T12:33:21+00:00</lastmod>
+  <lastmod>2026-11-17T12:28:21+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
   <loc>https://canada-holidays.ca/provinces/NS/2030</loc>
-  <lastmod>2025-12-27T12:33:21+00:00</lastmod>
+  <lastmod>2026-11-17T12:28:21+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
   <loc>https://canada-holidays.ca/provinces/NL/2030</loc>
-  <lastmod>2025-12-27T12:33:21+00:00</lastmod>
+  <lastmod>2026-11-17T12:28:21+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
   <loc>https://canada-holidays.ca/federal/2030</loc>
-  <lastmod>2025-12-27T12:33:21+00:00</lastmod>
+  <lastmod>2026-11-17T12:28:21+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
   <loc>https://canada-holidays.ca/provinces/QC/2030</loc>
-  <lastmod>2025-12-27T12:33:21+00:00</lastmod>
+  <lastmod>2026-11-17T12:28:21+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
   <loc>https://canada-holidays.ca/provinces/NT/2030</loc>
-  <lastmod>2025-12-27T12:33:21+00:00</lastmod>
+  <lastmod>2026-11-17T12:28:21+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
   <loc>https://canada-holidays.ca/provinces/NU/2030</loc>
-  <lastmod>2025-12-27T12:33:21+00:00</lastmod>
+  <lastmod>2026-11-17T12:28:21+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
   <loc>https://canada-holidays.ca/provinces/YT/2030</loc>
-  <lastmod>2025-12-27T12:33:21+00:00</lastmod>
+  <lastmod>2026-11-17T12:28:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://canada-holidays.ca/2028</loc>
+  <lastmod>2026-11-17T12:28:21+00:00</lastmod>
+  <priority>0.73</priority>
+</url>
+<url>
+  <loc>https://canada-holidays.ca/2029</loc>
+  <lastmod>2026-11-17T12:28:21+00:00</lastmod>
+  <priority>0.73</priority>
+</url>
+<url>
+  <loc>https://canada-holidays.ca/2030</loc>
+  <lastmod>2026-11-17T12:28:21+00:00</lastmod>
+  <priority>0.73</priority>
+</url>
+<url>
+  <loc>https://canada-holidays.ca/2031</loc>
+  <lastmod>2026-11-17T12:28:21+00:00</lastmod>
+  <priority>0.73</priority>
+</url>
+<url>
+  <loc>https://canada-holidays.ca/provinces/MB/2031</loc>
+  <lastmod>2026-11-17T12:28:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://canada-holidays.ca/provinces/PE/2031</loc>
+  <lastmod>2026-11-17T12:28:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://canada-holidays.ca/provinces/AB/2031</loc>
+  <lastmod>2026-11-17T12:28:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://canada-holidays.ca/provinces/BC/2031</loc>
+  <lastmod>2026-11-17T12:28:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://canada-holidays.ca/provinces/NB/2031</loc>
+  <lastmod>2026-11-17T12:28:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://canada-holidays.ca/provinces/ON/2031</loc>
+  <lastmod>2026-11-17T12:28:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://canada-holidays.ca/provinces/SK/2031</loc>
+  <lastmod>2026-11-17T12:28:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://canada-holidays.ca/provinces/NS/2031</loc>
+  <lastmod>2026-11-17T12:28:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://canada-holidays.ca/provinces/NL/2031</loc>
+  <lastmod>2026-11-17T12:28:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://canada-holidays.ca/federal/2031</loc>
+  <lastmod>2026-11-17T12:28:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://canada-holidays.ca/provinces/QC/2031</loc>
+  <lastmod>2026-11-17T12:28:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://canada-holidays.ca/provinces/NT/2031</loc>
+  <lastmod>2026-11-17T12:28:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://canada-holidays.ca/provinces/NU/2031</loc>
+  <lastmod>2026-11-17T12:28:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://canada-holidays.ca/provinces/YT/2031</loc>
+  <lastmod>2026-11-17T12:28:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://canada-holidays.ca/fr/</loc>
+  <lastmod>2026-11-17T12:28:21+00:00</lastmod>
+  <priority>1.00</priority>
+</url>
+<url>
+  <loc>https://canada-holidays.ca/fr/provinces</loc>
+  <lastmod>2026-11-17T12:28:21+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://canada-holidays.ca/fr/a-propos</loc>
+  <lastmod>2026-11-17T12:28:21+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://canada-holidays.ca/fr/api</loc>
+  <lastmod>2026-11-17T12:28:21+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://canada-holidays.ca/fr/provinces/MB</loc>
+  <lastmod>2026-11-17T12:28:21+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://canada-holidays.ca/fr/provinces/PE</loc>
+  <lastmod>2026-11-17T12:28:21+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://canada-holidays.ca/fr/provinces/AB</loc>
+  <lastmod>2026-11-17T12:28:21+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://canada-holidays.ca/fr/provinces/BC</loc>
+  <lastmod>2026-11-17T12:28:21+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://canada-holidays.ca/fr/provinces/NB</loc>
+  <lastmod>2026-11-17T12:28:21+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://canada-holidays.ca/fr/provinces/ON</loc>
+  <lastmod>2026-11-17T12:28:21+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://canada-holidays.ca/fr/provinces/SK</loc>
+  <lastmod>2026-11-17T12:28:21+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://canada-holidays.ca/fr/provinces/NS</loc>
+  <lastmod>2026-11-17T12:28:21+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://canada-holidays.ca/fr/provinces/NL</loc>
+  <lastmod>2026-11-17T12:28:21+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://canada-holidays.ca/fr/federal</loc>
+  <lastmod>2026-11-17T12:28:21+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://canada-holidays.ca/fr/provinces/QC</loc>
+  <lastmod>2026-11-17T12:28:21+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://canada-holidays.ca/fr/provinces/NT</loc>
+  <lastmod>2026-11-17T12:28:21+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://canada-holidays.ca/fr/provinces/NU</loc>
+  <lastmod>2026-11-17T12:28:21+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://canada-holidays.ca/fr/provinces/YT</loc>
+  <lastmod>2026-11-17T12:28:21+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://canada-holidays.ca/fr/2023</loc>
+  <lastmod>2026-11-17T12:28:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://canada-holidays.ca/fr/sources</loc>
+  <lastmod>2026-11-17T12:28:21+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://canada-holidays.ca/fr/les-jours-feries-federaux-sappliquent-ils-a-moi</loc>
+  <lastmod>2026-11-17T12:28:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://canada-holidays.ca/fr/ajouter-des-jours-feries-au-calendrier</loc>
+  <lastmod>2026-11-17T12:28:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://canada-holidays.ca/fr/jours-feries-facultatifs-au-canada</loc>
+  <lastmod>2026-11-17T12:28:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://canada-holidays.ca/fr/2025</loc>
+  <lastmod>2026-11-17T12:28:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://canada-holidays.ca/fr/2027</loc>
+  <lastmod>2026-11-17T12:28:21+00:00</lastmod>
+  <priority>0.73</priority>
+</url>
+<url>
+  <loc>https://canada-holidays.ca/fr/provinces/MB/2027</loc>
+  <lastmod>2026-11-17T12:28:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://canada-holidays.ca/fr/provinces/PE/2027</loc>
+  <lastmod>2026-11-17T12:28:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://canada-holidays.ca/fr/provinces/AB/2027</loc>
+  <lastmod>2026-11-17T12:28:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://canada-holidays.ca/fr/provinces/BC/2027</loc>
+  <lastmod>2026-11-17T12:28:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://canada-holidays.ca/fr/provinces/NB/2027</loc>
+  <lastmod>2026-11-17T12:28:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://canada-holidays.ca/fr/provinces/ON/2027</loc>
+  <lastmod>2026-11-17T12:28:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://canada-holidays.ca/fr/provinces/SK/2027</loc>
+  <lastmod>2026-11-17T12:28:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://canada-holidays.ca/fr/provinces/NS/2027</loc>
+  <lastmod>2026-11-17T12:28:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://canada-holidays.ca/fr/provinces/NL/2027</loc>
+  <lastmod>2026-11-17T12:28:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://canada-holidays.ca/fr/federal/2027</loc>
+  <lastmod>2026-11-17T12:28:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://canada-holidays.ca/fr/provinces/QC/2027</loc>
+  <lastmod>2026-11-17T12:28:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://canada-holidays.ca/fr/provinces/NT/2027</loc>
+  <lastmod>2026-11-17T12:28:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://canada-holidays.ca/fr/provinces/NU/2027</loc>
+  <lastmod>2026-11-17T12:28:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://canada-holidays.ca/fr/provinces/YT/2027</loc>
+  <lastmod>2026-11-17T12:28:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://canada-holidays.ca/fr/provinces/MB/2028</loc>
+  <lastmod>2026-11-17T12:28:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://canada-holidays.ca/fr/provinces/PE/2028</loc>
+  <lastmod>2026-11-17T12:28:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://canada-holidays.ca/fr/provinces/AB/2028</loc>
+  <lastmod>2026-11-17T12:28:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://canada-holidays.ca/fr/provinces/BC/2028</loc>
+  <lastmod>2026-11-17T12:28:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://canada-holidays.ca/fr/provinces/NB/2028</loc>
+  <lastmod>2026-11-17T12:28:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://canada-holidays.ca/fr/provinces/ON/2028</loc>
+  <lastmod>2026-11-17T12:28:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://canada-holidays.ca/fr/provinces/SK/2028</loc>
+  <lastmod>2026-11-17T12:28:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://canada-holidays.ca/fr/provinces/NS/2028</loc>
+  <lastmod>2026-11-17T12:28:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://canada-holidays.ca/fr/provinces/NL/2028</loc>
+  <lastmod>2026-11-17T12:28:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://canada-holidays.ca/fr/federal/2028</loc>
+  <lastmod>2026-11-17T12:28:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://canada-holidays.ca/fr/provinces/QC/2028</loc>
+  <lastmod>2026-11-17T12:28:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://canada-holidays.ca/fr/provinces/NT/2028</loc>
+  <lastmod>2026-11-17T12:28:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://canada-holidays.ca/fr/provinces/NU/2028</loc>
+  <lastmod>2026-11-17T12:28:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://canada-holidays.ca/fr/provinces/YT/2028</loc>
+  <lastmod>2026-11-17T12:28:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://canada-holidays.ca/fr/provinces/MB/2029</loc>
+  <lastmod>2026-11-17T12:28:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://canada-holidays.ca/fr/provinces/PE/2029</loc>
+  <lastmod>2026-11-17T12:28:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://canada-holidays.ca/fr/provinces/AB/2029</loc>
+  <lastmod>2026-11-17T12:28:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://canada-holidays.ca/fr/provinces/BC/2029</loc>
+  <lastmod>2026-11-17T12:28:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://canada-holidays.ca/fr/provinces/NB/2029</loc>
+  <lastmod>2026-11-17T12:28:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://canada-holidays.ca/fr/provinces/ON/2029</loc>
+  <lastmod>2026-11-17T12:28:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://canada-holidays.ca/fr/provinces/SK/2029</loc>
+  <lastmod>2026-11-17T12:28:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://canada-holidays.ca/fr/provinces/NS/2029</loc>
+  <lastmod>2026-11-17T12:28:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://canada-holidays.ca/fr/provinces/NL/2029</loc>
+  <lastmod>2026-11-17T12:28:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://canada-holidays.ca/fr/federal/2029</loc>
+  <lastmod>2026-11-17T12:28:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://canada-holidays.ca/fr/provinces/QC/2029</loc>
+  <lastmod>2026-11-17T12:28:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://canada-holidays.ca/fr/provinces/NT/2029</loc>
+  <lastmod>2026-11-17T12:28:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://canada-holidays.ca/fr/provinces/NU/2029</loc>
+  <lastmod>2026-11-17T12:28:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://canada-holidays.ca/fr/provinces/YT/2029</loc>
+  <lastmod>2026-11-17T12:28:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://canada-holidays.ca/fr/provinces/MB/2030</loc>
+  <lastmod>2026-11-17T12:28:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://canada-holidays.ca/fr/provinces/PE/2030</loc>
+  <lastmod>2026-11-17T12:28:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://canada-holidays.ca/fr/provinces/AB/2030</loc>
+  <lastmod>2026-11-17T12:28:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://canada-holidays.ca/fr/provinces/BC/2030</loc>
+  <lastmod>2026-11-17T12:28:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://canada-holidays.ca/fr/provinces/NB/2030</loc>
+  <lastmod>2026-11-17T12:28:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://canada-holidays.ca/fr/provinces/ON/2030</loc>
+  <lastmod>2026-11-17T12:28:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://canada-holidays.ca/fr/provinces/SK/2030</loc>
+  <lastmod>2026-11-17T12:28:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://canada-holidays.ca/fr/provinces/NS/2030</loc>
+  <lastmod>2026-11-17T12:28:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://canada-holidays.ca/fr/provinces/NL/2030</loc>
+  <lastmod>2026-11-17T12:28:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://canada-holidays.ca/fr/federal/2030</loc>
+  <lastmod>2026-11-17T12:28:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://canada-holidays.ca/fr/provinces/QC/2030</loc>
+  <lastmod>2026-11-17T12:28:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://canada-holidays.ca/fr/provinces/NT/2030</loc>
+  <lastmod>2026-11-17T12:28:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://canada-holidays.ca/fr/provinces/NU/2030</loc>
+  <lastmod>2026-11-17T12:28:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://canada-holidays.ca/fr/provinces/YT/2030</loc>
+  <lastmod>2026-11-17T12:28:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://canada-holidays.ca/fr/2028</loc>
+  <lastmod>2026-11-17T12:28:21+00:00</lastmod>
+  <priority>0.73</priority>
+</url>
+<url>
+  <loc>https://canada-holidays.ca/fr/2029</loc>
+  <lastmod>2026-11-17T12:28:21+00:00</lastmod>
+  <priority>0.73</priority>
+</url>
+<url>
+  <loc>https://canada-holidays.ca/fr/2030</loc>
+  <lastmod>2026-11-17T12:28:21+00:00</lastmod>
+  <priority>0.73</priority>
+</url>
+<url>
+  <loc>https://canada-holidays.ca/fr/2031</loc>
+  <lastmod>2026-11-17T12:28:21+00:00</lastmod>
+  <priority>0.73</priority>
+</url>
+<url>
+  <loc>https://canada-holidays.ca/fr/provinces/MB/2031</loc>
+  <lastmod>2026-11-17T12:28:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://canada-holidays.ca/fr/provinces/PE/2031</loc>
+  <lastmod>2026-11-17T12:28:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://canada-holidays.ca/fr/provinces/AB/2031</loc>
+  <lastmod>2026-11-17T12:28:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://canada-holidays.ca/fr/provinces/BC/2031</loc>
+  <lastmod>2026-11-17T12:28:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://canada-holidays.ca/fr/provinces/NB/2031</loc>
+  <lastmod>2026-11-17T12:28:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://canada-holidays.ca/fr/provinces/ON/2031</loc>
+  <lastmod>2026-11-17T12:28:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://canada-holidays.ca/fr/provinces/SK/2031</loc>
+  <lastmod>2026-11-17T12:28:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://canada-holidays.ca/fr/provinces/NS/2031</loc>
+  <lastmod>2026-11-17T12:28:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://canada-holidays.ca/fr/provinces/NL/2031</loc>
+  <lastmod>2026-11-17T12:28:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://canada-holidays.ca/fr/federal/2031</loc>
+  <lastmod>2026-11-17T12:28:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://canada-holidays.ca/fr/provinces/QC/2031</loc>
+  <lastmod>2026-11-17T12:28:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://canada-holidays.ca/fr/provinces/NT/2031</loc>
+  <lastmod>2026-11-17T12:28:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://canada-holidays.ca/fr/provinces/NU/2031</loc>
+  <lastmod>2026-11-17T12:28:21+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://canada-holidays.ca/fr/provinces/YT/2031</loc>
+  <lastmod>2026-11-17T12:28:21+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 </urlset>
