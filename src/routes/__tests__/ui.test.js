@@ -309,6 +309,35 @@ describe('Test ui responses', () => {
         })
       })
     })
+
+    test('French federal JSON-LD uses French labels and canonical URLs', async () => {
+      const response = await request(app).get('/fr/federal')
+      const $ = cheerio.load(response.text)
+
+      expect(response.statusCode).toBe(200)
+
+      const jsonLd = JSON.parse($('script[type="application/ld+json"]').html())
+      const breadcrumbs = jsonLd.find((item) => item['@type'] === 'BreadcrumbList')
+      const speakable = jsonLd.find((item) => item['@type'] === 'WebPage')
+
+      expect(breadcrumbs.itemListElement).toHaveLength(2)
+      expect(breadcrumbs.itemListElement[0].item).toBe('https://canada-holidays.ca/fr/')
+      expect(breadcrumbs.itemListElement[1].name).toBe('Fédéral')
+
+      expect(speakable.name).toBe('Prochain jour férié fédéral au Canada')
+      expect(speakable.url).toBe('https://canada-holidays.ca/fr/federal')
+    })
+
+    test('English alias uses canonical URL in speakable JSON-LD', async () => {
+      const response = await request(app).get('/en/provinces/QC')
+      const $ = cheerio.load(response.text)
+
+      expect(response.statusCode).toBe(200)
+
+      const jsonLd = JSON.parse($('script[type="application/ld+json"]').html())
+      const speakable = jsonLd.find((item) => item['@type'] === 'WebPage')
+      expect(speakable.url).toBe('https://canada-holidays.ca/provinces/QC')
+    })
   })
 
   describe('Test /provinces/:provinceId responses', () => {
@@ -1526,7 +1555,6 @@ describe('Test /province responses', () => {
     })
   })
 })
-
 
 describe('Language switcher routes', () => {
   test.each([

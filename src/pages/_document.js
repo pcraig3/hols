@@ -14,6 +14,7 @@ const document = ({
     meta,
     path,
     region,
+    federal = false,
     richSnippets,
     year,
     error,
@@ -182,11 +183,12 @@ const document = ({
       ? `<!-- rich snippets 💰✂️ -->
               <script type="application/ld+json">
                 [
-                  ${JSON.stringify(breadcrumb({ region }))}${richSnippets.length === 3 ? ',' : ''}
-                  ${richSnippets.length === 3
-        ? `${JSON.stringify(speakable({ region, path }))}`
-        : ''
-      }
+              ${JSON.stringify(breadcrumb({ region, locale, provinceId: id, federal }))}
+              ${richSnippets.length === 3 ? ',' : ''}
+              ${richSnippets.length === 3 
+                ? JSON.stringify(speakable({ region, path: canonical, locale, provinceId: id, federal }))
+                : ''
+              }
                 ]
               </script>`
       : ''

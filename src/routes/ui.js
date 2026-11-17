@@ -350,6 +350,7 @@ const renderFederal = (locale) => (req, res) => {
         meta,
         path: req.path,
         region: t('routes.ui.federal.region'),
+        federal: true,
         year,
         locale,
         ...getHolidayDocPaths({
