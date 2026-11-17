@@ -99,7 +99,6 @@ const renderInfoPage = (req, page, pageComponent, data = {}) => {
     title: t(`pages.${page}.documentTitle`),
     docProps: {
       meta: t(`pages.${page}.metaDescription`),
-      path: req.path,
       locale,
       canonicalPath: pathFor(page, { locale }),
       alternatePaths: alternatePathsFor(page),
@@ -170,7 +169,6 @@ const renderCanada = (req, res) => {
       title: t('routes.ui.canada.documentTitle', { year }),
       docProps: {
         meta,
-        path: req.path,
         region: t('routes.ui.canada.region'),
         year,
         locale,
@@ -225,7 +223,6 @@ const renderProvince = (req, res) => {
       }),
       docProps: {
         meta,
-        path: req.path,
         region: provinceName,
         year,
         id: provinceId,
@@ -279,7 +276,6 @@ const renderFederal = (req, res) => {
       }),
       docProps: {
         meta,
-        path: req.path,
         region: t('routes.ui.federal.region'),
         federal: true,
         year,
@@ -523,7 +519,7 @@ router.use(function (err, req, res, next) {
     renderPage({
       pageComponent: 'Error',
       title: t('pages.error.documentTitle', { status }),
-      docProps: { meta, path: req.path, error: true, locale },
+      docProps: { meta, error: true, locale },
       props: {
         data: {
           status,

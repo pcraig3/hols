@@ -5,8 +5,10 @@ const { escape } = require('validator')
 
 const { fontStyles, ga4, ga4Id, printStyles } = require('../headStyles')
 const { theme, visuallyHidden } = require('../styles')
-const { getCanonical, getOgImagePath, html, metaIfSHA } = require('../utils')
+const { getOgImagePath, html, metaIfSHA } = require('../utils')
 const { breadcrumb, speakable } = require('../utils/richSnippets')
+
+const stringifyJSONLD = (value) => JSON.stringify(value).replace(/</g, '\\u003c')
 
 const document = ({
   title,
@@ -14,11 +16,9 @@ const document = ({
   docProps: {
     id,
     meta,
-    path,
     region,
     federal = false,
     richSnippets,
-    year,
     error,
     ignore,
     locale = 'en',
@@ -26,7 +26,7 @@ const document = ({
     alternatePaths,
   },
 }) => {
-  const canonical = canonicalPath ?? getCanonical({ error, path, provinceId: id, year })
+  const canonical = error ? undefined : canonicalPath
   const ogImagePath = getOgImagePath({ id, federal })
 
   return `
@@ -57,7 +57,10 @@ const document = ({
 
         <!-- open graph tags -->
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://canada-holidays.ca${escape(canonicalPath ?? path ?? '/')}" />
+        ${canonical
+          ? `<meta property="og:url" content="https://canada-holidays.ca${escape(canonical)}" />`
+          : ''
+        }
         <meta property="og:title" content="${escape(title)}" />
         <meta property="og:description" content="${escape(meta ? `${meta.split('.')[0]}.` : 'Upcoming statutory holidays in Canada')}" />
 
@@ -179,10 +182,10 @@ const document = ({
       ? `<!-- rich snippets 💰✂️ -->
               <script type="application/ld+json">
                 [
-              ${JSON.stringify(breadcrumb({ region, locale, provinceId: id, federal }))}
+              ${stringifyJSONLD(breadcrumb({ region, locale, provinceId: id, federal }))}
               ${richSnippets.includes('speakable') ? ',' : ''}
               ${richSnippets.includes('speakable')
-                ? JSON.stringify(speakable({ region, path: canonical, locale, provinceId: id, federal }))
+                ? stringifyJSONLD(speakable({ region, path: canonical, locale, provinceId: id, federal }))
                 : ''
               }
                 ]
