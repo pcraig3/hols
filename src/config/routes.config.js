@@ -81,4 +81,31 @@ const alternateHolidayPathsFor = ({
   'x-default': holidayPathFor({ provinceId, federal, year }),
 })
 
-module.exports = { pathFor, alternatePathsFor, holidayPathFor, alternateHolidayPathsFor }
+const pagePathsFor = (page) => {
+  const enPath = pathFor(page)
+
+  return [
+    enPath,
+    `/en${enPath}`,
+    pathFor(page, { locale: 'fr' }),
+  ]
+}
+
+const holidayPathsFor = (options = {}) => {
+  const enPath = holidayPathFor({ ...options, locale: 'en' })
+
+  return [
+    enPath,
+    `/en${enPath}`,
+    holidayPathFor({ ...options, locale: 'fr' }),
+  ]
+}
+
+module.exports = {
+  pathFor,
+  alternatePathsFor,
+  holidayPathFor,
+  alternateHolidayPathsFor,
+  pagePathsFor,
+  holidayPathsFor,
+}

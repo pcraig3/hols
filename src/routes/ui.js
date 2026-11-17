@@ -3,11 +3,19 @@ const router = express.Router()
 const createError = require('http-errors')
 const DB = require('@beenotung/better-sqlite3-helper')
 const { ALLOWED_YEARS } = require('../config/vars.config')
-const { pathFor, alternatePathsFor, holidayPathFor, alternateHolidayPathsFor } = require('../config/routes.config')
+const {
+  pathFor,
+  alternatePathsFor,
+  holidayPathFor,
+  alternateHolidayPathsFor,
+  pagePathsFor,
+  holidayPathsFor,
+} = require('../config/routes.config')
 const renderPage = require('../pages/_document.js')
 const {
   dbmw,
   getRequestYear,
+  getRequestLocale,
   requireFourDigitYear,
   checkProvinceIdErr,
   checkYearErr,
@@ -38,7 +46,8 @@ const getHolidayDocPaths = ({ locale, provinceId, federal = false, year }) => {
   }
 }
 
-const renderCanada = (locale) => (req, res) => {
+const renderCanada = (req, res) => {
+  const locale = getRequestLocale(req)
   const t = getTranslator(locale)
   const hasYear = req.params.year !== undefined
 
@@ -93,38 +102,19 @@ const renderCanada = (locale) => (req, res) => {
   )
 }
 
-const canadaRootPath = holidayPathFor()
-
 router.get(
-  [canadaRootPath, `/en${canadaRootPath}`],
+  holidayPathsFor(),
   checkRedirectYear,
   dbmw(getHolidaysWithProvinces),
-  renderCanada('en'),
+  renderCanada,
 )
 
 router.get(
-  holidayPathFor({ locale: 'fr' }),
-  checkRedirectYear,
-  dbmw(getHolidaysWithProvinces),
-  renderCanada('fr'),
-)
-
-const canadaYearPath = holidayPathFor({ year: ':year' })
-
-router.get(
-  [canadaYearPath, `/en${canadaYearPath}`],
+  holidayPathsFor({ year: ':year' }),
   requireFourDigitYear,
   checkYearErr,
   dbmw(getHolidaysWithProvinces),
-  renderCanada('en'),
-)
-
-router.get(
-  holidayPathFor({ locale: 'fr', year: ':year' }),
-  requireFourDigitYear,
-  checkYearErr,
-  dbmw(getHolidaysWithProvinces),
-  renderCanada('fr'),
+  renderCanada,
 )
 
 const redirectProvinceAlias = ({ locale = 'en', provinceId }) => (req, res) => {
@@ -181,7 +171,8 @@ router.get(
   redirectProvinceAlias({ locale: 'fr', provinceId: 'QC' }),
 )
 
-const renderProvince = (locale) => (req, res) => {
+const renderProvince = (req, res) => {
+  const locale = getRequestLocale(req)
   const t = getTranslator(locale)
   const hasYear = req.params.year !== undefined
 
@@ -264,58 +255,31 @@ const renderProvince = (locale) => (req, res) => {
   )
 }
 
-const provincePath = holidayPathFor({ provinceId: ':provinceId' })
-
 router.get(
-  [provincePath, `/en${provincePath}`],
+  holidayPathsFor({ provinceId: ':provinceId' }),
   checkProvinceIdErr,
   checkRedirectYear,
   checkRedirectProvinceId,
   optionalTrue,
   dbmw(getProvincesWithHolidays),
-  renderProvince('en'),
+  renderProvince,
 )
 
 router.get(
-  holidayPathFor({
-    locale: 'fr',
-    provinceId: ':provinceId',
-  }),
-  checkProvinceIdErr,
-  checkRedirectYear,
-  checkRedirectProvinceId,
-  optionalTrue,
-  dbmw(getProvincesWithHolidays),
-  renderProvince('fr'),
-)
-
-const provinceYearPath = holidayPathFor({ provinceId: ':provinceId', year: ':year' })
-
-router.get(
-  [provinceYearPath, `/en${provinceYearPath}`],
+  holidayPathsFor({ provinceId: ':provinceId', year: ':year' }),
   requireFourDigitYear,
   checkProvinceIdErr,
   checkRedirectProvinceId,
   checkYearErr,
   optionalTrue,
   dbmw(getProvincesWithHolidays),
-  renderProvince('en'),
-)
-
-router.get(
-  holidayPathFor({ locale: 'fr', provinceId: ':provinceId', year: ':year' }),
-  requireFourDigitYear,
-  checkProvinceIdErr,
-  checkRedirectProvinceId,
-  checkYearErr,
-  optionalTrue,
-  dbmw(getProvincesWithHolidays),
-  renderProvince('fr'),
+  renderProvince,
 )
 
 const getFederalSourceForPage = () => getSource(DB, 'federal')
 
-const renderFederal = (locale) => (req, res) => {
+const renderFederal = (req, res) => {
+  const locale = getRequestLocale(req)
   const t = getTranslator(locale)
   const hasYear = req.params.year !== undefined
 
@@ -376,46 +340,23 @@ const renderFederal = (locale) => (req, res) => {
   )
 }
 
-const federalPath = holidayPathFor({
-  federal: true,
-})
-
 router.get(
-  [federalPath, `/en${federalPath}`],
+  holidayPathsFor({ federal: true }),
   checkRedirectYear,
   dbmw(getHolidaysWithProvinces),
-  renderFederal('en'),
+  renderFederal,
 )
 
 router.get(
-  holidayPathFor({
-    locale: 'fr',
-    federal: true,
-  }),
-  checkRedirectYear,
-  dbmw(getHolidaysWithProvinces),
-  renderFederal('fr'),
-)
-
-const federalYearPath = holidayPathFor({ federal: true, year: ':year' })
-
-router.get(
-  [federalYearPath, `/en${federalYearPath}`],
+  holidayPathsFor({ federal: true, year: ':year' }),
   requireFourDigitYear,
   checkYearErr,
   dbmw(getHolidaysWithProvinces),
-  renderFederal('en'),
+  renderFederal,
 )
 
-router.get(
-  holidayPathFor({ locale: 'fr', federal: true, year: ':year'}),
-  requireFourDigitYear,
-  checkYearErr,
-  dbmw(getHolidaysWithProvinces),
-  renderFederal('fr'),
-)
-
-const renderProvinces = (locale) => (req, res) => {
+const renderProvinces = (req, res) => {
+  const locale = getRequestLocale(req)
   const t = getTranslator(locale)
 
   return res.send(
@@ -440,15 +381,9 @@ const renderProvinces = (locale) => (req, res) => {
 }
 
 router.get(
-  [pathFor('provinces'), `/en${pathFor('provinces')}`],
+  pagePathsFor('provinces'),
   dbmw(getProvinces),
-  renderProvinces('en'),
-)
-
-router.get(
-  pathFor('provinces', { locale: 'fr' }),
-  dbmw(getProvinces),
-  renderProvinces('fr'),
+  renderProvinces,
 )
 
 const handleProvincePicker = (locale) => (req, res) => {
@@ -489,7 +424,8 @@ router.get('/province/:provinceId/:year', (req, res) => {
   return res.redirect(301, `/provinces/${req.params.provinceId}/${req.params.year}`)
 })
 
-const renderFederallyRegulated = (locale) => (req, res) => {
+const renderFederallyRegulated = (req, res) => {
+  const locale = getRequestLocale(req)
   const t = getTranslator(locale)
 
   return res.send(
@@ -508,20 +444,10 @@ const renderFederallyRegulated = (locale) => (req, res) => {
   )
 }
 
-router.get(
-  [
-    pathFor('federallyRegulated'),
-    `/en${pathFor('federallyRegulated')}`,
-  ],
-  renderFederallyRegulated('en'),
-)
+router.get(pagePathsFor('federallyRegulated'), renderFederallyRegulated)
 
-router.get(
-  pathFor('federallyRegulated', { locale: 'fr' }),
-  renderFederallyRegulated('fr'),
-)
-
-const renderOptionalHolidays = (locale) => (req, res) => {
+const renderOptionalHolidays = (req, res) => {
+  const locale = getRequestLocale(req)
   const t = getTranslator(locale)
 
   return res.send(
@@ -540,21 +466,10 @@ const renderOptionalHolidays = (locale) => (req, res) => {
   )
 }
 
-router.get(
-  [
-    pathFor('optionalHolidays'),
-    `/en${pathFor('optionalHolidays')}`,
-  ],
-  renderOptionalHolidays('en'),
-)
+router.get(pagePathsFor('optionalHolidays'), renderOptionalHolidays)
 
-router.get(
-  pathFor('optionalHolidays', { locale: 'fr' }),
-  renderOptionalHolidays('fr'),
-)
-
-
-const renderAbout = (locale) => (req, res) => {
+const renderAbout = (req, res) => {
+  const locale = getRequestLocale(req)
   const nextHol = nextHoliday(res.locals.rows)
   const t = getTranslator(locale)
 
@@ -575,19 +490,13 @@ const renderAbout = (locale) => (req, res) => {
 }
 
 router.get(
-  [pathFor('about'), `/en${pathFor('about')}`],
+  pagePathsFor('about'),
   dbmw(getHolidaysWithProvinces),
-  renderAbout('en'),
+  renderAbout,
 )
 
-router.get(
-  pathFor('about', { locale: 'fr' }),
-  dbmw(getHolidaysWithProvinces),
-  renderAbout('fr'),
-)
-
-
-const renderFeedback = (locale) => (req, res) => {
+const renderFeedback = (req, res) => {
+  const locale = getRequestLocale(req)
   const t = getTranslator(locale)
 
   return res.send(
@@ -606,18 +515,10 @@ const renderFeedback = (locale) => (req, res) => {
   )
 }
 
-router.get(
-  [pathFor('feedback'), `/en${pathFor('feedback')}`],
-  renderFeedback('en'),
-)
+router.get(pagePathsFor('feedback'), renderFeedback)
 
-router.get(
-  pathFor('feedback', { locale: 'fr' }),
-  renderFeedback('fr'),
-)
-
-
-const renderSources = (locale) => (req, res) => {
+const renderSources = (req, res) => {
+  const locale = getRequestLocale(req)
   const t = getTranslator(locale)
 
   return res.send(
@@ -643,19 +544,13 @@ const renderSources = (locale) => (req, res) => {
 }
 
 router.get(
-  [pathFor('sources'), `/en${pathFor('sources')}`],
+  pagePathsFor('sources'),
   dbmw(getProvinces),
-  renderSources('en'),
+  renderSources,
 )
 
-router.get(
-  pathFor('sources', { locale: 'fr' }),
-  dbmw(getProvinces),
-  renderSources('fr'),
-)
-
-
-const renderAddHolidays = (locale) => (req, res) => {
+const renderAddHolidays = (req, res) => {
+  const locale = getRequestLocale(req)
   const t = getTranslator(locale)
   const year = getCurrentHolidayYear()
 
@@ -682,15 +577,9 @@ const renderAddHolidays = (locale) => (req, res) => {
 }
 
 router.get(
-  [pathFor('addHolidays'), `/en${pathFor('addHolidays')}`],
+  pagePathsFor('addHolidays'),
   dbmw(getProvinces),
-  renderAddHolidays('en'),
-)
-
-router.get(
-  pathFor('addHolidays', { locale: 'fr' }),
-  dbmw(getProvinces),
-  renderAddHolidays('fr'),
+  renderAddHolidays,
 )
 
 router.get(`/en${pathFor('api')}`, renderApiPage('en'))
