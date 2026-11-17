@@ -1,7 +1,7 @@
 const cheerio = require('cheerio')
 const render = require('preact-render-to-string')
 
-const { SELECTABLE_YEARS } = require('../../config/vars.config')
+const { ALLOWED_YEARS, SELECTABLE_YEARS } = require('../../config/vars.config')
 const { html } = require('../../utils')
 const ProvincePicker = require('../ProvincePicker.js')
 
@@ -61,7 +61,7 @@ describe('<ProvincePicker>', () => {
     })
 
     // People want future holidays, not past holidays
-    SELECTABLE_YEARS.map((year) => {
+    ALLOWED_YEARS.map((year) => {
       test(`renders selected year as ${year} when passed in`, () => {
         const $ = renderProvincePicker({ year })
         expect($('select').eq(1).find('option[selected]').text()).toEqual(`${year}`)
